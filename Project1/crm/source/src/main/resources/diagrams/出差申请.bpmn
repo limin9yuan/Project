@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:activiti="http://activiti.org/bpmn" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema" expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://www.activiti.org/processdef">
+  <process id="travel" name="出差申请" isExecutable="true">
+    <startEvent id="start" name="申请人" activiti:initiator="applyUserId" activiti:formKey="/contract/travel/form"></startEvent>
+    <userTask id="sp" name="审批人" activiti:assignee="admin"></userTask>
+    <sequenceFlow id="sid-60045C71-E28A-41D2-AD86-EDC75DF1AFAE" sourceRef="start" targetRef="sp"></sequenceFlow>
+    <userTask id="hz" name="申请人回执" activiti:assignee="${applyUserId}"></userTask>
+    <endEvent id="sid-86AB54C1-5FCE-4A33-A4B1-944B37911938" name="结束"></endEvent>
+    <sequenceFlow id="sid-00CCD8C0-22D6-4008-958D-CC79892F4517" sourceRef="hz" targetRef="sid-86AB54C1-5FCE-4A33-A4B1-944B37911938"></sequenceFlow>
+    <exclusiveGateway id="sid-23762F3E-811A-4FE9-9A03-BE1F915C36CF"></exclusiveGateway>
+    <sequenceFlow id="sid-B899D2B1-90FB-4687-A5B9-5FC41D9D9635" sourceRef="sp" targetRef="sid-23762F3E-811A-4FE9-9A03-BE1F915C36CF"></sequenceFlow>
+    <userTask id="bhsqr" name="驳回申请人" activiti:assignee="${applyUserId}"></userTask>
+    <sequenceFlow id="sid-0BE1F999-C847-4ADA-BA15-5C8B6629FD37" sourceRef="bhsqr" targetRef="sp"></sequenceFlow>
+    <sequenceFlow id="sid-0024EED4-85E0-43D6-A7FB-20443A309B97" name="通过" sourceRef="sid-23762F3E-811A-4FE9-9A03-BE1F915C36CF" targetRef="hz">
+      <documentation>通过</documentation>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${taskAction==0}]]></conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="sid-DA11A04E-8607-4446-A457-65AEC37DFBE4" name="驳回申请人" sourceRef="sid-23762F3E-811A-4FE9-9A03-BE1F915C36CF" targetRef="bhsqr">
+      <documentation>驳回申请人</documentation>
+      <conditionExpression xsi:type="tFormalExpression"><![CDATA[${taskAction==1 or taskAction==2}]]></conditionExpression>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_travel">
+    <bpmndi:BPMNPlane bpmnElement="travel" id="BPMNPlane_travel">
+      <bpmndi:BPMNShape bpmnElement="start" id="BPMNShape_start">
+        <omgdc:Bounds height="30.0" width="30.0" x="60.0" y="70.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sp" id="BPMNShape_sp">
+        <omgdc:Bounds height="80.0" width="100.0" x="195.0" y="45.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="hz" id="BPMNShape_hz">
+        <omgdc:Bounds height="80.0" width="100.0" x="525.0" y="45.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-86AB54C1-5FCE-4A33-A4B1-944B37911938" id="BPMNShape_sid-86AB54C1-5FCE-4A33-A4B1-944B37911938">
+        <omgdc:Bounds height="28.0" width="28.0" x="765.0" y="71.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="sid-23762F3E-811A-4FE9-9A03-BE1F915C36CF" id="BPMNShape_sid-23762F3E-811A-4FE9-9A03-BE1F915C36CF">
+        <omgdc:Bounds height="40.0" width="40.0" x="360.0" y="65.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="bhsqr" id="BPMNShape_bhsqr">
+        <omgdc:Bounds height="80.0" width="100.0" x="195.0" y="210.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sid-0024EED4-85E0-43D6-A7FB-20443A309B97" id="BPMNEdge_sid-0024EED4-85E0-43D6-A7FB-20443A309B97">
+        <omgdi:waypoint x="399.5655172413793" y="85.43448275862069"></omgdi:waypoint>
+        <omgdi:waypoint x="525.0" y="85.00343642611683"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-00CCD8C0-22D6-4008-958D-CC79892F4517" id="BPMNEdge_sid-00CCD8C0-22D6-4008-958D-CC79892F4517">
+        <omgdi:waypoint x="625.0" y="85.0"></omgdi:waypoint>
+        <omgdi:waypoint x="765.0" y="85.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-DA11A04E-8607-4446-A457-65AEC37DFBE4" id="BPMNEdge_sid-DA11A04E-8607-4446-A457-65AEC37DFBE4">
+        <omgdi:waypoint x="380.5" y="104.5"></omgdi:waypoint>
+        <omgdi:waypoint x="380.5" y="250.0"></omgdi:waypoint>
+        <omgdi:waypoint x="295.0" y="250.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-B899D2B1-90FB-4687-A5B9-5FC41D9D9635" id="BPMNEdge_sid-B899D2B1-90FB-4687-A5B9-5FC41D9D9635">
+        <omgdi:waypoint x="295.0" y="85.18450184501845"></omgdi:waypoint>
+        <omgdi:waypoint x="360.4259259259259" y="85.42592592592592"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-60045C71-E28A-41D2-AD86-EDC75DF1AFAE" id="BPMNEdge_sid-60045C71-E28A-41D2-AD86-EDC75DF1AFAE">
+        <omgdi:waypoint x="90.0" y="85.0"></omgdi:waypoint>
+        <omgdi:waypoint x="195.0" y="85.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sid-0BE1F999-C847-4ADA-BA15-5C8B6629FD37" id="BPMNEdge_sid-0BE1F999-C847-4ADA-BA15-5C8B6629FD37">
+        <omgdi:waypoint x="245.0" y="210.0"></omgdi:waypoint>
+        <omgdi:waypoint x="245.0" y="125.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

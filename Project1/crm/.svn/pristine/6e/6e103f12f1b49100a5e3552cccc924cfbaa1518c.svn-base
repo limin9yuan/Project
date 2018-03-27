@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.project.dao.ModuleCategoryDao">
+
+	<select id="get" resultType="com.bootdo.project.domain.ModuleCategoryDO">
+		select `Module_ID`,`Product_ID`,`Module_Name`,`Module_Description`,`Module_Attachment`,`Module_Remark`,`Module_Recorder`,`Module_Record_Time`,`Module_Creator`,`Module_Create_Time` from sales_module_category where Module_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.project.domain.ModuleCategoryDO">
+		select `Module_ID`,
+		a.`Product_ID`,b.`Product_Name` as `Product_Name`,
+		`Module_Name`,`Module_Description`,`Module_Attachment`,`Module_Remark`,
+		`Module_Recorder`,e.`name`,
+		`Module_Record_Time`,
+		`Module_Creator`,d.`name`,
+		`Module_Create_Time` 
+		from sales_module_category a
+		left join sales_product_category b on a.`Product_ID`=b.`Product_ID`
+		left join sys_user d on a.`Module_Creator`=d.`user_id`
+		left join sys_user e on a.`Module_Recorder`=e.`user_id`
+        <where>  
+		  		  <if test="moduleId != null and moduleId != ''"> and Module_ID = #{moduleId} </if>
+		  		  <if test="productId != null and productId != ''"> and Product_ID = #{productId} </if>
+		  		  <if test="moduleName != null and moduleName != ''"> and Module_Name = #{moduleName} </if>
+		  		  <if test="moduleDescription != null and moduleDescription != ''"> and Module_Description = #{moduleDescription} </if>
+		  		  <if test="moduleAttachment != null and moduleAttachment != ''"> and Module_Attachment = #{moduleAttachment} </if>
+		  		  <if test="moduleRemark != null and moduleRemark != ''"> and Module_Remark = #{moduleRemark} </if>
+		  		  <if test="moduleRecorder != null and moduleRecorder != ''"> and Module_Recorder = #{moduleRecorder} </if>
+		  		  <if test="moduleRecordTime != null and moduleRecordTime != ''"> and Module_Record_Time = #{moduleRecordTime} </if>
+		  		  <if test="moduleCreator != null and moduleCreator != ''"> and Module_Creator = #{moduleCreator} </if>
+		  		  <if test="moduleCreateTime != null and moduleCreateTime != ''"> and Module_Create_Time = #{moduleCreateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Module_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sales_module_category
+		 <where>  
+		  		  <if test="moduleId != null and moduleId != ''"> and Module_ID = #{moduleId} </if>
+		  		  <if test="productId != null and productId != ''"> and Product_ID = #{productId} </if>
+		  		  <if test="moduleName != null and moduleName != ''"> and Module_Name = #{moduleName} </if>
+		  		  <if test="moduleDescription != null and moduleDescription != ''"> and Module_Description = #{moduleDescription} </if>
+		  		  <if test="moduleAttachment != null and moduleAttachment != ''"> and Module_Attachment = #{moduleAttachment} </if>
+		  		  <if test="moduleRemark != null and moduleRemark != ''"> and Module_Remark = #{moduleRemark} </if>
+		  		  <if test="moduleRecorder != null and moduleRecorder != ''"> and Module_Recorder = #{moduleRecorder} </if>
+		  		  <if test="moduleRecordTime != null and moduleRecordTime != ''"> and Module_Record_Time = #{moduleRecordTime} </if>
+		  		  <if test="moduleCreator != null and moduleCreator != ''"> and Module_Creator = #{moduleCreator} </if>
+		  		  <if test="moduleCreateTime != null and moduleCreateTime != ''"> and Module_Create_Time = #{moduleCreateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.project.domain.ModuleCategoryDO">
+		insert into sales_module_category
+		(
+			`Module_ID`, 
+			`Product_ID`, 
+			`Module_Name`, 
+			`Module_Description`, 
+			`Module_Attachment`, 
+			`Module_Remark`, 
+			`Module_Recorder`, 
+			`Module_Record_Time`, 
+			`Module_Creator`, 
+			`Module_Create_Time`
+		)
+		values
+		(
+			#{moduleId}, 
+			#{productId}, 
+			#{moduleName}, 
+			#{moduleDescription}, 
+			#{moduleAttachment}, 
+			#{moduleRemark}, 
+			#{moduleRecorder}, 
+			#{moduleRecordTime}, 
+			#{moduleCreator}, 
+			#{moduleCreateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.project.domain.ModuleCategoryDO">
+		update sales_module_category 
+		<set>
+			<if test="productId != null">`Product_ID` = #{productId}, </if>
+			<if test="moduleName != null">`Module_Name` = #{moduleName}, </if>
+			<if test="moduleDescription != null">`Module_Description` = #{moduleDescription}, </if>
+			<if test="moduleAttachment != null">`Module_Attachment` = #{moduleAttachment}, </if>
+			<if test="moduleRemark != null">`Module_Remark` = #{moduleRemark}, </if>
+			<if test="moduleRecorder != null">`Module_Recorder` = #{moduleRecorder}, </if>
+			<if test="moduleRecordTime != null">`Module_Record_Time` = #{moduleRecordTime} </if>
+		</set>
+		where Module_ID = #{moduleId}
+	</update>
+	
+	<delete id="remove">
+		delete from sales_module_category where Module_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sales_module_category where Module_ID in 
+		<foreach item="moduleId" collection="array" open="(" separator="," close=")">
+			#{moduleId}
+		</foreach>
+	</delete>
+	
+	<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
+		select `Module_ID` value,concat(`Module_ID`,' ',`Module_Name`) name
+		from sales_module_category 
+	</select>
+
+</mapper>

@@ -1,0 +1,354 @@
+drop table if exists Development_Project;
+
+drop table if exists Development_Project_Collection;
+
+drop table if exists Development_Project_Group;
+
+drop table if exists Pre_Sales_Project;
+
+/*==============================================================*/
+/* Table: Development_Project                                   */
+/*==============================================================*/
+create table Development_Project
+(
+   Project_ID           varchar(50) not null comment '项目编号',
+   Customer_ID          varchar(50) comment '企业客户编号',
+   Collection_ID        varchar(50) comment '项目集合编号',
+   Project_Name         varchar(50) not null comment '项目名称',
+   Project_Sales        varchar(6) not null comment '销售负责人',
+   Project_Begin_Date   datetime not null comment '项目开始时间',
+   Project_End_Date     datetime not null comment '项目结束时间',
+   Project_Owner        varchar(6) comment '负责人',
+   Project_Manager      varchar(50) not null comment '研发经理',
+   Project_Development_Begin_Date datetime not null comment '研发开始时间',
+   Project_Development_End_Date datetime not null comment '研发结束时间',
+   Project_Gategory     varchar(20) not null comment '项目类型',
+   Project_Phase        varchar(20) not null comment '项目阶段',
+   Project_Description  varchar(1000) not null comment '项目描述',
+   Project_Old_ID       varchar(50) comment '旧项目编号',
+   Project_Remarks      varchar(500) comment '备注',
+   Project_Operator     varchar(50) not null comment '创建人',
+   Project_Operate_Time timestamp not null comment '创建时间',
+   primary key (Project_ID)
+);
+
+alter table Development_Project comment '项目信息表';
+
+alter table Development_Project modify column Project_ID varchar(50) comment '项目编号';
+
+alter table Development_Project modify column Customer_ID varchar(50) comment '企业客户编号';
+
+alter table Development_Project modify column Collection_ID varchar(50) comment '项目集合编号';
+
+alter table Development_Project modify column Project_Name varchar(50) comment '项目名称';
+
+alter table Development_Project modify column Project_Sales varchar(6) comment '销售负责人';
+
+alter table Development_Project modify column Project_Begin_Date datetime comment '项目开始时间';
+
+alter table Development_Project modify column Project_End_Date datetime comment '项目结束时间';
+
+alter table Development_Project modify column Project_Owner varchar(6) comment '负责人';
+
+alter table Development_Project modify column Project_Manager varchar(50) comment '研发经理';
+
+alter table Development_Project modify column Project_Development_Begin_Date datetime comment '研发开始时间';
+
+alter table Development_Project modify column Project_Development_End_Date datetime comment '研发结束时间';
+
+alter table Development_Project modify column Project_Gategory varchar(20) comment '项目类型';
+
+alter table Development_Project modify column Project_Phase varchar(20) comment '项目阶段';
+
+alter table Development_Project modify column Project_Description varchar(1000) comment '项目描述';
+
+alter table Development_Project modify column Project_Old_ID varchar(50) comment '旧项目编号';
+
+alter table Development_Project modify column Project_Remarks varchar(500) comment '备注';
+
+alter table Development_Project modify column Project_Operator varchar(50) comment '创建人';
+
+alter table Development_Project modify column Project_Operate_Time timestamp comment '创建时间';
+
+/*==============================================================*/
+/* Table: Development_Project_Collection                        */
+/*==============================================================*/
+create table Development_Project_Collection
+(
+   Collection_ID        varchar(50) not null comment '项目集合编号',
+   Group_ID             varchar(50) comment '项目群编号',
+   Collection_Name      varchar(50) not null comment '项目集合名称',
+   Collection_Begin_Date datetime not null comment '项目开始时间',
+   Collection_End_Date  datetime not null comment '项目结束时间',
+   Collection_Owner     varchar(50) comment '负责人',
+   Collection_Manager   varchar(50) not null comment '研发经理',
+   Collect_Development_Begin_Date datetime not null comment '研发开始时间',
+   Collectio_Development_End_Date datetime not null comment '研发结束时间',
+   Collection_Gategory  varchar(20) not null comment '项目类型',
+   Collection_Phase     varchar(20) not null comment '项目阶段',
+   Collection_Description varchar(1000) not null comment '项目描述',
+   Collection_Remarks   varchar(500) comment '备注',
+   Collection_Operator  varchar(50) not null comment '创建人',
+   Collection_Operate_Time timestamp not null comment '创建时间',
+   primary key (Collection_ID)
+);
+
+alter table Development_Project_Collection comment '项目组合信息表';
+
+alter table Development_Project_Collection modify column Collection_ID varchar(50) comment '项目集合编号';
+
+alter table Development_Project_Collection modify column Group_ID varchar(50) comment '项目群编号';
+
+alter table Development_Project_Collection modify column Collection_Name varchar(50) comment '项目集合名称';
+
+alter table Development_Project_Collection modify column Collection_Begin_Date datetime comment '项目开始时间';
+
+alter table Development_Project_Collection modify column Collection_End_Date datetime comment '项目结束时间';
+
+alter table Development_Project_Collection modify column Collection_Owner varchar(50) comment '负责人';
+
+alter table Development_Project_Collection modify column Collection_Manager varchar(50) comment '研发经理';
+
+alter table Development_Project_Collection modify column Collect_Development_Begin_Date datetime comment '研发开始时间';
+
+alter table Development_Project_Collection modify column Collectio_Development_End_Date datetime comment '研发结束时间';
+
+alter table Development_Project_Collection modify column Collection_Gategory varchar(20) comment '项目类型';
+
+alter table Development_Project_Collection modify column Collection_Phase varchar(20) comment '项目阶段';
+
+alter table Development_Project_Collection modify column Collection_Description varchar(1000) comment '项目描述';
+
+alter table Development_Project_Collection modify column Collection_Remarks varchar(500) comment '备注';
+
+alter table Development_Project_Collection modify column Collection_Operator varchar(50) comment '创建人';
+
+alter table Development_Project_Collection modify column Collection_Operate_Time timestamp comment '创建时间';
+
+/*==============================================================*/
+/* Table: Development_Project_Group                             */
+/*==============================================================*/
+create table Development_Project_Group
+(
+   Group_ID             varchar(50) not null comment '项目群编号',
+   Customer_ID          varchar(50) comment '企业客户编号',
+   Group_Name           varchar(50) not null comment '项目群名称',
+   Group_Begin_Date     datetime not null comment '项目开始时间',
+   Group_End_Date       datetime not null comment '项目结束时间',
+   Group_Owner          varchar(20) comment '负责人',
+   Group_Manager        varchar(50) not null comment '研发经理',
+   Group_Development_Begin_Date datetime not null comment '研发开始时间',
+   Group_Development_End_Date datetime not null comment '研发结束时间',
+   Group_Gategory       varchar(20) not null comment '项目类型',
+   Group_Phase          varchar(20) not null comment '项目阶段',
+   Group_Description    varchar(1000) not null comment '项目描述',
+   Group_Remarks        varchar(500) comment '备注',
+   Group_Operator       varchar(50) not null comment '创建人',
+   Group_Operate_Time   timestamp not null comment '创建时间',
+   primary key (Group_ID)
+);
+
+alter table Development_Project_Group comment '项目群信息表';
+
+alter table Development_Project_Group modify column Group_ID varchar(50) comment '项目群编号';
+
+alter table Development_Project_Group modify column Customer_ID varchar(50) comment '企业客户编号';
+
+alter table Development_Project_Group modify column Group_Name varchar(50) comment '项目群名称';
+
+alter table Development_Project_Group modify column Group_Begin_Date datetime comment '项目开始时间';
+
+alter table Development_Project_Group modify column Group_End_Date datetime comment '项目结束时间';
+
+alter table Development_Project_Group modify column Group_Owner varchar(20) comment '负责人';
+
+alter table Development_Project_Group modify column Group_Manager varchar(50) comment '研发经理';
+
+alter table Development_Project_Group modify column Group_Development_Begin_Date datetime comment '研发开始时间';
+
+alter table Development_Project_Group modify column Group_Development_End_Date datetime comment '研发结束时间';
+
+alter table Development_Project_Group modify column Group_Gategory varchar(20) comment '项目类型';
+
+alter table Development_Project_Group modify column Group_Phase varchar(20) comment '项目阶段';
+
+alter table Development_Project_Group modify column Group_Description varchar(1000) comment '项目描述';
+
+alter table Development_Project_Group modify column Group_Remarks varchar(500) comment '备注';
+
+alter table Development_Project_Group modify column Group_Operator varchar(50) comment '创建人';
+
+alter table Development_Project_Group modify column Group_Operate_Time timestamp comment '创建时间';
+
+/*==============================================================*/
+/* Table: Pre_Sales_Project                                     */
+/*==============================================================*/
+create table Pre_Sales_Project
+(
+   Project_ID           varchar(50) not null comment '售前项目编号',
+   Customer_ID          varchar(50) comment '企业客户编号',
+   Project_Name         varchar(50) not null comment '项目名称',
+   Project_Sales        varchar(6) not null comment '销售负责人',
+   Project_Begin_Date   datetime not null comment '项目开始时间',
+   Project_End_Date     datetime not null comment '项目结束时间',
+   Project_Manager      varchar(50) not null comment '售前经理',
+   Project_Gategory     varchar(20) not null comment '项目类型',
+   Project_Phase        varchar(20) not null comment '项目阶段',
+   Project_Description  varchar(1000) not null comment '项目描述',
+   Project_Old_ID       varchar(50) comment '旧项目编号',
+   Project_Remarks      varchar(500) comment '备注',
+   Project_Operator     varchar(50) not null comment '创建人',
+   Project_Operate_Time timestamp not null comment '创建时间',
+   primary key (Project_ID)
+);
+
+alter table Pre_Sales_Project comment '售前项目信息表';
+
+alter table Pre_Sales_Project modify column Project_ID varchar(50) comment '售前项目编号';
+
+alter table Pre_Sales_Project modify column Customer_ID varchar(50) comment '企业客户编号';
+
+alter table Pre_Sales_Project modify column Project_Name varchar(50) comment '项目名称';
+
+alter table Pre_Sales_Project modify column Project_Sales varchar(6) comment '销售负责人';
+
+alter table Pre_Sales_Project modify column Project_Begin_Date datetime comment '项目开始时间';
+
+alter table Pre_Sales_Project modify column Project_End_Date datetime comment '项目结束时间';
+
+alter table Pre_Sales_Project modify column Project_Manager varchar(50) comment '售前经理';
+
+alter table Pre_Sales_Project modify column Project_Gategory varchar(20) comment '项目类型';
+
+alter table Pre_Sales_Project modify column Project_Phase varchar(20) comment '项目阶段';
+
+alter table Pre_Sales_Project modify column Project_Description varchar(1000) comment '项目描述';
+
+alter table Pre_Sales_Project modify column Project_Old_ID varchar(50) comment '旧项目编号';
+
+alter table Pre_Sales_Project modify column Project_Remarks varchar(500) comment '备注';
+
+alter table Pre_Sales_Project modify column Project_Operator varchar(50) comment '创建人';
+
+alter table Pre_Sales_Project modify column Project_Operate_Time timestamp comment '创建时间';
+
+alter table Development_Project add constraint FK_Reference_49 foreign key (Customer_ID)
+      references Sales_Company_Customer (Customer_ID) on delete restrict on update restrict;
+
+alter table Development_Project add constraint FK_Reference_51 foreign key (Collection_ID)
+      references Development_Project_Collection (Collection_ID) on delete restrict on update restrict;
+
+alter table Development_Project_Collection add constraint FK_Reference_52 foreign key (Group_ID)
+      references Development_Project_Group (Group_ID) on delete restrict on update restrict;
+
+alter table Development_Project_Group add constraint FK_Reference_50 foreign key (Customer_ID)
+      references Sales_Company_Customer (Customer_ID) on delete restrict on update restrict;
+
+alter table Pre_Sales_Project add constraint FK_Reference_Customer_ID foreign key (Customer_ID)
+      references Sales_Company_Customer (Customer_ID) on delete restrict on update restrict;
+
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `sales_province`
+-- ----------------------------
+DROP TABLE IF EXISTS `sales_province`;
+CREATE TABLE `sales_province` (
+  `Province_Id` varchar(10) NOT NULL,
+  `Province_Name` varchar(255) NOT NULL,
+  PRIMARY KEY (`Province_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sales_province
+-- ----------------------------
+INSERT INTO `sales_province` VALUES ('001', '内蒙古');
+INSERT INTO `sales_province` VALUES ('002', '辽宁');
+
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `sales_province_city`
+-- ----------------------------
+DROP TABLE IF EXISTS `sales_province_city`;
+CREATE TABLE `sales_province_city` (
+  `Province_Id` varchar(255) NOT NULL DEFAULT '',
+  `City_Id` varchar(10) NOT NULL,
+  `City_Name` varchar(50) NOT NULL,
+  PRIMARY KEY (`Province_Id`,`City_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sales_province_city
+-- ----------------------------
+INSERT INTO `sales_province_city` VALUES ('001', '00101', '乌兰浩特');
+INSERT INTO `sales_province_city` VALUES ('002', '00201', '大连');
+INSERT INTO `sales_province_city` VALUES ('002', '00202', '沈阳');
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `sales_city_area`
+-- ----------------------------
+DROP TABLE IF EXISTS `sales_city_area`;
+CREATE TABLE `sales_city_area` (
+  `City_Id` varchar(10) NOT NULL DEFAULT '',
+  `Area_Id` varchar(10) NOT NULL DEFAULT '',
+  `Area_Name` varchar(10) DEFAULT NULL,
+  PRIMARY KEY (`City_Id`,`Area_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sales_city_area
+-- ----------------------------
+INSERT INTO `sales_city_area` VALUES ('00101', '00101001', '西华苑');
+INSERT INTO `sales_city_area` VALUES ('00202', '00202001', '甘井子区');
+INSERT INTO `sales_city_area` VALUES ('00202', '00202002', '高新园区');
+
+
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `sales_project_business`
+-- ----------------------------
+DROP TABLE IF EXISTS `sales_project_business`;
+CREATE TABLE `sales_project_business` (
+  `Project_ID` varchar(50) NOT NULL DEFAULT '' COMMENT '项目编号',
+  `Business_ID` varchar(50) NOT NULL DEFAULT '' COMMENT '业务编号',
+  `Operator` bigint(20) DEFAULT NULL COMMENT '操作人',
+  `Operate_Time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '操作时间',
+  PRIMARY KEY (`Project_ID`,`Business_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of sales_project_business
+-- ----------------------------
+
+
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `project_project_dept`
+-- ----------------------------
+DROP TABLE IF EXISTS `project_project_dept`;
+CREATE TABLE `project_project_dept` (
+  `Project_ID` varchar(50) NOT NULL DEFAULT '' COMMENT '项目编号',
+  `Dept_ID` varchar(50) NOT NULL DEFAULT '' COMMENT '部门编号',
+  `Operator` bigint(20) DEFAULT NULL COMMENT '操作人',
+  `Operate_Time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '操作时间',
+  PRIMARY KEY (`Project_ID`,`Dept_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of project_project_dept
+-- ----------------------------
+
+
+

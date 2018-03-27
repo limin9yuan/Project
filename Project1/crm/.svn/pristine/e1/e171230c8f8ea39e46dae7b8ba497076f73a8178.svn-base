@@ -1,0 +1,44 @@
+package com.bootdo.contract.service;
+
+
+
+import com.bootdo.common.domain.DictDO;
+import com.bootdo.contract.domain.ContractDO;
+import com.bootdo.contract.domain.ContractDeliveryDO;
+
+import javax.servlet.ServletOutputStream;
+import java.io.File;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 合同交付信息表
+ * 
+ * @author chglee
+ * @email 1992lcg@163.com
+ * @date 2018-03-09 13:55:47
+ */
+public interface ContractDeliveryService {
+	
+	ContractDeliveryDO get(String deliveryId);
+	
+	List<ContractDeliveryDO> list(Map<String, Object> map);
+	
+	int count(Map<String, Object> map);
+	
+	int save(ContractDeliveryDO delivery);
+	
+	int update(ContractDeliveryDO delivery);
+	
+	int remove(String deliveryId);
+	
+	int batchRemove(String[] deliveryIds);
+
+	List<DictDO> listDic();
+
+	Map<String, Object> dataImport(File file, long userid) ;
+
+	List<ContractDeliveryDO> getQuery(Map<String, Object> params);
+
+	public void export(String[] titles, ServletOutputStream out, List<ContractDeliveryDO> list);
+}

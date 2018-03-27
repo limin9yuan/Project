@@ -1,0 +1,106 @@
+$().ready(function() {
+	loadDic("sales_record_phase","recordPhase");
+	loadDic("sales_record_expense_category","recordExpenseCategory");
+	loadDic("sales_Record_Execute_Status","recordExecuteStatus");
+	loadCrmData("/sales/business/listDic","businessId");
+	loadCrmData("/sales/companyCustomer/listDic","customerId");
+	loadCrmData("/inner/innerOrgEmployee/listDic","recordExecutor");
+	loadCrmData("/sales/salesProject/listAllDic","projectId");
+	layui.use('upload', function () {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1', //绑定元素
+            url: '/common/sysFile/upload', //上传接口
+            size: 1000,
+            accept: 'file',
+            done: function (r) {
+            	//alert(r.fileName);
+            	$("#recordAttachment").val(r.fileName);
+                //layer.msg(r.msg);
+                //app.getData();
+            },
+            error: function (r) {
+                layer.msg(r.msg);
+            }
+        });
+    });
+	validateRule();
+	datetimepicker();
+});
+
+$.validator.setDefaults({
+	submitHandler : function() {
+		save();
+	}
+});
+function save() {
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/sales/record/save",
+		data : $('#signupForm').serialize(),// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				parent.reLoad();
+				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				parent.layer.close(index);
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+
+}
+function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#signupForm").validate({
+		rules : {
+			recordName : {
+				required : true,
+				maxlength:50
+			},
+			recordBeginDate: {
+				required : true,
+				dateISO:true
+			},recordEndDate: {
+				required : true
+			},recordSaleOpportunity: {
+				required : true,
+				maxlength:200
+			}
+		},
+		messages : {
+			recordName : {
+				required : icon + "请输入行动主题！",
+				maxlength:icon + "字符长度不能大于50"
+			},
+			recordBeginDate : {
+				required : icon + "实际执行开始时间不能为空！",
+				dateISO: icon + "请输入有效的日期 (YYYY-MM-DD)"
+			},recordEndDate : {
+				required : icon + "实际执行开始时间不能为空！"
+			},recordSaleOpportunity : {
+				required : icon + "请输入销售机会！",
+				maxlength:icon + "字符长度不能大于200"
+			}
+		}
+	})
+}
+function datetimepicker() {
+	 $('#recordBeginDate').datetimepicker({  
+	        format: 'YYYY-MM-DD',  
+	        locale: moment.locale('zh-cn')  
+	    });  
+	 $('#recordEndDate').datetimepicker({  
+	        format: 'YYYY-MM-DD',  
+	        locale: moment.locale('zh-cn')  
+	    }); 
+}

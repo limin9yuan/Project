@@ -1,0 +1,33 @@
+package com.bootdo.contract.dao;
+
+import com.bootdo.common.domain.DictDO;
+import com.bootdo.contract.domain.ContractOperationDO;
+import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Mingyuan Li on 2018/3/6.
+ * Package name: com.bootdo.contract.dao.
+ * Project name: crm.
+ */
+@Mapper
+public interface ContractOperationDao {
+
+    ContractOperationDO get(String contractOperationId);
+
+    List<ContractOperationDO> list(Map<String, Object> map);
+
+    int count(Map<String, Object> map);
+
+    int save(ContractOperationDO contractOperation);
+
+    int update(ContractOperationDO contractOperation);
+
+    int remove(String contractOperation_ID);
+
+    int batchRemove(String[] contractOperationIds);
+
+    List<DictDO> listDic();
+}

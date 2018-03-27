@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.sales.dao.RecordComplaintDao">
+
+	<select id="get" resultType="com.bootdo.sales.domain.RecordComplaintDO">
+		select `Complaint_ID`,`Project_ID`,`Customer_ID`,`Complaint_Product`,`Complaint_Name`,`Complaint_Date`,`Complaint_Company`,`Complaint_Feedback_Type`,`Complaint_Problem`,`Complaint_Attachment`,`Complaint_Attachment_Customer`,`Complaint_Problem_Remarks`,`Complaint_After_Sale_Type`,`Complaint_Problem_Description`,`Complaint_Operator`,`Complaint_Executor`,`Complaint_Result`,`Complaint_After_Sale_Remarks`,`Complaint_Phone_Number`,`Complaint_Mailbox`,`Complaint_Recorder`,`Complaint_Record_Time`,`Complaint_Create_Time` from sales_record_complaint where Complaint_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.sales.domain.RecordComplaintDO">
+		select `Complaint_ID`,a.`Project_ID`,a.`Customer_ID`,`Complaint_Product`,`Complaint_Name`,`Complaint_Date`,`Complaint_Company`
+		,`Complaint_Feedback_Type`,`Complaint_Problem`,`Complaint_Attachment`,`Complaint_Attachment_Customer`,`Complaint_Problem_Remarks`
+		,`Complaint_After_Sale_Type`,`Complaint_Problem_Description`,`Complaint_Operator`,`Complaint_Executor`,`Complaint_Result`
+		,`Complaint_After_Sale_Remarks`,`Complaint_Phone_Number`,`Complaint_Mailbox`,`Complaint_Record_Time`
+		,`Complaint_Create_Time`,c.name Complaint_Recorder_Name,b.Service_Feedback_Type,b.Service_Feedback_Info
+		from sales_record_complaint a
+		left join sales_record_service b on a.Customer_ID=b.Custormer_ID 
+		left join sys_user c on a.Complaint_Recorder=c.user_id
+		left join development_project d on a.Project_ID=d.Project_ID
+
+        <where>  
+		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
+		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="complaintProduct != null and complaintProduct != ''"> and Complaint_Product = #{complaintProduct} </if>
+		  		  <if test="complaintName != null and complaintName != ''"> and Complaint_Name = #{complaintName} </if>
+		  		  <if test="complaintDate != null and complaintDate != ''"> and Complaint_Date = #{complaintDate} </if>
+		  		  <if test="complaintCompany != null and complaintCompany != ''"> and Complaint_Company = #{complaintCompany} </if>
+		  		  <if test="complaintFeedbackType != null and complaintFeedbackType != ''"> and Complaint_Feedback_Type = #{complaintFeedbackType} </if>
+		  		  <if test="complaintProblem != null and complaintProblem != ''"> and Complaint_Problem = #{complaintProblem} </if>
+		  		  <if test="complaintAttachment != null and complaintAttachment != ''"> and Complaint_Attachment = #{complaintAttachment} </if>
+		  		  <if test="complaintAttachmentCustomer != null and complaintAttachmentCustomer != ''"> and Complaint_Attachment_Customer = #{complaintAttachmentCustomer} </if>
+		  		  <if test="complaintProblemRemarks != null and complaintProblemRemarks != ''"> and Complaint_Problem_Remarks = #{complaintProblemRemarks} </if>
+		  		  <if test="complaintAfterSaleType != null and complaintAfterSaleType != ''"> and Complaint_After_Sale_Type = #{complaintAfterSaleType} </if>
+		  		  <if test="complaintProblemDescription != null and complaintProblemDescription != ''"> and Complaint_Problem_Description = #{complaintProblemDescription} </if>
+		  		  <if test="complaintOperator != null and complaintOperator != ''"> and Complaint_Operator = #{complaintOperator} </if>
+		  		  <if test="complaintExecutor != null and complaintExecutor != ''"> and Complaint_Executor = #{complaintExecutor} </if>
+		  		  <if test="complaintResult != null and complaintResult != ''"> and Complaint_Result = #{complaintResult} </if>
+		  		  <if test="complaintAfterSaleRemarks != null and complaintAfterSaleRemarks != ''"> and Complaint_After_Sale_Remarks = #{complaintAfterSaleRemarks} </if>
+		  		  <if test="complaintPhoneNumber != null and complaintPhoneNumber != ''"> and Complaint_Phone_Number = #{complaintPhoneNumber} </if>
+		  		  <if test="complaintMailbox != null and complaintMailbox != ''"> and Complaint_Mailbox = #{complaintMailbox} </if>
+		  		  <if test="complaintRecorder != null and complaintRecorder != ''"> and Complaint_Recorder = #{complaintRecorder} </if>
+		  		  <if test="complaintRecordTime != null and complaintRecordTime != ''"> and Complaint_Record_Time = #{complaintRecordTime} </if>
+		  		  <if test="complaintCreateTime != null and complaintCreateTime != ''"> and Complaint_Create_Time = #{complaintCreateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Complaint_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sales_record_complaint
+		 <where>  
+		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
+		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="complaintProduct != null and complaintProduct != ''"> and Complaint_Product = #{complaintProduct} </if>
+		  		  <if test="complaintName != null and complaintName != ''"> and Complaint_Name = #{complaintName} </if>
+		  		  <if test="complaintDate != null and complaintDate != ''"> and Complaint_Date = #{complaintDate} </if>
+		  		  <if test="complaintCompany != null and complaintCompany != ''"> and Complaint_Company = #{complaintCompany} </if>
+		  		  <if test="complaintFeedbackType != null and complaintFeedbackType != ''"> and Complaint_Feedback_Type = #{complaintFeedbackType} </if>
+		  		  <if test="complaintProblem != null and complaintProblem != ''"> and Complaint_Problem = #{complaintProblem} </if>
+		  		  <if test="complaintAttachment != null and complaintAttachment != ''"> and Complaint_Attachment = #{complaintAttachment} </if>
+		  		  <if test="complaintAttachmentCustomer != null and complaintAttachmentCustomer != ''"> and Complaint_Attachment_Customer = #{complaintAttachmentCustomer} </if>
+		  		  <if test="complaintProblemRemarks != null and complaintProblemRemarks != ''"> and Complaint_Problem_Remarks = #{complaintProblemRemarks} </if>
+		  		  <if test="complaintAfterSaleType != null and complaintAfterSaleType != ''"> and Complaint_After_Sale_Type = #{complaintAfterSaleType} </if>
+		  		  <if test="complaintProblemDescription != null and complaintProblemDescription != ''"> and Complaint_Problem_Description = #{complaintProblemDescription} </if>
+		  		  <if test="complaintOperator != null and complaintOperator != ''"> and Complaint_Operator = #{complaintOperator} </if>
+		  		  <if test="complaintExecutor != null and complaintExecutor != ''"> and Complaint_Executor = #{complaintExecutor} </if>
+		  		  <if test="complaintResult != null and complaintResult != ''"> and Complaint_Result = #{complaintResult} </if>
+		  		  <if test="complaintAfterSaleRemarks != null and complaintAfterSaleRemarks != ''"> and Complaint_After_Sale_Remarks = #{complaintAfterSaleRemarks} </if>
+		  		  <if test="complaintPhoneNumber != null and complaintPhoneNumber != ''"> and Complaint_Phone_Number = #{complaintPhoneNumber} </if>
+		  		  <if test="complaintMailbox != null and complaintMailbox != ''"> and Complaint_Mailbox = #{complaintMailbox} </if>
+		  		  <if test="complaintRecorder != null and complaintRecorder != ''"> and Complaint_Recorder = #{complaintRecorder} </if>
+		  		  <if test="complaintRecordTime != null and complaintRecordTime != ''"> and Complaint_Record_Time = #{complaintRecordTime} </if>
+		  		  <if test="complaintCreateTime != null and complaintCreateTime != ''"> and Complaint_Create_Time = #{complaintCreateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.sales.domain.RecordComplaintDO">
+		insert into sales_record_complaint
+		(
+			`Complaint_ID`, 
+			`Project_ID`, 
+			`Customer_ID`, 
+			`Complaint_Product`, 
+			`Complaint_Name`, 
+			`Complaint_Date`, 
+			`Complaint_Company`, 
+			`Complaint_Feedback_Type`, 
+			`Complaint_Problem`, 
+			`Complaint_Attachment`, 
+			`Complaint_Attachment_Customer`, 
+			`Complaint_Problem_Remarks`, 
+			`Complaint_After_Sale_Type`, 
+			`Complaint_Problem_Description`, 
+			`Complaint_Operator`, 
+			`Complaint_Executor`, 
+			`Complaint_Result`, 
+			`Complaint_After_Sale_Remarks`, 
+			`Complaint_Phone_Number`, 
+			`Complaint_Mailbox`, 
+			`Complaint_Recorder`, 
+			`Complaint_Record_Time`, 
+			`Complaint_Create_Time`
+		)
+		values
+		(
+			#{complaintId}, 
+			#{projectId}, 
+			#{customerId}, 
+			#{complaintProduct}, 
+			#{complaintName}, 
+			#{complaintDate}, 
+			#{complaintCompany}, 
+			#{complaintFeedbackType}, 
+			#{complaintProblem}, 
+			#{complaintAttachment}, 
+			#{complaintAttachmentCustomer}, 
+			#{complaintProblemRemarks}, 
+			#{complaintAfterSaleType}, 
+			#{complaintProblemDescription}, 
+			#{complaintOperator}, 
+			#{complaintExecutor}, 
+			#{complaintResult}, 
+			#{complaintAfterSaleRemarks}, 
+			#{complaintPhoneNumber}, 
+			#{complaintMailbox}, 
+			#{complaintRecorder}, 
+			#{complaintRecordTime}, 
+			#{complaintCreateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.sales.domain.RecordComplaintDO">
+		update sales_record_complaint 
+		<set>
+			<if test="projectId != null">`Project_ID` = #{projectId}, </if>
+			<if test="customerId != null">`Customer_ID` = #{customerId}, </if>
+			<if test="complaintProduct != null">`Complaint_Product` = #{complaintProduct}, </if>
+			<if test="complaintName != null">`Complaint_Name` = #{complaintName}, </if>
+			<if test="complaintDate != null">`Complaint_Date` = #{complaintDate}, </if>
+			<if test="complaintCompany != null">`Complaint_Company` = #{complaintCompany}, </if>
+			<if test="complaintFeedbackType != null">`Complaint_Feedback_Type` = #{complaintFeedbackType}, </if>
+			<if test="complaintProblem != null">`Complaint_Problem` = #{complaintProblem}, </if>
+			<if test="complaintAttachment != null">`Complaint_Attachment` = #{complaintAttachment}, </if>
+			<if test="complaintAttachmentCustomer != null">`Complaint_Attachment_Customer` = #{complaintAttachmentCustomer}, </if>
+			<if test="complaintProblemRemarks != null">`Complaint_Problem_Remarks` = #{complaintProblemRemarks}, </if>
+			<if test="complaintAfterSaleType != null">`Complaint_After_Sale_Type` = #{complaintAfterSaleType}, </if>
+			<if test="complaintProblemDescription != null">`Complaint_Problem_Description` = #{complaintProblemDescription}, </if>
+			<if test="complaintOperator != null">`Complaint_Operator` = #{complaintOperator}, </if>
+			<if test="complaintExecutor != null">`Complaint_Executor` = #{complaintExecutor}, </if>
+			<if test="complaintResult != null">`Complaint_Result` = #{complaintResult}, </if>
+			<if test="complaintAfterSaleRemarks != null">`Complaint_After_Sale_Remarks` = #{complaintAfterSaleRemarks}, </if>
+			<if test="complaintPhoneNumber != null">`Complaint_Phone_Number` = #{complaintPhoneNumber}, </if>
+			<if test="complaintMailbox != null">`Complaint_Mailbox` = #{complaintMailbox}, </if>
+			<if test="complaintRecorder != null">`Complaint_Recorder` = #{complaintRecorder}, </if>
+			<if test="complaintRecordTime != null">`Complaint_Record_Time` = #{complaintRecordTime}, </if>
+			<if test="complaintCreateTime != null">`Complaint_Create_Time` = #{complaintCreateTime}</if>
+		</set>
+		where Complaint_ID = #{complaintId}
+	</update>
+	
+	<delete id="remove">
+		delete from sales_record_complaint where Complaint_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sales_record_complaint where Complaint_ID in 
+		<foreach item="complaintId" collection="array" open="(" separator="," close=")">
+			#{complaintId}
+		</foreach>
+	</delete>
+
+<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
+		select `Customer_ID` value,concat(`Customer_ID`,' ',`Complaint_Name`) name
+		from sales_record_complaint
+	</select>
+	
+	<select id="listDicxmbh" resultType="com.bootdo.common.domain.DictDO">
+		select `Project_ID` value,concat(`Project_ID`,' ',`Project_Name`) name
+		from sales_project 
+	</select>
+</mapper>

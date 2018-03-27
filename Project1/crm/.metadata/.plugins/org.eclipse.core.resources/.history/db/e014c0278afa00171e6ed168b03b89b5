@@ -1,0 +1,61 @@
+package com.bootdo.contract.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.bootdo.common.domain.DictDO;
+import com.bootdo.contract.dao.PayoutDao;
+import com.bootdo.contract.domain.PayoutDO;
+import com.bootdo.contract.service.PayoutService;
+
+
+
+@Service
+public class PayoutServiceImpl implements PayoutService {
+	@Autowired
+	private PayoutDao payoutDao;
+	
+	@Override
+	public PayoutDO get(String payoutId){
+		return payoutDao.get(payoutId);
+	}
+	
+	@Override
+	public List<PayoutDO> list(Map<String, Object> map){
+		return payoutDao.list(map);
+	}
+	
+	@Override
+	public int count(Map<String, Object> map){
+		return payoutDao.count(map);
+	}
+	
+	@Override
+	public int save(PayoutDO payout){
+		return payoutDao.save(payout);
+	}
+	
+	@Override
+	public int update(PayoutDO payout){
+		return payoutDao.update(payout);
+	}
+	
+	@Override
+	public int remove(String payoutId){
+		return payoutDao.remove(payoutId);
+	}
+	
+	@Override
+	public int batchRemove(String[] payoutIds){
+		return payoutDao.batchRemove(payoutIds);
+	}
+	
+	@Override	
+	public List<DictDO> listDic(){
+		return payoutDao.listDic();
+	}
+	
+}

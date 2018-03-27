@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">员工姓名：</label>
+								<div class="col-sm-4">
+									<input id="employeeName" name="employeeName"
+										class="form-control" type="text">
+								</div>
+								<label class="col-sm-2 control-label">所属中心：</label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="employeeCenter"
+										id="employeeCenter" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+										<option value="">请选择</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">员工工号：</label>
+								<div class="col-sm-4">
+									<input id="employeeId" name="employeeId" class="form-control"
+										type="text">
+								</div>
+								<label class="col-sm-2 control-label">岗位名称：</label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="jobId" id="jobId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">请选择</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">部门：</label>
+								<div class="col-sm-4">
+								<input id="deptId" name="deptId" class="hidden"> <input
+										id="employeeDept" name="employeeDept" class="form-control" type="text"
+										style="cursor: pointer;" onclick="openDept()"
+										readonly="readonly" placeholder="所属部门">
+								</div>
+								<label class="col-sm-2 control-label">内部账号：</label>
+								<div class="col-sm-4">
+									<input id="innerUserId" name="innerUserId" class="form-control"
+										type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">入职时间：：</label>
+								<div class="col-sm-4">
+									<div class="input-group date" id="employeeJoinDate">
+										<input class="form-control" type="text"
+											name="employeeJoinDate"> <span
+											class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">密码：</label>
+								<div class="col-sm-4">
+									<input id="" name="" class="form-control" type="text">
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-2 control-label">时薪：</label>
+									<div class="col-sm-4">
+										<input id="employeeSalaryHour" name="employeeSalaryHour"
+											class="form-control" type="text">
+									</div>
+								</div>
+								<label class="col-sm-2 control-label">QQ：</label>
+								<div class="col-sm-4">
+									<input id="employeeQq" name="employeeQq" class="form-control"
+										type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">电话：</label>
+								<div class="col-sm-4">
+									<input id="employeePhoneNumber" name="employeePhoneNumber"
+										class="form-control" type="text">
+								</div>
+								<label class="col-sm-2 control-label">电话小号：</label>
+								<div class="col-sm-4">
+									<input id="employeeInnerPhoneNumber"
+										name="employeeInnerPhoneNumber" class="form-control"
+										type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">员工状态：</label>
+								<!--  员工状态-在职或者离职单选按钮-->
+								<div class="col-md-10">
+									<label class="radio-inline"> <input type="radio"
+										name="employeeStatus" value="1" />在职
+									</label> <label class="radio-inline"> <input type="radio"
+										name="employeeStatus"  value="0"/>离职
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">备注：</label>
+								<div class="col-sm-10">
+									<textarea id="employeeRemarks" name="employeeRemarks"
+										class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-2 col-sm-offset-10">
+									<button type="submit" class="btn btn-primary">提交</button>
+									&nbsp;
+									<button type="button" class="btn btn-primary" onclick="closeWin()">取消</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/inner/innerOrgEmployee/add.js"></script>
+	<script type="text/javascript" src="/js/common.js"></script>
+</body>
+</html>

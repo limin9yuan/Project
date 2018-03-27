@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <select data-placeholder="请选择" name="projectId" id="projectId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">请选择</option>  
+									</select>
+								</div>
+								<label class="col-sm-3 control-label">采购人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <select data-placeholder="请选择" name="purchasePerson" id="purchasePerson"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">请选择</option>  
+									</select>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">采购时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="purchaseTime">
+							            <input class="form-control" type="text" name="purchaseTime">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>	
+								<label class="col-sm-3 control-label">交货时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="purchaseDeliveryTime">
+							            <input class="form-control" type="text" name="purchaseDeliveryTime">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>
+							</div>	
+							<div class="form-group">
+								<label class="col-sm-3 control-label">交货地点：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseDeliveryPlace" name="purchaseDeliveryPlace" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">收货人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseConsignee" name="purchaseConsignee" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">联系电话：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchasePhoneNumber" name="purchasePhoneNumber" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">物品名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseName" name="purchaseName" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">品牌：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseBrand" name="purchaseBrand" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">型号：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseMode" name="purchaseMode" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">规格/配置：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseConfig" name="purchaseConfig" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">单位：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseUnit" name="purchaseUnit" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">单价：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseUnitPrice" name="purchaseUnitPrice" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">数量：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseNumber" name="purchaseNumber" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">总计：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseTotalPrice" name="purchaseTotalPrice" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">订货情况：<span class="mustin">*</span></label>
+								<div class="col-sm-9">
+								    <label class="radio-inline"> 
+									    <input type="radio" name="purchaseOrderStatus" value="0" /> 已签合同
+									</label> 
+									<label class="radio-inline"> 
+									    <input type="radio" name="purchaseOrderStatus" value="1" /> 未签合同
+									</label>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">已付款：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchasePaid" name="purchasePaid" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">未付款：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="purchaseNotPaid" name="purchaseNotPaid" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">发货情况：<span class="mustin">*</span></label>
+								<div class="col-sm-9">
+								    <label class="radio-inline"> 
+									    <input type="radio" name="purchaseFulfilmentStatus" value="0" /> 已发货
+									</label> 
+									<label class="radio-inline"> 
+									    <input type="radio" name="purchaseFulfilmentStatus" value="1" /> 未发货
+									</label>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-9">
+									<textarea id="purchaseRemarks" name="purchaseRemarks" class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								 <div class="columns pull-right col-md-2">
+										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
+								   </div>
+								   <div class="columns pull-right col-md-2">
+										<button type="submit" class="btn btn-primary columns" >提交</button>
+								</div>
+							</div>
+								<!--  					<div class="form-group">	
+								<label class="col-sm-3 control-label">采购申请编号：</label>
+								<div class="col-sm-8">
+									<input id="approvalPurchaseId" name="approvalPurchaseId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">操作人：</label>
+								<div class="col-sm-8">
+									<input id="purchaseOperator" name="purchaseOperator" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">操作时间：</label>
+								<div class="col-sm-8">
+									<input id="purchaseOperateTime" name="purchaseOperateTime" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>-->	
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/payment/purchaseManagement/add.js">
+	</script>
+</body>
+</html>

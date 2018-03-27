@@ -1,0 +1,60 @@
+package com.bootdo.contract.service.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.bootdo.common.domain.DictDO;
+import com.bootdo.contract.dao.TravelDao;
+import com.bootdo.contract.domain.TravelDO;
+import com.bootdo.contract.service.TravelService;
+
+
+
+@Service
+public class TravelServiceImpl implements TravelService {
+	@Autowired
+	private TravelDao travelDao;
+	
+	@Override
+	public TravelDO get(String travelId){
+		return travelDao.get(travelId);
+	}
+	
+	@Override
+	public List<TravelDO> list(Map<String, Object> map){
+		return travelDao.list(map);
+	}
+	
+	@Override
+	public int count(Map<String, Object> map){
+		return travelDao.count(map);
+	}
+	
+	@Override
+	public int save(TravelDO travel){
+		return travelDao.save(travel);
+	}
+	
+	@Override
+	public int update(TravelDO travel){
+		return travelDao.update(travel);
+	}
+	
+	@Override
+	public int remove(String travelId){
+		return travelDao.remove(travelId);
+	}
+	
+	@Override
+	public int batchRemove(String[] travelIds){
+		return travelDao.batchRemove(travelIds);
+	}
+	
+	@Override	
+	public List<DictDO> listDic(){
+		return travelDao.listDic();
+	}
+}

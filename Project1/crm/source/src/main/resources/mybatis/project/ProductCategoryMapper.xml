@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.project.dao.ProductCategoryDao">
+
+	<select id="get" resultType="com.bootdo.project.domain.ProductCategoryDO">
+		select `Product_ID`,`Product_Name`,`Product_Description`,`Product_Attachment`,`Product_Remars`,`Product_Recorder`,`Product_Record_Time`,`Product_Creator`,`Product_Create_Time` from sales_product_category where Product_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.project.domain.ProductCategoryDO">
+		select `Product_ID`,`Product_Name`,`Product_Description`,`Product_Attachment`,`Product_Remars`,
+		`Product_Recorder`,e.`name`,
+		`Product_Record_Time`,
+		`Product_Creator`,d.`name`,
+		`Product_Create_Time`
+		from sales_product_category a
+		left join sys_user d on a.`Product_Creator`=d.`user_id`
+		left join sys_user e on a.`Product_Recorder`=e.`user_id`
+        <where>  
+		  		  <if test="productId != null and productId != ''"> and Product_ID = #{productId} </if>
+		  		  <if test="productName != null and productName != ''"> and Product_Name = #{productName} </if>
+		  		  <if test="productDescription != null and productDescription != ''"> and Product_Description = #{productDescription} </if>
+		  		  <if test="productAttachment != null and productAttachment != ''"> and Product_Attachment = #{productAttachment} </if>
+		  		  <if test="productRemars != null and productRemars != ''"> and Product_Remars = #{productRemars} </if>
+		  		  <if test="productRecorder != null and productRecorder != ''"> and Product_Recorder = #{productRecorder} </if>
+		  		  <if test="productRecordTime != null and productRecordTime != ''"> and Product_Record_Time = #{productRecordTime} </if>
+		  		  <if test="productCreator != null and productCreator != ''"> and Product_Creator = #{productCreator} </if>
+		  		  <if test="productCreateTime != null and productCreateTime != ''"> and Product_Create_Time = #{productCreateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Product_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sales_product_category
+		 <where>  
+		  		  <if test="productId != null and productId != ''"> and Product_ID = #{productId} </if>
+		  		  <if test="productName != null and productName != ''"> and Product_Name = #{productName} </if>
+		  		  <if test="productDescription != null and productDescription != ''"> and Product_Description = #{productDescription} </if>
+		  		  <if test="productAttachment != null and productAttachment != ''"> and Product_Attachment = #{productAttachment} </if>
+		  		  <if test="productRemars != null and productRemars != ''"> and Product_Remars = #{productRemars} </if>
+		  		  <if test="productRecorder != null and productRecorder != ''"> and Product_Recorder = #{productRecorder} </if>
+		  		  <if test="productRecordTime != null and productRecordTime != ''"> and Product_Record_Time = #{productRecordTime} </if>
+		  		  <if test="productCreator != null and productCreator != ''"> and Product_Creator = #{productCreator} </if>
+		  		  <if test="productCreateTime != null and productCreateTime != ''"> and Product_Create_Time = #{productCreateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.project.domain.ProductCategoryDO">
+		insert into sales_product_category
+		(
+			`Product_ID`, 
+			`Product_Name`, 
+			`Product_Description`, 
+			`Product_Attachment`, 
+			`Product_Remars`,
+			`Product_Recorder`,  
+			`Product_Record_Time`,   
+			`Product_Creator`, 
+			`Product_Create_Time`
+		)
+		values
+		(
+			#{productId}, 
+			#{productName}, 
+			#{productDescription}, 
+			#{productAttachment}, 
+			#{productRemars}, 
+			#{productRecorder},
+			#{productRecordTime},  
+			#{productCreator}, 
+			#{productCreateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.project.domain.ProductCategoryDO">
+		update sales_product_category 
+		<set>
+			<if test="productName != null">`Product_Name` = #{productName}, </if>
+			<if test="productDescription != null">`Product_Description` = #{productDescription}, </if>
+			<if test="productAttachment != null">`Product_Attachment` = #{productAttachment}, </if>
+			<if test="productRemars != null">`Product_Remars` = #{productRemars}, </if>
+			<if test="productRecorder != null">`Product_Recorder` = #{productRecorder}, </if>
+			<if test="productRecordTime != null">`Product_Record_Time` = #{productRecordTime}, </if>
+		</set>
+		where Product_ID = #{productId}
+	</update>
+	
+	<delete id="remove">
+		delete from sales_product_category where Product_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sales_product_category where Product_ID in 
+		<foreach item="productId" collection="array" open="(" separator="," close=")">
+			#{productId}
+		</foreach>
+	</delete>
+	
+	<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
+		select `Product_ID` value,concat(`Product_ID`,' ',`Product_Name`) name
+		from sales_product_category 
+	</select>
+
+</mapper>

@@ -1,0 +1,126 @@
+var prefixrecord = "/sales/record"
+$().ready(function() {
+	loadDicValue("sales_record_phase","recordPhase");
+	loadDicValue("sales_record_expense_category","recordExpenseCategory");
+	loadDicValue("sales_Record_Execute_Status","recordExecuteStatus");
+	loadCrmDataValue("/sales/business/listDic","businessId");
+	loadCrmDataValue("/sales/companyCustomer/listDic","customerId");
+	loadCrmDataValue("/inner/innerOrgEmployee/listDic","recordExecutor");
+	loadCrmDataValue("/sales/salesProject/listAllDic","projectId");
+	layui.use('upload', function () {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1', //绑定元素
+            url: '/common/sysFile/upload', //上传接口
+            size: 1000,
+            accept: 'file',
+            done: function (r) {
+            	alert(r.fileName);
+            	$("#recordAttachment").val(r.fileName);
+                //layer.msg(r.msg);
+                //app.getData();
+            },
+            error: function (r) {
+                layer.msg(r.msg);
+            }
+        });
+    });
+	
+	validateRule();
+	datetimepicker();
+	recordMapper_edit();
+});
+
+$.validator.setDefaults({
+	submitHandler : function() {
+		update();
+	}
+});
+function update() {
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/sales/record/update",
+		data : $('#signupForm').serialize(),// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				parent.reLoad();
+				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				parent.layer.close(index);
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+
+}
+function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#signupForm").validate({
+		rules : {
+			name : {
+				required : true
+			}
+		},
+		messages : {
+			name : {
+				required : icon + "请输入名字"
+			}
+		}
+	})
+}
+function datetimepicker() {
+	 $('#recordBeginDate').datetimepicker({  
+	        format: 'YYYY-MM-DD',  
+	        locale: moment.locale('zh-cn')  
+	    });  
+	 $('#recordEndDate').datetimepicker({  
+	        format: 'YYYY-MM-DD',  
+	        locale: moment.locale('zh-cn')  
+	    }); 
+}
+//修改——显示数据绑定
+function recordMapper_edit(){
+	$.ajax({
+		url : prefixrecord + '/edit_ajax/' + $("#record").val(),
+		type : "get",
+		data : {
+			'recordId' : $("#record").val(),
+		},
+		success : function(data) {
+			var result = data.record;
+			$("input[name='recordId']").val(result.recordId);
+			$("input[name='recordName']").val(result.recordName);
+			$("input[name='recordBeginDate']").val(result.recordBeginDate);
+			$("input[name='recordEndDate']").val(result.recordEndDate);
+			$("input[name='recordSaleOpportunity']").val(result.recordSaleOpportunity);
+			$("input[name='recordExpenseActual']").val(result.recordExpenseActual);
+			$("input[name='recordAttachment']").val(result.recordAttachment);
+			$("textarea[name='recordRemarks']").val(result.recordRemarks);
+			
+			$("select[name='customerId']").val(result.customerId);
+			$("select[name='customerId']").trigger("chosen:updated");
+			
+			$("select[name='businessId']").val(result.businessId);
+			$("select[name='businessId']").trigger("chosen:updated");
+			$("select[name='projectId']").val(result.projectId);
+			$("select[name='projectId']").trigger("chosen:updated");
+			$("select[name='recordPhase']").val(result.recordPhase);
+			$("select[name='recordPhase']").trigger("chosen:updated");
+			$("select[name='recordExecutor']").val(result.recordExecutor);
+			$("select[name='recordExecutor']").trigger("chosen:updated");
+			$("select[name='recordExecuteStatus']").val(result.recordExecuteStatus);
+			$("select[name='recordExecuteStatus']").trigger("chosen:updated");
+			$("select[name='recordExpenseCategory']").val(result.recordExpenseCategory);
+			$("select[name='recordExpenseCategory']").trigger("chosen:updated");
+		}
+	});
+}

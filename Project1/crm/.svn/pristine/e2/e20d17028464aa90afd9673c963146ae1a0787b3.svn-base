@@ -1,0 +1,491 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>所在单位</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/所在单位/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/所在单位/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5300" class="ax_default box_1">
+        <div id="u5300_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5301" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5302" class="ax_default box_2">
+        <div id="u5302_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5303" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5304" class="ax_default _一级标题">
+        <div id="u5304_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5305" class="text">
+          <p><span>联系人新增</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5306" class="ax_default _三级标题">
+        <div id="u5306_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5307" class="text">
+          <p><span>基本信息</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u5308" class="ax_default line">
+        <img id="u5308_img" class="img " src="images/基本信息/u2864.png"/>
+        <!-- Unnamed () -->
+        <div id="u5309" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5310" class="ax_default _三级标题">
+        <div id="u5310_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5311" class="text">
+          <p><span>联系方式</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5312" class="ax_default label">
+        <div id="u5312_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5313" class="text">
+          <p><span>公司名称&nbsp; </span><span style="color:#FF0000;">*</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u5314" class="ax_default text_field">
+        <input id="u5314_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5315" class="ax_default box_2">
+        <div id="u5315_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5316" class="text">
+          <p><span>提交</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5317" class="ax_default box_2">
+        <div id="u5317_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5318" class="text">
+          <p><span>取消</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u5319" class="ax_default line">
+        <img id="u5319_img" class="img " src="images/基本信息/u2968.png"/>
+        <!-- Unnamed () -->
+        <div id="u5320" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5321" class="ax_default box_2">
+        <div id="u5321_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5322" class="text">
+          <p><span>上一步</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5323" class="ax_default box_2">
+        <div id="u5323_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5324" class="text">
+          <p><span>下一步</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (占位符) -->
+      <div id="u5325" class="ax_default placeholder">
+        <img id="u5325_img" class="img " src="images/基本信息/u2978.png"/>
+        <!-- Unnamed () -->
+        <div id="u5326" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u5327" class="ax_default" data-left="284" data-top="358" data-width="70" data-height="24">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u5328" class="ax_default sticky_2">
+          <div id="u5328_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u5329" class="text">
+            <p><span>杨天生</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u5330" class="ax_default line">
+          <img id="u5330_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u5331" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u5332" class="ax_default line">
+          <img id="u5332_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u5333" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (椭圆形) -->
+        <div id="u5334" class="ax_default ellipse">
+          <img id="u5334_img" class="img " src="images/基本信息/u2987.png"/>
+          <!-- Unnamed () -->
+          <div id="u5335" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5336" class="ax_default label">
+        <div id="u5336_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5337" class="text">
+          <p><span>主送人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5338" class="ax_default label">
+        <div id="u5338_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5339" class="text">
+          <p><span>抄送人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u5340" class="ax_default line">
+        <img id="u5340_img" class="img " src="images/基本信息/u2968.png"/>
+        <!-- Unnamed () -->
+        <div id="u5341" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u5342" class="ax_default icon">
+        <img id="u5342_img" class="img " src="images/基本信息/u2995.png"/>
+        <!-- Unnamed () -->
+        <div id="u5343" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u5344" class="ax_default" data-left="284" data-top="395" data-width="70" data-height="24">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u5345" class="ax_default sticky_2">
+          <div id="u5345_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u5346" class="text">
+            <p><span>杨天生</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u5347" class="ax_default line">
+          <img id="u5347_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u5348" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u5349" class="ax_default line">
+          <img id="u5349_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u5350" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (椭圆形) -->
+        <div id="u5351" class="ax_default ellipse">
+          <img id="u5351_img" class="img " src="images/基本信息/u2987.png"/>
+          <!-- Unnamed () -->
+          <div id="u5352" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u5353" class="ax_default" data-left="364" data-top="358" data-width="70" data-height="24">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u5354" class="ax_default sticky_2">
+          <div id="u5354_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u5355" class="text">
+            <p><span>杨天生</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u5356" class="ax_default line">
+          <img id="u5356_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u5357" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u5358" class="ax_default line">
+          <img id="u5358_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u5359" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (椭圆形) -->
+        <div id="u5360" class="ax_default ellipse">
+          <img id="u5360_img" class="img " src="images/基本信息/u2987.png"/>
+          <!-- Unnamed () -->
+          <div id="u5361" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u5362" class="ax_default" data-left="364" data-top="395" data-width="70" data-height="24">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u5363" class="ax_default sticky_2">
+          <div id="u5363_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u5364" class="text">
+            <p><span>杨天生</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u5365" class="ax_default line">
+          <img id="u5365_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u5366" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u5367" class="ax_default line">
+          <img id="u5367_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u5368" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (椭圆形) -->
+        <div id="u5369" class="ax_default ellipse">
+          <img id="u5369_img" class="img " src="images/基本信息/u2987.png"/>
+          <!-- Unnamed () -->
+          <div id="u5370" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u5371" class="ax_default icon">
+        <img id="u5371_img" class="img " src="images/基本信息/u2995.png"/>
+        <!-- Unnamed () -->
+        <div id="u5372" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5373" class="ax_default label">
+        <div id="u5373_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5374" class="text">
+          <p><span>企业客户编号&nbsp; </span><span style="color:#FF0000;">*</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u5375" class="ax_default text_field">
+        <input id="u5375_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5376" class="ax_default label">
+        <div id="u5376_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5377" class="text">
+          <p><span>职务</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5378" class="ax_default label">
+        <div id="u5378_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5379" class="text">
+          <p><span>角色</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u5380" class="ax_default text_field">
+        <input id="u5380_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u5381" class="ax_default text_field">
+        <input id="u5381_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5382" class="ax_default sticky_2">
+        <div id="u5382_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5383" class="text">
+          <p><span>同一公司同一姓名显示重名提示</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5384" class="ax_default label">
+        <div id="u5384_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5385" class="text">
+          <p><span>部门</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u5386" class="ax_default text_field">
+        <input id="u5386_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5387" class="ax_default label">
+        <div id="u5387_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5388" class="text">
+          <p><span>单位地址&nbsp; </span><span style="color:#FF0000;">*</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u5389" class="ax_default text_field">
+        <input id="u5389_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5390" class="ax_default _三级标题">
+        <div id="u5390_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5391" class="text">
+          <p><span>所在单位</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5392" class="ax_default label">
+        <div id="u5392_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5393" class="text">
+          <p><span>企业行政区划&nbsp; </span><span style="color:#FF0000;">*</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u5394" class="ax_default droplist">
+        <select id="u5394_input">
+          <option value="省">省</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u5395" class="ax_default droplist">
+        <select id="u5395_input">
+          <option value="市">市</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u5396" class="ax_default droplist">
+        <select id="u5396_input">
+          <option value="区">区</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5397" class="ax_default _三级标题">
+        <div id="u5397_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5398" class="text">
+          <p><span>纪念日和爱好</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u5399" class="ax_default _三级标题">
+        <div id="u5399_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u5400" class="text">
+          <p><span>自定义字段</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

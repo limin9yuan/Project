@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		 <form id="projectExpenditureForm" name="projectExpenditureForm" th:action="@{/payment/projectExpenditure/export}" method="get">
+			<input type="hidden" name="projectManager" />
+			<input type="hidden" name="projectSales" />
+			<input type="hidden" name="projectId" />
+			<input type="hidden" name="contractApplicantName" />
+		</form>
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<div id="myTabContent" class="tab-content">
+							<div class="tab-pane fade in active" id="basic">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">项目经理：</label>
+									<div class="col-sm-4">
+										<input id="projectManager" name=projectManager class="form-control" type="text">
+									</div>
+									<label class="col-sm-2 control-label">销售负责人：</label>
+									<div class="col-sm-4">
+										<select data-placeholder="请选择" name="projectSales" id="projectSales" class="form-control chosen-select" tabindex="1" style="width: 100%">
+											<option value="">全部</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-2 control-label">项目名称：</label>
+									<div class="col-sm-4 ">
+										<select data-placeholder="请选择" name="projectId" id="projectId" class="form-control chosen-select" tabindex="2" style="width: 100%">
+											<option value="">全部</option>
+										</select>
+									</div>
+									<label class="col-sm-2 control-label">时间：</label>
+									<div class="col-sm-4">
+										 <div class="row">
+											<div class="col-lg-7">
+												<div class="input-group input-inline-sm col-sm-12">
+													<div class="input-group date" id="timeMin">
+														<input class="form-control" type="text"
+															name="timeMin" style="width:100px"> <span
+															class="input-group-addon"> <span
+															class="glyphicon glyphicon-calendar"></span>
+														</span>
+													</div>
+													<!-- <input type="text" class="form-control" name="timeMin" id="timeMin"> -->
+													<span class="input-group-addon">至</span>
+													<div class="input-group date" id="timeMax">
+														<input class="form-control" type="text"
+															name="timeMax" style="width:100px"> <span
+															class="input-group-addon"> <span
+															class="glyphicon glyphicon-calendar"></span>
+														</span>
+													</div>
+													<!-- <input type="text" class="form-control" name="timeMax" id="timeMax"> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="ibox">
+								<div class="ibox-body">
+									<div class="fixed-table-toolbar">
+										<div class="columns pull-left">
+											<button shiro:hasPermission="payment:projectExpenditure:add" type="button" class="btn  btn-primary" onclick="add()">
+												<i class="fa fa-plus" aria-hidden="true"></i>添加
+											</button>
+											<button shiro:hasPermission="payment:projectExpenditure:batchRemove" type="button" class="btn  btn-danger" onclick="batchRemove()">
+												<i class="fa fa-trash" aria-hidden="true"></i>批量删除
+											</button>
+											<button shiro:hasPermission="payment:projectExpenditure:export" type="button" class="btn btn-primary" onclick="exportData()">
+												<i class="fa fa-export" aria-hidden="true"></i>导出
+											</button>
+										</div>
+										<div class="columns pull-right">
+											<button type="button" class="btn btn-primary" onclick="reLoad()">
+												<i class="fa fa-search" aria-hidden="true"></i>查询
+											</button>
+											<button type="button" class="btn btn-primary" onclick="resetPwd()">
+												<i class="fa fa-refresh" aria-hidden="true"></i>重置
+											</button>
+							</div>
+									</div>
+									<table id="exampleTable" data-mobile-responsive="true"> </table>
+								</div>
+								<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+								<div>
+									<script type="text/javascript">
+												var s_edit_h = 'hidden';
+												var s_remove_h = 'hidden';
+												var s_detailed_information_h = 'hidden';
+									</script>
+								</div>
+								<div shiro:hasPermission="payment:projectExpenditure:edit">
+									<script type="text/javascript"> s_edit_h = ''; </script>
+								</div>
+								<div shiro:hasPermission="payment:projectExpenditure:remove">
+									<script type="text/javascript"> var s_remove_h = ''; </script>
+								</div>
+								<div shiro:hasPermission="payment:projectExpenditure:detailed_information">
+									<script type="text/javascript"> var s_detailed_information_h = ''; </script>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/payment/projectExpenditure/projectExpenditure.js"></script>
+</body>
+</html>

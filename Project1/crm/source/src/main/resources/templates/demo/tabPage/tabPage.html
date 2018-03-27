@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+					<!-- tab标签 -->  
+<ul id="myTab" class="nav nav-tabs">  
+   <li class="active">  
+      <a href="#home" data-toggle="tab">  
+         tab1  
+      </a>  
+   </li>  
+  
+   <li>  
+    <a href="#ios" data-toggle="tab">  
+        tab2 
+    </a>  
+   </li>  
+   <li class="dropdown">  
+      <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">  
+          Java   
+         <b class="caret"></b>  
+      </a>  
+      <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">  
+         <li><a href="#jmeter" tabindex="-1" data-toggle="tab">jmeter</a></li>  
+         <li><a href="#ejb" tabindex="-1" data-toggle="tab">ejb</a></li>  
+      </ul>  
+   </li>  
+</ul>  
+  
+<!-- 每个tab页对应的内容 -->  
+<div id="myTabContent" class="tab-content">  
+   <div class="tab-pane fade in active" id="home">  
+      <p>tab1内容</p>  
+   </div>  
+   <div class="tab-pane fade" id="ios">  
+      <p>tab2内容</p>  
+   </div>  
+   <div class="tab-pane fade" id="jmeter">  
+      <p>jMeter 是一款开源的测试软件。</p>  
+   </div>  
+   <div class="tab-pane fade" id="ejb">  
+      <p>EJB是一个创建高度可扩展性和强大企业级应用程序的开发架构。</p>  
+   </div>  
+</div>  	
+					</div>	
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	</script>
+</body>
+</html>

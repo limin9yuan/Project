@@ -1,0 +1,360 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>找回密码-重置密码 手机</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/找回密码-重置密码_手机/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/找回密码-重置密码_手机/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u585" class="ax_default box_2">
+        <div id="u585_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u586" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u587" class="ax_default box_2">
+        <div id="u587_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u588" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u589" class="ax_default box_2">
+        <div id="u589_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u590" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u591" class="ax_default primary_button">
+        <div id="u591_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u592" class="text">
+          <p><span>提交</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u593" class="ax_default sticky_2">
+        <div id="u593_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u594" class="text">
+          <p><span>用户输入11位手机号码并在验证码验证正确后显示绿色对号图标</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u595" class="ax_default sticky_2">
+        <div id="u595_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u596" class="text">
+          <p><span>密码字符符合条件显示对号标志。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (椭圆形) -->
+      <div id="u597" class="ax_default ellipse">
+        <img id="u597_img" class="img " src="images/找回密码-选择找回方式/u459.png"/>
+        <!-- Unnamed () -->
+        <div id="u598" class="text">
+          <p><span>1</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u599" class="ax_default line">
+        <img id="u599_img" class="img " src="images/找回密码-选择找回方式/u457.png"/>
+        <!-- Unnamed () -->
+        <div id="u600" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (椭圆形) -->
+      <div id="u601" class="ax_default ellipse">
+        <img id="u601_img" class="img " src="images/找回密码-选择找回方式/u455.png"/>
+        <!-- Unnamed () -->
+        <div id="u602" class="text">
+          <p><span>3</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (椭圆形) -->
+      <div id="u603" class="ax_default ellipse">
+        <img id="u603_img" class="img " src="images/找回密码-选择找回方式/u459.png"/>
+        <!-- Unnamed () -->
+        <div id="u604" class="text">
+          <p><span>2</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u605" class="ax_default line">
+        <img id="u605_img" class="img " src="images/找回密码-选择找回方式/u457.png"/>
+        <!-- Unnamed () -->
+        <div id="u606" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u607" class="ax_default label">
+        <div id="u607_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u608" class="text">
+          <p><span>选择找回方式</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u609" class="ax_default label">
+        <div id="u609_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u610" class="text">
+          <p><span>身份验证</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u611" class="ax_default label">
+        <div id="u611_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u612" class="text">
+          <p><span>重置密码</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u613" class="ax_default _连接线">
+        <img id="u613_seg0" class="img " src="images/找回密码-重置密码_手机/u613_seg0.png" alt="u613_seg0"/>
+        <img id="u613_seg1" class="img " src="images/找回密码-重置密码_手机/u613_seg1.png" alt="u613_seg1"/>
+        <img id="u613_seg2" class="img " src="images/找回密码-重置密码_手机/u613_seg2.png" alt="u613_seg2"/>
+        <!-- Unnamed () -->
+        <div id="u614" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u615" class="ax_default _连接线">
+        <img id="u615_seg0" class="img " src="images/找回密码-身份验证_手机/u556_seg0.png" alt="u615_seg0"/>
+        <img id="u615_seg1" class="img " src="images/找回密码-身份验证_手机/u556_seg1.png" alt="u615_seg1"/>
+        <img id="u615_seg2" class="img " src="images/找回密码-身份验证_手机/u556_seg2.png" alt="u615_seg2"/>
+        <img id="u615_seg3" class="img " src="images/找回密码-身份验证_手机/u556_seg3.png" alt="u615_seg3"/>
+        <!-- Unnamed () -->
+        <div id="u616" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u617" class="ax_default text_field">
+        <input id="u617_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u618" class="ax_default text_field">
+        <input id="u618_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u619" class="ax_default label">
+        <div id="u619_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u620" class="text">
+          <p><span>6-16位，英文（区分大小写）、数字或常用符号</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u621" class="ax_default label">
+        <div id="u621_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u622" class="text">
+          <p><span>密码需一致</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u623" class="ax_default icon">
+        <img id="u623_img" class="img " src="images/手机注册/u268.png"/>
+        <!-- Unnamed () -->
+        <div id="u624" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u625" class="ax_default icon">
+        <img id="u625_img" class="img " src="images/手机注册/u268.png"/>
+        <!-- Unnamed () -->
+        <div id="u626" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u627" class="ax_default label">
+        <div id="u627_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u628" class="text">
+          <p><span>新密码</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u629" class="ax_default label">
+        <div id="u629_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u630" class="text">
+          <p><span>确认密码</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (bottom2) -->
+
+      <!-- Unnamed (矩形) -->
+      <div id="u632" class="ax_default box_2">
+        <div id="u632_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u633" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u634" class="ax_default label">
+        <div id="u634_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u635" class="text">
+          <p><span>公司介绍</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u636" class="ax_default label">
+        <div id="u636_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u637" class="text">
+          <p><span>资质证明</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u638" class="ax_default label">
+        <div id="u638_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u639" class="text">
+          <p><span>发展历程</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u640" class="ax_default label">
+        <div id="u640_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u641" class="text">
+          <p><span>行业论坛</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u642" class="ax_default label">
+        <div id="u642_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u643" class="text">
+          <p><span>合作伙伴</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u644" class="ax_default label">
+        <div id="u644_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u645" class="text">
+          <p><span>关于我们</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u646" class="ax_default image">
+        <img id="u646_img" class="img " src="images/登录/u72.png"/>
+        <!-- Unnamed () -->
+        <div id="u647" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u648" class="ax_default image">
+        <img id="u648_img" class="img " src="images/登录/u39.png"/>
+        <!-- Unnamed () -->
+        <div id="u649" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u650" class="ax_default _二级标题">
+        <div id="u650_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u651" class="text">
+          <p><span>客户需求发展平台</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u652" class="ax_default label">
+        <div id="u652_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u653" class="text">
+          <p><span>海心官网</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u654" class="ax_default label">
+        <div id="u654_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u655" class="text">
+          <p><span>在线反馈</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u656" class="ax_default label">
+        <div id="u656_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u657" class="text">
+          <p><span>项目咨询</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

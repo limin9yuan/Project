@@ -1,0 +1,129 @@
+ALTER TABLE approval_assignment            MODIFY COLUMN  Assignment_Operator            BIGINT COMMENT  '操作人';
+ALTER TABLE approval_expenses__travel      MODIFY COLUMN  Expenses_Travel_Operator       BIGINT COMMENT  '操作人';
+ALTER TABLE approval_expenses_normal       MODIFY COLUMN  Expenses_Normal_Operator       BIGINT COMMENT  '操作人';
+ALTER TABLE approval_payout                MODIFY COLUMN  Payout_Operator                BIGINT COMMENT  '操作人';
+ALTER TABLE approval_purchase              MODIFY COLUMN  Purchase_Operator              BIGINT COMMENT  '操作人';
+ALTER TABLE approval_travel                MODIFY COLUMN  Travel_Operator                BIGINT COMMENT  '操作人';
+
+ALTER TABLE development_project            MODIFY COLUMN  Project_Operator               BIGINT COMMENT  '操作人';
+ALTER TABLE development_project_collection MODIFY COLUMN  Collection_Operator            BIGINT COMMENT  '操作人';
+ALTER TABLE development_project_group      MODIFY COLUMN  Group_Operator                 BIGINT COMMENT  '操作人';
+
+ALTER TABLE Sales_Bug_Category             MODIFY COLUMN   Bug_Recorder                  BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Business                 MODIFY COLUMN   Business_Operator             BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Company_Customer         MODIFY COLUMN   Customer_Operator             BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Competitor               MODIFY COLUMN   Complaint_Operator            BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Customer_Child_Company   MODIFY COLUMN   Child_Company_Operator        BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Customer_Contact         MODIFY COLUMN   Contact_Operator              BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Customer_Dept            MODIFY COLUMN   Customer_Dept_Operator        BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Customer__Job            MODIFY COLUMN   Customer_Job_Operator         BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Module_Category          MODIFY COLUMN   Module_Recorder               BIGINT COMMENT  '操作人';
+
+ALTER TABLE Sales_Product_Category         MODIFY COLUMN   Product_Recorder              BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Project                  MODIFY COLUMN   Project_Operator              BIGINT COMMENT  '操作人';
+
+ALTER TABLE Sales_Record                   MODIFY COLUMN  Record_Operator                BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Record_Complaint         MODIFY COLUMN  Complaint_Recorder             BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Record_Service           MODIFY COLUMN  Service_Recorder               BIGINT COMMENT  '操作人';
+ALTER TABLE Sales_Requirement_Category     MODIFY COLUMN  Requirement_Recorder           BIGINT COMMENT  '操作人';
+ALTER TABLE pre_sales_project              MODIFY COLUMN  Project_Operator               BIGINT COMMENT  '操作人';
+
+
+ALTER TABLE approval_assignment            MODIFY COLUMN Assignment_Operate_Time           timestamp COMMENT  '修改时间';
+ALTER TABLE approval_expenses__travel      MODIFY COLUMN Expenses_Travel_Opt_Time          timestamp COMMENT  '修改时间';
+ALTER TABLE approval_expenses_normal       MODIFY COLUMN Expenses_Normal_Opt_Time          timestamp COMMENT  '修改时间';
+ALTER TABLE approval_payout                MODIFY COLUMN Payout_Operate_Time               timestamp COMMENT  '修改时间';
+ALTER TABLE approval_purchase              MODIFY COLUMN Purchase_Operate_Time             timestamp COMMENT  '修改时间';
+ALTER TABLE approval_travel                MODIFY COLUMN Travel_Operate_Time               timestamp COMMENT  '修改时间';
+
+ALTER TABLE development_project            MODIFY COLUMN Project_Operate_Time              timestamp COMMENT  '修改时间';
+ALTER TABLE development_project_collection MODIFY COLUMN Collection_Operate_Time           timestamp COMMENT  '修改时间';
+ALTER TABLE development_project_group      MODIFY COLUMN Group_Operate_Time                timestamp COMMENT  '修改时间';
+
+ALTER TABLE Sales_Bug_Category             MODIFY COLUMN  Bug_Record_Time                  timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Business                 MODIFY COLUMN  Business_Operate_Time            timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Company_Customer         MODIFY COLUMN  Customer_Operate_Time            timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Competitor               MODIFY COLUMN  Complaint_Operate_Time           timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Customer_Child_Company   MODIFY COLUMN  Child_Company_Operate_Time       timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Customer_Contact         MODIFY COLUMN  Contact_Operate_Time             timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Customer_Dept            MODIFY COLUMN  Customer_Dept_Operate_Time       timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Customer__Job            MODIFY COLUMN  Customer_Job_Operate_Time        timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Module_Category          MODIFY COLUMN  Module_Record_Time               timestamp COMMENT  '修改时间';
+
+ALTER TABLE Sales_Product_Category         MODIFY COLUMN  Product_Record_Time              timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Project                  MODIFY COLUMN Project_Operate_Time              timestamp COMMENT  '修改时间';
+
+ALTER TABLE Sales_Record                   MODIFY COLUMN Record_Operate_Time               timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Record_Complaint         MODIFY COLUMN Complaint_Record_Time             timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Record_Service           MODIFY COLUMN Service_Record_Time               timestamp COMMENT  '修改时间';
+ALTER TABLE Sales_Requirement_Category     MODIFY COLUMN Requirement_Record_Time           timestamp COMMENT  '修改时间';
+ALTER TABLE pre_sales_project              MODIFY COLUMN Project_Operate_Time              timestamp COMMENT  '修改时间';
+
+
+
+ALTER TABLE approval_assignment            ADD Assignment_Creator           BIGINT(20) COMMENT  '创建人';
+ALTER TABLE approval_expenses__travel      ADD Expenses_Travel_Creator      BIGINT(20) COMMENT  '创建人';
+ALTER TABLE approval_expenses_normal       ADD Expenses_Normal_Creator      BIGINT(20) COMMENT  '创建人';
+ALTER TABLE approval_payout                ADD Payout_Creator               BIGINT(20) COMMENT  '创建人';
+ALTER TABLE approval_purchase              ADD Purchase_Creator             BIGINT(20) COMMENT  '创建人';
+ALTER TABLE approval_travel                ADD Travel_Creator               BIGINT(20) COMMENT  '创建人';
+
+ALTER TABLE development_project            ADD Project_Creator              BIGINT(20) COMMENT  '创建人';
+ALTER TABLE development_project_collection ADD Collection_Creator           BIGINT(20) COMMENT  '创建人';
+ALTER TABLE development_project_group      ADD Group_Creator                BIGINT(20) COMMENT  '创建人';
+
+ALTER TABLE Sales_Bug_Category             ADD  Bug_Creator                 BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Business                 ADD  Business_Creator            BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Company_Customer         ADD  Customer_Creator            BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Competitor               ADD  Complaint_Creator           BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Customer_Child_Company   ADD  Child_Company_Creator       BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Customer_Contact         ADD  Contact_Creator             BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Customer_Dept            ADD  Customer_Dept_Creator       BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Customer__Job            ADD  Customer_Job_Creator        BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Module_Category          ADD  Module_Creator              BIGINT(20) COMMENT  '创建人';
+
+ALTER TABLE Sales_Product_Category         ADD  Product_Creator             BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Project                  ADD  Project_Creator             BIGINT(20) COMMENT  '创建人';
+
+ALTER TABLE Sales_Record                   ADD Record_Creator               BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Record_Complaint         ADD Complaint_Creator            BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Record_Service           ADD Service_Creator              BIGINT(20) COMMENT  '创建人';
+ALTER TABLE Sales_Requirement_Category     ADD Requirement_Creator          BIGINT(20) COMMENT  '创建人';
+ALTER TABLE pre_sales_project              ADD Project_Creator              BIGINT(20) COMMENT  '创建人';
+
+
+
+
+
+
+
+
+ALTER TABLE approval_assignment            ADD Assignment_Create_Time           timestamp COMMENT  '创建时间';
+ALTER TABLE approval_expenses__travel      ADD Expenses_Travel_Create_Time      timestamp COMMENT  '创建时间';
+ALTER TABLE approval_expenses_normal       ADD Expenses_Normal_Create_Time      timestamp COMMENT  '创建时间';
+ALTER TABLE approval_payout                ADD Payout_Create_Time               timestamp COMMENT  '创建时间';
+ALTER TABLE approval_purchase              ADD Purchase_Create_Time             timestamp COMMENT  '创建时间';
+ALTER TABLE approval_travel                ADD Travel_Create_Time               timestamp COMMENT  '创建时间';
+
+ALTER TABLE development_project            ADD Project_Create_Time              timestamp COMMENT  '创建时间';
+ALTER TABLE development_project_collection ADD Collection_Create_Time           timestamp COMMENT  '创建时间';
+ALTER TABLE development_project_group      ADD Group_Create_Time                timestamp COMMENT  '创建时间';
+
+ALTER TABLE Sales_Bug_Category             ADD  Bug_Create_Time                 timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Business                 ADD  Business_Create_Time            timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Company_Customer         ADD  Customer_Create_Time            timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Competitor               ADD  Complaint_Create_Time           timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Customer_Child_Company   ADD  Child_Company_Create_Time       timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Customer_Contact         ADD  Contact_Create_Time             timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Customer_Dept            ADD  Customer_Dept_Create_Time       timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Customer__Job            ADD  Customer_Job_Create_Time        timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Module_Category          ADD  Module_Create_Time              timestamp COMMENT  '创建时间';
+
+ALTER TABLE Sales_Product_Category         ADD  Product_Create_Time             timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Project                  ADD Project_Create_Time              timestamp COMMENT  '创建时间';
+
+ALTER TABLE Sales_Record                   ADD Record_Create_Time               timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Record_Complaint         ADD Complaint_Create_Time            timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Record_Service           ADD Service_Create_Time              timestamp COMMENT  '创建时间';
+ALTER TABLE Sales_Requirement_Category     ADD Requirement_Create_Time          timestamp COMMENT  '创建时间';
+ALTER TABLE pre_sales_project              ADD Project_Create_Time              timestamp COMMENT  '创建时间';

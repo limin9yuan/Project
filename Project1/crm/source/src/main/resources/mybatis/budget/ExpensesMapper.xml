@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.budget.dao.ExpensesDao">
+
+	<select id="get" resultType="com.bootdo.budget.domain.ExpensesDO">
+		select `Expenses_ID`,`Budget_ID`,`Expenses_Type`,`Expenses_Plan_Price`,`Expenses_Plan_Description`,`Expenses_Customer_Rate`,`Expenses_Project_Rate`,`Expenses_Remarks`,`Expenses_Operator`,`Expenses_Operate_TIme`,`Expenses_Total_Price` from budget_expenses where Expenses_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.budget.domain.ExpensesDO">
+		select `Expenses_ID`,`Budget_ID`,`Expenses_Type`,`Expenses_Plan_Price`,`Expenses_Plan_Description`,`Expenses_Customer_Rate`,`Expenses_Project_Rate`,`Expenses_Remarks`,`Expenses_Operator`,`Expenses_Operate_TIme`,`Expenses_Total_Price` from budget_expenses
+        <where>  
+		  		  <if test="expensesId != null and expensesId != ''"> and Expenses_ID = #{expensesId} </if>
+		  		  <if test="budgetId != null and budgetId != ''"> and Budget_ID = #{budgetId} </if>
+		  		  <if test="expensesType != null and expensesType != ''"> and Expenses_Type = #{expensesType} </if>
+		  		  <if test="expensesPlanPrice != null and expensesPlanPrice != ''"> and Expenses_Plan_Price = #{expensesPlanPrice} </if>
+		  		  <if test="expensesPlanDescription != null and expensesPlanDescription != ''"> and Expenses_Plan_Description = #{expensesPlanDescription} </if>
+		  		  <if test="expensesCustomerRate != null and expensesCustomerRate != ''"> and Expenses_Customer_Rate = #{expensesCustomerRate} </if>
+		  		  <if test="expensesProjectRate != null and expensesProjectRate != ''"> and Expenses_Project_Rate = #{expensesProjectRate} </if>
+		  		  <if test="expensesRemarks != null and expensesRemarks != ''"> and Expenses_Remarks = #{expensesRemarks} </if>
+		  		  <if test="expensesOperator != null and expensesOperator != ''"> and Expenses_Operator = #{expensesOperator} </if>
+		  		  <if test="expensesOperateTime != null and expensesOperateTime != ''"> and Expenses_Operate_TIme = #{expensesOperateTime} </if>
+		  		   <if test="expensesTotalPrice != null and expensesTotalPrice != ''"> and Expenses_Total_Price = #{expensesTotalPrice} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Expenses_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from budget_expenses
+		 <where>  
+		  		  <if test="expensesId != null and expensesId != ''"> and Expenses_ID = #{expensesId} </if>
+		  		  <if test="budgetId != null and budgetId != ''"> and Budget_ID = #{budgetId} </if>
+		  		  <if test="expensesType != null and expensesType != ''"> and Expenses_Type = #{expensesType} </if>
+		  		  <if test="expensesPlanPrice != null and expensesPlanPrice != ''"> and Expenses_Plan_Price = #{expensesPlanPrice} </if>
+		  		  <if test="expensesPlanDescription != null and expensesPlanDescription != ''"> and Expenses_Plan_Description = #{expensesPlanDescription} </if>
+		  		  <if test="expensesCustomerRate != null and expensesCustomerRate != ''"> and Expenses_Customer_Rate = #{expensesCustomerRate} </if>
+		  		  <if test="expensesProjectRate != null and expensesProjectRate != ''"> and Expenses_Project_Rate = #{expensesProjectRate} </if>
+		  		  <if test="expensesRemarks != null and expensesRemarks != ''"> and Expenses_Remarks = #{expensesRemarks} </if>
+		  		  <if test="expensesOperator != null and expensesOperator != ''"> and Expenses_Operator = #{expensesOperator} </if>
+		  		  <if test="expensesOperateTime != null and expensesOperateTime != ''"> and Expenses_Operate_TIme = #{expensesOperateTime} </if>
+		  		  <if test="expensesTotalPrice != null and expensesTotalPrice != ''"> and Expenses_Total_Price = #{expensesTotalPrice} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.budget.domain.ExpensesDO">
+		insert into budget_expenses
+		(
+			`Expenses_ID`, 
+			`Budget_ID`, 
+			`Expenses_Type`, 
+			`Expenses_Plan_Price`, 
+			`Expenses_Plan_Description`, 
+			`Expenses_Customer_Rate`, 
+			`Expenses_Project_Rate`, 
+			`Expenses_Remarks`, 
+			`Expenses_Operator`, 
+			`Expenses_Operate_TIme`,
+			`Expenses_Total_Price`
+		)
+		values
+		(
+			#{expensesId}, 
+			#{budgetId}, 
+			#{expensesType}, 
+			#{expensesPlanPrice}, 
+			#{expensesPlanDescription}, 
+			#{expensesCustomerRate}, 
+			#{expensesProjectRate}, 
+			#{expensesRemarks}, 
+			#{expensesOperator}, 
+			#{expensesOperateTime},
+			#{expensesTotalPrice}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.budget.domain.ExpensesDO">
+		update budget_expenses 
+		<set>
+			<if test="budgetId != null">`Budget_ID` = #{budgetId}, </if>
+			<if test="expensesType != null">`Expenses_Type` = #{expensesType}, </if>
+			<if test="expensesPlanPrice != null">`Expenses_Plan_Price` = #{expensesPlanPrice}, </if>
+			<if test="expensesPlanDescription != null">`Expenses_Plan_Description` = #{expensesPlanDescription}, </if>
+			<if test="expensesCustomerRate != null">`Expenses_Customer_Rate` = #{expensesCustomerRate}, </if>
+			<if test="expensesProjectRate != null">`Expenses_Project_Rate` = #{expensesProjectRate}, </if>
+			<if test="expensesRemarks != null">`Expenses_Remarks` = #{expensesRemarks}, </if>
+			<if test="expensesOperator != null">`Expenses_Operator` = #{expensesOperator}, </if>
+			<if test="expensesOperateTime != null">`Expenses_Operate_TIme` = #{expensesOperateTime},</if>
+			<if test="expensesTotalPrice != null">`Expenses_Total_Price` = #{expensesTotalPrice}</if>
+		</set>
+		where Expenses_ID = #{expensesId}
+	</update>
+	
+	<delete id="remove">
+		delete from budget_expenses where Expenses_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from budget_expenses where Expenses_ID in 
+		<foreach item="expensesId" collection="array" open="(" separator="," close=")">
+			#{expensesId}
+		</foreach>
+	</delete>
+
+</mapper>

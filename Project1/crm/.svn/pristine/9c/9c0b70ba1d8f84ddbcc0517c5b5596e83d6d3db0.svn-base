@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.sales.dao.RecordDao">
+
+	<select id="get" resultType="com.bootdo.sales.domain.RecordDO">
+		select `Record_ID`,`Customer_ID`,`Business_ID`,`Project_ID`,`Record_Name`,`Record_Phase`,`Record_Sale_Opportunity`,`Record_Expense_Category`,`Record_Expense_Actual`,`Record_Executor`,`Record_Begin_Date`,`Record_End_Date`,`Record_Execute_Status`,`Record_Attachment`,`Record_Remarks`,`Record_Operator`,`Record_Operate_Time`,`Record_Creator`,`Record_Create_Time` from sales_record where Record_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.sales.domain.RecordDO">
+		select `Record_ID`,
+		a.`Customer_ID`,b.`Customer_Name` as `Record_Customer_Name`,
+		a.`Business_ID`,c.`Business_Name` as `Record_Business_Name`,
+		`Record_Name`,`Record_Phase`,`Record_Sale_Opportunity`,`Record_Expense_Category`,`Record_Expense_Actual`,
+		a.`Record_Executor`, d.`Employee_Name` as `Record_Executor_Name`,
+		`Record_Begin_Date`,`Record_End_Date`,`Record_Execute_Status`,`Record_Attachment`,`Record_Remarks`,`Record_Operator`,`Record_Operate_Time`,
+		a.`Record_Creator`,f.`name`,
+		`Record_Create_Time`,
+        a.`Project_ID`,e.`Project_Name` as `Record_Project_Name` 
+		from sales_record a
+		left join
+        (select `Project_ID`,`Project_Name`,`Customer_ID` from pre_sales_project
+         UNION ALL
+         select `Project_ID`,`Project_Name`,`Customer_ID` from development_project
+        )e on a.`Project_ID`=e.`Project_ID`
+		left join sales_company_customer b on a.`Customer_ID`=b.`Customer_ID`
+		left join sales_business c on a.`Business_ID`=c.`Business_ID`
+		left join inner_org_employee d on a.`Record_Executor`=d.`Employee_ID`
+		left join sys_user f on a.`Record_Creator`=f.`user_id`
+        <where>  
+		  		  <if test="recordId != null and recordId != ''"> and Record_ID = #{recordId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
+		  		  <if test="recordName != null and recordName != ''"> and Record_Name = #{recordName} </if>
+		  		  <if test="recordPhase != null and recordPhase != ''"> and Record_Phase = #{recordPhase} </if>
+		  		  <if test="recordSaleOpportunity != null and recordSaleOpportunity != ''"> and Record_Sale_Opportunity = #{recordSaleOpportunity} </if>
+		  		  <if test="recordExpenseCategory != null and recordExpenseCategory != ''"> and Record_Expense_Category = #{recordExpenseCategory} </if>
+		  		  <if test="recordExpenseActual != null and recordExpenseActual != ''"> and Record_Expense_Actual = #{recordExpenseActual} </if>
+		  		  <if test="recordExecutor != null and recordExecutor != ''"> and Record_Executor = #{recordExecutor} </if>
+		  		  <if test="recordBeginDate != null and recordBeginDate != ''"> and Record_Begin_Date = #{recordBeginDate} </if>
+		  		  <if test="recordEndDate != null and recordEndDate != ''"> and Record_End_Date = #{recordEndDate} </if>
+		  		  <if test="recordExecuteStatus != null and recordExecuteStatus != ''"> and Record_Execute_Status = #{recordExecuteStatus} </if>
+		  		  <if test="recordAttachment != null and recordAttachment != ''"> and Record_Attachment = #{recordAttachment} </if>
+		  		  <if test="recordRemarks != null and recordRemarks != ''"> and Record_Remarks = #{recordRemarks} </if>
+		  		  <if test="recordOperator != null and recordOperator != ''"> and Record_Operator = #{recordOperator} </if>
+		  		  <if test="recordOperateTime != null and recordOperateTime != ''"> and Record_Operate_Time = #{recordOperateTime} </if>
+		  		  <if test="recordCreator != null and recordCreator != ''"> and Record_Creator = #{recordCreator} </if>
+		  		  <if test="recordCreateTime != null and recordCreateTime != ''"> and Record_Create_Time = #{recordCreateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Record_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sales_record
+		 <where>  
+		  		  <if test="recordId != null and recordId != ''"> and Record_ID = #{recordId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
+		  		  <if test="recordName != null and recordName != ''"> and Record_Name = #{recordName} </if>
+		  		  <if test="recordPhase != null and recordPhase != ''"> and Record_Phase = #{recordPhase} </if>
+		  		  <if test="recordSaleOpportunity != null and recordSaleOpportunity != ''"> and Record_Sale_Opportunity = #{recordSaleOpportunity} </if>
+		  		  <if test="recordExpenseCategory != null and recordExpenseCategory != ''"> and Record_Expense_Category = #{recordExpenseCategory} </if>
+		  		  <if test="recordExpenseActual != null and recordExpenseActual != ''"> and Record_Expense_Actual = #{recordExpenseActual} </if>
+		  		  <if test="recordExecutor != null and recordExecutor != ''"> and Record_Executor = #{recordExecutor} </if>
+		  		  <if test="recordBeginDate != null and recordBeginDate != ''"> and Record_Begin_Date = #{recordBeginDate} </if>
+		  		  <if test="recordEndDate != null and recordEndDate != ''"> and Record_End_Date = #{recordEndDate} </if>
+		  		  <if test="recordExecuteStatus != null and recordExecuteStatus != ''"> and Record_Execute_Status = #{recordExecuteStatus} </if>
+		  		  <if test="recordAttachment != null and recordAttachment != ''"> and Record_Attachment = #{recordAttachment} </if>
+		  		  <if test="recordRemarks != null and recordRemarks != ''"> and Record_Remarks = #{recordRemarks} </if>
+		  		  <if test="recordOperator != null and recordOperator != ''"> and Record_Operator = #{recordOperator} </if>
+		  		  <if test="recordOperateTime != null and recordOperateTime != ''"> and Record_Operate_Time = #{recordOperateTime} </if>
+		  		  <if test="recordCreator != null and recordCreator != ''"> and Record_Creator = #{recordCreator} </if>
+		  		  <if test="recordCreateTime != null and recordCreateTime != ''"> and Record_Create_Time = #{recordCreateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.sales.domain.RecordDO">
+		insert into sales_record
+		(
+			`Record_ID`, 
+			`Customer_ID`, 
+			`Business_ID`, 
+			`Project_ID`, 
+			`Record_Name`, 
+			`Record_Phase`, 
+			`Record_Sale_Opportunity`, 
+			`Record_Expense_Category`, 
+			`Record_Expense_Actual`, 
+			`Record_Executor`, 
+			`Record_Begin_Date`, 
+			`Record_End_Date`, 
+			`Record_Execute_Status`, 
+			`Record_Attachment`, 
+			`Record_Remarks`,  
+			`Record_Creator`, 
+			`Record_Create_Time`
+		)
+		values
+		(
+			#{recordId}, 
+			#{customerId}, 
+			#{businessId}, 
+			#{projectId}, 
+			#{recordName}, 
+			#{recordPhase}, 
+			#{recordSaleOpportunity}, 
+			#{recordExpenseCategory}, 
+			#{recordExpenseActual}, 
+			#{recordExecutor}, 
+			#{recordBeginDate}, 
+			#{recordEndDate}, 
+			#{recordExecuteStatus}, 
+			#{recordAttachment}, 
+			#{recordRemarks}, 
+			#{recordCreator}, 
+			#{recordCreateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.sales.domain.RecordDO">
+		update sales_record 
+		<set>
+			<if test="customerId != null">`Customer_ID` = #{customerId}, </if>
+			<if test="businessId != null">`Business_ID` = #{businessId}, </if>
+			<if test="projectId != null">`Project_ID` = #{projectId}, </if>
+			<if test="recordName != null">`Record_Name` = #{recordName}, </if>
+			<if test="recordPhase != null">`Record_Phase` = #{recordPhase}, </if>
+			<if test="recordSaleOpportunity != null">`Record_Sale_Opportunity` = #{recordSaleOpportunity}, </if>
+			<if test="recordExpenseCategory != null">`Record_Expense_Category` = #{recordExpenseCategory}, </if>
+			<if test="recordExpenseActual != null">`Record_Expense_Actual` = #{recordExpenseActual}, </if>
+			<if test="recordExecutor != null">`Record_Executor` = #{recordExecutor}, </if>
+			<if test="recordBeginDate != null">`Record_Begin_Date` = #{recordBeginDate}, </if>
+			<if test="recordEndDate != null">`Record_End_Date` = #{recordEndDate}, </if>
+			<if test="recordExecuteStatus != null">`Record_Execute_Status` = #{recordExecuteStatus}, </if>
+			<if test="recordAttachment != null">`Record_Attachment` = #{recordAttachment}, </if>
+			<if test="recordRemarks != null">`Record_Remarks` = #{recordRemarks}, </if>
+			<if test="recordOperator != null">`Record_Operator` = #{recordOperator}, </if>
+			<if test="recordOperateTime != null">`Record_Operate_Time` = #{recordOperateTime}, </if>
+		</set>
+		where Record_ID = #{recordId}
+	</update>
+	
+	<delete id="remove">
+		delete from sales_record where Record_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sales_record where Record_ID in 
+		<foreach item="recordId" collection="array" open="(" separator="," close=")">
+			#{recordId}
+		</foreach>
+	</delete>
+</mapper>

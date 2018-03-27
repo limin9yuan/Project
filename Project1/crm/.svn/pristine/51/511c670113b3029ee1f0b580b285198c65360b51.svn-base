@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.budget.dao.BudgetDao">
+
+	<select id="get" resultType="com.bootdo.budget.domain.BudgetDO">
+		select `Budget_ID`,`Customer_ID`,`Business_ID`,`Project_ID`,`Budget_Profit_Rate`,`Budget_Account_Receivable`,`Budget_Total_Cost`,`Budget_Conformance`,`Budget_Service_Revenue`,`Budget_Tax`,`Budget_Service_Revenue_Net`,`Budget_Purchase_Cost`,`Budget_Labor_Cost`,`Budget_Travel_Cost`,`Budget_Cost`,`Budget_Profit`,`Budget_Operator`,`Budget_Operate_Time`,`Dept_ID`,`Responsible_Center`,`Project_Supervisor`,`Project_Gategory`from project_budget where Budget_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.budget.domain.BudgetDO">
+		select `Budget_ID`,
+		a.`Customer_ID`,d.`Customer_Name`as `Customer_Name`,
+		`Business_ID`,
+		a.`Project_ID`,b.`Project_Name` as `Project_Name`, b.`Project_Owner` as `Project_Owner_Name`,
+		`Budget_Profit_Rate`,`Budget_Account_Receivable`,`Budget_Total_Cost`,`Budget_Conformance`,`Budget_Service_Revenue`,`Budget_Tax`,`Budget_Service_Revenue_Net`,`Budget_Purchase_Cost`,`Budget_Labor_Cost`,`Budget_Travel_Cost`,`Budget_Cost`,`Budget_Profit`,
+		a.`Budget_Operator`,f.`name` as `Budget_Operator_Name`,`Budget_Operate_Time`,
+		a.`Dept_ID`,e.`name` as `Dept_Name`,
+		`Responsible_Center`,
+        `Project_Supervisor`,g.Employee_Name as `Project_Supervisor_Name`,
+        c.Employee_Name as `Project_Owner_Name`,
+        a.`Project_Gategory`
+		from project_budget a
+		left join development_project b on a.`Project_ID`=b.`Project_ID`
+		left join inner_org_employee c on a.`Project_Supervisor`=c.`Employee_ID`
+		left join sales_company_customer d on a.`Customer_ID`=d.`Customer_ID`
+		left join sys_dept e on a.`Dept_ID`=e.`dept_id`
+		left join sys_user f on a.`Budget_Operator`=f.`user_id`
+		left join inner_org_employee g on a.`Project_Supervisor`=g.`Employee_ID`
+        <where>  
+		  		  <if test="budgetId != null and budgetId != ''"> and Budget_ID = #{budgetId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  <if test="budgetProfitRate != null and budgetProfitRate != ''"> and Budget_Profit_Rate = #{budgetProfitRate} </if>
+		  		  <if test="budgetAccountReceivable != null and budgetAccountReceivable != ''"> and Budget_Account_Receivable = #{budgetAccountReceivable} </if>
+		  		  <if test="budgetTotalCost != null and budgetTotalCost != ''"> and Budget_Total_Cost = #{budgetTotalCost} </if>
+		  		  <if test="budgetConformance != null and budgetConformance != ''"> and Budget_Conformance = #{budgetConformance} </if>
+		  		  <if test="budgetServiceRevenue != null and budgetServiceRevenue != ''"> and Budget_Service_Revenue = #{budgetServiceRevenue} </if>
+		  		  <if test="budgetTax != null and budgetTax != ''"> and Budget_Tax = #{budgetTax} </if>
+		  		  <if test="budgetServiceRevenueNet != null and budgetServiceRevenueNet != ''"> and Budget_Service_Revenue_Net = #{budgetServiceRevenueNet} </if>
+		  		  <if test="budgetPurchaseCost != null and budgetPurchaseCost != ''"> and Budget_Purchase_Cost = #{budgetPurchaseCost} </if>
+		  		  <if test="budgetLaborCost != null and budgetLaborCost != ''"> and Budget_Labor_Cost = #{budgetLaborCost} </if>
+		  		  <if test="budgetTravelCost != null and budgetTravelCost != ''"> and Budget_Travel_Cost = #{budgetTravelCost} </if>
+		  		  <if test="budgetCost != null and budgetCost != ''"> and Budget_Cost = #{budgetCost} </if>
+		  		  <if test="budgetProfit != null and budgetProfit != ''"> and Budget_Profit = #{budgetProfit} </if>
+		  		  <if test="budgetOperator != null and budgetOperator != ''"> and Budget_Operator = #{budgetOperator} </if>
+		  		  <if test="deptId != null and deptId != ''"> and Dept_ID = #{deptId} </if>
+		  		  <if test="responsibleCenter != null and responsibleCenter != ''"> and Responsible_Center = #{responsibleCenter} </if>
+		  		  <if test="projectSupervisor != null and projectSupervisor != ''"> and Project_Supervisor = #{projectSupervisor} </if>
+		  		  <if test="projectGategory != null and projectGategory != ''"> and Project_Gategory = #{projectGategory} </if>
+		  		  
+		  		  <if test="projectOwner != null and projectOwner != ''"> and b.`Project_Owner` LIKE #{projectOwner} </if>
+		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
+		  		  <if test="budgetOperateTime != null and budgetOperateTime != ''"> and Budget_Operate_Time = #{budgetOperateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Budget_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*)
+		from project_budget a
+		left join development_project b on a.`Project_ID`=b.`Project_ID`
+		left join inner_org_employee c on a.`Project_Supervisor`=c.`Employee_ID`
+		left join sales_company_customer d on a.`Customer_ID`=d.`Customer_ID`
+		left join sys_dept e on a.`Dept_ID`=e.`dept_id`
+		left join sys_user f on a.`Budget_Operator`=f.`user_id`
+		left join inner_org_employee g on a.`Project_Supervisor`=g.`Employee_ID`
+		 <where>  
+		  		  <if test="budgetId != null and budgetId != ''"> and Budget_ID = #{budgetId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  <if test="budgetProfitRate != null and budgetProfitRate != ''"> and Budget_Profit_Rate = #{budgetProfitRate} </if>
+		  		  <if test="budgetAccountReceivable != null and budgetAccountReceivable != ''"> and Budget_Account_Receivable = #{budgetAccountReceivable} </if>
+		  		  <if test="budgetTotalCost != null and budgetTotalCost != ''"> and Budget_Total_Cost = #{budgetTotalCost} </if>
+		  		  <if test="budgetConformance != null and budgetConformance != ''"> and Budget_Conformance = #{budgetConformance} </if>
+		  		  <if test="budgetServiceRevenue != null and budgetServiceRevenue != ''"> and Budget_Service_Revenue = #{budgetServiceRevenue} </if>
+		  		  <if test="budgetTax != null and budgetTax != ''"> and Budget_Tax = #{budgetTax} </if>
+		  		  <if test="budgetServiceRevenueNet != null and budgetServiceRevenueNet != ''"> and Budget_Service_Revenue_Net = #{budgetServiceRevenueNet} </if>
+		  		  <if test="budgetPurchaseCost != null and budgetPurchaseCost != ''"> and Budget_Purchase_Cost = #{budgetPurchaseCost} </if>
+		  		  <if test="budgetLaborCost != null and budgetLaborCost != ''"> and Budget_Labor_Cost = #{budgetLaborCost} </if>
+		  		  <if test="budgetTravelCost != null and budgetTravelCost != ''"> and Budget_Travel_Cost = #{budgetTravelCost} </if>
+		  		  <if test="budgetCost != null and budgetCost != ''"> and Budget_Cost = #{budgetCost} </if>
+		  		  <if test="budgetProfit != null and budgetProfit != ''"> and Budget_Profit = #{budgetProfit} </if>
+		  		  <if test="budgetOperator != null and budgetOperator != ''"> and Budget_Operator = #{budgetOperator} </if>
+		  		  <if test="deptId != null and deptId != ''"> and Dept_ID = #{deptId} </if>
+		  		  <if test="responsibleCenter != null and responsibleCenter != ''"> and Responsible_Center = #{responsibleCenter} </if>
+		  		  <if test="projectSupervisor != null and projectSupervisor != ''"> and Project_Supervisor = #{projectSupervisor} </if>
+		  		  <if test="projectGategory != null and projectGategory != ''"> and Project_Gategory = #{projectGategory} </if>
+		  		  
+		  		  <if test="projectOwner != null and projectOwner != ''"> and b.`Project_Owner` LIKE #{projectOwner} </if>
+		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
+		  		  <if test="budgetOperateTime != null and budgetOperateTime != ''"> and Budget_Operate_Time = #{budgetOperateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.budget.domain.BudgetDO">
+		insert into project_budget
+		(
+			`Budget_ID`, 
+			`Customer_ID`, 
+			`Business_ID`, 
+			`Project_ID`, 
+			`Budget_Profit_Rate`, 
+			`Budget_Account_Receivable`, 
+			`Budget_Total_Cost`, 
+			`Budget_Conformance`, 
+			`Budget_Service_Revenue`, 
+			`Budget_Tax`, 
+			`Budget_Service_Revenue_Net`, 
+			`Budget_Purchase_Cost`, 
+			`Budget_Labor_Cost`, 
+			`Budget_Travel_Cost`, 
+			`Budget_Cost`, 
+			`Budget_Profit`, 
+			`Budget_Operator`, 
+			`Budget_Operate_Time`,
+			`Dept_ID`, 
+			`Responsible_Center`, 
+			`Project_Supervisor`,
+			`Project_Gategory`
+			
+		)
+		values
+		(
+			#{budgetId}, 
+			#{customerId}, 
+			#{businessId}, 
+			#{projectId}, 
+			#{budgetProfitRate}, 
+			#{budgetAccountReceivable}, 
+			#{budgetTotalCost}, 
+			#{budgetConformance}, 
+			#{budgetServiceRevenue}, 
+			#{budgetTax}, 
+			#{budgetServiceRevenueNet}, 
+			#{budgetPurchaseCost}, 
+			#{budgetLaborCost}, 
+			#{budgetTravelCost}, 
+			#{budgetCost}, 
+			#{budgetProfit}, 
+			#{budgetOperator}, 
+			#{budgetOperateTime},
+			#{deptId}, 
+			#{responsibleCenter}, 
+			#{projectSupervisor},
+			#{projectGategory}
+			
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.budget.domain.BudgetDO">
+		update project_budget 
+		<set>
+			<if test="customerId != null">`Customer_ID` = #{customerId}, </if>
+			<if test="businessId != null">`Business_ID` = #{businessId}, </if>
+			<if test="projectId != null">`Project_ID` = #{projectId}, </if>
+			<if test="budgetProfitRate != null">`Budget_Profit_Rate` = #{budgetProfitRate}, </if>
+			<if test="budgetAccountReceivable != null">`Budget_Account_Receivable` = #{budgetAccountReceivable}, </if>
+			<if test="budgetTotalCost != null">`Budget_Total_Cost` = #{budgetTotalCost}, </if>
+			<if test="budgetConformance != null">`Budget_Conformance` = #{budgetConformance}, </if>
+			<if test="budgetServiceRevenue != null">`Budget_Service_Revenue` = #{budgetServiceRevenue}, </if>
+			<if test="budgetTax != null">`Budget_Tax` = #{budgetTax}, </if>
+			<if test="budgetServiceRevenueNet != null">`Budget_Service_Revenue_Net` = #{budgetServiceRevenueNet}, </if>
+			<if test="budgetPurchaseCost != null">`Budget_Purchase_Cost` = #{budgetPurchaseCost}, </if>
+			<if test="budgetLaborCost != null">`Budget_Labor_Cost` = #{budgetLaborCost}, </if>
+			<if test="budgetTravelCost != null">`Budget_Travel_Cost` = #{budgetTravelCost}, </if>
+			<if test="budgetCost != null">`Budget_Cost` = #{budgetCost}, </if>
+			<if test="budgetProfit != null">`Budget_Profit` = #{budgetProfit}, </if>
+			<if test="budgetOperator != null">`Budget_Operator` = #{budgetOperator}, </if>
+			<if test="budgetOperateTime != null">`Budget_Operate_Time` = #{budgetOperateTime},</if>
+			<if test="deptId != null">`Dept_ID` = #{deptId}, </if>
+			<if test="responsibleCenter != null">`Responsible_Center` = #{responsibleCenter}, </if>
+			<if test="projectSupervisor != null">`Project_Supervisor` = #{projectSupervisor},</if>
+			<if test="projectGategory != null">`Project_Gategory` = #{projectGategory}</if>			
+		</set>
+		where Budget_ID = #{budgetId}
+	</update>
+	
+	<delete id="remove">
+		delete from project_budget where Budget_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from project_budget where Budget_ID in 
+		<foreach item="budgetId" collection="array" open="(" separator="," close=")">
+			#{budgetId}
+		</foreach>
+	</delete>
+	
+	<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
+		select Budget_ID value,concat(Budget_ID,' ',Responsible_Center) name from project_budget
+	</select>
+</mapper>

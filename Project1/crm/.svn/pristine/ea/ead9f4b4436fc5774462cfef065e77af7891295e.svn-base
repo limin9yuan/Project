@@ -1,0 +1,108 @@
+var deptIds;
+$().ready(function() {
+	loadDic("project_delivery_status","deliveryStatus");
+	loadDic("project_if_outSource","ifOutSource");
+	loadDic("project_project_gategory","projectGategory");
+	loadDic("project_fllow_type","fllowType");
+	loadCrmData("/sales/salesProject/listDic","projectRelatedId");
+	loadCrmData("/sales/companyCustomer/listDic","customerId");
+	loadCrmData("/inner/innerOrgEmployee/listDic","projectOwner");
+	loadCrmData("/inner/innerOrgEmployee/listDic","projectManager");
+	loadCrmData("/inner/innerOrgEmployee/listDic","projectSales");
+	//loadCrmData("/system/sysDept/listDic","deptId");
+	getProjectMenuTreeData();
+	validateRule();
+	datetimepicker();
+});
+
+$.validator.setDefaults({
+	submitHandler : function() {
+		getAllSelectNodes();
+		save();
+	}
+});
+function getAllSelectNodes() {
+	var ref = $('#projectMenuTree').jstree(true); // 获得整个树
+
+	deptIds = ref.get_selected(); // 获得所有选中节点的，返回值为数组
+	alert(deptIds);
+
+	$("#projectMenuTree").find(".jstree-undetermined").each(function(i, element) {
+		deptIds.push($(element).closest('.jstree-node').attr("id"));
+	});
+}
+function getProjectMenuTreeData() {
+	$.ajax({
+		type : "GET",
+		url : "/system/sysDept/tree",
+		success : function(projectMenuTree) {
+			loadProjectMenuTree(projectMenuTree);
+		}
+	});
+}
+function loadProjectMenuTree(projectMenuTree) {
+	$('#projectMenuTree').jstree({
+		'core' : {
+			'data' : projectMenuTree
+		},
+		"checkbox" : {
+			"three_state" : true,
+		},
+		"plugins" : [ "wholerow", "checkbox" ]
+	});
+	//$('#menuTree').jstree("open_all");
+
+}
+function save() {
+	$('#deptIds').val(deptIds);
+	var role = $('#signupForm').serialize();
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/project/project/save",
+		data : role, // 你的formid
+		//data : $('#signupForm').serialize(),// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				parent.reLoad();
+				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				parent.layer.close(index);
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+
+}
+function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#signupForm").validate({
+		rules : {
+			name : {
+				required : true
+			}
+		},
+		messages : {
+			name : {
+				required : icon + "请输入姓名"
+			}
+		}
+	})
+}
+function datetimepicker() {
+	 $('#projectBeginDate').datetimepicker({  
+	        format: 'YYYY-MM-DD',  
+	        locale: moment.locale('zh-cn')  
+	    });  
+	 $('#projectEndDate').datetimepicker({  
+	        format: 'YYYY-MM-DD hh:mm',  
+	        locale: moment.locale('zh-cn')  
+	    }); 
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+					<h1>请您详细填写以下表格，我们将与您联系，协助解决问题，感谢您的宝贵意见。</h1>
+					<hr style="border:1px dotted #036" />
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="feedbackId" name="feedbackId" th:value="${onlineFeedback.feedbackId}"  type="hidden">
+						    <div class="form-group">	
+								<!-- <label class="col-sm-3 control-label">反馈内容分类：</label>
+								<div class="col-sm-3">
+									<label class="radio-inline"> <input type="radio"
+										name="feedbackCategory" value="0" /> Bug
+									</label> <label class="radio-inline"> <input type="radio"
+										name="feedbackCategory" value="1" /> 新需求
+									</label>
+								</div> -->
+								<label class="col-sm-4 control-label">反馈内容分类：<span class="mustin">*</span></label>
+								<div class="col-sm-5">
+								<select data-placeholder="请选择" name="feedbackCategory" id="feedbackCategory"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">请选择</option> 
+										<option value="">Bug</option> 
+										<option value="">新需求</option> 
+									</select>
+									<!-- 
+									<input id="projectSales" name="projectSales" class="form-control" type="text">
+									 -->
+								</div>	
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-4 control-label">手机：<span class="mustin">*</span></label>
+								<div class="col-sm-5">
+									<input id="feedbackPhoneNumber" name="feedbackPhoneNumber" th:value="${onlineFeedback.feedbackPhoneNumber}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-4 control-label">邮箱：<span class="mustin">*</span></label>
+								<div class="col-sm-5">
+									<input id="feedbackMailbox" name="feedbackMailbox" th:value="${onlineFeedback.feedbackMailbox}" class="form-control" type="text">
+								</div>
+							</div>	
+							<div class="form-group">	
+								<label class="col-sm-4 control-label">姓名：<span class="mustin">*</span></label>
+								<div class="col-sm-5">
+									<input id="feedbackName" name="feedbackName" th:value="${onlineFeedback.feedbackName}" class="form-control" type="text">
+								</div>
+							</div>					
+							<div class="form-group">			
+								<label class="col-sm-4 control-label">公司名称：<span class="mustin">*</span></label>
+								<div class="col-sm-5">
+									<input id="feedbackCompanyName" name="feedbackCompanyName" th:value="${onlineFeedback.feedbackCompanyName}"  class="form-control" type="text">
+								</div>		
+							</div>
+							<div class="form-group">	
+							    <label class="col-sm-4 control-label">使用产品：<span class="mustin">*</span></label>
+								<div class="col-sm-5">
+									<input id="feedbackProduct" name="feedbackProduct" th:value="${onlineFeedback.feedbackProduct}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-4 control-label">问题描述：<span class="mustin">*</span></label>
+								<div class="col-sm-6">
+									<textarea id="feedbackDescription" name="feedbackDescription" th:value="${onlineFeedback.feedbackDescription}" class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+                            <div class="form-group">	
+								<label class="col-sm-4 control-label">附件：</label>
+								<div class="col-sm-3">
+									<div class="file-manager">
+											<button type="button" class="layui-btn" id="test1"
+												style="width: 100%;">
+												<i class="fa fa-cloud"></i>上传文件
+											</button>
+											<input id="feedbackAttachment" name="feedbackAttachment"
+												type="hidden">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-8">
+									<h1>通过提交该表单，表明我同意海心可以通过上述信息处理我的数据。</h1>
+								</div>
+							</div>
+					        <!-- 
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">反馈处理状态：</label>
+								<div class="col-sm-8">
+									<input id="feedbackExcuteStatus" name="feedbackExcuteStatus" th:value="${onlineFeedback.feedbackExcuteStatus}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">反馈处理状态描述：</label>
+								<div class="col-sm-8">
+									<input id="feedbackExcuteDescription" name="feedbackExcuteDescription" th:value="${onlineFeedback.feedbackExcuteDescription}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">反馈处理时间：</label>
+								<div class="col-sm-8">
+									<input id="feedbackExcuteTime" name="feedbackExcuteTime" th:value="${onlineFeedback.feedbackExcuteTime}" class="form-control" type="text">
+								</div>
+							</div> -->
+							<div class="form-group">
+								 <div class="columns pull-right col-md-2">
+										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
+								   </div>
+								   <div class="columns pull-right col-md-2">
+										<button type="submit" class="btn btn-primary columns" >提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/onlineFeedback/edit.js">
+	</script>
+</body>
+</html>

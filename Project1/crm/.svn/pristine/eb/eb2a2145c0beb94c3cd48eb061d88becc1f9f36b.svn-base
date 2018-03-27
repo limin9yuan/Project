@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="purchaseId" name="purchaseId" th:value="${purchase.purchaseId}"  type="hidden">
+						<div class="form-group">	
+								<label class="col-sm-3 control-label">项目名称：</label>
+								<div class="col-sm-3">
+								   <select data-placeholder="请选择" name="projectId" id="projectId"
+								   th:value="${purchase.projectId}"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">请选择</option>  
+									</select>
+								</div>							
+								<label class="col-sm-3 control-label">申购部门：</label>
+								<div class="col-sm-3">
+								   <select data-placeholder="请选择" name="purchaseDept" id="purchaseDept"
+								   th:value="${purchase.purchaseDept}"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">请选择</option>  
+									</select>							
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">申购人：</label>
+								<div class="col-sm-3">
+								    <select data-placeholder="请选择" name="purchasePerson" id="purchasePerson"
+								    th:value="${purchase.purchasePerson}"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">请选择</option>  
+									</select>
+								</div>	
+								<label class="col-sm-3 control-label">收货人：</label>
+								<div class="col-sm-3">
+									<input id="purchaseConsignee" name="purchaseConsignee" th:value="${purchase.purchaseConsignee}" 
+									class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">申购时间：</label>
+								<div class="col-sm-3">
+									<div class="input-group date" id="purchaseDate">
+							            <input th:value="${purchase.purchaseDate}" class="form-control" type="text" name="purchaseDate">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>
+								<label class="col-sm-3 control-label">要求交货时间：</label>
+								<div class="col-sm-3">
+									<div class="input-group date" id="purchaseDeliveryTime">
+							            <input th:value="${purchase.purchaseDeliveryTime}"  class="form-control" type="text" name="purchaseDeliveryTime">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">交货地点：</label>
+								<div class="col-sm-3">
+									<input id="purchaseDeliveryPlace" name="purchaseDeliveryPlace" 
+									th:value="${purchase.purchaseDeliveryPlace}" class="form-control" type="text">
+								</div>
+								<label class="col-sm-3 control-label">联系电话：</label>
+								<div class="col-sm-3">
+									<input id="purchasePhoneNumber" name="purchasePhoneNumber" 
+									th:value="${purchase.purchasePhoneNumber}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">物品名称：</label>
+								<div class="col-sm-3">
+									<input id="purchaseName" name="purchaseName" 
+									th:value="${purchase.purchaseName}" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">规格/配置：</label>
+								<div class="col-sm-3">
+									<input id="purchaseConfig" name="purchaseConfig" 
+									th:value="${purchase.purchaseConfig}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">品牌：</label>
+								<div class="col-sm-3">
+									<input id="purchaseBrand" name="purchaseBrand" 
+									th:value="${purchase.purchaseBrand}" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">型号：</label>
+								<div class="col-sm-3">
+									<input id="purchaseMode" name="purchaseMode" 
+									th:value="${purchase.purchaseMode}" class="form-control" type="text">
+								</div>
+							</div>
+														
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">单位：</label>
+								<div class="col-sm-3">
+									<input id="purchaseUnit" name="purchaseUnit" 
+									th:value="${purchase.purchaseUnit}" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">数量：</label>
+								<div class="col-sm-3">
+									<input id="purchaseNumber" name="purchaseNumber" 
+									th:value="${purchase.purchaseNumber}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">预算单价：</label>
+								<div class="col-sm-3">
+									<input id="purchaseUnitPrice" name="purchaseUnitPrice" 
+									th:value="${purchase.purchaseUnitPrice}" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">总价：</label>
+								<div class="col-sm-3">
+									<input id="purchaseTotalPrice" name="purchaseTotalPrice" 
+									th:value="${purchase.purchaseTotalPrice}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">审批状态：</label>
+								<div class="col-sm-3">
+									<input id="purchaseApprovalStatus" name="purchaseApprovalStatus" 
+									th:value="${purchase.purchaseApprovalStatus}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-9">
+								    <textarea id="purchaseRemarks" name="purchaseRemarks" 
+								    th:value="${purchase.purchaseRemarks}" class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+							        <div class="columns pull-right col-md-2">
+									<button type="button" class="btn  btn-danger">取消</button>
+								    </div>
+								    <div class="columns pull-right col-md-2">
+									<button type="submit" class="btn btn-primary columns" >提交</button>
+									 </div>
+							        <!--<button type="submit" class="btn  btn-danger" data-toggle="modal"
+									data-target="#myModal">提交</button> --> 
+							</div>
+							<!-- 
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">操作人：</label>
+								<div class="col-sm-8">
+									<input id="purchaseOperator" name="purchaseOperator" th:value="${purchase.purchaseOperator}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input id="purchaseOperateTime" name="purchaseOperateTime" th:value="${purchase.purchaseOperateTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建人：</label>
+								<div class="col-sm-8">
+									<input id="purchaseCreator" name="purchaseCreator" th:value="${purchase.purchaseCreator}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="purchaseCreateTime" name="purchaseCreateTime" th:value="${purchase.purchaseCreateTime}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div> -->
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/approval/purchase/edit.js">
+	</script>
+</body>
+</html>

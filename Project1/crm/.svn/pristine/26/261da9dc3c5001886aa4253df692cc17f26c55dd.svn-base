@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+<link href="/css/layui.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active"><a href="#baseInfo" data-toggle="tab">基本信息</a></li>
+							<li><a href="#serviceAA" data-toggle="tab">售后服务</a></li>
+							<li><a href="#information" data-toggle="tab">联系方式</a></li>
+						</ul>
+						<form class="form-horizontal m-t" id="signupForm">
+							<div id="myTabContent" class="tab-content">
+							<div class="tab-pane fade in active" id="baseInfo">
+							<input id="serviceId" name="serviceId" class="form-control" type="hidden" th:value="${serviceId}"> 
+									<div class="form-group">
+										<label class="col-sm-2 control-label">问题出现时间：</label>
+										<div class="col-sm-4">
+											<div class="input-group date" id="serviceProblemTime">
+												<input class="form-control" type="text"
+													name="serviceProblemTime"> <span
+													class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</div>
+										</div>
+										<label class="col-sm-2 control-label">姓名：</label>
+										<div class="col-sm-4">
+											<!-- user表 -->
+											<input id="serviceName" name="serviceName"
+												class="form-control" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">所在单位：</label>
+										<div class="col-sm-4">
+											<input id="serviceDept" name="serviceDept"
+												class="form-control" type="text">
+										</div>
+										<label class="col-sm-2 control-label">客户姓名：</label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="custormerId"
+												id="custormerId" class="form-control chosen-select"
+												tabindex="2"  style="width: 100%">
+												<option value="">请选择</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">项目名称：</label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="projectId"
+												id="projectId" class="form-control chosen-select"
+												tabindex="2" style="width: 100%">
+												<option value="">请选择</option>
+											</select>
+										</div>
+										<label class="col-sm-2 control-label">使用产品：</label>
+										<div class="col-sm-4">
+											<input id="serviceProduct" name="serviceProduct"
+												class="form-control" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">反馈方式：</label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="serviceFeedbackType"
+												id="serviceFeedbackType" class="form-control chosen-select"
+												tabindex="2" style="width: 100%">
+												<option value="">请选择</option>
+											</select>
+										</div>
+										<label class="col-sm-2 control-label">反馈内容：</label>
+										<div class="col-sm-4">
+											<input id="serviceFeedbackInfo" name="serviceFeedbackInfo"
+												class="form-control" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">发送资料：</label>
+										<div class="col-sm-4">
+											<input id="serviceAttachmentToCustomer"
+												name="serviceAttachmentToCustomer" class="form-control"
+												type="text">
+										</div>
+									</div>
+									
+									<!-- <div class="form-group">
+										<label class="col-sm-2 control-label">备注：</label>
+										<div class="col-sm-10">
+											<textarea id="jobRemarks" name="jobRemarks"
+												class="form-control" rows="3"></textarea>
+										</div>
+									</div> -->
+								</div>
+<!-- 售后服务 -->
+								<div class="tab-pane fade" id="serviceAA">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">服务类型：</label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="serviceType"
+												id="serviceType" class="form-control chosen-select"
+												tabindex="2" style="width: 100%">
+												<option value="">请选择</option>
+											</select>
+										</div>
+										<!-- <label class="col-sm-2 control-label">问题描述：</label>
+										<div class="col-sm-4">
+											<input id="serviceProblemDeascription"
+												name="serviceProblemDeascription" class="form-control"
+												type="text">
+										</div> -->
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">处理过程：</label>
+										<div class="col-sm-4">
+											<input id="serviceProcedure" name="serviceProcedure"
+												class="form-control" type="text">
+										</div>
+										<label class="col-sm-2 control-label">处理结果：</label>
+										<div class="col-sm-4">
+											<input id="serviceResult" name="serviceResult"
+												class="form-control" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">备注：</label>
+										<div class="col-sm-10">
+											<textarea id="serviceAfterSaleRemarks" name="serviceAfterSaleRemarks"
+												class="form-control" rows="3"></textarea>
+										</div>
+									</div>
+									
+								</div>
+<!-- 联系方式 -->
+								<div class="tab-pane fade" id="information">
+									<div class="form-group">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">邮箱：</label>
+											<div class="col-sm-4">
+												<input id="serviceMailbox" name="serviceMailbox"
+													class="form-control" type="text">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">电话：</label>
+											<div class="col-sm-4">
+												<input id="servicePhoneNumber" name="servicePhoneNumber"
+												class="form-control" type="text">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">附件：</label>
+										<div class="col-sm-4">
+											<div class="file-manager">
+												<button type="button" class="layui-btn" id="test1"
+													style="width: 100%;">
+													<i class="fa fa-cloud"></i>上传文件
+												</button>
+												<input id="serviceAttachment" name="serviceAttachment"
+													type="hidden">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4 col-sm-offset-8">
+									<button type="button" id="lastBtn" disabled
+										class="btn btn-primary"
+										onclick="lastStep('myTab',3,'lastBtn','nextBtn')">上一页</button>
+									&nbsp;
+									<button type="button" id="nextBtn" class="btn btn-primary"
+										onclick="nextStep('myTab',3,'lastBtn','nextBtn')">下一页</button>
+									&nbsp;
+									<button type="submit" class="btn btn-primary">提交</button>
+									&nbsp;
+									<button type="button" class="btn btn-primary" onclick="closeWin()">取消</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/recordService/edit.js"></script>
+	<script type="text/javascript" src="/js/common.js"></script>
+</body>
+</html>

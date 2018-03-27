@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+	<form id="recordComplaintForm" name="recordComplaintForm" th:action="@{/sales/recordComplaint/export}" method="get">
+		</form>
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="sales:recordComplaint:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							</button>
+							<button shiro:hasPermission="sales:recordComplaint:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+							<button shiro:hasPermission="sales:recordComplaint:dataImport"
+								type="button" class="btn btn-primary" name="excelinsertbtn">
+								<i class="fa fa-import" aria-hidden="true"></i>导入
+							</button>
+							<button shiro:hasPermission="sales:recordComplaint:export" type="button"
+								class="btn btn-primary" onclick="exportData()">
+								<i class="fa fa-export" aria-hidden="true"></i>导出
+							</button>
+							<a shiro:hasPermission="sales:salesProject:batchRemove"
+								type="button" class="btn btn-primary" onclick="">
+								<i class="glyphicon glyphicon-th icon-th" aria-hidden="true"></i>列表显示项配置
+							</a>
+						</div>
+						<div class="columns pull-right">
+								<button type="button" class="btn btn-primary" onclick="reLoad()">
+								<i class="fa fa-search" aria-hidden="true">查询</i>
+								</button>
+								
+						</div>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true"></table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="sales:recordComplaint:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="sales:recordComplaint:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="sales:recordComplaint:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/sales/recordComplaint/recordComplaint.js"></script>
+</body>
+</html>

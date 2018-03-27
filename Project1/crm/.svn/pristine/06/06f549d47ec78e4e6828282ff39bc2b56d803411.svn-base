@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+	<form id="budgetform"
+			th:action="@{/budget/budget/export}" method="get">
+			<!--  <input type="hidden" id="province" name="province" /> 
+			<input type="hidden" id="city" name="city" /> 
+			<input type="hidden" id="area" name="area" /> -->
+			<input type="hidden" id="projectId" name="projectId" /> <input
+				type="hidden" id="projectSales" name="projectSales" />
+		</form>
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+				<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">项目经理：</label>
+								<div class="col-sm-2">
+									<input id="projectOwner" name="projectOwner" class="form-control"
+										type="text">
+								</div>
+								<label class="col-sm-2 control-label">项目编号：</label>
+								<div class="col-sm-2">
+									<input id="projectId" name="projectId" class="form-control"
+										type="text">
+								</div>
+								<label class="col-sm-2 control-label">项目名称：</label>
+								<div class="col-sm-2">
+								<select data-placeholder="全部" name="projectName" id="projectName"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">全部</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">项目预算制定时间：</label>
+								<div class="col-sm-2">
+									<div class="input-group date" id="budgetOperateTime">
+							            <input class="form-control" type="text" name="budgetOperateTime">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>
+							</div>
+							<div class="text-right form-group">
+							<div class="columns pull-right col-md-2">
+							    <button type="button"
+							        class="btn btn-primary" onclick="reLoad()">
+							        <i class="fa fa-search" aria-hidden="true"></i>查询
+							    </button>
+							    <button type="button"
+						            class="btn btn-danger" onclick="resetPwd()" type="reset">重置</button>
+						    </div>
+						</div>
+					</form>
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="budget:budget:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							</button>
+							<button shiro:hasPermission="budget:budget:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>删除
+							</button>
+							<button shiro:hasPermission="budget:budget:export"
+									type="button" class="btn  btn-danger" onclick="exportData()">
+									<i class="fa" aria-hidden="true"></i>导出
+						</button>
+						</div>						
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="budget:budget:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="budget:budget:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="budget:budget:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script src="/js/layui.js"></script>
+	<script type="text/javascript" src="/js/appjs/budget/budget/budget.js"></script>
+</body>
+</html>

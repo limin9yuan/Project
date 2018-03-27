@@ -1,0 +1,1 @@
+update sys_menu set name='bug∑÷¿‡' where menu_id='197';

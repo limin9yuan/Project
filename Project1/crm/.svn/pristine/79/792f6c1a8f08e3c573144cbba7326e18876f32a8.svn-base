@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.contract.dao.ContractDeliveryDao">
+
+	<select id="get" resultType="com.bootdo.contract.domain.ContractDeliveryDO">
+		select `Delivery_ID`,`Contract_ID`,`Delivery_Person_Name`,`Delivery_Date`,`Delivery_Content`,`Delivery_Status`,`Delivery_Attachment`,`Delivery_Rmarks`,`Delivery_Operator`,`Delivery_Operate_Time` from contract_delivery where Delivery_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.contract.domain.ContractDeliveryDO">
+		select `Delivery_ID`,`Contract_ID`, Employee_Name AS `Delivery_Person_Name`,`Delivery_Date`,`Delivery_Content`,
+		CASE WHEN `Delivery_Status` = '0' THEN '交付中'
+		WHEN `Delivery_Status` = '1' THEN '已完成' END AS `Delivery_Status`,
+		`Delivery_Attachment`,`Delivery_Rmarks`, `name`AS`Delivery_Operator`,`Delivery_Operate_Time`
+		from contract_delivery
+		LEFT JOIN inner_org_employee on Delivery_Person_Name = Employee_ID
+		LEFT JOIN sys_user on Delivery_Operator = user_id
+        <where>  
+		  		  <if test="deliveryId != null and deliveryId != ''"> and Delivery_ID = #{deliveryId} </if>
+		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
+		  		  <if test="deliveryPersonName != null and deliveryPersonName != ''"> and Delivery_Person_Name = #{deliveryPersonName} </if>
+		  		  <if test="deliveryDate != null and deliveryDate != ''"> and Delivery_Date = #{deliveryDate} </if>
+		  		  <if test="deliveryContent != null and deliveryContent != ''"> and Delivery_Content = #{deliveryContent} </if>
+		  		  <if test="deliveryStatus != null and deliveryStatus != ''"> and Delivery_Status = #{deliveryStatus} </if>
+		  		  <if test="deliveryAttachment != null and deliveryAttachment != ''"> and Delivery_Attachment = #{deliveryAttachment} </if>
+		  		  <if test="deliveryRmarks != null and deliveryRmarks != ''"> and Delivery_Rmarks = #{deliveryRmarks} </if>
+		  		  <if test="deliveryOperator != null and deliveryOperator != ''"> and Delivery_Operator = #{deliveryOperator} </if>
+		  		  <if test="deliveryOperateTime != null and deliveryOperateTime != ''"> and Delivery_Operate_Time = #{deliveryOperateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Delivery_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from contract_delivery
+		 <where>  
+		  		  <if test="deliveryId != null and deliveryId != ''"> and Delivery_ID = #{deliveryId} </if>
+		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
+		  		  <if test="deliveryPersonName != null and deliveryPersonName != ''"> and Delivery_Person_Name = #{deliveryPersonName} </if>
+		  		  <if test="deliveryDate != null and deliveryDate != ''"> and Delivery_Date = #{deliveryDate} </if>
+		  		  <if test="deliveryContent != null and deliveryContent != ''"> and Delivery_Content = #{deliveryContent} </if>
+		  		  <if test="deliveryStatus != null and deliveryStatus != ''"> and Delivery_Status = #{deliveryStatus} </if>
+		  		  <if test="deliveryAttachment != null and deliveryAttachment != ''"> and Delivery_Attachment = #{deliveryAttachment} </if>
+		  		  <if test="deliveryRmarks != null and deliveryRmarks != ''"> and Delivery_Rmarks = #{deliveryRmarks} </if>
+		  		  <if test="deliveryOperator != null and deliveryOperator != ''"> and Delivery_Operator = #{deliveryOperator} </if>
+		  		  <if test="deliveryOperateTime != null and deliveryOperateTime != ''"> and Delivery_Operate_Time = #{deliveryOperateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.contract.domain.ContractDeliveryDO">
+		insert into contract_delivery
+		(
+			`Contract_ID`, 
+			`Delivery_Person_Name`, 
+			`Delivery_Date`, 
+			`Delivery_Content`, 
+			`Delivery_Status`, 
+			`Delivery_Attachment`, 
+			`Delivery_Rmarks`, 
+			`Delivery_Operator`, 
+			`Delivery_Operate_Time`
+		)
+		values
+		(
+			#{contractId}, 
+			#{deliveryPersonName}, 
+			#{deliveryDate}, 
+			#{deliveryContent}, 
+			#{deliveryStatus}, 
+			#{deliveryAttachment}, 
+			#{deliveryRmarks}, 
+			#{deliveryOperator}, 
+			#{deliveryOperateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.contract.domain.ContractDeliveryDO">
+		update contract_delivery 
+		<set>
+			<if test="contractId != null">`Contract_ID` = #{contractId}, </if>
+			<if test="deliveryPersonName != null">`Delivery_Person_Name` = #{deliveryPersonName}, </if>
+			<if test="deliveryDate != null">`Delivery_Date` = #{deliveryDate}, </if>
+			<if test="deliveryContent != null">`Delivery_Content` = #{deliveryContent}, </if>
+			<if test="deliveryStatus != null">`Delivery_Status` = #{deliveryStatus}, </if>
+			<if test="deliveryAttachment != null">`Delivery_Attachment` = #{deliveryAttachment}, </if>
+			<if test="deliveryRmarks != null">`Delivery_Rmarks` = #{deliveryRmarks}, </if>
+			<if test="deliveryOperator != null">`Delivery_Operator` = #{deliveryOperator}, </if>
+			<if test="deliveryOperateTime != null">`Delivery_Operate_Time` = #{deliveryOperateTime}</if>
+		</set>
+		where Delivery_ID = #{deliveryId}
+	</update>
+	
+	<delete id="remove">
+		delete from contract_delivery where Delivery_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from contract_delivery where Delivery_ID in 
+		<foreach item="deliveryId" collection="array" open="(" separator="," close=")">
+			#{deliveryId}
+		</foreach>
+	</delete>
+
+</mapper>

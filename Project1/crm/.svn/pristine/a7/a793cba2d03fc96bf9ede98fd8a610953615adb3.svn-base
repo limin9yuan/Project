@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.contract.dao.PayableDao">
+
+	<select id="get" resultType="com.bootdo.contract.domain.PayableDO">
+		select `Payable_ID`,`Contract_ID`,`Payable_Date`,`Payable_Price`,`Payable_Remarks`,
+		`Payable_Operator`,`Payable_Operate_Time`
+		from accounts_payable
+		where Payable_ID = #{value}
+	</select>
+	
+	<select id="list" resultType="com.bootdo.contract.domain.PayableDO">
+		select `Payable_ID`,`Contract_ID`,`Payable_Date`,`Payable_Price`,`Payable_Remarks`,
+		`Payable_Operator`,`Payable_Operate_Time`
+		from accounts_payable 
+        <where>
+		  		  <if test="payableId != null and payableId != ''"> and Payable_ID = #{payableId} </if>
+		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
+		  		  <if test="payableDate != null and payableDate != ''"> and Payable_Date = #{payableDate} </if>
+		  		  <if test="payablePrice != null and payablePrice != ''"> and Payable_Price = #{payablePrice} </if>
+		  		  <if test="payableRemarks != null and payableRemarks != ''"> and Payable_Remarks = #{payableRemarks} </if>
+		  		  <if test="payableOperator != null and payableOperator != ''"> and Payable_Operator = #{payableOperator} </if>
+		  		  <if test="payableOperateTime != null and payableOperateTime != ''"> and Payable_Operate_Time = #{payableOperateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Payable_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from accounts_payable 
+		 <where>  
+		  		  <if test="payableId != null and payableId != ''"> and Payable_ID = #{payableId} </if>
+		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
+		  		  <if test="payableDate != null and payableDate != ''"> and Payable_Date = #{payableDate} </if>
+		  		  <if test="payablePrice != null and payablePrice != ''"> and Payable_Price = #{payablePrice} </if>
+		  		  <if test="payableRemarks != null and payableRemarks != ''"> and Payable_Remarks = #{payableRemarks} </if>
+		  		  <if test="payableOperator != null and payableOperator != ''"> and Payable_Operator = #{payableOperator} </if>
+		  		  <if test="payableOperateTime != null and payableOperateTime != ''"> and Payable_Operate_Time = #{payableOperateTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.contract.domain.PayableDO">
+		insert into accounts_payable
+		(
+			`Contract_ID`, 
+			`Payable_Date`, 
+			`Payable_Price`, 
+			`Payable_Remarks`, 
+			`Payable_Operator`, 
+			`Payable_Operate_Time`
+		)
+		values
+		(
+			#{contractId}, 
+			#{payableDate}, 
+			#{payablePrice}, 
+			#{payableRemarks}, 
+			#{payableOperator}, 
+			#{payableOperateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.contract.domain.PayableDO">
+		update accounts_payable 
+		<set>
+			<if test="contractId != null">`Contract_ID` = #{contractId}, </if>
+			<if test="payableDate != null">`Payable_Date` = #{payableDate}, </if>
+			<if test="payablePrice != null">`Payable_Price` = #{payablePrice}, </if>
+			<if test="payableRemarks != null">`Payable_Remarks` = #{payableRemarks}, </if>
+			<if test="payableOperator != null">`Payable_Operator` = #{payableOperator}, </if>
+			<if test="payableOperateTime != null">`Payable_Operate_Time` = #{payableOperateTime}</if>
+		</set>
+		where Payable_ID = #{payableId}
+	</update>
+	
+	<delete id="remove">
+		delete from accounts_payable where Payable_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from accounts_payable where Payable_ID in 
+		<foreach item="payableId" collection="array" open="(" separator="," close=")">
+			#{payableId}
+		</foreach>
+	</delete>
+</mapper>

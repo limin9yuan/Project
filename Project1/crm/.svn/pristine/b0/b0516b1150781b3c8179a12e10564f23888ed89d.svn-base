@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<!--  <input id="moduleId" name="moduleId" th:value="${moduleCategory.moduleId}"  type="hidden">-->
+						<input id="moduleCategory" name="moduleCategory" th:value="${moduleId}" class="form-control" type="text" type="hidden">
+						<input id="moduleCategory" name="moduleCategory" th:value="${productId}" class="form-control" type="text" type="hidden">
+						<input id="moduleCategory" name="moduleCategory" th:value="${moduleName}" class="form-control" type="text" type="hidden">
+						<input id="moduleCategory" name="moduleCategory" th:value="${moduleDescription}" class="form-control" type="text" type="hidden">
+						<input id="moduleCategory" name="moduleCategory" th:value="${moduleAttachment}" class="form-control" type="text" type="hidden">
+						<input id="moduleCategory" name="moduleCategory" th:value="${moduleRemark}" class="form-control" type="text" type="hidden">
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">产品名称：</label>
+								<div class="col-sm-3">
+								    <select data-placeholder="请选择" name="productId" id="productId"	
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">请选择</option>  
+									</select>
+								</div>
+								<label class="col-sm-3 control-label">模块名称：</label>
+								<div class="col-sm-3">
+									<input id="moduleName" name="moduleName" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">模块描述：</label>
+								<div class="col-sm-9">
+									<textarea id="moduleDescription" name="moduleDescription" class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">附件：</label>
+								<div class="col-sm-8">
+									<input id="moduleAttachment" name="moduleAttachment" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-9">
+									<textarea id="moduleRemark" name="moduleRemark" class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+							        <div class="columns pull-right col-md-2">
+									<button type="button" class="btn  btn-danger">取消</button>
+								    </div>
+								    <div class="columns pull-right col-md-2">
+									<button type="submit" class="btn btn-primary columns" >提交</button>
+									 </div>
+							        <!--<button type="submit" class="btn  btn-danger" data-toggle="modal"
+									data-target="#myModal">提交</button> --> 
+							</div>
+														<!-- <div class="form-group">	
+								<label class="col-sm-3 control-label">操作人：</label>
+								<div class="col-sm-8">
+									<input id="moduleRecorder" name="moduleRecorder" th:value="${moduleCategory.moduleRecorder}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input id="moduleRecordTime" name="moduleRecordTime" th:value="${moduleCategory.moduleRecordTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建人：</label>
+								<div class="col-sm-8">
+									<input id="moduleCreator" name="moduleCreator" th:value="${moduleCategory.moduleCreator}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="moduleCreateTime" name="moduleCreateTime" th:value="${moduleCategory.moduleCreateTime}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div> -->
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/project/moduleCategory/edit.js">
+	</script>
+</body>
+</html>

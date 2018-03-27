@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>提交页面、提示语</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/提交页面、提示语_1/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/提交页面、提示语_1/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13355" class="ax_default box_1">
+        <div id="u13355_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13356" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13357" class="ax_default box_2">
+        <div id="u13357_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13358" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (bottom1) -->
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13360" class="ax_default box_2">
+        <div id="u13360_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13361" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13362" class="ax_default label">
+        <div id="u13362_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13363" class="text">
+          <p><span>公司介绍</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13364" class="ax_default label">
+        <div id="u13364_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13365" class="text">
+          <p><span>资质证明</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13366" class="ax_default label">
+        <div id="u13366_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13367" class="text">
+          <p><span>发展历程</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13368" class="ax_default label">
+        <div id="u13368_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13369" class="text">
+          <p><span>行业论坛</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13370" class="ax_default label">
+        <div id="u13370_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13371" class="text">
+          <p><span>合作伙伴</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13372" class="ax_default label">
+        <div id="u13372_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13373" class="text">
+          <p><span>关于我们</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u13374" class="ax_default image">
+        <img id="u13374_img" class="img " src="images/登录/u72.png"/>
+        <!-- Unnamed () -->
+        <div id="u13375" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13376" class="ax_default label">
+        <div id="u13376_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13377" class="text">
+          <p style="font-size:36px;"><span style="color:#000000;">您的咨询已提交，请耐心等待客户代表的反馈</span></p><p style="font-size:36px;"><span style="color:#000000;"><br></span></p><p style="font-size:18px;"><span style="text-decoration:underline;color:#0000FF;">查看已提交项目咨询信息处理状态</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (SVG) -->
+      <div id="u13378" class="ax_default _图片">
+        <img id="u13378_img" class="img " src="images/找回密码-身份验证_邮箱__1_/u738.svg"/>
+        <!-- Unnamed () -->
+        <div id="u13379" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13380" class="ax_default box_2">
+        <div id="u13380_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13381" class="text">
+          <p><span>项目咨询</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (占位符) -->
+      <div id="u13382" class="ax_default placeholder">
+        <img id="u13382_img" class="img " src="images/我的工作台/u1035.png"/>
+        <!-- Unnamed () -->
+        <div id="u13383" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (客户项目咨询) -->
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13385" class="ax_default box_2" selectiongroup="u13384Menu">
+        <div id="u13385_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13386" class="text">
+          <p><span>&nbsp;&nbsp; &nbsp;&nbsp; 项目咨询</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13387" class="ax_default box_2" selectiongroup="u13384Menu">
+        <img id="u13387_img" class="img " src="images/后台首页/u144.png"/>
+        <!-- Unnamed () -->
+        <div id="u13388" class="text">
+          <p><span>&nbsp;&nbsp; &nbsp;&nbsp; 反馈进度查询</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (header2) -->
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13390" class="ax_default box_2">
+        <div id="u13390_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13391" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u13392" class="ax_default image">
+        <img id="u13392_img" class="img " src="images/登录/u39.png"/>
+        <!-- Unnamed () -->
+        <div id="u13393" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u13394" class="ax_default" data-left="1207" data-top="27" data-width="290" data-height="20">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u13395" class="ax_default label">
+          <div id="u13395_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u13396" class="text">
+            <p><span>换肤</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (三角形) -->
+        <div id="u13397" class="ax_default box_1">
+          <img id="u13397_img" class="img " src="images/后台首页/u82.png"/>
+          <!-- Unnamed () -->
+          <div id="u13398" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (矩形) -->
+        <div id="u13399" class="ax_default label">
+          <div id="u13399_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u13400" class="text">
+            <p><span>郑群&nbsp; &nbsp; 欢迎你！</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (三角形) -->
+      <div id="u13401" class="ax_default box_1">
+        <img id="u13401_img" class="img " src="images/后台首页/u91.png"/>
+        <!-- Unnamed () -->
+        <div id="u13402" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13403" class="ax_default label">
+        <div id="u13403_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13404" class="text">
+          <p><span>系统管理</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13405" class="ax_default label">
+        <div id="u13405_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13406" class="text">
+          <p><span>客户需求发展平台</span></p>
+        </div>
+      </div>
+
+      <!-- 状态 (表格) -->
+      <div id="u13407" class="ax_default ax_default_hidden" data-label="状态" style="display:none; visibility: hidden">
+
+        <!-- Unnamed (单元格) -->
+        <div id="u13408" class="ax_default table_cell">
+          <img id="u13408_img" class="img " src="images/后台首页/u108.png"/>
+          <!-- Unnamed () -->
+          <div id="u13409" class="text">
+            <p><span>修改密码</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (单元格) -->
+        <div id="u13410" class="ax_default table_cell">
+          <img id="u13410_img" class="img " src="images/后台首页/u110.png"/>
+          <!-- Unnamed () -->
+          <div id="u13411" class="text">
+            <p><span>退出登录</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13412" class="ax_default label">
+        <div id="u13412_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13413" class="text">
+          <p><span>客户在线反馈</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13414" class="ax_default label">
+        <div id="u13414_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13415" class="text">
+          <p><span>客户项目咨询</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

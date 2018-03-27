@@ -1,0 +1,517 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>热点情况</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/热点情况/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/热点情况/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3289" class="ax_default box_1">
+        <div id="u3289_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3290" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3291" class="ax_default box_2">
+        <div id="u3291_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3292" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3293" class="ax_default _一级标题">
+        <div id="u3293_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3294" class="text">
+          <p><span>企业客户新增</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3295" class="ax_default _三级标题">
+        <div id="u3295_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3296" class="text">
+          <p><span>基本信息</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u3297" class="ax_default line">
+        <img id="u3297_img" class="img " src="images/基本信息/u2864.png"/>
+        <!-- Unnamed () -->
+        <div id="u3298" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3299" class="ax_default _三级标题">
+        <div id="u3299_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3300" class="text">
+          <p><span>组织机构</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3301" class="ax_default _三级标题">
+        <div id="u3301_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3302" class="text">
+          <p><span>热点情况</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3303" class="ax_default label">
+        <div id="u3303_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3304" class="text">
+          <p><span>热度</span><span style="color:#FF0000;">*</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3305" class="ax_default label">
+        <div id="u3305_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3306" class="text">
+          <p><span>预期成交额</span><span style="color:#FF0000;">&nbsp; *</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u3307" class="ax_default droplist">
+        <select id="u3307_input">
+          <option selected value="请选择">请选择</option>
+          <option value="收费功能">收费功能</option>
+          <option value="工程管理">工程管理</option>
+          <option value="生产管理">生产管理</option>
+          <option value="客户服务">客户服务</option>
+          <option value="换热站控制">换热站控制</option>
+          <option value="锅炉控制">锅炉控制</option>
+          <option value="远程计量">远程计量</option>
+          <option value="其他">其他</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3308" class="ax_default label">
+        <div id="u3308_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3309" class="text">
+          <p><span>产品需求&nbsp; </span><span style="color:#FF0000;">*</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3310" class="ax_default box_2">
+        <div id="u3310_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3311" class="text">
+          <p><span>提交</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3312" class="ax_default box_2">
+        <div id="u3312_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3313" class="text">
+          <p><span>取消</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u3314" class="ax_default line">
+        <img id="u3314_img" class="img " src="images/基本信息/u2968.png"/>
+        <!-- Unnamed () -->
+        <div id="u3315" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3316" class="ax_default box_2">
+        <div id="u3316_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3317" class="text">
+          <p><span>上一步</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3318" class="ax_default box_2">
+        <div id="u3318_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3319" class="text">
+          <p><span>下一步</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (占位符) -->
+      <div id="u3320" class="ax_default placeholder">
+        <img id="u3320_img" class="img " src="images/基本信息/u2978.png"/>
+        <!-- Unnamed () -->
+        <div id="u3321" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u3322" class="ax_default" data-left="281" data-top="394" data-width="70" data-height="24">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u3323" class="ax_default sticky_2">
+          <div id="u3323_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u3324" class="text">
+            <p><span>杨天生</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u3325" class="ax_default line">
+          <img id="u3325_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u3326" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u3327" class="ax_default line">
+          <img id="u3327_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u3328" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (椭圆形) -->
+        <div id="u3329" class="ax_default ellipse">
+          <img id="u3329_img" class="img " src="images/基本信息/u2987.png"/>
+          <!-- Unnamed () -->
+          <div id="u3330" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3331" class="ax_default label">
+        <div id="u3331_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3332" class="text">
+          <p><span>主送人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3333" class="ax_default label">
+        <div id="u3333_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3334" class="text">
+          <p><span>抄送人</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (水平线) -->
+      <div id="u3335" class="ax_default line">
+        <img id="u3335_img" class="img " src="images/基本信息/u2968.png"/>
+        <!-- Unnamed () -->
+        <div id="u3336" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u3337" class="ax_default icon">
+        <img id="u3337_img" class="img " src="images/基本信息/u2995.png"/>
+        <!-- Unnamed () -->
+        <div id="u3338" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u3339" class="ax_default" data-left="281" data-top="431" data-width="70" data-height="24">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u3340" class="ax_default sticky_2">
+          <div id="u3340_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u3341" class="text">
+            <p><span>杨天生</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u3342" class="ax_default line">
+          <img id="u3342_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u3343" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u3344" class="ax_default line">
+          <img id="u3344_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u3345" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (椭圆形) -->
+        <div id="u3346" class="ax_default ellipse">
+          <img id="u3346_img" class="img " src="images/基本信息/u2987.png"/>
+          <!-- Unnamed () -->
+          <div id="u3347" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u3348" class="ax_default" data-left="361" data-top="394" data-width="70" data-height="24">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u3349" class="ax_default sticky_2">
+          <div id="u3349_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u3350" class="text">
+            <p><span>杨天生</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u3351" class="ax_default line">
+          <img id="u3351_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u3352" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u3353" class="ax_default line">
+          <img id="u3353_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u3354" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (椭圆形) -->
+        <div id="u3355" class="ax_default ellipse">
+          <img id="u3355_img" class="img " src="images/基本信息/u2987.png"/>
+          <!-- Unnamed () -->
+          <div id="u3356" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (组合) -->
+      <div id="u3357" class="ax_default" data-left="361" data-top="431" data-width="70" data-height="24">
+
+        <!-- Unnamed (矩形) -->
+        <div id="u3358" class="ax_default sticky_2">
+          <div id="u3358_div" class=""></div>
+          <!-- Unnamed () -->
+          <div id="u3359" class="text">
+            <p><span>杨天生</span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u3360" class="ax_default line">
+          <img id="u3360_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u3361" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (垂直线) -->
+        <div id="u3362" class="ax_default line">
+          <img id="u3362_img" class="img " src="images/基本信息/u2983.png"/>
+          <!-- Unnamed () -->
+          <div id="u3363" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+
+        <!-- Unnamed (椭圆形) -->
+        <div id="u3364" class="ax_default ellipse">
+          <img id="u3364_img" class="img " src="images/基本信息/u2987.png"/>
+          <!-- Unnamed () -->
+          <div id="u3365" class="text" style="display:none; visibility: hidden">
+            <p><span></span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u3366" class="ax_default icon">
+        <img id="u3366_img" class="img " src="images/基本信息/u2995.png"/>
+        <!-- Unnamed () -->
+        <div id="u3367" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3368" class="ax_default label">
+        <div id="u3368_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3369" class="text">
+          <p style="font-size:12px;"><span style="font-family:'MicrosoftYaHei', 'Microsoft YaHei';font-weight:400;">热点客户</span><span style="font-family:'MicrosoftYaHei', 'Microsoft YaHei';font-weight:400;font-size:16px;">&nbsp; </span><span style="font-family:'微软雅黑';font-weight:400;color:#FF0000;">*</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u3370" class="ax_default text_field">
+        <input id="u3370_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u3371" class="ax_default droplist">
+        <select id="u3371_input">
+          <option value="请选择">请选择</option>
+          <option value="高">高</option>
+          <option value="中">中</option>
+          <option value="低">低</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (单选按钮) -->
+      <div id="u3372" class="ax_default radio_button">
+        <label for="u3372_input">
+          <!-- Unnamed () -->
+          <div id="u3373" class="text">
+            <p><span>是</span></p>
+          </div>
+        </label>
+        <input id="u3372_input" type="radio" value="radio" name="u3372"/>
+      </div>
+
+      <!-- Unnamed (单选按钮) -->
+      <div id="u3374" class="ax_default radio_button">
+        <label for="u3374_input">
+          <!-- Unnamed () -->
+          <div id="u3375" class="text">
+            <p><span>否</span></p>
+          </div>
+        </label>
+        <input id="u3374_input" type="radio" value="radio" name="u3374"/>
+      </div>
+
+      <!-- Unnamed (下拉列表框) -->
+      <div id="u3376" class="ax_default droplist">
+        <select id="u3376_input">
+          <option selected value="请选择">请选择</option>
+        </select>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3377" class="ax_default label">
+        <div id="u3377_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3378" class="text">
+          <p><span>热点说明</span><span style="color:#FF0000;">&nbsp; *</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3379" class="ax_default _三级标题">
+        <div id="u3379_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3380" class="text">
+          <p><span>开票信息</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3381" class="ax_default _三级标题">
+        <div id="u3381_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3382" class="text">
+          <p><span>联系方式</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3383" class="ax_default _三级标题">
+        <div id="u3383_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3384" class="text">
+          <p><span>生产信息</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3385" class="ax_default _三级标题">
+        <div id="u3385_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3386" class="text">
+          <p><span>能耗</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3387" class="ax_default _三级标题">
+        <div id="u3387_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3388" class="text">
+          <p><span>未来规划</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3389" class="ax_default _三级标题">
+        <div id="u3389_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3390" class="text">
+          <p><span>竞争对手</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u3391" class="ax_default _三级标题">
+        <div id="u3391_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u3392" class="text">
+          <p><span>自定义字段</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

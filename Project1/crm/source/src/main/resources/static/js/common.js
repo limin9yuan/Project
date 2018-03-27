@@ -1,0 +1,166 @@
+function loadDic(dicName,selId,initValue){
+	var html = "";
+	$.ajax({
+		url : '/common/sysDict/list/'+dicName,
+		success : function(data) {
+			$("#"+selId).html("");
+			if(initValue==undefined){
+				html += '<option value="">请选择</option>';
+			}else{
+				html += '<option value="">'+initValue+'</option>';
+			}
+			
+			//加载数据
+			for (var i = 0; i < data.length; i++) {
+				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+			}
+			$("#"+selId).append(html);
+			$("#"+selId).chosen({
+				maxHeight : 200
+			});
+			//点击事件
+			$("#"+selId).on('change', function(e, params) {
+				console.log(params.selected);
+				var opt = {
+					query : {
+						type : params.selected,
+					}
+				}
+				//$('#exampleTable').bootstrapTable('refresh', opt);
+			});
+		}
+	});
+}
+function loadDicValue(dicName,selId,value,initValue){
+	var html = "";
+	$.ajax({
+		url : '/common/sysDict/list/'+dicName,
+		success : function(data) {
+			$("#"+selId).html("");
+			if(initValue==undefined){
+				html += '<option value="">请选择</option>';
+			}
+			//加载数据
+			for (var i = 0; i < data.length; i++) {
+				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+			}
+			$("#"+selId).append(html);
+			$("#"+selId).chosen({
+				maxHeight : 200
+			});
+			$("#"+selId).val(value);
+			$("#"+selId).trigger("chosen:updated");
+			//点击事件
+			$("#"+selId).on('change', function(e, params) {
+				console.log(params.selected);
+				var opt = {
+					query : {
+						type : params.selected,
+					}
+				}
+			});
+		}
+	});
+}
+function loadCrmData(url,selId,initValue){
+	var html = "";
+	$.ajax({
+		url : url,
+		success : function(data) {
+			$("#"+selId).html("");
+			if(initValue==undefined){
+				html += '<option value="">请选择</option>';
+			}else{
+				html += '<option value="">'+initValue+'</option>';
+			}
+			//加载数据
+			for (var i = 0; i < data.length; i++) {
+				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+			}
+			$("#"+selId).append(html);
+			$("#"+selId).chosen({
+				maxHeight : 200
+			});
+			//点击事件
+			$("#"+selId).on('change', function(e, params) {
+				console.log(params.selected);
+				var opt = {
+					query : {
+						type : params.selected,
+					}
+				}
+				//$('#exampleTable').bootstrapTable('refresh', opt);
+			});
+		}
+	});
+}
+
+function loadCrmDataValue(url,selId,value,initValue){
+	var html = "";
+	$.ajax({
+		url : url,
+		success : function(data) {
+			$("#"+selId).html(""); 
+			if(initValue==undefined){
+				html += '<option value="">请选择</option>';
+			}else{
+				html += '<option value="">'+initValue+'</option>';
+			}
+			//加载数据
+			for (var i = 0; i < data.length; i++) {
+				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+			}
+			$("#"+selId).append(html);
+			$("#"+selId).chosen({
+				maxHeight : 200
+			});	
+			$("#"+selId).val(value);
+			$("#"+selId).trigger("chosen:updated");
+			//点击事件
+			$("#"+selId).on('change', function(e, params) {
+				console.log(params.selected);
+				var opt = {
+					query : {
+						type : params.selected,
+					}
+				}
+				//$('#exampleTable').bootstrapTable('refresh', opt);
+			});
+		}
+	});
+}
+// 上一页 下一页
+function nextStep(tabId,totalStep,lastBtn,nextBtn){
+	for(i=0;i<totalStep-1;i++){
+		if($('#'+tabId+' li:eq('+i+')').attr("class")=='active'){
+			$('#'+tabId+' li:eq('+(i+1)+') a').tab('show');			
+			$('#'+lastBtn).attr("disabled",false);
+			if(i+1==totalStep-1){
+				$('#'+nextBtn).attr("disabled",true);	
+			}else{
+				$('#'+nextBtn).attr("disabled",false);
+			}
+			break;
+		}
+	}
+}
+function lastStep(tabId,totalStep,lastBtn,nextBtn){
+	for(i=0;i<totalStep;i++){
+		if($('#'+tabId+' li:eq('+i+')').attr("class")=='active'){
+			$('#'+tabId+' li:eq('+(i-1)+') a').tab('show');
+			if(i-1==1-1){
+				$('#'+lastBtn).attr("disabled",true);	
+			}                 
+			if(i-1==totalStep-1){
+				$('#'+nextBtn).attr("disabled",true);	
+			}else{
+				$('#'+nextBtn).attr("disabled",false);
+			}
+			break;
+		}
+	}
+}
+function closeWin(){
+	var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+	parent.layer.close(index);
+}

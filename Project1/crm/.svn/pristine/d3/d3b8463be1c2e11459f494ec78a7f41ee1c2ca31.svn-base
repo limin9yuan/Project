@@ -1,0 +1,121 @@
+$().ready(function() {
+	/*
+	loadDic("sales_customer_category","customerCategory");
+	loadDic("sales_customer_product","customerProduct");
+	loadDic("sales_customer_character","customerCharacter");
+	loadDic("sales_customer_status","customerStatus");
+	loadDic("sales_customer_level","customerLevel");
+	loadDic("sales_customer_sale_Phase","customerSalePhase");
+	loadDic("sales_customer_inner_Phase","customerInnerPhase");
+	loadDic("sales_customer_sourcee","customerSource");
+	loadDic("sales_customer_credit_Rank","customerCreditRank");
+	loadDic("sales_customer_potential","customerPotential");
+	loadDic("sales_customer_visit_Mode","customerVisitMode");
+	loadCrmData("/inner/innerOrgEmployee/listDic","customerOwner");
+	loadCrmData("/inner/innerOrgEmployee/listDic","customerSales");
+	
+	
+	
+	
+	
+	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e){
+		 if($("#customerHotRank option").length==1){
+			 loadDic("sales_customer_hot_Rank","customerHotRank");
+		 }
+	    
+	 });
+	$('#myTab a[href="#linkInfo"]').on('shown.bs.tab', function(e){
+		
+		 if($("#customerContactSta option").length==1){
+			 loadDic("sales_customer_contact_Sta","customerContactSta");
+		 }
+	    
+	 });
+	//$('#myTab a[href="#Gegner"]').on('shown.bs.tab', function(e){	
+		
+		loadCompetitor();
+	// });
+	//$('#myTab a[href="#Organisation"]').on('shown.bs.tab', function(e){		
+		loadJob();
+	// });
+	layui.use('upload', function () {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1', //绑定元素
+            url: '/common/sysFile/upload', //上传接口
+            size: 1000,
+            accept: 'file',
+            done: function (r) {
+            	//alert(r.fileName);
+            	$("#serviceAttachment").val(r.fileName);
+                //layer.msg(r.msg);
+                //app.getData();
+            },
+            error: function (r) {
+                layer.msg(r.msg);
+            }
+        });
+    });*/
+	 $('#myTab a[href="#cost"]').on('shown.bs.tab', function(e){
+			alert(1);
+		 if($("#expensesTravelPayMode option").length==1){
+			 loadDic("contract_payout_Means","expensesTravelPayMode");
+		 }
+			
+	 });
+	 $('#myTab a[href="#cost"]').on('shown.bs.tab', function(e){
+			alert(1);
+		 if($("#expensesTravelPayMode option").length==1){
+			 loadDic("contract_payout_Means","expensesTravelPayMode");
+		 }
+			
+	 });
+	validateRule();
+});
+
+$.validator.setDefaults({
+	submitHandler : function() {
+		save();
+	}
+});
+function save() {
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/sales/companyCustomer/save",
+		data : $('#signupForm').serialize(),// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				parent.reLoad();
+				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				parent.layer.close(index);
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+
+}
+function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#signupForm").validate({
+		rules : {
+			name : {
+				required : true
+			}
+		},
+		messages : {
+			name : {
+				required : icon + "请输入姓名"
+			}
+		}
+	})
+}

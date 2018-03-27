@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+					<h1>请您详细填写以下表格，我们将尽快与您联系，为您服务。</h1>
+					<hr style="border:1px dotted #036" />
+						<form class="form-horizontal m-t" id="signupForm">
+							<!-- <div class="form-group">	
+									<label class="col-sm-3 control-label">联系方式：</label>
+							</div>
+							 -->
+						    <div class="form-group">	
+								<label class="col-sm-3 control-label">姓名：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="consultationName" name="consultationName" class="form-control" type="text">
+								</div>
+								<label class="col-sm-3 control-label">手机：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="consultationPhoneNumber" name="consultationPhoneNumber" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+									
+								<label class="col-sm-3 control-label">邮箱：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="consultationMailbox" name="consultationMailbox" class="form-control" type="text">
+								</div>
+								
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">公司名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="consultationCompanyName" name="consultationCompanyName" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">行政区划：<span class="mustin">*</span></label>
+								<div class="col-sm-9">
+									<select data-placeholder="省" name="consultationProvence" id="consultationProvence"
+										class="form-control chosen-select" tabindex="1"
+										style="width:85px">
+										<option value="">省</option>
+									</select> 
+									<select data-placeholder="选市" name="consultationCity" id="consultationCity"
+										class="form-control chosen-select" tabindex="2"
+										style="width:85px">
+										<option value="">市</option>
+									</select>
+									<select data-placeholder="区" name="consultationCounty" id="consultationCounty"
+										class="form-control chosen-select" tabindex="3"
+										style="width:85px">
+										<option value="">区</option>
+									</select>
+								</div>
+							  </div>
+						   <!-- <div class="form-group">	
+									<label class="col-sm-3 control-label">项目信息：</label>
+							</div>
+							 -->							  
+						   <div class="form-group">	
+								<label class="col-sm-3 control-label">所在行业：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="consultationIndustry" name="consultationIndustry" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">感兴趣产品：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="consultationProduct" name="consultationProduct" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">项目规模：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="consultationProjectScale" name="consultationProjectScale" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">项目概述：<span class="mustin">*</span></label>
+								<div class="col-sm-9">
+									<textarea id="consultationProjectIntroduct" name="consultationProjectIntroduct" class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">附件：</label>
+								<div class="col-sm-3">
+									<div class="file-manager">
+											<button type="button" class="layui-btn" id="test1"
+												style="width: 100%;">
+												<i class="fa fa-cloud"></i>上传文件
+											</button>
+											<input id="consultationAttachment" name="consultationAttachment"
+												type="hidden">
+									</div>
+								</div>
+							</div> 
+							<div class="form-group">	
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-8">
+									<h1>通过提交该表单，表明我同意海心可以通过上述信息处理我的数据。</h1>
+								</div>
+							</div>							  
+			
+							
+							<!--						
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<input id="consultation——rmarks" name="consultation——rmarks" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">咨询时间：</label>
+								<div class="col-sm-8">
+									<input id="consultationTime" name="consultationTime" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">咨询处理状态：</label>
+								<div class="col-sm-8">
+									<input id="consultationExcuteStatus" name="consultationExcuteStatus" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">咨询处理状态描述：</label>
+								<div class="col-sm-8">
+									<input id="consultationExcuteDescriptio" name="consultationExcuteDescriptio" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">咨询处理时间：</label>
+								<div class="col-sm-8">
+									<input id="consultationExcuteTime" name="consultationExcuteTime" class="form-control" type="text">
+								</div>
+							</div>
+							 -->
+							 <div class="form-group">
+							       <div class="columns pull-right col-md-2">
+										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
+								   </div>
+								   <div class="columns pull-right col-md-2">
+										<button type="submit" class="btn btn-primary columns" >提交</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/projectConsultation/add.js"></script>
+	<script type="text/javascript" src="/js/province.js"></script>
+</body>
+</html>

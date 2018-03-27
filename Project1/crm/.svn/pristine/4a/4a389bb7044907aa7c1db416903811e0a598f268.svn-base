@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>提交页面</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/提交页面_1/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/提交页面_1/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13226" class="ax_default box_1">
+        <div id="u13226_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13227" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13228" class="ax_default box_2">
+        <div id="u13228_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13229" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13230" class="ax_default _一级标题">
+        <div id="u13230_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13231" class="text">
+          <p><span>项目咨询</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13232" class="ax_default label">
+        <div id="u13232_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13233" class="text">
+          <p style="font-size:36px;"><span style="color:#000000;">您的咨询已提交，请耐心等待客户代表的反馈</span></p><p style="font-size:36px;"><span style="color:#000000;"><br></span></p><p style="font-size:25px;"><span style="color:#000000;">登录客户需求发展平台</span><span style="text-decoration:underline;color:#0000FF;">查看已提交项目咨询信息处理状态</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (SVG) -->
+      <div id="u13234" class="ax_default _图片">
+        <img id="u13234_img" class="img " src="images/找回密码-身份验证_邮箱__1_/u738.svg"/>
+        <!-- Unnamed () -->
+        <div id="u13235" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u13236" class="ax_default _连接线">
+        <img id="u13236_seg0" class="img " src="images/提交页面_1/u13236_seg0.png" alt="u13236_seg0"/>
+        <img id="u13236_seg1" class="img " src="images/提交页面_1/u13236_seg1.png" alt="u13236_seg1"/>
+        <img id="u13236_seg2" class="img " src="images/提交页面_1/u13236_seg2.png" alt="u13236_seg2"/>
+        <!-- Unnamed () -->
+        <div id="u13237" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (占位符) -->
+      <div id="u13238" class="ax_default placeholder">
+        <img id="u13238_img" class="img " src="images/提交页面_1/u13238.png"/>
+        <!-- Unnamed () -->
+        <div id="u13239" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u13240" class="ax_default sticky_2">
+        <div id="u13240_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u13241" class="text">
+          <p><span style="font-family:'Arial Normal', 'Arial';">跳转</span><span style="font-family:'PingFangSC-Regular', 'PingFang SC';">到登录注册页</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

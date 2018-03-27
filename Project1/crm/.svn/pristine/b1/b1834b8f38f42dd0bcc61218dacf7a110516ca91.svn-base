@@ -1,0 +1,559 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>邮箱注册</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="resources/css/jquery-ui-themes.css" type="text/css" rel="stylesheet"/>
+    <link href="resources/css/axure_rp_page.css" type="text/css" rel="stylesheet"/>
+    <link href="data/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/邮箱注册/styles.css" type="text/css" rel="stylesheet"/>
+    <script src="resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="resources/scripts/jquery-ui-1.8.10.custom.min.js"></script>
+    <script src="resources/scripts/prototypePre.js"></script>
+    <script src="data/document.js"></script>
+    <script src="resources/scripts/prototypePost.js"></script>
+    <script src="files/邮箱注册/data.js"></script>
+    <script type="text/javascript">
+      $axure.utils.getTransparentGifPath = function() { return 'resources/images/transparent.gif'; };
+      $axure.utils.getOtherPath = function() { return 'resources/Other.html'; };
+      $axure.utils.getReloadPath = function() { return 'resources/reload.html'; };
+    </script>
+  </head>
+  <body>
+    <div id="base" class="">
+
+      <!-- Unnamed (矩形) -->
+      <div id="u335" class="ax_default box_2">
+        <div id="u335_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u336" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u337" class="ax_default image">
+        <img id="u337_img" class="img " src="images/登录/u39.png"/>
+        <!-- Unnamed () -->
+        <div id="u338" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u339" class="ax_default box_2">
+        <div id="u339_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u340" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u341" class="ax_default box_2">
+        <div id="u341_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u342" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u343" class="ax_default box_2">
+        <div id="u343_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u344" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u345" class="ax_default primary_button">
+        <div id="u345_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u346" class="text">
+          <p><span>立即注册</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u347" class="ax_default label">
+        <div id="u347_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u348" class="text">
+          <p><span>已有账号，请</span><span style="color:#0000FF;">登录</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u349" class="ax_default text_field">
+        <input id="u349_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u350" class="ax_default text_field">
+        <input id="u350_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u351" class="ax_default text_field">
+        <input id="u351_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u352" class="ax_default label">
+        <div id="u352_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u353" class="text">
+          <p><span>6-16位，英文（区分大小写）、数字或常用符号</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u354" class="ax_default box_1">
+        <div id="u354_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u355" class="text">
+          <p><span>手机注册</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u356" class="ax_default label">
+        <div id="u356_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u357" class="text">
+          <p><span>两次密码需一致</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u358" class="ax_default icon">
+        <img id="u358_img" class="img " src="images/手机注册/u268.png"/>
+        <!-- Unnamed () -->
+        <div id="u359" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u360" class="ax_default icon">
+        <img id="u360_img" class="img " src="images/手机注册/u268.png"/>
+        <!-- Unnamed () -->
+        <div id="u361" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u362" class="ax_default icon">
+        <img id="u362_img" class="img " src="images/手机注册/u268.png"/>
+        <!-- Unnamed () -->
+        <div id="u363" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u364" class="ax_default label">
+        <div id="u364_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u365" class="text">
+          <p><span>电子邮箱</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u366" class="ax_default label">
+        <div id="u366_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u367" class="text">
+          <p><span>设置密码</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u368" class="ax_default label">
+        <div id="u368_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u369" class="text">
+          <p><span>确认密码</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u370" class="ax_default sticky_2">
+        <div id="u370_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u371" class="text">
+          <p><span>用户输入11位手机号码并在验证码验证正确后显示绿色对号图标</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u372" class="ax_default _连接线">
+        <img id="u372_seg0" class="img " src="images/邮箱注册/u372_seg0.png" alt="u372_seg0"/>
+        <img id="u372_seg1" class="img " src="images/邮箱注册/u372_seg1.png" alt="u372_seg1"/>
+        <!-- Unnamed () -->
+        <div id="u373" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u374" class="ax_default sticky_2">
+        <div id="u374_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u375" class="text">
+          <p><span>密码字符符合条件显示对号标志。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u376" class="ax_default _连接线">
+        <img id="u376_seg0" class="img " src="images/邮箱注册/u376_seg0.png" alt="u376_seg0"/>
+        <img id="u376_seg1" class="img " src="images/邮箱注册/u376_seg1.png" alt="u376_seg1"/>
+        <img id="u376_seg2" class="img " src="images/邮箱注册/u376_seg2.png" alt="u376_seg2"/>
+        <!-- Unnamed () -->
+        <div id="u377" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u378" class="ax_default sticky_2">
+        <div id="u378_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u379" class="text">
+          <p><span>前后密码一直显示对号标志</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u380" class="ax_default _连接线">
+        <img id="u380_seg0" class="img " src="images/邮箱注册/u380_seg0.png" alt="u380_seg0"/>
+        <img id="u380_seg1" class="img " src="images/邮箱注册/u380_seg1.png" alt="u380_seg1"/>
+        <img id="u380_seg2" class="img " src="images/邮箱注册/u376_seg2.png" alt="u380_seg2"/>
+        <!-- Unnamed () -->
+        <div id="u381" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u382" class="ax_default sticky_2">
+        <div id="u382_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u383" class="text">
+          <p><span>信息填写无误，点击“立即注册”提示注册成功，并自动跳转到系统首页。</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (连接线) -->
+      <div id="u384" class="ax_default _连接线">
+        <img id="u384_seg0" class="img " src="images/邮箱注册/u384_seg0.png" alt="u384_seg0"/>
+        <img id="u384_seg1" class="img " src="images/邮箱注册/u384_seg1.png" alt="u384_seg1"/>
+        <!-- Unnamed () -->
+        <div id="u385" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u386" class="ax_default box_1">
+        <div id="u386_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u387" class="text">
+          <p><span>邮箱注册</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (垂直线) -->
+      <div id="u388" class="ax_default line">
+        <img id="u388_img" class="img " src="images/手机注册/u286.png"/>
+        <!-- Unnamed () -->
+        <div id="u389" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u390" class="ax_default _二级标题">
+        <div id="u390_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u391" class="text">
+          <p><span>客户需求发展平台</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u392" class="ax_default icon">
+        <img id="u392_img" class="img " src="images/手机注册/u290.png"/>
+        <!-- Unnamed () -->
+        <div id="u393" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (SVG) -->
+      <div id="u394" class="ax_default _图片">
+        <img id="u394_img" class="img " src="images/手机注册/u292.svg"/>
+        <!-- Unnamed () -->
+        <div id="u395" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (动态面板) -->
+      <div id="u396" class="ax_default">
+        <div id="u396_state0" class="panel_state" data-label="State1" style="">
+          <div id="u396_state0_content" class="panel_state_content">
+
+            <!-- Background (图片) -->
+            <div id="u397" class="ax_default image" data-label="Background">
+              <img id="u397_img" class="img " src="images/登录/background_u15.png"/>
+              <!-- Unnamed () -->
+              <div id="u398" class="text" style="display:none; visibility: hidden">
+                <p><span></span></p>
+              </div>
+            </div>
+
+            <!-- ShowText1 (矩形) -->
+            <div id="u399" class="ax_default _形状1" data-label="ShowText1">
+              <div id="u399_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u400" class="text" style="display:none; visibility: hidden">
+                <p><span style="font-family:'MV Boli Normal', 'MV Boli';font-weight:400;font-style:normal;"></span></p>
+              </div>
+            </div>
+
+            <!-- Character (矩形) -->
+            <div id="u401" class="ax_default _文本段落" data-label="Character">
+              <div id="u401_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u402" class="text">
+                <p><span>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789</span></p>
+              </div>
+            </div>
+
+            <!-- ShowText2 (矩形) -->
+            <div id="u403" class="ax_default _形状1" data-label="ShowText2">
+              <div id="u403_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u404" class="text" style="display:none; visibility: hidden">
+                <p><span style="font-family:'MV Boli Normal', 'MV Boli';font-weight:400;font-style:normal;"></span></p>
+              </div>
+            </div>
+
+            <!-- ShowText3 (矩形) -->
+            <div id="u405" class="ax_default _形状1" data-label="ShowText3">
+              <div id="u405_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u406" class="text" style="display:none; visibility: hidden">
+                <p><span style="font-family:'MV Boli Normal', 'MV Boli';font-weight:400;font-style:normal;"></span></p>
+              </div>
+            </div>
+
+            <!-- ShowText4 (矩形) -->
+            <div id="u407" class="ax_default _形状1" data-label="ShowText4">
+              <div id="u407_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u408" class="text" style="display:none; visibility: hidden">
+                <p><span style="font-family:'MV Boli Normal', 'MV Boli';font-weight:400;font-style:normal;"></span></p>
+              </div>
+            </div>
+
+            <!-- RandomText (矩形) -->
+            <div id="u409" class="ax_default label" data-label="RandomText">
+              <div id="u409_div" class=""></div>
+              <!-- Unnamed () -->
+              <div id="u410" class="text">
+                <p><span>文本标签</span></p>
+              </div>
+            </div>
+
+            <!-- Unnamed (热区) -->
+            <div id="u411" class="ax_default">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CheckInput (文本框) -->
+      <div id="u412" class="ax_default text_field" data-label="CheckInput">
+        <input id="u412_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u413" class="ax_default label">
+        <div id="u413_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u414" class="text">
+          <p><span>验证码</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u415" class="ax_default label">
+        <div id="u415_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u416" class="text">
+          <p><span>看不清？点击图片换一张</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u417" class="ax_default icon">
+        <img id="u417_img" class="img " src="images/手机注册/u268.png"/>
+        <!-- Unnamed () -->
+        <div id="u418" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (文本框) -->
+      <div id="u419" class="ax_default text_field">
+        <input id="u419_input" type="text" value=""/>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u420" class="ax_default label">
+        <div id="u420_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u421" class="text">
+          <p><span>手机号</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u422" class="ax_default label">
+        <div id="u422_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u423" class="text">
+          <p><span>绑定手机号码可用于密码找回</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (形状) -->
+      <div id="u424" class="ax_default icon">
+        <img id="u424_img" class="img " src="images/手机注册/u268.png"/>
+        <!-- Unnamed () -->
+        <div id="u425" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (bottom2) -->
+
+      <!-- Unnamed (矩形) -->
+      <div id="u427" class="ax_default box_2">
+        <div id="u427_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u428" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u429" class="ax_default label">
+        <div id="u429_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u430" class="text">
+          <p><span>公司介绍</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u431" class="ax_default label">
+        <div id="u431_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u432" class="text">
+          <p><span>资质证明</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u433" class="ax_default label">
+        <div id="u433_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u434" class="text">
+          <p><span>发展历程</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u435" class="ax_default label">
+        <div id="u435_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u436" class="text">
+          <p><span>行业论坛</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u437" class="ax_default label">
+        <div id="u437_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u438" class="text">
+          <p><span>合作伙伴</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u439" class="ax_default label">
+        <div id="u439_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u440" class="text">
+          <p><span>关于我们</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u441" class="ax_default image">
+        <img id="u441_img" class="img " src="images/登录/u72.png"/>
+        <!-- Unnamed () -->
+        <div id="u442" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (图片) -->
+      <div id="u443" class="ax_default image">
+        <img id="u443_img" class="img " src="images/登录/u39.png"/>
+        <!-- Unnamed () -->
+        <div id="u444" class="text" style="display:none; visibility: hidden">
+          <p><span></span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u445" class="ax_default label">
+        <div id="u445_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u446" class="text">
+          <p><span>海心官网</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u447" class="ax_default label">
+        <div id="u447_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u448" class="text">
+          <p><span>在线反馈</span></p>
+        </div>
+      </div>
+
+      <!-- Unnamed (矩形) -->
+      <div id="u449" class="ax_default label">
+        <div id="u449_div" class=""></div>
+        <!-- Unnamed () -->
+        <div id="u450" class="text">
+          <p><span>项目咨询</span></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

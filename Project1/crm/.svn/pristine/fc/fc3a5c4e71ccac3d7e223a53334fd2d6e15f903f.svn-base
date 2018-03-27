@@ -1,0 +1,99 @@
+var prefixinnerOrgEmployee = "/inner/innerOrgEmployee"
+$().ready(function() {
+//所属中心，级别绑哪里？
+//	loadCrmData("/inner/innerOrgEmployee/listDic","employeeCenter");
+	loadCrmData("/inner/orgJob/listDic","jobId");
+	loadDic("inner_org_job_rank","jobRank");
+	datetimepicker()
+	innerOrgEmployee_edit();
+});
+
+$.validator.setDefaults({
+	submitHandler : function() {
+		update();
+	}
+});
+function update() {
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/inner/innerOrgEmployee/update",
+		data : $('#signupForm').serialize(),// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				parent.reLoad();
+				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				parent.layer.close(index);
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+
+}
+function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#signupForm").validate({
+		rules : {
+			name : {
+				required : true
+			}
+		},
+		messages : {
+			name : {
+				required : icon + "请输入名字"
+			}
+		}
+	})
+}
+var openDept = function(){
+	layer.open({
+		type:2,
+		title:"选择部门",
+		area : [ '300px', '450px' ],
+		content:"/system/sysDept/treeView"
+	})
+}
+function loadDept( deptId,deptName){
+	$("#deptId").val(deptId);
+	$("#employeeDept").val(deptName);
+}
+function datetimepicker() {
+	$('#employeeJoinDate').datetimepicker({
+		format : 'YYYY-MM-DD',
+		locale : moment.locale('zh-cn')
+	});
+}
+
+function innerOrgEmployee_edit(){
+	$.ajax({
+		url : prefixinnerOrgEmployee + '/edit_ajax/' + $("#employeeId").val(),
+		type : "get",
+		data : {
+			'employeeId' : $("#employeeId").val(),
+		},
+		success : function(data) {
+			var result = data.employee;
+			$("input[name='employeeName']").val(result.employeeName);
+			$("input[name='employeeId']").val(result.employeeId);
+			$("input[name='employeeQq']").val(result.employeeQq);
+			$("input[name='employeeRemarks']").val(result.employeeRemarks);
+			$("input[name='employeeSalaryHour']").val(result.employeeSalaryHour);
+			$("input[name='employeePhoneNumber']").val(result.employeePhoneNumber);
+			$("input[name='employeeInnerPhoneNumber']").val(result.employeeInnerPhoneNumber);
+			$("input[name='innerUserId']").val(result.innerUserId);
+			$("input[name='employeeDept']").val(result.employeeDept);alert(result.employeeDept);
+			$("textarea[name='employeeRemarks']").val(result.employeeRemarks);
+			$("select[name='jobId']").val(result.jobId);
+			$("select[name='jobId']").trigger("chosen:updated");
+			$(":radio[name='employeeStatus'][value='" + result.employeeStatus + "']").prop("checked", "checked");
+		}
+	});
+}

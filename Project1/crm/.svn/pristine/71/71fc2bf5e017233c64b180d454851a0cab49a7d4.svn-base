@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.sales.dao.ProjectConsultationDao">
+
+	<select id="get" resultType="com.bootdo.sales.domain.ProjectConsultationDO">
+		select `Consultation_ID`,`Consultation_Name`,`Consultation_Phone_Number`,`Consultation_Mailbox`,`Consultation_Company_Name`,`Consultation_Job`,`Consultation_Provence`,`Consultation_City`,`Consultation_County`,`Consultation_Industry`,`Consultation_Product`,`Consultation_Project_Introduct`,`Consultation_Project_Scale`,`Consultation_Attachment`,`Consultation_Rmarks`,`Consultation_Time`,`Consultation_Excute_Status`,`Consultation_Excute_Descriptio`,`Consultation_Excute_Time` from sales_project_consultation where Consultation_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.sales.domain.ProjectConsultationDO">
+		select `Consultation_ID`,`Consultation_Name`,`Consultation_Phone_Number`,`Consultation_Mailbox`,`Consultation_Company_Name`,`Consultation_Job`,`Consultation_Provence`,`Consultation_City`,`Consultation_County`,`Consultation_Industry`,`Consultation_Product`,`Consultation_Project_Introduct`,`Consultation_Project_Scale`,`Consultation_Attachment`,`Consultation_Rmarks`,`Consultation_Time`,`Consultation_Excute_Status`,`Consultation_Excute_Descriptio`,`Consultation_Excute_Time` from sales_project_consultation
+        <where>  
+		  		  <if test="consultationId != null and consultationId != ''"> and Consultation_ID LIKE #{consultationId} </if>
+		  		  <if test="consultationName != null and consultationName != ''"> and Consultation_Name = #{consultationName} </if>
+		  		  <if test="consultationPhoneNumber != null and consultationPhoneNumber != ''"> and Consultation_Phone_Number = #{consultationPhoneNumber} </if>
+		  		  <if test="consultationMailbox != null and consultationMailbox != ''"> and Consultation_Mailbox = #{consultationMailbox} </if>
+		  		  <if test="consultationCompanyName != null and consultationCompanyName != ''"> and Consultation_Company_Name = #{consultationCompanyName} </if>
+		  		  <if test="consultationJob != null and consultationJob != ''"> and Consultation_Job = #{consultationJob} </if>
+		  		  <if test="consultationProvence != null and consultationProvence != ''"> and Consultation_Provence = #{consultationProvence} </if>
+		  		  <if test="consultationCity != null and consultationCity != ''"> and Consultation_City = #{consultationCity} </if>
+		  		  <if test="consultationCounty != null and consultationCounty != ''"> and Consultation_County = #{consultationCounty} </if>
+		  		  <if test="consultationIndustry != null and consultationIndustry != ''"> and Consultation_Industry = #{consultationIndustry} </if>
+		  		  <if test="consultationProduct != null and consultationProduct != ''"> and Consultation_Product = #{consultationProduct} </if>
+		  		  <if test="consultationProjectIntroduct != null and consultationProjectIntroduct != ''"> and Consultation_Project_Introduct = #{consultationProjectIntroduct} </if>
+		  		  <if test="consultationProjectScale != null and consultationProjectScale != ''"> and Consultation_Project_Scale = #{consultationProjectScale} </if>
+		  		  <if test="consultationAttachment != null and consultationAttachment != ''"> and Consultation_Attachment = #{consultationAttachment} </if>
+		  		  <if test="consultationRmarks != null and consultationRmarks != ''"> and Consultation_Rmarks = #{consultationRmarks} </if>
+		  		  <if test="consultationTime != null and consultationTime != ''"> and Consultation_Time = #{consultationTime} </if>
+		  		  <if test="consultationExcuteStatus != null and consultationExcuteStatus != ''"> and Consultation_Excute_Status = #{consultationExcuteStatus} </if>
+		  		  <if test="consultationExcuteDescriptio != null and consultationExcuteDescriptio != ''"> and Consultation_Excute_Descriptio = #{consultationExcuteDescriptio} </if>
+		  		  <if test="consultationExcuteTime != null and consultationExcuteTime != ''"> and Consultation_Excute_Time = #{consultationExcuteTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Consultation_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from sales_project_consultation
+		 <where>  
+		  		  <if test="consultationId != null and consultationId != ''"> and Consultation_ID LIKE #{consultationId} </if>
+		  		  <if test="consultationName != null and consultationName != ''"> and Consultation_Name = #{consultationName} </if>
+		  		  <if test="consultationPhoneNumber != null and consultationPhoneNumber != ''"> and Consultation_Phone_Number = #{consultationPhoneNumber} </if>
+		  		  <if test="consultationMailbox != null and consultationMailbox != ''"> and Consultation_Mailbox = #{consultationMailbox} </if>
+		  		  <if test="consultationCompanyName != null and consultationCompanyName != ''"> and Consultation_Company_Name = #{consultationCompanyName} </if>
+		  		  <if test="consultationJob != null and consultationJob != ''"> and Consultation_Job = #{consultationJob} </if>
+		  		  <if test="consultationProvence != null and consultationProvence != ''"> and Consultation_Provence = #{consultationProvence} </if>
+		  		  <if test="consultationCity != null and consultationCity != ''"> and Consultation_City = #{consultationCity} </if>
+		  		  <if test="consultationCounty != null and consultationCounty != ''"> and Consultation_County = #{consultationCounty} </if>
+		  		  <if test="consultationIndustry != null and consultationIndustry != ''"> and Consultation_Industry = #{consultationIndustry} </if>
+		  		  <if test="consultationProduct != null and consultationProduct != ''"> and Consultation_Product = #{consultationProduct} </if>
+		  		  <if test="consultationProjectIntroduct != null and consultationProjectIntroduct != ''"> and Consultation_Project_Introduct = #{consultationProjectIntroduct} </if>
+		  		  <if test="consultationProjectScale != null and consultationProjectScale != ''"> and Consultation_Project_Scale = #{consultationProjectScale} </if>
+		  		  <if test="consultationAttachment != null and consultationAttachment != ''"> and Consultation_Attachment = #{consultationAttachment} </if>
+		  		  <if test="consultationRmarks != null and consultationRmarks != ''"> and Consultation_Rmarks = #{consultationRmarks} </if>
+		  		  <if test="consultationTime != null and consultationTime != ''"> and Consultation_Time = #{consultationTime} </if>
+		  		  <if test="consultationExcuteStatus != null and consultationExcuteStatus != ''"> and Consultation_Excute_Status = #{consultationExcuteStatus} </if>
+		  		  <if test="consultationExcuteDescriptio != null and consultationExcuteDescriptio != ''"> and Consultation_Excute_Descriptio = #{consultationExcuteDescriptio} </if>
+		  		  <if test="consultationExcuteTime != null and consultationExcuteTime != ''"> and Consultation_Excute_Time = #{consultationExcuteTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.sales.domain.ProjectConsultationDO">
+		insert into sales_project_consultation
+		(
+			`Consultation_ID`, 
+			`Consultation_Name`, 
+			`Consultation_Phone_Number`, 
+			`Consultation_Mailbox`, 
+			`Consultation_Company_Name`, 
+			`Consultation_Job`, 
+			`Consultation_Provence`, 
+			`Consultation_City`, 
+			`Consultation_County`, 
+			`Consultation_Industry`, 
+			`Consultation_Product`, 
+			`Consultation_Project_Introduct`, 
+			`Consultation_Project_Scale`, 
+			`Consultation_Attachment`, 
+			`Consultation_Rmarks`, 
+			`Consultation_Time`, 
+			`Consultation_Excute_Status`, 
+			`Consultation_Excute_Descriptio`, 
+			`Consultation_Excute_Time`
+		)
+		values
+		(
+			#{consultationId}, 
+			#{consultationName}, 
+			#{consultationPhoneNumber}, 
+			#{consultationMailbox}, 
+			#{consultationCompanyName}, 
+			#{consultationJob}, 
+			#{consultationProvence}, 
+			#{consultationCity}, 
+			#{consultationCounty}, 
+			#{consultationIndustry}, 
+			#{consultationProduct}, 
+			#{consultationProjectIntroduct}, 
+			#{consultationProjectScale}, 
+			#{consultationAttachment}, 
+			#{consultationRmarks}, 
+			#{consultationTime}, 
+			#{consultationExcuteStatus}, 
+			#{consultationExcuteDescriptio}, 
+			#{consultationExcuteTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.sales.domain.ProjectConsultationDO">
+		update sales_project_consultation 
+		<set>
+			<if test="consultationName != null">`Consultation_Name` = #{consultationName}, </if>
+			<if test="consultationPhoneNumber != null">`Consultation_Phone_Number` = #{consultationPhoneNumber}, </if>
+			<if test="consultationMailbox != null">`Consultation_Mailbox` = #{consultationMailbox}, </if>
+			<if test="consultationCompanyName != null">`Consultation_Company_Name` = #{consultationCompanyName}, </if>
+			<if test="consultationJob != null">`Consultation_Job` = #{consultationJob}, </if>
+			<if test="consultationProvence != null">`Consultation_Provence` = #{consultationProvence}, </if>
+			<if test="consultationCity != null">`Consultation_City` = #{consultationCity}, </if>
+			<if test="consultationCounty != null">`Consultation_County` = #{consultationCounty}, </if>
+			<if test="consultationIndustry != null">`Consultation_Industry` = #{consultationIndustry}, </if>
+			<if test="consultationProduct != null">`Consultation_Product` = #{consultationProduct}, </if>
+			<if test="consultationProjectIntroduct != null">`Consultation_Project_Introduct` = #{consultationProjectIntroduct}, </if>
+			<if test="consultationProjectScale != null">`Consultation_Project_Scale` = #{consultationProjectScale}, </if>
+			<if test="consultationAttachment != null">`Consultation_Attachment` = #{consultationAttachment}, </if>
+			<if test="consultationRmarks != null">`Consultation_Rmarks` = #{consultationRmarks}, </if>
+			<if test="consultationTime != null">`Consultation_Time` = #{consultationTime}, </if>
+			<if test="consultationExcuteStatus != null">`Consultation_Excute_Status` = #{consultationExcuteStatus}, </if>
+			<if test="consultationExcuteDescriptio != null">`Consultation_Excute_Descriptio` = #{consultationExcuteDescriptio}, </if>
+			<if test="consultationExcuteTime != null">`Consultation_Excute_Time` = #{consultationExcuteTime}</if>
+		</set>
+		where Consultation_ID = #{consultationId}
+	</update>
+	
+	<delete id="remove">
+		delete from sales_project_consultation where Consultation_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sales_project_consultation where Consultation_ID in 
+		<foreach item="consultationId" collection="array" open="(" separator="," close=")">
+			#{consultationId}
+		</foreach>
+	</delete>
+
+</mapper>

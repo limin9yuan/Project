@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html><html>
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  
+
+  
+  
+  
+
+  
+
+<script src="/js/jquery.min.js?v=2.1.4"></script>
+     <script src="/js/plugins/datepicker/local/moment-with-locales.min.js"></script>
+      <script type="text/javascript" src="/js/bootstrap.min.js"></script>    
+     <script src="/js/plugins/datepicker/bootstrap-datepicker.min.js"></script>
+  
+    <link rel="stylesheet" type="text/css" href="/css/plugins/datepicker/bootstrap-datetimepicker.min.css">
+   
+    
+      <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+  
+
+  <style type="text/css">
+    
+
+  </style>
+
+  <title></title>
+
+  
+    
+
+
+
+
+<script type="text/javascript">//<![CDATA[
+$(window).load(function(){
+$(function() {
+        $('#datetimepicker1').datetimepicker({  
+            format: 'YYYY-MM-DD',  
+            locale: moment.locale('zh-cn')  
+        });
+
+    });
+});//]]> 
+
+</script>
+
+  
+</head>
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+					  <div class="form-group">
+					    <label class="col-sm-2 control-label">企业客户编号：</label>
+					    <div class="col-sm-3">
+					        <div class="input-group date" id="datetimepicker1">
+					            <input class="form-control" type="text">
+					            <span class="input-group-addon">
+					                                        <span class="glyphicon glyphicon-calendar"></span>
+					            </span>
+					        </div>
+					    </div>
+					</div>
+					</form> 
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+  <script>
+  // tell the embed parent frame the height of the content
+  if (window.parent && window.parent.parent){
+    window.parent.parent.postMessage(["resultsFrame", {
+      height: document.body.getBoundingClientRect().height,
+      slug: "None"
+    }], "*")
+  }
+</script>
+
+
+
+
+
+</body></html>

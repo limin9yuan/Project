@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.approval.dao.AssignmentDao">
+
+	<select id="get" resultType="com.bootdo.approval.domain.AssignmentDO">
+		select `Assignment_ID`,`Customer_ID`,`Business_ID`,`Project_ID`,`Assignment_Project_Cagegory`,
+		`Assignment_PM`,`Assignment_Task_Name`,
+		date_format(Assignment_Begin_Time,'%Y-%m-%d') `Assignment_Begin_Time`,
+		date_format(Assignment_End_Time,'%Y-%m-%d') `Assignment_End_Time`,
+		`Assignment_Dept`,
+		`Assignment_Principal`,`Assignment_Recipient_Dept`,`Assignment_Recipient`,`Assignment_Task_Description`,
+		date_format(Assignment_Task_Finish_Time,'%Y-%m-%d') `Assignment_Task_Finish_Time`,
+		`Assignment_Remarks`,`Assignment_Approval_Status`,
+		`Assignment_Operator`,`Assignment_Operate_Time`,
+		`Assignment_Creator`,`Assignment_Create_Time`,
+		`Assignment_Person` 
+		from approval_assignment where Assignment_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.approval.domain.AssignmentDO">
+		select `Assignment_ID`,
+		a.`Customer_ID`,b.`Customer_Name`,
+		a.`Business_ID`,c.`Business_Name`,
+		`Assignment_Project_Cagegory`,
+		a.`Assignment_PM`,h.`Employee_Name` as `Assignment_PM_Name`,
+		`Assignment_Task_Name`,`Assignment_Begin_Time`,`Assignment_End_Time`,
+		a.`Assignment_Dept`,f.`Name`,
+		`Assignment_Principal`,j.`Employee_Name` as `Assignment_Principal_Name`,
+		a.`Assignment_Recipient_Dept`,g.`Name`,
+		`Assignment_Recipient`,k.`Employee_Name` as `Assignment_Recipient_Name`,
+		`Assignment_Task_Description`,`Assignment_Task_Performance`,`Assignment_Task_Finish_Time`,`Assignment_Remarks`,`Assignment_Approval_Status`,`Assignment_Operator`,`Assignment_Operate_Time`,
+		`Assignment_Creator`,l.`name`,
+		`Assignment_Create_Time`, 
+		a.`Assignment_Person`,i.`Employee_Name` as `Assignment_Person_Name`,
+		a.`Project_ID`,d.`Project_Name` as `Project_Name` 
+		from approval_assignment a
+		left join
+        (select `Project_ID`,`Project_Name` from pre_sales_project
+         UNION ALL
+         select `Project_ID`,`Project_Name`from development_project
+        )d on a.`Project_ID`=d.`Project_ID`
+        left join sales_company_customer b on a.`Customer_ID`=b.`Customer_ID`
+        left join sales_business c on a.`Business_ID`=c.`Business_ID`
+        left join sys_dept f on a.`Assignment_Dept`=f.`Dept_ID`
+        left join sys_dept g on a.`Assignment_Recipient_Dept`=g.`Dept_ID`
+        
+        left join inner_org_employee h on a.`Assignment_PM`=h.`Employee_ID`
+        left join inner_org_employee i on a.`Assignment_Person`=i.`Employee_ID`
+		left join inner_org_employee j on a.`Assignment_Principal`=j.`Employee_ID`
+		left join inner_org_employee k on a.`Assignment_Recipient`=k.`Employee_ID`
+		left join sys_user l on a.`Assignment_Creator`=l.`user_id`
+        <where>  
+		  		  <if test="assignmentId != null and assignmentId != ''"> and Assignment_ID = #{assignmentId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  <if test="assignmentProjectCagegory != null and assignmentProjectCagegory != ''"> and Assignment_Project_Cagegory = #{assignmentProjectCagegory} </if>
+		  		  <if test="assignmentPm != null and assignmentPm != ''"> and Assignment_PM = #{assignmentPm} </if>
+		  		  <if test="assignmentEndTime != null and assignmentEndTime != ''"> and Assignment_End_Time = #{assignmentEndTime} </if>
+		  		  <if test="assignmentDept != null and assignmentDept != ''"> and Assignment_Dept = #{assignmentDept} </if>
+		  		  <if test="assignmentRecipientDept != null and assignmentRecipientDept != ''"> and Assignment_Recipient_Dept = #{assignmentRecipientDept} </if>
+		  		  <if test="assignmentTaskDescription != null and assignmentTaskDescription != ''"> and Assignment_Task_Description = #{assignmentTaskDescription} </if>
+		  		  <if test="assignmentTaskPerformance != null and assignmentTaskPerformance != ''"> and Assignment_Task_Performance = #{assignmentTaskPerformance} </if>
+		  		  <if test="assignmentTaskFinishTime != null and assignmentTaskFinishTime != ''"> and Assignment_Task_Finish_Time = #{assignmentTaskFinishTime} </if>
+		  		  <if test="assignmentRemarks != null and assignmentRemarks != ''"> and Assignment_Remarks = #{assignmentRemarks} </if>
+		  		  <if test="assignmentApprovalStatus != null and assignmentApprovalStatus != ''"> and Assignment_Approval_Status = #{assignmentApprovalStatus} </if>
+		  		  <if test="assignmentOperator != null and assignmentOperator != ''"> and Assignment_Operator = #{assignmentOperator} </if>
+		  		  <if test="assignmentOperateTime != null and assignmentOperateTime != ''"> and Assignment_Operate_Time = #{assignmentOperateTime} </if>
+		  		  <if test="assignmentCreator != null and assignmentCreator != ''"> and Assignment_Creator = #{assignmentCreator} </if>
+		  		  <if test="assignmentCreateTime != null and assignmentCreateTime != ''"> and Assignment_Create_Time = #{assignmentCreateTime} </if>
+		  		  <if test="assignmentPerson != null and assignmentPerson != ''"> and Assignment_Person = #{assignmentPerson} </if>
+		  		  
+		  		  <if test="assignmentPrincipal != null and assignmentPrincipal != ''"> and j.`Employee_Name` LIKE #{assignmentPrincipal} </if>
+		  		  <if test="assignmentRecipient != null and assignmentRecipient != ''"> and k.`Employee_Name` LIKE #{assignmentRecipient} </if>
+		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
+		  		  <if test="assignmentTaskName != null and assignmentTaskName != ''"> and Assignment_Task_Name LIKE #{assignmentTaskName} </if>
+		  		  <if test="assignmentBeginTime != null and assignmentBeginTime != ''"> and Assignment_Begin_Time = #{assignmentBeginTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Assignment_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) 
+        from approval_assignment a
+		left join
+        (select `Project_ID`,`Project_Name` from pre_sales_project
+         UNION ALL
+         select `Project_ID`,`Project_Name`from development_project
+        )d on a.`Project_ID`=d.`Project_ID`
+        left join sales_company_customer b on a.`Customer_ID`=b.`Customer_ID`
+        left join sales_business c on a.`Business_ID`=c.`Business_ID`
+        left join sys_dept f on a.`Assignment_Dept`=f.`Dept_ID`
+        left join sys_dept g on a.`Assignment_Recipient_Dept`=g.`Dept_ID`
+        
+        left join inner_org_employee h on a.`Assignment_PM`=h.`Employee_ID`
+        left join inner_org_employee i on a.`Assignment_Person`=i.`Employee_ID`
+		left join inner_org_employee j on a.`Assignment_Principal`=j.`Employee_ID`
+		left join inner_org_employee k on a.`Assignment_Recipient`=k.`Employee_ID`
+		left join sys_user l on a.`Assignment_Creator`=l.`user_id`
+		 <where>  
+		  		  <if test="assignmentId != null and assignmentId != ''"> and Assignment_ID = #{assignmentId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  <if test="assignmentProjectCagegory != null and assignmentProjectCagegory != ''"> and Assignment_Project_Cagegory = #{assignmentProjectCagegory} </if>
+		  		  <if test="assignmentPm != null and assignmentPm != ''"> and Assignment_PM = #{assignmentPm} </if>
+		  		  <if test="assignmentEndTime != null and assignmentEndTime != ''"> and Assignment_End_Time = #{assignmentEndTime} </if>
+		  		  <if test="assignmentDept != null and assignmentDept != ''"> and Assignment_Dept = #{assignmentDept} </if>
+		  		  <if test="assignmentRecipientDept != null and assignmentRecipientDept != ''"> and Assignment_Recipient_Dept = #{assignmentRecipientDept} </if>
+		  		  <if test="assignmentTaskDescription != null and assignmentTaskDescription != ''"> and Assignment_Task_Description = #{assignmentTaskDescription} </if>
+		  		  <if test="assignmentTaskPerformance != null and assignmentTaskPerformance != ''"> and Assignment_Task_Performance = #{assignmentTaskPerformance} </if>
+		  		  <if test="assignmentTaskFinishTime != null and assignmentTaskFinishTime != ''"> and Assignment_Task_Finish_Time = #{assignmentTaskFinishTime} </if>
+		  		  <if test="assignmentRemarks != null and assignmentRemarks != ''"> and Assignment_Remarks = #{assignmentRemarks} </if>
+		  		  <if test="assignmentApprovalStatus != null and assignmentApprovalStatus != ''"> and Assignment_Approval_Status = #{assignmentApprovalStatus} </if>
+		  		  <if test="assignmentOperator != null and assignmentOperator != ''"> and Assignment_Operator = #{assignmentOperator} </if>
+		  		  <if test="assignmentOperateTime != null and assignmentOperateTime != ''"> and Assignment_Operate_Time = #{assignmentOperateTime} </if>
+		  		  <if test="assignmentCreator != null and assignmentCreator != ''"> and Assignment_Creator = #{assignmentCreator} </if>
+		  		  <if test="assignmentCreateTime != null and assignmentCreateTime != ''"> and Assignment_Create_Time = #{assignmentCreateTime} </if>
+		  		  <if test="assignmentPerson != null and assignmentPerson != ''"> and Assignment_Person = #{assignmentPerson} </if>
+		  		  
+		  		  <if test="assignmentPrincipal != null and assignmentPrincipal != ''"> and j.`Employee_Name` LIKE #{assignmentPrincipal} </if>
+		  		  <if test="assignmentRecipient != null and assignmentRecipient != ''"> and k.`Employee_Name` LIKE #{assignmentRecipient} </if>
+		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
+		  		  <if test="assignmentTaskName != null and assignmentTaskName != ''"> and Assignment_Task_Name LIKE #{assignmentTaskName} </if>
+		  		  <if test="assignmentBeginTime != null and assignmentBeginTime != ''"> and Assignment_Begin_Time = #{assignmentBeginTime} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.approval.domain.AssignmentDO">
+		insert into approval_assignment
+		(
+			`Assignment_ID`, 
+			`Customer_ID`, 
+			`Business_ID`, 
+			`Project_ID`, 
+			`Assignment_Project_Cagegory`, 
+			`Assignment_PM`, 
+			`Assignment_Task_Name`, 
+			`Assignment_Begin_Time`, 
+			`Assignment_End_Time`, 
+			`Assignment_Dept`, 
+			`Assignment_Principal`, 
+			`Assignment_Recipient_Dept`, 
+			`Assignment_Recipient`, 
+			`Assignment_Task_Description`, 
+			`Assignment_Task_Performance`, 
+			`Assignment_Task_Finish_Time`, 
+			`Assignment_Remarks`, 
+			`Assignment_Approval_Status`, 
+			`Assignment_Operator`, 
+			`Assignment_Operate_Time`, 
+			`Assignment_Creator`, 
+			`Assignment_Create_Time`,
+			`Assignment_Person`
+		)
+		values
+		(
+			#{assignmentId}, 
+			#{customerId}, 
+			#{businessId}, 
+			#{projectId}, 
+			#{assignmentProjectCagegory}, 
+			#{assignmentPm}, 
+			#{assignmentTaskName}, 
+			#{assignmentBeginTime}, 
+			#{assignmentEndTime}, 
+			#{assignmentDept}, 
+			#{assignmentPrincipal}, 
+			#{assignmentRecipientDept}, 
+			#{assignmentRecipient}, 
+			#{assignmentTaskDescription}, 
+			#{assignmentTaskPerformance}, 
+			#{assignmentTaskFinishTime}, 
+			#{assignmentRemarks}, 
+			#{assignmentApprovalStatus}, 
+			#{assignmentOperator}, 
+			#{assignmentOperateTime}, 
+			#{assignmentCreator}, 
+			#{assignmentCreateTime},
+			#{assignmentPerson}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.approval.domain.AssignmentDO">
+		update approval_assignment 
+		<set>
+			<if test="customerId != null">`Customer_ID` = #{customerId}, </if>
+			<if test="businessId != null">`Business_ID` = #{businessId}, </if>
+			<if test="projectId != null">`Project_ID` = #{projectId}, </if>
+			<if test="assignmentProjectCagegory != null">`Assignment_Project_Cagegory` = #{assignmentProjectCagegory}, </if>
+			<if test="assignmentPm != null">`Assignment_PM` = #{assignmentPm}, </if>
+			<if test="assignmentTaskName != null">`Assignment_Task_Name` = #{assignmentTaskName}, </if>
+			<if test="assignmentBeginTime != null">`Assignment_Begin_Time` = #{assignmentBeginTime}, </if>
+			<if test="assignmentEndTime != null">`Assignment_End_Time` = #{assignmentEndTime}, </if>
+			<if test="assignmentDept != null">`Assignment_Dept` = #{assignmentDept}, </if>
+			<if test="assignmentPrincipal != null">`Assignment_Principal` = #{assignmentPrincipal}, </if>
+			<if test="assignmentRecipientDept != null">`Assignment_Recipient_Dept` = #{assignmentRecipientDept}, </if>
+			<if test="assignmentRecipient != null">`Assignment_Recipient` = #{assignmentRecipient}, </if>
+			<if test="assignmentTaskDescription != null">`Assignment_Task_Description` = #{assignmentTaskDescription}, </if>
+			<if test="assignmentTaskPerformance != null">`Assignment_Task_Performance` = #{assignmentTaskPerformance}, </if>
+			<if test="assignmentTaskFinishTime != null">`Assignment_Task_Finish_Time` = #{assignmentTaskFinishTime}, </if>
+			<if test="assignmentRemarks != null">`Assignment_Remarks` = #{assignmentRemarks}, </if>
+			<if test="assignmentApprovalStatus != null">`Assignment_Approval_Status` = #{assignmentApprovalStatus}, </if>
+			<if test="assignmentOperator != null">`Assignment_Operator` = #{assignmentOperator}, </if>
+			<if test="assignmentOperateTime != null">`Assignment_Operate_Time` = #{assignmentOperateTime}, </if>
+			<if test="assignmentPerson != null">`Assignment_Person` = #{assignmentPerson}</if>
+		</set>
+		where Assignment_ID = #{assignmentId}
+	</update>
+	
+	<delete id="remove">
+		delete from approval_assignment where Assignment_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from approval_assignment where Assignment_ID in 
+		<foreach item="assignmentId" collection="array" open="(" separator="," close=")">
+			#{assignmentId}
+		</foreach>
+	</delete>
+
+</mapper>

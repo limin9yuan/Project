@@ -1,0 +1,70 @@
+alter table contract_additional_records add Project_ID VARCHAR(50);
+alter table contract_additional_records add Contract_Name VARCHAR(50);
+alter table contract_additional_records add Pre_Invoice_Date DATE;
+
+alter table development_project add Fllow_Type  VARCHAR(50);
+alter table development_project add If_OutSource  VARCHAR(50);
+
+alter table sales_customer_contact add BirthDay DATE;
+alter table sales_customer_contact add Work_Address  VARCHAR(100);
+alter table sales_company_customer add Opponent_Company  VARCHAR(100);
+alter table sales_company_customer add Opponent_Project_Type  VARCHAR(100);
+alter table sales_company_customer add Opponent_Product_Type  VARCHAR(100);
+alter table sales_company_customer add Opponent_Product_Price  VARCHAR(100);
+
+
+alter table inner_org_job add Create_Job_Date DATE;
+alter table inner_org_job modify column Create_Job_Date DATE comment '岗位设立时间';
+
+alter table development_project add  Project_Related_ID  VARCHAR(50);
+alter table development_project modify column  Project_Related_ID VARCHAR(50) comment '关联售前项目编号';
+alter table development_project add Delivery_Status  VARCHAR(50);
+alter table development_project modify column  Delivery_Status VARCHAR(50) comment '是否签订合同';
+
+
+alter table pre_sales_project add  Project_Business VARCHAR(50);
+alter table pre_sales_project modify column  Project_Business VARCHAR(50) comment '业务编号';
+
+
+alter table approval_assignment add  Assignment_Person VARCHAR(6);
+alter table approval_assignment modify column  Assignment_Person VARCHAR(6) comment '申请人';
+
+
+alter table invoice add  Invoice_Company VARCHAR(50);
+alter table invoice modify column  Invoice_Company VARCHAR(50) comment '开票公司';
+
+
+alter table sales_bug_category add  Else_Category VARCHAR(50);
+alter table sales_bug_category modify column  Else_Category VARCHAR(50) comment '其他分类';
+
+alter table sales_requirement_category add  Else_Category VARCHAR(50);
+alter table sales_requirement_category modify column  Else_Category VARCHAR(50) comment '其他分类';
+
+alter table contract add Project_ID VARCHAR(50);
+alter table contract modify column  Project_ID VARCHAR(50) comment '项目编号';
+
+
+
+alter table development_project add  Dept_ID VARCHAR(50);
+alter table development_project modify column  Dept_ID VARCHAR(50) comment '部门编号';
+
+alter table budget_expenses add  Expenses_Total_Price decimal(12,2);
+alter table budget_expenses modify column  Expenses_Total_Price decimal(12,2) comment '总计';
+
+
+alter table budget_purchase add  Purchase_Total_Price decimal(12,2);
+alter table budget_purchase modify column  Purchase_Total_Price decimal(12,2) comment '总计';
+
+alter table budget_labor add  Labor_Grand_Total_Cost decimal(12,2);
+alter table budget_labor modify column  Labor_Grand_Total_Cost decimal(12,2) comment '人工的成本总计';
+
+
+alter table project_budget add  Dept_ID VARCHAR(50);
+alter table project_budget modify column  Dept_ID VARCHAR(50) comment '部门';
+alter table project_budget add  Responsible_Center VARCHAR(50);
+alter table project_budget modify column  Responsible_Center VARCHAR(50) comment '负责中心';
+alter table project_budget add  Project_Supervisor VARCHAR(50);
+alter table project_budget modify column  Project_Supervisor VARCHAR(50) comment '项目主管';
+alter table project_budget add  Project_Gategory VARCHAR(50);
+alter table project_budget modify column  Project_Gategory VARCHAR(50) comment '项目类别';
+

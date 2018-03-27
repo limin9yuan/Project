@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+		<div class="ibox float-e-margins">
+					<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<div class="form-group">
+							<label class="col-sm-2 control-label">行政区划：</label>
+							<div class="col-sm-2">
+								<select data-placeholder="全部" name="provice" id="provice"
+									class="form-control chosen-select data-max-level=3"
+									tabindex="2" style="width: 100%">
+									<option value="">省</option>
+								</select>
+								<select data-placeholder="全部" name="provice" id="provice"
+									class="form-control chosen-select data-max-level=3"
+									tabindex="2" style="width: 100%">
+									<option value="">市</option>
+								</select>
+								<select data-placeholder="全部" name="provice" id="provice"
+									class="form-control chosen-select data-max-level=3"
+									tabindex="2" style="width: 100%">
+									<option value="">区</option>
+								</select>
+							</div>
+							<label class="col-sm-2 control-label">业务名称：</label>
+							<div class="col-sm-2">
+								<select data-placeholder="全部" name="businessName" id="businessName"
+									class="form-control chosen-select" tabindex="2"
+									style="width: 100%">
+									<option value="">全部</option>
+								</select>
+							</div>
+							<label class="col-sm-2 control-label">销售负责人：</label>
+							<div class="col-sm-2">
+								<select data-placeholder="全部" name="businessSales"
+									id="businessSales" class="form-control chosen-select"
+									tabindex="2" style="width: 100%">
+									<option value="">全部</option>
+								</select>
+							</div>
+						</div>
+						<div class="text-right form-group">
+							<div class="columns pull-right col-md-2">
+								<button type="button" class="btn btn-danger" onclick="reLoad()">查询</button>
+								<button type="button" class="btn btn-danger"
+									onclick="resetPwd()">重置</button>
+							</div>
+						</div>
+					</form>
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="sales:salesProject:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>新增
+							</button>
+							<button shiro:hasPermission="sales:salesProject:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>批量删除
+							</button>
+							<button shiro:hasPermission="sales:salesProject:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>导入
+							</button>
+							<button shiro:hasPermission="sales:salesProject:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>导出
+							</button>
+							<a shiro:hasPermission="sales:salesProject:batchRemove" type="button" class="btn  btn-danger"
+								onclick="returnList()">
+								<i class="fa" aria-hidden="true"></i>列表显示项配置
+							</a>
+						</div>
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		
+		
+		
+		
+		
+		
+		
+			<!-- <div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="sales:business:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>新增
+							</button>
+							<button shiro:hasPermission="sales:business:batchRemove" type="button" class="btn  btn-danger"
+								onclick="batchRemove()">
+								<i class="fa fa-trash" aria-hidden="true"></i>批量删除
+							</button>
+						</div>
+						
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="searchName" type="text" class="form-control"
+								placeholder="">
+						</div>
+						
+					</div>
+					<table id="exampleTable" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_resetPwd_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="sales:business:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="sales:business:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="sales:business:resetPwd">
+			<script type="text/javascript">
+				var s_resetPwd_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/sales/business/business.js"></script>
+</body>
+</html>
