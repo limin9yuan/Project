@@ -4,7 +4,7 @@ $().ready(function() {
 
 	validateRule();
 	datetimepicker();
-	loadEditTable();
+	// loadEditTable();
 	// // 交付人
 	loadCrmData("/inner/innerOrgEmployee/listDic", "deliveryPersonName");
 	// 附件
@@ -59,16 +59,44 @@ function save() {
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
-		rules : {
-			name : {
-				required : true
+		ignore: ":hidden:not(select)",
+			rules : {
+				deliveryPersonName : {
+					required : true,
+				},
+				deliveryContent : {
+					required : true,
+					rangelength:[1,1000]
+				},
+				deliveryDate : {
+					required : true,
+				},
+				deliveryStatus : {
+					required : true,
+				},
+				deliveryRmarks : {
+					rangelength:[1,200]
+				}
+			},
+			messages : {
+				deliveryPersonName : {
+					required : icon + "交付人不能为空",
+				},
+				deliveryContent : {
+					required : icon + "交付内容不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 1000 之间的字符串"
+				},
+				deliveryDate : {
+					required : icon + "交付时间不能为空",
+				},
+				deliveryStatus : {
+					required : icon + "合同状态不能为空",
+
+				},
+				deliveryRmarks : {
+					rangelength: icon + "请输入一个长度介于 1 和 200 之间的字符串"
+				}
 			}
-		},
-		messages : {
-			name : {
-				required : icon + "请输入名字"
-			}
-		}
 	})
 }
 function operateFormatter1(value, row, index) {
