@@ -111,7 +111,7 @@ public class ContractController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("contract:contract:add")
 	public R save(ContractDO contract) {
-		contract.setContractId(getUserId());
+		contract.setContractOperator(Long.toString(getUserId()));
 		if (contractService.save(contract) > 0) {
 			return R.ok();
 		}

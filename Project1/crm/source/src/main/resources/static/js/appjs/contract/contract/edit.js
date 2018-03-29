@@ -44,7 +44,7 @@ $().ready(function() {
 			}
 		});
 	});
-	// validateRule();
+	validateRule();
 	datetimepicker();
 	Contract_ajax();
 });
@@ -291,7 +291,9 @@ function removeRow(deleteIndex,mark){
         $('#reportTable2').bootstrapTable('removeRow', deleteIndex);
     }
 }
-var openDept = function(){
+var currentFiled = "";
+var openDept = function(currentFiledparam){
+	currentFiled = currentFiledparam;
 	layer.open({
 		type:2,
 		title:"选择部门",
@@ -299,9 +301,15 @@ var openDept = function(){
 		content:"/system/sysDept/treeView"
 	})
 }
-function loadDept( deptId,deptName){
-	$("#deptId").val(deptId);
-	$("#employeeDept").val(deptName);
+function loadDept( deptId,employeeDept){
+	if (currentFiled == "deptId") {
+		$("#deptId").val(deptId);
+		$("#deptName").val(employeeDept);
+	}
+	if (currentFiled == "contractDept") {
+		$("#contractDept").val(deptId);
+		$("#contractDeptName").val(employeeDept);
+	}
 }
 function datetimepicker() {
 	// 预计开具发票时间
@@ -342,36 +350,38 @@ function Contract_ajax(){
 		},
 		success : function(data) {
 			result = data.contract;
- 			$("select[name='customerId']").val(result.customerId);
- 			$("Select[name='customerId']").trigger("chosen:updated");
- 			$("select[name='businessId']").val(result.businessId);
- 			$("Select[name='businessId']").trigger("chosen:updated");
- 			$("select[name='contractApplicantName']").val(result.contractApplicantName);
- 			$("select[name='contractApplicantName']").trigger("chosen:updated");
- 			$("select[name='contractApplicant']").val(result.contractApplicant);
- 			$("select[name='contractApplicant']").trigger("chosen:updated");
- 			$("select[name='projectId']").val(result.projectId);
- 			$("select[name='projectId']").trigger("chosen:updated");
- 			$("select[name='contractType']").val(result.contractType);
- 			$("select[name='contractType']").trigger("chosen:updated");
- 			$("select[name='contractCategory']").val(result.contractCategory);
- 			$("select[name='contractCategory']").trigger("chosen:updated");
- 			$("select[name='contractInvoiceType']").val(result.contractInvoiceType);
- 			$("select[name='contractInvoiceType']").trigger("chosen:updated");
- 			$("select[name='contractRelatedId']").val(result.contractId);
- 			$("select[name='contractRelatedId']").trigger("chosen:updated");
- 			$("select[name='contractSales']").val(result.contractSales);
- 			$("select[name='contractSales']").trigger("chosen:updated");
+			alert(result.projectId);
+ 			// $("select[name='customerId']").val(result.customerId);
+ 			// $("Select[name='customerId']").trigger("chosen:updated");
+ 			// $("select[name='businessId']").val(result.businessId);
+ 			// $("Select[name='businessId']").trigger("chosen:updated");
+ 			// $("select[name='contractApplicantName']").val(result.contractApplicantName);
+ 			// $("select[name='contractApplicantName']").trigger("chosen:updated");
+ 			// $("select[name='contractApplicant']").val(result.contractApplicant);
+ 			// $("select[name='contractApplicant']").trigger("chosen:updated");
+ 			// $("select[name='projectId']").val(result.projectId);
+ 			// $("select[name='projectId']").trigger("chosen:updated");
+ 			// $("select[name='contractType']").val(result.contractType);
+ 			// $("select[name='contractType']").trigger("chosen:updated");
+ 			// $("select[name='contractCategory']").val(result.contractCategory);
+ 			// $("select[name='contractCategory']").trigger("chosen:updated");
+ 			// $("select[name='contractInvoiceType']").val(result.contractInvoiceType);
+ 			// $("select[name='contractInvoiceType']").trigger("chosen:updated");
+ 			// $("select[name='contractRelatedId']").val(result.contractId);
+ 			// $("select[name='contractRelatedId']").trigger("chosen:updated");
+ 			// $("select[name='contractSales']").val(result.contractSales);
+ 			// $("select[name='contractSales']").trigger("chosen:updated");
  			$("input[name='contractName']").val(result.contractName);
  			$("input[name='contractBuildCompany']").val(result.contractBuildCompany);
  			$("input[name='contractTotalPrice']").val(result.contractTotalPrice);
  			$("input[name='contractDraftPerson']").val(result.contractDraftPerson);
- 			$("input[name='employeeDept']").val(result.employeeDept);
+ 			$("input[name='deptName']").val(result.deptName);
+			$("input[name='contractDeptName']").val(result.contractDeptName);
  			$("textarea[name='contractRemarks']").val(result.contractRemarks);
  			// 关联合同名称
 			loadCrmDataValue("/contract/contract/listDic", "contractRelatedId",result.contractRelatedId);
 			// 项目名称
-			loadCrmDataValue("/project/project/listDic", "projectId",result.projectId);
+			loadCrmDataValue("/sales/salesProject/listDic", "projectId",result.projectId);
 			// 客户名称
 			loadCrmDataValue("/sales/companyCustomer/listDic", "customerId",result.customerId);
 			// 业务名称
@@ -385,9 +395,11 @@ function Contract_ajax(){
 			// 岗位(内部)
 			loadCrmDataValue("/inner/orgJob/listDic", "jobId",result.jobId);
 			// 合同类型
-			loadDicValue("Contract_Type", "contractType",result.contractType);
+			loadDicValue("contract_Contract_Type", "contractType",result.contractType);
+			// loadDicValue("Contract_Type", "contractType",result.contractType);
 			// 合同种类
-			loadDicValue("Contract_Category", "contractCategory",result.contractCategory);
+			loadDicValue("contract_Contract_Category", "contractCategory",result.contractCategory);
+			// loadDicValue("Contract_Category", "contractCategory",result.contractCategory);
 			// 发票类型
 			loadDicValue("Contract_Invoice_Type", "contractInvoiceType",result.contractInvoiceType);
 		}

@@ -108,10 +108,10 @@
 	<insert id="save" parameterType="com.bootdo.contract.domain.ContractDO">
 		insert into contract
 		(
-			`Customer_ID`, 
+			`Customer_ID`,
 			`Business_ID`, 
 			`Contract_Name`, 
-			`Contract_Applicant_Name`, 
+			`Contract_Applicant_Name`,
 			`Contract_Build_Company`, 
 			`Contract_Type`, 
 			`Contract_Category`, 
@@ -136,10 +136,10 @@
 		)
 		values
 		(
-			#{customerId}, 
+			#{customerId},
 			#{businessId}, 
 			#{contractName}, 
-			#{contractApplicantName}, 
+			#{contractApplicantName},
 			#{contractBuildCompany}, 
 			#{contractType}, 
 			#{contractCategory}, 
@@ -190,7 +190,7 @@
 			<if test="contractApprovalStatus != null">`Contract_Approval_Status` = #{contractApprovalStatus}, </if>
 			<if test="contractOperator != null">`Contract_Operator` = #{contractOperator}, </if>
 			<if test="contractOperateTime != null">`Contract_Operate_Time` = #{contractOperateTime},</if>
-			<if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
+			<if test="projectId != null and projectId != ''">Project_ID = #{projectId} </if>
 		</set>
 		where Contract_ID = #{contractId}
 	</update>

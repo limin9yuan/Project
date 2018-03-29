@@ -193,9 +193,6 @@ function Service_ajax(){
 		},
 		success : function(data) {
 			result = data.service;
-			// alert(result.customerId);
-			// $("select[name='customerId']").val(result.customerId);
-			// $("Select[name='customerId']").trigger("chosen:updated");
 			$("input[name='serviceName']").val(result.serviceName);
 			$("input[name='serviceDept']").val(result.serviceDept);
 			$("input[name='serviceFeedbackInfo']").val(result.serviceFeedbackInfo);

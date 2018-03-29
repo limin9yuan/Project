@@ -40,7 +40,7 @@
 								</div>
 								<label class="col-sm-2 control-label">申请人姓名：<span class="mustin">*</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="contractApplicantName "
+									<select data-placeholder="请选择" name="contractApplicantName"
 									id="contractApplicantName" class="form-control chosen-select"
 									tabindex="2" style="width: 100%">
 									<option value="">请选择</option>
@@ -51,8 +51,8 @@
 										<label class="col-sm-2 control-label">所在部门：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<input id="deptId" name="deptId" class="hidden"> <input
-												id="employeeDept" name="employeeDept" class="form-control"
-												type="text" style="cursor: pointer;" onclick="openDept()"
+												id="deptName" name="deptName" class="form-control"
+												type="text" style="cursor: pointer;" onclick="openDept('deptId')"
 												readonly="readonly" placeholder="所属部门">
 										</div>
 										<label class="col-sm-2 control-label">岗位：<span class="mustin">*</label>
@@ -102,11 +102,10 @@
 										</div>
 										<label class="col-sm-2 control-label">合同发起部门：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<select data-placeholder="请选择" name="contractDept"
-												id="contractDept" class="form-control chosen-select"
-												tabindex="2" style="width: 100%">
-												<option value="">请选择</option>
-											</select>
+											<input id="contractDept" name="contractDept" class="hidden"> <input
+												id="contractDeptName" name="contractDeptName" class="form-control" type="text"
+												style="cursor: pointer;" onclick="openDept('contractDept')"
+												readonly="readonly" placeholder="合同发起部门">
 										</div>
 									</div>
 							<div class="form-group">

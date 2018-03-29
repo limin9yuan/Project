@@ -3,7 +3,7 @@ $().ready(function() {
 	/**
 	 * 基本信息
 	 */
-			// validateRule();
+			validateRule();
 			datetimepicker();
 			loadEditTable();
 			// 项目名称
@@ -22,8 +22,6 @@ $().ready(function() {
 			loadCrmData("/inner/orgJob/listDic", "jobId");
 			// 关联合同名称
 			loadCrmData("/contract/contract/listDic", "contractRelatedId");
-			// 合同发起部门
-			loadCrmData("", "");
 			// 合同类型
 			loadDic("contract_Contract_Type", "contractType");
 			// 合同种类
@@ -57,6 +55,7 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+	alert($('#signupForm').serialize());
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -81,132 +80,132 @@ function save() {
 	});
 
 }
-// function validateRule() {
-// 	var icon = "<i class='fa fa-times-circle'></i> ";
-// 	$("#signupForm").validate({
-// 		ignore: ":hidden:not(select)",
-// 			rules : {
-// 				customerId : {
-// 					required : true
-// 				},
-// 				businessId : {
-// 					required : true,
-// 				},
-// 				projectId : {
-// 					required : true,
-// 				},
-// 				contractApplicantName : {
-// 					required : true
-// 				},
-// 				deptId : {
-// 					required : true
-// 				},
-// 				jobId : {
-// 					required : true,
-// 				},
-// 				contractName : {
-// 					required : true,
-// 					rangelength:[1,50]
-// 				},
-// 				contractBuildCompany : {
-// 					required : true,
-// 					rangelength:[1,50]
-// 				},
-// 				contractType : {
-// 					required: true,
-// 				},
-// 				contractCategory : {
-// 					required: true,
-// 				},
-// 				contractTotalPrice : {
-// 					required: true,
-// 					rangelength:[1,16]
-// 				},
-// 				contractDept : {
-// 					required: true,
-// 				},
-// 				contractApplicant : {
-// 					required: true,
-// 				},
-// 				contractDraftPerson : {
-// 					required: true,
-// 					rangelength:[1,6]
-// 				},
-// 				contractSales : {
-// 					required: true,
-// 				},
-// 				contractCommitTime : {
-// 					required: true,
-// 				},
-// 				contractAttachment : {
-// 					required: true,
-// 				},
-// 				contractRemarks : {
-// 					rangelength:[1,200]
-// 				}
-// 			},
-// 			messages : {
-// 				customerId : {
-// 					required : icon + "客户名称不能为空"
-// 				},
-// 				businessId : {
-// 					required : icon + "业务名称不能为空",
-// 				},
-// 				projectId : {
-// 					required : icon + "项目名称不能为空",
-// 				},
-// 				contractApplicantName : {
-// 					required : icon + "申请人姓名不能为空"
-// 				},
-// 				deptId : {
-// 					required : icon + "所在部门不能为空"
-// 				},
-// 				jobId : {
-// 					required : icon + "岗位不能为空",
-// 				},
-// 				contractName : {
-// 					required : icon + "合同名称不能为空",
-// 					rangelength: icon + "请输入一个长度介于 1 和 50 之间的字符串"
-// 				},
-// 				contractBuildCompany : {
-// 					required : icon + "建设单位不能为空",
-// 					rangelength: icon + "请输入一个长度介于 1 和 50 之间的字符串"
-// 				},
-// 				contractType : {
-// 					required : icon + "合同类型不能为空",
-// 				},
-// 				contractCategory : {
-// 					required : icon + "合同种类不能为空",
-// 				},
-// 				contractTotalPrice : {
-// 					required : icon + "合同总金额不能为空",
-// 					rangelength: icon + "请输入一个长度介于 1 和 16 之间的字符串"
-// 				},
-// 				contractDept : {
-// 					required : icon + "合同发起部门不能为空",
-// 				},
-// 				contractApplicant : {
-// 					required : icon + "业务发起人不能为空",
-// 				},
-// 				contractDraftPerson : {
-// 					required : icon + "合同拟定人不能为空",
-// 					rangelength: icon + "请输入一个长度介于 1 和 6 之间的字符串"
-// 				},
-// 				contractSales : {
-// 					required : icon + "销售负责人不能为空",
-// 				},
-// 				contractCommitTime : {
-// 					required : icon + "提交评审时间不能为空"
-// 				},
-// 				contractAttachment : {
-// 					required : icon + "附件不能为空"
-// 				},
-// 				contractRemarks : {
-// 					rangelength: icon + "请输入一个长度介于 1 和 200 之间的字符串"
-// 				}
-// 			}
-// 	})
-// }
+ function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#signupForm").validate({
+		ignore: ":hidden:not(select)",
+			rules : {
+				customerId : {
+					required : true
+				},
+				businessId : {
+					required : true,
+				},
+				projectId : {
+					required : true,
+				},
+				contractApplicantName : {
+					required : true
+				},
+				deptId : {
+					required : true
+				},
+				jobId : {
+					required : true,
+				},
+				contractName : {
+					required : true,
+					rangelength:[1,50]
+				},
+				contractBuildCompany : {
+					required : true,
+					rangelength:[1,50]
+				},
+				contractType : {
+					required: true,
+				},
+				contractCategory : {
+					required: true,
+				},
+				contractTotalPrice : {
+					required: true,
+					rangelength:[1,16]
+				},
+				contractDept : {
+					required: true,
+				},
+				contractApplicant : {
+					required: true,
+				},
+				contractDraftPerson : {
+					required: true,
+					rangelength:[1,6]
+				},
+				contractSales : {
+					required: true,
+				},
+				contractCommitTime : {
+					required: true,
+				},
+				contractAttachment : {
+					required: true,
+				},
+				contractRemarks : {
+					rangelength:[1,200]
+				}
+			},
+			messages : {
+				customerId : {
+					required : icon + "客户名称不能为空"
+				},
+				businessId : {
+					required : icon + "业务名称不能为空",
+				},
+				projectId : {
+					required : icon + "项目名称不能为空",
+				},
+				contractApplicantName : {
+					required : icon + "申请人姓名不能为空"
+				},
+				deptId : {
+					required : icon + "所在部门不能为空"
+				},
+				jobId : {
+					required : icon + "岗位不能为空",
+				},
+				contractName : {
+					required : icon + "合同名称不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 50 之间的字符串"
+				},
+				contractBuildCompany : {
+					required : icon + "建设单位不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 50 之间的字符串"
+				},
+				contractType : {
+					required : icon + "合同类型不能为空",
+				},
+				contractCategory : {
+					required : icon + "合同种类不能为空",
+				},
+				contractTotalPrice : {
+					required : icon + "合同总金额不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 16 之间的字符串"
+				},
+				contractDept : {
+					required : icon + "合同发起部门不能为空",
+				},
+				contractApplicant : {
+					required : icon + "业务发起人不能为空",
+				},
+				contractDraftPerson : {
+					required : icon + "合同拟定人不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 6 之间的字符串"
+				},
+				contractSales : {
+					required : icon + "销售负责人不能为空",
+				},
+				contractCommitTime : {
+					required : icon + "提交评审时间不能为空"
+				},
+				contractAttachment : {
+					required : icon + "附件不能为空"
+				},
+				contractRemarks : {
+					rangelength: icon + "请输入一个长度介于 1 和 200 之间的字符串"
+				}
+			}
+	})
+}
 /*
  * @param 主表ID
  * 加载可编辑列表公共方法*/
@@ -295,7 +294,9 @@ function removeRow(deleteIndex,mark){
         $('#reportTable2').bootstrapTable('removeRow', deleteIndex);
     }
 }
-var openDept = function(){
+var currentFiled = "";
+var openDept = function(currentFiledparam){
+	currentFiled = currentFiledparam;
 	layer.open({
 		type:2,
 		title:"选择部门",
@@ -303,9 +304,15 @@ var openDept = function(){
 		content:"/system/sysDept/treeView"
 	})
 }
-function loadDept( deptId,deptName){
-	$("#deptId").val(deptId);
-	$("#employeeDept").val(deptName);
+function loadDept( deptId,employeeDept){
+	if (currentFiled == "deptId") {
+		$("#deptId").val(deptId);
+		$("#deptName").val(employeeDept);
+	}
+	if (currentFiled == "contractDept") {
+		$("#contractDept").val(deptId);
+		$("#contractDeptName").val(employeeDept);
+	}
 }
 function datetimepicker() {
 	// 预计开具发票时间

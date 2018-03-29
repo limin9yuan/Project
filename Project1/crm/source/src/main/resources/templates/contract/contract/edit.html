@@ -23,7 +23,7 @@
 							<div id="myTabContent" class="tab-content">
 								<div class="tab-pane fade in active" id="basic">
 									<div class="form-group">
-										<label class="col-sm-2 control-label">客户名称：</label>
+										<label class="col-sm-2 control-label">客户名称：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="customerId"
 												id="customerId" class="form-control chosen-select"
@@ -31,7 +31,7 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-										<label class="col-sm-2 control-label">业务名称：</label>
+										<label class="col-sm-2 control-label">业务名称：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="businessId"
 												id="businessId" class="form-control chosen-select"
@@ -41,7 +41,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">项目名称：</label>
+										<label class="col-sm-2 control-label">项目名称：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="projectId"
 												id="projectId" class="form-control chosen-select"
@@ -49,7 +49,7 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-										<label class="col-sm-2 control-label">申请人姓名：</label>
+										<label class="col-sm-2 control-label">申请人姓名：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="contractApplicantName"
 												id="contractApplicantName" class="form-control chosen-select"
@@ -59,14 +59,14 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">所在部门：</label>
+										<label class="col-sm-2 control-label">所在部门：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input id="deptId" name="deptId" class="hidden">
-											<input id="employeeDept" name="employeeDept" class="form-control"
-												type="text" style="cursor: pointer;"
-												onclick="openDept()" readonly="readonly" placeholder="所属部门">
+											<input id="deptId" name="deptId" class="hidden"> <input
+												id="deptName" name="deptName" class="form-control"
+												type="text" style="cursor: pointer;" onclick="openDept('deptId')"
+												readonly="readonly" placeholder="所属部门">
 										</div>
-										<label class="col-sm-2 control-label">岗位：</label>
+										<label class="col-sm-2 control-label">岗位：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="jobId" id="jobId"
 												class="form-control chosen-select" tabindex="2"
@@ -76,19 +76,19 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">合同名称：</label>
+										<label class="col-sm-2 control-label">合同名称：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<input id="contractName" name="contractName"
 												class="form-control" type="text">
 										</div>
-										<label class="col-sm-2 control-label">建设单位：</label>
+										<label class="col-sm-2 control-label">建设单位：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<input id="contractBuildCompany" name="contractBuildCompany"
 												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">合同类型：</label>
+										<label class="col-sm-2 control-label">合同类型：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="contractType"
 												id="contractType" class="form-control chosen-select"
@@ -96,7 +96,7 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-										<label class="col-sm-2 control-label">合同种类：</label>
+										<label class="col-sm-2 control-label">合同种类：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="contractCategory"
 												id="contractCategory" class="form-control chosen-select"
@@ -106,22 +106,21 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">合同总金额：</label>
+										<label class="col-sm-2 control-label">合同总金额：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<input id="contractTotalPrice" name="contractTotalPrice"
 												class="form-control" type="text">
 										</div>
-										<label class="col-sm-2 control-label">合同发起部门：</label>
+										<label class="col-sm-2 control-label">合同发起部门：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<select data-placeholder="请选择" name="contractDept"
-												id="contractDept" class="form-control chosen-select"
-												tabindex="2" style="width: 100%">
-												<option value="">请选择</option>
-											</select>
+											<input id="contractDept" name="contractDept" class="hidden"> <input
+												id="contractDeptName" name="contractDeptName" class="form-control" type="text"
+												style="cursor: pointer;" onclick="openDept('contractDept')"
+												readonly="readonly" placeholder="合同发起部门">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">业务发起人：</label>
+										<label class="col-sm-2 control-label">业务发起人：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="contractApplicant"
 												id="contractApplicant" class="form-control chosen-select"
@@ -129,14 +128,14 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-										<label class="col-sm-2 control-label">合同拟定人：</label>
+										<label class="col-sm-2 control-label">合同拟定人：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<input id="contractDraftPerson" name="contractDraftPerson"
 												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">销售负责人：</label>
+										<label class="col-sm-2 control-label">销售负责人：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="contractSales"
 												id="contractSales" class="form-control chosen-select"
@@ -144,7 +143,7 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-										<label class="col-sm-2 control-label">提交评审时间：</label>
+										<label class="col-sm-2 control-label">提交评审时间：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<div class="input-group date" id="contractCommitTime">
 												<input class="form-control" type="text"
@@ -156,7 +155,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">附件：</label>
+										<label class="col-sm-2 control-label">附件：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<div class="file-manager">
 												<button type="button" class="layui-btn" id="test1"
@@ -272,7 +271,7 @@
 														<i class="fa fa-plus" aria-hidden="true"></i>添加
 													</button>
 													<button
-														shiro:hasPermission="contract:receivable:batchRemove" 
+														shiro:hasPermission="contract:receivable:batchRemove"
 														type="button" class="btn  btn-danger" onclick="batchRemoveReceivable()">
 														<i class="fa fa-trash" aria-hidden="true"></i>批量删除
 													</button>
