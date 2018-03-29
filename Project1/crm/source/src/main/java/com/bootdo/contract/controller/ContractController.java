@@ -3,7 +3,6 @@ package com.bootdo.contract.controller;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +12,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bootdo.activiti.utils.ActivitiUtils;
-import com.bootdo.contract.domain.TravelDO;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bootdo.contract.domain.ContractDO;
 import com.bootdo.contract.service.ContractService;
-import com.bootdo.sales.domain.BusinessDO;
-import com.bootdo.sales.domain.RecordComplaintDO;
-import com.sun.xml.internal.ws.api.server.SDDocument;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.DictDO;
