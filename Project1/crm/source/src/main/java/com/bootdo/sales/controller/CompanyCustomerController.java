@@ -112,7 +112,7 @@ public class CompanyCustomerController  extends BaseController {
 	}
 	
 	/**
-	 * 查看
+	 * 查看联系人信息
 	 */
 	@GetMapping("/examine/{customerId}")
 	@RequiresPermissions("sales:companyCustomer:examine")
@@ -129,6 +129,7 @@ public class CompanyCustomerController  extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("sales:companyCustomer:add")
 	public R save( CompanyCustomerDO companyCustomer){
+		companyCustomer.setCustomerOperator(getUserId());
 		if(companyCustomerService.save(companyCustomer)>0){
 			return R.ok();
 		}

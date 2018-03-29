@@ -1,3 +1,4 @@
+var address = null;
 $().ready(function() {
 
 	loadDic("sales_customer_category", "customerCategory");
@@ -14,6 +15,18 @@ $().ready(function() {
 	loadCrmData("/inner/innerOrgEmployee/listDic", "customerOwner");
 	loadCrmData("/inner/innerOrgEmployee/listDic", "customerSales");
 
+	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e){		
+		 if(address==null){
+			 address = new addressResolve({
+				    proId: 'province',
+				    cityId: 'city',
+				    areaId: 'area'
+			 });
+			 address.init(); 
+		 }
+		 
+		 });
+	
 	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e) {
 		if ($("#customerHotRank option").length == 1) {
 			loadDic("sales_customer_hot_Rank", "customerHotRank");
@@ -56,6 +69,14 @@ $().ready(function() {
 		});
 	});
 	validateRule();
+	if (address == null) {
+		address = new addressResolve({
+			proId : 'province',
+			cityId : 'city',
+			areaId : 'area'
+		});
+		address.init();
+	}
 });
 
 $.validator.setDefaults({

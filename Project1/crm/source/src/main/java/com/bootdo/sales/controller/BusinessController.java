@@ -117,6 +117,17 @@ public class BusinessController extends BaseController {
 	}
 
 	/**
+	 * 查看业务信息
+	 */
+	@GetMapping("/examineB/{customerId}")
+	@RequiresPermissions("sales:companyCustomer:examineB")
+	String examineBusiness(@PathVariable("customerId") String customerId, Model model) {
+		model.addAttribute("customerId", customerId);
+		
+		return "sales/companyCustomer/examineBusiness";
+	}
+	
+	/**
 	 * 查看
 	 */
 	@GetMapping("/examine/{businessId}")

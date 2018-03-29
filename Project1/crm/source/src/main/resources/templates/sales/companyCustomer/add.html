@@ -37,25 +37,20 @@
 
 									<div class="form-group">
 
-										<label class="col-sm-1 control-label"><a
-											style="color: red;">*&nbsp;</a>省份：</label>
-										<div class="col-sm-1">
-											<input id="customerProvince" name="customerProvince"
-												class="form-control" type="text">
+										<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>企业行政区划：</label>
+										<div class="col-sm-4">
+											<select data-placeholder="省" name="province" id="province"
+												class="form-control chosen-select" tabindex="1" style="width: 32%">
+											</select> 
+											<select data-placeholder="市" name="city" id="city"
+												class="form-control chosen-select" tabindex="2" style="width: 32%">
+											</select> 
+											<select data-placeholder="区" name="area" id="area"
+												class="form-control chosen-select" tabindex="3" style="width: 32%">
+											</select>
 										</div>
-
-										<label class="col-sm-1 control-label"><a
-											style="color: red;">*&nbsp;</a>城市：</label>
-										<div class="col-sm-1">
-											<input id="customerCity" name="customerCity"
-												class="form-control" type="text">
-										</div>
-										<label class="col-sm-1 control-label"><a
-											style="color: red;">*&nbsp;</a>区县：</label>
-										<div class="col-sm-1">
-											<input id="customerCounty" name="customerCounty"
-												class="form-control" type="text">
-										</div>
+										
 										<label class="col-sm-2 control-label"><a
 											style="color: red;">*&nbsp;</a>企业名称：</label>
 										<div class="col-sm-4">
@@ -902,6 +897,7 @@
 		src="/js/appjs/sales/companyCustomer/add.js"></script>
 	<script type="text/javascript"
 		src="/js/appjs/sales/companyCustomer/competitor.js"></script>
+	<script type="text/javascript" src="/js/province.js"></script>
 	<!-- 		<script type="text/javascript" src="/js/appjs/sales/customerContact/add.js"></script> -->
 </body>
 </html>

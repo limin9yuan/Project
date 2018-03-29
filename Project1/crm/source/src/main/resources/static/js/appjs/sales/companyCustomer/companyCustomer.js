@@ -1,6 +1,11 @@
-
+	
 var prefix = "/sales/companyCustomer"
+	//联系人信息
 var prefixContact="/sales/customerContact"
+	//业务信息
+var profixBusiness="/sales/business" 
+	//项目信息
+var	prefixProject="/project/project"
 $(function() {
 	var address = new addressResolve({
 	    proId: 'province',
@@ -53,8 +58,7 @@ function load() {
 					            businessName:$('#businessName').val(),
 					            projectName:$('#projectName').val(),
 					            customerSales:$('#customerSales').val(),
-					            customerLevel:$('#customerLevel').val(),
-					        	contactName:$('#contactName').val()
+					            customerLevel:$('#customerLevel').val()
 					        	
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
@@ -105,14 +109,14 @@ function load() {
 //								},
 															{
 									
-									
+//									超链接---------------------------------------------------------------------
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
 										if(row.contactName!=null ){
-										var e = '<a href="#" mce_href="#"  onclick="examine(\'' + row.customerId+ '\')">'+ row.contactName+'</a> ';
-										return  e ;
+										var a = '<a href="#" mce_href="#"  onclick="examine(\'' + row.customerId+ '\')">'+ row.contactName+'</a> ';
+										return  a ;
 										}
 									},
 									
@@ -120,14 +124,31 @@ function load() {
 									title : '联系人姓名' 
 								},
 															{
+									title : '操作',
+									field : 'id',
 									align : 'center',
-									field : 'businessName', 
+									formatter : function(value, row, index) {
+										if(row.businessName!=null ){
+										var b = '<a href="#" mce_href="#"  onclick="examineB(\'' + row.customerId+ '\')">'+ row.businessName+'</a> ';
+										return  b ;
+										}
+									},
+//									field : 'businessName', 
 									title : '业务信息' 
 								},
 															{
+									title : '操作',
+									field : 'id',
 									align : 'center',
-									field : 'projectName', 
+									formatter : function(value, row, index) {
+										if(row.projectName!=null ){
+										var c = '<a href="#" mce_href="#"  onclick="examineP(\'' + row.customerId+ '\')">'+ row.projectName+'</a> ';
+										return  c ;
+										}
+									},
+//									field : 'projectName', 
 									title : '项目信息' 
+//										超链接---------------------------------------------------------------
 								},
 								               {
 									align : 'center',
@@ -210,18 +231,40 @@ function reLoad() {
 }
 
 
-//————查看
+//————查看联系人信息
 function examine(id) {
-	alert($('#contactName').val())
 	parent.layer.open({
 		type : 2,
-		title : '查看',
+		title : '查看联系人',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '70%', '70%' ],
 		content : prefixContact + '/examine/' + id 
 	});
 }
+//---查看业务信息
+function examineB(id) {
+	parent.layer.open({
+		type : 2,
+		title : '查看业务信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '70%', '70%' ],
+		content : profixBusiness + '/examineB/' + id 
+	});
+}
+//---查看项目信息
+function examineP(id) {
+	parent.layer.open({
+		type : 2,
+		title : '查看项目信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '70%', '70%' ],
+		content : prefixProject +'/examineP/' + id 
+	});
+}
+
 
 function add() {
 	layer.open({

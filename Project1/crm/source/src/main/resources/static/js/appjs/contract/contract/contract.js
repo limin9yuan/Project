@@ -94,8 +94,8 @@ function load() {
 									field : 'contractApprovalStatus',
 									title : '合同审批状态'
 								},{
-									field : '', 
-									title : '详细信息' 
+									field : '',
+									title : '详细信息'
 								}
 											 ]
 					});
@@ -131,7 +131,7 @@ function add() {
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '95%', '95%' ],
+		area : [ '90%', '90%' ],
 		content : prefix + '/add' // iframe的url
 	});
 }

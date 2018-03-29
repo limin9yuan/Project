@@ -2,8 +2,22 @@ var prefixCompanyCustomer="/sales/companyCustomer";
 var address = null;
 var result = null;
 $().ready(function() {
-	
-	companyCustomer_edit();
+			$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
+				if (address == null) {
+					address = new addressResolve({
+						proId : 'province',
+						cityId : 'city',
+						areaId : 'area'
+					}, {
+						proId : result.province,
+						cityId : 'city',
+						areaId : 'arae'
+					});
+					address.init();
+				}
+
+			});
+		
 	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e){
 		 if($("#customerHotRank option").length==0){
 			
@@ -16,6 +30,7 @@ $().ready(function() {
 		 if($("#customerContactSta option").length==0){
 			 loadDicValue("sales_customer_contact_Sta","customerContactSta",result.customerContactSta);
 		 }
+		
 	    
 	 });
 	$('#myTab a[href="#Gegner"]').on('shown.bs.tab', function(e) {
@@ -50,25 +65,16 @@ $().ready(function() {
 //            }
 //        });
 //    });
-	 $('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e){		
-//	 $('#lastBtn').attr("disabled",false);
-//	 $('#nextBtn').attr("disabled",false);	
-	 if(address==null){
-		 address = new addressResolve({
-			    proId: 'customerProvince',
-			    cityId: 'customerCity',
-			    areaId: 'customerCounty'
-		 },{
-			 proId:result.customerProvince,
-			 cityId:'customerCity',
-			 areaId:'customerCounty'
-		 });
-		 address.init(); 
-	 }
-	 
-	 });
 	validateRule();
-	
+	companyCustomer_edit();
+	if (address == null) {
+		address = new addressResolve({
+			proId : 'province',
+			cityId : 'city',
+			areaId : 'area'
+		});
+		address.init();
+	}
 });
 
 
@@ -438,17 +444,17 @@ function companyCustomer_edit(){
 
 function nextStepThis(tabId,totalStep,lastBtn,nextBtn){
 	nextStep(tabId,totalStep,lastBtn,nextBtn);
-//	if(address ==null ){
-//			if( $('#'+tabId+' li:eq(2)').attr("class")=='active'){
-//				address = new addressResolve({
-//				    proId: 'province',
-//				    cityId: 'city',
-//				    areaId: 'area'
-//				  });
-//				address.init(); 
-//			}
+	if(address ==null ){
+			if( $('#'+tabId+' li:eq(2)').attr("class")=='active'){
+				address = new addressResolve({
+				    proId: 'province',
+				    cityId: 'city',
+				    areaId: 'area'
+				  });
+				address.init(); 
+			}
 		
-//	}
+	}
 
 }
 

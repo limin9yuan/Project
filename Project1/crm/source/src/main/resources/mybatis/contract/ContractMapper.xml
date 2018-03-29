@@ -106,7 +106,7 @@
 		  		</where>
 	</select>
 	<insert id="save" parameterType="com.bootdo.contract.domain.ContractDO">
-		insert  <!-- ingore --> into contract
+		insert into contract
 		(
 			`Customer_ID`, 
 			`Business_ID`, 

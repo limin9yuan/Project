@@ -70,79 +70,79 @@ function load() {
 									}
 								},
 																{
-									field : 'recordId', 
-									title : '行动记录编号' 
+									field : 'recordId',
+									title : '行动记录编号'
 								},{
-									field : 'recordCreateTime', 
-									title : '首次保存时间' 
+									field : 'recordCreateTime',
+									title : '首次保存时间'
 								},{
-									field : 'recordOperateTime', 
-									title : '最后一次保存时间' 
+									field : 'recordOperateTime',
+									title : '最后一次保存时间'
 								},{
-									field : 'recordCustomerName', 
-									title : '客户名称' 
+									field : 'recordCustomerName',
+									title : '客户名称'
 								},{
-									field : 'recordBusinessName', 
-									title : '业务名称' 
+									field : 'recordBusinessName',
+									title : '业务名称'
 								},{
-									field : 'projectId', 
-									title : '项目编号' 
+									field : 'projectId',
+									title : '项目编号'
 								},{
-									field : 'recordProjectName', 
-									title : '项目名称' 
+									field : 'recordProjectName',
+									title : '项目名称'
 								},{
-									field : 'recordName', 
-									title : '行动主题' 
+									field : 'recordName',
+									title : '行动主题'
 								},{
-									field : 'recordPhase', 
-									title : '阶段' 
+									field : 'recordPhase',
+									title : '阶段'
 								},{
-									field : 'recordExpenseActual', 
-									title : '实际费用' 
+									field : 'recordExpenseActual',
+									title : '实际费用'
 								},{
-									field : 'recordAttachment', 
-									title : '附件' 
+									field : 'recordAttachment',
+									title : '附件'
 								},{
-									field : 'recordExecutorName', 
-									title : '执行人' 
+									field : 'recordExecutorName',
+									title : '执行人'
 								},{
-									field : 'recordExecuteStatus', 
-									title : '执行状态' 
+									field : 'recordExecuteStatus',
+									title : '执行状态'
 								}/*{
-									field : 'recordBeginDate', 
-									title : '实际执行开始时间' 
+									field : 'recordBeginDate',
+									title : '实际执行开始时间'
 								},{
-									field : 'recordEndDate', 
-									title : '实际执行结束时间' 
+									field : 'recordEndDate',
+									title : '实际执行结束时间'
 								}/*
-																
+
 																{
-									field : 'recordRemarks', 
-									title : '备注' 
+									field : 'recordRemarks',
+									title : '备注'
 								},
 																{
-									field : 'recordOperator', 
-									title : '操作人' 
+									field : 'recordOperator',
+									title : '操作人'
 								},
 																{
-									field : 'recordOperateTime', 
-									title : '修改时间' 
+									field : 'recordOperateTime',
+									title : '修改时间'
 								},
 																{
-									field : 'recordCreator', 
-									title : '创建人' 
+									field : 'recordCreator',
+									title : '创建人'
 								},
 																{
-									field : 'recordCreateTime', 
-									title : '创建时间' 
+									field : 'recordCreateTime',
+									title : '创建时间'
 								},
 																{
-									field : 'recordSaleOpportunity', 
-									title : '销售机会' 
+									field : 'recordSaleOpportunity',
+									title : '销售机会'
 								},
 																{
-									field : 'recordExpenseCategory', 
-									title : '费用类型' 
+									field : 'recordExpenseCategory',
+									title : '费用类型'
 								},*/
 																 ]
 					});
@@ -174,7 +174,7 @@ function see(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
-		content : prefix + '/see/' + id 
+		content : prefix + '/see/' + id
 	});
 }
 function add() {

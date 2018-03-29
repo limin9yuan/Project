@@ -74,15 +74,6 @@ public class ContractDO implements Serializable {
 	//流程任务ID
 	private String taskId;
 	//审批操作
-
-	public void setTaskId(String taskId) {
-		this.taskId = taskId;
-	}
-
-	public void setTaskAction(String taskAction) {
-		this.taskAction = taskAction;
-	}
-
 	private String taskAction;
 
 	public String getTaskId() {
@@ -91,6 +82,14 @@ public class ContractDO implements Serializable {
 
 	public String getTaskAction() {
 		return taskAction;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
+	public void setTaskAction(String taskAction) {
+		this.taskAction = taskAction;
 	}
 
 	public String getContractOperatorName() {

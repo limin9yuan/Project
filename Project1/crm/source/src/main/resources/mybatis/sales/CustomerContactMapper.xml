@@ -35,7 +35,6 @@
 		  		  <if test="contactTitle != null and contactTitle != ''"> and Contact_Title = #{contactTitle} </if>
 		  		  <if test="contactResponsibility != null and contactResponsibility != ''"> and Contact_Responsibility = #{contactResponsibility} </if>
 		  		  <if test="contactRole != null and contactRole != ''"> and Contact_Role = #{contactRole} </if>
-		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
 		  		  <if test="contactDept != null and contactDept != ''"> and Contact_Dept = #{contactDept} </if>
 		  		  <if test="contactJob != null and contactJob != ''"> and Contact_Job = #{contactJob} </if>
 		  		  <if test="contactMaritalStatus != null and contactMaritalStatus != ''"> and Contact_Marital_Status = #{contactMaritalStatus} </if>
@@ -90,8 +89,12 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from sales_customer_contact
-		 <where>  
+		select count(*) 
+		from sales_customer_contact a
+		left join sys_user u on a.Contact_Operator = u.user_id
+		left join sales_company_customer c on a.Customer_ID=c.Customer_ID
+		
+        <where>  
 		  		  <if test="contactId != null and contactId != ''"> and Contact_ID = #{contactId} </if>
 		  		  <if test="contactName != null and contactName != ''"> and Contact_Name = #{contactName} </if>
 		  		  <if test="contactSex != null and contactSex != ''"> and Contact_Sex = #{contactSex} </if>
@@ -99,7 +102,6 @@
 		  		  <if test="contactTitle != null and contactTitle != ''"> and Contact_Title = #{contactTitle} </if>
 		  		  <if test="contactResponsibility != null and contactResponsibility != ''"> and Contact_Responsibility = #{contactResponsibility} </if>
 		  		  <if test="contactRole != null and contactRole != ''"> and Contact_Role = #{contactRole} </if>
-		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
 		  		  <if test="contactDept != null and contactDept != ''"> and Contact_Dept = #{contactDept} </if>
 		  		  <if test="contactJob != null and contactJob != ''"> and Contact_Job = #{contactJob} </if>
 		  		  <if test="contactMaritalStatus != null and contactMaritalStatus != ''"> and Contact_Marital_Status = #{contactMaritalStatus} </if>
@@ -129,6 +131,16 @@
 		  		  <if test="contactRemarks != null and contactRemarks != ''"> and Contact_Remarks = #{contactRemarks} </if>
 		  		  <if test="contactOperator != null and contactOperator != ''"> and Contact_Operator = #{contactOperator} </if>
 		  		  <if test="contactOperateTime != null and contactOperateTime != ''"> and Contact_Operate_Time = #{contactOperateTime} </if>
+		  		  
+		  		  <if test="province != null and province != ''"> and c.Customer_Province = #{province} </if>
+		  		  <if test="city != null and city != ''"> and c.Customer_City = #{city} </if>
+		  		  <if test="area != null and area != ''"> and c.Customer_County = #{area} </if>
+		  		  
+		  		  <if test="customerName != null and customerName != ''"> and c.customer_Name like #{customerName} </if>
+		  		  
+		  		  <if test="contactName !=null and contactName !=''"> and a.Contact_Name =#{contactName}</if>
+		  		  
+		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID like #{customerId} </if>
 		  		</where>
 	</select>
 	 

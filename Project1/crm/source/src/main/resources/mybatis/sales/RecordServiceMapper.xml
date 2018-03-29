@@ -140,7 +140,7 @@
 		(
 			#{serviceId}, 
 			#{projectId}, 
-			#{custormerId}, 
+			#{custormerId},
 			#{serviceProduct}, 
 			#{serviceName}, 
 			#{serviceProblemTime}, 

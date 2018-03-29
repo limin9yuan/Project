@@ -1,6 +1,6 @@
 $().ready(function() {
 	loadCrmData("/project/project/listDic","projectId");
-	loadCrmData("/sales/companyCustomer/listDic","customerId");
+	loadCrmData("/sales/companyCustomer/listDic","custormerId");
 	loadDic("sales_record_service_Service_Feedback_Type","serviceFeedbackType");
 	validateRule();
 	datetimepicker();

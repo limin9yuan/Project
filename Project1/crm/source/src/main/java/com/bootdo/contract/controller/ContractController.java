@@ -244,32 +244,32 @@ public class ContractController extends BaseController {
 	 * ********************** 审批流程相关  *********************************
 	 */
 	//申请页面
-	@GetMapping("/form")
-	@RequiresPermissions("contract:contract:add")
-	String form(){
-		return "contract/travel/add";
-	}
-	//审批处理页面
-	@GetMapping("/form/{taskId}")
-	@RequiresPermissions("contract/contract/add")
-	String formTask(@PathVariable("taskId") String taskId,Model model){
-		//取得流程表单数据
-		ContractDO contract = contractService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
-		if(contract!=null){
-			model.addAttribute("travel", contract);
-			//model.addAttribute("taskId",taskId);
-		}
-		return "contract/contract/edit";
-	}
-
-
-	//审批处理保存
-	@ResponseBody
-	@RequestMapping("/form/update")
-	@RequiresPermissions("contract:contract:edit")
-	public R formUpdate( ContractDO contract){
-
-		contractService.formUpdate(contract);
-		return R.ok();
-	}
+//	@GetMapping("/form")
+//	@RequiresPermissions("contract:contract:add")
+//	String form(){
+//		return "contract/contract/add";
+//	}
+//	//审批处理页面
+//	@GetMapping("/form/{taskId}")
+//	@RequiresPermissions("contract/contract/add")
+//	String formTask(@PathVariable("taskId") String taskId,Model model){
+//		//取得流程表单数据
+//		ContractDO contract = contractService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+//		if(contract!=null){
+//			model.addAttribute("travel", contract);
+//			//model.addAttribute("taskId",taskId);
+//		}
+//		return "contract/contract/edit";
+//	}
+//
+//
+//	//审批处理保存
+//	@ResponseBody
+//	@RequestMapping("/form/update")
+//	@RequiresPermissions("contract:contract:edit")
+//	public R formUpdate( ContractDO contract){
+//
+//		contractService.formUpdate(contract);
+//		return R.ok();
+//	}
 }

@@ -44,7 +44,7 @@ $().ready(function() {
 			}
 		});
 	});
-	validateRule();
+	// validateRule();
 	datetimepicker();
 	Contract_ajax();
 });
