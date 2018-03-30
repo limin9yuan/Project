@@ -1,8 +1,5 @@
 var prefixpurchase = "/approval/purchase"
 $().ready(function() {
-	loadCrmDataValue("/system/sysDept/listDic","purchaseDept");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","purchasePerson");
-	loadCrmDataValue("/project/project/listDic","projectId");
 	validateRule();
 	datetimepicker();
 	purchaseMapper_edit();
@@ -210,14 +207,11 @@ function purchaseMapper_edit(){
 			$("input[name='purchaseApprovalStatus']").val(result.purchaseApprovalStatus);
 			$("textarea[name='purchaseRemarks']").val(result.purchaseRemarks);
 			
-			$("select[name='projectId']").val(result.projectId);
-			$("select[name='projectId']").trigger("chosen:updated");
-			$("select[name='purchaseDept']").val(result.purchaseDept);
-			$("select[name='purchaseDept']").trigger("chosen:updated");
-			$("select[name='purchasePerson']").val(result.purchasePerson);
-			$("select[name='purchasePerson']").trigger("chosen:updated");
-			$("select[name='projectGategory']").val(result.projectGategory);
-			$("select[name='projectGategory']").trigger("chosen:updated");
+			//$("select[name='projectGategory']").val(result.projectGategory);
+			//$("select[name='projectGategory']").trigger("chosen:updated");
+			loadCrmDataValue("/system/sysDept/listDic","purchaseDept",result.purchaseDept);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","purchasePerson",result.purchasePerson);
+			loadCrmDataValue("/project/project/listDic","projectId",result.projectId);
 		}
 	});
 }

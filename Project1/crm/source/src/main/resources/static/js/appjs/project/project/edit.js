@@ -1,15 +1,5 @@
 var prefixproject = "/project/project"
 $().ready(function() {
-	loadDicValue("project_delivery_status","deliveryStatus");
-	loadDicValue("project_if_outSource","ifOutSource");
-	loadDicValue("project_project_gategory","projectGategory");
-	loadDicValue("project_fllow_type","fllowType");
-	loadCrmDataValue("/sales/salesProject/listDic","projectRelatedId");
-	loadCrmDataValue("/sales/companyCustomer/listDic","customerId");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectOwner");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectManager");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectSales");
-	loadCrmDataValue("/system/sysDept/listDic","deptId");
 	getProjectMenuTreeData();
 	validateRule();
 	datetimepicker();
@@ -198,22 +188,17 @@ function projectMapper_edit(){
 			$("input[name='projectOldId']").val(result.projectOldId);
 			$("textarea[name='projectDescription']").val(result.projectDescription);
 			$("textarea[name='projectRemarks']").val(result.projectRemarks);
-			$("select[name='projectRelatedId']").val(result.projectRelatedId);
-			$("select[name='projectRelatedId']").trigger("chosen:updated");
-			$("select[name='projectOwner']").val(result.projectOwner);
-			$("select[name='projectOwner']").trigger("chosen:updated");
-			$("select[name='projectManager']").val(result.projectManager);
-			$("select[name='projectManager']").trigger("chosen:updated");
-			$("select[name='projectGategory']").val(result.projectGategory);
-			$("select[name='projectGategory']").trigger("chosen:updated");
-			$("select[name='projectSales']").val(result.projectSales);
-			$("select[name='projectSales']").trigger("chosen:updated");
-			$("select[name='deliveryStatus']").val(result.deliveryStatus);
-			$("select[name='deliveryStatus']").trigger("chosen:updated");
-			$("select[name='fllowType']").val(result.fllowType);
-			$("select[name='fllowType']").trigger("chosen:updated");
-			$("select[name='projectGategory']").val(result.projectGategory);
-			$("select[name='projectGategory']").trigger("chosen:updated");
+
+			loadDicValue("project_delivery_status","deliveryStatus",result.deliveryStatus);
+			loadDicValue("project_if_outSource","ifOutSource",result.ifOutSource);
+			loadDicValue("project_project_gategory","projectGategory",result.projectGategory);
+			loadDicValue("project_fllow_type","fllowType",result.fllowType);
+			loadCrmDataValue("/sales/salesProject/listDic","projectRelatedId",result.projectRelatedId);
+			loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectOwner",result.projectOwner);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectManager",result.projectManager);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectSales",result.projectSales);
+			//loadCrmDataValue("/system/sysDept/listDic","deptId",result.deptId);
 		}
 	});
 }

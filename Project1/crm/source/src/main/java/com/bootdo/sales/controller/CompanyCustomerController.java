@@ -111,17 +111,17 @@ public class CompanyCustomerController  extends BaseController {
 	    return "sales/companyCustomer/edit";
 	}
 	
-	/**
-	 * 查看联系人信息
-	 */
-	@GetMapping("/examine/{customerId}")
-	@RequiresPermissions("sales:companyCustomer:examine")
-	String examine(@PathVariable("customerId") String customerId, Model model) {
-		model.addAttribute("customerId", customerId);
-		
-		return "sales/companyCustomer/examineContact";
-	}
-	
+//	/**
+//	 * 查看联系人信息
+//	 */
+//	@GetMapping("/examine/{customerId}")
+//	@RequiresPermissions("sales:companyCustomer:examine")
+//	String examine(@PathVariable("customerId") String customerId, Model model) {
+//		model.addAttribute("customerId", customerId);
+//		
+//		return "sales/companyCustomer/examineContact";
+//	}
+//	
 	/**
 	 * 保存
 	 */

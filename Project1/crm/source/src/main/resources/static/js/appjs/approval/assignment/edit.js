@@ -1,19 +1,5 @@
 var prefixassignment = "/approval/assignment"
-$().ready(function() {
-	loadCrmDataValue("/sales/companyCustomer/listDic","customerId");
-	loadCrmDataValue("/sales/business/listDic","businessId");
-	loadCrmDataValue("/project/project/listDic","projectId");
-	loadCrmDataValue("/inner/orgJob/listDic","jobId");
-	
-	loadDicValue("sales_project_gategory","assignmentProjectCagegory");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","assignmentPm");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","assignmentPerson");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","assignmentPrincipal");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","assignmentRecipient");
-	loadCrmDataValue("/system/sysDept/listDic","deptId");
-	loadCrmDataValue("/system/sysDept/listDic","assignmentDept");
-	loadCrmDataValue("/system/sysDept/listDic","assignmentRecipientDept");
-	
+$().ready(function() {	
 	validateRule();
 	datetimepicker();
 	assignmentMapper_edit();
@@ -194,30 +180,20 @@ function assignmentMapper_edit(){
 			$("input[name='assignmentEndTime']").val(result.assignmentEndTime);
 			$("textarea[name='assignmentTaskDescription']").val(result.assignmentTaskDescription);
 			$("textarea[name='assignmentRemarks']").val(result.assignmentRemarks);
-			$("select[name='customerId']").val(result.customerId);
-			$("select[name='customerId']").trigger("chosen:updated");
-			$("select[name='businessId']").val(result.businessId);
-			$("select[name='businessId']").trigger("chosen:updated");
-			$("select[name='projectId']").val(result.projectId);
-			$("select[name='projectId']").trigger("chosen:updated");
-			$("select[name='assignmentProjectCagegory']").val(result.assignmentProjectCagegory);
-			$("select[name='assignmentProjectCagegory']").trigger("chosen:updated");
-			$("select[name='assignmentPm']").val(result.assignmentPm);
-			$("select[name='assignmentPm']").trigger("chosen:updated");
-			$("select[name='assignmentPerson']").val(result.assignmentPerson);
-			$("select[name='assignmentPerson']").trigger("chosen:updated");
-			$("select[name='deptId']").val(result.deptId);
-			$("select[name='deptId']").trigger("chosen:updated");
-			$("select[name='jobId']").val(result.jobId);
-			$("select[name='jobId']").trigger("chosen:updated");
-			$("select[name='assignmentDept']").val(result.assignmentDept);
-			$("select[name='assignmentDept']").trigger("chosen:updated");
-			$("select[name='assignmentPrincipal']").val(result.assignmentPrincipal);
-			$("select[name='assignmentPrincipal']").trigger("chosen:updated");
-			$("select[name='assignmentRecipientDept']").val(result.assignmentRecipientDept);
-			$("select[name='assignmentRecipientDept']").trigger("chosen:updated");
-			$("select[name='assignmentRecipient']").val(result.assignmentRecipient);
-			$("select[name='assignmentRecipient']").trigger("chosen:updated");
+			
+			loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
+			loadCrmDataValue("/sales/business/listDic","businessId",result.businessId);
+			loadCrmDataValue("/project/project/listDic","projectId",result.projectId);
+			loadCrmDataValue("/inner/orgJob/listDic","jobId",result.jobId);
+			
+			loadDicValue("sales_project_gategory","assignmentProjectCagegory",result.assignmentProjectCagegory);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","assignmentPm",result.assignmentPm);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","assignmentPerson",result.assignmentPerson);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","assignmentPrincipal",result.assignmentPrincipal);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","assignmentRecipient",result.assignmentRecipient);
+			loadCrmDataValue("/system/sysDept/listDic","deptId",result.deptId);
+			loadCrmDataValue("/system/sysDept/listDic","assignmentDept",result.assignmentDept);
+			loadCrmDataValue("/system/sysDept/listDic","assignmentRecipientDept",result.assignmentRecipientDept);
 		}
 	});
 }

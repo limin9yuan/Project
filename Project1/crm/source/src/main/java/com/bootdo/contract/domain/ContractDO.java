@@ -43,13 +43,13 @@ public class ContractDO implements Serializable {
 	//销售负责人
 	private String contractSales;
 	//提交评审时间
-	private Date contractCommitTime;
+	private String contractCommitTime;
 	//关联合同编号
 	private String contractRelatedId;
 	//发票类型
 	private String contractInvoiceType;
 	//预计开具发票时间
-	private Date contractInvoiceTime;
+	private String contractInvoiceTime;
 	//硬件设备明细表
 	private String contractHardwareList;
 	//软件功能列表
@@ -257,13 +257,13 @@ public class ContractDO implements Serializable {
 	/**
 	 * 设置：提交评审时间
 	 */
-	public void setContractCommitTime(Date contractCommitTime) {
+	public void setContractCommitTime(String contractCommitTime) {
 		this.contractCommitTime = contractCommitTime;
 	}
 	/**
 	 * 获取：提交评审时间
 	 */
-	public Date getContractCommitTime() {
+	public String getContractCommitTime() {
 		return contractCommitTime;
 	}
 	/**
@@ -293,13 +293,13 @@ public class ContractDO implements Serializable {
 	/**
 	 * 设置：预计开具发票时间
 	 */
-	public void setContractInvoiceTime(Date contractInvoiceTime) {
+	public void setContractInvoiceTime(String contractInvoiceTime) {
 		this.contractInvoiceTime = contractInvoiceTime;
 	}
 	/**
 	 * 获取：预计开具发票时间
 	 */
-	public Date getContractInvoiceTime() {
+	public String getContractInvoiceTime() {
 		return contractInvoiceTime;
 	}
 	/**

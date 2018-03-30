@@ -1,6 +1,6 @@
 var prefixmoduleCategory = "/project/moduleCategory"
 $().ready(function() {
-	loadCrmDataValue("/project/productCategory/listDic","productId");
+	//loadCrmDataValue("/project/productCategory/listDic","productId");
 	layui.use('upload', function () {
         var upload = layui.upload;
         //执行实例
@@ -103,8 +103,8 @@ function moduleCategoryMapper_edit(){
 			$("input[name='moduleAttachment']").val(result.moduleAttachment);
 			$("textarea[name='moduleDescription']").val(result.moduleDescription);
 			$("textarea[name='moduleRemark']").val(result.moduleRemark);
-			$("select[name='productId']").val(result.productId);
-			$("select[name='productId']").trigger("chosen:updated");
+			
+			loadCrmDataValue("/project/productCategory/listDic","productId",result.productId);
 		}
 	});
 }

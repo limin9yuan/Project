@@ -347,7 +347,7 @@ public class ContractServiceImpl implements ContractService {
 					// 提交评审时间
 					String ContractCommitTime = "";
 					if (report.getContractCommitTime() != null) {
-						Date getContractCommitTime = report.getContractCommitTime();
+						String getContractCommitTime = report.getContractCommitTime();
 						ContractCommitTime = sdf.format(getContractCommitTime);
 					}
 					hssfRow.createCell(14).setCellValue(ContractCommitTime);
@@ -366,7 +366,7 @@ public class ContractServiceImpl implements ContractService {
 					// 预计开具发票时间
 					String ContractInvoiceTime = "";
 					if (report.getContractInvoiceTime() != null) {
-						Date getContractInvoiceTime1 = report.getContractInvoiceTime();
+						String getContractInvoiceTime1 = report.getContractInvoiceTime();
 						ContractInvoiceTime = sdf.format(getContractInvoiceTime1);
 					}
 					hssfRow.createCell(17).setCellValue(ContractInvoiceTime);

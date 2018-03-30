@@ -125,7 +125,7 @@ public class ContractController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("contract:contract:edit")
 	public R update(ContractDO contract) {
-		contract.setContractId(getUserId());
+		contract.setContractOperator(Long.toString(getUserId()));
 		contractService.update(contract);
 		return R.ok();
 	}

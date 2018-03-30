@@ -110,8 +110,7 @@ function load() {
 															{
 									
 //									超链接---------------------------------------------------------------------
-									title : '操作',
-									field : 'id',
+								
 									align : 'center',
 									formatter : function(value, row, index) {
 										if(row.contactName!=null ){
@@ -124,8 +123,7 @@ function load() {
 									title : '联系人姓名' 
 								},
 															{
-									title : '操作',
-									field : 'id',
+									
 									align : 'center',
 									formatter : function(value, row, index) {
 										if(row.businessName!=null ){
@@ -137,8 +135,7 @@ function load() {
 									title : '业务信息' 
 								},
 															{
-									title : '操作',
-									field : 'id',
+									
 									align : 'center',
 									formatter : function(value, row, index) {
 										if(row.projectName!=null ){

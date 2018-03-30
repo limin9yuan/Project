@@ -89,7 +89,7 @@ function load() {
 									field : 'recordTotalPrice', 
 									title : '增补总金额' 
 								},{
-									field : 'recordSales', 
+									field : 'recordSalesName', 
 									title : '销售负责人' 
 								},{
 									field : 'recordCommitTime', 
@@ -189,22 +189,22 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
-	layer.open({
+	parent.layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '95%' ],
+		area : [ '950px', '95%' ],
 		content : prefix + '/add' // iframe的url
 	});
 }
 function edit(id) {
-	layer.open({
+	parent.layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '95%' ],
+		area : [ '950px', '95%' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
 }

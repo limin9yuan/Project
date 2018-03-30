@@ -318,6 +318,9 @@ function companyCustomer_edit(){
 			loadDicValue("sales_customer_sourcee","customerSource",result.customerSource);//来源
 			loadDicValue("sales_customer_credit_Rank","customerCreditRank",result.customerCreditRank);//信用等级
 			loadDicValue("sales_customer_potential","customerPotential",result.customerPotential);//客户潜力
+			loadDicValue("sales_customer_Province","customerProvince",result.province);//省
+			loadDicValue("sales_customer_City","customerCity",result.city);//市
+			loadDicValue("sales_customer_County","customerCounty",result.area);//区
 			loadDicValue("sales_customer_visit_Mode","customerVisitMode",result.customerVisitMode);//拜访交通方式
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic", "customerOwner",result.customerOwner);//客户所有者
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic", "customerSales",result.customerSales);//销售负责人

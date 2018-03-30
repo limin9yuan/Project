@@ -1,7 +1,7 @@
 var prefixpurchaseManagement = "/payment/purchaseManagement"
 $().ready(function() {
-	loadCrmData("/inner/innerOrgEmployee/listDic","purchasePerson");
-	loadCrmData("/sales/salesProject/listAllDic","projectId");
+	//loadCrmData("/inner/innerOrgEmployee/listDic","purchasePerson");
+	//loadCrmData("/sales/salesProject/listAllDic","projectId");
 	validateRule();
 	datetimepicker();
 	purchaseManagementMapper_edit();

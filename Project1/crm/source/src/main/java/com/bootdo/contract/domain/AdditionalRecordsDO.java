@@ -67,6 +67,8 @@ public class AdditionalRecordsDO implements Serializable {
 	private String customerId;
 	//业务编号
 	private String businessId;
+	//销售负责人名称
+	private String recordSalesName;
 	
 
 	public String getRecordOperatorName() {
@@ -332,5 +334,11 @@ public class AdditionalRecordsDO implements Serializable {
 	}
 	public void setBusinessId(String businessId) {
 		this.businessId = businessId;
+	}
+	public String getRecordSalesName() {
+		return recordSalesName;
+	}
+	public void setRecordSalesName(String recordSalesName) {
+		this.recordSalesName = recordSalesName;
 	}
 }

@@ -48,7 +48,7 @@ public class CompanyCustomerDO implements Serializable {
 	//客户状态
 	private String customerStatus;
 	//客户级别
-	private Integer customerLevel;
+	private Long customerLevel;
 	//销售阶段
 	private String customerSalePhase;
 	//客户内部阶段
@@ -399,13 +399,13 @@ public class CompanyCustomerDO implements Serializable {
 	/**
 	 * 设置：客户级别
 	 */
-	public void setCustomerLevel(Integer customerLevel) {
+	public void setCustomerLevel(Long customerLevel) {
 		this.customerLevel = customerLevel;
 	}
 	/**
 	 * 获取：客户级别
 	 */
-	public Integer getCustomerLevel() {
+	public Long getCustomerLevel() {
 		return customerLevel;
 	}
 	/**

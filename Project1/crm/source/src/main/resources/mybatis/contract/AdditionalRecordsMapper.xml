@@ -5,7 +5,7 @@
 
 	<select id="get" resultType="com.bootdo.contract.domain.AdditionalRecordsDO">
 		select `Record_ID`,`Contract_ID`,`Record_Name`,`Record_Bulid_Company`,`Record_Total_Price`,`Record_Description`,`Record_Reason`,
-		d.Employee_Name as Record_Sales,`Record_Attachment`,`Record_Related_Contract_ID`,`Record_Hardware_Equipment_List`,`Record_Software_Function_List`,`Record_Remarks`,`Record_Approval_Status`,`Record_Operator`,
+		`Record_Sales`,`Record_Attachment`,`Record_Related_Contract_ID`,`Record_Hardware_Equipment_List`,`Record_Software_Function_List`,`Record_Remarks`,`Record_Approval_Status`,`Record_Operator`,
 		date_format(Record_Commit_Time,'%Y-%m-%d') `Record_Commit_Time`,
 		date_format(Pre_Invoice_Date,'%Y-%m-%d') `Pre_Invoice_Date`,
 		`Project_ID`,`Contract_Name`
@@ -14,7 +14,7 @@
 
 	<select id="list" resultType="com.bootdo.contract.domain.AdditionalRecordsDO">
 		select `Record_ID`,a.`Contract_ID`  as `Contract_ID`,u.Employee_Name as Record_Name,`Record_Bulid_Company`,`Record_Total_Price`,`Record_Description`,`Record_Reason`,
-		d.Employee_Name as Record_Sales,`Record_Attachment`,
+		`Record_Sales`,d.Employee_Name as Record_Sales_Name,`Record_Attachment`,
 		`Record_Related_Contract_ID`,
 		b.`Contract_Type` as `Contract_Type`,
 		b.`Contract_Type` as `Contract_Category`,

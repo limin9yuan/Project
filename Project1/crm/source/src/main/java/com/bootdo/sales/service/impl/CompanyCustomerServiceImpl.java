@@ -208,7 +208,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 						} else if (j == 12) {
 							companyCustomerDO.setCustomerStatus(cellvalue);
 						} else if (j == 13) {
-							companyCustomerDO.setCustomerLevel(Integer.valueOf(cellvalue));
+							companyCustomerDO.setCustomerLevel(Long.valueOf(cellvalue));
 						} else if (j == 14) {
 							companyCustomerDO.setCustomerSalePhase(cellvalue);
 						} else if (j == 15) {

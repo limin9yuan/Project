@@ -130,8 +130,8 @@ public class ProjectController extends BaseController {
 	 * 查看项目信息
 	 */
 	@GetMapping("/examineP/{customerId}")
-	@RequiresPermissions("sales:companyCustomer:examineP")
-	String examineProject(@PathVariable("customerId") String customerId, Model model) {
+	@RequiresPermissions("project:project:project")
+	String examineP(@PathVariable("customerId") String customerId, Model model) {
 		model.addAttribute("customerId", customerId);
 		
 		return "sales/companyCustomer/examineProject";

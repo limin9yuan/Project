@@ -22,7 +22,9 @@
 		left join inner_org_employee i on a.Business_Sales = i.Employee_ID
         <where>
 		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
-		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  
+		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID = #{customerId} </if>
+		  		  
 		  		  <if test="contactId != null and contactId != ''"> and Contact_ID = #{contactId} </if>
 		  		  <if test="businessCategory != null and businessCategory != ''"> and Business_Category = #{businessCategory} </if>
 		  		  <if test="businessStatus != null and businessStatus != ''"> and Business_Status = #{businessStatus} </if>
@@ -60,7 +62,9 @@
 		left join inner_org_employee i on a.Business_Sales = i.Employee_ID
 		  <where>  
 		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
-		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  
+		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID = #{customerId} </if>
+		  		  
 		  		  <if test="contactId != null and contactId != ''"> and Contact_ID = #{contactId} </if>
 		  		  <if test="businessCategory != null and businessCategory != ''"> and Business_Category = #{businessCategory} </if>
 		  		  <if test="businessStatus != null and businessStatus != ''"> and Business_Status = #{businessStatus} </if>

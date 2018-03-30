@@ -4,7 +4,11 @@
 <mapper namespace="com.bootdo.contract.dao.ContractDeliveryDao">
 
 	<select id="get" resultType="com.bootdo.contract.domain.ContractDeliveryDO">
-		select `Delivery_ID`,`Contract_ID`,`Delivery_Person_Name`,`Delivery_Date`,`Delivery_Content`,`Delivery_Status`,`Delivery_Attachment`,`Delivery_Rmarks`,`Delivery_Operator`,`Delivery_Operate_Time` from contract_delivery where Delivery_ID = #{value}
+		select `Delivery_ID`,`Contract_ID`,`Delivery_Person_Name`,
+		`Delivery_Date`,`Delivery_Content`,`Delivery_Status`,
+		`Delivery_Attachment`,`Delivery_Rmarks`,`Delivery_Operator`,
+		`Delivery_Operate_Time`
+		from contract_delivery where Delivery_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.contract.domain.ContractDeliveryDO">

@@ -19,7 +19,7 @@ function update() {
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
-		},
+		},                                                    
 		success : function(data) {
 			if (data.code == 0) {
 				parent.layer.msg("操作成功");

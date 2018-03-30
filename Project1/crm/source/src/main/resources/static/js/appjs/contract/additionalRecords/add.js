@@ -42,15 +42,88 @@ function save() {
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
+		ignore: ":hidden:not(select)",
 		rules : {
-			name : {
+			recordName : {
+				required : true
+			},
+			jobId : {
+				required : true
+			},
+			contractName : {
+				required : true,
+				maxlength:50
+			},
+			recordBulidCompany : {
+				required : true,
+				maxlength:50
+			},
+			projectId: {
+				required : true
+			},
+			recordSales: {
+				required : true
+			},
+			recordTotalPrice : {
+				required : true,
+				maxlength:16
+			},
+			recordDescription: {
+				required : true,
+				maxlength:1000
+			},recordReason: {
+				required : true,
+				maxlength:1000
+			},recordCommitTime: {
+				required : true
+			},preInvoiceDate: {
+				required : true
+			},contractDraftPerson: {
 				required : true
 			}
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
+			recordName : {
+				required : icon + "请选择申请人姓名"
+			},
+			jobId : {
+				required : icon + "请选择岗位"
+			},
+			contractName : {
+				required : icon + "请输入合同名称",
+				maxlength:icon + "字符长度不能大于50"
+			},
+			recordBulidCompany : {
+				required : icon + "请输入建设单位",
+				maxlength:icon + "字符长度不能大于50"
+			},
+			projectId : {
+				required : icon + "请选择项目名称"
+			},
+			recordSales : {
+				required : icon + "请选择销售负责人"
+			},
+			recordTotalPrice : {
+				required : icon + "请输入增补总金额",
+				maxlength:icon + "字符长度不能大于16"
+			},
+			recordDescription : {
+				required : icon + "请输入增补内容描述",
+				maxlength:icon + "字符长度不能大于1000"
+			},
+			recordReason : {
+				required : icon + "请输入增补原因",
+				maxlength:icon + "字符长度不能大于1000"
+			},
+			recordCommitTime : {
+				required : icon + "开始时间提交评审时间"
+			},
+			preInvoiceDate : {
+				required : icon + "预计开发票时间不能为空"
+			},
+			contractDraftPerson : {
+				required : icon + "请选择合同拟定人"
+			}	
 		}
 	})
 }

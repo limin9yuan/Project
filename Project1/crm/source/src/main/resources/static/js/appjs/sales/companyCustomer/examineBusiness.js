@@ -1,5 +1,5 @@
 
-var prefix= "/sales/business"
+var profixBusiness= "/sales/business"
 
 $(function(){
 	businessName();
@@ -10,7 +10,7 @@ function businessName() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : profixBusiness + "/list", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -49,58 +49,77 @@ function businessName() {
 													{
 									checkbox : true
 								},
-//													{
-//									align : 'center',
-//									field : 'contactName', 
-//									title : '联系人姓名' 
-//								},
-//													{
-//									align : 'center',
-//									field : 'contactSex', 
-//									title : '性别' 
-//								},
-//													{
-//									align : 'center',
-//									field : 'contactMailbox', 
-//									title : '邮件地址' 
-//								},				
-//									
-//																{
-//									align : 'center',
-//									field : 'contactWorkPhoneNumber', 
-//									title : '工作电话' 
-//								},
-//																
-//																{
-//									align : 'center',
-//									field : 'contactFamilyPhoneNumber', 
-//									title : '家庭电话' 
-//								},
-//												{
-//									align : 'center',
-//									field : 'contactFax', 
-//									title : '传真' 
-//								},						{
-//									align : 'center',
-//									field : 'contactFamilyAddress', 
-//									title : '家庭住址' 
-//								},
-//																{
-//									align : 'center',
-//									field : 'contactWeixin', 
-//									title : '微信' 
-//								},
-//																{
-//									align : 'center',
-//									align : 'center',
-//									field : 'contactQq', 
-//									title : 'QQ' 
-//								},
-//																{
-//									align : 'center',
-//									field : 'contactPhoneNumber', 
-//									title : '手机' 
-//								}
+													{
+									align : 'center',
+									field : 'businessId', 
+									title : '业务编号' 
+								},
+													{
+									align : 'center',
+									field : 'customerId', 
+									title : '客户编号' 
+								},
+													{
+									align : 'center',
+									field : 'contactId', 
+									title : '联系人编号' 
+								},				
+									
+																{
+									align : 'center',
+									field : 'businessName', 
+									title : '业务名称' 
+								},
+																
+																{
+									align : 'center',
+									field : 'businessCategory', 
+									title : '业务类型' 
+								},
+												{
+									align : 'center',
+									field : 'businessStatus', 
+									title : '业务状态' 
+								},						{
+									align : 'center',
+									field : 'businessSales', 
+									title : '销售负责人' 
+								},
+																{
+									align : 'center',
+									field : 'businessOldId', 
+									title : '旧业务编号' 
+								},
+																{
+									align : 'center',
+									field : 'businessDescription', 
+									title : '业务描述' 
+								},
+																{
+									align : 'center',
+									field : 'businessRemarks', 
+									title : '备注' 
+								},
+																{
+									align : 'center',
+									field : 'contactWeixin', 
+									title : '微信' 
+								},
+																{
+									align : 'center',
+									field : 'businessOperator', 
+									title : '业务修改人(操作人)' 
+								},
+																{
+									align : 'center',
+									field : 'businessOperateTime', 
+									title : '业务修改时间' 
+								},
+																{
+									align : 'center',
+									field : 'businessCreateTime', 
+									title : '业务创建时间' 
+								}
 															 ]
 					});
 }

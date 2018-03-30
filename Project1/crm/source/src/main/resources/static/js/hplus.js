@@ -273,7 +273,7 @@ $(function () {
     // 点击上部菜单
     $('.topmenu').click(function () {
     	var val=$(this).attr("id");
-    	for(i=0;i<7;i++){
+    	for(i=0;i<8;i++){
     		if("topmenu"+i==val){
     			$("."+val).show();
     		}else{

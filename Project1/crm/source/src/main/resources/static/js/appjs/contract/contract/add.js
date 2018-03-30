@@ -55,7 +55,6 @@ $.validator.setDefaults({
 	}
 });
 function save() {
-	alert($('#signupForm').serialize());
 	$.ajax({
 		cache : true,
 		type : "POST",

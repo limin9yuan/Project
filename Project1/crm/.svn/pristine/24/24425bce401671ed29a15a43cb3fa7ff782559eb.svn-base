@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+					    <!-- tab标签 -->
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active"><a href="#basic" data-toggle="tab">基本信息</a></li>
+							<li><a href="#payment" data-toggle="tab">付款信息</a></li>
+							<li><a href="#Receivables" data-toggle="tab">收款信息</a></li>
+							<li><a href="#plan" data-toggle="tab">回款计划</a></li>
+						</ul>
+						<!-- 基本信息 -->
+						<form class="form-horizontal m-t" id="signupForm">
+						<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade in active" id="basic">
+						<!--  <input id="recordId" name="recordId" type="hidden">-->
+						<input id="recordId" name="recordId" th:value="${recordId}" class="form-control" type="text" type="hidden">	
+						    <div class="form-group">	
+								<label class="col-sm-3 control-label">申请人姓名：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								<select data-placeholder="请选择" name="recordName" id="recordName"
+										 class="form-control chosen-select" tabindex="2"
+										style="width: 100%">	  
+								</select>
+								</div>
+								<label class="col-sm-3 control-label">所在部门：<span class="mustin">*</span></label>
+									<div class="col-sm-3">
+									<input id="deptId" name="deptId" class="hidden"> 
+									<input id="employeeDept" name="employeeDept" class="form-control"
+												type="text" style="cursor: pointer;" onclick="openDept()"
+												readonly="readonly" placeholder="所属部门">
+									</div>
+						    </div>
+						    <div class="form-group">	
+						        <label class="col-sm-3 control-label">岗位：<span class="mustin">*</span></label>
+							    <div class="col-sm-3">
+							    <select data-placeholder="请选择" name="jobId" id="jobId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">	  
+								</select>	
+								</div>
+								<label class="col-sm-3 control-label">合同名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractName" name="contractName"  class="form-control" type="text">
+								</div>
+						    </div>								
+						    <div class="form-group">	
+								<label class="col-sm-3 control-label">建设单位：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="recordBulidCompany" name="recordBulidCompany" class="form-control" type="text">
+								</div>
+								<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								<select data-placeholder="请选择" name="projectId" id="projectId"
+									 class="form-control chosen-select" tabindex="2"
+										style="width: 100%">	  
+								</select>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">销售负责人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								<select data-placeholder="请选择" name="recordSales" id="recordSales"
+									class="form-control chosen-select" tabindex="2"
+										style="width: 100%">	  
+								</select>
+								</div>	
+								<label class="col-sm-3 control-label">增补总金额：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="recordTotalPrice" name="recordTotalPrice"  class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">增补内容描述：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<textarea id="recordDescription" name="recordDescription"  class="form-control" rows="3"></textarea>
+								</div>	
+								<label class="col-sm-3 control-label">增补原因：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<textarea id="recordReason" name="recordReason"  class="form-control" rows="3"></textarea>
+								</div>	
+							</div>
+							
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">提交评审时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="recordCommitTime">
+							            <input  class="form-control" type="text" name="recordCommitTime">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">关联合同编号：</label>
+								<div class="col-sm-9">
+									<select data-placeholder="请选择" name="recordRelatedContractId" id="recordRelatedContractId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">	  
+								</select>
+								</div>
+							</div>	
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">预计开发票时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="preInvoiceDate">
+							            <input  class="form-control" type="text" name="preInvoiceDate">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>
+								<label class="col-sm-3 control-label">合同拟定人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								<select data-placeholder="请选择" name="contractDraftPerson" id="contractDraftPerson"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">	  
+								</select>
+								</div>
+							</div>					
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">正文附件：</label>
+								<div class="col-sm-3">
+								<div class="file-manager">
+									<button type="button" class="layui-btn" id="test1"
+													style="width: 100%;">
+									<i class="fa fa-cloud"></i>上传文件
+									</button>
+								    <input id="recordAttachment" name="contractAttachment" type="hidden">
+								</div>
+								</div>			
+							</div>
+						    <div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<textarea id="recordRemarks" name="recordRemarks" class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+														
+							 <div class="form-group">
+								 <div class="columns pull-right col-md-2">
+										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
+								   </div>
+								   <div class="columns pull-right col-md-2">
+										<button type="submit" class="btn btn-primary columns" >提交</button>
+								</div>
+							</div>
+							</div>
+						
+						<!-- 付款信息 -->
+								<div class="tab-pane fade" id="payment">
+									<div class="ibox">
+										<div class="ibox-body">
+											<div class="fixed-table-toolbar">
+												<div class="columns pull-left">
+													<button shiro:hasPermission="contract:payable:add"
+														type="button" class="btn  btn-primary"
+														onclick="addPayable()">
+														<i class="fa fa-plus" aria-hidden="true"></i>添加
+													</button>
+													<button shiro:hasPermission="contract:payable:batchRemove"
+														type="button" class="btn  btn-danger"
+														onclick="batchRemovePayable()">
+														<i class="fa fa-trash" aria-hidden="true"></i>批量删除
+													</button>
+												</div>
+											</div>
+											<table id="payableTable" data-mobile-responsive="true">
+											</table>
+										</div>
+										<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+										<div>
+											<script type="text/javascript">
+												var s_edit_h = 'hidden';
+												var s_remove_h = 'hidden';
+												var s_resetPwd_h = 'hidden';
+											</script>
+										</div>
+										<div shiro:hasPermission="contract:payable:edit">
+											<script type="text/javascript">
+												s_edit_h = '';
+											</script>
+										</div>
+										<div shiro:hasPermission="contract:payable:remove">
+											<script type="text/javascript">
+												var s_remove_h = '';
+											</script>
+										</div>
+										<div shiro:hasPermission="contract:payable:resetPwd">
+											<script type="text/javascript">
+												var s_resetPwd_h = '';
+											</script>
+										</div>
+									</div>
+								</div>
+								<!-- 收款信息 -->
+								<div class="tab-pane fade" id="Receivables">
+									<div class="ibox">
+										<div class="ibox-body">
+											<div class="fixed-table-toolbar">
+												<div class="columns pull-left">
+													<button shiro:hasPermission="contract:receivable:add"
+														type="button" class="btn  btn-primary"
+														onclick="addReceivable()">
+														<i class="fa fa-plus" aria-hidden="true"></i>添加
+													</button>
+													<button
+														shiro:hasPermission="contract:receivable:batchRemove"
+														type="button" class="btn  btn-danger"
+														onclick="batchRemoveReceivable()">
+														<i class="fa fa-trash" aria-hidden="true"></i>批量删除
+													</button>
+												</div>
+											</div>
+											<table id="receivableTable" data-mobile-responsive="true">
+											</table>
+										</div>
+									</div>
+									<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+									<div>
+										<script type="text/javascript">
+											var s_edit_h = 'hidden';
+											var s_remove_h = 'hidden';
+											var s_resetPwd_h = 'hidden';
+										</script>
+									</div>
+									<div shiro:hasPermission="contract:receivable:edit">
+										<script type="text/javascript">
+											s_edit_h = '';
+										</script>
+									</div>
+									<div shiro:hasPermission="contract:receivable:remove">
+										<script type="text/javascript">
+											var s_remove_h = '';
+										</script>
+									</div>
+									<div shiro:hasPermission="contract:receivable:resetPwd">
+										<script type="text/javascript">
+											var s_resetPwd_h = '';
+										</script>
+									</div>
+								</div>
+								<!-- 回款计划 -->
+								<div class="tab-pane fade" id="plan">
+									<div class="ibox">
+										<div class="ibox-body">
+											<div class="fixed-table-toolbar">
+												<div class="columns pull-left">
+													<button shiro:hasPermission="contract:plan:add"
+														type="button" class="btn  btn-primary" onclick="addPlan()">
+														<i class="fa fa-plus" aria-hidden="true"></i>添加
+													</button>
+													<button shiro:hasPermission="contract:plan:batchRemove"
+														type="button" class="btn  btn-danger"
+														onclick="batchRemovePlan()">
+														<i class="fa fa-trash" aria-hidden="true"></i>批量删除
+													</button>
+												</div>
+											</div>
+											<table id="planTable" data-mobile-responsive="true">
+											</table>
+										</div>
+									</div>
+									<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+									<div>
+										<script type="text/javascript">
+											var s_edit_h = 'hidden';
+											var s_remove_h = 'hidden';
+											var s_resetPwd_h = 'hidden';
+										</script>
+									</div>
+									<div shiro:hasPermission="contract:plan:edit">
+										<script type="text/javascript">
+											s_edit_h = '';
+										</script>
+									</div>
+									<div shiro:hasPermission="contract:plan:remove">
+										<script type="text/javascript">
+											var s_remove_h = '';
+										</script>
+									</div>
+									<div shiro:hasPermission="contract:plan:resetPwd">
+										<script type="text/javascript">
+											var s_resetPwd_h = '';
+										</script>
+									</div>
+								</div>
+							</div>
+						</form>
+
+						<!-- 
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">合同编号：</label>
+								<div class="col-sm-8">
+									<input id="contractId" name="contractId" th:value="${additionalRecords.contractId}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">硬件设备明细表：</label>
+								<div class="col-sm-8">
+									<input id="recordHardwareEquipmentList" name="recordHardwareEquipmentList" th:value="${additionalRecords.recordHardwareEquipmentList}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">软件功能列表：</label>
+								<div class="col-sm-8">
+									<input id="recordSoftwareFunctionList" name="recordSoftwareFunctionList" th:value="${additionalRecords.recordSoftwareFunctionList}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">审批状态：</label>
+								<div class="col-sm-8">
+									<input id="recordApprovalStatus" name="recordApprovalStatus" th:value="${additionalRecords.recordApprovalStatus}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建人：</label>
+								<div class="col-sm-8">
+									<input id="recordOperator" name="recordOperator" th:value="${additionalRecords.recordOperator}" class="form-control" type="text">
+								</div>
+							</div>
+						 -->
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/contract/additionalRecords/edit.js"></script>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/contract/additionalRecords/payable.js"></script>
+	<script type="text/javascript" src="/js/appjs/contract/additionalRecords/receivable.js"></script>
+	<script type="text/javascript" src="/js/appjs/contract/additionalRecords/plan.js"></script>
+</body>
+</html>

@@ -1,11 +1,11 @@
 var prefixadditionalRecords = "/contract/additionalRecords"
 //var result;
 $().ready(function() {
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","recordName");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","recordSales");
-	loadCrmDataValue("/inner/innerOrgEmployee/listDic","contractDraftPerson");
-	loadCrmDataValue("/inner/orgJob/listDic", "jobId");
-	loadCrmDataValue("/sales/salesProject/listDic", "projectId");
+	//loadCrmDataValue("/inner/innerOrgEmployee/listDic","recordName");
+	//loadCrmDataValue("/inner/innerOrgEmployee/listDic","recordSales");
+	//loadCrmDataValue("/inner/innerOrgEmployee/listDic","contractDraftPerson");
+	//loadCrmDataValue("/inner/orgJob/listDic", "jobId");
+	//loadCrmDataValue("/sales/salesProject/listDic", "projectId");
 	/*$('#myTab a[href="#payment"]').on('shown.bs.tab', function(e) {
 		//loadDicValue("sales_record_type","serviceType",result.serviceType);
 	});*/
@@ -47,15 +47,88 @@ function update() {
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
+		ignore: ":hidden:not(select)",
 		rules : {
-			name : {
+			recordName : {
+				required : true
+			},
+			jobId : {
+				required : true
+			},
+			contractName : {
+				required : true,
+				maxlength:50
+			},
+			recordBulidCompany : {
+				required : true,
+				maxlength:50
+			},
+			projectId: {
+				required : true
+			},
+			recordSales: {
+				required : true
+			},
+			recordTotalPrice : {
+				required : true,
+				maxlength:16
+			},
+			recordDescription: {
+				required : true,
+				maxlength:1000
+			},recordReason: {
+				required : true,
+				maxlength:1000
+			},recordCommitTime: {
+				required : true
+			},preInvoiceDate: {
+				required : true
+			},contractDraftPerson: {
 				required : true
 			}
 		},
 		messages : {
-			name : {
-				required : icon + "请输入名字"
-			}
+			recordName : {
+				required : icon + "请选择申请人姓名"
+			},
+			jobId : {
+				required : icon + "请选择岗位"
+			},
+			contractName : {
+				required : icon + "请输入合同名称",
+				maxlength:icon + "字符长度不能大于50"
+			},
+			recordBulidCompany : {
+				required : icon + "请输入建设单位",
+				maxlength:icon + "字符长度不能大于50"
+			},
+			projectId : {
+				required : icon + "请选择项目名称"
+			},
+			recordSales : {
+				required : icon + "请选择销售负责人"
+			},
+			recordTotalPrice : {
+				required : icon + "请输入增补总金额",
+				maxlength:icon + "字符长度不能大于16"
+			},
+			recordDescription : {
+				required : icon + "请输入增补内容描述",
+				maxlength:icon + "字符长度不能大于1000"
+			},
+			recordReason : {
+				required : icon + "请输入增补原因",
+				maxlength:icon + "字符长度不能大于1000"
+			},
+			recordCommitTime : {
+				required : icon + "开始时间提交评审时间"
+			},
+			preInvoiceDate : {
+				required : icon + "预计开发票时间不能为空"
+			},
+			contractDraftPerson : {
+				required : icon + "请选择合同拟定人"
+			}	
 		}
 	})
 }
@@ -72,10 +145,10 @@ function datetimepicker() {
 //修改——显示数据绑定
 function additionalRecordsMapper_edit(){
 	$.ajax({
-		url : prefixadditionalRecords + '/edit_ajax/' + $("#additionalRecords").val(),
+		url : prefixadditionalRecords + '/edit_ajax/' + $("#recordId").val(),
 		type : "get",
 		data : {
-			'recordId' : $("#additionalRecords").val(),
+			'recordId' : $("#recordId").val(),
 		},
 		success : function(data) {
 			var result = data.additionalRecords;
@@ -90,19 +163,15 @@ function additionalRecordsMapper_edit(){
 			$("input[name='preInvoiceDate']").val(result.preInvoiceDate);
 			$("input[name='contractAttachment']").val(result.contractAttachment);
 			$("textarea[name='recordRemarks']").val(result.recordRemarks);
-			
-			$("select[name='recordName']").val(result.recordName);
-			$("select[name='recordName']").trigger("chosen:updated");
-			$("select[name='jobId']").val(result.jobId);
-			$("select[name='jobId']").trigger("chosen:updated");
-			$("select[name='projectId']").val(result.projectId);
-			$("select[name='projectId']").trigger("chosen:updated");
-			$("select[name='recordSales']").val(result.recordSales);
-			$("select[name='recordSales']").trigger("chosen:updated");
-			$("select[name='recordRelatedContractId']").val(result.recordRelatedContractId);
-			$("select[name='recordRelatedContractId']").trigger("chosen:updated");
-			$("select[name='contractDraftPerson']").val(result.contractDraftPerson);
-			$("select[name='contractDraftPerson']").trigger("chosen:updated");
+			//$("select[name='recordRelatedContractId']").val(result.recordRelatedContractId);
+			//$("select[name='recordRelatedContractId']").trigger("chosen:updated");
+
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","recordName",result.recordName);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","recordSales",result.recordSales);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","contractDraftPerson",result.contractDraftPerson);
+			loadCrmDataValue("/inner/orgJob/listDic", "jobId",result.jobId);
+			loadCrmDataValue("/sales/salesProject/listDic", "projectId",result.projectId);
+			loadCrmDataValue("/contract/contract/listDic", "recordRelatedContractId",result.recordRelatedContractId);
 		}
 	});
 }
