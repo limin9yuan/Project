@@ -27,4 +27,6 @@ public interface PurchaseService {
 	int remove(String purchaseId);
 	
 	int batchRemove(String[] purchaseIds);
+
+	int formUpdate(PurchaseDO purchase);  
 }

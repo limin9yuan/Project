@@ -49,8 +49,13 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from sales_bug_category
-		 <where>  
+		select count(*) 
+        from sales_bug_category a
+		left join sales_product_category b on a.`Product_ID`=b.`Product_ID`
+		left join sales_module_category c on a.`Module_ID`=c.`Module_ID`
+		left join sys_user d on a.`Bug_Creator`=d.`user_id`
+		left join sys_user e on a.`Bug_Recorder`=e.`user_id`
+		  <where>  
 		  		  <if test="bugId != null and bugId != ''"> and BUG_ID = #{bugId} </if>
 		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
 		  		  <if test="serviceId != null and serviceId != ''"> and Service_ID = #{serviceId} </if>

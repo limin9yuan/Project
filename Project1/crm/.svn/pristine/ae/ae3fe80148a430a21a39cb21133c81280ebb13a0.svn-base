@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.sales.dao.RequirementCategoryDao">
+
+	<select id="get" resultType="com.bootdo.sales.domain.RequirementCategoryDO">
+		select `Requirement_ID`,`Complaint_ID`,`Service_ID`,`Product_ID`,`Module_ID`,`Feedback_ID`,`Consultation_ID`,`Requirement_Description`,`Requirement_Remarks`,`Requirement_Recorder`,`Requirement_Record_Time`,`Requirement_Creator`,`Requirement_Create_Time`,`Else_Category` from sales_requirement_category where Requirement_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.sales.domain.RequirementCategoryDO">
+		select `Requirement_ID`,`Complaint_ID`,`Service_ID`,
+		a.`Product_ID`,b.`Product_Name` as `Requirement_Product_Name`,
+		a.`Module_ID`,c.`Module_Name` as `Requirement_Module_Name`,c.`Module_Name` as `BUG_Category`,
+		`Feedback_ID`,`Consultation_ID`,`Requirement_Description`,`Requirement_Remarks`,
+		`Requirement_Recorder`,e.`name` as `Requirement_Recorder_Name`,
+		`Requirement_Record_Time`,
+		`Requirement_Creator`,d.`name`,
+		`Requirement_Create_Time`,a.`Else_Category`  
+		from sales_requirement_category a
+		left join sales_product_category b on a.`Product_ID`=b.`Product_ID`
+		left join sales_module_category c on a.`Module_ID`=c.`Module_ID`
+		left join sys_user d on a.`Requirement_Creator`=d.`user_id`
+		left join sys_user e on a.`Requirement_Recorder`=e.`user_id`
+        <where>  
+		  		  <if test="requirementId != null and requirementId != ''"> and Requirement_ID = #{requirementId} </if>
+		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
+		  		  <if test="serviceId != null and serviceId != ''"> and Service_ID = #{serviceId} </if>
+		  		  <if test="productId != null and productId != ''"> and Product_ID = #{productId} </if>
+		  		  <if test="moduleId != null and moduleId != ''"> and Module_ID = #{moduleId} </if>
+		  		  <if test="feedbackId != null and feedbackId != ''"> and Feedback_ID = #{feedbackId} </if>
+		  		  <if test="consultationId != null and consultationId != ''"> and Consultation_ID = #{consultationId} </if>
+		  		  <if test="requirementDescription != null and requirementDescription != ''"> and Requirement_Description = #{requirementDescription} </if>
+		  		  <if test="requirementRemarks != null and requirementRemarks != ''"> and Requirement_Remarks = #{requirementRemarks} </if>
+		  		  <if test="requirementRecorder != null and requirementRecorder != ''"> and Requirement_Recorder = #{requirementRecorder} </if>
+		  		  <if test="requirementRecordTime != null and requirementRecordTime != ''"> and Requirement_Record_Time = #{requirementRecordTime} </if>
+		  		  <if test="requirementCreator != null and requirementCreator != ''"> and Requirement_Creator = #{requirementCreator} </if>
+		  		  <if test="requirementCreateTime != null and requirementCreateTime != ''"> and Requirement_Create_Time = #{requirementCreateTime} </if>
+		  		  <if test="elseCategory != null and elseCategory != ''"> and Else_Category = #{elseCategory} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Requirement_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) 
+        from sales_requirement_category a
+		left join sales_product_category b on a.`Product_ID`=b.`Product_ID`
+		left join sales_module_category c on a.`Module_ID`=c.`Module_ID`
+		left join sys_user d on a.`Requirement_Creator`=d.`user_id`
+		left join sys_user e on a.`Requirement_Recorder`=e.`user_id`
+		 <where>  
+		  		  <if test="requirementId != null and requirementId != ''"> and Requirement_ID = #{requirementId} </if>
+		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
+		  		  <if test="serviceId != null and serviceId != ''"> and Service_ID = #{serviceId} </if>
+		  		  <if test="productId != null and productId != ''"> and Product_ID = #{productId} </if>
+		  		  <if test="moduleId != null and moduleId != ''"> and Module_ID = #{moduleId} </if>
+		  		  <if test="feedbackId != null and feedbackId != ''"> and Feedback_ID = #{feedbackId} </if>
+		  		  <if test="consultationId != null and consultationId != ''"> and Consultation_ID = #{consultationId} </if>
+		  		  <if test="requirementDescription != null and requirementDescription != ''"> and Requirement_Description = #{requirementDescription} </if>
+		  		  <if test="requirementRemarks != null and requirementRemarks != ''"> and Requirement_Remarks = #{requirementRemarks} </if>
+		  		  <if test="requirementRecorder != null and requirementRecorder != ''"> and Requirement_Recorder = #{requirementRecorder} </if>
+		  		  <if test="requirementRecordTime != null and requirementRecordTime != ''"> and Requirement_Record_Time = #{requirementRecordTime} </if>
+		  		  <if test="requirementCreator != null and requirementCreator != ''"> and Requirement_Creator = #{requirementCreator} </if>
+		  		  <if test="requirementCreateTime != null and requirementCreateTime != ''"> and Requirement_Create_Time = #{requirementCreateTime} </if>
+		  		  <if test="elseCategory != null and elseCategory != ''"> and Else_Category = #{elseCategory} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.sales.domain.RequirementCategoryDO">
+		insert into sales_requirement_category
+		(
+			`Requirement_ID`, 
+			`Complaint_ID`, 
+			`Service_ID`, 
+			`Product_ID`, 
+			`Module_ID`, 
+			`Feedback_ID`, 
+			`Consultation_ID`, 
+			`Requirement_Description`, 
+			`Requirement_Remarks`, 
+			`Requirement_Recorder`, 
+			`Requirement_Creator`, 
+			`Requirement_Create_Time`,
+			`Else_Category`
+		)
+		values
+		(
+			#{requirementId}, 
+			#{complaintId}, 
+			#{serviceId}, 
+			#{productId}, 
+			#{moduleId}, 
+			#{feedbackId}, 
+			#{consultationId}, 
+			#{requirementDescription}, 
+			#{requirementRemarks},
+			#{requirementRecorder},  
+			#{requirementCreator}, 
+			#{requirementCreateTime},
+			#{elseCategory}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.sales.domain.RequirementCategoryDO">
+		update sales_requirement_category 
+		<set>
+			<if test="complaintId != null">`Complaint_ID` = #{complaintId}, </if>
+			<if test="serviceId != null">`Service_ID` = #{serviceId}, </if>
+			<if test="productId != null">`Product_ID` = #{productId}, </if>
+			<if test="moduleId != null">`Module_ID` = #{moduleId}, </if>
+			<if test="feedbackId != null">`Feedback_ID` = #{feedbackId}, </if>
+			<if test="consultationId != null">`Consultation_ID` = #{consultationId}, </if>
+			<if test="requirementDescription != null">`Requirement_Description` = #{requirementDescription}, </if>
+			<if test="requirementRemarks != null">`Requirement_Remarks` = #{requirementRemarks}, </if>
+			<if test="requirementRecorder != null">`Requirement_Recorder` = #{requirementRecorder}, </if>
+			<if test="requirementRecordTime != null">`Requirement_Record_Time` = #{requirementRecordTime}, </if>
+			<if test="elseCategory != null">`Else_Category` = #{elseCategory}</if>
+		</set>
+		where Requirement_ID = #{requirementId}
+	</update>
+	
+	<delete id="remove">
+		delete from sales_requirement_category where Requirement_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sales_requirement_category where Requirement_ID in 
+		<foreach item="requirementId" collection="array" open="(" separator="," close=")">
+			#{requirementId}
+		</foreach>
+	</delete>
+</mapper>

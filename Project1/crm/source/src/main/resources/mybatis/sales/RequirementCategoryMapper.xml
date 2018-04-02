@@ -51,7 +51,12 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from sales_requirement_category
+		select count(*) 
+        from sales_requirement_category a
+		left join sales_product_category b on a.`Product_ID`=b.`Product_ID`
+		left join sales_module_category c on a.`Module_ID`=c.`Module_ID`
+		left join sys_user d on a.`Requirement_Creator`=d.`user_id`
+		left join sys_user e on a.`Requirement_Recorder`=e.`user_id`
 		 <where>  
 		  		  <if test="requirementId != null and requirementId != ''"> and Requirement_ID = #{requirementId} </if>
 		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>

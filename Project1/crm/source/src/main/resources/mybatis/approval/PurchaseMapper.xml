@@ -96,7 +96,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.approval.domain.PurchaseDO">
+	<insert id="save" parameterType="com.bootdo.approval.domain.PurchaseDO" useGeneratedKeys="true" keyProperty="purchaseId">
 		insert into approval_purchase
 		(
 			`Purchase_ID`, 

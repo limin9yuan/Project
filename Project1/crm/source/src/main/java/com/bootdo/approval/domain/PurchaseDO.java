@@ -70,6 +70,38 @@ public class PurchaseDO implements Serializable {
 	
 	//申请人员名称
 	private String purchaseOperatorName;
+	
+	//**********************流程相关属性****************************
+	//流程任务ID
+	private String taskId;
+	//审批操作
+	private String taskAction;
+	
+	/**
+	 * 设置：审批操作
+	 */
+	public void setTaskAction(String taskAction) {
+		this.taskAction = taskAction;
+	}
+	/**
+	 * 获取：审批操作
+	 */
+	public String getTaskAction() {
+		return taskAction;
+	}
+	
+	/**
+	 * 设置：流程任务ID
+	 */
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+	/**
+	 * 获取：流程任务ID
+	 */
+	public String getTaskId() {
+		return taskId;
+	}	
 
 	/**
 	 * 设置：采购申请编号
@@ -377,5 +409,4 @@ public class PurchaseDO implements Serializable {
 	public void setPurchaseOperatorName(String purchaseOperatorName) {
 		this.purchaseOperatorName = purchaseOperatorName;
 	}
-	
 }

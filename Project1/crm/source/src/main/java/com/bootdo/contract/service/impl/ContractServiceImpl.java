@@ -1,5 +1,6 @@
 package com.bootdo.contract.service.impl;
 
+import com.bootdo.activiti.config.ActivitiConstant;
 import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.service.impl.ActTaskServiceImpl;
 import com.bootdo.contract.domain.TravelDO;
@@ -66,7 +67,15 @@ public class ContractServiceImpl implements ContractService {
 
 	@Override
 	public int save(ContractDO contract) {
-		return contractDao.save(contract);
+		int ret = contractDao.save(contract);
+		//xml <insert id="save" parameterType="com.bootdo.contract.domain.ContractDO"
+		//useGeneratedKeys="true" keyProperty="contractId">
+		//获取contractId
+		String contractId = contract.getContractId();
+		actTaskService.startProcess(ActivitiConstant.ACTIVIYI_CONTRACT[0],
+				ActivitiConstant.ACTIVIYI_CONTRACT[1], contractId,contract.getContractName(), new HashMap<>());
+
+		return ret;
 	}
 
 	@Override
@@ -205,7 +214,7 @@ public class ContractServiceImpl implements ContractService {
 							contractDO.setContractApprovalStatus(new Integer(cellvalue));
 						}
 					} // --->遍历列
-					contractDO.setContractId(Long.valueOf(i));
+					contractDO.setContractId(cellvalue);
 					contractDO.setContractOperateTime(new Date());
 					rtn = contractDao.save(contractDO);
 				}
@@ -267,7 +276,7 @@ public class ContractServiceImpl implements ContractService {
 					// 合同编号
 					String contractId = "";
 					if (report.getContractId() != null) {
-						Long getContractId = report.getContractId();
+						String getContractId = report.getContractId();
 						contractId = sdf.format(getContractId);
 					}
 					hssfRow.createCell(0).setCellValue(contractId);

@@ -40,7 +40,7 @@ function load(projectId) {
 								projectName:$('#projectName').val(),
 								projectOwner:$('#projectOwner').val(),
 								projectPhase:$('#projectPhase').val(),
-								customerId:$('#customerId').val(),
+								customerName:$('#customerName').val(),
 								deptId:$('#deptId').val()
 					           // username:$('#searchName').val()
 							};

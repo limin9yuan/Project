@@ -85,10 +85,10 @@ function validateRule() {
 //修改——显示数据绑定
 function requirementCategoryMapper_edit(){
 	$.ajax({
-		url : prefixrequirementCategory + '/edit_ajax/' + $("#requirementCategory").val(),
+		url : prefixrequirementCategory + '/edit_ajax/' + $("#requirementId").val(),
 		type : "get",
 		data : {
-			'requirementId' : $("#requirementCategory").val(),
+			'requirementId' : $("#requirementId").val(),
 		},
 		success : function(data) {
 			var result = data.requirementCategory;

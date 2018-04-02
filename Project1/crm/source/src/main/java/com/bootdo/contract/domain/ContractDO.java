@@ -17,7 +17,7 @@ public class ContractDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//合同编号
-	private Long contractId;
+	private String contractId;
 	//企业客户编号
 	private String customerId;
 	//业务编号
@@ -101,13 +101,13 @@ public class ContractDO implements Serializable {
 	/**
 	 * 设置：合同编号
 	 */
-	public void setContractId(Long contractId) {
+	public void setContractId(String contractId) {
 		this.contractId = contractId;
 	}
 	/**
 	 * 获取：合同编号
 	 */
-	public Long getContractId() {
+	public String getContractId() {
 		return contractId;
 	}
 	/**

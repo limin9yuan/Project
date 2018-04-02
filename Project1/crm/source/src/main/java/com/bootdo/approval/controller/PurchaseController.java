@@ -16,12 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bootdo.activiti.domain.SalaryDO;
+import com.bootdo.activiti.service.impl.ActTaskServiceImpl;
+import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.approval.domain.PurchaseDO;
 import com.bootdo.approval.service.PurchaseService;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.contract.domain.TravelDO;
 import com.bootdo.project.domain.ProjectDO;
 
 /**
@@ -37,6 +41,8 @@ import com.bootdo.project.domain.ProjectDO;
 public class PurchaseController extends BaseController {
 	@Autowired
 	private PurchaseService purchaseService;
+	@Autowired
+	private ActivitiUtils activitiUtils;
 	
 	@GetMapping()
 	@RequiresPermissions("approval:purchase:purchase")
@@ -127,5 +133,36 @@ public class PurchaseController extends BaseController {
 		purchaseService.batchRemove(purchaseIds);
 		return R.ok();
 	}
+	/**
+	 * ********************** 审批流程相关  *********************************
+	 */
+	//申请页面
+	@GetMapping("/form")
+	@RequiresPermissions("approval:purchase:add")
+	String form(){
+	    return "approval/purchase/add";
+	}
+	//审批处理页面
+	@GetMapping("/form/{taskId}")
+	@RequiresPermissions("approval:purchase:add")
+	String formTask(@PathVariable("taskId") String taskId,Model model){
+		//取得流程表单数据
+		PurchaseDO purchase = purchaseService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+		if(purchase!=null){
+			model.addAttribute("purchase", purchase);
+			//model.addAttribute("taskId",taskId);
+		}
+	    return "approval/purchase/edit";
+	}
 	
+	
+	 //审批处理保存
+	@ResponseBody
+	@RequestMapping("/form/update")
+	@RequiresPermissions("approval:purchase:edit")
+	public R formUpdate( PurchaseDO purchase){
+		
+		purchaseService.formUpdate(purchase);
+		return R.ok();
+	}
 }

@@ -83,8 +83,8 @@ public class ProjectController extends BaseController {
 		if (params.get("projectPhase") != null && !"".equals(params.get("projectPhase"))) {
 			params.put("projectPhase", "%" + (String) params.get("projectPhase") + "%");
 		}
-		if (params.get("customerId") != null && !"".equals(params.get("customerId"))) {
-			params.put("customerId", "%" + (String) params.get("customerId") + "%");
+		if (params.get("customerName") != null && !"".equals(params.get("customerName"))) {
+			params.put("customerName", "%" + (String) params.get("customerName") + "%");
 		}
 		if (params.get("projectOwner") != null && !"".equals(params.get("projectOwner"))) {
 			params.put("projectOwner", "%" + (String) params.get("projectOwner") + "%");

@@ -48,7 +48,8 @@ public class TravelServiceImpl implements TravelService {
 		*/
 		String travelId=travel.getTravelId();
 		//添加保存时发起审批流程
-		actTaskService.startProcess(ActivitiConstant.ACTIVITI_CONTRACT_TRAVEL[0],ActivitiConstant.ACTIVITI_CONTRACT_TRAVEL[1],travelId,travel.getTravelName(),new HashMap<String,Object>());
+		actTaskService.startProcess(ActivitiConstant.ACTIVITI_CONTRACT_TRAVEL[0],
+				ActivitiConstant.ACTIVITI_CONTRACT_TRAVEL[1],travelId,travel.getTravelName(),new HashMap<String,Object>());
 		
 		return ret;
 	}

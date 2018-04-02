@@ -251,7 +251,7 @@ public class ContractController extends BaseController {
 		//取得流程表单数据
 		ContractDO contract = contractService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
 		if(contract!=null){
-			model.addAttribute("travel", contract);
+			model.addAttribute("contract", contract);
 			//model.addAttribute("taskId",taskId);
 		}
 		return "contract/contract/edit";
