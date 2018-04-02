@@ -24,6 +24,8 @@ public class PayoutDO implements Serializable {
 	private String businessId;
 	//项目编号
 	private String projectId;
+	//项目名称
+	private String projectName;
 	//申请人姓名
 	private String payoutPerson;
 	//请款用途
@@ -101,6 +103,14 @@ public class PayoutDO implements Serializable {
 	public String getProjectId() {
 		return projectId;
 	}
+	//项目名称
+		public String getProjectName() {
+			return projectName;
+		}
+		//项目名称
+		public void setProjectName(String projectName) {
+			this.projectName = projectName;
+		}
 	/**
 	 * 设置：申请人姓名
 	 */

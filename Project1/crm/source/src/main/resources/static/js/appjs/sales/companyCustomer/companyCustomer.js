@@ -90,23 +90,23 @@ function load() {
 										return  e + d ;
 									}
 								} ,
-//																{
-//									field : 'customerId', 
-//									title : '企业客户编号' 
-//								},
-//																{
-//									field : 'customerName', 
-//									title : '企业名称' 
-//								},
+																{
+									field : 'customerId', 
+									title : '企业客户编号' 
+								},
+																{
+									field : 'customerName', 
+									title : '企业名称' 
+								},
 															{
 									align : 'center',
 									field : 'customerOperateTime', 
 									title : '创建时间' 
 								},
-//															{
-//									field : 'customerSales', 
-//									title : '销售负责人' 
-//								},
+															{
+									field : 'customerSales', 
+									title : '销售负责人' 
+								},
 															{
 									
 //									超链接---------------------------------------------------------------------
@@ -224,6 +224,7 @@ function load() {
 }
 
 function reLoad() {
+//	alert($('#customerName').val());
 	$('#exampleTable').bootstrapTable('refresh');
 }
 

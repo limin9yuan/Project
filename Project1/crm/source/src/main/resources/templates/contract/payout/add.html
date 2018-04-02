@@ -13,7 +13,8 @@
 							
 							
 							<div class="form-group">	
-								<label class="col-sm-2 control-label">企业客户编号：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>企业客户编号：</label>
 								<div class="col-sm-4">
 									<select data-placeholder="请选择" name="customerId" id="customerId"
 										class="form-control chosen-select" tabindex="2"
@@ -21,7 +22,8 @@
 										<option value="">请选择</option>
 									</select>
 								</div>	
-								<label class="col-sm-2 control-label">业务编号：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>业务编号：</label>
 								<div class="col-sm-4">
 									<select data-placeholder="请选择" name="businessId" id="businessId"
 										class="form-control chosen-select" tabindex="2"
@@ -32,7 +34,8 @@
 							</div>
 														
 														<div class="form-group">	
-								<label class="col-sm-2 control-label">项目编号：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>项目编号：</label>
 								<div class="col-sm-4">
 									<select data-placeholder="请选择" name="projectId" id="projectId"
 										class="form-control chosen-select" tabindex="2"
@@ -40,7 +43,8 @@
 										<option value="">请选择</option>
 									</select>
 								</div>
-								<label class="col-sm-2 control-label">申请人姓名：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>申请人姓名：</label>
 								<div class="col-sm-4">
 									<select data-placeholder="请选择" name="payoutPerson" id="payoutPerson"
 										class="form-control chosen-select" tabindex="2"
@@ -50,17 +54,20 @@
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-2 control-label">请款用途：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>请款用途：</label>
 								<div class="col-sm-4">
 									<input id="payoutUseage" name="payoutUseage" class="form-control" type="text">
 								</div>
-								<label class="col-sm-2 control-label">请款金额：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>请款金额：</label>
 								<div class="col-sm-4">
 									<input id="payoutPrice" name="payoutPrice" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-2 control-label">结算方式：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>结算方式：</label>
 								<div class="col-sm-4">
 									<select data-placeholder="请选择" name="payoutMeans" id="payoutMeans"
 										class="form-control chosen-select" tabindex="2"
@@ -68,17 +75,20 @@
 										<option value="">请选择</option>
 									</select>
 								</div>
-								<label class="col-sm-2 control-label">收款人银行：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>收款人银行：</label>
 								<div class="col-sm-4">
 									<input id="payoutBeneficiaryBank" name="payoutBeneficiaryBank" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">	
-								<label class="col-sm-2 control-label">银行卡号：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>银行卡号：</label>
 								<div class="col-sm-4">
 									<input id="payoutCardNumber" name="payoutCardNumber" class="form-control" type="text">
 								</div>
-								<label class="col-sm-2 control-label">关联出差申请编号：</label>
+								<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>关联出差申请编号：</label>
 								<div class="col-sm-4">
 									<select data-placeholder="请选择" name="payoutRelatedContractId" id="payoutRelatedContractId"
 										class="form-control chosen-select" tabindex="2"
@@ -133,6 +143,7 @@
 																					<div class="form-group">
 								<div class="col-sm-8 col-sm-offset-3">
 									<button type="submit" class="btn btn-primary">提交</button>
+									<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
 								</div>
 							</div>
 						</form>

@@ -1,6 +1,13 @@
 $().ready(function() {
 	loadDic("budget_Expenses_Type","expensesType");
 	validateRule();
+	 $('#expensesPlanPrice').bind('input propertychange', function() {    
+         var expensesPlanPrice=$("#expensesPlanPrice").val();
+         var expensesProjectRate=$("#expensesProjectRate").val();
+         var expensesCustomerRate=$("#expensesCustomerRate").val();
+         var sum= expensesPlanPrice/expensesProjectRate*expensesCustomerRate; 
+         $("#expensesTotalPrice").val(sum);   
+     });
 });
 
 $.validator.setDefaults({
@@ -45,9 +52,11 @@ function validateRule() {
 				required : true,
 				maxlength:10
 			},
-			expensesTotalPrice : {
-				required : true,
-				maxlength:12
+			expensesCustomerRate : {
+				max:100
+			},
+			expensesProjectRate : {
+				max:100
 			}
 		},
 		messages : {
@@ -58,9 +67,11 @@ function validateRule() {
 				required : icon + "请输入报销金额预估",
 				maxlength:icon + "字符长度不能大于10"
 			},
-			expensesTotalPrice : {
-				required : icon + "请输入总计",
-				maxlength:icon + "字符长度不能大于12"
+			expensesCustomerRate : {
+				max:icon + "输入值不能大于100。"
+			},
+			expensesProjectRate : {
+				max:icon + "输入值不能大于100。"
 			}
 		}
 	})

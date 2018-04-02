@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bootdo.contract.domain.PayoutDO;
 import com.bootdo.contract.service.PayoutService;
+import com.bootdo.sales.domain.RecordServiceDO;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.DictDO;
@@ -55,6 +56,18 @@ public class PayoutController extends BaseController {
 	@RequiresPermissions("contract:payout:payout")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		if (params.get("payoutPerson") != null && params.get("payoutPerson") != "") {
+			params.put("payoutPerson", "%" + params.get("payoutPerson") + "%");
+		}
+		if (params.get("projectId") != null && params.get("projectId") != "") {
+			params.put("projectId", "%" + params.get("projectId") + "%");
+		}
+//		if (params.get("payoutCreateTime") != null && params.get("payoutCreateTime") != "") {
+//			params.put("payoutCreateTime", params.get("payoutCreateTime") + " 00:00:00");
+//		}
+//		if (params.get("payoutOperateTime") != null && params.get("payoutOperateTime") != "") {
+//			params.put("payoutOperateTime", params.get("payoutOperateTime") + " 23:59:59");
+//		}
         Query query = new Query(params);
 		List<PayoutDO> payoutList = payoutService.list(query);
 		int total = payoutService.count(query);
@@ -80,6 +93,15 @@ public class PayoutController extends BaseController {
 	    return "contract/payout/edit";
 	}
 	
+	// edit数据绑定
+		@RequestMapping("/edit_ajax/{payoutId}")
+		@ResponseBody
+		Map<String, Object> edit_ajax(@PathVariable("payoutId") String payoutId) {
+			PayoutDO payout = payoutService.get(payoutId);
+			Map<String, Object> returnData = new HashMap<String, Object>();
+			returnData.put("payout", payout);
+			return returnData;
+		}
 	/**
 	 * 保存
 	 */
@@ -87,6 +109,7 @@ public class PayoutController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("contract:payout:add")
 	public R save( PayoutDO payout){
+		payout.setPayoutOperator(getUserId());
 		if(payoutService.save(payout)>0){
 			return R.ok();
 		}

@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.approval.dao.ExpensesTravelDao">
+
+	<select id="get" resultType="com.bootdo.approval.domain.ExpensesTravelDO">
+		select
+		`Expenses_Travel_ID`,`Customer_ID`,`Business_ID`,`Project_ID`,`Expenses_Travel_Name`,`Expenses_Travel_Task`,`Expenses_Travel_Allowance`,`Expenses_Travel_Type`,`Expenses_Travel_Price`,`Expenses_Travel_TID`,`Expenses_Travel_PayID`,`Expenses_Travel_Pay_Price`,`Expenses_Travel_Pay_Mode`,`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,`Expenses_Travel_Status`,`Expenses_Travel_Operator`,`Expenses_Travel_Opt_Time`,`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`
+		from approval_expenses__travel where Expenses_Travel_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.approval.domain.ExpensesTravelDO">
+		select
+		`Expenses_Travel_ID`,a.`Customer_ID`,`Business_ID`,a.`Project_ID`,`Expenses_Travel_Name`,`Expenses_Travel_Task`,`Expenses_Travel_Allowance`,
+		`Expenses_Travel_Type`,`Expenses_Travel_Price`,`Expenses_Travel_TID`,`Expenses_Travel_PayID`,`Expenses_Travel_Pay_Price`,`Expenses_Travel_Pay_Mode`,
+		`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,`Expenses_Travel_Status`,`Expenses_Travel_Operator`,`Expenses_Travel_Opt_Time`,
+		`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`
+		from approval_expenses__travel a
+		left join development_project d on a.Project_ID=d.Project_ID
+		<where>
+			<if test="expensesTravelId != null and expensesTravelId != ''"> and Expenses_Travel_ID = #{expensesTravelId} </if>
+			<if test="customerId != null and customerId != ''"> and a.Customer_ID = #{customerId} </if>
+			<if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+			<if test="projectId != null and projectId != ''"> and d.Project_ID = #{projectId} </if>
+			<if test="expensesTravelName != null and expensesTravelName != ''"> and Expenses_Travel_Name like #{expensesTravelName} </if>
+			<if test="expensesTravelTask != null and expensesTravelTask != ''"> and Expenses_Travel_Task = #{expensesTravelTask} </if>
+			<if
+				test="expensesTravelAllowance != null and expensesTravelAllowance != ''"> and Expenses_Travel_Allowance = #{expensesTravelAllowance}
+			</if>
+			<if test="expensesTravelType != null and expensesTravelType != ''"> and Expenses_Travel_Type = #{expensesTravelType} </if>
+			<if test="expensesTravelPrice != null and expensesTravelPrice != ''"> and Expenses_Travel_Price = #{expensesTravelPrice} </if>
+			<if test="expensesTravelTid != null and expensesTravelTid != ''"> and Expenses_Travel_TID = #{expensesTravelTid} </if>
+			<if test="expensesTravelPayid != null and expensesTravelPayid != ''"> and Expenses_Travel_PayID = #{expensesTravelPayid} </if>
+			<if test="expensesTravelPayPrice != null and expensesTravelPayPrice != ''"> and Expenses_Travel_Pay_Price =
+				#{expensesTravelPayPrice} </if>
+			<if test="expensesTravelPayMode != null and expensesTravelPayMode != ''"> and Expenses_Travel_Pay_Mode = #{expensesTravelPayMode}
+			</if>
+			<if test="expensesTravelBank != null and expensesTravelBank != ''"> and Expenses_Travel_Bank = #{expensesTravelBank} </if>
+			<if test="expensesTravelCardNum != null and expensesTravelCardNum != ''"> and Expenses_Travel_Card_Num = #{expensesTravelCardNum}
+			</if>
+			<if test="expensesTravelRemarks != null and expensesTravelRemarks != ''"> and Expenses_Travel_Remarks = #{expensesTravelRemarks}
+			</if>
+			<if test="expensesTravelStatus != null and expensesTravelStatus != ''"> and Expenses_Travel_Status = #{expensesTravelStatus}
+			</if>
+			<if test="expensesTravelOperator != null and expensesTravelOperator != ''"> and Expenses_Travel_Operator = #{expensesTravelOperator}
+			</if>
+			<if test="expensesTravelOptTime != null and expensesTravelOptTime != ''"> and a.Expenses_Travel_Opt_Time &gt;= #{expensesTravelOptTime}
+			</if>
+			<if test="expensesTravelCreator != null and expensesTravelCreator != ''"> and Expenses_Travel_Creator = #{expensesTravelCreator}
+			</if>
+			<if
+				test="expensesTravelCreateTime != null and expensesTravelCreateTime != ''"> and a.Expenses_Travel_Create_Time &gt;= #{expensesTravelCreateTime}
+			</if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by Expenses_Travel_ID desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from approval_expenses__travel
+		<where>
+			<if test="expensesTravelId != null and expensesTravelId != ''"> and Expenses_Travel_ID = #{expensesTravelId} </if>
+			<if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+			<if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+			<if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
+			<if test="expensesTravelName != null and expensesTravelName != ''"> and Expenses_Travel_Name = #{expensesTravelName} </if>
+			<if test="expensesTravelTask != null and expensesTravelTask != ''"> and Expenses_Travel_Task = #{expensesTravelTask} </if>
+			<if
+				test="expensesTravelAllowance != null and expensesTravelAllowance != ''"> and Expenses_Travel_Allowance = #{expensesTravelAllowance}
+			</if>
+			<if test="expensesTravelType != null and expensesTravelType != ''"> and Expenses_Travel_Type = #{expensesTravelType} </if>
+			<if test="expensesTravelPrice != null and expensesTravelPrice != ''"> and Expenses_Travel_Price = #{expensesTravelPrice} </if>
+			<if test="expensesTravelTid != null and expensesTravelTid != ''"> and Expenses_Travel_TID = #{expensesTravelTid} </if>
+			<if test="expensesTravelPayid != null and expensesTravelPayid != ''"> and Expenses_Travel_PayID = #{expensesTravelPayid} </if>
+			<if test="expensesTravelPayPrice != null and expensesTravelPayPrice != ''"> and Expenses_Travel_Pay_Price =
+				#{expensesTravelPayPrice} </if>
+			<if test="expensesTravelPayMode != null and expensesTravelPayMode != ''"> and Expenses_Travel_Pay_Mode = #{expensesTravelPayMode}
+			</if>
+			<if test="expensesTravelBank != null and expensesTravelBank != ''"> and Expenses_Travel_Bank = #{expensesTravelBank} </if>
+			<if test="expensesTravelCardNum != null and expensesTravelCardNum != ''"> and Expenses_Travel_Card_Num = #{expensesTravelCardNum}
+			</if>
+			<if test="expensesTravelRemarks != null and expensesTravelRemarks != ''"> and Expenses_Travel_Remarks = #{expensesTravelRemarks}
+			</if>
+			<if test="expensesTravelStatus != null and expensesTravelStatus != ''"> and Expenses_Travel_Status = #{expensesTravelStatus}
+			</if>
+			<if test="expensesTravelOperator != null and expensesTravelOperator != ''"> and Expenses_Travel_Operator = #{expensesTravelOperator}
+			</if>
+			<if test="expensesTravelOptTime != null and expensesTravelOptTime != ''"> and Expenses_Travel_Opt_Time = #{expensesTravelOptTime}
+			</if>
+			<if test="expensesTravelCreator != null and expensesTravelCreator != ''"> and Expenses_Travel_Creator = #{expensesTravelCreator}
+			</if>
+			<if
+				test="expensesTravelCreateTime != null and expensesTravelCreateTime != ''"> and Expenses_Travel_Create_Time = #{expensesTravelCreateTime}
+			</if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.bootdo.approval.domain.ExpensesTravelDO">
+		insert into
+		approval_expenses__travel
+		(
+		`Expenses_Travel_ID`,
+		`Customer_ID`,
+		`Business_ID`,
+		`Project_ID`,
+		`Expenses_Travel_Name`,
+		`Expenses_Travel_Task`,
+		`Expenses_Travel_Allowance`,
+		`Expenses_Travel_Type`,
+		`Expenses_Travel_Price`,
+		`Expenses_Travel_TID`,
+		`Expenses_Travel_PayID`,
+		`Expenses_Travel_Pay_Price`,
+		`Expenses_Travel_Pay_Mode`,
+		`Expenses_Travel_Bank`,
+		`Expenses_Travel_Card_Num`,
+		`Expenses_Travel_Remarks`,
+		`Expenses_Travel_Status`,
+		`Expenses_Travel_Operator`,
+		`Expenses_Travel_Opt_Time`,
+		`Expenses_Travel_Creator`,
+		`Expenses_Travel_Create_Time`
+		)
+		values
+		(
+		#{expensesTravelId},
+		#{customerId},
+		#{businessId},
+		#{projectId},
+		#{expensesTravelName},
+		#{expensesTravelTask},
+		#{expensesTravelAllowance},
+		#{expensesTravelType},
+		#{expensesTravelPrice},
+		#{expensesTravelTid},
+		#{expensesTravelPayid},
+		#{expensesTravelPayPrice},
+		#{expensesTravelPayMode},
+		#{expensesTravelBank},
+		#{expensesTravelCardNum},
+		#{expensesTravelRemarks},
+		#{expensesTravelStatus},
+		#{expensesTravelOperator},
+		#{expensesTravelOptTime},
+		#{expensesTravelCreator},
+		#{expensesTravelCreateTime}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.bootdo.approval.domain.ExpensesTravelDO">
+		update approval_expenses__travel
+		<set>
+			<if test="customerId != null">`Customer_ID` = #{customerId}, </if>
+			<if test="businessId != null">`Business_ID` = #{businessId}, </if>
+			<if test="projectId != null">`Project_ID` = #{projectId}, </if>
+			<if test="expensesTravelName != null">`Expenses_Travel_Name` = #{expensesTravelName}, </if>
+			<if test="expensesTravelTask != null">`Expenses_Travel_Task` = #{expensesTravelTask}, </if>
+			<if test="expensesTravelAllowance != null">`Expenses_Travel_Allowance` = #{expensesTravelAllowance},
+			</if>
+			<if test="expensesTravelType != null">`Expenses_Travel_Type` = #{expensesTravelType}, </if>
+			<if test="expensesTravelPrice != null">`Expenses_Travel_Price` = #{expensesTravelPrice}, </if>
+			<if test="expensesTravelTid != null">`Expenses_Travel_TID` = #{expensesTravelTid}, </if>
+			<if test="expensesTravelPayid != null">`Expenses_Travel_PayID` = #{expensesTravelPayid}, </if>
+			<if test="expensesTravelPayPrice != null">`Expenses_Travel_Pay_Price` = #{expensesTravelPayPrice},
+			</if>
+			<if test="expensesTravelPayMode != null">`Expenses_Travel_Pay_Mode` = #{expensesTravelPayMode},
+			</if>
+			<if test="expensesTravelBank != null">`Expenses_Travel_Bank` = #{expensesTravelBank}, </if>
+			<if test="expensesTravelCardNum != null">`Expenses_Travel_Card_Num` = #{expensesTravelCardNum},
+			</if>
+			<if test="expensesTravelRemarks != null">`Expenses_Travel_Remarks` = #{expensesTravelRemarks},
+			</if>
+			<if test="expensesTravelStatus != null">`Expenses_Travel_Status` = #{expensesTravelStatus}, </if>
+			<if test="expensesTravelOperator != null">`Expenses_Travel_Operator` = #{expensesTravelOperator},
+			</if>
+			<if test="expensesTravelOptTime != null">`Expenses_Travel_Opt_Time` = #{expensesTravelOptTime},
+			</if>
+			<if test="expensesTravelCreator != null">`Expenses_Travel_Creator` = #{expensesTravelCreator},
+			</if>
+			<if test="expensesTravelCreateTime != null">`Expenses_Travel_Create_Time` =
+				#{expensesTravelCreateTime}</if>
+		</set>
+		where Expenses_Travel_ID = #{expensesTravelId}
+	</update>
+
+	<delete id="remove">
+		delete from approval_expenses__travel where
+		Expenses_Travel_ID = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from approval_expenses__travel where Expenses_Travel_ID in
+		<foreach item="expensesTravelId" collection="array" open="("
+			separator="," close=")">
+			#{expensesTravelId}
+		</foreach>
+	</delete>
+
+</mapper>

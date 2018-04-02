@@ -20,7 +20,7 @@
 		  		  <if test="expensesRemarks != null and expensesRemarks != ''"> and Expenses_Remarks = #{expensesRemarks} </if>
 		  		  <if test="expensesOperator != null and expensesOperator != ''"> and Expenses_Operator = #{expensesOperator} </if>
 		  		  <if test="expensesOperateTime != null and expensesOperateTime != ''"> and Expenses_Operate_TIme = #{expensesOperateTime} </if>
-		  		   <if test="expensesTotalPrice != null and expensesTotalPrice != ''"> and Expenses_Total_Price = #{expensesTotalPrice} </if>
+		  		  <if test="expensesTotalPrice != null and expensesTotalPrice != ''"> and Expenses_Total_Price = #{expensesTotalPrice} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">

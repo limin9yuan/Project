@@ -53,6 +53,15 @@ public class ExpensesTravelController extends BaseController  {
 	@RequiresPermissions("approval:expensesTravel:expensesTravel")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		 if(params.get("expensesTravelName") != null && params.get("expensesTravelName") != "") {
+				params.put("expensesTravelName", "%" + params.get("expensesTravelName") + "%");
+			}
+//		 if (params.get("payoutCreateTime") != null && params.get("payoutCreateTime") != "") {
+//				params.put("payoutCreateTime", params.get("payoutCreateTime") + " 00:00:00");
+//			}
+//			if (params.get("payoutOperateTime") != null && params.get("payoutOperateTime") != "") {
+//				params.put("payoutOperateTime", params.get("payoutOperateTime") + " 23:59:59");
+//			}
         Query query = new Query(params);
 		List<ExpensesTravelDO> expensesTravelList = expensesTravelService.list(query);
 		int total = expensesTravelService.count(query);

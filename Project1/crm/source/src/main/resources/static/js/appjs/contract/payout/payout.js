@@ -1,8 +1,24 @@
 
 var prefix = "/contract/payout"
 $(function() {
+	loadCrmData("/project/project/listDic","projectId");
+	
 	load();
+	datetimepicker();
 });
+
+function datetimepicker(){
+	//开始时间(创建时间)
+	$('#payoutCreateTime').datetimepicker({
+		format:'YYYY-MM-DD',
+		locale:moment.locale('zh-cn')
+	});
+	//结束时间(最后修改时间)
+	$('#payoutOperateTime').datetimepicker({
+		format:'YYYY-MM-DD',
+		locale:moment.locale('zh-cn')
+	});
+}
 
 function load() {
 	$('#exampleTable')
@@ -32,7 +48,14 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
+								payoutCreateTime:$('#payoutCreateTime').data('date'),
+								payoutOperateTime:$('#payoutOperateTime').data('date'),
+								projectName:$('#projectName').val(),
+								projectId:$('#projectId').val(),
+								payoutPerson:$('#payoutPerson').val(),
+								payoutId:$('#payoutId').val()
+								
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -58,81 +81,104 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.payoutId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.payoutId
-												+ '\')"><i class="fa fa-key"></i></a> ';
+//										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+//												+ row.payoutId
+//												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
 								} ,
 																{
+									align : 'center',
 									field : 'payoutId', 
 									title : '请款申请编号' 
 								},
 																{
+									align : 'center',
 									field : 'customerId', 
 									title : '企业客户编号' 
 								},
 																{
+									align : 'center',
 									field : 'businessId', 
 									title : '业务编号' 
 								},
 																{
+									align : 'center',
 									field : 'projectId', 
 									title : '项目编号' 
 								},
 																{
+									
+									align : 'center',
+									field : 'projectName', 
+									title : '项目名称' 
+								},
+																{
+									align : 'center',
 									field : 'payoutPerson', 
 									title : '申请人姓名' 
 								},
 																{
+									align : 'center',
 									field : 'payoutUseage', 
 									title : '请款用途' 
 								},
 																{
+									align : 'center',
 									field : 'payoutPrice', 
 									title : '请款金额' 
 								},
 																{
+									align : 'center',
 									field : 'payoutMeans', 
 									title : '结算方式' 
 								},
 																{
+									align : 'center',
 									field : 'payoutBeneficiaryBank', 
 									title : '收款人银行' 
 								},
 																{
+									align : 'center',
 									field : 'payoutCardNumber', 
 									title : '银行卡号' 
 								},
 																{
+									align : 'center',
 									field : 'payoutRelatedContractId', 
 									title : '关联出差申请编号' 
 								},
+//																{
+//									field : 'payoutResult', 
+//									title : '实际请款结果' 
+//								},
 																{
-									field : 'payoutResult', 
-									title : '实际请款结果' 
-								},
-																{
+									align : 'center',
 									field : 'payoutRemarks', 
 									title : '备注' 
 								},
 																{
+									align : 'center',
 									field : 'payoutApprovalStatus', 
 									title : '审批状态' 
 								},
+//																{
+//									align : 'center',
+//									field : 'payoutOperator', 
+//									title : '操作人' 
+//								},
 																{
-									field : 'payoutOperator', 
-									title : '操作人' 
-								},
-																{
+									align : 'center',
 									field : 'payoutOperateTime', 
 									title : '修改时间' 
 								},
+//																{
+//									align : 'center',
+//									field : 'payoutCreator', 
+//									title : '创建人' 
+//								},
 																{
-									field : 'payoutCreator', 
-									title : '创建人' 
-								},
-																{
+									align : 'center',
 									field : 'payoutCreateTime', 
 									title : '创建时间' 
 								}
@@ -155,6 +201,7 @@ function load() {
 
 
 function reLoad() {
+//	alert($('#projectName').val());
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {

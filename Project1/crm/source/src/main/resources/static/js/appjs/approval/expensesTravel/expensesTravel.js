@@ -1,9 +1,22 @@
 
 var prefix = "/approval/expensesTravel"
 $(function() {
+	loadCrmData("/project/project/listDic","projectId");
 	load();
+	datetimepicker();
 });
-
+function datetimepicker(){
+	//开始时间(创建时间)
+	$('#expensesTravelCreateTime').datetimepicker({
+		format:'YYYY-MM-DD',
+		locale:moment.locale('zh-cn')
+	});
+	//结束时间(最后修改时间)
+	$('#expensesTravelOptTime').datetimepicker({
+		format:'YYYY-MM-DD',
+		locale:moment.locale('zh-cn')
+	});
+}
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(
@@ -32,7 +45,11 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
+								expensesTravelName:$("#expensesTravelName").val(),
+								projectId:$("#projectId").val(),
+								expensesTravelCreateTime:$("#expensesTravelCreateTime").val(),
+								expensesTravelOptTime:$("#expensesTravelOptTime").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -132,18 +149,18 @@ function load() {
 									field : 'expensesTravelStatus', 
 									title : '审批状态' 
 								},
-																{
-									field : 'expensesTravelOperator', 
-									title : '操作人' 
-								},
+//																{
+//									field : 'expensesTravelOperator', 
+//									title : '操作人' 
+//								},
 																{
 									field : 'expensesTravelOptTime', 
 									title : '修改时间' 
 								},
-																{
-									field : 'expensesTravelCreator', 
-									title : '创建人' 
-								},
+//																{
+//									field : 'expensesTravelCreator', 
+//									title : '创建人' 
+//								},
 																{
 									field : 'expensesTravelCreateTime', 
 									title : '创建时间' 
@@ -164,6 +181,7 @@ function load() {
 	})
 }
 function reLoad() {
+	alert($("#expensesTravelCreateTime").val());
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function add() {
