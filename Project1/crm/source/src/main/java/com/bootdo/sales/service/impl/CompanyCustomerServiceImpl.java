@@ -311,7 +311,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 						}
 
 					} // --->遍历列
-					companyCustomerDO.setCustomerOperator(userid);
+					companyCustomerDO.setCustomerOperator(Long.toString(userid));
 					companyCustomerDO.setCustomerOperateTime(new Date());
 
 					rtn = companyCustomerDao.save(companyCustomerDO);

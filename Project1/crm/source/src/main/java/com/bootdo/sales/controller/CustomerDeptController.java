@@ -59,6 +59,13 @@ public class CustomerDeptController {
 	    return "sales/companyCustomer/addDept";
 	}
 
+	//结构详情
+	@GetMapping("/detailedInformation")
+	@RequiresPermissions("sales:customerDept:detailed_information")
+	String detailedInformation(){
+		return "sales/companyCustomer/detailedInformation";
+	}
+
 	@GetMapping("/edit/{customerDeptId}")
 	@RequiresPermissions("sales:customerDept:edit")
 	String edit(@PathVariable("customerDeptId") String customerDeptId,Model model){

@@ -49,9 +49,9 @@ public class ExpensesTravelDO implements Serializable {
 	//备注
 	private String expensesTravelRemarks;
 	//审批状态
-	private Integer expensesTravelStatus;
+	private String expensesTravelStatus;
 	//操作人
-	private Long expensesTravelOperator;
+	private String expensesTravelOperator;
 	//修改时间
 	private Date expensesTravelOptTime;
 	//创建人
@@ -275,25 +275,25 @@ public class ExpensesTravelDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setExpensesTravelStatus(Integer expensesTravelStatus) {
+	public void setExpensesTravelStatus(String expensesTravelStatus) {
 		this.expensesTravelStatus = expensesTravelStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public Integer getExpensesTravelStatus() {
+	public String getExpensesTravelStatus() {
 		return expensesTravelStatus;
 	}
 	/**
 	 * 设置：操作人
 	 */
-	public void setExpensesTravelOperator(Long expensesTravelOperator) {
+	public void setExpensesTravelOperator(String expensesTravelOperator) {
 		this.expensesTravelOperator = expensesTravelOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public Long getExpensesTravelOperator() {
+	public String getExpensesTravelOperator() {
 		return expensesTravelOperator;
 	}
 	/**

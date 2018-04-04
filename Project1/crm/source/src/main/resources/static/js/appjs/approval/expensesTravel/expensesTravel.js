@@ -164,15 +164,15 @@ function load() {
 									field : 'expensesTravelRemarks', 
 									title : '备注' 
 								},
-//																{
-//									align : 'center',
-//									field : 'expensesTravelStatus', 
-//									title : '审批状态' 
-//								},
-//																{
-//									field : 'expensesTravelOperator', 
-//									title : '操作人' 
-//								},
+																{
+									align : 'center',
+									field : 'expensesTravelStatus', 
+									title : '审批状态' 
+								},
+																{
+									field : 'expensesTravelOperator', 
+									title : '操作人' 
+								},
 																{
 									align : 'center',
 									field : 'expensesTravelOptTime', 

@@ -32,7 +32,7 @@
 
 							<!-- 客户基本信息 -->
 <!-- 				<form class="form-horizontal m-t" id="signupForm"> -->
-							<div id="myTabContent" class="tab-content">
+							<div id="myTabContent" class="tab-content" style="padding-top: 20px">
 								<div class="tab-pane fade in active" id="baseInfo">
 
 									<div class="form-group">
@@ -328,7 +328,7 @@
 											var s_edit_h = 'hidden';
 											var s_remove_h = 'hidden';
 											var s_resetPwd_h = 'hidden';
-											var s_detailed_information_h = 'hidden';
+											// var s_detailed_information_h = 'hidden';
 										</script>
 									</div>
 									<div shiro:hasPermission="sales:customerJob:edit">
@@ -346,11 +346,11 @@
 											var s_resetPwd_h = '';
 										</script>
 									</div>
-									<div shiro:hasPermission="sales:customerDept:detailed_information">
+									<!-- <div shiro:hasPermission="sales:customerDept:detailed_information">
 										<script type="text/javascript">
-											var s_detailed_information_h = ''; 
+											var s_detailed_information_h = '';
 										</script>
-									</div>
+									</div> -->
 
 
 									<!-- 部门  -->
@@ -371,6 +371,12 @@
 																type="button" class="btn  btn-danger"
 																onclick="batchRemoveDept()">
 																<i class="fa fa-trash" aria-hidden="true"></i>删除
+															</button>
+															<button
+																shiro:hasPermission="sales:customerDept:detailed_information"
+																type="button" class="btn btn-success"
+																onclick="detailedInformation()">
+																<i class="fa fa-detailed_information" aria-hidden="true"></i>结构详情
 															</button>
 														</div>
 														<!-- 				<div class="columns pull-right">

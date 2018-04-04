@@ -59,9 +59,6 @@ public class PayoutController extends BaseController {
 		if (params.get("payoutPerson") != null && params.get("payoutPerson") != "") {
 			params.put("payoutPerson", "%" + params.get("payoutPerson") + "%");
 		}
-		if (params.get("projectId") != null && params.get("projectId") != "") {
-			params.put("projectId", "%" + params.get("projectId") + "%");
-		}
 //		if (params.get("payoutCreateTime") != null && params.get("payoutCreateTime") != "") {
 //			params.put("payoutCreateTime", params.get("payoutCreateTime") + " 00:00:00");
 //		}
@@ -109,7 +106,7 @@ public class PayoutController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("contract:payout:add")
 	public R save( PayoutDO payout){
-		payout.setPayoutOperator(getUserId());
+		payout.setPayoutOperator(Long.toString(getUserId()));
 		if(payoutService.save(payout)>0){
 			return R.ok();
 		}

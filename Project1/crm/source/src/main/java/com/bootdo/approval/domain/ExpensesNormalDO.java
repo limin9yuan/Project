@@ -37,9 +37,9 @@ public class ExpensesNormalDO implements Serializable {
 	//备注
 	private String expensesNormalRmarks;
 	//审批状态
-	private Integer expensesNormalStatus;
+	private String expensesNormalStatus;
 	//操作人
-	private Long expensesNormalOperator;
+	private String expensesNormalOperator;
 	//修改时间
 	private Date expensesNormalOptTime;
 	//创建人
@@ -191,25 +191,25 @@ public class ExpensesNormalDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setExpensesNormalStatus(Integer expensesNormalStatus) {
+	public void setExpensesNormalStatus(String expensesNormalStatus) {
 		this.expensesNormalStatus = expensesNormalStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public Integer getExpensesNormalStatus() {
+	public String getExpensesNormalStatus() {
 		return expensesNormalStatus;
 	}
 	/**
 	 * 设置：操作人
 	 */
-	public void setExpensesNormalOperator(Long expensesNormalOperator) {
+	public void setExpensesNormalOperator(String expensesNormalOperator) {
 		this.expensesNormalOperator = expensesNormalOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public Long getExpensesNormalOperator() {
+	public String getExpensesNormalOperator() {
 		return expensesNormalOperator;
 	}
 	/**

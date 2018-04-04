@@ -212,7 +212,8 @@ function expensesTravel_edit() {
 			$("input[name='expensesTravelCardNum']").val(result.expensesTravelCardNum);
 			//备注--文本框
 			$("textarea[name='expensesTravelRemarks']").val(result.expensesTravelRemarks);
-			
+			//审批状态--单选按钮
+			 $(":radio[name='expensesTravelStatus'][value='" + result.expensesTravelStatus + "']").prop("checked", "checked");
 		}
 	});
 }

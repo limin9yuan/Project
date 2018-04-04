@@ -197,7 +197,7 @@ public Map<String, Object> Import(File file, long userid) {
 					}
 					
 				} // --->遍历列
-				payoutDO.setPayoutOperator(userid);
+				payoutDO.setPayoutOperator(Long.toString(userid));
 				payoutDO.setPayoutCreator(userid);
 				payoutDO.setPayoutOperateTime(new Date());
 				payoutDO.setPayoutCreateTime(new Date());

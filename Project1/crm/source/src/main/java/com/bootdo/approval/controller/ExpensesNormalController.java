@@ -109,7 +109,7 @@ public class ExpensesNormalController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("approval:expensesNormal:add")
 	public R save(ExpensesNormalDO expensesNormal) {
-		expensesNormal.setExpensesNormalOperator(getUserId());
+		expensesNormal.setExpensesNormalOperator(Long.toString(getUserId()));
 		if (expensesNormalService.save(expensesNormal) > 0) {
 			return R.ok();
 		}

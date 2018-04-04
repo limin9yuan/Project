@@ -8,13 +8,27 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.contract.domain.TravelDO">
-		select `Travel_ID`,`Customer_ID`,`Project_ID`,`Business_ID`,`Travel_Name`,`Travel_Place_Issue`,`Travel_Place_Ended`,`Travel_Partner`,`Travel_Departure_Date`,`Travel_Return_Date`,`Travel_Plan_Cost_Type`,`Travel_Visit_Mode`,`Travel_Plan_Task`,`Travel_Actual_Performance`,`Travel_Uncompleted_Cause`,`Travel_Task_Confirm`,`Travel_Approval_Status`,`Travel_Operator`,`Travel_Operate_Time`,`Travel_Creator`,`Travel_Create_Time` from approval_travel
+		select `Travel_ID`,a.`Customer_ID`,a.`Project_ID`,`Business_ID`,
+		i.Employee_Name AS `Travel_Name`,`Travel_Place_Issue`,
+		`Travel_Place_Ended`,
+		e.Employee_Name AS `Travel_Partner`,`Travel_Departure_Date`,`Travel_Return_Date`,`Travel_Plan_Cost_Type`,
+		`Travel_Visit_Mode`,`Travel_Plan_Task`,
+		CASE `Travel_Actual_Performance` when '1' then '完成' else '未完成' END AS Travel_Actual_Performance,`Travel_Uncompleted_Cause`,
+		CASE `Travel_Task_Confirm` when '1' then '完成' else '未完成' END AS Travel_Task_Confirm ,
+		CASE `Travel_Approval_Status` when '1' then '已审批' else '未审批' END AS Travel_Approval_Status,
+		b.name AS `Travel_Operator`,`Travel_Operate_Time`,`Travel_Creator`,`Travel_Create_Time` 
+		from approval_travel a
+		left join development_project  d on a.Project_ID=d.Project_ID
+		left join sys_user b ON a.Travel_Operator = b.user_id
+		left join inner_org_employee i on a.Travel_Name=i.Employee_ID
+		left join inner_org_employee e on a.Travel_Partner=e.Employee_ID
+		left join inner_org_employee g on a.Travel_Name=g.Employee_ID
         <where>  
 		  		  <if test="travelId != null and travelId != ''"> and Travel_ID = #{travelId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
-		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
+		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
 		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
-		  		  <if test="travelName != null and travelName != ''"> and Travel_Name = #{travelName} </if>
+		  		  <if test="travelName != null and travelName != ''"> and g.Employee_Name like #{travelName} </if>
 		  		  <if test="travelPlaceIssue != null and travelPlaceIssue != ''"> and Travel_Place_Issue = #{travelPlaceIssue} </if>
 		  		  <if test="travelPlaceEnded != null and travelPlaceEnded != ''"> and Travel_Place_Ended = #{travelPlaceEnded} </if>
 		  		  <if test="travelPartner != null and travelPartner != ''"> and Travel_Partner = #{travelPartner} </if>
@@ -28,9 +42,9 @@
 		  		  <if test="travelTaskConfirm != null and travelTaskConfirm != ''"> and Travel_Task_Confirm = #{travelTaskConfirm} </if>
 		  		  <if test="travelApprovalStatus != null and travelApprovalStatus != ''"> and Travel_Approval_Status = #{travelApprovalStatus} </if>
 		  		  <if test="travelOperator != null and travelOperator != ''"> and Travel_Operator = #{travelOperator} </if>
-		  		  <if test="travelOperateTime != null and travelOperateTime != ''"> and Travel_Operate_Time = #{travelOperateTime} </if>
+		  		  <if test="travelOperateTime != null and travelOperateTime != ''"> and Travel_Operate_Time &gt;= #{travelOperateTime} </if>
 		  		  <if test="travelCreator != null and travelCreator != ''"> and Travel_Creator = #{travelCreator} </if>
-		  		  <if test="travelCreateTime != null and travelCreateTime != ''"> and Travel_Create_Time = #{travelCreateTime} </if>
+		  		  <if test="travelCreateTime != null and travelCreateTime != ''"> and Travel_Create_Time &gt;= #{travelCreateTime} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -46,13 +60,16 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from approval_travel
+		select count(*) 
+		from approval_travel a
+		left join development_project  d on a.Project_ID=d.Project_ID
+		left join inner_org_employee g on a.Travel_Name=g.Employee_ID
 		 <where>  
 		  		  <if test="travelId != null and travelId != ''"> and Travel_ID = #{travelId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
-		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
+		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
 		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
-		  		  <if test="travelName != null and travelName != ''"> and Travel_Name = #{travelName} </if>
+		  		  <if test="travelName != null and travelName != ''"> and g.Employee_Name like #{travelName} </if>
 		  		  <if test="travelPlaceIssue != null and travelPlaceIssue != ''"> and Travel_Place_Issue = #{travelPlaceIssue} </if>
 		  		  <if test="travelPlaceEnded != null and travelPlaceEnded != ''"> and Travel_Place_Ended = #{travelPlaceEnded} </if>
 		  		  <if test="travelPartner != null and travelPartner != ''"> and Travel_Partner = #{travelPartner} </if>
@@ -66,9 +83,9 @@
 		  		  <if test="travelTaskConfirm != null and travelTaskConfirm != ''"> and Travel_Task_Confirm = #{travelTaskConfirm} </if>
 		  		  <if test="travelApprovalStatus != null and travelApprovalStatus != ''"> and Travel_Approval_Status = #{travelApprovalStatus} </if>
 		  		  <if test="travelOperator != null and travelOperator != ''"> and Travel_Operator = #{travelOperator} </if>
-		  		  <if test="travelOperateTime != null and travelOperateTime != ''"> and Travel_Operate_Time = #{travelOperateTime} </if>
+		  		  <if test="travelOperateTime != null and travelOperateTime != ''"> and Travel_Operate_Time &gt;= #{travelOperateTime} </if>
 		  		  <if test="travelCreator != null and travelCreator != ''"> and Travel_Creator = #{travelCreator} </if>
-		  		  <if test="travelCreateTime != null and travelCreateTime != ''"> and Travel_Create_Time = #{travelCreateTime} </if>
+		  		  <if test="travelCreateTime != null and travelCreateTime != ''"> and Travel_Create_Time &gt;= #{travelCreateTime} </if>
 		  		</where>
 	</select>
 	 

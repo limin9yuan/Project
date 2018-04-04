@@ -79,6 +79,7 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
+										var a='<div style="width:70px"></div>'
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
 												+ row.customerId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
@@ -87,7 +88,7 @@ function load() {
 //										var f = '<a class="btn btn-success btn-sm '+s_examine_h+'" href="#" title="查看"  mce_href="#" onclick="examine(\''
 //												+ row.customerId
 //												+ '\')"><i class="fa fa-search"></i></a> ';
-										return  e + d ;
+										return  a + e + d ;
 									}
 								} ,
 																{
@@ -206,6 +207,11 @@ function load() {
 									align : 'center',
 									field : 'customerHotWaterArea', 
 									title : '热水面积' 
+								},
+								{
+									align : 'center',
+									field : 'customerOperator', 
+									title : '操作人' 
 								},
 						]
 					});

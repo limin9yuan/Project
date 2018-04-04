@@ -1,21 +1,27 @@
 $().ready(function() {
-	 $('#travelDepartureDate').datetimepicker({  
-         format: 'YYYY-MM-DD',  
-         locale: moment.locale('zh-cn')  
-     });
-	 $('#travelReturnDate').datetimepicker({  
-         format: 'YYYY-MM-DD',  
-         locale: moment.locale('zh-cn')  
-     });
-	 loadCrmData("/sales/companyCustomer/listDic","customerId");
-	 loadCrmData("/sales/business/listDic","businessId");
-	 loadCrmData("/sales/salesProject/listDic","projectId");
-	 loadDic("sales_customer_visit_Mode","travelVisitMode");
-	 loadDic("Travel_Plan_Cost_Type","travelPlanCostType");
-	 loadCrmData("/inner/innerOrgEmployee/listDic","travelName");
-	 loadCrmData("/inner/innerOrgEmployee/listDic","travelPartner");
+
+	loadCrmData("/sales/companyCustomer/listDic", "customerId");
+	loadCrmData("/sales/business/listDic", "businessId");
+	loadCrmData("/sales/salesProject/listDic", "projectId");
+	loadDic("sales_customer_visit_Mode", "travelVisitMode");
+	loadDic("Travel_Plan_Cost_Type", "travelPlanCostType");
+	loadCrmData("/inner/innerOrgEmployee/listDic", "travelName");
+	loadCrmData("/inner/innerOrgEmployee/listDic", "travelPartner");
+
 	validateRule();
+	datetimepicker();
 });
+
+function datetimepicker() {
+	$('#travelDepartureDate').datetimepicker({
+		format : 'YYYY-MM-DD',
+		locale : moment.locale('zh-cn')
+	});
+	$('#travelReturnDate').datetimepicker({
+		format : 'YYYY-MM-DD',
+		locale : moment.locale('zh-cn')
+	});
+}
 
 $.validator.setDefaults({
 	submitHandler : function() {
@@ -50,14 +56,98 @@ function save() {
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
+		ignore : ":hidden:not(select)",
 		rules : {
-			name : {
+			// 企业客户编号
+			customerId : {
+				required : true
+			},
+			// 业务编号
+			businessId : {
+				required : true
+			},
+			// 项目编号
+			projectId : {
+				required : true
+			},
+			// 出差人姓名
+			travelName : {
+				required : true
+			},
+			// 出发地
+			travelPlaceIssue : {
+				required : true
+			},
+			// 目的地
+			travelPlaceEnded : {
+				required : true
+			},
+			// 拟出差时间
+			travelDepartureDate : {
+				required : true
+			},
+			// 拟返程时间
+			travelReturnDate : {
+				required : true
+			},
+			// 预计费用类别
+			travelPlanCostType : {
+				required : true
+			},
+			// 预计交通方式
+			travelVisitMode : {
+				required : true
+			},
+			// 计划任务信息
+			travelPlanTask : {
 				required : true
 			}
+
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
+			// 企业客户编号
+			customerId : {
+				required :  icon + "请选择企业客户编号！"
+			},
+			// 业务编号
+			businessId : {
+				required :  icon + "请选择业务编号！"
+			},
+			// 项目编号
+			projectId : {
+				required :  icon + "请选择项目编号！"
+			},
+			// 出差人姓名
+			travelName : {
+				required :  icon + "输入出差人姓名！"
+			},
+			// 出发地
+			travelPlaceIssue : {
+				required :  icon + "请输入出发地！"
+			},
+			// 目的地
+			travelPlaceEnded : {
+				required :  icon + "请输入目的地！"
+			},
+			// 拟出差时间
+			travelDepartureDate : {
+				required :  icon + "请输入拟出差时间！"
+			},
+			// 拟返程时间
+			travelReturnDate : {
+				required :  icon + "请输入拟返程时间！"
+			},
+			// 预计费用类别
+			travelPlanCostType : {
+				required : icon + "请输入预计费用类别！"
+			},
+			// 预计交通方式
+			travelVisitMode : {
+				required : icon + "请选择预计交通方式！"
+			},
+			// 计划任务信息
+			travelPlanTask : {
+				required : icon + "请输入计划任务信息！！"
 			}
 		}
 	})

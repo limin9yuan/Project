@@ -209,7 +209,7 @@ public class ExpensesNormalServiceImpl implements ExpensesNormalService {
 						
 						
 					} // --->遍历列
-					expensesNormalDO.setExpensesNormalOperator(userid);
+					expensesNormalDO.setExpensesNormalOperator(Long.toString(userid));
 					expensesNormalDO.setExpensesNormalCreator(userid);
 					expensesNormalDO.setExpensesNormalOptTime(new Date());
 					expensesNormalDO.setExpensesNormalCreateTime(new Date());

@@ -27,7 +27,8 @@
 		s.name as customerOwnerName,
 
 		`Customer_Operate_Time`,`Opponent_Company`,`Opponent_Project_Type`,`Opponent_Product_Type`,`Opponent_Product_Price` 
-		,u.name as customerOperatorName,a.Customer_Level,f.Contact_Name,g.Business_Name,p.Project_Name
+		,u.name as customerOperatorName,a.Customer_Level,f.Contact_Name,g.Business_Name,p.Project_Name,
+		s.name AS Customer_Operator
 		
 		from sales_company_customer a
 		left join sys_user u on a.Customer_Operator = u.user_id
@@ -56,7 +57,7 @@
 		  		  <if test="customerCity != null and customerCity != ''"> and Customer_City = #{customerCity} </if>
 		  		  <if test="customerCounty != null and customerCounty != ''"> and Customer_County = #{customerCounty} </if>
 		  		  
-		  		  <if test="customerId != null and customerId != ''"> and Customer_ID like #{customerId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID like #{customerId} or a.Customer_Simple_Name like #{customerId}</if>
 		  		  <if test="customerName != null and customerName != ''"> and a.Customer_Name like #{customerName} </if>
 		  		  
 		  		  <if test="contactName != null and contactName !=''"> and f.Contact_Name like #{contactName} </if>
@@ -95,7 +96,7 @@
 		  		  <if test="customerCounty != null and customerCounty != ''"> and Customer_County = #{customerCounty} </if>
 		  		  
 		  		  
-		  		  <if test="customerId != null and customerId != ''"> and Customer_ID like #{customerId} </if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID like #{customerId} or a.Customer_Simple_Name like #{customerId}</if>
 		  		  <if test="customerSales != null and customerSales != ''"> and Customer_Sales = #{customerSales} </if>
 		  		  <if test="customerLevel != null and customerLevel != ''"> and Customer_Level = #{customerLevel} </if>
 		  		  <if test="province != null and province != ''"> and Customer_Province = #{province} </if>

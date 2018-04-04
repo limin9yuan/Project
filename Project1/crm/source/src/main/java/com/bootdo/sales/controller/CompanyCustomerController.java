@@ -129,7 +129,7 @@ public class CompanyCustomerController  extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("sales:companyCustomer:add")
 	public R save( CompanyCustomerDO companyCustomer){
-		companyCustomer.setCustomerOperator(getUserId());
+		companyCustomer.setCustomerOperator(Long.toString(getUserId()));
 		if(companyCustomerService.save(companyCustomer)>0){
 			return R.ok();
 		}

@@ -163,11 +163,11 @@ function load() {
 									field : 'payoutApprovalStatus', 
 									title : '审批状态' 
 								},
-//																{
-//									align : 'center',
-//									field : 'payoutOperator', 
-//									title : '操作人' 
-//								},
+																{
+									align : 'center',
+									field : 'payoutOperator', 
+									title : '操作人' 
+								},
 																{
 									align : 'center',
 									field : 'payoutOperateTime', 

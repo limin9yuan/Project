@@ -45,9 +45,9 @@ public class PayoutDO implements Serializable {
 	//备注
 	private String payoutRemarks;
 	//审批状态
-	private Integer payoutApprovalStatus;
+	private String payoutApprovalStatus;
 	//操作人
-	private Long payoutOperator;
+	private String payoutOperator;
 	//修改时间
 	private Date payoutOperateTime;
 	//创建人
@@ -222,25 +222,25 @@ public class PayoutDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setPayoutApprovalStatus(Integer payoutApprovalStatus) {
+	public void setPayoutApprovalStatus(String payoutApprovalStatus) {
 		this.payoutApprovalStatus = payoutApprovalStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public Integer getPayoutApprovalStatus() {
+	public String getPayoutApprovalStatus() {
 		return payoutApprovalStatus;
 	}
 	/**
 	 * 设置：操作人
 	 */
-	public void setPayoutOperator(Long payoutOperator) {
+	public void setPayoutOperator(String payoutOperator) {
 		this.payoutOperator = payoutOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public Long getPayoutOperator() {
+	public String getPayoutOperator() {
 		return payoutOperator;
 	}
 	/**

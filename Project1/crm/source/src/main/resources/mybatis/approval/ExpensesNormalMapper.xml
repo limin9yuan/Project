@@ -11,16 +11,21 @@
 
 	<select id="list" resultType="com.bootdo.approval.domain.ExpensesNormalDO">
 		select
-		`Expenses_Normal`,a.`Customer_ID`,`Business_ID`,a.`Project_ID`,`Expenses_Normal_Name`,`Expenses_Normal_Reason`,`Expenses_Normal_Price`,`Expenses_Normal_Result`,`Expenses_Normal_RelatedID`,`Expenses_Normal_Rmarks`,`Expenses_Normal_Status`,`Expenses_Normal_Operator`,`Expenses_Normal_Opt_Time`,`Expenses_Normal_Creator`,`Expenses_Normal_Create_Time`
+		`Expenses_Normal`,a.`Customer_ID`,`Business_ID`,a.`Project_ID`,
+		g.Employee_Name AS`Expenses_Normal_Name`,`Expenses_Normal_Reason`,`Expenses_Normal_Price`,`Expenses_Normal_Result`,`Expenses_Normal_RelatedID`,`Expenses_Normal_Rmarks`,
+		CASE `Expenses_Normal_Status` when '1' then '已审批' ELSE '未审批' END AS Expenses_Normal_Status,
+		s.name AS`Expenses_Normal_Operator`,`Expenses_Normal_Opt_Time`,`Expenses_Normal_Creator`,`Expenses_Normal_Create_Time`
 		from approval_expenses_normal a
 		left join development_project p on a.Project_ID=p.Project_ID
-		left join sys_user s on a.Expenses_Normal_Operator=s.user_id
+		left join sys_user s on a.Expenses_Normal_Operator=s.user_id 
+		left join inner_org_employee g on a.Expenses_Normal_Name=g.Employee_ID
+		
 		<where>
 			<if test="expensesNormal != null and expensesNormal != ''"> and Expenses_Normal = #{expensesNormal} </if>
 			<if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
 			<if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
-			<if test="projectId != null and projectId != ''"> and p.Project_ID = #{projectId} </if>
-			<if test="expensesNormalName != null and expensesNormalName != ''"> and Expenses_Normal_Name like #{expensesNormalName} </if>
+			<if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
+			<if test="expensesNormalName != null and expensesNormalName != ''"> and g.Employee_Name like #{expensesNormalName} </if>
 			<if test="expensesNormalReason != null and expensesNormalReason != ''"> and Expenses_Normal_Reason = #{expensesNormalReason}
 			</if>
 			<if test="expensesNormalPrice != null and expensesNormalPrice != ''"> and Expenses_Normal_Price = #{expensesNormalPrice} </if>
@@ -57,13 +62,16 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from approval_expenses_normal
+		select count(*) 
+		from approval_expenses_normal a
+		left join development_project p on a.Project_ID=p.Project_ID
+		left join inner_org_employee g on a.Expenses_Normal_Name=g.Employee_ID
 		<where>
 			<if test="expensesNormal != null and expensesNormal != ''"> and Expenses_Normal = #{expensesNormal} </if>
 			<if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
 			<if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
-			<if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
-			<if test="expensesNormalName != null and expensesNormalName != ''"> and Expenses_Normal_Name = #{expensesNormalName} </if>
+			<if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
+			<if test="expensesNormalName != null and expensesNormalName != ''"> and g.Employee_Name like #{expensesNormalName} </if>
 			<if test="expensesNormalReason != null and expensesNormalReason != ''"> and Expenses_Normal_Reason = #{expensesNormalReason}
 			</if>
 			<if test="expensesNormalPrice != null and expensesNormalPrice != ''"> and Expenses_Normal_Price = #{expensesNormalPrice} </if>
@@ -78,12 +86,12 @@
 			</if>
 			<if test="expensesNormalOperator != null and expensesNormalOperator != ''"> and Expenses_Normal_Operator = #{expensesNormalOperator}
 			</if>
-			<if test="expensesNormalOptTime != null and expensesNormalOptTime != ''"> and Expenses_Normal_Opt_Time = #{expensesNormalOptTime}
+			<if test="expensesNormalOptTime != null and expensesNormalOptTime != ''"> and Expenses_Normal_Opt_Time &gt;= #{expensesNormalOptTime}
 			</if>
 			<if test="expensesNormalCreator != null and expensesNormalCreator != ''"> and Expenses_Normal_Creator = #{expensesNormalCreator}
 			</if>
 			<if
-				test="expensesNormalCreateTime != null and expensesNormalCreateTime != ''"> and Expenses_Normal_Create_Time = #{expensesNormalCreateTime}
+				test="expensesNormalCreateTime != null and expensesNormalCreateTime != ''"> and Expenses_Normal_Create_Time &gt;= #{expensesNormalCreateTime}
 			</if>
 		</where>
 	</select>

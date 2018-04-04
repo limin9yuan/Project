@@ -110,7 +110,7 @@ public class ExpensesTravelController extends BaseController  {
 	@PostMapping("/save")
 	@RequiresPermissions("approval:expensesTravel:add")
 	public R save( ExpensesTravelDO expensesTravel){
-		expensesTravel.setExpensesTravelOperator(getUserId());
+		expensesTravel.setExpensesTravelOperator(Long.toString(getUserId()));
 		if(expensesTravelService.save(expensesTravel)>0){
 			return R.ok();
 		}

@@ -143,8 +143,8 @@ public class CompanyCustomerDO implements Serializable {
 	private String customerPlanThreeYear;
 	//备注
 	private String customerRemarks;
-	//创建人
-	private long customerOperator;
+	//操作人
+	private String customerOperator;
 	//创建人姓名
 	private String customerOperatorName;
 	//创建时间
@@ -975,13 +975,13 @@ public class CompanyCustomerDO implements Serializable {
 	/**
 	 * 设置：创建人
 	 */
-	public void setCustomerOperator(long customerOperator) {
+	public void setCustomerOperator(String customerOperator) {
 		this.customerOperator = customerOperator;
 	}
 	/**
 	 * 获取：创建人
 	 */
-	public long getCustomerOperator() {
+	public String getCustomerOperator() {
 		return customerOperator;
 	}
 	/**

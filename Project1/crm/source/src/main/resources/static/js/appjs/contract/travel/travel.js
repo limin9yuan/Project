@@ -1,9 +1,22 @@
 
 var prefix = "/contract/travel"
 $(function() {
+	loadCrmData("/sales/salesProject/listDic","projectId");
 	load();
+	datetimepicker();
 });
-
+function datetimepicker(){
+	//开始时间(创建时间)
+	$('#travelCreateTime').datetimepicker({
+		format:'YYYY-MM-DD',
+		locale:moment.locale('zh-cn')
+	});
+	//结束时间(最后修改时间)
+	$('#travelOperateTime').datetimepicker({
+		format:'YYYY-MM-DD',
+		locale:moment.locale('zh-cn')
+	});
+}
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(
@@ -32,7 +45,12 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
+								travelOperateTime:$("#travelOperateTime").data('date'),
+								travelCreateTime:$("#travelCreateTime").data('date'),
+								travelName:$("#travelName").val(),
+								projectId:$("#projectId").val()
+								
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -52,6 +70,7 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
+										var a ='<div style="width:70px"></div>'
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
 												+ row.travelId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
@@ -61,90 +80,111 @@ function load() {
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
 												+ row.travelId
 												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+										return  a + e + d ;
 									}
 								} ,
 																{
+									align : 'center',
 									field : 'travelId', 
 									title : '出差申请编号' 
 								},
 																{
+									align : 'center',
 									field : 'customerId', 
 									title : '企业客户编号' 
 								},
 																{
+									align : 'center',
 									field : 'projectId', 
 									title : '项目编号' 
 								},
 																{
+									align : 'center',
 									field : 'businessId', 
 									title : '业务编号' 
 								},
 																{
+									align : 'center',
 									field : 'travelName', 
 									title : '出差人姓名' 
 								},
 																{
+									align : 'center',
 									field : 'travelPlaceIssue', 
 									title : '出发地' 
 								},
 																{
+									align : 'center',
 									field : 'travelPlaceEnded', 
 									title : '目的地' 
 								},
 																{
+									align : 'center',
 									field : 'travelPartner', 
 									title : '同行人' 
 								},
 																{
+									align : 'center',
 									field : 'travelDepartureDate', 
 									title : '拟出差时间' 
 								},
 																{
+									align : 'center',
 									field : 'travelReturnDate', 
 									title : '拟返程时间' 
 								},
 																{
+									align : 'center',
 									field : 'travelPlanCostType', 
 									title : '预计费用类别' 
 								},
 																{
+									align : 'center',
 									field : 'travelVisitMode', 
 									title : '预计交通方式' 
 								},
 																{
+									align : 'center',
 									field : 'travelPlanTask', 
 									title : '计划任务信息' 
 								},
 																{
+									align : 'center',
 									field : 'travelActualPerformance', 
 									title : '实际完成结果' 
 								},
 																{
+									align : 'center',
 									field : 'travelUncompletedCause', 
 									title : '未完成原因' 
 								},
 																{
+									align : 'center',
 									field : 'travelTaskConfirm', 
 									title : '出差任务确认' 
 								},
 																{
+									align : 'center',
 									field : 'travelApprovalStatus', 
 									title : '审批状态' 
 								},
 																{
+									align : 'center',
 									field : 'travelOperator', 
 									title : '操作人' 
 								},
 																{
+									align : 'center',
 									field : 'travelOperateTime', 
 									title : '修改时间' 
 								},
+//																{
+//								align : 'center',
+//									field : 'travelCreator', 
+//									title : '创建人' 
+//								},
 																{
-									field : 'travelCreator', 
-									title : '创建人' 
-								},
-																{
+									align : 'center',
 									field : 'travelCreateTime', 
 									title : '创建时间' 
 								}

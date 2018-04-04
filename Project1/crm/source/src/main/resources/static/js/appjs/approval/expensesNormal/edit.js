@@ -143,6 +143,9 @@ function expensesNormal_edit() {
 			$("input[name='expensesNormalPrice']").val(result.expensesNormalPrice);
 			//备注--文本框
 			$("textarea[name='expensesNormalRmarks']").val(result.expensesNormalRmarks);
+			//审批状态--单选按钮
+			 $(":radio[name='expensesNormalStatus'][value='" + result.expensesNormalStatus + "']").prop("checked", "checked");
+			
 			
 		}
 	});

@@ -225,7 +225,7 @@ public class ExpensesTravelServiceImpl implements ExpensesTravelService {
 							expensesTravelDO.setExpensesTravelRemarks(cellvalue);
 						}
 					} // --->遍历列
-					expensesTravelDO.setExpensesTravelOperator(userid);
+					expensesTravelDO.setExpensesTravelOperator(Long.toString(userid));
 					expensesTravelDO.setExpensesTravelCreator(userid);
 					expensesTravelDO.setExpensesTravelOptTime(new Date());
 					expensesTravelDO.setExpensesTravelCreateTime(new Date());

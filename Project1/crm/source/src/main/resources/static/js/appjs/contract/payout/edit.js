@@ -86,6 +86,8 @@ function payout_edit() {
 			loadCrmDataValue("/contract/travel/listDic", "payoutRelatedContractId",result.payoutRelatedContractId);
 			// 备注--文本框
 			$("textarea[name='payoutRemarks']").val(result.payoutRemarks);
+			//审批状态--单选按钮
+			$(":radio[name='payoutApprovalStatus'][value='" + result.payoutApprovalStatus + "']").prop("checked", "checked");
 		}
 	});
 }

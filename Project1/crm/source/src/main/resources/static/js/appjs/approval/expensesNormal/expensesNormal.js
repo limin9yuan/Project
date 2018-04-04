@@ -82,55 +82,68 @@ function load() {
 										return a+e + d ;
 									}
 								} ,
-								{
+																{
+									align : 'center',
 									field : 'expensesNormal', 
 									title : '报销申请编号' 
 								},
 																{
+									align : 'center',
 									field : 'customerId', 
 									title : '企业客户编号' 
 								},
 																{
+									align : 'center',
 									field : 'businessId', 
 									title : '业务编号' 
 								},
 																{
+									align : 'center',
 									field : 'projectId', 
 									title : '项目编号' 
 								},
 																{
+									align : 'center',
 									field : 'expensesNormalName', 
 									title : '申请人姓名' 
 								},
 																{
+									align : 'center',
 									field : 'expensesNormalReason', 
 									title : '支付原因' 
 								},
 																{
+									align : 'center',
 									field : 'expensesNormalPrice', 
 									title : '报销金额' 
 								},
 																{
+									align : 'center',
 									field : 'expensesNormalResult', 
 									title : '审票结果' 
 								},
 																{
+									align : 'center',
 									field : 'expensesNormalRelatedid', 
 									title : '关联请款申请编号' 
 								},
 																{
+									align : 'center',
 									field : 'expensesNormalRmarks', 
 									title : '备注' 
 								},
 																{
+									align : 'center',
 									field : 'expensesNormalStatus', 
 									title : '审批状态' 
 								},
-//																{
-//									field : 'expensesNormalOperator', 
-//									title : '操作人' 
-//								},
 																{
+									align : 'center',
+									field : 'expensesNormalOperator', 
+									title : '操作人' 
+								},
+																{
+									align : 'center',
 									field : 'expensesNormalOptTime', 
 									title : '修改时间' 
 								},
@@ -139,6 +152,7 @@ function load() {
 //									title : '创建人' 
 //								},
 																{
+									align : 'center',
 									field : 'expensesNormalCreateTime', 
 									title : '创建时间' 
 								}

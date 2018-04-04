@@ -56,10 +56,10 @@ function loadDept() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="removeDept(\''
 												+ row.customerDeptId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" '+s_detailed_information_h+' href="#" title="结构详情"  mce_href="#" onclick="detailed_information(\''
-												+ row.customerDeptId
-												+ '\')"><i class="fa fa-detailed_information"></i>结构详情</a> ';
-										return e + d + f ;
+										// var f = '<a class="btn btn-success btn-sm" '+s_detailed_information_h+' href="#" title="结构详情"  mce_href="#" onclick="openDept(\''
+										// 		+ row.customerDeptId
+										// 		+ '\')"><i class="fa fa-detailed_information"></i>结构详情</a> ';
+										return e + d;
 									}
 								},
 								{
@@ -102,19 +102,19 @@ function loadDept() {
 															 ]
 					});
 }
-function reLoadDept() {
-	$('#DeptTable').bootstrapTable('refresh');
-}
-// 详细信息
-function detailed_information(id){
-	parent.layer.open({
+function detailedInformation(){
+	layer.open({
 		type : 2,
-		title : '详细信息',
+		title : '结构详情',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '95%', '95%' ],
-		content : '/sales/customerDept' + '/detailed_information/' + id // iframe的url
-	});
+		area : [ '800px', '95%' ],
+		content : prefixDept + '/detailedInformation' // iframe的url
+	})
+}
+
+function reLoadDept() {
+	$('#DeptTable').bootstrapTable('refresh');
 }
 
 function addDept() {

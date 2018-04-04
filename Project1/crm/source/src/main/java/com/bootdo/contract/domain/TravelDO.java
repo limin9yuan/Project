@@ -32,9 +32,9 @@ public class TravelDO implements Serializable {
 	//同行人
 	private String travelPartner;
 	//拟出差时间
-	private Date travelDepartureDate;
+	private String travelDepartureDate;
 	//拟返程时间
-	private Date travelReturnDate;
+	private String travelReturnDate;
 	//预计费用类别
 	private String travelPlanCostType;
 	//预计交通方式
@@ -48,9 +48,9 @@ public class TravelDO implements Serializable {
 	//出差任务确认
 	private String travelTaskConfirm;
 	//审批状态
-	private Integer travelApprovalStatus;
+	private String travelApprovalStatus;
 	//操作人
-	private Long travelOperator;
+	private String travelOperator;
 	//修改时间
 	private Date travelOperateTime;
 	//创建人
@@ -187,25 +187,25 @@ public class TravelDO implements Serializable {
 	/**
 	 * 设置：拟出差时间
 	 */
-	public void setTravelDepartureDate(Date travelDepartureDate) {
+	public void setTravelDepartureDate(String travelDepartureDate) {
 		this.travelDepartureDate = travelDepartureDate;
 	}
 	/**
 	 * 获取：拟出差时间
 	 */
-	public Date getTravelDepartureDate() {
+	public String getTravelDepartureDate() {
 		return travelDepartureDate;
 	}
 	/**
 	 * 设置：拟返程时间
 	 */
-	public void setTravelReturnDate(Date travelReturnDate) {
+	public void setTravelReturnDate(String travelReturnDate) {
 		this.travelReturnDate = travelReturnDate;
 	}
 	/**
 	 * 获取：拟返程时间
 	 */
-	public Date getTravelReturnDate() {
+	public String getTravelReturnDate() {
 		return travelReturnDate;
 	}
 	/**
@@ -283,25 +283,25 @@ public class TravelDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setTravelApprovalStatus(Integer travelApprovalStatus) {
+	public void setTravelApprovalStatus(String travelApprovalStatus) {
 		this.travelApprovalStatus = travelApprovalStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public Integer getTravelApprovalStatus() {
+	public String getTravelApprovalStatus() {
 		return travelApprovalStatus;
 	}
 	/**
 	 * 设置：操作人
 	 */
-	public void setTravelOperator(Long travelOperator) {
+	public void setTravelOperator(String travelOperator) {
 		this.travelOperator = travelOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public Long getTravelOperator() {
+	public String getTravelOperator() {
 		return travelOperator;
 	}
 	/**
