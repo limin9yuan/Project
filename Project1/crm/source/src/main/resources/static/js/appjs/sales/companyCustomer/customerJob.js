@@ -29,7 +29,8 @@ function loadJob() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
+								customerId : $('#customerId').val(),
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -62,10 +63,10 @@ function loadJob() {
 									field : 'customerJobId', 
 									title : '岗位编号' 
 								},
-//																{
-//									field : 'customerDeptId', 
-//									title : '部门编号' 
-//								},
+																{
+									field : 'customerId', 
+									title : '企业客户编号' 
+								},
 																{
 									field : 'customerJobName', 
 									title : '岗位名称' 

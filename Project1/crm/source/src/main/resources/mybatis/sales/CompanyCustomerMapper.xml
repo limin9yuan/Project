@@ -52,6 +52,7 @@
 		left join inner_org_employee m on a.Customer_Owner=m.Employee_ID 
 		left join inner_org_employee q on a.Customer_Sales=q.Employee_ID
 		left join sys_user s on a.Customer_Operator=s.user_id
+		left join sales_customer__job j on a.Customer_ID=j.Customer_ID
         <where>    
 		  		  <if test="customerProvince != null and customerProvince != ''"> and Customer_Province = #{customerProvince} </if>
 		  		  <if test="customerCity != null and customerCity != ''"> and Customer_City = #{customerCity} </if>

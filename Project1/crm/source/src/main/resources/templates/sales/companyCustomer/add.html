@@ -296,6 +296,63 @@
 
 
 								<div class="tab-pane fade" id="Organisation">
+<!-- 								子公司 -->
+								<div class="wrapper wrapper-content ">
+										<div class="col-sm-12">
+											<div class="ibox">
+												<div class="ibox-body">
+													<div class="fixed-table-toolbar">
+														<div class="columns pull-left">
+															<button shiro:hasPermission="sales:customerChildCompany:add"
+																type="button" class="btn  btn-primary"
+																onclick="addChild()">
+																<i class="fa fa-plus" aria-hidden="true"></i>添加
+															</button>
+															<button
+																shiro:hasPermission="sales:customerChildCompany:batchRemove"
+																type="button" class="btn  btn-danger"
+																onclick="batchRemoveChild()">
+																<i class="fa fa-trash" aria-hidden="true"></i>删除
+															</button>
+														</div>
+
+													</div>
+													<table id="childTable" data-mobile-responsive="true">
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
+									<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+									<div>
+										<script type="text/javascript">
+											var s_edit_h = 'hidden';
+											var s_remove_h = 'hidden';
+											var s_resetPwd_h = 'hidden';
+											var s_detailed_information_h = 'hidden';
+										</script>
+									</div>
+									<div shiro:hasPermission="sales:customerChildCompany:edit">
+										<script type="text/javascript">
+											s_edit_h = '';
+										</script>
+									</div>
+									<div shiro:hasPermission="sales:customerChildCompany:batchRemove">
+										<script type="text/javascript">
+											var s_remove_h = '';
+										</script>
+									</div>
+									<div shiro:hasPermission="sales:customerChildCompany:resetPwd">
+										<script type="text/javascript">
+											var s_resetPwd_h = '';
+										</script>
+									</div>
+									<div shiro:hasPermission="sales:customerChildCompany:detailed_information">
+										<script type="text/javascript">
+											var s_detailed_information_h = ''; 
+										</script>
+									</div>
+<!-- 								岗位 -->
 									<div class="wrapper wrapper-content ">
 										<div class="col-sm-12">
 											<div class="ibox">
@@ -346,7 +403,11 @@
 											var s_resetPwd_h = '';
 										</script>
 									</div>
+<<<<<<< .mine
+									<div shiro:hasPermission="sales:customerJob:detailed_information">
+=======
 									<!-- <div shiro:hasPermission="sales:customerDept:detailed_information">
+>>>>>>> .r440
 										<script type="text/javascript">
 											var s_detailed_information_h = '';
 										</script>
@@ -911,5 +972,6 @@
 		src="/js/appjs/sales/companyCustomer/competitor.js"></script>
 	<script type="text/javascript" src="/js/province.js"></script>
 	<!-- 		<script type="text/javascript" src="/js/appjs/sales/customerContact/add.js"></script> -->
+	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/customerChild.js"></script>
 </body>
 </html>

@@ -142,11 +142,11 @@ function validateRule() {
 function datetimepicker() {
 	 $('#laborBeginTime').datetimepicker({
 	        format: 'YYYY-MM-DD HH:mm',
-	        locale: moment.locale('zh-cn')
+	        locale: moment.locale('zh-cn'),
 	    });
 	 $('#laborEndTime').datetimepicker({
-	        format: 'YYYY-MM-DD HH:mm', 
-	        locale: moment.locale('zh-cn')
+	        format: 'YYYY-MM-DD HH:mm',
+	        locale: moment.locale('zh-cn'),
 	    });
 }
 //修改——显示数据绑定

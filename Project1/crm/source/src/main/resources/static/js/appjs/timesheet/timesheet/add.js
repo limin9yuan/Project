@@ -1,11 +1,12 @@
 var prefix = "/timesheet/timesheet"
 
 $().ready(function() {
-loadCrmData("/project/project/listDic","projectId");
-loadCrmData("/project/project/listDic","projectName");
+   loadCrmData("/sales/companyCustomer/listDic","customerId");
+		loadCrmData("/sales/business/listDic","businessId");
+		loadCrmData("/project/project/listDic","projectId");
 //loadCrmData("/sales/companyCustomer/listDic","customerId");
 //		loadCrmData("/sales/business/listDic","businessId");
-		loadCrmData("/sales/business/listDic","businessName");
+
 	validateRule();
 });
 

@@ -30,8 +30,13 @@ function loadDept() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
+<<<<<<< .mine
+								offset:params.offset,
+								customerId : $('#customerId').val(),
+=======
 								offset:params.offset,
 								// customerDeptDescription:$('#customerDeptDescription').val(),
+>>>>>>> .r440
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -58,10 +63,17 @@ function loadDept() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="removeDept(\''
 												+ row.customerDeptId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
+<<<<<<< .mine
+										var f = '<a class="btn btn-success btn-sm" '+s_detailed_information_h+' href="#" title="结构详情"  mce_href="#" onclick="detailed_information(\''
+												+ row.customerDeptId
+												+ '\')"><i class="fa fa-detailed_information"></i>结构详情</a> ';
+										return e + d  ;
+=======
 										// var f = '<a class="btn btn-success btn-sm" '+s_detailed_information_h+' href="#" title="结构详情"  mce_href="#" onclick="openDept(\''
 										// 		+ row.customerDeptId
 										// 		+ '\')"><i class="fa fa-detailed_information"></i>结构详情</a> ';
 										return e + d;
+>>>>>>> .r440
 									}
 								},
 								{

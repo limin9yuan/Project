@@ -31,7 +31,16 @@ public class CustomerJobDO implements Serializable {
 	private Date customerJobOperateTime;
 	//创建时间
 	private Date customerJobCreateTime;
+	
+	private String customerId;
+	
 
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
 	/**
 	 * 设置：岗位编号
 	 */

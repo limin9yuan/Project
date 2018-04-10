@@ -44,8 +44,8 @@ $().ready(function() {
 		loadCompetitor();
 	});
 	$('#myTab a[href="#Organisation"]').on('shown.bs.tab', function(e) {
+		loadChild();
 		loadJob();
-
 		loadDept();
 	});
 

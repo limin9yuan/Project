@@ -1,4 +1,5 @@
 $().ready(function() {
+	loadCrmData("/sales/companyCustomer/listDic", "customerId");
 	validateRule();
 });
 

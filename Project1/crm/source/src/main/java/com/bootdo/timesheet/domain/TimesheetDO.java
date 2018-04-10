@@ -17,7 +17,7 @@ import java.util.Date;
 public class TimesheetDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String assignmenttaskName;
+
 	//工时信息编号
 	private String timesheetId;
 	//项目编号
@@ -54,8 +54,9 @@ public class TimesheetDO implements Serializable {
 	private Integer timesheetApprovalStatus;
 	//操作时间
 	private Date timesheetOperateTime;
-	// 业务名称
-	private String businessName;
+	//业务名称
+	private String assignmenttaskName;
+
 	//提取今天的日期
 	 private String date8;
 	//提取的timesheetid
@@ -336,13 +337,7 @@ public class TimesheetDO implements Serializable {
 		this.projectName = projectName;
 	}
 
-	public String getBusinessName() {
-		return businessName;
-	}
 
-	public void setBusinessName(String businessName) {
-		this.businessName = businessName;
-	}
 
 
 	public String getContentDate1() {
