@@ -117,7 +117,7 @@ function load() {
 									title : '创建时间',
 									valign:'middle',
 									sortable : true
-									
+
 								},
 								{
 									field : 'customerSales',
@@ -285,7 +285,7 @@ function add() {
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '80%', '80%' ],
+		area : [ '95%', '95%' ],
 		content : prefix + '/add' // iframe的url
 	});
 }
