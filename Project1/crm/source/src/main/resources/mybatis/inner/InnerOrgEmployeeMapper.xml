@@ -4,15 +4,16 @@
 <mapper namespace="com.bootdo.inner.dao.InnerOrgEmployeeDao">
 
 	<select id="get" resultType="com.bootdo.inner.domain.InnerOrgEmployeeDO">
-		select a.`Employee_ID`,a.`Dept_ID`,`Job_ID`,`Inner_User_ID`,`User_Role_ID`,`Module_ID`,
+		select a.`Employee_ID`,a.`Dept_ID`,a.`Job_ID`,`Inner_User_ID`,`User_Role_ID`,`Module_ID`,
 		`Employee_Name`,`Employee_Dept`,`Employee_Center`,
 		`Employee_Join_Date`,`Employee_Salary_Hour`,`Employee_Status`,`Employee_Phone_Number`,
 		`Employee_Inner_Phone_Number`,`Employee_QQ`,`Employee_Remarks`,
 		b.name Employee_Operator_Name,`Employee_Operate_Time`,
-		s.role_name as userRoleName,b.name as employeeOperatorName
+		s.role_name as userRoleName,b.name as employeeOperatorName,c.`Job_Name`as jobId
 		from inner_org_employee a
 		left JOIN sys_user b ON a.Employee_Operator=b.user_id
-		left join sys_role s on a.User_Role_ID = s.role_id 
+		left join sys_role s on a.User_Role_ID = s.role_id
+		left join inner_org_job c on a.Job_ID = c.Job_ID
 		where Employee_ID = #{value}
 	</select>
 

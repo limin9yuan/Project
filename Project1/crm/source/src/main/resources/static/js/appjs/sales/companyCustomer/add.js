@@ -96,6 +96,16 @@ function deleteSendPerson() {
 function deleteRecivePerson() {
 	$("#receiveDiv").remove();
 }
+function addSendAndReceive() {
+	layer.open({
+		type : 2,
+		title : '增加主抄送人',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '95%' ],
+		content :'/sales/companyCustomer/sendAndReceive'
+	});
+}
 
 function save() {
 	$.ajax({

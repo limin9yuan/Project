@@ -93,6 +93,14 @@ public class CompanyCustomerController  extends BaseController {
 	String add(){
 	    return "sales/companyCustomer/add";
 	}
+
+	@GetMapping("/sendAndReceive")
+	@RequiresPermissions("sales:companyCustomer:sendAndReceive")
+	String sendAndReceive(){
+//		return "sales/companyCustomer/add";
+		return "sales/companyCustomer/sendAndReceive";
+	}
+
 	@GetMapping("/import")
 	@RequiresPermissions("sales:companyCustomer:import")
 	String importFile() {

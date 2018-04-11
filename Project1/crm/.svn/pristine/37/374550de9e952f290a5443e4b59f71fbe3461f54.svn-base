@@ -1,0 +1,381 @@
+var address = null;
+$().ready(function() {
+
+	loadDic("sales_customer_category", "customerCategory");
+	loadDic("sales_customer_product", "customerProduct");
+	loadDic("sales_customer_character", "customerCharacter");
+	loadDic("sales_customer_status", "customerStatus");
+	loadDic("sales_customer_level", "customerLevel");
+	loadDic("sales_customer_sale_Phase", "customerSalePhase");
+	loadDic("sales_customer_inner_Phase", "customerInnerPhase");
+	loadDic("sales_customer_sourcee", "customerSource");
+	loadDic("sales_customer_credit_Rank", "customerCreditRank");
+	loadDic("sales_customer_potential", "customerPotential");
+	loadDic("sales_customer_visit_Mode", "customerVisitMode");
+	loadCrmData("/inner/innerOrgEmployee/listDic", "customerOwner");
+	loadCrmData("/inner/innerOrgEmployee/listDic", "customerSales");
+
+	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e){
+		 if(address==null){
+			 address = new addressResolve({
+				    proId: 'province',
+				    cityId: 'city',
+				    areaId: 'area'
+			 });
+			 address.init();
+		 }
+
+		 });
+
+	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e) {
+		if ($("#customerHotRank option").length == 1) {
+			loadDic("sales_customer_hot_Rank", "customerHotRank");
+		}
+
+	});
+	$('#myTab a[href="#linkInfo"]').on('shown.bs.tab', function(e) {
+
+		if ($("#customerContactSta option").length == 1) {
+			loadDic("sales_customer_contact_Sta", "customerContactSta");
+		}
+
+	});
+	$('#myTab a[href="#Gegner"]').on('shown.bs.tab', function(e) {
+		loadCompetitor();
+	});
+	$('#myTab a[href="#Organisation"]').on('shown.bs.tab', function(e) {
+		loadChild();
+		loadJob();
+		loadDept();
+	});
+
+	layui.use('upload', function() {
+		var upload = layui.upload;
+		// 执行实例
+		var uploadInst = upload.render({
+			elem : '#test1', // 绑定元素
+			url : '/common/sysFile/upload', // 上传接口
+			size : 1000,
+			accept : 'file',
+			done : function(r) {
+				// alert(r.fileName);
+				$("#serviceAttachment").val(r.fileName);
+				// layer.msg(r.msg);
+				// app.getData();
+			},
+			error : function(r) {
+				layer.msg(r.msg);
+			}
+		});
+	});
+	validateRule();
+	if (address == null) {
+		address = new addressResolve({
+			proId : 'province',
+			cityId : 'city',
+			areaId : 'area'
+		});
+		address.init();
+	}
+});
+
+$.validator.setDefaults({
+	submitHandler : function() {
+		save();
+	}
+});
+function addSendPerson() {
+	$("#sendPerson").append("<div class='personDiv' id='sendDiv' onclick='deleteSendPerson()'>abc</div>")
+}
+function addRecivePerson() {
+	$("#receivePerson").append("<div class='personDiv' id='receiveDiv' onclick='deleteRecivePerson()'>abc</div>")
+}
+function deleteSendPerson() {
+	$("#sendDiv").remove();
+}
+function deleteRecivePerson() {
+	$("#receiveDiv").remove();
+}
+function addSendAndReceive() {
+	layer.open({
+		type : 2,
+		title : '增加主抄送人',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '95%' ],
+		content :'/sales/companyCustomer/sendAndReceive'
+	});
+}
+
+function save() {
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/sales/companyCustomer/save",
+		data : $('#signupForm').serialize(),// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				parent.reLoad();
+				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				parent.layer.close(index);
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+
+}
+function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#signupForm").validate({
+	ignore: ":hidden:not(select)",
+		rules : {
+			customerProvince : {
+				required : true
+			},
+			customerCity : {
+				required : true
+			},
+			customerCounty : {
+				required : true
+			},
+			customerName : {
+				required : true
+			},
+			customerSimpleName : {
+				required : true
+			},
+			customerOwner : {
+				required : true
+			},
+			customerSales : {
+				required : true
+			},
+			customerProduct : {
+				required : true
+			},
+			customerCategory : {
+				required : true
+			},
+			customerCharacter : {
+				required : true
+			},
+			customerStatus : {
+				required : true
+			},
+			customerLevel : {
+				required : true
+			},
+			customerSalePhase : {
+				required : true
+			},
+			customerInnerPhase : {
+				required : true
+			},
+			customerParent : {
+				required : true
+			},
+//				  label1 : {
+//				required : true
+//			},
+			customerHotRank : {
+				required : true
+			},
+			customerVolume : {
+				digits:true,
+				required : true
+			},
+			customerHotDesc : {
+				required : true
+			},
+			// 联系方式
+			customerContactSta:{
+				required:true
+			},
+			customerAddress:{
+				required:true
+			},
+			customerPhoneNum:{
+				required:true,
+				digits:true,
+				rangelength:[5,11]
+			},
+			customerLeader:{
+				required:true
+			},
+//			生产信息
+			customerPaymentRate:{
+				required:true,
+				digits:true,
+				range:[0,100]
+			},
+			customerHeatingShare:{
+				required:true,
+				digits:true,
+				range:[0,100]
+			},
+			customerComplaintRate:{
+				required:true,
+				digits:true,
+				range:[0,100]
+			},
+			customerHeatingArea:{
+				max:99999999999999
+			},
+			customerHeatingSourceNumber:{
+				max:99999999
+			},
+			customerSteamArea:{
+				max:99999999999999
+			},
+			customerHotWaterArea:{
+				max:99999999999999
+			},
+			customerOwnHeatingSource:{
+				max:99999999
+			},
+			customerOutHeatingSource:{
+				max:99999999
+			},
+			customerEmpNumber:{
+				max:9999999,
+				digits:true
+			}
+		},
+		messages : {
+			customerProvince : {
+				required : icon + "请输入省份！"
+			},
+			customerCity : {
+				required : icon + "请输入城市！"
+			},
+			customerCounty : {
+				required : icon + "请输入区县！"
+			},
+			customerName : {
+				required : icon + "请输入企业名称！"
+			},
+			customerSimpleName : {
+				required : icon + "请输入助记简称！"
+			},
+			customerOwner : {
+				required : icon + "请输入客户所有者！"
+			},
+			customerSales : {
+				required : icon + "请输入销售负责人！"
+			},
+			customerProduct : {
+				required : icon + "请输入产品需求！"
+			},
+			customerCategory : {
+				required : icon + "请输入客户类别！"
+			},
+			customerCharacter : {
+				required : icon + "请输入企业性质！"
+			},
+			customerStatus : {
+				required : icon + "请输入客户状态！"
+			},
+			customerLevel : {
+				required : icon + "请输入客户级别！"
+			},
+			customerSalePhase : {
+				required : icon + "请输入销售阶段！"
+			},
+			customerInnerPhase : {
+				required : icon + "请输入客户内部阶段！"
+			},
+			customerParent : {
+				required : icon + "请输入上级单位！"
+			},
+//			label1 : {
+//				required : icon + "热点客户不能为空！"
+//			},
+			customerHotRank : {
+				required : icon + "请热度不能为空！"
+			},
+			customerVolume : {
+				required : icon + "与其成交金额不能为空！",
+				digits:icon+"请输入有效的数字！"
+			},
+			customerHotDesc : {
+				required : icon + "热点说明不能为空！"
+			},
+			customerContactSta:{
+				required:icon+"联系情况不能为空！"
+			},
+			customerAddress:{
+				required:icon+"企业地址不能为空！"
+			},
+			customerPhoneNum:{
+				required:icon +"电话号码不能为空！",
+				digits:icon +"请输入数字！",
+				rangelength:icon +"请输入有效的电话号码！"
+			},
+			customerLeader:{
+				required:icon +"企业负责人不能为空！"
+			},
+//			生产信息
+			customerPaymentRate:{
+				required:icon +"收费收缴率不能为空！",
+				digits:icon +"收费收缴率必须为数字！",
+				range:icon +"收费收缴率只能在0-100之间！"
+			},
+			customerHeatingShare:{
+				required:icon +"企业占全市热化率不能为空！",
+				digits:icon +"企业占全市热化率必须为数字！",
+				range:icon +"企业占全市热化率只能在0-100之间！"
+			},
+			customerComplaintRate:{
+				required:icon +"投诉率不能为空！",
+				digits:icon +"投诉率必须为数字！",
+				range:icon +"投诉率只能在0-100之间！"
+			},
+			customerEmpNumber:{
+				max:icon+"员工数量不能大于7位数（9999999）！",
+				digits:icon+"员工数量必须为数字！"
+			},
+			customerHeatingArea:{
+				max:$.validator.format("请输入不大于 99999999999999在14位之间的数值")
+			},
+			customerHeatingSourceNumber:{
+				max:$.validator.format("请输入不大于 999999999 在14位之间的数值")
+			},
+			customerSteamArea:{
+				max:$.validator.format("请输入不大于 99999999999999 在14位之间的数值")
+			},
+			customerHotWaterArea:{
+				max:$.validator.format("请输入不大于 99999999999999 在14位之间的数值")
+			},
+			customerOwnHeatingSource:{
+				max:$.validator.format("请输入不大于 999999999 在14位之间的数值")
+			},
+			customerOutHeatingSource:{
+				max:$.validator.format("请输入不大于 999999999 在14位之间的数值")
+			}
+		}
+	})
+}
+
+function nextStepThis(tabId,totalStep,lastBtn,nextBtn){
+	nextStep(tabId,totalStep,lastBtn,nextBtn);
+	if(address ==null ){
+			if( $('#'+tabId+' li:eq(2)').attr("class")=='active'){
+				address = new addressResolve({
+				    proId: 'province',
+				    cityId: 'city',
+				    areaId: 'area'
+				  });
+				address.init();
+			}
+
+	}
+
+}
