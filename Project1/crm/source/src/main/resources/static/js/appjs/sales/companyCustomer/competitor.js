@@ -50,10 +50,10 @@ function loadCompetitor() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="editCompetitor(\''
 												+ row.complaintId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="removeCompetitor(\''
 												+ row.complaintId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
@@ -63,54 +63,62 @@ function loadCompetitor() {
 									}
 								} ,
 								{
+									align : 'center',
 									field : 'complaintId', 
 									title : '竞争对手ID' 
 								},
-//																{
-//									field : 'customerId', 
-//									title : '企业客户编号' 
-//								},
 																{
+									align : 'center',
+									field : 'customerId', 
+									title : '企业客户编号' 
+								},
+																{
+									align : 'center',
 									field : 'complaintProjectType', 
 									title : '项目类型' 
 								},
 																{
+									align : 'center',
 									field : 'complaintProductCategory', 
 									title : '产品分类' 
 								},
 																{
+									align : 'center',
 									field : 'complaintProductName', 
 									title : '产品名称' 
 								},
 																{
+									align : 'center',
 									field : 'complaintProductPrice', 
 									title : '产品价格' 
 								},
-//																{
-//									field : 'complaintProductDescription', 
-//									title : '产品描述' 
-//								},
 																{
+									align : 'center',
+									field : 'complaintProductDescription', 
+									title : '产品描述' 
+								},
+																{
+									align : 'center',
 									field : 'complaintCompanyName', 
 									title : '公司名称' 
 								},
-//																{
-//									field : 'complaintAttachment', 
-//									title : '附件' 
-//								},
 																{
+									align : 'center',
 									field : 'complaintRemarks', 
 									title : '备注' 
 								},
-//																{
-//									field : 'complaintOperator', 
-//									title : '操作人' 
-//								},
 																{
+									align : 'center',
+									field : 'complaintOperator', 
+									title : '操作人' 
+								},
+																{
+									align : 'center',
 									field : 'complaintOperateTime', 
 									title : '修改时间' 
 								},
 																{
+									align : 'center',
 									field : 'complaintCreateTime', 
 									title : '创建时间' 
 								}
@@ -130,7 +138,7 @@ function add() {
 		content : competitorPrefix + '/add' // iframe的url
 	});
 }
-function edit(id) {
+function editCompetitor(id) {
 	layer.open({
 		type : 2,
 		title : '编辑',
@@ -140,7 +148,7 @@ function edit(id) {
 		content : competitorPrefix + '/edit/' + id // iframe的url
 	});
 }
-function remove(id) {
+function removeCompetitor(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
 	}, function() {

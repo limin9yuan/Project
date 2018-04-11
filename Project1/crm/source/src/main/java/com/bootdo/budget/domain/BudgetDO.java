@@ -63,9 +63,6 @@ public class BudgetDO implements Serializable {
 	
 	//项目类别
 	private String projectGategory;
-	//人工的成本总计
-	private BigDecimal laborGrandTotalCost;
-	
 	
 	//部门名称
 	private String deptName;
@@ -88,6 +85,8 @@ public class BudgetDO implements Serializable {
 		
 	//项目名称
 	private String ProjectName;
+	//项目描述
+	private String projectDescription;
 
 		
 
@@ -361,12 +360,6 @@ public class BudgetDO implements Serializable {
 	public void setContractId(String contractId) {
 		this.contractId = contractId;
 	}
-	public BigDecimal getLaborGrandTotalCost() {
-		return laborGrandTotalCost;
-	}
-	public void setLaborGrandTotalCost(BigDecimal laborGrandTotalCost) {
-		this.laborGrandTotalCost = laborGrandTotalCost;
-	}
 	public String getBudgetOperatorName() {
 		return budgetOperatorName;
 	}
@@ -384,5 +377,11 @@ public class BudgetDO implements Serializable {
 	}
 	public void setProjectName(String projectName) {
 		ProjectName = projectName;
+	}
+	public String getProjectDescription() {
+		return projectDescription;
+	}
+	public void setProjectDescription(String projectDescription) {
+		this.projectDescription = projectDescription;
 	}
 }

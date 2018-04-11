@@ -26,7 +26,7 @@ public class CustomerJobDO implements Serializable {
 	//备注
 	private String customerJobRemarks;
 	//操作人
-	private Long customerJobOperator;
+	private String customerJobOperator;
 	//修改时间
 	private Date customerJobOperateTime;
 	//创建时间
@@ -104,13 +104,13 @@ public class CustomerJobDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setCustomerJobOperator(Long customerJobOperator) {
+	public void setCustomerJobOperator(String customerJobOperator) {
 		this.customerJobOperator = customerJobOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public Long getCustomerJobOperator() {
+	public String getCustomerJobOperator() {
 		return customerJobOperator;
 	}
 	/**

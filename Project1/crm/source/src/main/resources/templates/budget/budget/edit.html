@@ -20,8 +20,7 @@
 						<form class="form-horizontal m-t" id="signupForm">
 							<div id="myTabContent" class="tab-content">
 								<div class="tab-pane fade in active" id="budgetInfo">
-						<!-- <input id="budgetId" name="budgetId" th:value="${budget.budgetId}"  type="hidden"> -->
-						<input id="budgetId" name="budgetId" th:value="${budgetId}" class="form-control" type="text" type="hidden">
+						    <input id="budgetId" name="budgetId" th:value="${budgetId}" class="form-control" type="text" type="hidden">
 						    <div class="form-group">
 										<label class="col-sm-3 control-label">负责中心：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
@@ -81,7 +80,7 @@
 									<div class="form-group">	
 								       <label class="col-sm-3 control-label">项目描述：<span class="mustin">*</span></label>
 								       <div class="col-sm-9">
-									        <textarea id="projectDescription" name="projectDescription" class="form-control" rows="3"></textarea>
+									        <textarea id="projectDescription" name="projectDescription" class="form-control" rows="3" readonly></textarea>
 								       </div>
 							        </div>
 									<div class="form-group">
@@ -194,35 +193,13 @@
 															</button>
 														</div>
 													</div>
-													<table id="exampleTable" data-mobile-responsive="true">
+													<table id="laborTable" data-mobile-responsive="true">
 													</table>
 												</div>
 											</div>
 										</div>
 									</div>
-									<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-									<div>
-										<script type="text/javascript">
-											var s_edit_h = 'hidden';
-											var s_remove_h = 'hidden';
-											var s_resetPwd_h = 'hidden';
-										</script>
-									</div>
-									<div shiro:hasPermission="budget:budget:edit">
-										<script type="text/javascript">
-											s_edit_h = '';
-										</script>
-									</div>
-									<div shiro:hasPermission="budget:budget:remove">
-										<script type="text/javascript">
-											var s_remove_h = '';
-										</script>
-									</div>
-									<div shiro:hasPermission="budget:budget:resetPwd">
-										<script type="text/javascript">
-											var s_resetPwd_h = '';
-										</script>
-									</div>
+									
 								</div>
 
 
@@ -251,29 +228,7 @@
 											</div>
 										</div>
 									</div>
-									<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-									<div>
-										<script type="text/javascript">
-											var s_edit_h = 'hidden';
-											var s_remove_h = 'hidden';
-											var s_resetPwd_h = 'hidden';
-										</script>
-									</div>
-									<div shiro:hasPermission="budget:budget:edit">
-										<script type="text/javascript">
-											s_edit_h = '';
-										</script>
-									</div>
-									<div shiro:hasPermission="budget:budget:remove">
-										<script type="text/javascript">
-											var s_remove_h = '';
-										</script>
-									</div>
-									<div shiro:hasPermission="budget:budget:resetPwd">
-										<script type="text/javascript">
-											var s_resetPwd_h = '';
-										</script>
-									</div>
+									
 								</div>
 
 								<div class="tab-pane fade" id="budgetPurchase">
@@ -345,14 +300,8 @@
 	<div th:include="include::footer"></div>
 	<script type="text/javascript" src="/js/appjs/budget/budget/edit.js">	</script>
 	<script type="text/javascript" src="/js/province.js"></script>	
-
-	<script type="text/javascript"
-		src="/js/appjs/budget/budget/budgetPurchase.js"></script>
-		
-	<script type="text/javascript"
-		src="/js/appjs/budget/budget/budgetExpenses.js"></script>
-
-	<script type="text/javascript"
-		src="/js/appjs/budget/budget/budgetLabor.js"></script>
+	<script type="text/javascript" src="/js/appjs/budget/budget/budgetPurchase.js"></script>	
+	<script type="text/javascript" src="/js/appjs/budget/budget/budgetExpenses.js"></script>
+    <script type="text/javascript" src="/js/appjs/budget/budget/budgetLabor.js"></script>
 </body>
 </html>

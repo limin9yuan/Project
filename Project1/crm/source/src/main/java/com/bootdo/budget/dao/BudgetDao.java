@@ -2,6 +2,7 @@ package com.bootdo.budget.dao;
 
 import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.common.domain.DictDO;
+import com.bootdo.project.domain.ProjectDO;
 
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,8 @@ public interface BudgetDao {
 	
 	int batchRemove(String[] budgetIds);
 	
-	List<DictDO> listDic(); 
+	List<DictDO> listDic();
+
+	ProjectDO getProjectId(String projectId);  
 	
 }

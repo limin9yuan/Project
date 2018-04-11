@@ -18,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,11 +25,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.budget.service.BudgetService;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
-import com.bootdo.sales.domain.SalesProjectDO;
+import com.bootdo.project.domain.ProjectDO;
 
 /**
  * 项目预算表
@@ -95,10 +93,18 @@ public class BudgetController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("budget:budget:add")
 	public R save( BudgetDO budget){
-		if(budgetService.save(budget)>0){
-			return R.ok();
+		//budgetId=budget.getBudgetId();
+		int resultBudgetId=budgetService.save(budget);
+		if(resultBudgetId>0){  
+			R r = R.ok();
+			r.put("budgetId", resultBudgetId);
+			System.out.println("resultBudgetId=="+resultBudgetId);
+			System.out.println("r.get===="+r.get("budgetId"));
+			return r;
+			
 		}
-		return R.error();
+		return R.error(); 
+
 	}
 	/**
 	 * 修改
@@ -134,6 +140,14 @@ public class BudgetController extends BaseController {
 	public R remove(@RequestParam("ids[]") String[] budgetIds){
 		budgetService.batchRemove(budgetIds);
 		return R.ok();
+	}
+	@RequestMapping("/getProjectId/{projectId}")
+	@ResponseBody
+	Map<String, Object> getProjectId(@PathVariable("projectId") String projectId) {
+		ProjectDO project = budgetService.getProjectId(projectId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("project", project);
+		return returnData;
 	}
 	/**
 	 * 导出

@@ -71,10 +71,10 @@ function load() {
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
-								}/*,{
+								},{
 									field : 'budgetId', 
 									title : '项目预算编号' 
-								}*/,{
+								},{
 									field : 'projectId', 
 									title : '项目编号' 
 								},{

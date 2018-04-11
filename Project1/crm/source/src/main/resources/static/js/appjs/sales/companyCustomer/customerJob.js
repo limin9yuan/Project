@@ -30,7 +30,7 @@ function loadJob() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-								customerId : $('#customerId').val(),
+								customerId : $('#customerId').val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -60,38 +60,46 @@ function loadJob() {
 									}
 								} ,
 																{
+									align : 'center',
 									field : 'customerJobId', 
 									title : '岗位编号' 
 								},
 																{
+									align : 'center',
 									field : 'customerId', 
 									title : '企业客户编号' 
 								},
 																{
+									align : 'center',
 									field : 'customerJobName', 
 									title : '岗位名称' 
 								},
 																{
+									align : 'center',
 									field : 'customerJobDescription', 
 									title : '岗位描述' 
 								},
 																{
+									align : 'center',
 									field : 'customerJobRemarks', 
 									title : '备注' 
-								}
-								/*								{
+								},
+															{
+									align : 'center',
 							field : 'customerJobOperator', 
 									title : '操作人' 
 								},
 																{
+									align : 'center',
 									field : 'customerJobOperateTime', 
 									title : '修改时间' 
 								},
 																{
+									align : 'center',
 									field : 'customerJobCreateTime', 
 									title : '创建时间' 
-								},
-								*/
+								}
+								
 															]
 					});
 }

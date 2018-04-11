@@ -2,6 +2,7 @@ package com.bootdo.budget.service;
 
 import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.common.domain.DictDO;
+import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.sales.domain.SalesProjectDO;
 
 import java.util.List;
@@ -36,5 +37,7 @@ public interface BudgetService {
 	
 	public void export(String[] titles, ServletOutputStream out, List<BudgetDO> list);
 	
-	List<DictDO> listDic(); 
+	List<DictDO> listDic();
+
+	ProjectDO getProjectId(String projectId);  
 }

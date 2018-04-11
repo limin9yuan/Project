@@ -1,5 +1,5 @@
 var address = null;
-var prefixbudget = "/budget/budget"
+var prefix = "/budget/budget"
 $().ready(function() {
 	$('#myTab a[href="#budgetInfo"]').on('shown.bs.tab', function(e){		
 		 $('#lastBtn').attr("disabled",true);
@@ -7,15 +7,18 @@ $().ready(function() {
 	 });
 	 $('#myTab a[href="#labor"]').on('shown.bs.tab', function(e){		
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	    
+		 $('#nextBtn').attr("disabled",false);	
+		 loadLabor();
 	 });
 	 $('#myTab a[href="#expenses"]').on('shown.bs.tab', function(e){		
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	    
+		 $('#nextBtn').attr("disabled",false);	
+		 loadExpenses();
 	 });
 	 $('#myTab a[href="#budgetPurchase"]').on('shown.bs.tab', function(e){		
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	    
+		 $('#nextBtn').attr("disabled",false);	
+		 loadPurchase();
 	 });
 	validateRule();
 	var address = new addressResolve({
@@ -25,6 +28,9 @@ $().ready(function() {
 	  });
 	address.init(); 
 	budgetMapper_edit();
+	
+	//获取项目描述
+	$("#projectId").bind("change", getProjectId);
 });
 
 $.validator.setDefaults({
@@ -32,6 +38,20 @@ $.validator.setDefaults({
 		update();
 	}
 });
+
+function getProjectId(){
+	$.ajax({
+		url : '/budget/budget/getProjectId/' + $("#projectId").val(),
+		type : "get",
+		data : {
+			'projectId' : $("#projectId").val()
+		},
+		success : function(data) {
+			var result = data.project;
+			$("textarea[name='projectDescription']").val(result.projectDescription);
+		}
+	});
+}
 function update() {
 	$.ajax({
 		cache : true,
@@ -242,7 +262,7 @@ function validateRule() {
 //修改——显示数据绑定
 function budgetMapper_edit(){
 	$.ajax({
-		url : prefixbudget + '/edit_ajax/' + $("#budgetId").val(),
+		url : prefix + '/edit_ajax/' + $("#budgetId").val(),
 		type : "get",
 		data : {
 			'budgetId' : $("#budgetId").val()

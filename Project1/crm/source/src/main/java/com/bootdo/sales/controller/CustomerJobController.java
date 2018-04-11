@@ -1,5 +1,6 @@
 package com.bootdo.sales.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bootdo.sales.domain.CustomerChildCompanyDo;
 import com.bootdo.sales.domain.CustomerJobDO;
 import com.bootdo.sales.service.CustomerJobService;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -31,7 +34,7 @@ import com.bootdo.common.utils.R;
 
 @Controller
 @RequestMapping("/sales/customerJob")
-public class CustomerJobController {
+public class CustomerJobController extends BaseController{
 	@Autowired
 	private CustomerJobService customerJobService;
 
@@ -67,6 +70,16 @@ public class CustomerJobController {
 		return "sales/companyCustomer/editjobcon";
 	}
 
+	// ajax修改绑定数据
+	@RequestMapping("/edit_ajax/{customerJobId}")
+	@ResponseBody
+	Map<String, Object> edit_ajax(@PathVariable("customerJobId") String customerJobId) {
+		CustomerJobDO CustomerJob = customerJobService.get(customerJobId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("CustomerJob", CustomerJob);
+		return returnData;
+	}
+
 	/**
 	 * 保存
 	 */
@@ -74,6 +87,7 @@ public class CustomerJobController {
 	@PostMapping("/save")
 	@RequiresPermissions("sales:customerJob:add")
 	public R save(CustomerJobDO customerJob) {
+		customerJob.setCustomerJobOperator(Long.toString(getUserId()));//操作人
 		if (customerJobService.save(customerJob) > 0) {
 			return R.ok();
 		}

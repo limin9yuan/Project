@@ -9,7 +9,7 @@
 		date_format(Labor_End_Time,'%Y-%m-%d %h:%i') `Labor_End_Time`,
 		`Labor_Total_Day_Num`,`Labor_Rate`,`Labor_Total_Hour_Num`,
         `Labor_Total_Cost`,`Labor_Remarks`,`Labor_Operator`,
-        `Labor_Operate_TIme`, `Labor_Grand_Total_Cost`,
+        `Labor_Operate_TIme`,
         b.Employee_Salary_Hour,c.Job_Rank employee_Level
         from budget_labor a
         left join inner_org_employee b on a.`Employee_ID`=b.`Employee_ID`
@@ -28,7 +28,7 @@
 		DATE_FORMAT(Labor_Begin_Time,'%Y-%m-%d %h:%i')`Labor_Begin_Time`,
 		DATE_FORMAT(Labor_End_Time,'%Y-%m-%d %h:%i')`Labor_End_Time`,
 		`Labor_Total_Day_Num`,`Labor_Rate`,`Labor_Total_Hour_Num`,`Labor_Total_Cost`,
-		`Labor_Remarks`,`Labor_Operator`,`Labor_Operate_TIme`,`Labor_Grand_Total_Cost` from budget_labor
+		`Labor_Remarks`,`Labor_Operator`,`Labor_Operate_TIme` from budget_labor
         <where>  
 		  		  <if test="laborId != null and laborId != ''"> and Labor_ID = #{laborId} </if>
 		  		  <if test="budgetId != null and budgetId != ''"> and Budget_ID = #{budgetId} </if>
@@ -42,7 +42,6 @@
 		  		  <if test="laborRemarks != null and laborRemarks != ''"> and Labor_Remarks = #{laborRemarks} </if>
 		  		  <if test="laborOperator != null and laborOperator != ''"> and Labor_Operator = #{laborOperator} </if>
 		  		  <if test="laborOperateTime != null and laborOperateTime != ''"> and Labor_Operate_TIme = #{laborOperateTime} </if>
-		  		  <if test="laborGrandTotalCost != null and laborGrandTotalCost != ''"> and Labor_Grand_Total_Cost = #{laborGrandTotalCost} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -72,7 +71,6 @@
 		  		  <if test="laborRemarks != null and laborRemarks != ''"> and Labor_Remarks = #{laborRemarks} </if>
 		  		  <if test="laborOperator != null and laborOperator != ''"> and Labor_Operator = #{laborOperator} </if>
 		  		  <if test="laborOperateTime != null and laborOperateTime != ''"> and Labor_Operate_TIme = #{laborOperateTime} </if>
-		  		  <if test="laborGrandTotalCost != null and laborGrandTotalCost != ''"> and Labor_Grand_Total_Cost = #{laborGrandTotalCost} </if>
 		  		</where>
 	</select>
 	 
@@ -89,8 +87,7 @@
 			`Labor_Total_Cost`, 
 			`Labor_Remarks`, 
 			`Labor_Operator`, 
-			`Labor_Operate_TIme`,
-			`Labor_Grand_Total_Cost`
+			`Labor_Operate_TIme`
 		)
 		values
 		(
@@ -104,8 +101,7 @@
 			#{laborTotalCost}, 
 			#{laborRemarks}, 
 			#{laborOperator}, 
-			#{laborOperateTime},
-			#{laborGrandTotalCost}
+			#{laborOperateTime}
 		)
 	</insert>
 	 
@@ -122,8 +118,7 @@
 			<if test="laborTotalCost != null">`Labor_Total_Cost` = #{laborTotalCost}, </if>
 			<if test="laborRemarks != null">`Labor_Remarks` = #{laborRemarks}, </if>
 			<if test="laborOperator != null">`Labor_Operator` = #{laborOperator}, </if>
-			<if test="laborOperateTime != null">`Labor_Operate_TIme` = #{laborOperateTime},</if>
-			<if test="laborGrandTotalCost != null">`Labor_Grand_Total_Cost` = #{laborGrandTotalCost}</if>
+			<if test="laborOperateTime != null">`Labor_Operate_TIme` = #{laborOperateTime}</if>
 		</set>
 		where Labor_ID = #{laborId}
 	</update>

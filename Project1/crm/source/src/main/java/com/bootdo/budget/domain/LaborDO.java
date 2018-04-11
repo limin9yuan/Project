@@ -41,8 +41,6 @@ public class LaborDO implements Serializable {
 	//操作时间
 	private Date laborOperateTime;
 	
-	//人工的成本总计
-	private BigDecimal laborGrandTotalCost;
 	//员工级别
 	private String employeeLevel;
 	//时薪
@@ -191,12 +189,6 @@ public class LaborDO implements Serializable {
 	 */
 	public Date getLaborOperateTime() {
 		return laborOperateTime;
-	}
-	public BigDecimal getLaborGrandTotalCost() {
-		return laborGrandTotalCost;
-	}
-	public void setLaborGrandTotalCost(BigDecimal laborGrandTotalCost) {
-		this.laborGrandTotalCost = laborGrandTotalCost;
 	}
 	public String getEmployeeLevel() {
 		return employeeLevel;

@@ -1,4 +1,5 @@
 var address = null;
+var prefixlabor = "/budget/budget";
 $().ready(function() {
 	loadDic("budget_Responsible_Center","responsibleCenter");
 	loadDic("budget_project_gategory","projectGategory");
@@ -15,15 +16,18 @@ $().ready(function() {
 	 });
 	 $('#myTab a[href="#labor"]').on('shown.bs.tab', function(e){		
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	    
+		 $('#nextBtn').attr("disabled",false);
+		 loadLabor();
 	 });
 	 $('#myTab a[href="#expenses"]').on('shown.bs.tab', function(e){		
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	    
+		 $('#nextBtn').attr("disabled",false);
+		 loadExpenses();
 	 });
 	 $('#myTab a[href="#budgetPurchase"]').on('shown.bs.tab', function(e){		
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	    
+		 $('#nextBtn').attr("disabled",false);	
+		 loadPurchase();
 	 });
 	validateRule();
 	var address = new addressResolve({
@@ -32,6 +36,9 @@ $().ready(function() {
 	    areaId: 'area'
 	  });
 	address.init(); 
+	
+	//获取项目描述
+	$("#projectId").bind("change", getProjectId);
 });
 
 $.validator.setDefaults({
@@ -39,6 +46,19 @@ $.validator.setDefaults({
 		save();
 	}
 });
+function getProjectId(){
+	$.ajax({
+		url : '/budget/budget/getProjectId/' + $("#projectId").val(),
+		type : "get",
+		data : {
+			'projectId' : $("#projectId").val()
+		},
+		success : function(data) {
+			var result = data.project;
+			$("textarea[name='projectDescription']").val(result.projectDescription);
+		}
+	});
+}
 function save() {
 	$.ajax({
 		cache : true,
@@ -50,11 +70,12 @@ function save() {
 			parent.layer.alert("Connection error");
 		},
 		success : function(data) {
-			if (data.code == 0) {
+			if (data.budgetId > 0) {
+				$('#relsultBudgetId').val(data.budgetId);
 				parent.layer.msg("操作成功");
-				parent.reLoad();
-				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-				parent.layer.close(index);
+				//parent.reLoad();
+				//var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				//parent.layer.close(index);
 
 			} else {
 				parent.layer.alert(data.msg)

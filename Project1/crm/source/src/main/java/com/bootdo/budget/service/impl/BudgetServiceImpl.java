@@ -19,8 +19,8 @@ import com.bootdo.budget.dao.BudgetDao;
 import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.budget.service.BudgetService;
 import com.bootdo.common.domain.DictDO;
-import com.bootdo.sales.domain.SalesProjectDO;
-import com.bootdo.sales.service.BugCategoryService;
+import com.bootdo.project.domain.ProjectDO;
+
 
 
 
@@ -46,7 +46,10 @@ public class BudgetServiceImpl implements BudgetService {
 	
 	@Override
 	public int save(BudgetDO budget){
-		return budgetDao.save(budget);
+		//return budgetDao.save(budget);
+		int ret=budgetDao.save(budget);
+		String budgetId=budget.getBudgetId();
+		return Integer.parseInt(budgetId);
 	}
 	
 	@Override
@@ -69,6 +72,10 @@ public class BudgetServiceImpl implements BudgetService {
 		return budgetDao.listDic();
 	}
 	
+	@Override
+	public ProjectDO getProjectId(String projectId) {
+		return budgetDao.getProjectId(projectId);
+	}	
 	/**
 	 * 导出Excel写入文件方法
 	 */
@@ -279,7 +286,5 @@ public class BudgetServiceImpl implements BudgetService {
 		/*for (int i = 0; i < returnDate.size(); i++) {
 		}*/
 	}
-
-	
 }
 

@@ -2,6 +2,7 @@ package com.bootdo.project.service;
 
 import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.domain.Tree;
+import com.bootdo.inner.domain.InnerOrgEmployeeDO;
 import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.sales.domain.SalesProjectDO;
 import com.bootdo.system.domain.DeptDO;
@@ -44,4 +45,5 @@ public interface ProjectService {
     List<ProjectDO> getQuery(Map<String, Object> params);
 	
 	public void export(String[] titles, ServletOutputStream out, List<ProjectDO> list);
+	
 }

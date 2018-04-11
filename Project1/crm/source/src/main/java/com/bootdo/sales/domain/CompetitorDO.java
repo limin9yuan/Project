@@ -37,7 +37,7 @@ public class CompetitorDO implements Serializable {
 	//备注
 	private String complaintRemarks;
 	//操作人
-	private Long complaintOperator;
+	private String complaintOperator;
 	//修改时间
 	private Date complaintOperateTime;
 	//创建时间
@@ -166,13 +166,13 @@ public class CompetitorDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setComplaintOperator(Long complaintOperator) {
+	public void setComplaintOperator(String complaintOperator) {
 		this.complaintOperator = complaintOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public Long getComplaintOperator() {
+	public String getComplaintOperator() {
 		return complaintOperator;
 	}
 	/**

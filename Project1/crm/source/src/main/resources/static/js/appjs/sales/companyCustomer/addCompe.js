@@ -1,6 +1,26 @@
 $().ready(function() {
 	loadDic("sales_customer_product","complaintProductCategory");
 	loadDic("sales_project_gategory","complaintProjectType");
+	loadCrmData("/sales/companyCustomer/listDic", "customerId");
+	layui.use('upload', function () {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1', //绑定元素
+            url: '/sales/competitor/upload2', //上传接口
+            size: 1000,
+            accept: 'file',
+            done: function (r) {
+            	//alert(r.fileName);
+            	$("#complaintAttachment").val(r.fileName);
+                //layer.msg(r.msg);
+                //app.getData();
+            },
+            error: function (r) {
+                layer.msg(r.msg);
+            }
+        });
+    });
 	validateRule();
 });
 

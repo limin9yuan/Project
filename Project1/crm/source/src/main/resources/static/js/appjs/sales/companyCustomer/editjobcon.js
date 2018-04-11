@@ -1,4 +1,6 @@
+var jobconPrefiux="/sales/customerJob"
 $().ready(function() {
+	jobcon_edit();
 	validateRule();
 });
 
@@ -31,6 +33,27 @@ function update() {
 		}
 	});
 
+}
+
+// 修改--实现绑定数据
+function jobcon_edit() {
+	$.ajax({
+		url : jobconPrefiux + '/edit_ajax/' + $("#customerJobId").val(),
+		type : "get",
+		data : {
+			'customerJobId' : $("#customerJobId").val(),
+		},
+		success : function(data) {
+			result = data.CustomerJob;
+			// 岗位描述
+			$("input[name='customerJobDescription']").val(result.customerJobDescription);
+			// 岗位名称
+			$("input[name='customerJobName']").val(result.customerJobName);
+			// 备注
+			$("textarea[name='customerJobRemarks']").val(result.customerJobRemarks);
+
+		}
+	});
 }
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";

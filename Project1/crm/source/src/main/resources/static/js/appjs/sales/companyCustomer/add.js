@@ -15,18 +15,18 @@ $().ready(function() {
 	loadCrmData("/inner/innerOrgEmployee/listDic", "customerOwner");
 	loadCrmData("/inner/innerOrgEmployee/listDic", "customerSales");
 
-	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e){		
+	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e){
 		 if(address==null){
 			 address = new addressResolve({
 				    proId: 'province',
 				    cityId: 'city',
 				    areaId: 'area'
 			 });
-			 address.init(); 
+			 address.init();
 		 }
-		 
+
 		 });
-	
+
 	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e) {
 		if ($("#customerHotRank option").length == 1) {
 			loadDic("sales_customer_hot_Rank", "customerHotRank");
@@ -84,6 +84,12 @@ $.validator.setDefaults({
 		save();
 	}
 });
+function addSendPerson() {
+	$("#sendPerson").append("<button type='button' class='btn btn-danger'>abc</button>")
+}
+function addRecivePerson() {
+
+}
 function save() {
 	$.ajax({
 		cache : true,
@@ -160,7 +166,7 @@ function validateRule() {
 				required : true
 			},
 //				  label1 : {
-//				required : true				 
+//				required : true
 //			},
 			customerHotRank : {
 				required : true
@@ -271,7 +277,7 @@ function validateRule() {
 			},
 			customerParent : {
 				required : icon + "请输入上级单位！"
-			},			
+			},
 //			label1 : {
 //				required : icon + "热点客户不能为空！"
 //			},
@@ -339,7 +345,7 @@ function validateRule() {
 			}
 		}
 	})
-}   
+}
 
 function nextStepThis(tabId,totalStep,lastBtn,nextBtn){
 	nextStep(tabId,totalStep,lastBtn,nextBtn);
@@ -350,9 +356,9 @@ function nextStepThis(tabId,totalStep,lastBtn,nextBtn){
 				    cityId: 'city',
 				    areaId: 'area'
 				  });
-				address.init(); 
+				address.init();
 			}
-		
+
 	}
 
 }

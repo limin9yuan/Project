@@ -241,7 +241,6 @@ function load() {
 }
 
 function reLoad() {
-	// alert($('#customerName').val());
 	$('#exampleTable').bootstrapTable('refresh');
 }
 

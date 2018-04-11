@@ -1,7 +1,9 @@
 package com.bootdo.sales.service;
 
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.sales.domain.CompetitorDO;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
 
@@ -13,18 +15,24 @@ import java.util.Map;
  * @date 2017-12-11 14:31:23
  */
 public interface CompetitorService {
-	
+
 	CompetitorDO get(String complaintId);
-	
+
 	List<CompetitorDO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
-	
+
 	int save(CompetitorDO competitor);
-	
+
 	int update(CompetitorDO competitor);
-	
+
 	int remove(String complaintId);
-	
+
 	int batchRemove(String[] complaintIds);
+
+	List<DictDO> listDic();
+
+	List<DictDO> listDicxmbh();
+
+	Map<String, Object> dataImport(File file, long userid);
 }

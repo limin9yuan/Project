@@ -3,8 +3,8 @@
 <html>
 <meta charset="utf-8">
 <head th:include="include :: header">
-<link href="/css/sendToReceivePerson.css?v=4.1.0" th:href="@{/css/sendToReceivePerson.css?v=4.1.0}"
-    	rel="stylesheet">
+<link href="/css/sendToReceivePerson.css?v=4.1.0"
+	th:href="@{/css/sendToReceivePerson.css?v=4.1.0}" rel="stylesheet">
 </head>
 
 <body class="gray-bg">
@@ -28,14 +28,14 @@
 								<li><a href="#Zukunft" data-toggle="tab">未来规划 </a></li>
 								<li><a href="#Gegner" data-toggle="tab">竞争对手 </a></li>
 								<li><a href="#Custom" data-toggle="tab">自定义字段 </a></li>
-
 							</ul>
 
 
 
 							<!-- 客户基本信息 -->
-<!-- 				<form class="form-horizontal m-t" id="signupForm"> -->
-							<div id="myTabContent" class="tab-content" style="padding-top: 20px">
+							<!-- 				<form class="form-horizontal m-t" id="signupForm"> -->
+							<div id="myTabContent" class="tab-content"
+								style="padding-top: 20px">
 								<div class="tab-pane fade in active" id="baseInfo">
 
 									<div class="form-group">
@@ -44,13 +44,14 @@
 											class="mustin">*&nbsp;</span>企业行政区划：</label>
 										<div class="col-sm-4">
 											<select data-placeholder="省" name="province" id="province"
-												class="form-control chosen-select" tabindex="1" style="width: 32%">
-											</select>
-											<select data-placeholder="市" name="city" id="city"
-												class="form-control chosen-select" tabindex="2" style="width: 32%">
-											</select>
-											<select data-placeholder="区" name="area" id="area"
-												class="form-control chosen-select" tabindex="3" style="width: 32%">
+												class="form-control chosen-select" tabindex="1"
+												style="width: 32%">
+											</select> <select data-placeholder="市" name="city" id="city"
+												class="form-control chosen-select" tabindex="2"
+												style="width: 32%">
+											</select> <select data-placeholder="区" name="area" id="area"
+												class="form-control chosen-select" tabindex="3"
+												style="width: 32%">
 											</select>
 										</div>
 
@@ -116,9 +117,6 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-
-
-
 										<label class="col-sm-2 control-label"><a
 											style="color: red;">*&nbsp;</a>企业性质：</label>
 										<div class="col-sm-4">
@@ -140,8 +138,6 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-
-
 										<label class="col-sm-2 control-label"><a
 											style="color: red;">*&nbsp;</a>客户级别：</label>
 										<div class="col-sm-4">
@@ -163,7 +159,6 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-
 										<label class="col-sm-2 control-label"><a
 											style="color: red;">*&nbsp;</a>客户内部阶段：</label>
 										<div class="col-sm-4">
@@ -184,8 +179,6 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-
-
 										<label class="col-sm-2 control-label">行业：</label>
 										<div class="col-sm-4">
 											<input id="customerIndustry" name="customerIndustry"
@@ -199,8 +192,6 @@
 											<input id="customerStaffSize" name="customerStaffSize"
 												class="form-control" type="text">
 										</div>
-
-
 										<label class="col-sm-2 control-label">信用等级：</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="customerCreditRank"
@@ -220,8 +211,6 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-
-
 										<label class="col-sm-2 control-label">员工数量：</label>
 										<div class="col-sm-4">
 											<input id="customerEmpNumber" name="customerEmpNumber"
@@ -236,8 +225,6 @@
 											<input id="customerParent" name="customerParent"
 												class="form-control" type="text">
 										</div>
-
-
 										<label class="col-sm-2 control-label">拜访交通方式：</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="customerVisitMode"
@@ -253,10 +240,7 @@
 										<div class="col-sm-4">
 											<textarea id="customerIntroduction"
 												name="customerIntroduction" class="form-control" rows="3"></textarea>
-
 										</div>
-
-
 										<label class="col-sm-2 control-label">需求简要描述：</label>
 										<div class="col-sm-4">
 											<input id="customerReqDes" name="customerReqDes"
@@ -289,51 +273,62 @@
 										<div class="col-sm-8">
 											<textarea id="customerRemarks" name="customerRemarks"
 												class="form-control" rows="3"></textarea>
-
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">主送人：</label>
-										<div class="col-sm-8">
+										<div class="col-sm-8" >
+											<div  style="float:left;" id="sendPerson">
+												1
+											</div>
+											<div style="float:left;">
+												<button type="button" class="btn btn-danger btn-xs" id="sendPersonBtn"
+												name="sendPersonBtn"
+												style="border-radius:100%;" onclick="addSendPerson()">
+												<span class="glyphicon glyphicon-plus"></span></button>
+											</div>
 
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">抄送人：</label>
-										<div class="col-sm-8">
-
+										<div class="col-sm-8" id="receivePerson" name="receivePerson">
+											<button type="button" class="btn btn-danger btn-xs" id="receivePersonBtn"
+											name="receivePersonBtn"
+											style="border-radius:100%;">
+											<span class="glyphicon glyphicon-plus"></span></button>
 										</div>
 									</div>
 								</div>
+							</div>
 
-								<!-- 组织机构 -->
+							<!-- 组织机构 -->
 
 
-								<div class="tab-pane fade" id="Organisation">
-<!-- 								子公司 -->
+							<div class="tab-pane fade" id="Organisation">
+								<!-- 								子公司 -->
 								<div class="wrapper wrapper-content ">
-										<div class="col-sm-12">
-											<div class="ibox">
-												<div class="ibox-body">
-													<div class="fixed-table-toolbar">
-														<div class="columns pull-left">
-															<button shiro:hasPermission="sales:customerChildCompany:add"
-																type="button" class="btn  btn-primary"
-																onclick="addChild()">
-																<i class="fa fa-plus" aria-hidden="true"></i>添加
-															</button>
-															<button
-																shiro:hasPermission="sales:customerChildCompany:batchRemove"
-																type="button" class="btn  btn-danger"
-																onclick="batchRemoveChild()">
-																<i class="fa fa-trash" aria-hidden="true"></i>删除
-															</button>
-														</div>
-
+									<div class="col-sm-12">
+										<div class="ibox">
+											<div class="ibox-body">
+												<div class="fixed-table-toolbar">
+													<div class="columns pull-left">
+														<button
+															shiro:hasPermission="sales:customerChildCompany:add"
+															type="button" class="btn  btn-primary"
+															onclick="addChild()">
+															<i class="fa fa-plus" aria-hidden="true"></i>添加
+														</button>
+														<button
+															shiro:hasPermission="sales:customerChildCompany:batchRemove"
+															type="button" class="btn  btn-danger"
+															onclick="batchRemoveChild()">
+															<i class="fa fa-trash" aria-hidden="true"></i>删除
+														</button>
 													</div>
-													<table id="childTable" data-mobile-responsive="true">
-													</table>
 												</div>
+												<table id="childTable" data-mobile-responsive="true">
+												</table>
 											</div>
 										</div>
 									</div>
@@ -351,7 +346,8 @@
 											s_edit_h = '';
 										</script>
 									</div>
-									<div shiro:hasPermission="sales:customerChildCompany:batchRemove">
+									<div
+										shiro:hasPermission="sales:customerChildCompany:batchRemove">
 										<script type="text/javascript">
 											var s_remove_h = '';
 										</script>
@@ -361,35 +357,66 @@
 											var s_resetPwd_h = '';
 										</script>
 									</div>
-									<div shiro:hasPermission="sales:customerChildCompany:detailed_information">
+									<div
+										shiro:hasPermission="sales:customerChildCompany:detailed_information">
 										<script type="text/javascript">
 											var s_detailed_information_h = '';
 										</script>
 									</div>
-<!-- 								岗位 -->
-									<div class="wrapper wrapper-content ">
-										<div class="col-sm-12">
-											<div class="ibox">
-												<div class="ibox-body">
-													<div class="fixed-table-toolbar">
-														<div class="columns pull-left">
-															<button shiro:hasPermission="sales:customerJob:add"
-																type="button" class="btn  btn-primary"
-																onclick="addJob()">
-																<i class="fa fa-plus" aria-hidden="true"></i>添加
-															</button>
-															<button
-																shiro:hasPermission="sales:customerJob:batchRemove"
-																type="button" class="btn  btn-danger"
-																onclick="batchRemoveJob()">
-																<i class="fa fa-trash" aria-hidden="true"></i>删除
-															</button>
-														</div>
-
+								</div>
+								<!-- 								岗位 -->
+								<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+								<div>
+									<script type="text/javascript">
+										var s_edit_h = 'hidden';
+										var s_remove_h = 'hidden';
+										var s_resetPwd_h = 'hidden';
+										var s_detailed_information_h = 'hidden';
+									</script>
+								</div>
+								<div shiro:hasPermission="sales:customerChildCompany:edit">
+									<script type="text/javascript">
+										s_edit_h = '';
+									</script>
+								</div>
+								<div
+									shiro:hasPermission="sales:customerChildCompany:batchRemove">
+									<script type="text/javascript">
+										var s_remove_h = '';
+									</script>
+								</div>
+								<div shiro:hasPermission="sales:customerChildCompany:resetPwd">
+									<script type="text/javascript">
+										var s_resetPwd_h = '';
+									</script>
+								</div>
+								<div
+									shiro:hasPermission="sales:customerChildCompany:detailed_information">
+									<script type="text/javascript">
+										var s_detailed_information_h = '';
+									</script>
+								</div>
+								<!-- 								岗位 -->
+								<div class="wrapper wrapper-content ">
+									<div class="col-sm-12">
+										<div class="ibox">
+											<div class="ibox-body">
+												<div class="fixed-table-toolbar">
+													<div class="columns pull-left">
+														<button shiro:hasPermission="sales:customerJob:add"
+															type="button" class="btn  btn-primary" onclick="addJob()">
+															<i class="fa fa-plus" aria-hidden="true"></i>添加
+														</button>
+														<button
+															shiro:hasPermission="sales:customerJob:batchRemove"
+															type="button" class="btn  btn-danger"
+															onclick="batchRemoveJob()">
+															<i class="fa fa-trash" aria-hidden="true"></i>删除
+														</button>
 													</div>
-													<table id="jobTable" data-mobile-responsive="true">
-													</table>
 												</div>
+												<table id="jobTable" data-mobile-responsive="true">
+												</table>
 											</div>
 										</div>
 									</div>
@@ -417,8 +444,41 @@
 											var s_resetPwd_h = '';
 										</script>
 									</div>
+									<div
+										shiro:hasPermission="sales:customerDept:detailed_information">
+										<script type="text/javascript">
+											var s_detailed_information_h = '';
+										</script>
+									</div>
 
-									<div shiro:hasPermission="sales:customerJob:detailed_information">
+								</div>
+								<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+								<div>
+									<script type="text/javascript">
+										var s_edit_h = 'hidden';
+										var s_remove_h = 'hidden';
+										var s_resetPwd_h = 'hidden';
+										// var s_detailed_information_h = 'hidden';
+									</script>
+								</div>
+								<div shiro:hasPermission="sales:customerJob:edit">
+									<script type="text/javascript">
+										s_edit_h = '';
+									</script>
+								</div>
+								<div shiro:hasPermission="sales:customerJob:batchRemove">
+									<script type="text/javascript">
+										var s_remove_h = '';
+									</script>
+								</div>
+								<div shiro:hasPermission="sales:customerJob:resetPwd">
+									<script type="text/javascript">
+										var s_resetPwd_h = '';
+									</script>
+								</div>
+
+								<div
+									shiro:hasPermission="sales:customerJob:detailed_information">
 
 									<!-- <div shiro:hasPermission="sales:customerDept:detailed_information">
 
@@ -426,8 +486,6 @@
 											var s_detailed_information_h = '';
 										</script>
 									</div> -->
-
-
 									<!-- 部门  -->
 
 									<div class="wrapper wrapper-content ">
@@ -454,52 +512,39 @@
 																<i class="fa fa-detailed_information" aria-hidden="true"></i>结构详情
 															</button>
 														</div>
-														<!-- 				<div class="columns pull-right">
-
-																	<button class="btn btn-success" onclick="reLoad()">查询</button>
-																</div>
-																<div class="columns pull-right col-md-2 nopadding">
-																	<input id="searchName" type="text" class="form-control"
-																		placeholder="">
-																</div>
-																 -->
 													</div>
 													<table id="DeptTable" data-mobile-responsive="true">
-
 													</table>
 												</div>
 											</div>
 										</div>
-									</div>
-									<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-									<div>
-										<script type="text/javascript">
-											var s_edit_h = 'hidden';
-											var s_remove_h = 'hidden';
-											var s_resetPwd_h = 'hidden';
-										</script>
-									</div>
-									<div shiro:hasPermission="sales:customerDept:edit">
-										<script type="text/javascript">
-											s_edit_h = '';
-										</script>
-									</div>
-									<div shiro:hasPermission="sales:customerDept:remove">
-										<script type="text/javascript">
-											var s_remove_h = '';
-										</script>
-									</div>
-									<div shiro:hasPermission="sales:customerDept:resetPwd">
-										<script type="text/javascript">
-											var s_resetPwd_h = '';
-										</script>
+										<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+										<div>
+											<script type="text/javascript">
+												var s_edit_h = 'hidden';
+												var s_remove_h = 'hidden';
+												var s_resetPwd_h = 'hidden';
+											</script>
+										</div>
+										<div shiro:hasPermission="sales:customerDept:edit">
+											<script type="text/javascript">
+												s_edit_h = '';
+											</script>
+										</div>
+										<div shiro:hasPermission="sales:customerDept:remove">
+											<script type="text/javascript">
+												var s_remove_h = '';
+											</script>
+										</div>
+										<div shiro:hasPermission="sales:customerDept:resetPwd">
+											<script type="text/javascript">
+												var s_resetPwd_h = '';
+											</script>
+										</div>
 									</div>
 								</div>
 								<!-- 热点情况 -->
-
-
 								<div class="tab-pane fade" id="Hotspot">
-
 									<div class="form-group">
 										<label class="col-sm-2 control-label"><a
 											style="color: red;">*&nbsp;</a>热点客户：</label>
@@ -510,9 +555,8 @@
 												name="customerHot" value="0" /> 否
 											</label>
 										</div>
-
-
-										<label class="col-sm-2 control-label"><a style="color: red;">*&nbsp;</a>热度：</label>
+										<label class="col-sm-2 control-label"><a
+											style="color: red;">*&nbsp;</a>热度：</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="customerHotRank"
 												id="customerHotRank" class="form-control chosen-select"
@@ -537,13 +581,8 @@
 												class="form-control" type="text">
 										</div>
 									</div>
-
 								</div>
-
-
 								<!-- 开票信息 -->
-
-
 								<div class="tab-pane fade" id="Rechnungs">
 									<div class="form-group">
 										<label class="col-sm-2 control-label">开票名称：</label>
@@ -577,14 +616,7 @@
 
 
 								</div>
-
-
-
-
-
 								<!-- 联系方式 -->
-
-
 								<div class="tab-pane fade" id="linkInfo">
 									<div class="form-group">
 										<label class="col-sm-2 control-label"><a
@@ -931,39 +963,20 @@
 										<div class="col-sm-8">
 											<textarea id="customerRemarks" name="customerRemarks"
 												class="form-control" rows="3"></textarea>
-
 										</div>
 									</div>
-
-
-
-
-
 								</div>
-
-							</div>
-<!-- 								</form> -->
-
-
-<!-- 														<div class="form-group">	 -->
-<!-- 								<label class="col-sm-3 control-label">创建人：</label> -->
-<!-- 								<div class="col-sm-8"> -->
-<!-- 									<input id="customerOperator" name="customerOperator" class="form-control" type="text"> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 													<div class="form-group">	 -->
-<!-- 								<label class="col-sm-3control-label">创建时间：</label> -->
-<!-- 								<div class="col-sm-8"> -->
-<!-- 									<input id="customerOperateTime" name="customerOperateTime" class="form-control" type="text"> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-
-							<div class="form-group">
-								<div class="col-sm-8 col-sm-offset-8">
-									<button type="button" class="btn btn-primary" id="lastBtn" disabled="true" onclick="lastStep('myTab',10,'lastBtn','nextBtn')">上一步</button>
-									<button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStepThis('myTab',10,'lastBtn','nextBtn')">下一步</button>
-									<button type="submit" class="btn btn-primary">提交</button>
-									<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
+								<div class="form-group">
+									<div class="col-sm-8 col-sm-offset-8">
+										<button type="button" class="btn btn-primary" id="lastBtn"
+											disabled="true"
+											onclick="lastStep('myTab',10,'lastBtn','nextBtn')">上一步</button>
+										<button type="button" class="btn btn-primary" id="nextBtn"
+											onclick="nextStepThis('myTab',10,'lastBtn','nextBtn')">下一步</button>
+										<button type="submit" class="btn btn-primary">提交</button>
+										<button type="button" class="btn btn-danger"
+											onclick="closeWin()">取消</button>
+									</div>
 								</div>
 							</div>
 						</form>
@@ -986,8 +999,10 @@
 		src="/js/appjs/sales/companyCustomer/competitor.js"></script>
 	<script type="text/javascript" src="/js/province.js"></script>
 	<!-- 		<script type="text/javascript" src="/js/appjs/sales/customerContact/add.js"></script> -->
-	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/customerChild.js"></script>
-	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/sendToReceivePerson.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/sales/companyCustomer/customerChild.js"></script>
+	<!-- <script type="text/javascript"
+		src="/js/appjs/sales/companyCustomer/sendToReceivePerson.js"></script> -->
 
 </body>
 </html>

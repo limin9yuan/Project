@@ -22,6 +22,13 @@ $.validator.setDefaults({
 	}
 });
 function savePurchase() {
+	var tmpBudgetId = $("#budgetId",window.parent.document).val()==undefined ? $("#relsultBudgetId",window.parent.document).val()
+			:$("#budgetId",window.parent.document).val()
+	if(tmpBudgetId==-1){
+		parent.layer.msg("请先保存项目基本信息");
+		return;
+	}
+	$('#budgetId').val(tmpBudgetId);
 	$.ajax({
 		cache : true,
 		type : "POST",

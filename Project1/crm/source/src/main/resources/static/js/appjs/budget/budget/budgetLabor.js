@@ -1,11 +1,9 @@
 var prefix = "/budget/budget"
 var prefixlabor = "/budget/labor"
-	$(function() {
-		load();
-	});
 
-function load() {
-	$('#exampleTable')
+
+function loadLabor() {
+	$('#laborTable')
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
@@ -14,7 +12,7 @@ function load() {
 					//	showToggle : true,
 					//	showColumns : true,
 						iconSize : 'outline',
-						toolbar : '#exampleToolbar',
+						toolbar : '#laborToolbar',
 						striped : true, // 设置为true会有隔行变色效果
 						dataType : "json", // 服务器返回的数据类型
 						pagination : true, // 设置为true会在底部显示分页条
@@ -33,7 +31,8 @@ function load() {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
 								offset:params.offset,
-								budgetId: $("#budgetId").val()
+								//budgetId: $("#budgetId").val()
+								budgetId: $("#budgetId").val()==undefined ? $("#relsultBudgetId").val():$("#budgetId").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -86,9 +85,6 @@ function load() {
 									field : 'laborTotalCost', 
 									title : '人工成本合计' 
 								},{
-									field : 'laborGrandTotalCost', 
-									title : '人工的成本总计' 
-								},{
 									field : 'laborRemarks', 
 									title : '备注' 
 								}/*,
@@ -103,8 +99,8 @@ function load() {
 																 ]
 					});
 }
-function reLoad() {
-	$('#exampleTable').bootstrapTable('refresh');
+function reLoadLabor() {
+	$('#laborTable').bootstrapTable('refresh');
 }
 function addLabor() {
 	layer.open({
@@ -140,7 +136,7 @@ function removeLabor(id) {
 			success : function(r) {
 				if (r.code==0) {
 					layer.msg(r.msg);
-					reLoad();
+					reLoadLabor();
 				}else{
 					layer.msg(r.msg);
 				}
@@ -152,7 +148,7 @@ function removeLabor(id) {
 function resetPwd(id) {
 }
 function batchRemoveLabor() {
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	var rows = $('#laborTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择要删除的数据");
 		return;
@@ -175,7 +171,7 @@ function batchRemoveLabor() {
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
-					reLoad();
+					reLoadLabor();
 				} else {
 					layer.msg(r.msg);
 				}
