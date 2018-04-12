@@ -99,11 +99,19 @@ public class CompanyCustomerController  extends BaseController {
 	/**
 	 * 主送人和抄送人相关************************************************
 	 */
-	@GetMapping("/sendAndReceive")
-	@RequiresPermissions("sales:companyCustomer:sendAndReceive")
-	String sendAndReceive(){
-		return "sales/companyCustomer/sendAndReceive";
+	@GetMapping("/mainPerson")
+	@RequiresPermissions("sales:companyCustomer:mainPerson")
+	String mainPerson(){
+		return "sales/companyCustomer/mainPerson";
 	}
+
+	@GetMapping("/copyPerson")
+	@RequiresPermissions("sales:companyCustomer:copyPerson")
+	String copyPerson(){
+		return "sales/companyCustomer/copyPerson";
+	}
+
+
 
 
 	@GetMapping("/import")
