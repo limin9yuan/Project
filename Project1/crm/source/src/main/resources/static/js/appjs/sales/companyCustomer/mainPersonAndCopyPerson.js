@@ -69,7 +69,29 @@ function load() {
 					});
 }
 
-function pickPerson() {
+function pickMainPerson() {
+	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	if (rows.length == 0) {
+		layer.msg("请选择员工");
+		return;
+	}
+    var employeeIds="";
+    // 遍历所有选择的行数据，取每条数据对应的ID
+    $.each(rows, function(i, row) {
+        if(employeeIds==""){
+            employeeIds = row['employeeId'];
+        }else{
+            employeeIds = employeeIds+","+row['employeeId'];
+        }
+        var sendDiv = row['employeeId']+"1";
+        $("#sendPerson",window.parent.document).append("<div class='personDiv' id=" + sendDiv +" onclick='deleteSendPerson(\"" + sendDiv +"\" )'>"
+                                + row['employeeName'] +"</div>");
+    });
+    //子窗口给父窗口元素赋值
+    $("#mainPerson",window.parent.document).attr("value",employeeIds);
+    closeWin();
+}
+function pickCopyPerson() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
 		layer.msg("请选择员工");
@@ -92,17 +114,17 @@ function pickPerson() {
     $("#copyPerson",window.parent.document).attr("value",employeeIds);
     closeWin();
 }
-// function addSendPerson() {
-//     layer.open({
-//         type : 2,
-//         title : '增加主送人',
-//         maxmin : true,
-//         shadeClose : false, // 点击遮罩关闭层
-//         area : [ '800px', '95%' ],
-//         content :'/sales/companyCustomer/mainPerson'
-//     });
-// 	$("#sendPerson").append("<div class='personDiv' id='sendDiv' onclick='deleteSendPerson()'>abc</div>")
-// }
+function addSendPerson() {
+    layer.open({
+        type : 2,
+        title : '增加主送人',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '800px', '95%' ],
+        content :'/sales/companyCustomer/mainPerson'
+    });
+	// $("#sendPerson").append("<div class='personDiv' id='sendDiv' onclick='deleteSendPerson()'>abc</div>")
+}
 function addRecivePerson() {
     layer.open({
         type : 2,
@@ -113,13 +135,38 @@ function addRecivePerson() {
         content :'/sales/companyCustomer/copyPerson'
     });
 }
-// function deleteSendPerson(id) {
-//     $("#"+id).remove();
-// }
+function deleteSendPerson(id) {
+    $("#"+id).remove();
+}
 function deleteRecivePerson(id) {
 	$("#"+id).remove();
 }
 
+// function save() {
+// 	$.ajax({
+// 		cache : true,
+// 		type : "POST",
+// 		url : "/sales/companyCustomer/save",
+// 		data : $('#signupForm').serialize(),// 你的formid
+// 		async : false,
+// 		error : function(request) {
+// 			parent.layer.alert("Connection error");
+// 		},
+// 		success : function(data) {
+// 			if (data.code == 0) {
+// 				parent.layer.msg("操作成功");
+// 				parent.reLoad();
+// 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+// 				parent.layer.close(index);
+//
+// 			} else {
+// 				parent.layer.alert(data.msg)
+// 			}
+//
+// 		}
+// 	});
+//
+// }
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
