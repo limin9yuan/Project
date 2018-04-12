@@ -84,12 +84,12 @@ function pickPerson() {
             employeeIds = employeeIds+","+row['employeeId'];
         }
         // var sendDiv = row['employeeId'];
-        var receiveDiv = row['employeeId'];
-        $("#sendPerson",window.parent.document).append("<div class='personDiv' id=" + receiveDiv +" onclick='deleteSendPerson(\"" + receiveDiv +"\" )'>"
+        var receiveDiv = row['employeeId']+"2";
+        $("#receivePerson",window.parent.document).append("<div class='personDiv' id=" + receiveDiv +" onclick='deleteSendPerson(\"" + receiveDiv +"\" )'>"
                                 + row['employeeName'] +"</div>");
     });
     //子窗口给父窗口元素赋值
-    $("#mainPerson",window.parent.document).attr("value",employeeIds);
+    $("#copyPerson",window.parent.document).attr("value",employeeIds);
     closeWin();
 }
 // function addSendPerson() {

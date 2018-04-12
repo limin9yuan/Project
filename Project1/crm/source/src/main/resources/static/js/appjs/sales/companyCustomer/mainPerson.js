@@ -83,8 +83,7 @@ function pickPerson() {
         }else{
             employeeIds = employeeIds+","+row['employeeId'];
         }
-        var sendDiv = row['employeeId'];
-        var receiveDiv = row['employeeId'];
+        var sendDiv = row['employeeId']+"1";
         $("#sendPerson",window.parent.document).append("<div class='personDiv' id=" + sendDiv +" onclick='deleteSendPerson(\"" + sendDiv +"\" )'>"
                                 + row['employeeName'] +"</div>");
     });
