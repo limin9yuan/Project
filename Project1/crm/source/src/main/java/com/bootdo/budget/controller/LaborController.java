@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.budget.domain.LaborDO;
 import com.bootdo.budget.service.LaborService;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -34,7 +35,7 @@ import com.bootdo.inner.domain.InnerOrgEmployeeDO;
  
 @Controller
 @RequestMapping("/budget/labor")
-public class LaborController {
+public class LaborController extends BaseController {
 	@Autowired
 	private LaborService laborService;
 	
@@ -87,6 +88,7 @@ public class LaborController {
 	@PostMapping("/save")
 	@RequiresPermissions("budget:budget:add")
 	public R save( LaborDO labor){
+		labor.setLaborOperator(getUserId());
 		if(laborService.save(labor)>0){
 			return R.ok();
 		}
@@ -99,6 +101,7 @@ public class LaborController {
 	@RequestMapping("/update")
 	@RequiresPermissions("budget:budget:edit")
 	public R update( LaborDO labor){
+		labor.setLaborOperator(getUserId());
 		laborService.update(labor);
 		return R.ok();
 	}

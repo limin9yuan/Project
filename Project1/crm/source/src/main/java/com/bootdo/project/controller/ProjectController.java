@@ -159,6 +159,7 @@ public class ProjectController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("project:project:edit")
 	public R update(ProjectDO project) {
+		project.setProjectOperator(getUserId());
 		projectService.update(project);
 		return R.ok();
 	}

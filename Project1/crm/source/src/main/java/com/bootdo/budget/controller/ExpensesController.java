@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.budget.domain.ExpensesDO;
 import com.bootdo.budget.domain.LaborDO;
 import com.bootdo.budget.service.ExpensesService;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -33,7 +34,7 @@ import com.bootdo.common.utils.R;
  
 @Controller
 @RequestMapping("/budget/expenses")
-public class ExpensesController {
+public class ExpensesController extends BaseController {
 	@Autowired
 	private ExpensesService expensesService;
 	
@@ -85,6 +86,7 @@ public class ExpensesController {
 	@PostMapping("/save")
 	@RequiresPermissions("budget:budget:add")
 	public R save( ExpensesDO expenses){
+		expenses.setExpensesOperator(getUserId());
 		if(expensesService.save(expenses)>0){
 			return R.ok();
 		}

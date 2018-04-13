@@ -5,7 +5,7 @@ $().ready(function() {
 	loadCrmData("/sales/business/listDic","businessId");
 	loadCrmData("/sales/companyCustomer/listDic","customerId");
 	loadCrmData("/inner/innerOrgEmployee/listDic","recordExecutor");
-	loadCrmData("/sales/salesProject/listAllDic","projectId");
+	loadCrmData("/project/project/listDic","projectId");
 	layui.use('upload', function () {
         var upload = layui.upload;
         //执行实例

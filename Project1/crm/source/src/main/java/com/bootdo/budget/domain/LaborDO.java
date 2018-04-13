@@ -37,7 +37,7 @@ public class LaborDO implements Serializable {
 	//备注
 	private String laborRemarks;
 	//操作人
-	private String laborOperator;
+	private Long laborOperator;
 	//操作时间
 	private Date laborOperateTime;
 	
@@ -169,13 +169,13 @@ public class LaborDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setLaborOperator(String laborOperator) {
+	public void setLaborOperator(Long laborOperator) {
 		this.laborOperator = laborOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public String getLaborOperator() {
+	public Long getLaborOperator() {
 		return laborOperator;
 	}
 	/**

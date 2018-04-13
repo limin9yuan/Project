@@ -18,7 +18,12 @@
 		`Invoice_Receiver_Time`,
 		`Invoice_Receiver`,c.Employee_Name as `Invoice_Receiver_Name`,
 		f.`Employee_Name` as `Project_Owner_Name`,e.`Project_Name` as `Invoice_Project_Name`,
-		`Invoice_Attachment`,`Invoice_Contract_Status`,`Invoice_Remarks`,`Invoice_Operator`,`Invoice_Operate_Time`,`Invoice_Company` 
+		`Invoice_Attachment`,
+		CASE WHEN `Invoice_Contract_Status` = '0' THEN '未开始'
+		WHEN `Invoice_Contract_Status` = '1' THEN '交付中' 
+		WHEN `Invoice_Contract_Status` = '2' THEN '已完成' 
+		END AS `Invoice_Contract_Status`,
+		`Invoice_Remarks`,`Invoice_Operator`,`Invoice_Operate_Time`,`Invoice_Company` 
 		from invoice a
 		left join inner_org_employee b on a.`Invoice_Person`=b.`Employee_ID`
 		left join inner_org_employee c on a.`Invoice_Receiver`=c.`Employee_ID`

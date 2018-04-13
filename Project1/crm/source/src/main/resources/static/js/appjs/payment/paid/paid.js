@@ -67,10 +67,10 @@ function load() {
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
-								},{
+								},/*{
 									field : 'paidId', 
 									title : '付款信息编号' 
-								},{
+								},*/{
 									field : 'paidTime', 
 									title : '付款时间' 
 								},{

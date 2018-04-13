@@ -12,7 +12,12 @@
 	<select id="list" resultType="com.bootdo.payment.domain.PaidDO">
 		select `Paid_ID`,
 		a.`Contract_ID`,d.`Employee_Name` as `Project_Owner_Name`,c.`Project_Name` as `Paid_Project_Name`,
-		`Purchase_ID`,`Contract__D`,`Paid_Time`,`Paid_Price`,`Paid_Account_Number`,`Paid_Type`,`Paid_Status`,`Paid_Remarks`,`Paid_Operator`,`Paid_Operate_Time`,
+		`Purchase_ID`,`Contract__D`,`Paid_Time`,`Paid_Price`,`Paid_Account_Number`,`Paid_Type`,
+		CASE WHEN `Paid_Status` = '0' THEN '未开始'
+		WHEN `Paid_Status` = '1' THEN '交付中' 
+		WHEN `Paid_Status` = '2' THEN '已完成' 
+		END AS `Paid_Status`,
+		`Paid_Remarks`,`Paid_Operator`,`Paid_Operate_Time`,
 		b.`Contract_Total_Price`as `Paid_Account_Price`
 		from payment_paid a
 		left join contract b on a.`Contract__D`=b.`Contract_ID`

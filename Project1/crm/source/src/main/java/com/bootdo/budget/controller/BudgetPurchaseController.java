@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.budget.domain.BudgetPurchaseDO;
 import com.bootdo.budget.domain.ExpensesDO;
 import com.bootdo.budget.service.BudgetPurchaseService;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -33,7 +34,7 @@ import com.bootdo.common.utils.R;
  
 @Controller
 @RequestMapping("/budget/budgetPurchase")
-public class BudgetPurchaseController {
+public class BudgetPurchaseController extends BaseController {
 	@Autowired
 	private BudgetPurchaseService budgetPurchaseService;
 	
@@ -88,6 +89,7 @@ public class BudgetPurchaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("budget:budget:add")
 	public R save( BudgetPurchaseDO purchase){
+		purchase.setPurchaseOperator(getUserId());
 		if(budgetPurchaseService.save(purchase)>0){
 			return R.ok();
 		}
@@ -100,6 +102,7 @@ public class BudgetPurchaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("budget:budget:edit")
 	public R update( BudgetPurchaseDO purchase){
+		purchase.setPurchaseOperator(getUserId());
 		budgetPurchaseService.update(purchase);
 		return R.ok();
 	}

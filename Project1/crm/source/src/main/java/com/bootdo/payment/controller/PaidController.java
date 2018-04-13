@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.payment.domain.InvoiceDO;
 import com.bootdo.payment.domain.PaidDO;
 import com.bootdo.payment.service.PaidService;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -33,7 +34,7 @@ import com.bootdo.common.utils.R;
  
 @Controller
 @RequestMapping("/payment/paid")
-public class PaidController {
+public class PaidController extends BaseController {
 	@Autowired
 	private PaidService paidService;
 	
@@ -86,6 +87,7 @@ public class PaidController {
 	@PostMapping("/save")
 	@RequiresPermissions("payment:paid:add")
 	public R save( PaidDO paid){
+		paid.setPaidOperator(getUserId());
 		if(paidService.save(paid)>0){
 			return R.ok();
 		}
@@ -98,6 +100,7 @@ public class PaidController {
 	@RequestMapping("/update")
 	@RequiresPermissions("payment:paid:edit")
 	public R update( PaidDO paid){
+		paid.setPaidOperator(getUserId());
 		paidService.update(paid);
 		return R.ok();
 	}

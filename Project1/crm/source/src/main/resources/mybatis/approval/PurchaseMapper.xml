@@ -15,7 +15,9 @@
 		select `Purchase_ID`,
 		`Purchase_Dept`,b.`Name`,
 		a.`Purchase_Person`,c.`Employee_Name` as `Purchase_Person_Name`,
-		`Purchase_Date`,`Purchase_Name`,`Purchase_Brand`,`Purchase_Mode`,`Purchase_Config`,`Purchase_Unit`,`Purchase_Number`,`Purchase_Unit_Price`,`Purchase_Total_Price`,`Purchase_Delivery_Time`,`Purchase_Delivery_Place`,`Purchase_Consignee`,`Purchase_Phone_Number`,`Purchase_Remarks`,`Purchase_Approval_Status`,`Purchase_Operator`,`Purchase_Operate_Time`,
+		`Purchase_Date`,`Purchase_Name`,`Purchase_Brand`,`Purchase_Mode`,`Purchase_Config`,`Purchase_Unit`,`Purchase_Number`,`Purchase_Unit_Price`,`Purchase_Total_Price`,`Purchase_Delivery_Time`,`Purchase_Delivery_Place`,`Purchase_Consignee`,`Purchase_Phone_Number`,`Purchase_Remarks`,
+		END AS `Purchase_Approval_Status`,
+		`Purchase_Operator`,`Purchase_Operate_Time`,
 		`Purchase_Creator`,e.`name`as Purchase_Operator_Name,
 		`Purchase_Create_Time`,
 		a.`Project_ID`,d.`Project_Name` as `Project_Name`  

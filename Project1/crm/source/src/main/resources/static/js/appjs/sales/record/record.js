@@ -2,7 +2,7 @@
 var prefix = "/sales/record"
 $(function() {
 	load();
-	loadCrmData("/sales/salesProject/listAllDic","projectId","全部");
+	loadCrmData("/project/project/listDic","projectId","全部");
 	loadCrmData("/sales/companyCustomer/listDic","customerId","全部");
 	loadCrmData("/sales/business/listDic","businessId","全部");
 });

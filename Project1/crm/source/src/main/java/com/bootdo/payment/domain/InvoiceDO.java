@@ -45,7 +45,7 @@ public class InvoiceDO implements Serializable {
 	//备注
 	private String invoiceRemarks;
 	//操作人
-	private String invoiceOperator;
+	private Long invoiceOperator;
 	//操作时间
 	private Date invoiceOperateTime;
 	
@@ -237,13 +237,13 @@ public class InvoiceDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setInvoiceOperator(String invoiceOperator) {
+	public void setInvoiceOperator(Long invoiceOperator) {
 		this.invoiceOperator = invoiceOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public String getInvoiceOperator() {
+	public Long getInvoiceOperator() {
 		return invoiceOperator;
 	}
 	/**

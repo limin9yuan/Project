@@ -15,7 +15,15 @@
 		select `Purchase_ID`,
 		`Approval_Purchase_ID`,
 		`Purchase_Person`,b.`Employee_Name` as `Purchase_Person_Name`,
-		`Purchase_TIme`,`Purchase_Delivery_Time`,`Purchase_Delivery_Place`,`Purchase_Consignee`,`Purchase_Phone_Number`,`Purchase_Name`,`Purchase_Brand`,`Purchase_Mode`,`Purchase_Config`,`Purchase_Unit`,`Purchase_Unit_Price`,`Purchase_Number`,`Purchase_Total_Price`,`Purchase_Order_Status`,`Purchase_Paid`,`Purchase_Not_Paid`,`Purchase_Fulfilment_Status`,`Purchase_Remarks`,
+		`Purchase_TIme`,`Purchase_Delivery_Time`,`Purchase_Delivery_Place`,`Purchase_Consignee`,`Purchase_Phone_Number`,`Purchase_Name`,`Purchase_Brand`,`Purchase_Mode`,`Purchase_Config`,`Purchase_Unit`,`Purchase_Unit_Price`,`Purchase_Number`,`Purchase_Total_Price`,
+		CASE WHEN `Purchase_Order_Status` = '0' THEN '未签合同'
+		WHEN `Purchase_Order_Status` = '1' THEN '已签合同' 
+		END AS `Purchase_Order_Status`,
+		`Purchase_Paid`,`Purchase_Not_Paid`,
+		CASE WHEN `Purchase_Fulfilment_Status` = '0' THEN '未发货'
+		WHEN `Purchase_Fulfilment_Status` = '1' THEN '已发货' 
+		END AS `Purchase_Fulfilment_Status`,
+		`Purchase_Remarks`,
 		`Purchase_Operator`,c.name as Purchase_Operator_Name,
 		`Purchase_Operate_Time`,
 		a.`Project_ID`,d.`Project_Name` as `Project_Name`   

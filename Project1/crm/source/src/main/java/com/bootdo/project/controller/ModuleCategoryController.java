@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.bootdo.project.domain.ModuleCategoryDO;
 import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.project.service.ModuleCategoryService;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
@@ -34,7 +35,7 @@ import com.bootdo.common.utils.R;
  
 @Controller
 @RequestMapping("/project/moduleCategory")
-public class ModuleCategoryController {
+public class ModuleCategoryController extends BaseController {
 	@Autowired
 	private ModuleCategoryService moduleCategoryService;
 	
@@ -84,6 +85,8 @@ public class ModuleCategoryController {
 	@PostMapping("/save")
 	@RequiresPermissions("project:moduleCategory:add")
 	public R save( ModuleCategoryDO moduleCategory){
+		moduleCategory.setModuleCreator(getUserId());
+		moduleCategory.setModuleRecorder(getUserId());
 		if(moduleCategoryService.save(moduleCategory)>0){
 			return R.ok();
 		}
@@ -96,6 +99,7 @@ public class ModuleCategoryController {
 	@RequestMapping("/update")
 	@RequiresPermissions("project:moduleCategory:edit")
 	public R update( ModuleCategoryDO moduleCategory){
+		moduleCategory.setModuleRecorder(getUserId());
 		moduleCategoryService.update(moduleCategory);
 		return R.ok();
 	}

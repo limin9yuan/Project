@@ -23,6 +23,7 @@ import com.bootdo.payment.domain.InvoiceDO;
 import com.bootdo.payment.service.InvoiceService;
 import com.bootdo.sales.domain.RequirementCategoryDO;
 import com.bootdo.common.config.BootdoConfig;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.FileType;
@@ -41,7 +42,7 @@ import com.bootdo.common.utils.R;
  
 @Controller
 @RequestMapping("/payment/invoice")
-public class InvoiceController {
+public class InvoiceController extends BaseController {
 	@Autowired
 	private InvoiceService invoiceService;
 	@Autowired
@@ -98,6 +99,7 @@ public class InvoiceController {
 	@PostMapping("/save")
 	@RequiresPermissions("payment:invoice:add")
 	public R save( InvoiceDO invoice){
+		invoice.setInvoiceOperator(getUserId());
 		if(invoiceService.save(invoice)>0){
 			return R.ok();
 		}
@@ -110,6 +112,7 @@ public class InvoiceController {
 	@RequestMapping("/update")
 	@RequiresPermissions("payment:invoice:edit")
 	public R update( InvoiceDO invoice){
+		invoice.setInvoiceOperator(getUserId());
 		invoiceService.update(invoice);
 		return R.ok();
 	}

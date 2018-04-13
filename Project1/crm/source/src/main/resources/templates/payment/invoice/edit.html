@@ -12,11 +12,11 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 						<!--  <input id="invoiceId" name="invoiceId" th:value="${invoice.invoiceId}"  type="hidden">-->
-						<input id="invoiceId" name="invoiceId" th:value="${invoiceId}" class="form-control" type="text" type="hidden">
+						<!--<input id="invoiceId" name="invoiceId" th:value="${invoiceId}" class="form-control"  type="hidden">-->
 						<div class="form-group">	
 								<label class="col-sm-3 control-label">发票序号：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="invoiceId" name="invoiceId" class="form-control" type="text">
+									<input id="invoiceId" name="invoiceId" th:value="${invoiceId}"class="form-control" type="text">
 								</div>	
 								<label class="col-sm-3 control-label">开票公司：<span class="mustin">*</span></label>
 								<div class="col-sm-3">

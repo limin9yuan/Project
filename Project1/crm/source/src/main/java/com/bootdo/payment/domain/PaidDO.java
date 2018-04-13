@@ -37,7 +37,7 @@ public class PaidDO implements Serializable {
 	//备注
 	private String paidRemarks;
 	//操作人
-	private String paidOperator;
+	private Long paidOperator;
 	//操作时间
 	private Date paidOperateTime;
 	
@@ -179,13 +179,13 @@ public class PaidDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setPaidOperator(String paidOperator) {
+	public void setPaidOperator(Long paidOperator) {
 		this.paidOperator = paidOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public String getPaidOperator() {
+	public Long getPaidOperator() {
 		return paidOperator;
 	}
 	/**

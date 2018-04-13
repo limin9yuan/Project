@@ -84,10 +84,10 @@ function validateRule() {
 			},
 			invoiceDate: {
 				required : true
-			}/*,
+			},
 			invoiceContractStatus: {
 				required : true
-			}*/
+			}
 		},
 		messages : {
 			invoiceId : {
@@ -115,10 +115,10 @@ function validateRule() {
 			},
 			invoiceDate : {
 				required : icon + "开票日期不能为空"
-			}/*,
+			},
 			invoiceContractStatus : {
 				required : icon + "请选择合同状态"
-			},*/
+			}
 		}
 	})
 }
@@ -150,7 +150,7 @@ function invoiceMapper_edit(){
 			$("input[name='invoiceContent']").val(result.invoiceContent);
 			$("input[name='invoiceDate']").val(result.invoiceDate);
 			$("input[name='invoiceReceiverTime']").val(result.invoiceReceiverTime);
-			$("input[name='invoiceContractStatus']").val(result.invoiceContractStatus);
+			$(":radio[name='invoiceContractStatus'][value='" + result.invoiceContractStatus + "']").prop("checked", "checked");
 			$("input[name='invoiceAttachment']").val(result.invoiceAttachment);
 			$("textarea[name='invoiceRemarks']").val(result.invoiceRemarks);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoicePerson",result.invoicePerson);

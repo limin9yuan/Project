@@ -33,7 +33,7 @@ public class BudgetPurchaseDO implements Serializable {
 	//备注
 	private String purchaseRemarks;
 	//操作人
-	private String purchaseOperator;
+	private Long purchaseOperator;
 	//操作时间
 	private Date purchaseOperateTime;
 	
@@ -140,13 +140,13 @@ public class BudgetPurchaseDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setPurchaseOperator(String purchaseOperator) {
+	public void setPurchaseOperator(Long purchaseOperator) {
 		this.purchaseOperator = purchaseOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public String getPurchaseOperator() {
+	public Long getPurchaseOperator() {
 		return purchaseOperator;
 	}
 	/**

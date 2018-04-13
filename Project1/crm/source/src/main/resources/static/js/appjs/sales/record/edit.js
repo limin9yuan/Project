@@ -9,7 +9,7 @@ $().ready(function() {
             size: 1000,
             accept: 'file',
             done: function (r) {
-            	alert(r.fileName);
+            	//alert(r.fileName);
             	$("#recordAttachment").val(r.fileName);
                 //layer.msg(r.msg);
                 //app.getData();
@@ -165,7 +165,7 @@ function recordMapper_edit(){
 			loadCrmDataValue("/sales/business/listDic","businessId",result.businessId);
 			loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","recordExecutor",result.recordExecutor);
-			loadCrmDataValue("/sales/salesProject/listAllDic","projectId",result.projectId);
+			loadCrmDataValue("/project/project/listDic","projectId",result.projectId);
 		}
 	});
 }

@@ -84,10 +84,10 @@ function validateRule() {
 			},
 			invoiceDate: {
 				required : true
-			}/*,
+			},
 			invoiceContractStatus: {
 				required : true
-			}*/
+			}
 		},
 		messages : {
 			invoiceId : {
@@ -115,10 +115,10 @@ function validateRule() {
 			},
 			invoiceDate : {
 				required : icon + "开票日期不能为空"
-			}/*,
+			},
 			invoiceContractStatus : {
 				required : icon + "请选择合同状态"
-			},*/
+			}
 		}
 	})
 }

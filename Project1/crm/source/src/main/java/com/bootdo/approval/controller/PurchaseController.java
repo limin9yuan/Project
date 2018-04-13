@@ -106,6 +106,7 @@ public class PurchaseController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("approval:purchase:edit")
 	public R update( PurchaseDO purchase){
+		purchase.setPurchaseOperator(getUserId());
 		purchaseService.update(purchase);
 		return R.ok();
 	}

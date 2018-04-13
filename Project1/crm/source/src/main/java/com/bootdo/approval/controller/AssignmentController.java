@@ -6,6 +6,7 @@ import java.util.Map;
 
 import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.contract.domain.TravelDO;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootdo.approval.domain.AssignmentDO;
 import com.bootdo.approval.service.AssignmentService;
+import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -33,7 +35,7 @@ import com.bootdo.common.utils.R;
  
 @Controller
 @RequestMapping("/approval/assignment")
-public class AssignmentController {
+public class AssignmentController extends BaseController {
 	@Autowired
 	private AssignmentService assignmentService;
 
@@ -99,6 +101,8 @@ public class AssignmentController {
 	@PostMapping("/save")
 	@RequiresPermissions("approval:assignment:add")
 	public R save( AssignmentDO assignment){
+		assignment.setAssignmentCreator(getUserId());
+		assignment.setAssignmentOperator(getUserId());
 		if(assignmentService.save(assignment)>0){
 			return R.ok();
 		}
@@ -111,6 +115,7 @@ public class AssignmentController {
 	@RequestMapping("/update")
 	@RequiresPermissions("approval:assignment:edit")
 	public R update( AssignmentDO assignment){
+		assignment.setAssignmentOperator(getUserId());
 		assignmentService.update(assignment);
 		return R.ok();
 	}

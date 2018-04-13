@@ -58,10 +58,10 @@ function validateRule() {
 			},
 			paidTime: {
 				required : true
-			}/*,
+			},
 			paidStatus: {
 				required : true
-			}*/
+			}
 		},
 		messages : {
 			paidPrice : {
@@ -82,10 +82,10 @@ function validateRule() {
 			},
 			paidTime : {
 				required : icon + "付款时间不能为空"
-			}/*,
+			},
 			paidStatus : {
 				required : icon + "请选择合同状态"
-			}*/
+			}
 		}
 	})
 }
@@ -112,7 +112,7 @@ function paidMapper_edit(){
 			$("input[name='paidType']").val(result.paidType);
 			$("input[name='paidTime']").val(result.paidTime);
 			$("input[name='receiptDelayTime']").val(result.receiptDelayTime);
-			$("input[name='paidStatus']").val(result.paidStatus);
+			$(":radio[name='paidStatus'][value='" + result.paidStatus + "']").prop("checked", "checked");
 			$("textarea[name='paidRemarks']").val(result.paidRemarks);		
 		}
 	});

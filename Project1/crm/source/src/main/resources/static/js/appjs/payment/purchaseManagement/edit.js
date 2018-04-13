@@ -64,7 +64,7 @@ function validateRule() {
 			},
 			purchasePhoneNumber : {
 				required : true,
-				maxlength:20
+				maxlength:11
 			},
 			purchaseName: {
 				required : true,
@@ -97,10 +97,10 @@ function validateRule() {
 			purchaseTotalPrice: {
 				required : true,
 				maxlength:10
-			},/*
+			},
 			purchaseOrderStatus: {
 				required : true
-			},*/
+			},
 			purchasePaid: {
 				required : true,
 				maxlength:10
@@ -108,10 +108,10 @@ function validateRule() {
 			purchaseNotPaid: {
 				required : true,
 				maxlength:10
-			}/*,
+			},
 			purchaseFulfilmentStatus: {
 				required : true
-			}*/
+			}
 		},
 		messages : {
 			projectId : {
@@ -136,7 +136,7 @@ function validateRule() {
 			},
 			purchasePhoneNumber : {
 				required : icon + "请输入联系电话",
-				maxlength:icon + "字符长度不能大于20"
+				maxlength:icon + "字符长度不能大于11"
 			},
 			purchaseName : {
 				required : icon + "请输入物品名称",
@@ -169,10 +169,10 @@ function validateRule() {
 			purchaseTotalPrice : {
 				required : icon + "请输入总计",
 				maxlength:icon + "字符长度不能大于10"
-			},/*
+			},
 			purchaseOrderStatus : {
 				required : icon + "请选择订货情况"
-			},*/
+			},
 			purchasePaid : {
 				required : icon + "请输入已付款",
 				maxlength:icon + "字符长度不能大于10"
@@ -180,10 +180,10 @@ function validateRule() {
 			purchaseNotPaid : {
 				required : icon + "请输入未付款",
 				maxlength:icon + "字符长度不能大于10"
-			}/*,
+			},
 			purchaseFulfilmentStatus : {
 				required : icon + "请选择发货情况"
-			}*/
+			}
 		}
 	})
 }
@@ -221,13 +221,13 @@ function purchaseManagementMapper_edit(){
 			$("input[name='purchaseUnitPrice']").val(result.purchaseUnitPrice);
 			$("input[name='purchaseNumber']").val(result.purchaseNumber);
 			$("input[name='purchaseTotalPrice']").val(result.purchaseTotalPrice);
-			$("input[name='purchaseOrderStatus']").val(result.purchaseOrderStatus);
+			$(":radio[name='purchaseOrderStatus'][value='" + result.purchaseOrderStatus + "']").prop("checked", "checked");
 			$("input[name='purchasePaid']").val(result.purchasePaid);
 			$("input[name='purchaseNotPaid']").val(result.purchaseNotPaid);
-			$("input[name='purchaseFulfilmentStatus']").val(result.purchaseFulfilmentStatus);
+			$(":radio[name='purchaseFulfilmentStatus'][value='" + result.purchaseFulfilmentStatus + "']").prop("checked", "checked");
 			$("textarea[name='purchaseRemarks']").val(result.purchaseRemarks);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","purchasePerson",result.purchasePerson);
-			loadCrmDataValue("/sales/salesProject/listAllDic","projectId",result.projectId);
+			loadCrmDataValue("/project/project/listDic","projectId",result.projectId);
 		}
 	});
 }

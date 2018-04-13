@@ -56,10 +56,10 @@ function validateRule() {
 			},
 			paidTime: {
 				required : true
-			}/*,
+			},
 			paidStatus: {
 				required : true
-			}*/
+			}
 		},
 		messages : {
 			paidPrice : {
@@ -80,10 +80,10 @@ function validateRule() {
 			},
 			paidTime : {
 				required : icon + "付款时间不能为空"
-			}/*,
+			},
 			paidStatus : {
 				required : icon + "请选择合同状态"
-			}*/
+			}
 		}
 	})
 }

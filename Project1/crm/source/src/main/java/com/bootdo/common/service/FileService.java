@@ -1,6 +1,7 @@
 package com.bootdo.common.service;
 
 import com.bootdo.common.domain.FileDO;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Map;
  * @email 1992lcg@163.com
  * @date 2017-09-19 16:02:20
  */
+
 public interface FileService {
 	
 	FileDO get(Long id);

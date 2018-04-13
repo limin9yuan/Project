@@ -33,7 +33,7 @@ public class ExpensesDO implements Serializable {
 	//备注
 	private String expensesRemarks;
 	//操作人
-	private String expensesOperator;
+	private Long expensesOperator;
 	//操作时间
 	private Date expensesOperateTime;
 	
@@ -140,13 +140,13 @@ public class ExpensesDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setExpensesOperator(String expensesOperator) {
+	public void setExpensesOperator(Long expensesOperator) {
 		this.expensesOperator = expensesOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public String getExpensesOperator() {
+	public Long getExpensesOperator() {
 		return expensesOperator;
 	}
 	/**

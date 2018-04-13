@@ -94,6 +94,7 @@ public class BudgetController extends BaseController {
 	@RequiresPermissions("budget:budget:add")
 	public R save( BudgetDO budget){
 		//budgetId=budget.getBudgetId();
+		budget.setBudgetOperator(getUserId());
 		int resultBudgetId=budgetService.save(budget);
 		if(resultBudgetId>0){  
 			R r = R.ok();

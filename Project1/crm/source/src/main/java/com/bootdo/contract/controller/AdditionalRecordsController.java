@@ -115,6 +115,7 @@ public class AdditionalRecordsController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("contract:additionalRecords:add")
 	public R save( AdditionalRecordsDO additionalRecords){
+		additionalRecords.setRecordOperator(getUserId());
 		if(additionalRecordsService.save(additionalRecords)>0){
 			return R.ok();
 		}
@@ -127,6 +128,7 @@ public class AdditionalRecordsController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("contract:additionalRecords:edit")
 	public R update( AdditionalRecordsDO additionalRecords){
+		additionalRecords.setRecordOperator(getUserId());
 		additionalRecordsService.update(additionalRecords);
 		return R.ok();
 	}

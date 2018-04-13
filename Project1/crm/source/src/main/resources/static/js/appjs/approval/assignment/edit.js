@@ -172,7 +172,7 @@ function assignmentMapper_edit(){
 		},
 		success : function(data) {
 			var result = data.assignment;
-			alert(result.assignmentTaskPerformance);
+			//alert(result.assignmentTaskPerformance);
 			$("input[name='assignmentId']").val(result.assignmentId);
 			$("input[name='assignmentTaskName']").val(result.assignmentTaskName);
 			$("input[name='assignmentTaskPerformance']").val(result.assignmentTaskPerformance);

@@ -137,6 +137,7 @@ public class RecordController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("sales:record:edit")
 	public R update( RecordDO record){
+		record.setRecordOperator(getUserId());
 		recordService.update(record);
 		return R.ok();
 	}
