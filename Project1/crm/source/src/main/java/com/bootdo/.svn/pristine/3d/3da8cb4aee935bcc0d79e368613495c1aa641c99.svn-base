@@ -1,0 +1,417 @@
+package com.bootdo.sales.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/**
+ * 客户投诉信息表
+ * 
+ * @author chglee
+ * @email 1992lcg@163.com
+ * @date 2017-11-28 18:06:03
+ */
+public class RecordComplaintDO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	// 客户投诉记录编号
+	private String complaintId;
+	// 项目编号
+	private String projectId;
+	// 企业客户编号
+	private String customerId;
+	// 使用产品
+	private String complaintProduct;
+	// 投诉人姓名
+	private String complaintName;
+	// 投诉时间
+	private Date complaintDate;
+	// 所在单位
+	private String complaintCompany;
+	// 投诉方式
+	private String complaintFeedbackType;
+	// 投诉内容
+	private String complaintProblem;
+	// 附件
+	private String complaintAttachment;
+	// 客服发送资料
+	private String complaintAttachmentCustomer;
+	// 问题描述备注
+	private String complaintProblemRemarks;
+	// 售后服务类型
+	private String complaintAfterSaleType;
+	// 问题描述
+	private String complaintProblemDescription;
+	// 处理人
+	private Long complaintOperator;
+	// 处理过程
+	private String complaintExecutor;
+	// 处理结果
+	private String complaintResult;
+	// 售后备注
+	private String complaintAfterSaleRemarks;
+	// 客户电话
+	private String complaintPhoneNumber;
+	// 客户邮箱
+	private String complaintMailbox;
+	// 操作人
+	private Long complaintRecorder;
+	// 修改时间
+	private Date complaintRecordTime;
+	// 创建时间
+	private Date complaintCreateTime;
+	// 操作人姓名
+	private String complaintRecorderName;
+	// 客户名称
+	private String customerName;
+	// 项目名称
+	private String projectName;
+	
+	
+	
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	/**
+	 * 设置：客户投诉记录编号
+	 */
+	public void setComplaintId(String complaintId) {
+		this.complaintId = complaintId;
+	}
+
+	/**
+	 * 获取：客户投诉记录编号
+	 */
+	public String getComplaintId() {
+		return complaintId;
+	}
+
+	/**
+	 * 设置：项目编号
+	 */
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+
+	/**
+	 * 获取：项目编号
+	 */
+	public String getProjectId() {
+		return projectId;
+	}
+
+	/**
+	 * 设置：企业客户编号
+	 */
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	/**
+	 * 获取：企业客户编号
+	 */
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	/**
+	 * 设置：使用产品
+	 */
+	public void setComplaintProduct(String complaintProduct) {
+		this.complaintProduct = complaintProduct;
+	}
+
+	/**
+	 * 获取：使用产品
+	 */
+	public String getComplaintProduct() {
+		return complaintProduct;
+	}
+
+	/**
+	 * 设置：投诉人姓名
+	 */
+	public void setComplaintName(String complaintName) {
+		this.complaintName = complaintName;
+	}
+
+	/**
+	 * 获取：投诉人姓名
+	 */
+	public String getComplaintName() {
+		return complaintName;
+	}
+
+	/**
+	 * 设置：投诉时间
+	 */
+	public void setComplaintDate(Date complaintDate) {
+		this.complaintDate = complaintDate;
+	}
+
+	/**
+	 * 获取：投诉时间
+	 */
+	public Date getComplaintDate() {
+		return complaintDate;
+	}
+
+	/**
+	 * 设置：所在单位
+	 */
+	public void setComplaintCompany(String complaintCompany) {
+		this.complaintCompany = complaintCompany;
+	}
+
+	/**
+	 * 获取：所在单位
+	 */
+	public String getComplaintCompany() {
+		return complaintCompany;
+	}
+
+	/**
+	 * 设置：投诉方式
+	 */
+	public void setComplaintFeedbackType(String complaintFeedbackType) {
+		this.complaintFeedbackType = complaintFeedbackType;
+	}
+
+	/**
+	 * 获取：投诉方式
+	 */
+	public String getComplaintFeedbackType() {
+		return complaintFeedbackType;
+	}
+
+	/**
+	 * 设置：投诉内容
+	 */
+	public void setComplaintProblem(String complaintProblem) {
+		this.complaintProblem = complaintProblem;
+	}
+
+	/**
+	 * 获取：投诉内容
+	 */
+	public String getComplaintProblem() {
+		return complaintProblem;
+	}
+
+	/**
+	 * 设置：附件
+	 */
+	public void setComplaintAttachment(String complaintAttachment) {
+		this.complaintAttachment = complaintAttachment;
+	}
+
+	/**
+	 * 获取：附件
+	 */
+	public String getComplaintAttachment() {
+		return complaintAttachment;
+	}
+
+	/**
+	 * 设置：客服发送资料
+	 */
+	public void setComplaintAttachmentCustomer(String complaintAttachmentCustomer) {
+		this.complaintAttachmentCustomer = complaintAttachmentCustomer;
+	}
+
+	/**
+	 * 获取：客服发送资料
+	 */
+	public String getComplaintAttachmentCustomer() {
+		return complaintAttachmentCustomer;
+	}
+
+	/**
+	 * 设置：问题描述备注
+	 */
+	public void setComplaintProblemRemarks(String complaintProblemRemarks) {
+		this.complaintProblemRemarks = complaintProblemRemarks;
+	}
+
+	/**
+	 * 获取：问题描述备注
+	 */
+	public String getComplaintProblemRemarks() {
+		return complaintProblemRemarks;
+	}
+
+	/**
+	 * 设置：售后服务类型
+	 */
+	public void setComplaintAfterSaleType(String complaintAfterSaleType) {
+		this.complaintAfterSaleType = complaintAfterSaleType;
+	}
+
+	/**
+	 * 获取：售后服务类型
+	 */
+	public String getComplaintAfterSaleType() {
+		return complaintAfterSaleType;
+	}
+
+	/**
+	 * 设置：问题描述
+	 */
+	public void setComplaintProblemDescription(String complaintProblemDescription) {
+		this.complaintProblemDescription = complaintProblemDescription;
+	}
+
+	/**
+	 * 获取：问题描述
+	 */
+	public String getComplaintProblemDescription() {
+		return complaintProblemDescription;
+	}
+
+	/**
+	 * 设置：处理人
+	 */
+	public void setComplaintOperator(Long complaintOperator) {
+		this.complaintOperator = complaintOperator;
+	}
+
+	/**
+	 * 获取：处理人
+	 */
+	public Long getComplaintOperator() {
+		return complaintOperator;
+	}
+
+	/**
+	 * 设置：处理过程
+	 */
+	public void setComplaintExecutor(String complaintExecutor) {
+		this.complaintExecutor = complaintExecutor;
+	}
+
+	/**
+	 * 获取：处理过程
+	 */
+	public String getComplaintExecutor() {
+		return complaintExecutor;
+	}
+
+	/**
+	 * 设置：处理结果
+	 */
+	public void setComplaintResult(String complaintResult) {
+		this.complaintResult = complaintResult;
+	}
+
+	/**
+	 * 获取：处理结果
+	 */
+	public String getComplaintResult() {
+		return complaintResult;
+	}
+
+	/**
+	 * 设置：售后备注
+	 */
+	public void setComplaintAfterSaleRemarks(String complaintAfterSaleRemarks) {
+		this.complaintAfterSaleRemarks = complaintAfterSaleRemarks;
+	}
+
+	/**
+	 * 获取：售后备注
+	 */
+	public String getComplaintAfterSaleRemarks() {
+		return complaintAfterSaleRemarks;
+	}
+
+	/**
+	 * 设置：客户电话
+	 */
+	public void setComplaintPhoneNumber(String complaintPhoneNumber) {
+		this.complaintPhoneNumber = complaintPhoneNumber;
+	}
+
+	/**
+	 * 获取：客户电话
+	 */
+	public String getComplaintPhoneNumber() {
+		return complaintPhoneNumber;
+	}
+
+	/**
+	 * 设置：客户邮箱
+	 */
+	public void setComplaintMailbox(String complaintMailbox) {
+		this.complaintMailbox = complaintMailbox;
+	}
+
+	/**
+	 * 获取：客户邮箱
+	 */
+	public String getComplaintMailbox() {
+		return complaintMailbox;
+	}
+
+	/**
+	 * 设置：操作人
+	 */
+	public void setComplaintRecorder(Long complaintRecorder) {
+		this.complaintRecorder = complaintRecorder;
+	}
+
+	/**
+	 * 获取：操作人
+	 */
+	public Long getComplaintRecorder() {
+		return complaintRecorder;
+	}
+
+	/**
+	 * 设置：修改时间
+	 */
+	public void setComplaintRecordTime(Date complaintRecordTime) {
+		this.complaintRecordTime = complaintRecordTime;
+	}
+
+	/**
+	 * 获取：修改时间
+	 */
+	public Date getComplaintRecordTime() {
+		return complaintRecordTime;
+	}
+
+	/**
+	 * 设置：操作人姓名
+	 */
+	public String getComplaintRecorderName() {
+		return complaintRecorderName;
+	}
+
+	public void setComplaintRecorderName(String complaintRecorderName) {
+		this.complaintRecorderName = complaintRecorderName;
+	}
+
+	public Date getComplaintCreateTime() {
+		return complaintCreateTime;
+	}
+
+	/**
+	 * 创建时间
+	 */
+	public void setComplaintCreateTime(Date complaintCreateTime) {
+		this.complaintCreateTime = complaintCreateTime;
+	}
+
+}

@@ -1,0 +1,364 @@
+package com.bootdo.sales.domain;
+
+import java.io.Serializable;
+import java.util.Date;
+
+
+
+/**
+ * 客服记录信息表
+ * 
+ * @author chglee
+ * @email 1992lcg@163.com
+ * @date 2017-11-28 09:25:19
+ */
+public class RecordServiceDO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
+	//客服记录编号
+	private String serviceId;
+	//项目编号
+	private String projectId;
+	//企业客户编号
+	private String custormerId;
+	//使用产品
+	private String serviceProduct;
+	//反馈人姓名
+	private String serviceName;
+	//问题出现时间
+	private String serviceProblemTime;
+	//所在单位
+	private String serviceDept;
+	//反馈方式
+	private String serviceFeedbackType;
+	//反馈内容
+	private String serviceFeedbackInfo;
+	//附件
+	private String serviceAttachment;
+	//客服发送资料
+	private String serviceAttachmentToCustomer;
+	//问题描述备注
+	private String serviceProblemRemarks;
+	//售后服务类型
+	private String serviceType;
+	//问题描述
+	private String serviceProblemDeascription;
+	//处理人
+	private Long serviceOperator;
+	//处理过程
+	private String serviceProcedure;
+	//处理结果
+	private String serviceResult;
+	//售后备注
+	private String serviceAfterSaleRemarks;
+	//客户电话
+	private String servicePhoneNumber;
+	//客户邮箱
+	private String serviceMailbox;
+	//操作人
+	private Long serviceRecorder;
+	//修改时间
+	private Date serviceRecordTime;
+	//创建时间
+	private Date serviceCreateTime;
+	//操作人姓名
+	private String serviceRecorderName;
+	//客户编号
+	private String custormerName;
+	//项目名称
+	private String projectName;
+	
+	
+	public String getProjectName() {
+		return projectName;
+	}
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
+	public String getCustormerName() {
+		return custormerName;
+	}
+	public void setCustormerName(String custormerName) {
+		this.custormerName = custormerName;
+	}
+	/**
+	 * 设置：客服记录编号
+	 */
+	public void setServiceId(String serviceId) {
+		this.serviceId = serviceId;
+	}
+	/**
+	 * 获取：客服记录编号
+	 */
+	public String getServiceId() {
+		return serviceId;
+	}
+	/**
+	 * 设置：项目编号
+	 */
+	public void setProjectId(String projectId) {
+		this.projectId = projectId;
+	}
+	/**
+	 * 获取：项目编号
+	 */
+	public String getProjectId() {
+		return projectId;
+	}
+	/**
+	 * 设置：企业客户编号
+	 */
+	public void setCustormerId(String custormerId) {
+		this.custormerId = custormerId;
+	}
+	/**
+	 * 获取：企业客户编号
+	 */
+	public String getCustormerId() {
+		return custormerId;
+	}
+	/**
+	 * 设置：使用产品
+	 */
+	public void setServiceProduct(String serviceProduct) {
+		this.serviceProduct = serviceProduct;
+	}
+	/**
+	 * 获取：使用产品
+	 */
+	public String getServiceProduct() {
+		return serviceProduct;
+	}
+	/**
+	 * 设置：反馈人姓名
+	 */
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+	/**
+	 * 获取：反馈人姓名
+	 */
+	public String getServiceName() {
+		return serviceName;
+	}
+	public String getServiceProblemTime() {
+		return serviceProblemTime;
+	}
+	public void setServiceProblemTime(String serviceProblemTime) {
+		this.serviceProblemTime = serviceProblemTime;
+	}
+	/**
+	 * 设置：所在单位
+	 */
+	public void setServiceDept(String serviceDept) {
+		this.serviceDept = serviceDept;
+	}
+	/**
+	 * 获取：所在单位
+	 */
+	public String getServiceDept() {
+		return serviceDept;
+	}
+	/**
+	 * 设置：反馈方式
+	 */
+	public void setServiceFeedbackType(String serviceFeedbackType) {
+		this.serviceFeedbackType = serviceFeedbackType;
+	}
+	/**
+	 * 获取：反馈方式
+	 */
+	public String getServiceFeedbackType() {
+		return serviceFeedbackType;
+	}
+	/**
+	 * 设置：反馈内容
+	 */
+	public void setServiceFeedbackInfo(String serviceFeedbackInfo) {
+		this.serviceFeedbackInfo = serviceFeedbackInfo;
+	}
+	/**
+	 * 获取：反馈内容
+	 */
+	public String getServiceFeedbackInfo() {
+		return serviceFeedbackInfo;
+	}
+	/**
+	 * 设置：附件
+	 */
+	public void setServiceAttachment(String serviceAttachment) {
+		this.serviceAttachment = serviceAttachment;
+	}
+	/**
+	 * 获取：附件
+	 */
+	public String getServiceAttachment() {
+		return serviceAttachment;
+	}
+	/**
+	 * 设置：客服发送资料
+	 */
+	public void setServiceAttachmentToCustomer(String serviceAttachmentToCustomer) {
+		this.serviceAttachmentToCustomer = serviceAttachmentToCustomer;
+	}
+	/**
+	 * 获取：客服发送资料
+	 */
+	public String getServiceAttachmentToCustomer() {
+		return serviceAttachmentToCustomer;
+	}
+	/**
+	 * 设置：问题描述备注
+	 */
+	public void setServiceProblemRemarks(String serviceProblemRemarks) {
+		this.serviceProblemRemarks = serviceProblemRemarks;
+	}
+	/**
+	 * 获取：问题描述备注
+	 */
+	public String getServiceProblemRemarks() {
+		return serviceProblemRemarks;
+	}
+	/**
+	 * 设置：售后服务类型
+	 */
+	public void setServiceType(String serviceType) {
+		this.serviceType = serviceType;
+	}
+	/**
+	 * 获取：售后服务类型
+	 */
+	public String getServiceType() {
+		return serviceType;
+	}
+	/**
+	 * 设置：问题描述
+	 */
+	public void setServiceProblemDeascription(String serviceProblemDeascription) {
+		this.serviceProblemDeascription = serviceProblemDeascription;
+	}
+	/**
+	 * 获取：问题描述
+	 */
+	public String getServiceProblemDeascription() {
+		return serviceProblemDeascription;
+	}
+	/**
+	 * 设置：处理人
+	 */
+	public void setServiceOperator(Long serviceOperator) {
+		this.serviceOperator = serviceOperator;
+	}
+	/**
+	 * 获取：处理人
+	 */
+	public Long getServiceOperator() {
+		return serviceOperator;
+	}
+	/**
+	 * 设置：处理过程
+	 */
+	public void setServiceProcedure(String serviceProcedure) {
+		this.serviceProcedure = serviceProcedure;
+	}
+	/**
+	 * 获取：处理过程
+	 */
+	public String getServiceProcedure() {
+		return serviceProcedure;
+	}
+	/**
+	 * 设置：处理结果
+	 */
+	public void setServiceResult(String serviceResult) {
+		this.serviceResult = serviceResult;
+	}
+	/**
+	 * 获取：处理结果
+	 */
+	public String getServiceResult() {
+		return serviceResult;
+	}
+	/**
+	 * 设置：售后备注
+	 */
+	public void setServiceAfterSaleRemarks(String serviceAfterSaleRemarks) {
+		this.serviceAfterSaleRemarks = serviceAfterSaleRemarks;
+	}
+	/**
+	 * 获取：售后备注
+	 */
+	public String getServiceAfterSaleRemarks() {
+		return serviceAfterSaleRemarks;
+	}
+	/**
+	 * 设置：客户电话
+	 */
+	public void setServicePhoneNumber(String servicePhoneNumber) {
+		this.servicePhoneNumber = servicePhoneNumber;
+	}
+	/**
+	 * 获取：客户电话
+	 */
+	public String getServicePhoneNumber() {
+		return servicePhoneNumber;
+	}
+	/**
+	 * 设置：客户邮箱
+	 */
+	public void setServiceMailbox(String serviceMailbox) {
+		this.serviceMailbox = serviceMailbox;
+	}
+	/**
+	 * 获取：客户邮箱
+	 */
+	public String getServiceMailbox() {
+		return serviceMailbox;
+	}
+	/**
+	 * 设置：操作人
+	 */
+	public void setServiceRecorder(Long serviceRecorder) {
+		this.serviceRecorder = serviceRecorder;
+	}
+	/**
+	 * 获取：操作人
+	 */
+	public Long getServiceRecorder() {
+		return serviceRecorder;
+	}
+	/**
+	 * 设置：修改时间
+	 */
+	public void setServiceRecordTime(Date serviceRecordTime) {
+		this.serviceRecordTime = serviceRecordTime;
+	}
+	/**
+	 * 获取：修改时间
+	 */
+	public Date getServiceRecordTime() {
+		return serviceRecordTime;
+	}
+	/**
+	 * 设置：创建时间
+	 */
+	public void setServiceCreateTime(Date serviceCreateTime) {
+		this.serviceCreateTime = serviceCreateTime;
+	}
+	/**
+	 * 获取：创建时间
+	 */
+	public Date getServiceCreateTime() {
+		return serviceCreateTime;
+	}
+	/**
+	 * 设置：问题出现时间
+	 */
+	public String getServiceRecorderName() {
+		return serviceRecorderName;
+	}
+	public void setServiceRecorderName(String serviceRecorderName) {
+		this.serviceRecorderName = serviceRecorderName;
+	}
+	
+}
