@@ -254,7 +254,8 @@ public class ContractController extends BaseController {
 			model.addAttribute("contract", contract);
 			//model.addAttribute("taskId",taskId);
 		}
-		return "contract/contract/edit";
+		return "contract/contract/ViewContract";
+
 	}
 
 
