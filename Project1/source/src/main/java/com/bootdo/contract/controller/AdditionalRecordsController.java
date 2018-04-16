@@ -302,7 +302,7 @@ public class AdditionalRecordsController extends BaseController {
 			model.addAttribute("additionalRecords", additionalRecords);
 			//model.addAttribute("taskId",taskId);
 		}
-	    return "contract/additionalRecords/edit";
+	    return "contract/additionalRecords/ViewAdditionalRecords";
 	}
 	
 	
