@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="view" resultType="com.bootdo.contract.domain.ContractDO">
-		select c.`Customer_Name`,b.`Business_Name`,d.`Project_Name`,e.`Employee_Name`,
+		select c.`Customer_Name`,b.`Business_Name`,d.`name`,e.`Employee_Name`,
 		a.`Contract_Name`,a.`Contract_Build_Company`,a.`Contract_Type`,a.`Contract_Category`,
 		a.`Contract_Total_Price`,e.`Employee_Name` as `Contract_Applicant`,a.`Contract_Draft_Person`,
 		e.`Employee_Name` as `Contract_Sales`,a.`Contract_Commit_Time`,
@@ -31,9 +31,8 @@
 		left join sales_company_customer c on a.Customer_ID = c.Customer_ID
 		left JOIN (select `Project_ID` value,concat(`Project_ID`,' ',`Project_Name`) name from pre_sales_project
          UNION ALL
-         select `Project_ID` value,concat(`Project_ID`,' ',`Project_Name`) name from development_project)d on a.Project_ID = d.Project_ID
+         select `Project_ID` value,concat(`Project_ID`,' ',`Project_Name`) name from development_project) d on a.Project_ID = d.value
 		left join inner_org_employee e on a.Contract_Applicant_Name = e.Employee_ID
-
 		where a.Contract_ID = #{value}
 	</select>
 

@@ -69,10 +69,10 @@ public class AdditionalRecordsServiceImpl implements AdditionalRecordsService {
 	public int save(AdditionalRecordsDO additionalRecords){
 		int ret=additionalRecordsDao.save(additionalRecords);
 		String recordId=additionalRecords.getRecordId();
+		
 		//添加保存时发起审批流程
 		actTaskService.startProcess(ActivitiConstant.ACTIVITI_CONTRACT_ADDITIONALRECORDS[0],ActivitiConstant.ACTIVITI_CONTRACT_ADDITIONALRECORDS[1],recordId,additionalRecords.getRecordId(),new HashMap<String,Object>());
-		
-		return ret;
+		return Integer.parseInt(recordId);
 	}
 	
 	@Override

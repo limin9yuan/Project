@@ -1,21 +1,68 @@
 var prefix = "/timesheet/timesheet"
 
 $().ready(function() {
-   loadCrmData("/sales/companyCustomer/listDic","customerId");
-		loadCrmData("/sales/business/listDic","businessId");
-		loadCrmData("/project/project/listDic","projectId");
-//loadCrmData("/sales/companyCustomer/listDic","customerId");
-//		loadCrmData("/sales/business/listDic","businessId");
 
+	loadCrmData("/sales/companyCustomer/listDic","customerId");
+	loadCrmData("/sales/business/listDic","businessId");
+	loadCrmData("/project/project/listDic","projectId");
+	loadCrmData("/inner/orgJob/listDic","jobId");
+
+	loadCrmData("/inner/innerOrgEmployee/listDic","customerId");
+
+	loadCrmData("/inner/innerOrgEmployee/listDic","assignmentPerson");
+	loadCrmData("/inner/innerOrgEmployee/listDic","assignmentPrincipal");
+	loadCrmData("/inner/innerOrgEmployee/listDic","assignmentRecipient");
+	loadCrmData("/system/sysDept/listDic","deptId");
+	loadCrmDataValue ("/system/sysDept/listDic","assignmentDept");
+	loadCrmData("/system/sysDept/listDic","assignmentRecipientDept");
+		loadCrmData("/project/project/listDic","projectId");
+
+		//获取项目类型经理和编号
+$("#projectId").bind("change",getProjectId);
+
+datetimepicker();
 	validateRule();
 });
+function getProjectId(){
+	$.ajax({
+		url : '/timesheet/timesheet/getProjectId/'+$("#projectId").val(),
+		type : "get",
+		data : {
+			'projectId' : $("#projectId").val()
+		},
+		success : function(data) {
+			var result = data.project;
 
+			$("input[name='projectDescription']").val(result.projectDescription);
+			$("input[name='employeeName']").val(result.employeeName);
+				$("input[name='projectOwner']").val(result.projectOwner);
+		 $("input[name='projectName']").val(result.projectName);
+         	 $("input[name='customerId']").val(result.customerId);
+         	  $("input[name='assignmentPm']").val(result.projectOwner);
+        $("input[name='timesheetPm']").val(result.employeeName);
+
+
+		}
+	});
+}
+
+function datetimepicker() {
+	 $('#assignmentBeginTime').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+	 $('#assignmentEndTime').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+}
 $.validator.setDefaults({
 	submitHandler : function() {
 		save();
 	}
 });
 function save() {
+alert($('#timesheetPm').val());
 	$.ajax({
 		cache : true,
 		type : "POST",

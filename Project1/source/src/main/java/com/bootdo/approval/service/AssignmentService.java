@@ -2,6 +2,7 @@ package com.bootdo.approval.service;
 
 import com.bootdo.approval.domain.AssignmentDO;
 import com.bootdo.contract.domain.TravelDO;
+import com.bootdo.timesheet.domain.TimesheetDO;
 
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ public interface AssignmentService {
 	int remove(String assignmentId);
 	
 	int batchRemove(String[] assignmentIds);
-
 	int formUpdate(AssignmentDO travel);
+
+	String saveAssignmentInTimesheet(TimesheetDO timesheet);
 }

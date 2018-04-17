@@ -2,6 +2,7 @@ var prefixPayable = "/contract/payable"
 var prefix = "/contract/contract";
 $(function() {
 	loadPayable();
+    view_ajax();
 });
 
 function loadPayable() {
@@ -95,30 +96,6 @@ function view_ajax(){
             $("input[name='contractHardwareList']").val(result.contractHardwareList);
             $("input[name='contractSoftwareList']").val(result.contractSoftwareList);
  			$("textarea[name='contractRemarks']").val(result.contractRemarks);
-
- 			// // 关联合同名称
-			// loadCrmDataValue("/contract/contract/listDic", "contractRelatedId",result.contractRelatedId);
-			// // 项目名称
-			// loadCrmDataValue("/sales/salesProject/listDic", "projectId",result.projectId);
-			// // 客户名称
-			// loadCrmDataValue("/sales/companyCustomer/listDic", "customerId",result.customerId);
-			// // 业务名称
-			// loadCrmDataValue("/sales/business/listDic", "businessId",result.businessId);
-			// // 申请人姓名(员工表)
-			// loadCrmDataValue("/inner/innerOrgEmployee/listDic", "contractApplicantName",result.contractApplicantName);
-			// // 业务发起人(员工表)
-			// loadCrmDataValue("/inner/innerOrgEmployee/listDic", "contractApplicant",result.contractApplicant);
-			// // 销售负责人(员工表)
-			// loadCrmDataValue("/inner/innerOrgEmployee/listDic", "contractSales",result.contractSales);
-			// // 岗位(内部)
-			// loadCrmDataValue("/inner/orgJob/listDic", "jobId",result.jobId);
-			// // 合同类型
-			// loadDicValue("contract_Contract_Type", "contractType",result.contractType);
-			// // 合同种类
-			// loadDicValue("contract_Contract_Category", "contractCategory",result.contractCategory);
-			// // 发票类型
-			// loadDicValue("Contract_Invoice_Type", "contractInvoiceType",result.contractInvoiceType);
-
 		}
 	});
 }

@@ -21,13 +21,13 @@ public class PayableDO implements Serializable {
 	//合同编号
 	private Long contractId;
 	//付款计划时间
-	private Date payableDate;
+	private String payableDate;
 	//付款计划金额
 	private BigDecimal payablePrice;
 	//备注
 	private String payableRemarks;
 	//操作人
-	private String payableOperator;
+	private Long payableOperator;
 	//操作时间
 	private Date payableOperateTime;
 
@@ -58,13 +58,13 @@ public class PayableDO implements Serializable {
 	/**
 	 * 设置：付款计划时间
 	 */
-	public void setPayableDate(Date payableDate) {
+	public void setPayableDate(String payableDate) {
 		this.payableDate = payableDate;
 	}
 	/**
 	 * 获取：付款计划时间
 	 */
-	public Date getPayableDate() {
+	public String getPayableDate() {
 		return payableDate;
 	}
 	/**
@@ -94,13 +94,13 @@ public class PayableDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setPayableOperator(String payableOperator) {
+	public void setPayableOperator(Long payableOperator) {
 		this.payableOperator = payableOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public String getPayableOperator() {
+	public Long getPayableOperator() {
 		return payableOperator;
 	}
 	/**

@@ -145,6 +145,7 @@ public class ProjectController extends BaseController {
 	@RequiresPermissions("project:project:add")
 	public R save(ProjectDO project) {
 		project.setProjectCreator(getUserId());
+
 		project.setProjectOperator(getUserId());
 		if (projectService.save(project) > 0) {
 			return R.ok();

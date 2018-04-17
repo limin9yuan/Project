@@ -100,7 +100,7 @@ public class PayableController  extends BaseController{
 	@PostMapping("/save")
 	@RequiresPermissions("contract:payable:add")
 	public R save( PayableDO payable){
-		payable.setPayableOperator(getUsername());
+		payable.setPayableOperator(getUserId());
 		if(payableService.save(payable)>0){
 			return R.ok();
 		}
@@ -114,7 +114,7 @@ public class PayableController  extends BaseController{
 	@RequestMapping("/update")
 	@RequiresPermissions("contract:payable:edit")
 	public R update(PayableDO payable){
-		payable.setPayableOperator(getUsername());
+		payable.setPayableOperator(getUserId());
 		payableService.update(payable);
 		return R.ok();
 	}

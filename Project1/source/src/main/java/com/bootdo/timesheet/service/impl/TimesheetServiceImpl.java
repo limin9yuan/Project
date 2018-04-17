@@ -1,11 +1,13 @@
 package com.bootdo.timesheet.service.impl;
 
+
+import com.bootdo.common.domain.DictDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-
+import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.timesheet.dao.TimesheetDao;
 import com.bootdo.timesheet.domain.TimesheetDO;
 import com.bootdo.timesheet.service.TimesheetService;
@@ -55,5 +57,9 @@ public class TimesheetServiceImpl implements TimesheetService {
 	public int batchRemove(String[] timesheetIds){
 		return timesheetDao.batchRemove(timesheetIds);
 	}
-	
+	public ProjectDO getProjectId(String projectId) {
+		return timesheetDao.getProjectId(projectId);
+	}
+ 	public List<DictDO> listDic()
+	{return timesheetDao.listDic();}
 }

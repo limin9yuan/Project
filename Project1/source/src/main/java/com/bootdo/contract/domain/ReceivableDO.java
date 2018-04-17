@@ -21,7 +21,7 @@ public class ReceivableDO implements Serializable {
 	//合同编号
 	private Long contractId;
 	//收款计划时间
-	private Date receivableDate;
+	private String receivableDate;
 	//收款计划金额
 	private BigDecimal receivablePrice;
 	//收款负责人
@@ -29,7 +29,7 @@ public class ReceivableDO implements Serializable {
 	//备注
 	private String receivableRemarks;
 	//操作人
-	private String receivableOperator;
+	private Long receivableOperator;
 	//操作时间
 	private Date receivableOperateTime;
 
@@ -60,13 +60,13 @@ public class ReceivableDO implements Serializable {
 	/**
 	 * 设置：收款计划时间
 	 */
-	public void setReceivableDate(Date receivableDate) {
+	public void setReceivableDate(String receivableDate) {
 		this.receivableDate = receivableDate;
 	}
 	/**
 	 * 获取：收款计划时间
 	 */
-	public Date getReceivableDate() {
+	public String getReceivableDate() {
 		return receivableDate;
 	}
 	/**
@@ -108,13 +108,13 @@ public class ReceivableDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setReceivableOperator(String receivableOperator) {
+	public void setReceivableOperator(Long receivableOperator) {
 		this.receivableOperator = receivableOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public String getReceivableOperator() {
+	public Long getReceivableOperator() {
 		return receivableOperator;
 	}
 	/**

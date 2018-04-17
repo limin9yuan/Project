@@ -31,6 +31,8 @@ public class ProjectDO implements Serializable {
 	private String projectEndDate;
 	//项目经理
 	private String projectOwner;
+	//员工姓名
+	private String employeeName;
 	//研发经理
 	private String projectManager;
 	//研发开始时间
@@ -506,4 +508,11 @@ public class ProjectDO implements Serializable {
 		this.projectCreatorName = projectCreatorName;
 	}
 
+	public String getEmployeeName() {
+		return employeeName;
+	}
+
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
 }

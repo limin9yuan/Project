@@ -1,8 +1,13 @@
 package com.bootdo.timesheet.service;
 
 import java.util.List;
+
+
+import com.bootdo.common.domain.DictDO;
+import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.timesheet.domain.TimesheetDO;
 import java.util.Map;
+
 
 /**
  * 工时信息表
@@ -26,4 +31,9 @@ public interface TimesheetService {
 	int remove(String timesheetId);
 	
 	int batchRemove(String[] timesheetIds);
+
+	ProjectDO getProjectId(String projectId);
+	List<DictDO> listDic();
+
+
 }

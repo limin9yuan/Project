@@ -82,6 +82,8 @@ public class AssignmentDO implements Serializable {
 	private String taskId;
 	//审批操作
 	private String taskAction;
+	//1是来源任务 0是工时录入
+	private int isTask;
 
 
 	public String getTaskId() {
@@ -460,5 +462,13 @@ public class AssignmentDO implements Serializable {
 	 */
 	public void setAssignmentRecipientName(String assignmentRecipientName) {
 		this.assignmentRecipientName = assignmentRecipientName;
+	}
+
+	public int getIsTask() {
+		return isTask;
+	}
+
+	public void setIsTask(int isTask) {
+		this.isTask = isTask;
 	}
 }

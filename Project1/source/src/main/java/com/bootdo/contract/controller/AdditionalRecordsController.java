@@ -116,10 +116,16 @@ public class AdditionalRecordsController extends BaseController {
 	@RequiresPermissions("contract:additionalRecords:add")
 	public R save( AdditionalRecordsDO additionalRecords){
 		additionalRecords.setRecordOperator(getUserId());
-		if(additionalRecordsService.save(additionalRecords)>0){
-			return R.ok();
+		int resultRecordId=additionalRecordsService.save(additionalRecords);
+		if(resultRecordId>0){ 
+			R r = R.ok();
+			r.put("recordId", resultRecordId);
+			System.out.println("resultRecordId=="+resultRecordId);
+			System.out.println("r.get===="+r.get("recordId"));
+			return r;
+			
 		}
-		return R.error();
+		return R.error(); 
 	}
 	/**
 	 * 修改

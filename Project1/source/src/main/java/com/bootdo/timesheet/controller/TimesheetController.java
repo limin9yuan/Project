@@ -3,6 +3,9 @@ package com.bootdo.timesheet.controller;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.bootdo.approval.domain.AssignmentDO;
+import com.bootdo.common.domain.DictDO;
+import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.timesheet.domain.TimesheetDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.timesheet.service.TimesheetService;
+import com.bootdo.approval.service.AssignmentService;
 import com.bootdo.common.controller.BaseController;
 
 import java.text.SimpleDateFormat;
@@ -40,7 +44,8 @@ import com.bootdo.common.utils.R;
 public class TimesheetController extends BaseController {
 	@Autowired
 	private TimesheetService timesheetService;
-
+	@Autowired
+	private AssignmentService assignmentService;
 	
 	@GetMapping()
 	@RequiresPermissions("timesheet:timesheet:timesheet")
@@ -105,88 +110,6 @@ public class TimesheetController extends BaseController {
 		return "timesheet/timesheet/timesheet";
 	}
 
-
-	@ResponseBody
-	@GetMapping("/list1")
-	@RequiresPermissions("timesheet:timesheet:timesheet")
-	public PageUtils list1(@RequestParam Map<String, Object> params){
-
-		if (params.get("timeMin") != null && params.get("timeMin") != "") {
-			params.put("timeMin", params.get("timeMin") + " 00:00:00");
-		}
-		if (params.get("timeMax") != null && params.get("timeMax") != "") {
-			params.put("timeMax", params.get("timeMax") + " 23:59:59");
-		}
-
-
-		SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM-dd");
-
-		Calendar cal = Calendar.getInstance();
-
-		String date8=simdf.format(cal.getTime());
-		java.sql.Date dat8=java.sql.Date.valueOf(date8);
-		cal.set(cal.DAY_OF_WEEK, cal.MONDAY);
-		String date11 = simdf.format(cal.getTime());
-		java.sql.Date date1=java.sql.Date.valueOf(date11);
-
-
-		Date date=new Date();
-		cal.add(cal.DATE,+1);
-		date=cal.getTime();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String date2 = formatter.format(date);
-		java.sql.Date dat2=java.sql.Date.valueOf(date2);
-
-		cal.add(cal.DATE,+1);
-		date=cal.getTime();
-		String date3 = formatter.format(date);
-		java.sql.Date dat3=java.sql.Date.valueOf(date3);
-
-		cal.add(cal.DATE,+1);
-		date=cal.getTime();
-		String date4 = formatter.format(date);
-		java.sql.Date dat4=java.sql.Date.valueOf(date4);
-
-		cal.add(cal.DATE,+1);
-		date=cal.getTime();
-		String date5 = formatter.format(date);
-		java.sql.Date dat5=java.sql.Date.valueOf(date5);
-
-		cal.add(cal.DATE,+1);
-		date=cal.getTime();
-		String date6 = formatter.format(date);
-		java.sql.Date dat6=java.sql.Date.valueOf(date6);
-
-		Date date13=new Date();
-		cal.add(cal.DATE,+1);
-		date13=cal.getTime();
-
-
-
-
-
-
-		params.put("date1",date1);
-		params.put("date2",dat2);
-		params.put("date3",dat3);
-		params.put("date4",dat4);
-		params.put("date5",dat5);
-		params.put("date6",dat6);
-
-		params.put("date7",date13);
-		params.put("date8",dat8);
-
-		//查询列表数据
-		params.put("uerId",getUserId());
-		Query query = new Query(params);
-		List<TimesheetDO> timesheetList = timesheetService.list(query);
-
-		int total = timesheetService.count(query);
-		PageUtils pageUtils = new PageUtils(timesheetList, total);
-		return pageUtils;
-	}
-
-
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("timesheet:timesheet:timesheet")
@@ -240,7 +163,7 @@ public class TimesheetController extends BaseController {
 			java.sql.Date dat7 = java.sql.Date.valueOf(date7);
 
 
-
+            params.put("istask",params.get("istask"));
 			params.put("date1", da1);
 			params.put("date2", dat2);
 			params.put("date3", dat3);
@@ -323,7 +246,6 @@ public class TimesheetController extends BaseController {
 		PageUtils pageUtils = new PageUtils(timesheetList, total);
 		return pageUtils;
 	}
-
 
 	@GetMapping("/getlist/{timeMin}")
 	@ResponseBody
@@ -444,17 +366,6 @@ public class TimesheetController extends BaseController {
 			return returnData;
 		}
 
-
-
-
-
-
-
-
-
-
-
-
 //	//ajax修改绑定数据
 //	@RequestMapping("/edit_ajax/{timesheetId}")
 //	@ResponseBody
@@ -468,18 +379,9 @@ public class TimesheetController extends BaseController {
 	@RequiresPermissions("timesheet:timesheet:add")
 	String add(){
 
-
-
 	    return "timesheet/timesheet/add";
 	}
-	@GetMapping("/add1")
-	@RequiresPermissions("timesheet:timesheet:add1")
-	String add1(){
 
-
-
-		return "timesheet/timesheet/add1";
-	}
 
 	@GetMapping("/edit/{timesheetId}")
 	@RequiresPermissions("timesheet:timesheet:edit")
@@ -489,7 +391,15 @@ public class TimesheetController extends BaseController {
 	    return "timesheet/timesheet/edit";
 	}
 
-
+	@ResponseBody
+	@GetMapping("/listDic")
+	public List<DictDO> listByType() {
+		// 查询列表数据
+		Map<String, Object> map = new HashMap<>(16);
+		map.put("type", "");
+		List<DictDO> dictList = timesheetService.listDic();
+		return dictList;
+	}
 
 	
 	/**
@@ -499,12 +409,30 @@ public class TimesheetController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("timesheet:timesheet:add")
 	public R save( TimesheetDO timesheet){
-		if(timesheetService.save(timesheet)>0){
+//添加当前用户
+		timesheet.setEmployeeId(getUserId());
+//添加当前天日期
+		SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM-dd");//日期方法
+		Calendar cal = Calendar.getInstance();
+		Date date = new Date();
+		date=cal.getTime();
+      timesheet.setTimesheetDate(date);
 
+		//添加任务表
+
+
+		String assignmentId = assignmentService.saveAssignmentInTimesheet(timesheet);
+
+
+		//添加工时表
+		timesheet.setTimesheetAssignmentId(assignmentId);
+		if(timesheetService.save(timesheet)>0){
+  timesheet.setTimesheetAssignmentId(Long.toString(getUserId()));
 			return R.ok();
 		}
 		return R.error();
 	}
+
 
 
 
@@ -543,5 +471,14 @@ public class TimesheetController extends BaseController {
 		timesheetService.batchRemove(timesheetIds);
 		return R.ok();
 	}
+	@RequestMapping("/getProjectId/{projectId}")
+	@ResponseBody
+	Map<String, Object> getProjectId(@PathVariable("projectId") String projectId) {
+		ProjectDO project = timesheetService.getProjectId(projectId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("project",project);
+		return returnData;
+	}
+
 	
 }

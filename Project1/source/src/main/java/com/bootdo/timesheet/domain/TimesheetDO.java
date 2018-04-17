@@ -4,7 +4,7 @@ package com.bootdo.timesheet.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-
+import com.bootdo.approval.domain.AssignmentDO;
 
 
 /**
@@ -14,7 +14,7 @@ import java.util.Date;
  * @email 1992lcg@163.com
  * @date 2018-03-14 17:52:48
  */
-public class TimesheetDO implements Serializable {
+public class TimesheetDO extends AssignmentDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 
@@ -25,7 +25,7 @@ public class TimesheetDO implements Serializable {
 	//项目名称
 	private  String projectName;
  	//员工工号
-	private String employeeId;
+	private Long employeeId;
 	//员工姓名
 	private String timesheetName;
 	//项目类别
@@ -151,13 +151,13 @@ public class TimesheetDO implements Serializable {
 	/**
 	 * 设置：员工工号
 	 */
-	public void setEmployeeId(String employeeId) {
+	public void setEmployeeId(Long employeeId) {
 		this.employeeId = employeeId;
 	}
 	/**
 	 * 获取：员工工号
 	 */
-	public String getEmployeeId() {
+	public Long getEmployeeId() {
 		return employeeId;
 	}
 	/**

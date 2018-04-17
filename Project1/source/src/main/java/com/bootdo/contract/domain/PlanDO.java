@@ -20,7 +20,7 @@ public class PlanDO implements Serializable {
 	//合同编号
 	private Long contractId;
 	//计划交付时间
-	private Date planDeliveryDate;
+	private String planDeliveryDate;
 	//计划交付内容
 	private String planDeliveryContent;
 	//附件
@@ -28,7 +28,7 @@ public class PlanDO implements Serializable {
 	//备注
 	private String planRemarks;
 	//操作人
-	private String planOperator;
+	private Long planOperator;
 	//操作时间
 	private Date planOperateTime;
 
@@ -59,13 +59,13 @@ public class PlanDO implements Serializable {
 	/**
 	 * 设置：计划交付时间
 	 */
-	public void setPlanDeliveryDate(Date planDeliveryDate) {
+	public void setPlanDeliveryDate(String planDeliveryDate) {
 		this.planDeliveryDate = planDeliveryDate;
 	}
 	/**
 	 * 获取：计划交付时间
 	 */
-	public Date getPlanDeliveryDate() {
+	public String getPlanDeliveryDate() {
 		return planDeliveryDate;
 	}
 	/**
@@ -107,13 +107,13 @@ public class PlanDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setPlanOperator(String planOperator) {
+	public void setPlanOperator(Long planOperator) {
 		this.planOperator = planOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public String getPlanOperator() {
+	public Long getPlanOperator() {
 		return planOperator;
 	}
 	/**

@@ -3,6 +3,8 @@ package com.bootdo.approval.service.impl;
 import com.bootdo.activiti.config.ActivitiConstant;
 import com.bootdo.activiti.service.impl.ActTaskServiceImpl;
 import com.bootdo.contract.domain.TravelDO;
+import com.bootdo.project.domain.ProjectDO;
+import com.bootdo.timesheet.domain.TimesheetDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -80,5 +82,15 @@ public class AssignmentServiceImpl implements AssignmentService {
 
 		return assignmentDao.update(assignmentDO);
 	}
-	
+
+
+
+	@Override
+	public String saveAssignmentInTimesheet(TimesheetDO assignment){
+		int ret=assignmentDao.save(assignment);
+		String assignmentId=assignment.getAssignmentId();
+
+		return assignmentId;
+	}
+
 }

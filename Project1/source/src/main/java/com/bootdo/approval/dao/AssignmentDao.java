@@ -1,9 +1,10 @@
 package com.bootdo.approval.dao;
 
 import com.bootdo.approval.domain.AssignmentDO;
-
+import com.bootdo.project.domain.ProjectDO;
 import java.util.List;
 import java.util.Map;
+
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -29,4 +30,7 @@ public interface AssignmentDao {
 	int remove(String Assignment_ID);
 	
 	int batchRemove(String[] assignmentIds);
+
+
+	List<AssignmentDO> getProjectId(Map<String,Object> map);
 }

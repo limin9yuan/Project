@@ -15,7 +15,13 @@
 		`Assignment_Operator`,`Assignment_Operate_Time`,
 		`Assignment_Creator`,`Assignment_Create_Time`,
 		`Assignment_Person` 
-		from approval_assignment where Assignment_ID = #{value}
+		from approval_assignment
+		where Assignment_ID = #{value}
+
+
+
+
+
 	</select>
 
 	<select id="list" resultType="com.bootdo.approval.domain.AssignmentDO">
@@ -154,7 +160,8 @@
 			`Assignment_Operate_Time`, 
 			`Assignment_Creator`, 
 			`Assignment_Create_Time`,
-			`Assignment_Person`
+			`Assignment_Person`,
+		    `Is_Task`
 		)
 		values
 		(
@@ -180,7 +187,8 @@
 			#{assignmentOperateTime}, 
 			#{assignmentCreator}, 
 			#{assignmentCreateTime},
-			#{assignmentPerson}
+			#{assignmentPerson},
+		    #{isTask}
 		)
 	</insert>
 	 

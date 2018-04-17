@@ -1,7 +1,11 @@
 package com.bootdo.timesheet.dao;
 
 import java.util.List;
+
 import java.util.Map;
+
+import com.bootdo.common.domain.DictDO;
+import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.timesheet.domain.TimesheetDO;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -17,6 +21,7 @@ public interface TimesheetDao {
 	TimesheetDO get(String timesheetId);
 	
 	List<TimesheetDO> list(Map<String, Object> map);
+
 	
 	int count(Map<String, Object> map);
 	
@@ -27,4 +32,8 @@ public interface TimesheetDao {
 	int remove(String TimeSheet_ID);
 	
 	int batchRemove(String[] timesheetIds);
+
+	ProjectDO getProjectId(String projectId);
+	List<DictDO> listDic();
+
 }
