@@ -88,7 +88,27 @@ public class BudgetDO implements Serializable {
 	//项目描述
 	private String projectDescription;
 
-		
+	//**********************流程相关属性****************************
+	//流程任务ID
+	private String taskId;
+	//审批操作
+	private String taskAction;
+
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
+	public String getTaskAction() {
+		return taskAction;
+	}
+
+	public void setTaskAction(String taskAction) {
+		this.taskAction = taskAction;
+	}
 
 	/**
 	 * 设置：项目预算编号

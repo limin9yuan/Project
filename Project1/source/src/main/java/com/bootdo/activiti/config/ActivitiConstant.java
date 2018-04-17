@@ -12,5 +12,5 @@ public class ActivitiConstant {
     public static final String[] ACTIVITI_APPROVAL_ASSIGNMENT = new String[]{"approvalAssignment", "approval_assignment"};
     public static final String[] ACTIVITI_EXPENSES_NORMAL = new String[]{"expensesNormal", "expenses_normal"};
     public static final String[] ACTIVITI_EXPENSES_TRAVEL = new String[]{"expensesTravel", "expenses_travel"};
-
+    public static final String[] ACTIVITI_BUDGET = new String[]{"budget", "budget"};
 }

@@ -168,4 +168,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.listDic();
 	}
 	
+	@Override
+	public UserDO getByUsername(String username) {
+		UserDO user = userMapper.getByUsername(username);
+		return user;
+	}
 }

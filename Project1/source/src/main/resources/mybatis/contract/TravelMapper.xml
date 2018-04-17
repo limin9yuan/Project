@@ -16,7 +16,8 @@
 		CASE `Travel_Actual_Performance` when '1' then '完成' else '未完成' END AS Travel_Actual_Performance,`Travel_Uncompleted_Cause`,
 		CASE `Travel_Task_Confirm` when '1' then '完成' else '未完成' END AS Travel_Task_Confirm ,
 		CASE `Travel_Approval_Status` when '1' then '已审批' else '未审批' END AS Travel_Approval_Status,
-		b.name AS `Travel_Operator`,`Travel_Operate_Time`,`Travel_Creator`,`Travel_Create_Time` 
+		b.name AS `Travel_Operator`,`Travel_Operate_Time`,`Travel_Creator`,`Travel_Create_Time`,
+		`PROCESS_INSTANCE_ID` 
 		from approval_travel a
 		left join development_project  d on a.Project_ID=d.Project_ID
 		left join sys_user b ON a.Travel_Operator = b.user_id
@@ -162,7 +163,8 @@
 			<if test="travelOperator != null">`Travel_Operator` = #{travelOperator}, </if>
 			<if test="travelOperateTime != null">`Travel_Operate_Time` = #{travelOperateTime}, </if>
 			<if test="travelCreator != null">`Travel_Creator` = #{travelCreator}, </if>
-			<if test="travelCreateTime != null">`Travel_Create_Time` = #{travelCreateTime}</if>
+			<if test="travelCreateTime != null">`Travel_Create_Time` = #{travelCreateTime},</if>
+			<if test="processInstanceId != null">`PROCESS_INSTANCE_ID` = #{processInstanceId}</if>
 		</set>
 		where Travel_ID = #{travelId}
 	</update>

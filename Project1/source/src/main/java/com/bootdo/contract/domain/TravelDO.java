@@ -62,7 +62,36 @@ public class TravelDO implements Serializable {
 	private String taskId;
 	//审批操作
 	private String taskAction;
+	//审批说明
+	private String taskComment;
+	//流程实例ID
+	private String processInstanceId;
 	
+	/**
+	 * 设置：流程实例ID
+	 */
+	public void setProcessInstanceId(String processInstanceId) {
+		this.processInstanceId = processInstanceId;
+	}
+	/**
+	 * 获取：流程实例ID
+	 */
+	public String getProcessInstanceId() {
+		return processInstanceId;
+	}
+	
+	/**
+	 * 设置：审批说明
+	 */
+	public void setTaskComment(String taskComment) {
+		this.taskComment = taskComment;
+	}
+	/**
+	 * 获取：审批说明
+	 */
+	public String getTaskComment() {
+		return taskComment;
+	}
 	/**
 	 * 设置：审批操作
 	 */

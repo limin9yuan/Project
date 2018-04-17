@@ -11,6 +11,8 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bootdo.activiti.utils.ActivitiUtils;
+import com.bootdo.contract.domain.ContractDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -43,6 +45,43 @@ import com.bootdo.project.domain.ProjectDO;
 public class BudgetController extends BaseController {
 	@Autowired
 	private BudgetService budgetService;
+	@Autowired
+	ActivitiUtils activitiUtils;
+
+	/**
+	 * ********************** 审批流程相关  *********************************
+	 */
+	//申请页面
+	@GetMapping("/form")
+	@RequiresPermissions("budget:budget:add")
+	String form(){
+		return "budget/budget/add";
+	}
+	//审批处理页面
+	@GetMapping("/form/{taskId}")
+	@RequiresPermissions("budget:budget:add")
+	String formTask(@PathVariable("taskId") String taskId,Model model){
+		//取得流程表单数据
+		BudgetDO budget = budgetService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+		if(budget!=null){
+			model.addAttribute("budget", budget);
+			//model.addAttribute("taskId",taskId);
+		}
+		return "budget/budget/edit";
+
+	}
+
+
+	//审批处理保存
+	@ResponseBody
+	@RequestMapping("/form/update")
+	@RequiresPermissions("budget:budget:edit")
+	public R formUpdate( BudgetDO budget){
+
+		budgetService.formUpdate(budget);
+		return R.ok();
+	}
+
 	
 	@GetMapping()
 	@RequiresPermissions("budget:budget:budget")

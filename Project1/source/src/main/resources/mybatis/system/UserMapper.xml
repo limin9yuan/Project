@@ -124,5 +124,10 @@
 		select `user_id` value,concat(`user_id`,' ',`name`) name
 		from sys_user
 	</select>
-
+	
+	<select id="getByUsername" resultType="com.bootdo.system.domain.UserDO">
+		select
+		`user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`
+		from sys_user where username = #{value}
+	</select>
 </mapper>

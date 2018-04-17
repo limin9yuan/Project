@@ -81,8 +81,6 @@ public class ContractDO implements Serializable {
 	private String businessName;
 	//项目名称
 	private String projectName;
-//	//申请人姓名
-//	private String employeeName;
 
 	public String getCustomerName() {
 		return customerName;
@@ -96,10 +94,6 @@ public class ContractDO implements Serializable {
 		return projectName;
 	}
 
-//	public String getEmployeeName() {
-//		return employeeName;
-//	}
-
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
@@ -111,10 +105,6 @@ public class ContractDO implements Serializable {
 	public void setProjectName(String projectName) {
 		this.projectName = projectName;
 	}
-
-//	public void setEmployeeName(String employeeName) {
-//		this.employeeName = employeeName;
-//	}
 
 	public String getTaskId() {
 		return taskId;

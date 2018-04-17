@@ -87,25 +87,6 @@ public class ContractController extends BaseController {
 		return "contract/contract/import";
 	}
 
-	//view绑定数据
-//	@RequestMapping("/view_ajax/{contractId}")
-//	@ResponseBody
-//	Map<String, Object> view_ajax(@PathVariable("contractId") String contractId) {
-//		ContractDO contract = contractService.get(contractId);
-//		Map<String, Object> returnData = new HashMap<String, Object>();
-//		returnData.put("contract", contract);
-//		return returnData;
-//	}
-
-//	@GetMapping("/view/{contractId}")
-//	//@RequiresPermissions("contract:contract:edit")
-//	String view(@PathVariable("contractId") String contractId, Model model) {
-//		ContractDO contract = contractService.get(contractId);
-//		Map<String, Object> returnData = new HashMap<String, Object>();
-//		returnData.put("contract", contract);
-//		return "contract/contract/ViewContract";
-//	}
-
 	// edit数据绑定
 	@RequestMapping("/edit_ajax/{contractId}")
 	@ResponseBody

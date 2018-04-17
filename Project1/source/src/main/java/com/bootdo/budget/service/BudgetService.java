@@ -2,6 +2,7 @@ package com.bootdo.budget.service;
 
 import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.common.domain.DictDO;
+import com.bootdo.contract.domain.TravelDO;
 import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.sales.domain.SalesProjectDO;
 
@@ -18,7 +19,11 @@ import javax.servlet.ServletOutputStream;
  * @date 2017-12-11 14:44:13
  */
 public interface BudgetService {
-	
+
+	int formUpdate(BudgetDO budget);
+
+	BudgetDO view(String budgetId);
+
 	BudgetDO get(String budgetId);
 	
 	List<BudgetDO> list(Map<String, Object> map);

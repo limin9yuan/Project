@@ -35,5 +35,6 @@ public interface UserDao {
 	
 	List<DictDO> listDic();
 	
+	UserDO getByUsername(String username);
 	
 }

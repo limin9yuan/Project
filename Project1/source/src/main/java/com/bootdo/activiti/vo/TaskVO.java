@@ -1,5 +1,7 @@
 package com.bootdo.activiti.vo;
 
+import java.util.Date;
+
 import org.activiti.engine.task.Task;
 
 /**
@@ -8,16 +10,18 @@ import org.activiti.engine.task.Task;
 public class TaskVO  {
 
     public TaskVO(Task task){
+    	if(task!=null){
+	        this.setId(task.getId());
+	        this.setKey(task.getTaskDefinitionKey());
+	        this.setName(task.getName());
+	        this.setDescription(task.getDescription());
+	        this.setAssignee(task.getAssignee());
+	        this.setFormKey(task.getFormKey());
+	        this.setProcessId(task.getProcessInstanceId());
+	        this.setProcessDefinitionId(task.getProcessDefinitionId());
+	        this.setExecutionId(task.getExecutionId());
+    	}
 
-        this.setId(task.getId());
-        this.setKey(task.getTaskDefinitionKey());
-        this.setName(task.getName());
-        this.setDescription(task.getDescription());
-        this.setAssignee(task.getAssignee());
-        this.setFormKey(task.getFormKey());
-        this.setProcessId(task.getProcessInstanceId());
-        this.setProcessDefinitionId(task.getProcessDefinitionId());
-        this.setExecutionId(task.getExecutionId());
     }
     private  String id;
     private String name;
@@ -28,6 +32,57 @@ public class TaskVO  {
     private String processId;
     private String processDefinitionId;
     private String executionId;
+    
+    private String processName; 	// 流程名称
+    private String title; 		// 任务标题
+    private String startUserName; // 发起人
+    private Date startDate; // 发起日期
+    private Date endDate; // 结束日期
+    private String processStatus; //流程状态
+    
+    
+    public String getProcessStatus() {
+        return processStatus;
+    }
+    public void setProcessStatus(String processStatus) {
+        this.processStatus = processStatus;
+    }
+    
+    public Date getEndDate() {
+        return endDate;
+    }
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+    
+    public Date getStartDate() {
+        return startDate;
+    }
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+    
+    public String getStartUserName() {
+        return startUserName;
+    }
+    public void setStartUserName(String startUserName) {
+        this.startUserName = startUserName;
+    }
+    
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getProcessName() {
+        return processName;
+    }
+
+    public void setProcessName(String processName) {
+        this.processName = processName;
+    }
 
     public String getId() {
         return id;

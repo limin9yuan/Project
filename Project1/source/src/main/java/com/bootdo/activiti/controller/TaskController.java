@@ -1,16 +1,23 @@
 package com.bootdo.activiti.controller;
 
+import com.bootdo.activiti.domain.ActivitiDO;
 import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.vo.ProcessVO;
 import com.bootdo.activiti.vo.TaskVO;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.ShiroUtils;
+import com.bootdo.system.domain.UserDO;
+import com.bootdo.system.service.UserService;
 
 import org.activiti.engine.FormService;
 import org.activiti.engine.HistoryService;
 import org.activiti.engine.RepositoryService;
 import org.activiti.engine.TaskService;
+import org.activiti.engine.history.HistoricProcessInstance;
 import org.activiti.engine.history.HistoricProcessInstanceQuery;
+import org.activiti.engine.history.HistoricVariableInstance;
+import org.activiti.engine.impl.RepositoryServiceImpl;
+import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +34,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
 
@@ -44,6 +52,8 @@ public class TaskController {
     ActTaskService actTaskService;
     @Autowired
     HistoryService historyService;
+    @Autowired
+    private UserService userService;
     
     @GetMapping("goto")
     public ModelAndView gotoTask(){
@@ -93,6 +103,7 @@ public class TaskController {
     	model.addAttribute("taskName", task.getName());
     	model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
     	model.addAttribute("executionId", task.getExecutionId());
+    	model.addAttribute("processInstanceId", task.getProcessInstanceId());
     	
     	return new ModelAndView("act/task/formComm");
     }
@@ -101,38 +112,109 @@ public class TaskController {
     ModelAndView todo(){
         return new ModelAndView("act/task/todoTask");
     }
-
+    //待办列表
     @GetMapping("/todoList")
     List<TaskVO> todoList(){
-        List<Task> tasks = taskService.createTaskQuery().taskAssignee(ShiroUtils.getUser().getUsername()).list();//admin
+        List<Task> tasks = taskService.createTaskQuery().taskAssignee(ShiroUtils.getUser().getUsername()).includeProcessVariables().list();//admin
         List<TaskVO> taskVOS =  new ArrayList<>();
         for(Task task : tasks){
             TaskVO taskVO = new TaskVO(task);
+         // 获取流程定义
+            ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
+                    .getDeployedProcessDefinition(task.getProcessDefinitionId());
+            
+            taskVO.setProcessName(processDefinition.getName());
+            
+        //  获取历史流程实例
+            HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
+                    .processInstanceId(task.getProcessInstanceId()).singleResult();
+            if(historicProcessInstance!=null){
+            	UserDO user=userService.getByUsername(historicProcessInstance.getStartUserId());
+            	taskVO.setStartUserName(user.getName());
+            	taskVO.setStartDate(historicProcessInstance.getStartTime());
+            }
+            /* 
+            //另一种获取方式
+            String title = (String) taskService.getVariable(task.getId(), "title");  
+            taskVO.setTitle(title);
+            */
+          //查询标题
+            Map<String,Object> varIns=task.getProcessVariables();
+        	if(varIns!=null&&varIns.get("title")!=null){
+        		taskVO.setTitle(varIns.get("title").toString());
+        	}
+           
             taskVOS.add(taskVO);
         }
         return taskVOS;
     }
-    /*
-    @GetMapping("/finishedList")
-    List<TaskVO> finishedList(){
-    	HistoricProcessInstanceQuery finishedQuery = historyService.createHistoricProcessInstanceQuery()
-                .finished().orderByProcessInstanceEndTime().desc();
-    	
+    //已完列表
+    @GetMapping("/finishedList/{flag}")
+    PageUtils finishedList(int offset, int limit,@PathVariable("flag") String flag){
+    	HistoricProcessInstanceQuery finishedQuery;
+    	if(flag!=null&&flag.equals("1")){ //已完流程
+    		finishedQuery = historyService.createHistoricProcessInstanceQuery()
+    			.finished().includeProcessVariables().involvedUser(ShiroUtils.getUser().getUsername()).orderByProcessInstanceEndTime().desc();
+    	}else{//未完流程
+    		finishedQuery = historyService.createHistoricProcessInstanceQuery()
+        			.unfinished().includeProcessVariables().involvedUser(ShiroUtils.getUser().getUsername()).orderByProcessInstanceEndTime().desc();
+    	}
+
         List<TaskVO> taskVOS =  new ArrayList<>();
-        for(Task task : finishedQuery){
-            TaskVO taskVO = new TaskVO(task);
+        int count = (int) finishedQuery.count();
+        List<HistoricProcessInstance> finishedInstaceList=  finishedQuery.listPage(offset, limit);
+        
+        for(HistoricProcessInstance instance : finishedInstaceList){
+            TaskVO taskVO = new TaskVO(null);
+         // 获取流程定义
+            ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
+                    .getDeployedProcessDefinition(instance.getProcessDefinitionId());
+            taskVO.setProcessName(processDefinition.getName());
+            
+            UserDO user=userService.getByUsername(instance.getStartUserId());
+        	taskVO.setStartUserName(user.getName());
+        	
+        	taskVO.setStartDate(instance.getStartTime());
+        	taskVO.setEndDate(instance.getEndTime());
+        	
+        	taskVO.setProcessDefinitionId(instance.getProcessDefinitionId()); 
+        	taskVO.setProcessId(instance.getId());
+        	
+        	if(instance.getEndTime()!=null&&!instance.getEndTime().equals("")){
+        		taskVO.setProcessStatus("已结束");
+        	}else{
+        		taskVO.setProcessStatus("运行中");
+        	}
+        	
+        	//查询标题
+        	/*
+        	//另一种获取方式
+        	HistoricVariableInstance varIns = historyService  
+                    .createHistoricVariableInstanceQuery().processInstanceId(instance.getId())  
+                    .variableName("title").singleResult();  
+        	
+            if(varIns!=null&&varIns.getValue()!=null){
+            	taskVO.setTitle(varIns.getValue().toString());
+            }
+            */
+        	Map<String,Object> varIns=instance.getProcessVariables();
+        	if(varIns!=null&&varIns.get("title")!=null){
+        		taskVO.setTitle(varIns.get("title").toString());
+        	}
             taskVOS.add(taskVO);
         }
-        return taskVOS;
+        
+        PageUtils pageUtils = new PageUtils(taskVOS, count);
+        return pageUtils;
     }
-	*/
+	
 
     /**
      * 读取带跟踪的图片
      */
-    @RequestMapping(value = "/trace/photo/{procDefId}/{execId}")
-    public void tracePhoto(@PathVariable("procDefId") String procDefId, @PathVariable("execId") String execId, HttpServletResponse response) throws Exception {
-        InputStream imageStream = actTaskService.tracePhoto(procDefId, execId);
+    @RequestMapping(value = "/trace/photo/{processInstanceId}")
+    public void tracePhoto(@PathVariable("processInstanceId") String processInstanceId, HttpServletResponse response) throws Exception {
+        InputStream imageStream = actTaskService.tracePhoto(processInstanceId);
 
         // 输出资源内容到相应对象
         byte[] b = new byte[1024];
@@ -140,6 +222,19 @@ public class TaskController {
         while ((len = imageStream.read(b, 0, 1024)) != -1) {
             response.getOutputStream().write(b, 0, len);
         }
+    }
+    
+    
+
+    @GetMapping("/taskTraceList/{pProcessInstanceId}")
+    List<ActivitiDO> taskTraceList(@PathVariable("pProcessInstanceId") String pProcessInstanceId){
+    	return actTaskService.traceTaskData(pProcessInstanceId);
+    }
+    
+    @GetMapping("/taskTrace/{pProcessInstanceId}")
+    ModelAndView taskTrace(@PathVariable("pProcessInstanceId") String pProcessInstanceId,Model model){
+    	model.addAttribute("processInstanceId", pProcessInstanceId);
+        return new ModelAndView("act/task/taskTrace");
     }
 
 

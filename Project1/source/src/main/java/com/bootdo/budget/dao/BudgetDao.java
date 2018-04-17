@@ -18,6 +18,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface BudgetDao {
 
+	BudgetDO view(String budgetId);
+
 	BudgetDO get(String budgetId);
 	
 	List<BudgetDO> list(Map<String,Object> map);

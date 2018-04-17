@@ -4,21 +4,30 @@ import com.bootdo.activiti.domain.ActivitiDO;
 import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.common.utils.ShiroUtils;
 import com.bootdo.common.utils.StringUtils;
+import com.bootdo.system.domain.UserDO;
+import com.bootdo.system.service.UserService;
+
 import org.activiti.bpmn.model.BpmnModel;
 import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricProcessInstance;
+import org.activiti.engine.history.HistoricProcessInstanceQuery;
+import org.activiti.engine.history.HistoricTaskInstance;
 import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.pvm.PvmTransition;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.activiti.engine.runtime.ProcessInstanceQuery;
+import org.activiti.engine.task.Comment;
 import org.activiti.engine.task.Task;
+import org.activiti.engine.task.TaskQuery;
 import org.activiti.image.ProcessDiagramGenerator;
 import org.activiti.spring.ProcessEngineFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -50,6 +59,9 @@ public class ActTaskServiceImpl implements ActTaskService {
 
     @Autowired
     private HistoryService historyService;
+    
+    @Autowired
+    private UserService userService;
 
     @Override
     public List<ActivitiDO> listTodo(ActivitiDO act) {
@@ -101,6 +113,7 @@ public class ActTaskServiceImpl implements ActTaskService {
 //        Map<String,Object> vars = new HashMap<>();
 //        vars.put("pass",  "1" );
 //        vars.put("title","");
+        
         taskService.complete(taskId, vars);
     }
 
@@ -134,7 +147,7 @@ public class ActTaskServiceImpl implements ActTaskService {
         // 启动流程
         ProcessInstance procIns = runtimeService.startProcessInstanceByKey(procDefKey, businessId, vars);
       
-        return null;
+        return procIns.getId();
     }
 
     /**
@@ -164,7 +177,7 @@ public class ActTaskServiceImpl implements ActTaskService {
     }
 
     @Override
-    public InputStream tracePhoto(String xx, String pProcessInstanceId) {
+    public InputStream tracePhoto(String pProcessInstanceId) {
 ////		ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(executionId).singleResult();
 //        BpmnModel bpmnModel = repositoryService.getBpmnModel(processDefinitionId);
 //
@@ -191,6 +204,7 @@ public class ActTaskServiceImpl implements ActTaskService {
             // 获取流程定义
             ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
                     .getDeployedProcessDefinition(historicProcessInstance.getProcessDefinitionId());
+           
 
             // 获取流程历史中已执行节点，并按照节点在流程中执行先后顺序排序
             List<HistoricActivityInstance> historicActivityInstanceList = historyService.createHistoricActivityInstanceQuery()
@@ -202,8 +216,19 @@ public class ActTaskServiceImpl implements ActTaskService {
             //获取已经执行的节点ID
             for (HistoricActivityInstance activityInstance : historicActivityInstanceList) {
                 executedActivityIdList.add(activityInstance.getActivityId());
+                
                 index++;
             }
+            //测试
+            /*
+            List<HistoricTaskInstance> historicTaskInstanceList=historyService.createHistoricTaskInstanceQuery().processInstanceId(pProcessInstanceId).orderByProcessInstanceId().asc().list();
+            
+            //获取已经执行的节点ID
+              for (HistoricTaskInstance taskInstance : historicTaskInstanceList) {
+              	String name=taskInstance.getName();
+              	
+              }
+             */
 
             // 已执行的线集合
             List<String> flowIds = new ArrayList<String>();
@@ -273,6 +298,106 @@ public class ActTaskServiceImpl implements ActTaskService {
             }
         }
         return highFlows;
+    }
+    
+    
+    public List<ActivitiDO> traceTaskData(String pProcessInstanceId) {
+
+    List<ActivitiDO> activitiList=new ArrayList<>();
+    //  获取历史流程实例
+    HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
+            .processInstanceId(pProcessInstanceId).singleResult();
+    
+    
+    if (historicProcessInstance != null) {
+    	//开始节点
+        ActivitiDO activitiStart=new ActivitiDO();
+        UserDO user=userService.getByUsername(historicProcessInstance.getStartUserId());
+        activitiStart.setAssignee(user.getUsername());//发起人账号
+        activitiStart.setAssigneeName(user.getName());//发起人姓名
+        activitiStart.setBeginDate(historicProcessInstance.getStartTime()); //开始日期
+        activitiStart.setEndDate(historicProcessInstance.getStartTime());
+        activitiStart.setStatus("起草");
+        activitiStart.setTaskName("发起人");
+        activitiList.add(activitiStart);
+        
+        List<HistoricTaskInstance> historicTaskInstanceList=historyService.createHistoricTaskInstanceQuery().processInstanceId(pProcessInstanceId).orderByHistoricActivityInstanceId().asc().list();
+        
+      //获取已经执行任务节点
+        for (HistoricTaskInstance taskInstance : historicTaskInstanceList) {
+        	ActivitiDO task=new ActivitiDO();
+        	user=userService.getByUsername(taskInstance.getAssignee());
+        	task.setAssignee(user.getUsername());
+        	task.setAssigneeName(user.getName());
+        	task.setBeginDate(taskInstance.getStartTime());
+        	task.setEndDate(taskInstance.getEndTime());
+        	if(taskInstance.getDeleteReason()!=null&&taskInstance.getDeleteReason().equals("completed")){
+        		task.setStatus("完成");
+        	}else{
+        		task.setStatus("未审批");
+        	}
+        	task.setTaskName(taskInstance.getName());
+        	//读取备注
+        	List<Comment> comments=taskService.getTaskComments(taskInstance.getId());
+        	if(comments!=null && comments.size()>0){
+        		task.setComment(comments.get(0).getFullMessage());
+        	}
+        	activitiList.add(task);
+        }
+        
+        return activitiList;
+    }
+    return null;
+}
+    
+    //************************************** 通用函数 ***********************************************
+    
+    /**
+     * 获取未签收的任务查询对象
+     * @param userId    用户ID
+     * 此类任务针对于把Task分配给一个角色时，例如部门领导，因为部门领导角色可以指定多个人所以需要先签收再办理，术语：抢占式
+     */
+
+    public TaskQuery createUnsignedTaskQuery(String userId) {
+        TaskQuery taskCandidateUserQuery = taskService.createTaskQuery().taskCandidateUser(userId);
+        return taskCandidateUserQuery;
+    }
+    
+    /**
+     * 获取正在处理的任务查询对象
+     * @param userId    用户ID
+     * 此类任务数据类源有两种:
+			签收后的，5.1中签收后就应该为办理中状态
+			节点指定的是具体到一个人，而不是角色
+     */
+
+    public TaskQuery createTodoTaskQuery(String userId) {
+        TaskQuery taskAssigneeQuery = taskService.createTaskQuery().taskAssignee(userId);
+        return taskAssigneeQuery;
+    }
+    
+    /**
+     * 获取未经完成的流程实例查询对象
+     * @param userId    用户ID
+     * 说白了就是没有结束的流程，所有参与过的人都应该可以看到这个实例，但是Activiti的API没有可以通过用户查询的方法，这个只能自己用hack的方式处理了，我目前还没有处理。
+		从表ACT_RU_EXECUTION中查询数据。
+     */
+
+    public ProcessInstanceQuery createUnFinishedProcessInstanceQuery(String userId) {
+        ProcessInstanceQuery unfinishedQuery = runtimeService.createProcessInstanceQuery().active();
+        return unfinishedQuery;
+    }
+    
+    
+    /**
+     * 获取已经完成的流程实例查询对象
+     * @param userId    用户ID
+     * 已经结束的流程实例。
+	       从表ACT_HI_PROCINST中查询数据。
+     */
+    public HistoricProcessInstanceQuery createFinishedProcessInstanceQuery(String userId) {
+        HistoricProcessInstanceQuery finishedQuery = historyService.createHistoricProcessInstanceQuery().finished();
+        return finishedQuery;
     }
 
 }

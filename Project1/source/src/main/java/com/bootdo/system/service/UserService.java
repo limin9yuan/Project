@@ -37,5 +37,7 @@ public interface UserService {
 	Tree<DeptDO> getTree();
 
 	public List<DictDO> listDic();
+	
+	UserDO getByUsername(String username);
 
 }

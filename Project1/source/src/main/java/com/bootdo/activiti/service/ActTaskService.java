@@ -19,5 +19,7 @@ public interface ActTaskService {
 
     String getFormKey(String procDefId, String taskDefKey);
 
-    InputStream tracePhoto(String processDefinitionId, String executionId);
+    InputStream tracePhoto(String processInstanceId);
+    
+    List<ActivitiDO> traceTaskData(String pProcessInstanceId);
 }

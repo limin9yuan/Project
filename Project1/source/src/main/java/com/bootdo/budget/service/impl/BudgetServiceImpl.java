@@ -1,5 +1,8 @@
 package com.bootdo.budget.service.impl;
 
+import com.bootdo.activiti.config.ActivitiConstant;
+import com.bootdo.activiti.service.impl.ActTaskServiceImpl;
+import com.bootdo.contract.domain.ContractDO;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +32,28 @@ import com.bootdo.project.domain.ProjectDO;
 public class BudgetServiceImpl implements BudgetService {
 	@Autowired
 	private BudgetDao budgetDao;
+
+	@Autowired
+	private ActTaskServiceImpl actTaskService;
+
+	/**
+	 * ******************* 审批流程相关 *************************
+	 */
+	//审批处理保存
+	@Override
+	public int formUpdate(BudgetDO budget){
+		//流程审批处理
+		Map<String,Object> vars = new HashMap<>(16);
+		vars.put("taskAction",  budget.getTaskAction() );
+		actTaskService.complete(budget.getTaskId(),vars);
+
+		return budgetDao.update(budget);
+	}
+
+	@Override
+	public BudgetDO view(String budgetId) {
+		return budgetDao.view(budgetId);
+	}
 	
 	@Override
 	public BudgetDO get(String budgetId){
@@ -43,13 +69,16 @@ public class BudgetServiceImpl implements BudgetService {
 	public int count(Map<String, Object> map){
 		return budgetDao.count(map);
 	}
-	
+
 	@Override
-	public int save(BudgetDO budget){
-		//return budgetDao.save(budget);
-		int ret=budgetDao.save(budget);
-		String budgetId=budget.getBudgetId();
-		return Integer.parseInt(budgetId);
+	public int save(BudgetDO budget) {
+		int ret = budgetDao.save(budget);
+
+		String budgetId = budget.getContractId();
+		actTaskService.startProcess(ActivitiConstant.ACTIVITI_BUDGET[0],
+				ActivitiConstant.ACTIVITI_BUDGET[1], budgetId,budget.getBudgetId(), new HashMap<String,Object>());
+
+		return ret;
 	}
 	
 	@Override
