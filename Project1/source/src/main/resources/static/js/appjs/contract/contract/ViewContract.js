@@ -2,7 +2,7 @@ var prefixPayable = "/contract/payable"
 var prefix = "/contract/contract";
 $(function() {
 	loadPayable();
-    view_ajax();
+    view();
 });
 
 function loadPayable() {
@@ -69,36 +69,36 @@ function loadPayable() {
 								]
 					});
 }
-function view_ajax(){
-	$.ajax({
-		url : prefix + '/view_ajax/' + $("#contractId").val(),
-		type : "view",
-		data : {
-			'contractId' : $("#contractId").val(),
-		},
-		success : function(data) {
-			result = data.contract;
- 			$("input[name='customerId']").val(result.customerName);
- 			$("input[name='businessId']").val(result.businessName);
- 			$("input[name='projectId']").val(result.projectName);
- 			$("input[name='contractApplicantName']").val(result.employeeName);
- 			$("input[name='contractName']").val(result.contractName);
-			$("input[name='contractBuildCompany']").val(result.contractBuildCompany);
-			$("input[name='contractType']").val(result.contractType);
-			$("input[name='contractTotalPrice']").val(result.contractTotalPrice);
-            $("input[name='contractApplicant']").val(result.contractApplicant);
-            $("input[name='contractDraftPerson']").val(result.contractDraftPerson);
-            $("input[name='contractSales']").val(result.contractSales);
-            $("input[name='contractCommitTime']").val(result.contractCommitTime);
-            $("input[name='contractRelatedId']").val(result.contractRelatedId);
-            $("input[name='contractInvoiceType']").val(result.contractInvoiceType);
-            $("input[name='contractInvoiceTime']").val(result.contractInvoiceTime);
-            $("input[name='contractHardwareList']").val(result.contractHardwareList);
-            $("input[name='contractSoftwareList']").val(result.contractSoftwareList);
- 			$("textarea[name='contractRemarks']").val(result.contractRemarks);
-		}
-	});
-}
+// function view(){
+// 	$.ajax({
+// 		url : prefix + '/view_ajax/' + $("#contractId").val(),
+// 		type : "view",
+// 		data : {
+// 			'contractId' : $("#contractId").val(),
+// 		},
+// 		success : function(data) {
+// 			result = data.contract;
+//  			$("input[name='customerId']").val(result.customerName);
+//  			$("input[name='businessId']").val(result.businessName);
+//  			$("input[name='projectId']").val(result.projectName);
+//  			$("input[name='contractApplicantName']").val(result.employeeName);
+//  			$("input[name='contractName']").val(result.contractName);
+// 			$("input[name='contractBuildCompany']").val(result.contractBuildCompany);
+// 			$("input[name='contractType']").val(result.contractType);
+// 			$("input[name='contractTotalPrice']").val(result.contractTotalPrice);
+//             $("input[name='contractApplicant']").val(result.contractApplicant);
+//             $("input[name='contractDraftPerson']").val(result.contractDraftPerson);
+//             $("input[name='contractSales']").val(result.contractSales);
+//             $("input[name='contractCommitTime']").val(result.contractCommitTime);
+//             $("input[name='contractRelatedId']").val(result.contractRelatedId);
+//             $("input[name='contractInvoiceType']").val(result.contractInvoiceType);
+//             $("input[name='contractInvoiceTime']").val(result.contractInvoiceTime);
+//             $("input[name='contractHardwareList']").val(result.contractHardwareList);
+//             $("input[name='contractSoftwareList']").val(result.contractSoftwareList);
+//  			$("textarea[name='contractRemarks']").val(result.contractRemarks);
+// 		}
+// 	});
+// }
 function reLoadPayable() {
 	$('#payableTable').bootstrapTable('refresh');
 }

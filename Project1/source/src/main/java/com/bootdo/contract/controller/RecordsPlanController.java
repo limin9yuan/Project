@@ -104,7 +104,7 @@ public class RecordsPlanController  extends BaseController{
 	/**
 	 * 删除
 	 */
-	@PostMapping( "/remove")
+	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("contract:additionalRecords:remove")
 	public R remove( String planId){
@@ -117,7 +117,7 @@ public class RecordsPlanController  extends BaseController{
 	/**
 	 * 删除
 	 */
-	@PostMapping( "/batchRemove")
+	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("contract:additionalRecords:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] planIds){

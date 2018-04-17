@@ -19,20 +19,23 @@
 	</select>
 
 	<select id="view" resultType="com.bootdo.contract.domain.ContractDO">
-		select c.`Customer_Name`,b.`Business_Name`,d.`name`,e.`Employee_Name`,
+		select c.`Customer_Name`,b.`Business_Name`,d.`Project_Name`,e.`Employee_Name` as `Contract_Applicant_Name`,
 		a.`Contract_Name`,a.`Contract_Build_Company`,a.`Contract_Type`,a.`Contract_Category`,
-		a.`Contract_Total_Price`,e.`Employee_Name` as `Contract_Applicant`,a.`Contract_Draft_Person`,
-		e.`Employee_Name` as `Contract_Sales`,a.`Contract_Commit_Time`,
+		a.`Contract_Total_Price`,f.`Employee_Name` as `Contract_Applicant`,a.`Contract_Draft_Person`,
+		g.`Employee_Name` as `Contract_Sales`,a.`Contract_Commit_Time`,
 		a.`Contract_Invoice_Type`,a.`Contract_Invoice_Time`,a.`Contract_Hardware_List`,
 		a.`Contract_Software_List`,a.`Contract_Remarks`
 		from contract a
 		left JOIN sys_user s on a.Contract_Operator = s.user_id
 		left join sales_business b on a.Business_ID = b.Business_ID
 		left join sales_company_customer c on a.Customer_ID = c.Customer_ID
-		left JOIN (select `Project_ID` value,concat(`Project_ID`,' ',`Project_Name`) name from pre_sales_project
-         UNION ALL
-         select `Project_ID` value,concat(`Project_ID`,' ',`Project_Name`) name from development_project) d on a.Project_ID = d.value
+		left JOIN (select `Project_ID`,`Project_Name` from pre_sales_project
+         		   UNION ALL
+         		   select `Project_ID`,`Project_Name` from development_project) d on a.Project_ID = d.Project_ID
 		left join inner_org_employee e on a.Contract_Applicant_Name = e.Employee_ID
+    	LEFT JOIN inner_org_employee f on a.Contract_Applicant = f.Employee_ID
+		LEFT JOIN inner_org_employee g on a.Contract_Sales = g.Employee_ID
+
 		where a.Contract_ID = #{value}
 	</select>
 

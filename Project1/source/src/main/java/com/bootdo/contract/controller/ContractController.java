@@ -88,14 +88,23 @@ public class ContractController extends BaseController {
 	}
 
 	//view绑定数据
-	@RequestMapping("/view_ajax/{contractId}")
-	@ResponseBody
-	Map<String, Object> view_ajax(@PathVariable("contractId") String contractId) {
-		ContractDO contract = contractService.get(contractId);
-		Map<String, Object> returnData = new HashMap<String, Object>();
-		returnData.put("contract", contract);
-		return returnData;
-	}
+//	@RequestMapping("/view_ajax/{contractId}")
+//	@ResponseBody
+//	Map<String, Object> view_ajax(@PathVariable("contractId") String contractId) {
+//		ContractDO contract = contractService.get(contractId);
+//		Map<String, Object> returnData = new HashMap<String, Object>();
+//		returnData.put("contract", contract);
+//		return returnData;
+//	}
+
+//	@GetMapping("/view/{contractId}")
+//	//@RequiresPermissions("contract:contract:edit")
+//	String view(@PathVariable("contractId") String contractId, Model model) {
+//		ContractDO contract = contractService.get(contractId);
+//		Map<String, Object> returnData = new HashMap<String, Object>();
+//		returnData.put("contract", contract);
+//		return "contract/contract/ViewContract";
+//	}
 
 	// edit数据绑定
 	@RequestMapping("/edit_ajax/{contractId}")
@@ -259,7 +268,7 @@ public class ContractController extends BaseController {
 	@RequiresPermissions("contract:contract:add")
 	String formTask(@PathVariable("taskId") String taskId,Model model){
 		//取得流程表单数据
-		ContractDO contract = contractService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+		ContractDO contract = contractService.view(activitiUtils.getBusinessKeyByTaskId(taskId));
 		if(contract!=null){
 			model.addAttribute("contract", contract);
 			//model.addAttribute("taskId",taskId);

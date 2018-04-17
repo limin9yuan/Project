@@ -24,6 +24,8 @@ public interface ContractService {
 	ContractDO get(String contractId);
 	
 	List<ContractDO> list(Map<String, Object> map);
+
+	ContractDO view(String contractId);
 	
 	int count(Map<String, Object> map);
 	

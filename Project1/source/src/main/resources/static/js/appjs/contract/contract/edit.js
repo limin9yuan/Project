@@ -380,7 +380,7 @@ function Contract_ajax(){
 			// 合同种类
 			loadDicValue("contract_Contract_Category", "contractCategory",result.contractCategory);
 			// 发票类型
-			loadDicValue("Contract_Invoice_Type", "contractInvoiceType",result.contractInvoiceType);
+			loadDicValue("contract_invoice_type", "contractInvoiceType",result.contractInvoiceType);
 
 		}
 	});

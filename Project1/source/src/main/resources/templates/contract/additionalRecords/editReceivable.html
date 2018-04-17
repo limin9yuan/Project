@@ -11,11 +11,6 @@
 						<form class="form-horizontal m-t" id="signupForm">
 						<input id="receivableId" name="receivableId" th:value="${receivableId}" class="form-control" type="hidden">  
 							<div class="form-group">
-								<label class="col-sm-2 control-label">合同编号：</label>
-								<div class="col-sm-4">
-									<input id="contractId" name="contractId" class="form-control"
-										type="text">
-								</div>
 								<label class="col-sm-2 control-label">收款计划时间：<span class="mustin">*</span></label>
 								<div class="col-sm-4">
 								<div class="input-group date" id="receivableDate">
@@ -25,13 +20,13 @@
 										</span>
 									</div>
 								</div>
-							</div>
-							<div class="form-group">
 								<label class="col-sm-2 control-label">收款计划金额：<span class="mustin">*</span></label>
 								<div class="col-sm-4">
 									<input id="receivablePrice" name="receivablePrice"
 										class="form-control" type="text">
 								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2 control-label">收款负责人：<span class="mustin">*</span></label>
 								<div class="col-sm-4">
 									<input id="receivableOwner" name="receivableOwner"

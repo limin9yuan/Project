@@ -59,10 +59,10 @@ function validateRule() {
 		}
 	})
 }
-// 计划交付时间
 function datetimepicker() {
+	// 付款计划时间
 	$('#planDeliveryDate').datetimepicker({
-		foemat : 'YYYY-MM-DD',
+		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
 	});
 }

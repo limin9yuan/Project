@@ -57,6 +57,11 @@ public class ContractServiceImpl implements ContractService {
 	}
 
 	@Override
+	public ContractDO view(String contractId) {
+		return contractDao.view(contractId);
+	}
+
+	@Override
 	public List<ContractDO> list(Map<String, Object> map) {
 		return contractDao.list(map);
 	}

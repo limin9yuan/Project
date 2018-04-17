@@ -19,20 +19,20 @@
 						</ul>
 						<!-- 基本信息 -->
 						<form class="form-horizontal m-t" id="signupForm">
-						<input id="contractId" name="contractId" class="form-control" type="hidden" th:value="${contractId}">
+                            <!-- <input id="Ttype" name="Ttype" th:value="${contract.contractName}" type="text"> -->
 							<div id="myTabContent" class="tab-content">
 								<div class="tab-pane fade in active" id="basic">
 									<div class="form-group">
 										<label class="col-sm-2 control-label">客户名称：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="customerId"
+											<input th:value="${contract.customerName}" disabled="disabled" data-placeholder="请选择" name="customerId"
 												id="customerId" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
 										</div>
 										<label class="col-sm-2 control-label">业务名称：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="businessId"
+											<input th:value="${contract.businessName}" disabled="disabled" data-placeholder="请选择" name="businessId"
 												id="businessId" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -41,14 +41,14 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">项目名称：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="projectId"
+											<input th:value="${contract.projectName}" disabled="disabled" data-placeholder="请选择" name="projectId"
 												id="projectId" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
 										</div>
 										<label class="col-sm-2 control-label">申请人姓名：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="contractApplicantName"
+											<input th:value="${contract.contractApplicantName}" disabled="disabled" data-placeholder="请选择" name="contractApplicantName"
 												id="contractApplicantName" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -57,26 +57,26 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">合同名称：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" id="contractName" name="contractName"
+											<input th:value="${contract.contractName}" disabled="disabled" id="contractName" name="contractName"
 												class="form-control" type="text">
 										</div>
 										<label class="col-sm-2 control-label">建设单位：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" id="contractBuildCompany" name="contractBuildCompany"
+											<input th:value="${contract.contractBuildCompany}" disabled="disabled" id="contractBuildCompany" name="contractBuildCompany"
 												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">合同类型：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="contractType"
+											<input th:value="${contract.contractType}" disabled="disabled" data-placeholder="请选择" name="contractType"
 												id="contractType" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
 										</div>
 										<label class="col-sm-2 control-label">合同种类：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="contractCategory"
+											<input th:value="${contract.contractCategory}" disabled="disabled" data-placeholder="请选择" name="contractCategory"
 												id="contractCategory" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -85,7 +85,7 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">合同总金额：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" id="contractTotalPrice" name="contractTotalPrice"
+											<input th:value="${contract.contractTotalPrice}" disabled="disabled" id="contractTotalPrice" name="contractTotalPrice"
 												class="form-control" type="text">
 										</div>
 										<!-- <label class="col-sm-2 control-label">合同发起部门：<span class="mustin">*</label>
@@ -99,21 +99,21 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">业务发起人：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="contractApplicant"
+											<input th:value="${contract.contractApplicant}" disabled="disabled" data-placeholder="请选择" name="contractApplicant"
 												id="contractApplicant" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
 										</div>
 										<label class="col-sm-2 control-label">合同拟定人：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" id="contractDraftPerson" name="contractDraftPerson"
+											<input th:value="${contract.contractDraftPerson}" disabled="disabled" id="contractDraftPerson" name="contractDraftPerson"
 												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">销售负责人：<span class="mustin">*</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="contractSales"
+											<input th:value="${contract.contractSales}" disabled="disabled" data-placeholder="请选择" name="contractSales"
 												id="contractSales" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -121,7 +121,7 @@
 										<label class="col-sm-2 control-label">提交评审时间：<span class="mustin">*</label>
 										<div class="col-sm-4">
 											<div class="input-group date" id="contractCommitTime">
-												<input disabled="disabled" class="form-control" type="text"
+												<input th:value="${contract.contractCommitTime}" disabled="disabled" class="form-control" type="text"
 													name="contractCommitTime">
 												</input>
 											</div>
@@ -141,7 +141,7 @@
 										</div>
 										<label class="col-sm-2 control-label">关联合同名称：</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="contractRelatedId"
+											<input th:value="${contract.contractRelatedId}" disabled="disabled" data-placeholder="请选择" name="contractRelatedId"
 												id="contractRelatedId" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -150,7 +150,7 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">发票类型：</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="contractInvoiceType"
+											<input th:value="${contract.contractInvoiceType}" disabled="disabled" data-placeholder="请选择" name="contractInvoiceType"
 												id="contractInvoiceType" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -158,7 +158,7 @@
 										<label class="col-sm-2 control-label">预计开具发票时间：</label>
 										<div class="col-sm-4">
 											<div class="input-group date" id="contractInvoiceTime">
-												<input disabled="disabled" class="form-control" type="text"
+												<input th:value="${contract.contractInvoiceTime}" disabled="disabled" class="form-control" type="text"
 													name="contractInvoiceTime">
 												</input>
 											</div>
@@ -167,14 +167,14 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">硬件设备明细表：</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="contractHardwareList"
+											<input th:value="${contract.contractHardwareList}" disabled="disabled" data-placeholder="请选择" name="contractHardwareList"
 												id="contractHardwareList" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
 										</div>
 										<label class="col-sm-2 control-label">软件功能列表：</label>
 										<div class="col-sm-4">
-											<input disabled="disabled" data-placeholder="请选择" name="contractSoftwareList"
+											<input th:value="${contract.contractSoftwareList}" disabled="disabled" data-placeholder="请选择" name="contractSoftwareList"
 												id="contractSoftwareList" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -183,7 +183,7 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">备注：</label>
 										<div class="col-sm-10">
-											<textarea disabled="disabled" id="contractRemarks" name="contractRemarks"
+											<textarea th:value="${contract.contractRemarks}" disabled="disabled" id="contractRemarks" name="contractRemarks"
 												class="form-control" rows="3"></textarea>
 										</div>
 									</div>

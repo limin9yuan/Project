@@ -18,7 +18,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ContractDao {
 
 	ContractDO get(String contractId);
-	
+
+	ContractDO view(String contractId);
+
 	List<ContractDO> list(Map<String,Object> map);
 	
 	int count(Map<String,Object> map);

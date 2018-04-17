@@ -9,6 +9,16 @@ $.validator.setDefaults({
 	}
 });
 function savePlan() {
+	var tmpRecordId = $("#recordId",window.parent.document).val()==undefined ? $("#resultRecordId",window.parent.document).val()
+			:$("#recordId",window.parent.document).val();
+	var tmpContractId = $("#recordRelatedContractId",window.parent.document).val();
+	if(tmpRecordId==-1){
+		parent.layer.msg("请先保存合同增补基本信息");
+		return;
+	}
+	if(tmpRecordId>0){
+		$('#contractId').val(tmpContractId);
+	}
 	$.ajax({
 		cache : true,
 		type : "POST",
