@@ -67,7 +67,7 @@ public class BudgetController extends BaseController {
 			model.addAttribute("budget", budget);
 			//model.addAttribute("taskId",taskId);
 		}
-		return "budget/budget/edit";
+		return "budget/budget/viewBudget";
 
 	}
 

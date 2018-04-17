@@ -70,17 +70,17 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var a ='<div style="width:70px"></div>'
+										var a ='<div style="width:110px"></div>'
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
 												+ row.travelId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+									var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.travelId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.travelId
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return  a + e + d ;
+										var f = '<a class="btn btn-success btn-sm" href="#" title="跟踪流程"  mce_href="#" onclick="taskTrace(\''
+											+ +row.processInstanceId
+												+ '\')"><i class="fa fa-search"></i></a> ';
+										return  a + e + d +f;
 									}
 								} ,
 																{
@@ -270,5 +270,16 @@ function batchRemove() {
 		});
 	}, function() {
 
+	});
+}
+
+function taskTrace(processInstanceId){
+	layer.open({
+		type : 2,
+		title : '流程跟踪',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '100%', '100%'],
+		content : '/activiti/task/taskTrace/'+processInstanceId
 	});
 }
