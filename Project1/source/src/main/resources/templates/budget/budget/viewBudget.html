@@ -30,7 +30,7 @@
 										</div>
 										<label class="col-sm-3 control-label">部门：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" data-placeholder="请选择" name="deptId" id="deptId"
+											<input th:value="${budget.deptId}" disabled="disabled" data-placeholder="请选择" name="deptId" id="deptId"
 												class="form-control chosen-select" tabindex="2"
 												style="width: 100%">
 											</input>
@@ -39,14 +39,14 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">项目主管：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" data-placeholder="请选择" name="projectSupervisor"
+											<input th:value="${budget.projectSupervisor}" disabled="disabled" data-placeholder="请选择" name="projectSupervisor"
 												id="projectSupervisor" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
 										</div>
 										<label class="col-sm-3 control-label">项目类别：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" data-placeholder="请选择" name="projectGategory"
+											<input th:value="${budget.projectGategory}" disabled="disabled" data-placeholder="请选择" name="projectGategory"
 												id="projectGategory" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -72,7 +72,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
 										<div class="col-sm-9">
-											<input disabled="disabled" data-placeholder="请选择" name="projectId"
+											<input  th:value="${budget.projectId}" disabled="disabled" data-placeholder="请选择" name="projectId"
 												id="projectId" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -81,20 +81,21 @@
 									<div class="form-group">
 								       <label class="col-sm-3 control-label">项目描述：<span class="mustin">*</span></label>
 								       <div class="col-sm-9">
-									        <textarea id="projectDescription" name="projectDescription" class="form-control" rows="3" readonly></textarea>
+									        <textarea th:text="${budget.projectDescription}" id="projectDescription" name="projectDescription" class="form-control" rows="3" readonly>
+                                            </textarea>
 								       </div>
 							        </div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label">客户名称：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" data-placeholder="请选择" name="customerId"
+											<input th:value="${budget.customerId}" disabled="disabled" data-placeholder="请选择" name="customerId"
 												id="customerId" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
 										</div>
 										<label class="col-sm-3 control-label">业务名称：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" data-placeholder="请选择" name="businessId"
+											<input th:value="${budget.businessId}" disabled="disabled" data-placeholder="请选择" name="businessId"
 												id="businessId" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 											</input>
@@ -103,74 +104,74 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">应收账款总额：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetAccountReceivable"
+											<input th:value="${budget.budgetAccountReceivable}" disabled="disabled" id="budgetAccountReceivable"
 												name="budgetAccountReceivable" class="form-control"
 												type="text">
 										</div>
 										<label class="col-sm-3 control-label">计划成本总额：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetTotalCost" name="budgetTotalCost"
+											<input th:value="${budget.budgetTotalCost}" disabled="disabled" id="budgetTotalCost" name="budgetTotalCost"
 												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label">项目计划利润率：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetProfitRate" name="budgetProfitRate"
+											<input th:value="${budget.budgetProfitRate}" disabled="disabled" id="budgetProfitRate" name="budgetProfitRate"
 												class="form-control" type="text">
 										</div>
 										<label class="col-sm-3 control-label">计划是否合规：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetConformance" name="budgetConformance"
+											<input th:value="${budget.budgetConformance}" disabled="disabled" id="budgetConformance" name="budgetConformance"
 												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label">服务收入（合同额）：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetServiceRevenue" name="budgetServiceRevenue"
+											<input th:value="${budget.budgetServiceRevenue}" disabled="disabled" id="budgetServiceRevenue" name="budgetServiceRevenue"
 												class="form-control" type="text">
 										</div>
 										<label class="col-sm-3 control-label">税金：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetTax" name="budgetTax" class="form-control"
+											<input th:value="${budget.budgetTax}" disabled="disabled" id="budgetTax" name="budgetTax" class="form-control"
 												type="text">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label">服务净收入：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetServiceRevenueNet"
+											<input th:value="${budget.budgetServiceRevenueNet}" disabled="disabled" id="budgetServiceRevenueNet"
 												name="budgetServiceRevenueNet" class="form-control"
 												type="text">
 										</div>
 										<label class="col-sm-3 control-label">费用和支持（含税）：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetCost" name="budgetCost" class="form-control"
+											<input th:value="${budget.budgetCost}" disabled="disabled" id="budgetCost" name="budgetCost" class="form-control"
 												type="text">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label">采购成本：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetPurchaseCost" name="budgetPurchaseCost"
+											<input th:value="${budget.budgetPurchaseCost}" disabled="disabled" id="budgetPurchaseCost" name="budgetPurchaseCost"
 												class="form-control" type="text">
 										</div>
 										<label class="col-sm-3 control-label">人工成本：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetLaborCost" name="budgetLaborCost"
+											<input th:value="${budget.budgetLaborCost}" disabled="disabled" id="budgetLaborCost" name="budgetLaborCost"
 												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label">差旅成本：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetTravelCost" name="budgetTravelCost"
+											<input th:value="${budget.budgetTravelCost}" disabled="disabled" id="budgetTravelCost" name="budgetTravelCost"
 												class="form-control" type="text">
 										</div>
 										<label class="col-sm-3 control-label">利润：<span class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input disabled="disabled" id="budgetProfit" name="budgetProfit"
+											<input th:value="${budget.budgetProfit}" disabled="disabled" id="budgetProfit" name="budgetProfit"
 												class="form-control" type="text">
 										</div>
 									</div>

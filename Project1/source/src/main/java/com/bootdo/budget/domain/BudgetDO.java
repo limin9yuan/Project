@@ -93,8 +93,26 @@ public class BudgetDO implements Serializable {
 	private String taskId;
 	//审批操作
 	private String taskAction;
+	//审批说明
+	private String taskComment;
+	//流程实例ID
+	private String processInstanceId;
 
+	public String getTaskComment() {
+		return taskComment;
+	}
 
+	public void setTaskComment(String taskComment) {
+		this.taskComment = taskComment;
+	}
+
+	public String getProcessInstanceId() {
+		return processInstanceId;
+	}
+
+	public void setProcessInstanceId(String processInstanceId) {
+		this.processInstanceId = processInstanceId;
+	}
 
 	public String getTaskId() {
 		return taskId;

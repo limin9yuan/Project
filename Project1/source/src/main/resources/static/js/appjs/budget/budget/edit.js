@@ -1,23 +1,23 @@
 var address = null;
 var prefix = "/budget/budget"
 $().ready(function() {
-	$('#myTab a[href="#budgetInfo"]').on('shown.bs.tab', function(e){		
+	$('#myTab a[href="#budgetInfo"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",true);
 		 $('#nextBtn').attr("disabled",false);
 	 });
-	 $('#myTab a[href="#labor"]').on('shown.bs.tab', function(e){		
+	 $('#myTab a[href="#labor"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	
+		 $('#nextBtn').attr("disabled",false);
 		 loadLabor();
 	 });
-	 $('#myTab a[href="#expenses"]').on('shown.bs.tab', function(e){		
+	 $('#myTab a[href="#expenses"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	
+		 $('#nextBtn').attr("disabled",false);
 		 loadExpenses();
 	 });
-	 $('#myTab a[href="#budgetPurchase"]').on('shown.bs.tab', function(e){		
+	 $('#myTab a[href="#budgetPurchase"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	
+		 $('#nextBtn').attr("disabled",false);
 		 loadPurchase();
 	 });
 	validateRule();
@@ -26,9 +26,9 @@ $().ready(function() {
 	    cityId: 'city',
 	    areaId: 'area'
 	  });
-	address.init(); 
+	address.init();
 	budgetMapper_edit();
-	
+
 	//获取项目描述
 	$("#projectId").bind("change", getProjectId);
 });
@@ -283,7 +283,7 @@ function budgetMapper_edit(){
 			$("input[name='budgetTravelCost']").val(result.budgetTravelCost);
 			$("input[name='budgetProfit']").val(result.budgetProfit);
 			$("textarea[name='projectDescription']").val(result.projectDescription);
-			
+
 			$("select[name='province']").val(result.province);
 			$("select[name='province']").trigger("chosen:updated");
 			$("select[name='city']").val(result.city);
@@ -295,7 +295,7 @@ function budgetMapper_edit(){
 			loadCrmDataValue("/system/sysDept/listDic","deptId",result.deptId);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectSupervisor",result.projectSupervisor);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectOwner",result.projectOwner);
-			loadCrmDataValue("/project/project/listDic","projectId",result.projectId);
+			loadCrmDataValue("/sales/salesProject/listAllDic","projectId",result.projectId);
 			loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
 			loadCrmDataValue("/sales/business/listDic","businessId",result.businessId);
 			loadCrmDataValue("/contract/contract/listDic","contractId",result.contractId);
@@ -311,8 +311,8 @@ function nextStepThis(tabId,totalStep,lastBtn,nextBtn){
 				    cityId: 'city',
 				    areaId: 'area'
 				  });
-				address.init(); 
+				address.init();
 			}
-		
+
 	}
 }

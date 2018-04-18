@@ -6,27 +6,27 @@ $().ready(function() {
 	loadCrmData("/system/sysDept/listDic","deptId");
 	loadCrmData("/inner/innerOrgEmployee/listDic","projectSupervisor");
 	loadCrmData("/inner/innerOrgEmployee/listDic","projectOwner");
-	loadCrmData("/project/project/listDic","projectId");
+	loadCrmData("/sales/salesProject/listAllDic","projectId");
 	loadCrmData("/sales/companyCustomer/listDic","customerId");
 	loadCrmData("/sales/business/listDic","businessId");
 	loadCrmData("/contract/contract/listDic","contractId");
-	$('#myTab a[href="#budgetInfo"]').on('shown.bs.tab', function(e){		
+	$('#myTab a[href="#budgetInfo"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",true);
 		 $('#nextBtn').attr("disabled",false);
 	 });
-	 $('#myTab a[href="#labor"]').on('shown.bs.tab', function(e){		
+	 $('#myTab a[href="#labor"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
 		 $('#nextBtn').attr("disabled",false);
 		 loadLabor();
 	 });
-	 $('#myTab a[href="#expenses"]').on('shown.bs.tab', function(e){		
+	 $('#myTab a[href="#expenses"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
 		 $('#nextBtn').attr("disabled",false);
 		 loadExpenses();
 	 });
-	 $('#myTab a[href="#budgetPurchase"]').on('shown.bs.tab', function(e){		
+	 $('#myTab a[href="#budgetPurchase"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	
+		 $('#nextBtn').attr("disabled",false);
 		 loadPurchase();
 	 });
 	validateRule();
@@ -35,8 +35,8 @@ $().ready(function() {
 	    cityId: 'city',
 	    areaId: 'area'
 	  });
-	address.init(); 
-	
+	address.init();
+
 	//获取项目描述
 	$("#projectId").bind("change", getProjectId);
 });
@@ -276,8 +276,8 @@ function nextStepThis(tabId,totalStep,lastBtn,nextBtn){
 				    cityId: 'city',
 				    areaId: 'area'
 				  });
-				address.init(); 
+				address.init();
 			}
-		
+
 	}
 }

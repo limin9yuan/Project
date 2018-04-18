@@ -6,23 +6,37 @@
 	<select id="get" resultType="com.bootdo.budget.domain.BudgetDO">
 		select `Budget_ID`,a.`Customer_ID`,`Business_ID`,
 		a.`Project_ID`,b.Project_Description,
-		`Budget_Profit_Rate`,`Budget_Account_Receivable`,`Budget_Total_Cost`,`Budget_Conformance`,`Budget_Service_Revenue`,`Budget_Tax`,`Budget_Service_Revenue_Net`,`Budget_Purchase_Cost`,`Budget_Labor_Cost`,`Budget_Travel_Cost`,`Budget_Cost`,`Budget_Profit`,`Budget_Operator`,`Budget_Operate_Time`,a.`Dept_ID`,`Responsible_Center`,`Project_Supervisor`,a.`Project_Gategory`
+		`Budget_Profit_Rate`,`Budget_Account_Receivable`,`Budget_Total_Cost`,
+		`Budget_Conformance`,`Budget_Service_Revenue`,`Budget_Tax`,
+		`Budget_Service_Revenue_Net`,`Budget_Purchase_Cost`,`Budget_Labor_Cost`,
+		`Budget_Travel_Cost`,`Budget_Cost`,`Budget_Profit`,`Budget_Operator`,
+		`Budget_Operate_Time`,a.`Dept_ID`,`Responsible_Center`,`Project_Supervisor`,a.`Project_Gategory`
 		from project_budget a
 		left join development_project b on a.`Project_ID`=b.`Project_ID`
 		where Budget_ID = #{value}
 	</select>
 
 	<select id="view" resultType="com.bootdo.budget.domain.BudgetDO">
-		select `Budget_ID`,a.`Customer_ID`,`Business_ID`,
-		a.`Project_ID`,b.Project_Description,
+		select `Budget_ID`,f.Customer_Name as `Customer_ID`,g.Business_Name AS`Business_ID`,
+		e.Project_Name as `Project_ID`,Project_Description,
 		`Budget_Profit_Rate`,`Budget_Account_Receivable`,`Budget_Total_Cost`,
 		`Budget_Conformance`,`Budget_Service_Revenue`,`Budget_Tax`,
 		`Budget_Service_Revenue_Net`,`Budget_Purchase_Cost`,`Budget_Labor_Cost`,
 		`Budget_Travel_Cost`,`Budget_Cost`,`Budget_Profit`,`Budget_Operator`,
-		`Budget_Operate_Time`,a.`Dept_ID`,`Responsible_Center`,`Project_Supervisor`,
+		`Budget_Operate_Time`,c.`name` as `Dept_ID`,`Responsible_Center`,
+		d.Employee_Name as `Project_Supervisor`,
 		a.`Project_Gategory`
 		from project_budget a
 		left join development_project b on a.`Project_ID`=b.`Project_ID`
+		LEFT JOIN sys_dept c on a.Dept_ID = c.dept_id
+		LEFT JOIN inner_org_employee d on a.Project_Supervisor = d.Employee_ID
+		left JOIN (SELECT `Project_ID`,`Project_Name` from development_project
+				   UNION ALL
+				   select `Project_ID`,`Project_Name` from pre_sales_project h
+         		   WHERE NOT EXISTS
+         		   (select `Project_ID`,`Project_Name` from development_project i WHERE h.Project_ID = i.Project_ID)) e on a.Project_ID = e.Project_ID
+		LEFT JOIN sales_company_customer f on a.Customer_ID = f.Customer_ID
+		LEFT JOIN sales_business g on a.Business_ID = g.Business_ID
 		where Budget_ID = #{value}
 	</select>
 
@@ -36,13 +50,15 @@
 		a.`Customer_ID`,d.`Customer_Name`as `Customer_Name`,
 		`Business_ID`,
 		a.`Project_ID`,b.`Project_Name` as `Project_Name`,
-		`Budget_Profit_Rate`,`Budget_Account_Receivable`,`Budget_Total_Cost`,`Budget_Conformance`,`Budget_Service_Revenue`,`Budget_Tax`,`Budget_Service_Revenue_Net`,`Budget_Purchase_Cost`,`Budget_Labor_Cost`,`Budget_Travel_Cost`,`Budget_Cost`,`Budget_Profit`,
+		`Budget_Profit_Rate`,`Budget_Account_Receivable`,`Budget_Total_Cost`,`Budget_Conformance`,
+		`Budget_Service_Revenue`,`Budget_Tax`,`Budget_Service_Revenue_Net`,`Budget_Purchase_Cost`,
+		`Budget_Labor_Cost`,`Budget_Travel_Cost`,`Budget_Cost`,`Budget_Profit`,
 		a.`Budget_Operator`,f.`name` as `Budget_Operator_Name`,`Budget_Operate_Time`,
 		a.`Dept_ID`,e.`name` as `Dept_Name`,
 		`Responsible_Center`,
         `Project_Supervisor`,g.Employee_Name as `Project_Supervisor_Name`,
         h.Employee_Name as `Project_Owner_Name`,
-        a.`Project_Gategory`
+        a.`Project_Gategory`,PROCESS_INSTANCE_ID
 		from project_budget a
 		left join development_project b on a.`Project_ID`=b.`Project_ID`
 		left join inner_org_employee h on h.`Employee_ID`=b.`Project_Owner`
@@ -210,7 +226,8 @@
 			<if test="deptId != null">`Dept_ID` = #{deptId}, </if>
 			<if test="responsibleCenter != null">`Responsible_Center` = #{responsibleCenter}, </if>
 			<if test="projectSupervisor != null">`Project_Supervisor` = #{projectSupervisor},</if>
-			<if test="projectGategory != null">`Project_Gategory` = #{projectGategory}</if>			
+			<if test="projectGategory != null">`Project_Gategory` = #{projectGategory},</if>
+			<if test="processInstanceId != null">`PROCESS_INSTANCE_ID` = #{processInstanceId}</if>
 		</set>
 		where Budget_ID = #{budgetId}
 	</update>

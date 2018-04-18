@@ -3,6 +3,7 @@ package com.bootdo.budget.service.impl;
 import com.bootdo.activiti.config.ActivitiConstant;
 import com.bootdo.activiti.service.impl.ActTaskServiceImpl;
 import com.bootdo.contract.domain.ContractDO;
+import com.bootdo.inner.domain.InnerOrgEmployeeDO;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -45,9 +46,10 @@ public class BudgetServiceImpl implements BudgetService {
 		//流程审批处理
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("taskAction",  budget.getTaskAction() );
-		actTaskService.complete(budget.getTaskId(),vars);
+		actTaskService.complete(budget.getTaskId(),budget.getProcessInstanceId(),budget.getTaskComment(),"",vars);
 
 		return budgetDao.update(budget);
+
 	}
 
 	@Override
@@ -72,13 +74,34 @@ public class BudgetServiceImpl implements BudgetService {
 
 	@Override
 	public int save(BudgetDO budget) {
+//		int ret = budgetDao.save(budget);
+//
+//		String budgetId = budget.getBudgetId();
+//		actTaskService.startProcess(ActivitiConstant.ACTIVITI_BUDGET[0],
+//				ActivitiConstant.ACTIVITI_BUDGET[1], budgetId,budget.getBudgetId(), new HashMap<String,Object>());
+//
+//		return ret;
+		/*
+		此处获取自增长主键ID，此ID作为流程的businessId
+		需注意在SQL语句XML配置文件save中需增加：useGeneratedKeys="true" keyProperty="travelId" 用来获取数据库自增长ID
+		<insert id="save" parameterType="com.bootdo.contract.domain.TravelDO" useGeneratedKeys="true" keyProperty="travelId">
+		*/
 		int ret = budgetDao.save(budget);
 
-		String budgetId = budget.getBudgetId();
-		actTaskService.startProcess(ActivitiConstant.ACTIVITI_BUDGET[0],
-				ActivitiConstant.ACTIVITI_BUDGET[1], budgetId,budget.getBudgetId(), new HashMap<String,Object>());
+		String budgetId=budget.getBudgetId();
+		//流程标题，每个业务根据自己特点，体现主要信息
+		String title="";
+		title=budget.getBudgetId()+"-"+budget.getBudgetTotalCost();
+		//添加保存时发起审批流程
+		String PROCESS_INSTANCE_ID=actTaskService.startProcess(ActivitiConstant.ACTIVITI_BUDGET[0],
+				ActivitiConstant.ACTIVITI_BUDGET[1],budgetId,title,new HashMap<String,Object>());
+		//更新流程实例ID到业务表
+		budget.setProcessInstanceId(PROCESS_INSTANCE_ID);
+		budgetDao.update(budget);
+
 
 		return ret;
+
 	}
 	
 	@Override
