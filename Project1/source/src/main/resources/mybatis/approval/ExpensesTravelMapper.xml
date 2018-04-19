@@ -5,8 +5,27 @@
 
 	<select id="get" resultType="com.bootdo.approval.domain.ExpensesTravelDO">
 		select
-		`Expenses_Travel_ID`,`Customer_ID`,`Business_ID`,`Project_ID`,`Expenses_Travel_Name`,`Expenses_Travel_Task`,`Expenses_Travel_Allowance`,`Expenses_Travel_Type`,`Expenses_Travel_Price`,`Expenses_Travel_TID`,`Expenses_Travel_PayID`,`Expenses_Travel_Pay_Price`,`Expenses_Travel_Pay_Mode`,`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,`Expenses_Travel_Status`,`Expenses_Travel_Operator`,`Expenses_Travel_Opt_Time`,`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`
+		`Expenses_Travel_ID`,`Customer_ID`,`Business_ID`,`Project_ID`,
+		`Expenses_Travel_Name`,`Expenses_Travel_Task`,`Expenses_Travel_Allowance`,
+		`Expenses_Travel_Type`,`Expenses_Travel_Price`,`Expenses_Travel_TID`,
+		`Expenses_Travel_PayID`,`Expenses_Travel_Pay_Price`,`Expenses_Travel_Pay_Mode`,
+		`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,
+		`Expenses_Travel_Status`,`Expenses_Travel_Operator`,`Expenses_Travel_Opt_Time`,
+		`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`
 		from approval_expenses__travel where Expenses_Travel_ID = #{value}
+	</select>
+
+	<select id="view" resultType="com.bootdo.approval.domain.ExpensesTravelDO">
+		select
+		`Expenses_Travel_ID`,`Customer_ID`,`Business_ID`,`Project_ID`,
+		`Expenses_Travel_Name`,`Expenses_Travel_Task`,`Expenses_Travel_Allowance`,
+		`Expenses_Travel_Type`,`Expenses_Travel_Price`,`Expenses_Travel_TID`,
+		`Expenses_Travel_PayID`,`Expenses_Travel_Pay_Price`,`Expenses_Travel_Pay_Mode`,
+		`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,
+		`Expenses_Travel_Status`,`Expenses_Travel_Operator`,`Expenses_Travel_Opt_Time`,
+		`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`
+		from approval_expenses__travel
+		where Expenses_Travel_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.approval.domain.ExpensesTravelDO">
@@ -18,7 +37,7 @@
 		`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,
 		CASE `Expenses_Travel_Status` when '1' then '已审批' ELSE '未审批' END AS Expenses_Travel_Status,`Expenses_Travel_Opt_Time`,
 		`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`,
-		s.name AS Expenses_Travel_Operator
+		s.name AS Expenses_Travel_Operator,PROCESS_INSTANCE_ID
 		from approval_expenses__travel a
 		left join development_project d on a.Project_ID=d.Project_ID
 		left join sys_user s on a.Expenses_Travel_Operator=s.user_id
@@ -195,8 +214,9 @@
 			</if>
 			<if test="expensesTravelCreator != null">`Expenses_Travel_Creator` = #{expensesTravelCreator},
 			</if>
-			<if test="expensesTravelCreateTime != null">`Expenses_Travel_Create_Time` =
-				#{expensesTravelCreateTime}</if>
+			<if test="expensesTravelCreateTime != null">`Expenses_Travel_Create_Time` = #{expensesTravelCreateTime},</if>
+			<if test="processInstanceId != null">`PROCESS_INSTANCE_ID` = #{processInstanceId}</if>
+
 		</set>
 		where Expenses_Travel_ID = #{expensesTravelId}
 	</update>

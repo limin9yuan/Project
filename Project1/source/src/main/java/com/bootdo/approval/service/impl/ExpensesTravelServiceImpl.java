@@ -41,6 +41,12 @@ public class ExpensesTravelServiceImpl implements ExpensesTravelService {
 	private ExpensesTravelDao expensesTravelDao;
 	@Autowired
 	private ActTaskServiceImpl actTaskService;
+
+
+	@Override
+	public ExpensesTravelDO view(String expensesTravelId){
+		return expensesTravelDao.view(expensesTravelId);
+	}
 	
 	@Override
 	public ExpensesTravelDO get(String expensesTravelId){
@@ -60,15 +66,37 @@ public class ExpensesTravelServiceImpl implements ExpensesTravelService {
 	@Override
 	public int save(ExpensesTravelDO expensesTravel){
 		int ret = expensesTravelDao.save(expensesTravel);
-		//获取expensesNormalId
-		String expensesTravelId = expensesTravel.getExpensesTravelId();
-		actTaskService.startProcess(ActivitiConstant.ACTIVITI_EXPENSES_TRAVEL[0],
-				ActivitiConstant.ACTIVITI_EXPENSES_TRAVEL[1], expensesTravelId,expensesTravel.getExpensesTravelName(),
-				new HashMap<String,Object>());
+
+		String expensesTravelId=expensesTravel.getExpensesTravelId();
+		//流程标题，每个业务根据自己特点，体现主要信息
+		String title="";
+		title=expensesTravel.getExpensesTravelId()+"-"+expensesTravel.getExpensesTravelName();
+		//添加保存时发起审批流程
+		String PROCESS_INSTANCE_ID=actTaskService.startProcess(ActivitiConstant.ACTIVITI_EXPENSES_TRAVEL[0],
+				ActivitiConstant.ACTIVITI_EXPENSES_TRAVEL[1],expensesTravelId,title,new HashMap<String,Object>());
+		//更新流程实例ID到业务表
+		expensesTravel.setProcessInstanceId(PROCESS_INSTANCE_ID);
+		expensesTravelDao.update(expensesTravel);
+
 
 		return ret;
 	}
-	
+
+	/**
+	 * ******************* 审批流程相关 *************************
+	 */
+	//审批处理保存
+	@Override
+	public int formUpdate(ExpensesTravelDO expensesTravel){
+		//流程审批处理
+		Map<String,Object> vars = new HashMap<>(16);
+		vars.put("taskAction",  expensesTravel.getTaskAction() );
+		actTaskService.complete(expensesTravel.getTaskId(),expensesTravel.getProcessInstanceId(),expensesTravel.getTaskComment(),"",vars);
+
+		return expensesTravelDao.update(expensesTravel);
+	}
+
+
 	@Override
 	public int update(ExpensesTravelDO expensesTravel){
 		return expensesTravelDao.update(expensesTravel);
@@ -82,20 +110,6 @@ public class ExpensesTravelServiceImpl implements ExpensesTravelService {
 	@Override
 	public int batchRemove(String[] expensesTravelIds){
 		return expensesTravelDao.batchRemove(expensesTravelIds);
-	}
-
-	/**
-	 * ******************* 审批流程相关 *************************
-	 */
-	//审批处理保存
-	@Override
-	public int formUpdate(ExpensesTravelDO expensesTravelDO){
-		//流程审批处理
-		Map<String,Object> vars = new HashMap<>(16);
-		vars.put("taskAction",  expensesTravelDO.getTaskAction() );
-		actTaskService.complete(expensesTravelDO.getTaskId(),vars);
-
-		return expensesTravelDao.update(expensesTravelDO);
 	}
 
 

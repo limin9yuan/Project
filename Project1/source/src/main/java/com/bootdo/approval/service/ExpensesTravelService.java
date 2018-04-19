@@ -15,7 +15,9 @@ import java.util.Map;
  * @date 2017-11-28 14:18:31
  */
 public interface ExpensesTravelService {
-	
+
+	ExpensesTravelDO view(String expensesTravelId);
+
 	ExpensesTravelDO get(String expensesTravelId);
 	
 	List<ExpensesTravelDO> list(Map<String, Object> map);

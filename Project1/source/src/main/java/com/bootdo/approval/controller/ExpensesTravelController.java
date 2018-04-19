@@ -185,12 +185,12 @@ public class ExpensesTravelController extends BaseController  {
 	@RequiresPermissions("approval:expensesTravel:add")
 	String formTask(@PathVariable("taskId") String taskId,Model model){
 		//取得流程表单数据
-		ExpensesTravelDO expensesTravelDO = expensesTravelService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+		ExpensesTravelDO expensesTravelDO = expensesTravelService.view(activitiUtils.getBusinessKeyByTaskId(taskId));
 		if(expensesTravelDO!=null){
 			model.addAttribute("expensesTravel", expensesTravelDO);
 			//model.addAttribute("taskId",taskId);
 		}
-		return "approval/expensesTravel/edit";
+		return "approval/expensesTravel/viewExpensesTravel";
 	}
 
 

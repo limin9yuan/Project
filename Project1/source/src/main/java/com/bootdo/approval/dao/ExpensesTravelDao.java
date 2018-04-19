@@ -16,6 +16,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ExpensesTravelDao {
 
+	ExpensesTravelDO view(String expensesTravelId);
+
 	ExpensesTravelDO get(String expensesTravelId);
 	
 	List<ExpensesTravelDO> list(Map<String,Object> map);
