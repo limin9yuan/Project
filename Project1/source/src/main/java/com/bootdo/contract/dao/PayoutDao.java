@@ -17,6 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PayoutDao {
 
+	PayoutDO view(String payoutId);
+
 	PayoutDO get(String payoutId);
 	
 	List<PayoutDO> list(Map<String,Object> map);

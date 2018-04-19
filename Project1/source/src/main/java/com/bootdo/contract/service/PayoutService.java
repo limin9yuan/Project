@@ -17,6 +17,8 @@ import java.util.Map;
  */
 public interface PayoutService {
 
+	PayoutDO view(String payoutId);
+
 	int formUpdate(PayoutDO travel);
 	
 	PayoutDO get(String payoutId);

@@ -65,12 +65,12 @@ public class PayoutController extends BaseController {
 	@RequiresPermissions("contract:payout:add")
 	String formTask(@PathVariable("taskId") String taskId,Model model){
 		//取得流程表单数据
-		PayoutDO payout = payoutService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+		PayoutDO payout = payoutService.view(activitiUtils.getBusinessKeyByTaskId(taskId));
 		if(payout!=null){
 			model.addAttribute("payout", payout);
 			//model.addAttribute("taskId",taskId);
 		}
-		return "contract/payout/edit";
+		return "contract/payout/viewPayout";
 	}
 
 

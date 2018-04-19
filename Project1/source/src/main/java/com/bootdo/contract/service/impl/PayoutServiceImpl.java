@@ -42,6 +42,11 @@ public class PayoutServiceImpl implements PayoutService {
 	private PayoutDao payoutDao;
 	@Autowired
 	private ActTaskServiceImpl actTaskService;
+
+	@Override
+	public PayoutDO view(String payoutId){
+		return payoutDao.get(payoutId);
+	}
 	
 	@Override
 	public PayoutDO get(String payoutId){
