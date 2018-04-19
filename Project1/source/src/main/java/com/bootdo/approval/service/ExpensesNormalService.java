@@ -15,7 +15,9 @@ import java.util.Map;
  * @date 2017-11-28 17:41:01
  */
 public interface ExpensesNormalService {
-	
+
+	ExpensesNormalDO view(String expensesNormal);
+
 	ExpensesNormalDO get(String expensesNormal);
 	
 	List<ExpensesNormalDO> list(Map<String, Object> map);

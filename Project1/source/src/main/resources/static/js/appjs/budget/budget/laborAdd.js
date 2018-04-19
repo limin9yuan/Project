@@ -3,7 +3,6 @@ var prefixlabor = "/budget/labor";
 $().ready(function() {
 	loadCrmData("/inner/innerOrgEmployee/listDic","employeeId");
 	datetimepicker();
-	check();
 	validateRule();
 	//员工级别,时薪计算
 	$("#employeeId").bind("change", setEmployeeLevelSalary);
@@ -321,31 +320,6 @@ function multiDaysCalculate(startDate, endDate) {
 	workDayVal = workDayVal - weekendDay;
 	return workDayVal;
 }
-
-//日期比较
-/*$.validator.addMethod("compareDate",function(value,element,param) {
-	    var startTime=$("#laborBeginTime").val();  
-	    var start=new Date(startTime.replace("-", "/").replace("-", "/"));  
-	    var endTime=$("#laborEndTime").val();  
-	    var end=new Date(endTime.replace("-", "/").replace("-", "/"));  
-	    if(end<start){  
-	        return false;  
-	    }  
-	    return true;  
-	} */ 
-/*               var startDate = $('#laborBeginTime').val();
-               //var endDate = $('#laborEndTime').val();
-               return new Date(Date.parse(startDate.replace("-", "/"))) <= new Date(Date.parse(value.replace("-", "/")));
-           },
-           "结束日期必须大于开始日期!");*/
-function check() {
-    var startTime=$("#laborBeginTime").val();  
-    var start=new Date(startTime.replace("-", "/").replace("-", "/"));  
-    var endTime=$("#laborEndTime").val();  
-    var end=new Date(endTime.replace("-", "/").replace("-", "/"));  
-    if(end<start){  
-        return false;  
-    }  
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
@@ -370,8 +344,7 @@ function validateRule() {
 				required : true
 			},
 			laborEndTime: {
-				required : true,
-				compareDate : "#laborBeginTime"
+				required : true
 			},
 			laborTotalDayNum : {
 				required : true,
@@ -413,8 +386,7 @@ function validateRule() {
 				required : icon + "投入开始时间不能为空"
 			},
 			laborEndTime : {
-				required : icon + "投入结束时间不能为空",
-				compareDate : icon + "结束时间必须大于开始时间",
+				required : icon + "投入结束时间不能为空"
 			},
 			laborTotalDayNum : {
 				required : icon + "请输入合计天数",

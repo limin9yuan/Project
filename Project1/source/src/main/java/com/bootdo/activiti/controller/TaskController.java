@@ -5,6 +5,7 @@ import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.vo.ProcessVO;
 import com.bootdo.activiti.vo.TaskVO;
 import com.bootdo.common.utils.PageUtils;
+import com.bootdo.common.utils.R;
 import com.bootdo.common.utils.ShiroUtils;
 import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.service.UserService;
@@ -24,7 +25,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -107,6 +110,17 @@ public class TaskController {
     	
     	return new ModelAndView("act/task/formComm");
     }
+    
+    @ResponseBody
+    @PostMapping("/claim/{taskId}")
+    public R claim(@PathVariable("taskId") String taskId,Model model) throws IOException {
+    	try{
+	    	taskService.claim(taskId, ShiroUtils.getUser().getUsername());
+	    	return R.ok();
+    	}catch(Exception e){
+    		return R.error();
+    	}
+    }
 
     @GetMapping("/todo")
     ModelAndView todo(){
@@ -115,8 +129,10 @@ public class TaskController {
     //待办列表
     @GetMapping("/todoList")
     List<TaskVO> todoList(){
-        List<Task> tasks = taskService.createTaskQuery().taskAssignee(ShiroUtils.getUser().getUsername()).includeProcessVariables().list();//admin
+        //List<Task> tasks = taskService.createTaskQuery().taskAssignee(ShiroUtils.getUser().getUsername()).includeProcessVariables().list();//admin
+    	List<Task> tasks = taskService.createTaskQuery().taskCandidateOrAssigned(ShiroUtils.getUser().getUsername()).includeProcessVariables().list();//admin
         List<TaskVO> taskVOS =  new ArrayList<>();
+        
         for(Task task : tasks){
             TaskVO taskVO = new TaskVO(task);
          // 获取流程定义

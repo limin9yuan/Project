@@ -20,8 +20,8 @@
 		`Expenses_Travel_ID`,b.Customer_Name as `Customer_ID`,c.Business_Name as `Business_ID`,
 		f.Project_Name as `Project_ID`,
 		g.Employee_Name as `Expenses_Travel_Name`,`Expenses_Travel_Task`,`Expenses_Travel_Allowance`,
-		`Expenses_Travel_Type`,`Expenses_Travel_Price`,h.Travel_Name as `Expenses_Travel_TID`,
-		i.Payout_Person as `Expenses_Travel_PayID`,`Expenses_Travel_Pay_Price`,`Expenses_Travel_Pay_Mode`,
+		`Expenses_Travel_Type`,`Expenses_Travel_Price`,j.Employee_Name as `Expenses_Travel_TID`,
+		m.Employee_Name as `Expenses_Travel_PayID`,`Expenses_Travel_Pay_Price`,`Expenses_Travel_Pay_Mode`,
 		`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,
 		`Expenses_Travel_Status`,`Expenses_Travel_Operator`,`Expenses_Travel_Opt_Time`,
 		`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`
@@ -35,8 +35,14 @@
          		   (select `Project_ID`,`Project_Name` from development_project e
          		   WHERE d.Project_ID = e.Project_ID)) f on a.Project_ID = f.Project_ID
 		LEFT JOIN inner_org_employee g on a.Expenses_Travel_Name = g.Employee_ID
-		LEFT JOIN approval_travel h on a.Expenses_Travel_TID = h.Travel_ID
-		LEFT JOIN approval_payout i on a.Expenses_Travel_PayID = i.Payout_ID
+		LEFT JOIN (SELECT h.Travel_ID, i.Employee_Name
+								FROM approval_travel h
+								LEFT JOIN inner_org_employee i on h.Travel_Name = i.Employee_ID)j
+								on a.Expenses_Travel_TID = j.Travel_ID
+		LEFT JOIN (SELECT k.Payout_ID,l.Employee_Name
+								FROM approval_payout k
+								LEFT JOIN inner_org_employee l on k.Payout_Person = l.Employee_ID) m
+								on a.Expenses_Travel_PayID = m.Payout_ID
 		where Expenses_Travel_ID = #{value}
 	</select>
 

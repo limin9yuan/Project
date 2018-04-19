@@ -42,6 +42,11 @@ public class ExpensesNormalServiceImpl implements ExpensesNormalService {
 	private ExpensesNormalDao expensesNormalDao;
 	@Autowired
 	private ActTaskServiceImpl actTaskService;
+
+	@Override
+	public ExpensesNormalDO view(String expensesNormal){
+		return expensesNormalDao.view(expensesNormal);
+	}
 	
 	@Override
 	public ExpensesNormalDO get(String expensesNormal){

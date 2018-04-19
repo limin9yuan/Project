@@ -1,4 +1,4 @@
-var deptIds;
+//var deptIds;
 $().ready(function() {
 	loadDic("project_delivery_status","deliveryStatus");
 	loadDic("project_if_outSource","ifOutSource");
@@ -10,18 +10,18 @@ $().ready(function() {
 	loadCrmData("/inner/innerOrgEmployee/listDic","projectManager");
 	loadCrmData("/inner/innerOrgEmployee/listDic","projectSales");
 	//loadCrmData("/system/sysDept/listDic","deptId");
-	getProjectMenuTreeData();
+	//getProjectMenuTreeData();
 	validateRule();
 	datetimepicker();
 });
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		getAllSelectNodes();
+		//getAllSelectNodes();
 		save();
 	}
 });
-function getAllSelectNodes() {
+/*function getAllSelectNodes() {
 	var ref = $('#projectMenuTree').jstree(true); // 获得整个树
 
 	deptIds = ref.get_selected(); // 获得所有选中节点的，返回值为数组
@@ -52,9 +52,9 @@ function loadProjectMenuTree(projectMenuTree) {
 	});
 	//$('#menuTree').jstree("open_all");
 
-}
+}*/
 function save() {
-	$('#deptId').val(deptIds);
+	//$('#deptId').val(deptIds);
 	//alert($('#deptId').val());
 	var role = $('#signupForm').serialize();
 	$.ajax({
@@ -75,7 +75,7 @@ function save() {
 				parent.layer.close(index);
 
 			} else {
-				parent.layer.alert(data.msg)
+				parent.layer.alert(data.msg);
 			}
 
 		}
@@ -178,3 +178,54 @@ function datetimepicker() {
 	        locale: moment.locale('zh-cn')  
 	    }); 
 }
+var currentFiled = "";
+var openDept = function(currentFiledparam){
+	currentFiled = currentFiledparam;
+	layer.open({
+		type:2,
+		title:"选择部门",
+		area : [ '300px', '450px' ],
+		content:"/system/sysDept/treeView"
+	})
+}
+function loadDept( deptId,employeeDept){
+	if (currentFiled == "deptId") {
+		$("#deptId").val(deptId);
+		$("#deptName").val(employeeDept);
+	}
+}
+/*function check()  
+{  
+    $.ajax(  
+        {  
+            type:"GET",  
+            url:"/project/project/getId",  
+            data:"username="+$("#username").val(),  
+            dataType:"json",  
+            success:function(data)  
+            {  
+                if(data.result=="1")  
+                {  
+                    alert("用户名可用");  
+                    $("#spaName").html("<font color=green>可以使用</font>");  
+                }else if(data.result=="2")  
+                {  
+                    alert("用户名不可用");  
+                    $("#spaName").html("<font color=red>不可使用</font>");  
+                }  
+            },  
+            error:function()  
+            {  
+                alert("加载失败！");  
+            }  
+        });  
+              
+}  
+function checkN(){  
+    $val = $("#username").attr("value");  
+    if($val == ""){  
+    alert('用户名不能为空');  
+    return false;  
+}  
+    return true;  
+}  */

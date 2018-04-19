@@ -326,9 +326,14 @@ public class ActTaskServiceImpl implements ActTaskService {
       //获取已经执行任务节点
         for (HistoricTaskInstance taskInstance : historicTaskInstanceList) {
         	ActivitiDO task=new ActivitiDO();
-        	user=userService.getByUsername(taskInstance.getAssignee());
-        	task.setAssignee(user.getUsername());
-        	task.setAssigneeName(user.getName());
+        	if(taskInstance.getAssignee()!=null&&!taskInstance.getAssignee().equals("")){
+	        	user=userService.getByUsername(taskInstance.getAssignee());
+	        	task.setAssignee(user.getUsername());
+	        	task.setAssigneeName(user.getName());
+        	}else{
+        		task.setAssignee("");
+	        	task.setAssigneeName("未签收");
+        	}
         	task.setBeginDate(taskInstance.getStartTime());
         	task.setEndDate(taskInstance.getEndTime());
         	if(taskInstance.getDeleteReason()!=null&&taskInstance.getDeleteReason().equals("completed")){

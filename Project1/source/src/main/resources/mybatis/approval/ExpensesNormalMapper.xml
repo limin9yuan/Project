@@ -5,8 +5,38 @@
 
 	<select id="get" resultType="com.bootdo.approval.domain.ExpensesNormalDO">
 		select
-		`Expenses_Normal`,`Customer_ID`,`Business_ID`,`Project_ID`,`Expenses_Normal_Name`,`Expenses_Normal_Reason`,`Expenses_Normal_Price`,`Expenses_Normal_Result`,`Expenses_Normal_RelatedID`,`Expenses_Normal_Rmarks`,`Expenses_Normal_Status`,`Expenses_Normal_Operator`,`Expenses_Normal_Opt_Time`,`Expenses_Normal_Creator`,`Expenses_Normal_Create_Time`
-		from approval_expenses_normal where Expenses_Normal = #{value}
+		`Expenses_Normal`,`Customer_ID`,`Business_ID`,`Project_ID`,
+		`Expenses_Normal_Name`,`Expenses_Normal_Reason`,`Expenses_Normal_Price`,
+		`Expenses_Normal_Result`,`Expenses_Normal_RelatedID`,`Expenses_Normal_Rmarks`,
+		`Expenses_Normal_Status`,`Expenses_Normal_Operator`,`Expenses_Normal_Opt_Time`,
+		`Expenses_Normal_Creator`,`Expenses_Normal_Create_Time`
+		from approval_expenses_normal
+		where Expenses_Normal = #{value}
+	</select>
+
+	<select id="view" resultType="com.bootdo.approval.domain.ExpensesNormalDO">
+		select
+		`Expenses_Normal`,b.Customer_Name as `Customer_ID`,c.Business_Name as `Business_ID`,
+		f.Project_Name as `Project_ID`,
+		g.Employee_Name as `Expenses_Normal_Name`,`Expenses_Normal_Reason`,`Expenses_Normal_Price`,
+		`Expenses_Normal_Result`,k.Employee_Name as `Expenses_Normal_RelatedID`,`Expenses_Normal_Rmarks`,
+		`Expenses_Normal_Status`,`Expenses_Normal_Operator`,`Expenses_Normal_Opt_Time`,
+		`Expenses_Normal_Creator`,`Expenses_Normal_Create_Time`
+		from approval_expenses_normal a
+		LEFT JOIN sales_company_customer b on a.Customer_ID = b.Customer_ID
+		LEFT JOIN sales_business c on a.Business_ID = c.Business_ID
+		left JOIN (SELECT `Project_ID`,`Project_Name` from development_project
+				   UNION ALL
+				   select `Project_ID`,`Project_Name` from pre_sales_project d
+         		   WHERE NOT EXISTS
+         		   (select `Project_ID`,`Project_Name` from development_project e
+         		   WHERE d.Project_ID = e.Project_ID)) f on a.Project_ID = f.Project_ID
+		LEFT JOIN inner_org_employee g on a.Expenses_Normal_Name = g.Employee_ID
+		LEFT JOIN (SELECT i.Payout_ID,j.Employee_Name
+								FROM approval_payout i
+								LEFT JOIN inner_org_employee j on i.Payout_Person = j.Employee_ID) k
+								on a.Expenses_Normal_RelatedID = k.Payout_ID
+		where Expenses_Normal = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.approval.domain.ExpensesNormalDO">

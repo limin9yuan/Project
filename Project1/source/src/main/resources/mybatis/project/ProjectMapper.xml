@@ -193,7 +193,7 @@
 			<if test="ifOutSource != null">`If_OutSource` = #{ifOutSource},</if>
 			<if test="deptId != null">`Dept_ID` = #{deptId}</if>
 		</set>
-		where Project_ID = #{projectRelatedId}
+		where Project_ID = #{projectId}
 	</update>
 	
 	<delete id="remove">

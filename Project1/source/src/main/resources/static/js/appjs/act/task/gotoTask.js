@@ -43,9 +43,7 @@ function load3() {
 				// sortOrder.
 				// 返回false将会终止请求
 				columns : [
-					{
-						checkbox : true
-					},
+					
                     {
                         field : 'id', // 列字段名
                         title : '编号' // 列标题
@@ -72,7 +70,7 @@ function load3() {
 						formatter : function(value, row, index) {
 							var f = '<a class="btn btn-success btn-sm ' + s_resetPwd_h + '" href="#" title="发起任务"  mce_href="#" onclick="form3(\''
 								+ row.id
-								+ '\')"><i class="fa  fa-paper-plane"></i></a> ';
+								+ '\')"><i class="fa  fa-paper-plane"></i> 发起</a> ';
 							return f;
 						}
 					} ]

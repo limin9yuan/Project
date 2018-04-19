@@ -15,9 +15,11 @@ $(function() {
 	
 	
 });
+var tableFinished,tableNotFinished;
 
 function load2() {
-	$('#exampleTable2')
+	if (tableFinished==null){
+		tableFinished=$('#exampleTable2')
 		.bootstrapTable(
 			{
 				method : 'get', // 服务器数据的请求方式 get or post
@@ -56,9 +58,7 @@ function load2() {
 				// sortOrder.
 				// 返回false将会终止请求
 				columns : [
-					{
-						checkbox : true
-					},
+					
                     {
                         field : 'processName', // 列字段名
                         title : '流程名称' // 列标题
@@ -99,14 +99,18 @@ function load2() {
                         	if(row.title!=null)
                         		title=row.title;
                         	var f = '<a class="btn btn-primary btn-sm" href="#" title="查看"  mce_href="#" onclick="taskTrace(\''+row.processId
-								+ '\')">查看<i class="fa"></i></a> ';
+								+ '\')"><i class="fa fa-external-link"></i> 查看</a> ';
                         	return f;
 						}
                     }]
 			});
+	}else{
+		$('#exampleTable2').bootstrapTable('refresh');
+	}
 }
 function load4() {
-	$('#exampleTable4')
+	if(tableNotFinished==null){
+		tableNotFinished=$('#exampleTable4')
 		.bootstrapTable(
 			{
 				method : 'get', // 服务器数据的请求方式 get or post
@@ -145,9 +149,7 @@ function load4() {
 				// sortOrder.
 				// 返回false将会终止请求
 				columns : [
-					{
-						checkbox : true
-					},
+					
                     {
                         field : 'processName', // 列字段名
                         title : '流程名称' // 列标题
@@ -188,11 +190,14 @@ function load4() {
                         	if(row.title!=null)
                         		title=row.title;
                         	var f = '<a class="btn btn-primary btn-sm" href="#" title="查看"  mce_href="#" onclick="taskTrace(\''+row.processId
-								+ '\')">查看<i class="fa"></i></a> ';
+								+ '\')"><i class="fa fa-external-link"></i> 查看</a> ';
                         	return f;
 						}
                     }]
 			});
+	}else{
+		$('#exampleTable4').bootstrapTable('refresh');
+	}
 }
 
 function taskTrace(processInstanceId){

@@ -12,6 +12,7 @@ function load() {
 				// showRefresh : true,
 				// showToggle : true,
 				// showColumns : true,
+	
 				iconSize : 'outline',
 				toolbar : '#exampleToolbar',
 				striped : true, // 设置为true会有隔行变色效果
@@ -22,7 +23,7 @@ function load() {
 				singleSelect : false, // 设置为true将禁止多选
 				// contentType : "application/x-www-form-urlencoded",
 				// //发送到服务器的数据编码类型
-				pageSize : 10, // 如果设置了分页，每页数据条数
+				pageSize : 20, // 如果设置了分页，每页数据条数
 				pageNumber : 1, // 如果设置了分布，首页页码
 				// search : true, // 是否显示搜索框
 				showColumns : false, // 是否显示内容下拉框（选择显示的列）
@@ -72,7 +73,7 @@ function load() {
                         	//return '<a href="/activiti/task/trace/photo/'+row.processDefinitionId+'/'+row.executionId+'">跟踪</a>';
                         	var f = '<a class="btn btn-primary btn-sm " href="#" title="跟踪"  mce_href="#" onclick="taskTrace(\''
 								+ +row.processId
-								+ '\')">跟踪<i class="fa"></i></a> ';
+								+ '\')"><i class="fa fa-external-link"></i> 跟踪</a> ';
                         	return f;
 						}
                     },
@@ -81,11 +82,18 @@ function load() {
 						field : 'id',
 						align : 'center',
 						formatter : function(value, row, index) {
-
-							var f = '<a class="btn btn-primary btn-sm " href="#" title="签收任务"  mce_href="#" onclick="form(\''
-								+ row.processDefinitionId+'\',\''+row.id
-								+ '\')">审批<i class="fa fa-key"></i></a> ';
-							return f;
+							//console.log(row.assignee);
+							if(row.assignee==null){
+								var f = '<a class="btn btn-warning btn-sm " href="#" title="签收任务"  mce_href="#" onclick="claim(\''
+									+row.id
+									+ '\')"><i class="fa fa-hand-pointer-o"></i> 签收</a> ';
+								return f;
+							}else{
+								var f = '<a class="btn btn-primary btn-sm " href="#" title="办理任务"  mce_href="#" onclick="form(\''
+									+ row.processDefinitionId+'\',\''+row.id
+									+ '\')"><i class="fa fa-user"></i> 办理</a> ';
+								return f;
+							}
 						}
 					} ]
 			});
@@ -93,7 +101,7 @@ function load() {
 //刷新数据
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
-	$('#exampleTable2').bootstrapTable('refresh');
+	//$('#exampleTable2').bootstrapTable('refresh');
 }
 function add() {
 	// iframe层
@@ -164,6 +172,29 @@ function form(proId,id) {
         	reLoad();
         }
     })
+}
+
+function claim(id) {
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : prefix+"/claim/"+id,
+		data : {},// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("签收成功");
+				reLoad();
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
 }
 
 function batchRemove() {

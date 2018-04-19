@@ -1,13 +1,13 @@
 
 var prefix = "/project/project"
 $(function() {
-	var projectId = '';
+	//var projectId = '';
 	getTreeData();
-	load(projectId);
+	load();
 });
 
-function load(projectId) {
-	console.log("数据加载");
+function load() {
+	//console.log("数据加载");
 	$('#exampleTable')
 			.bootstrapTable(
 					{

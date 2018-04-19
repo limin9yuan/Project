@@ -46,9 +46,7 @@ function load2() {
 				// sortOrder.
 				// 返回false将会终止请求
 				columns : [
-					{
-						checkbox : true
-					},
+					
                     {
                         field : 'assigneeName', // 列字段名
                         title : '人员' // 列标题

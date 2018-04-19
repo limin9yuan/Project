@@ -34,6 +34,7 @@ import javax.servlet.ServletOutputStream;
 import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.utils.BuildTree;
+import com.bootdo.common.utils.Query;
 import com.bootdo.project.dao.ProjectDao;
 import com.bootdo.project.dao.ProjectDeptDao;
 import com.bootdo.project.domain.ProjectDO;
@@ -77,7 +78,8 @@ public class ProjectServiceImpl implements ProjectService {
 		String[] arrayDept = deptids.split(",");
 		for(int i=0;i<arrayDept.length;i++){
 			ProjectDeptDO projectDept = new ProjectDeptDO();
-			projectDept.setProjectId(project.getProjectId());
+			//projectDept.setProjectId(project.getProjectId());
+			projectDept.setProjectId(project.getProjectRelatedId());
 			projectDept.setDeptId(arrayDept[i]);
 			projectDept.setOperateTime(new Date());
 			projectDept.setOperator(project.getProjectOperator());
@@ -91,7 +93,22 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public int update(ProjectDO project){
-		return projectDao.update(project);
+		
+		String deptids = project.getDeptId();
+		String[] arrayDept = deptids.split(",");
+		for(int i=0;i<arrayDept.length;i++){
+			ProjectDeptDO projectDept = new ProjectDeptDO();
+			//projectDept.setProjectId(project.getProjectId());
+			projectDept.setProjectId(project.getProjectId());
+			projectDept.setDeptId(arrayDept[i]);
+			projectDept.setOperateTime(new Date());
+			projectDept.setOperator(project.getProjectOperator());
+			projectDeptDao.update(projectDept);
+			//arrayDept[i];
+		}
+		int r = projectDao.update(project);
+		return r;
+		//return projectDao.update(project);
 	}
 	
 	@Override

@@ -185,12 +185,12 @@ public class ExpensesNormalController extends BaseController {
 	@RequiresPermissions("approval:expensesNormal:add")
 	String formTask(@PathVariable("taskId") String taskId,Model model){
 		//取得流程表单数据
-		ExpensesNormalDO expensesNormalDO = expensesNormalService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+		ExpensesNormalDO expensesNormalDO = expensesNormalService.view(activitiUtils.getBusinessKeyByTaskId(taskId));
 		if(expensesNormalDO!=null){
 			model.addAttribute("expensesNormal", expensesNormalDO);
 			//model.addAttribute("taskId",taskId);
 		}
-		return "/approval/expensesNormal/edit";
+		return "/approval/expensesNormal/viewExpensesNormal";
 	}
 
 

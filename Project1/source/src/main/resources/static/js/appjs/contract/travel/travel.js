@@ -79,7 +79,7 @@ function load() {
 												+ '\')"><i class="fa fa-remove"></i></a> ';
 										var f = '<a class="btn btn-success btn-sm" href="#" title="跟踪流程"  mce_href="#" onclick="taskTrace(\''
 											+ +row.processInstanceId
-												+ '\')"><i class="fa fa-search"></i></a> ';
+												+ '\')"><i class="fa fa-external-link"></i></a> ';
 										return  a + e + d +f;
 									}
 								} ,

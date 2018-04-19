@@ -1,6 +1,7 @@
 package com.bootdo.project.controller;
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -144,6 +145,19 @@ public class ProjectController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("project:project:add")
 	public R save(ProjectDO project) {
+		Map<String, Object> params = new HashMap<>(16);
+		params.put("projectId", project.getProjectRelatedId());
+		params.put("offset", 10);
+		params.put("page", 1);
+		params.put("limit", 10);
+		Query query = new Query(params);
+		
+		int total = projectService.count(query);
+		
+		if(total>0){
+			return R.error("项目编号已存在，请重新选择关联项目。");
+			
+		}
 		project.setProjectCreator(getUserId());
 
 		project.setProjectOperator(getUserId());
@@ -160,10 +174,16 @@ public class ProjectController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("project:project:edit")
 	public R update(ProjectDO project) {
+		
+		project.setProjectCreator(getUserId());
+
 		project.setProjectOperator(getUserId());
-		projectService.update(project);
-		return R.ok();
-	}
+		if (projectService.update(project) > 0) {
+			return R.ok();
+		}
+		return R.error();
+	//return projectDao.update(project);
+}
 
 	/**
 	 * 删除

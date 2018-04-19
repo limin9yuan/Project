@@ -11,45 +11,17 @@
 						<form class="form-horizontal m-t" id="signupForm">
 						<!--  <input id="Project_ID" name="Project_ID" th:value="${project.Project_ID}"  type="hidden">
 						-->
-						<input id="project" name="project" th:value="${projectId}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectName}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectRelatedId}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${customerId}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectOwner}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectManager}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectGategory}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectSales}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${deliveryStatus}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${ContractCenterratio}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectBeginDate}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectEndDate}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectPhase}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${fllowType}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectOldId}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${ifOutSource}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectDescription}" class="form-control" type="text" type="hidden">
-						<input id="project" name="project" th:value="${projectRemarks}" class="form-control" type="text" type="hidden">
+						<input id="projectId" name="projectId" th:value="${projectId}" class="form-control" type="text" type="hidden">
 							<div class="form-group">	
 								<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 									<input id="projectName" name="projectName" class="form-control" type="text">
 								</div>
-								<label class="col-sm-3 control-label">关联售前项目：</label>
-								<div class="col-sm-3">
-								    <select data-placeholder="请选择" name="projectRelatedId" id="projectRelatedId"
-										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-										<option value="">请选择</option>  
-									</select>
-								</div>	
-							</div>
-							<div class="form-group">	
 								<label class="col-sm-3 control-label">客户名称：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 								    <select data-placeholder="请选择" name="customerId" id="customerId"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
-										<option value="">请选择</option>  
 									</select>
 								</div>
 							</div>
@@ -58,8 +30,7 @@
 								<div class="col-sm-3">
 								    <select data-placeholder="请选择" name="projectOwner" id="projectOwner"
 										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-										<option value="">请选择</option>  
+										style="width: 100%"> 
 									</select>
 								</div>
 								<label class="col-sm-3 control-label">研发经理：<span class="mustin">*</span></label>
@@ -67,7 +38,6 @@
 								    <select data-placeholder="请选择" name="projectManager" id="projectManager"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
-										<option value="">请选择</option>  
 									</select>
 								</div>
 							</div>					
@@ -77,15 +47,13 @@
 								    <select data-placeholder="请选择" name="projectGategory" id="projectGategory"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
-										<option value="">请选择</option>  
 									</select>
 								</div>
 								<label class="col-sm-3 control-label">销售负责人：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 								    <select data-placeholder="请选择" name="projectSales" id="projectSales"
 										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-										<option value="">请选择</option>  
+										style="width: 100%"> 
 									</select>
 								</div>
 							</div>
@@ -95,7 +63,6 @@
 								    <select data-placeholder="请选择" name="deliveryStatus" id="deliveryStatus"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
-										<option value="">请选择</option>  
 									</select>
 								</div>
 							</div>
@@ -135,8 +102,7 @@
 								<div class="col-sm-3">
 								    <select data-placeholder="请选择" name="fllowType" id="fllowType"
 										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-										<option value="">请选择</option>  
+										style="width: 100%"> 
 									</select>
 								</div>
 							</div>
@@ -150,7 +116,6 @@
 								    <select data-placeholder="请选择" name="ifOutSource" id="ifOutSource"
 									 class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
-										<option value="">请选择</option>  
 									</select>
 								</div>
 							</div>	
@@ -169,19 +134,26 @@
 								</div>
 							</div>
 							<div class="form-group">	
-							<label class="col-sm-3 control-label">部门名称：</label>
+							<!--  <label class="col-sm-3 control-label">部门名称：</label>
 								<div class="col-sm-9">
 									<div id="projectMenuTree"></div>
-								</div>
+								</div>-->
+							<label class="col-sm-3 control-label">部门名称：</label>
+								<div class="col-sm-3">
+									<input id="deptId" name="deptId" class="hidden"> <input
+										id="deptName" name="deptName" class="form-control" type="text"
+										style="cursor: pointer;" onclick="openDept('deptId')"
+										readonly="readonly" placeholder="部门名称">
+							</div>
 							</div>		
-							 <div class="form-group">
-								 <div class="columns pull-right col-md-2">
+							<div class="form-group">	
+								   <div class="columns pull-right col-md-2">
 										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
 								   </div>
 								   <div class="columns pull-right col-md-2">
 										<button type="submit" class="btn btn-primary columns" >提交</button>
-								</div>
-							</div>				
+								  </div>
+							 </div>					
 							
 								<!-- 				<div class="form-group">	
 								<label class="col-sm-3 control-label">项目集合编号：</label>

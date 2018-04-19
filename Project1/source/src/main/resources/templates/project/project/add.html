@@ -9,7 +9,7 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">	
-						<input id="deptId" name="deptId" type="hidden">
+						<!--  <input id="deptId" name="deptId" type="hidden">-->
 							<div class="form-group">	
 								<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
@@ -20,7 +20,6 @@
 								    <select data-placeholder="请选择" name="projectRelatedId" id="projectRelatedId"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
-										<option value="">请选择</option>  
 									</select>
 								</div>	
 							</div>
@@ -30,7 +29,6 @@
 								    <select data-placeholder="请选择" name="customerId" id="customerId"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
-										<option value="">请选择</option>  
 									</select>
 								</div>		
 							</div>
@@ -39,16 +37,14 @@
 								<div class="col-sm-3">
 								    <select data-placeholder="请选择" name="projectOwner" id="projectOwner"
 										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-										<option value="">请选择</option>  
+										style="width: 100%"> 
 									</select>
 								</div>
 								<label class="col-sm-3 control-label">研发经理：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 								    <select data-placeholder="请选择" name="projectManager" id="projectManager"
 										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-										<option value="">请选择</option>  
+										style="width: 100%"> 
 									</select>
 								</div>
 							</div>					
@@ -57,16 +53,14 @@
 								<div class="col-sm-3">
 								    <select data-placeholder="请选择" name="projectGategory" id="projectGategory"
 										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-										<option value="">请选择</option>  
+										style="width: 100%"> 
 									</select>
 								</div>
 								<label class="col-sm-3 control-label">销售负责人：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 								    <select data-placeholder="请选择" name="projectSales" id="projectSales"
 										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-										<option value="">请选择</option>  
+										style="width: 100%"> 
 									</select>
 								</div>
 							</div>
@@ -75,8 +69,7 @@
 								<div class="col-sm-3">
 								    <select data-placeholder="请选择" name="deliveryStatus" id="deliveryStatus"
 										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-										<option value="">请选择</option>  
+										style="width: 100%"> 
 									</select>
 								</div>
 							</div>
@@ -116,7 +109,6 @@
 								    <select data-placeholder="请选择" name="fllowType" id="fllowType"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
-										<option value="">请选择</option>  
 									</select>
 								</div>
 							</div>
@@ -130,7 +122,6 @@
 								    <select data-placeholder="请选择" name="ifOutSource" id="ifOutSource"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
-										<option value="">请选择</option>  
 									</select>
 								</div>
 							</div>	
@@ -147,9 +138,17 @@
 								</div>
 							</div>
 							<div class="form-group">	
-							<label class="col-sm-3 control-label">部门名称：</label>
+								<!--<label class="col-sm-3 control-label">部门名称：</label>
 								<div class="col-sm-9">
 									<div id="projectMenuTree"></div>
+								</div>-->
+							
+							<label class="col-sm-3 control-label">部门名称：</label>
+								<div class="col-sm-3">
+									<input id="deptId" name="deptId" class="hidden"> <input
+										id="deptName" name="deptName" class="form-control" type="text"
+										style="cursor: pointer;" onclick="openDept('deptId')"
+										readonly="readonly" placeholder="部门名称">
 								</div>
 							</div>			
 														
@@ -192,14 +191,14 @@
 							</div>
 														
 								-->
-								<div class="form-group">
-							         <div class="columns pull-right col-md-2">
+								<div class="form-group">	
+								   <div class="columns pull-right col-md-2">
 										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
 								   </div>
 								   <div class="columns pull-right col-md-2">
 										<button type="submit" class="btn btn-primary columns" >提交</button>
-								</div>
-							</div>							
+								  </div>
+							 </div>							
 						</form>
 					</div>
 				</div>

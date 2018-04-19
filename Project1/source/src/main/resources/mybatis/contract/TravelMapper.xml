@@ -180,8 +180,9 @@
 		</foreach>
 	</delete>
 	<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
-		select `Travel_ID` value,concat(`Travel_ID`,' ',`Travel_Name`) name
-		from approval_travel
+		select `Travel_ID` value,concat(`Travel_ID`,' ',b.Employee_Name) name
+		from approval_travel a
+		LEFT JOIN inner_org_employee b on a.Travel_Name = b.Employee_ID
 	</select>
 
 </mapper>

@@ -2,7 +2,8 @@ $().ready(function() {
 	$('#btnSubmit').attr('disabled',"true");
 	document.getElementById('frame_form').onload=function(){
 		//console.log($(frame_form.window.document).find("button"));
-		$(frame_form.window.document).find("button[type='submit']").hide();
+		//$(frame_form.window.document).find("button[type='submit']").hide();
+		$(frame_form.window.document).find("button").hide();
 		$('#btnSubmit').removeAttr("disabled"); 
 	};
 	

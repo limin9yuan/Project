@@ -1,6 +1,6 @@
 var prefixproject = "/project/project"
 $().ready(function() {
-	getProjectMenuTreeData();
+	//getProjectMenuTreeData();
 	validateRule();
 	datetimepicker();
 	projectMapper_edit();
@@ -9,51 +9,15 @@ $().ready(function() {
 
 $.validator.setDefaults({
 	submitHandler : function() {
-		getAllSelectNodes();
-		save();
+		update();
 	}
 });
-function getAllSelectNodes() {
-	var ref = $('#projectMenuTree').jstree(true); // 获得整个树
-
-	deptIds = ref.get_selected(); // 获得所有选中节点的，返回值为数组
-	//alert(deptIds);
-
-	$("#projectMenuTree").find(".jstree-undetermined").each(function(i, element) {
-		deptIds.push($(element).closest('.jstree-node').attr("id"));
-	});
-}
-function getProjectMenuTreeData() {
-	$.ajax({
-		type : "GET",
-		url : "/system/sysDept/tree",
-		success : function(projectMenuTree) {
-			loadProjectMenuTree(projectMenuTree);
-		}
-	});
-}
-function loadProjectMenuTree(projectMenuTree) {
-	$('#projectMenuTree').jstree({
-		'core' : {
-			'data' : projectMenuTree
-		},
-		"checkbox" : {
-			"three_state" : true,
-		},
-		"plugins" : [ "wholerow", "checkbox" ]
-	});
-	//$('#menuTree').jstree("open_all");
-
-}
-function save() {
-	$('#deptIds').val(deptIds);
-	var role = $('#signupForm').serialize();
+function update() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/project/project/save",
-		data : role, // 你的formid
-		//data : $('#signupForm').serialize(),// 你的formid
+		url : "/project/project/update",
+		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -172,10 +136,10 @@ function datetimepicker() {
 //修改——显示数据绑定
 function projectMapper_edit(){
 	$.ajax({
-		url : prefixproject + '/edit_ajax/' + $("#project").val(),
+		url : prefixproject + '/edit_ajax/' + $("#projectId").val(),
 		type : "get",
 		data : {
-			'projectId' : $("#project").val(),
+			'projectId' : $("#projectId").val(),
 		},
 		success : function(data) {
 			var result = data.project;
@@ -188,6 +152,7 @@ function projectMapper_edit(){
 			$("input[name='projectOldId']").val(result.projectOldId);
 			$("textarea[name='projectDescription']").val(result.projectDescription);
 			$("textarea[name='projectRemarks']").val(result.projectRemarks);
+			$("input[name='deptId']").val(result.deptId);
 
 			loadDicValue("project_delivery_status","deliveryStatus",result.deliveryStatus);
 			loadDicValue("project_if_outSource","ifOutSource",result.ifOutSource);
@@ -201,4 +166,20 @@ function projectMapper_edit(){
 			//loadCrmDataValue("/system/sysDept/listDic","deptId",result.deptId);
 		}
 	});
+}
+var currentFiled = "";
+var openDept = function(currentFiledparam){
+	currentFiled = currentFiledparam;
+	layer.open({
+		type:2,
+		title:"选择部门",
+		area : [ '300px', '450px' ],
+		content:"/system/sysDept/treeView"
+	})
+}
+function loadDept( deptId,employeeDept){
+	if (currentFiled == "deptId") {
+		$("#deptId").val(deptId);
+		$("#deptName").val(employeeDept);
+	}
 }
