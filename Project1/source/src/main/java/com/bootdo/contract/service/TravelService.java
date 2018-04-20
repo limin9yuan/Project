@@ -14,7 +14,9 @@ import java.util.Map;
  * @date 2017-11-30 17:44:01
  */
 public interface TravelService {
-	
+
+	TravelDO view(String travelId);
+
 	TravelDO get(String travelId);
 	
 	List<TravelDO> list(Map<String, Object> map);

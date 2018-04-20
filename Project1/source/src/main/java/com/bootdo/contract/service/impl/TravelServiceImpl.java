@@ -26,6 +26,11 @@ public class TravelServiceImpl implements TravelService {
 	private ActTaskServiceImpl actTaskService;
 	@Autowired
 	private InnerOrgEmployeeService innerOrgEmployeeService;
+
+	@Override
+	public TravelDO view(String travelId){
+		return travelDao.view(travelId);
+	}
 	
 	@Override
 	public TravelDO get(String travelId){

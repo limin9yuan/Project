@@ -17,6 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TravelDao {
 
+	TravelDO view(String travelId);
+
 	TravelDO get(String travelId);
 	
 	List<TravelDO> list(Map<String,Object> map);

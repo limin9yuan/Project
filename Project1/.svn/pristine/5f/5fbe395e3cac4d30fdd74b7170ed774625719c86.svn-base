@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<input id="travelId" name="travelId"
+								th:value="${travel.travelId}" type="hidden">
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>企业客户编号：</label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="customerId"
+										id="customerId" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+										<option value="">请选择</option>
+									</select>
+								</div>
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>业务编号：</label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="businessId"
+										id="businessId" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+										<option value="">请选择</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>项目编号：</label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="projectId" id="projectId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">请选择</option>
+									</select>
+								</div>
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>出差人姓名：</label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="travelName"
+										id="travelName" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+										<option value="">请选择</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>出发地：</label>
+								<div class="col-sm-4">
+									<input id="travelPlaceIssue" name="travelPlaceIssue"
+										class="form-control" type="text">
+								</div>
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>目的地：</label>
+								<div class="col-sm-4">
+									<input id="travelPlaceEnded" name="travelPlaceEnded"
+										class="form-control" type="text">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">同行人：</label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="travelPartner"
+										id="travelPartner" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+										<option value="">请选择</option>
+									</select>
+								</div>
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>拟出差时间：</label>
+								<div class="col-sm-4">
+									<div class="input-group date" id="travelDepartureDate">
+										<input class="form-control" type="text"
+											name="travelDepartureDate"> <span
+											class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>拟返程时间：</label>
+								<div class="col-sm-4">
+									<div class="input-group date" id="travelReturnDate">
+										<input class="form-control" type="text"
+											name="travelReturnDate"> <span
+											class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>预计费用类别：</label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="travelPlanCostType"
+										id="travelPlanCostType" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+										<option value="">请选择</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>预计交通方式：</label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="travelVisitMode"
+										id="travelVisitMode" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+										<option value="">请选择</option>
+									</select>
+								</div>
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>计划任务信息：</label>
+								<div class="col-sm-4">
+									<input id="travelPlanTask" name="travelPlanTask"
+										class="form-control" type="text">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>实际完成结果：</label>
+								<div class="col-sm-4">
+									<label class="radio-inline"> <input type="radio"
+										name="travelActualPerformance" value="1" /> 完成
+									</label> <label class="radio-inline"> <input type="radio"
+										name="travelActualPerformance" value="0" checked="checked" />
+										未完成
+									</label>
+								</div>
+
+
+								<label class="col-sm-2 control-label">未完成原因：</label>
+								<div class="col-sm-4">
+									<input id="travelUncompletedCause"
+										name="travelUncompletedCause" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label"><span
+									class="mustin">*&nbsp;</span>出差任务确认：</label>
+								<div class="col-sm-4">
+									<label class="radio-inline"> <input type="radio"
+										name="travelTaskConfirm" value="1" /> 完成
+									</label> <label class="radio-inline"> <input type="radio"
+										name="travelTaskConfirm" value="0" checked="checked" /> 未完成
+									</label>
+								</div>
+							</div>
+							<!--
+														<div class="form-group">
+								<label class="col-sm-2 control-label">操作人：</label>
+								<div class="col-sm-4">
+									<input id="travelOperator" name="travelOperator" class="form-control" type="text">
+								</div>
+								<label class="col-sm-2 control-label">修改时间：</label>
+								<div class="col-sm-4">
+									<input id="travelOperateTime" name="travelOperateTime" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-2 control-label">创建人：</label>
+								<div class="col-sm-4">
+									<input id="travelCreator" name="travelCreator" class="form-control" type="text">
+								</div>
+								<label class="col-sm-2 control-label">创建时间：</label>
+								<div class="col-sm-4">
+									<input id="travelCreateTime" name="travelCreateTime" class="form-control" type="text">
+								</div>
+							</div>
+											-->
+
+							<div class="form-group modal-footer">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+									<button type="button" class="btn btn-danger"
+										onclick="closeWin()">取消</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/contract/travel/edit.js">
+
+	</script>
+</body>
+</html>

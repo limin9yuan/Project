@@ -1,14 +1,14 @@
 var prefix="/contract/travel"
 $().ready(function() {
-	 $('#travelDepartureDate').datetimepicker({  
-         format: 'YYYY-MM-DD',  
-         locale: moment.locale('zh-cn')  
+	 $('#travelDepartureDate').datetimepicker({
+         format: 'YYYY-MM-DD',
+         locale: moment.locale('zh-cn')
      });
-	 $('#travelReturnDate').datetimepicker({  
-         format: 'YYYY-MM-DD',  
-         locale: moment.locale('zh-cn')  
+	 $('#travelReturnDate').datetimepicker({
+         format: 'YYYY-MM-DD',
+         locale: moment.locale('zh-cn')
      });
-	 
+
 	 travel_edit();
 	validateRule();
 });
@@ -158,7 +158,7 @@ function travel_edit() {
 			// 业务编号--下拉框
 			 loadCrmDataValue("/sales/business/listDic","businessId",result.businessId);
 			// 项目编号--下拉框
-			 loadCrmDataValue("/sales/salesProject/listDic","projectId",result.projectId);
+			 loadCrmDataValue("/sales/salesProject/listAllDic","projectId",result.projectId);
 			// 出差人姓名--下拉框
 			 loadCrmDataValue("/inner/innerOrgEmployee/listDic","travelName",result.travelName);
 			// 出发地--文本框

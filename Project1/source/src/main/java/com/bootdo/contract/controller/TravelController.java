@@ -161,12 +161,12 @@ public class TravelController extends BaseController {
 	@RequiresPermissions("contract:travel:add")
 	String formTask(@PathVariable("taskId") String taskId,Model model){
 		//取得流程表单数据
-		TravelDO travel = travelService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+		TravelDO travel = travelService.view(activitiUtils.getBusinessKeyByTaskId(taskId));
 		if(travel!=null){
 			model.addAttribute("travel", travel);
 			//model.addAttribute("taskId",taskId);
 		}
-	    return "contract/travel/edit";
+	    return "contract/travel/viewTravel";
 	}
 	
 	

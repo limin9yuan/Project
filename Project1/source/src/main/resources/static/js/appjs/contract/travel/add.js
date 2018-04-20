@@ -2,7 +2,7 @@ $().ready(function() {
 
 	loadCrmData("/sales/companyCustomer/listDic", "customerId");
 	loadCrmData("/sales/business/listDic", "businessId");
-	loadCrmData("/sales/salesProject/listDic", "projectId");
+	loadCrmData("/sales/salesProject/listAllDic", "projectId");
 	loadDic("sales_customer_visit_Mode", "travelVisitMode");
 	loadDic("Travel_Plan_Cost_Type", "travelPlanCostType");
 	loadCrmData("/inner/innerOrgEmployee/listDic", "travelName");

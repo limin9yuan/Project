@@ -4,7 +4,27 @@
 <mapper namespace="com.bootdo.contract.dao.TravelDao">
 
 	<select id="get" resultType="com.bootdo.contract.domain.TravelDO">
-		select `Travel_ID`,`Customer_ID`,`Project_ID`,`Business_ID`,`Travel_Name`,`Travel_Place_Issue`,`Travel_Place_Ended`,`Travel_Partner`,`Travel_Departure_Date`,`Travel_Return_Date`,`Travel_Plan_Cost_Type`,`Travel_Visit_Mode`,`Travel_Plan_Task`,`Travel_Actual_Performance`,`Travel_Uncompleted_Cause`,`Travel_Task_Confirm`,`Travel_Approval_Status`,`Travel_Operator`,`Travel_Operate_Time`,`Travel_Creator`,`Travel_Create_Time` from approval_travel where Travel_ID = #{value}
+		select `Travel_ID`,`Customer_ID`,`Project_ID`,`Business_ID`,
+		`Travel_Name`,`Travel_Place_Issue`,`Travel_Place_Ended`,
+		`Travel_Partner`,`Travel_Departure_Date`,`Travel_Return_Date`,
+		`Travel_Plan_Cost_Type`,`Travel_Visit_Mode`,`Travel_Plan_Task`,
+		`Travel_Actual_Performance`,`Travel_Uncompleted_Cause`,
+		`Travel_Task_Confirm`,`Travel_Approval_Status`,`Travel_Operator`,
+		`Travel_Operate_Time`,`Travel_Creator`,`Travel_Create_Time`
+		from approval_travel
+		where Travel_ID = #{value}
+	</select>
+
+	<select id="view" resultType="com.bootdo.contract.domain.TravelDO">
+		select `Travel_ID`,`Customer_ID`,`Project_ID`,`Business_ID`,
+		`Travel_Name`,`Travel_Place_Issue`,`Travel_Place_Ended`,
+		`Travel_Partner`,`Travel_Departure_Date`,`Travel_Return_Date`,
+		`Travel_Plan_Cost_Type`,`Travel_Visit_Mode`,`Travel_Plan_Task`,
+		`Travel_Actual_Performance`,`Travel_Uncompleted_Cause`,
+		`Travel_Task_Confirm`,`Travel_Approval_Status`,`Travel_Operator`,
+		`Travel_Operate_Time`,`Travel_Creator`,`Travel_Create_Time`
+		from approval_travel
+		where Travel_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.contract.domain.TravelDO">
