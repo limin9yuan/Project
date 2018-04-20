@@ -14,4 +14,5 @@ public class ActivitiConstant {
     public static final String[] ACTIVITI_EXPENSES_TRAVEL = new String[]{"expensesTravel", "expenses_travel"};
     public static final String[] ACTIVITI_BUDGET = new String[]{"budget", "budget"};
     public static final String[] ACTIVITI_PAYOUT = new String[]{"payout", "payout"};
+    public static final String[] ACTIVITI_TIMESHEET = new String[]{"timeSheet","timeSheet"};
 }

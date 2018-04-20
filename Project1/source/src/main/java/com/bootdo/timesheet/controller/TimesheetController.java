@@ -2,7 +2,8 @@ package com.bootdo.timesheet.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+import com.bootdo.common.utils.ShiroUtils;
+import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.approval.domain.AssignmentDO;
 import com.bootdo.common.domain.DictDO;
 import com.bootdo.project.domain.ProjectDO;
@@ -22,14 +23,14 @@ import com.bootdo.timesheet.service.TimesheetService;
 import com.bootdo.approval.service.AssignmentService;
 import com.bootdo.common.controller.BaseController;
 
-import java.text.SimpleDateFormat;
+
 import java.util.Calendar;
 
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
-
-
+import org.activiti.engine.task.Task;
+import org.activiti.engine.TaskService;
 /**
  * 工时信息表
  * 
@@ -48,7 +49,48 @@ public class TimesheetController extends BaseController {
 	private AssignmentService assignmentService;
 	@Autowired
 	private ProjectService projectService;
-	
+	@Autowired
+	TaskService taskService;
+
+	@Autowired
+	ActivitiUtils activitiUtils;
+	/**
+	 * ********************** 审批流程相关  *********************************
+	 */
+	//申请页面
+	@GetMapping("/form")
+	@RequiresPermissions("timesheet:timesheet:add")
+	String form(){
+		return "timesheet/timesheet/add";
+	}
+	//审批处理页面
+	@GetMapping("/form/{taskId}")
+	@RequiresPermissions("timesheet:timesheet:add")
+	String formTask(@PathVariable("taskId") String taskId,Model model){
+		//取得流程表单数据
+		TimesheetDO timesheet = timesheetService.view(activitiUtils.getBusinessKeyByTaskId(taskId));
+		if(timesheet!=null){
+			model.addAttribute("timesheet", timesheet);
+			//model.addAttribute("taskId",taskId);
+		}
+		return "timesheet/timesheet/viewTimeSheet";
+	}
+
+
+	//审批处理保存
+	@ResponseBody
+	@RequestMapping("/form/update")
+	@RequiresPermissions("timesheet:timesheet:edit")
+	public R formUpdate( TimesheetDO timesheet){
+
+		timesheetService.formUpdate(timesheet);
+		return R.ok();
+	}
+
+
+
+
+
 	@GetMapping()
 	@RequiresPermissions("timesheet:timesheet:timesheet")
 	String Timesheet(Model model){
@@ -111,68 +153,70 @@ public class TimesheetController extends BaseController {
 
 		return "timesheet/timesheet/timesheet";
 	}
-//	@GetMapping()
-//	@RequiresPermissions("timesheet:timesheet:timesheetapprove")
-//	String Timesheetapprove(Model model){
-//		SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM-dd");//日期方法
-//
-//		Calendar cal = Calendar.getInstance();
-//		String date8=simdf.format(cal.getTime());
-//
-//
-//		cal.set(cal.DAY_OF_WEEK, cal.MONDAY);
-//		String date11 = simdf.format(cal.getTime());
-//		java.sql.Date date1=java.sql.Date.valueOf(date11);
-//
-//
-//		Date date=new Date();
-//		cal.add(cal.DATE,+1);
-//		date=cal.getTime();
-//		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-//		String date2 = formatter.format(date);
-//
-//
-//		cal.add(cal.DATE,+1);
-//		date=cal.getTime();
-//		String date3 = formatter.format(date);
-//
-//
-//		cal.add(cal.DATE,+1);
-//		date=cal.getTime();
-//		String date4 = formatter.format(date);
-//
-//
-//		cal.add(cal.DATE,+1);
-//		date=cal.getTime();
-//		String date5 = formatter.format(date);
-//
-//
-//		cal.add(cal.DATE,+1);
-//		date=cal.getTime();
-//		String date6 = formatter.format(date);
-//
-//		cal.add(cal.DATE,+1);
-//		date=cal.getTime();
-//		String date7 = formatter.format(date);
-//
-//
-//
-//		model.addAttribute("Date1", date1);
-//		model.addAttribute("Date2", date2);
-//		model.addAttribute("Date3", date3);
-//		model.addAttribute("Date4", date4);
-//		model.addAttribute("Date5", date5);
-//		model.addAttribute("Date6", date6);
-//		model.addAttribute("Date7", date7);
-//		model.addAttribute("Date8", date8);
-//
-//
-//
-//
-//
-//
-//		return "timesheet/timesheet/timesheetapprove";
-//	}
+
+
+	@GetMapping("/approvetimesheet")
+	@RequiresPermissions("timesheet:timesheet:approvetimesheet")
+	String Approvetimesheet(Model model){
+		SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM-dd");//日期方法
+
+		Calendar cal = Calendar.getInstance();
+		String date8=simdf.format(cal.getTime());
+
+
+		cal.set(cal.DAY_OF_WEEK, cal.MONDAY);
+		String date11 = simdf.format(cal.getTime());
+		java.sql.Date date1=java.sql.Date.valueOf(date11);
+
+
+		Date date=new Date();
+		cal.add(cal.DATE,+1);
+		date=cal.getTime();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String date2 = formatter.format(date);
+
+
+		cal.add(cal.DATE,+1);
+		date=cal.getTime();
+		String date3 = formatter.format(date);
+
+
+		cal.add(cal.DATE,+1);
+		date=cal.getTime();
+		String date4 = formatter.format(date);
+
+
+		cal.add(cal.DATE,+1);
+		date=cal.getTime();
+		String date5 = formatter.format(date);
+
+
+		cal.add(cal.DATE,+1);
+		date=cal.getTime();
+		String date6 = formatter.format(date);
+
+		cal.add(cal.DATE,+1);
+		date=cal.getTime();
+		String date7 = formatter.format(date);
+
+
+
+		model.addAttribute("Date1", date1);
+		model.addAttribute("Date2", date2);
+		model.addAttribute("Date3", date3);
+		model.addAttribute("Date4", date4);
+		model.addAttribute("Date5", date5);
+		model.addAttribute("Date6", date6);
+		model.addAttribute("Date7", date7);
+		model.addAttribute("Date8", date8);
+
+
+
+
+
+
+		return "timesheet/timesheet/approvetimesheet";
+	}
 
 	@ResponseBody
 	@GetMapping("/list")
@@ -305,11 +349,213 @@ public class TimesheetController extends BaseController {
 		params.put("uerId",getUserId());
         Query query = new Query(params);
 		List<TimesheetDO> timesheetList = timesheetService.list(query);
+		int total = timesheetService.count(query);
+		PageUtils pageUtils = new PageUtils(timesheetList, total);
+		return pageUtils;
+	}
+
+	@ResponseBody
+	@GetMapping("/approvelist")
+	@RequiresPermissions("timesheet:timesheet:approvetimesheet")
+	public PageUtils approvelist(@RequestParam Map<String, Object> params){
+  //时间查询
+		if (params.get("timeMin") != null && !"".equals(params.get("timeMin"))) {
+			Date da1=new Date();
+
+			String d1=(String)(params.get("timeMin"));
+
+			da1 = java.sql.Date.valueOf(d1);
+
+			SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(da1);
+
+
+
+
+			cal.add(cal.DATE, +1);
+			Date date = new Date();
+			date = cal.getTime();
+			String date2 = simdf.format(date);
+			java.sql.Date dat2 = java.sql.Date.valueOf(date2);
+
+
+
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			String date3 = simdf.format(date);
+			java.sql.Date dat3 = java.sql.Date.valueOf(date3);
+
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			String date4 = simdf.format(date);
+			java.sql.Date dat4 = java.sql.Date.valueOf(date4);
+
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			String date5 = simdf.format(date);
+			java.sql.Date dat5 = java.sql.Date.valueOf(date5);
+
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			String date6 = simdf.format(date);
+			java.sql.Date dat6 = java.sql.Date.valueOf(date6);
+
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			String date7 = simdf.format(date);
+			java.sql.Date dat7 = java.sql.Date.valueOf(date7);
+
+
+			params.put("istask",params.get("istask"));
+			params.put("date1", da1);
+			params.put("date2", dat2);
+			params.put("date3", dat3);
+			params.put("date4", dat4);
+			params.put("date5", dat5);
+			params.put("date6", dat6);
+			params.put("date7", dat7);
+
+
+
+
+		}
+		else {
+
+			SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM-dd");
+
+			Calendar cal = Calendar.getInstance();
+
+			String date8 = simdf.format(cal.getTime());
+			java.sql.Date dat8 = java.sql.Date.valueOf(date8);
+			cal.set(cal.DAY_OF_WEEK, cal.MONDAY);
+			String date11 = simdf.format(cal.getTime());
+			java.sql.Date date1 = java.sql.Date.valueOf(date11);
+
+
+			Date date = new Date();
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String date2 = formatter.format(date);
+			java.sql.Date dat2 = java.sql.Date.valueOf(date2);
+
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			String date3 = formatter.format(date);
+			java.sql.Date dat3 = java.sql.Date.valueOf(date3);
+
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			String date4 = formatter.format(date);
+			java.sql.Date dat4 = java.sql.Date.valueOf(date4);
+
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			String date5 = formatter.format(date);
+			java.sql.Date dat5 = java.sql.Date.valueOf(date5);
+
+			cal.add(cal.DATE, +1);
+			date = cal.getTime();
+			String date6 = formatter.format(date);
+			java.sql.Date dat6 = java.sql.Date.valueOf(date6);
+
+			Date date13 = new Date();
+			cal.add(cal.DATE, +1);
+			date13 = cal.getTime();
+
+
+			params.put("date1", date1);
+			params.put("date2", dat2);
+			params.put("date3", dat3);
+			params.put("date4", dat4);
+			params.put("date5", dat5);
+			params.put("date6", dat6);
+
+			params.put("date7", date13);
+			params.put("date8", dat8);
+		}
+
+
+
+
+
+//
+//		查询列表数据
+		params.put("uerId",getUserId());
+		Query query = new Query(params);
+		List<TimesheetDO> timesheetList = timesheetService.list(query);
+
+		Task task =null;
+		for(TimesheetDO timesheet : timesheetList){
+
+			if(timesheet.getTimeSheetApprovalStatusDate1()==0){
+				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				if(task!=null){
+					timesheet.setTaskIdDate1(task.getId());
+					timesheet.setPdIdDate1(task.getProcessDefinitionId());
+				}
+			}
+			if(timesheet.getTimeSheetApprovalStatusDate2()==0){
+				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				if(task!=null){
+					timesheet.setTaskIdDate2(task.getId());
+					timesheet.setPdIdDate2(task.getProcessDefinitionId());
+				}
+			}
+
+			if(timesheet.getTimeSheetApprovalStatusDate3()==0){
+				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				if(task!=null){
+					timesheet.setTaskIdDate3(task.getId());
+					timesheet.setPdIdDate3(task.getProcessDefinitionId());
+				}
+			}
+
+			if(timesheet.getTimeSheetApprovalStatusDate4()==0){
+				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				if(task!=null){
+					timesheet.setTaskIdDate4(task.getId());
+					timesheet.setPdIdDate4(task.getProcessDefinitionId());
+				}
+			}
+
+			if(timesheet.getTimeSheetApprovalStatusDate5()==0){
+				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				if(task!=null){
+					timesheet.setTaskIdDate5(task.getId());
+					timesheet.setPdIdDate5(task.getProcessDefinitionId());
+				}
+			}
+
+			if(timesheet.getTimeSheetApprovalStatusDate6()==0){
+				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				if(task!=null){
+					timesheet.setTaskIdDate6(task.getId());
+					timesheet.setPdIdDate6(task.getProcessDefinitionId());
+				}
+			}
+
+			if(timesheet.getTimeSheetApprovalStatusDate7()==0){
+				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				if(task!=null){
+					timesheet.setTaskIdDate7(task.getId());
+					timesheet.setPdIdDate7(task.getProcessDefinitionId());
+				}
+			}
+
+
+
+
+
+		}
+
 
 		int total = timesheetService.count(query);
 		PageUtils pageUtils = new PageUtils(timesheetList, total);
 		return pageUtils;
 	}
+
 
 	@GetMapping("/getlist/{timeMin}")
 	@ResponseBody
@@ -446,13 +692,6 @@ public class TimesheetController extends BaseController {
 	    return "timesheet/timesheet/add";
 	}
 
-//	@GetMapping("/approve")
-//	@RequiresPermissions("timesheet:timesheet:approve")
-//	String approve(){
-//
-//		return "timesheet/timesheet/approve";
-//	}
-
 
 	@GetMapping("/edit/{timesheetId}/{projectId}")
 	@RequiresPermissions("timesheet:timesheet:edit")
@@ -486,6 +725,10 @@ public class TimesheetController extends BaseController {
 		}
 
 	}
+
+
+
+
 
 	@ResponseBody
 	@GetMapping("/listDic")

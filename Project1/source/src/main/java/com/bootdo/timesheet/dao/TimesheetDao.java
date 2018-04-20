@@ -18,11 +18,13 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface TimesheetDao {
 
+	TimesheetDO view(String timesheetId);
+
 	TimesheetDO get(String timesheetId);
 	
 	List<TimesheetDO> list(Map<String, Object> map);
 
-	
+	List<TimesheetDO> approvelist(Map<String, Object> map);
 	int count(Map<String, Object> map);
 	
 	int save(TimesheetDO timesheet);

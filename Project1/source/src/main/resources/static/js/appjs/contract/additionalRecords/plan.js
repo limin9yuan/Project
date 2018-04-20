@@ -1,3 +1,4 @@
+var prefix = "/contract/additionalRecords"
 var prefixPlan = "/additionalRecords/plan"
 
 function loadPlan() {
@@ -154,7 +155,7 @@ function batchRemovePlan() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['planid'];
+			ids[i] = row['planId'];
 		});
 		$.ajax({
 			type : 'POST',

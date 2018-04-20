@@ -17,11 +17,12 @@ import java.util.Map;
  * @date 2018-03-14 17:52:48
  */
 public interface TimesheetService {
-	
+
+	TimesheetDO view(String timesheetId);
+
 	TimesheetDO get(String timesheetId);
-//	TimesheetDO gets(String projectId);
 	List<TimesheetDO> list(Map<String, Object> map);
-	
+	List<TimesheetDO> approvelist(Map<String, Object> map);
 	int count(Map<String, Object> map);
 	
 	int save(TimesheetDO timesheet);
@@ -35,6 +36,6 @@ public interface TimesheetService {
 
 	ProjectDO getProjectId(String projectId);
 	List<DictDO> listDic();
-
+	int formUpdate(TimesheetDO timesheet);
 
 }

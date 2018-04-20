@@ -4,30 +4,45 @@
 <mapper namespace="com.bootdo.timesheet.dao.TimesheetDao">
 
 	<select id="getProjectId" resultType="com.bootdo.project.domain.ProjectDO">
-		select `Project_Owner`,`Project_Description`,`Project_Name`,`Customer_ID`,`Employee_Name`,`Project_Gategory`
-
+		select `Project_Owner`,`Project_Description`,`Project_Name`,
+		`Customer_ID`,`Employee_Name`,`Project_Gategory`
 		from development_project a
-		left join inner_org_employee b
-		on
-		a.Project_Owner=b.Employee_ID
+		left join inner_org_employee b on a.Project_Owner=b.Employee_ID
 		where Project_ID = #{value}
 
 
 	</select>
+
 	<select id="get" resultType="com.bootdo.timesheet.domain.TimesheetDO">
-		select `TimeSheet_ID`,`Project_ID`,`Employee_ID`,`TimeSheet_Name`,`TimeSheet_Project_Cagegory`,`TimeSheet_Date`,`TimeSheet_PM`,`TimeSheet_Normal`,`TimeSheet_Overtime`,`TimeSheet_Approved`,`TimeSheet_Planned`,`TimeSheet_Plan`,`TimeSheet_Content`,`TimeSheet_Problem`,`TimeSheet_Assignment_ID`,`TimeSheet_Approval_Status`,`TimeSheet_Operate_Time`
-
+		select `TimeSheet_ID`,`Project_ID`,`Employee_ID`,`TimeSheet_Name`,
+		`TimeSheet_Project_Cagegory`,`TimeSheet_Date`,`TimeSheet_PM`,
+		`TimeSheet_Normal`,`TimeSheet_Overtime`,`TimeSheet_Approved`,
+		`TimeSheet_Planned`,`TimeSheet_Plan`,`TimeSheet_Content`,
+		`TimeSheet_Problem`,`TimeSheet_Assignment_ID`,`TimeSheet_Approval_Status`,
+		`TimeSheet_Operate_Time`
 		from timesheet
-
-
-
 		where TimeSheet_ID = #{value}
 	</select>
+
+    <select id="view" resultType="com.bootdo.timesheet.domain.TimesheetDO">
+		select `TimeSheet_ID`,`Project_ID`,`Employee_ID`,`TimeSheet_Name`,
+		`TimeSheet_Project_Cagegory`,`TimeSheet_Date`,`TimeSheet_PM`,
+		`TimeSheet_Normal`,`TimeSheet_Overtime`,`TimeSheet_Approved`,
+		CASE WHEN `TimeSheet_Planned` = 1 THEN '是'
+				WHEN `TimeSheet_Planned` = 0 THEN '否' END AS TimeSheet_Planned,
+		`TimeSheet_Plan`,`TimeSheet_Content`,
+		`TimeSheet_Problem`,`TimeSheet_Assignment_ID`,`TimeSheet_Approval_Status`,
+		`TimeSheet_Operate_Time`
+		from timesheet
+		where TimeSheet_ID = #{value}
+	</select>
+
 	<select id="list" resultType="com.bootdo.timesheet.domain.TimesheetDO">
 
 
 
 		select d.Project_ID,b.Project_Name,d.Assignment_Task_Name,
+
 		id_date1,content_date1,normal_date1,over_date1,
 		id_date2,content_date2,normal_date1,over_date2,
 		id_date3,content_date3,normal_date1,over_date3,
@@ -150,6 +165,137 @@
 			limit #{offset}, #{limit}
 		</if>
 	</select>
+
+	<select id="approvelist" resultType="com.bootdo.timesheet.domain.TimesheetDO">
+
+
+
+		select d.Project_ID,b.Project_Name,d.Assignment_Task_Name,
+
+		id_date1,content_date1,normal_date1,over_date1,
+		id_date2,content_date2,normal_date1,over_date2,
+		id_date3,content_date3,normal_date1,over_date3,
+		id_date4,content_date4,normal_date1,over_date4,
+		id_date5,content_date5,normal_date1,over_date5,
+		id_date6,content_date6,normal_date1,over_date6,
+		id_date7,content_date7,normal_date1,over_date7
+		from
+		approval_assignment d
+
+		left join (
+		select a.Project_ID,a.TimeSheet_Assignment_ID,
+		max(id_date1)  id_date1,
+		max(content_date1) content_date1,
+		max(normal_date1) normal_date1,
+		max(over_date1) over_date1,
+
+		max(id_date2)  id_date2,
+		max(content_date2) content_date2,
+		max(normal_date2) normal_date2,
+		max(over_date2) over_date2,
+
+		max(id_date3)  id_date3,
+		max(content_date3) content_date3,
+		max(normal_date3) normal_date3,
+		max(over_date3) over_date3,
+
+		max(id_date4)  id_date4,
+		max(content_date4) content_date4,
+		max(normal_date4) normal_date4,
+		max(over_date4) over_date4,
+
+		max(id_date5)  id_date5,
+		max(content_date5) content_date5,
+		max(normal_date5) normal_date5,
+		max(over_date5) over_date5,
+
+		max(id_date6)  id_date6,
+		max(content_date6) content_date6,
+		max(normal_date6) normal_date6,
+		max(over_date6) over_date6,
+
+		max(id_date7)  id_date7,
+		max(content_date7) content_date7,
+		max(normal_date7) normal_date7,
+		max(over_date7) over_date7
+
+
+
+		from
+		(select a.Project_ID,a.TimeSheet_Assignment_ID,
+
+		case when TimeSheet_Date=#{date1} then TimeSheet_ID else '' end id_date1,
+		case when TimeSheet_Date=#{date1} then TimeSheet_Content else '' end content_date1,
+		case when TimeSheet_Date=#{date1} then TimeSheet_Normal else '' end normal_date1,
+		case when TimeSheet_Date=#{date1} then TimeSheet_Overtime else '' end over_date1,
+
+
+		case when TimeSheet_Date=#{date2} then TimeSheet_ID else '' end id_date2,
+		case when TimeSheet_Date=#{date2} then TimeSheet_Content else '' end content_date2,
+		case when TimeSheet_Date=#{date2} then TimeSheet_Normal else '' end normal_date2,
+		case when TimeSheet_Date=#{date2} then TimeSheet_Overtime else '' end over_date2,
+
+		case when TimeSheet_Date=#{date3} then TimeSheet_ID else '' end id_date3,
+		case when TimeSheet_Date=#{date3} then TimeSheet_Content else '' end content_date3,
+		case when TimeSheet_Date=#{date3} then TimeSheet_Normal else '' end normal_date3,
+		case when TimeSheet_Date=#{date3}then TimeSheet_Overtime else '' end over_date3,
+
+		case when TimeSheet_Date=#{date4} then TimeSheet_ID else '' end id_date4,
+		case when TimeSheet_Date=#{date4} then TimeSheet_Content else '' end content_date4,
+		case when TimeSheet_Date=#{date4} then TimeSheet_Normal else '' end normal_date4,
+		case when TimeSheet_Date=#{date4} then TimeSheet_Overtime else '' end over_date4,
+
+		case when TimeSheet_Date=#{date5} then TimeSheet_ID else '' end id_date5,
+		case when TimeSheet_Date=#{date5}  then TimeSheet_Content else '' end content_date5,
+		case when TimeSheet_Date=#{date5}  then TimeSheet_Normal else '' end normal_date5,
+		case when TimeSheet_Date=#{date5} then TimeSheet_Overtime else '' end over_date5,
+
+		case when TimeSheet_Date=#{date6}  then TimeSheet_ID else '' end id_date6,
+		case when TimeSheet_Date=#{date6}then TimeSheet_Content else '' end content_date6,
+		case when TimeSheet_Date=#{date6} then TimeSheet_Normal else '' end normal_date6,
+		case when TimeSheet_Date=#{date6} then TimeSheet_Overtime else '' end over_date6,
+
+		case when TimeSheet_Date=#{date7} then TimeSheet_ID else '' end id_date7,
+		case when TimeSheet_Date=#{date7} then TimeSheet_Content else '' end content_date7,
+		case when TimeSheet_Date=#{date7} then TimeSheet_Normal else '' end normal_date7,
+		case when TimeSheet_Date=#{date7}then TimeSheet_Overtime else '' end over_date7
+
+		from timesheet a
+
+		<where>
+
+			<if test="userId != null and userId != ''"> and Employee_ID = #{userId} </if>
+			<if test="timesheetId != null and timesheetId != ''"> and TimeSheet_ID = #{timesheetId} </if>
+			<if test="projectId != null and projectId != ''"> and  Project_ID = #{projectId}</if>
+			<if test="projectName != null and projectName != ''"> and   Project_Name= #{projectName}</if>
+
+		</where>
+
+		) a  group by a.Project_ID,TimeSheet_Assignment_ID) tim on d.Project_ID=tim.Project_ID and d.Assignment_ID = tim.TimeSheet_Assignment_ID
+		left JOIN development_project b on d.Project_ID=b.Project_ID
+		<where>
+
+			<if test="userId != null and userId != ''"> and d.assignment_Recipient = #{userId} </if>
+			<if test="project != null and project != ''"> and  d.Project_ID = #{project}</if>
+		</where>
+
+
+
+
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by Project_Name desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+
  	<select id="count" resultType="int">
 		select count(*) from (select Project_ID from
 		(select b.Project_Name,c.Business_Name,a.Project_ID,
@@ -311,56 +457,55 @@
 
 
 	</insert>
-	<insert id="save1" parameterType="com.bootdo.timesheet.domain.TimesheetDO"
-			useGeneratedKeys="true" keyProperty="timesheetId">
+	<!--<insert id="save1" parameterType="com.bootdo.timesheet.domain.TimesheetDO"-->
+			<!--useGeneratedKeys="true" keyProperty="timesheetId">-->
 
-		insert into timesheet
-		(
+		<!--insert into timesheet-->
+		<!--(-->
 
-		`TimeSheet_ID`,
-		`Project_ID`,
-		`Employee_ID`,
-		`TimeSheet_Name`,
-		`TimeSheet_Project_Cagegory`,
-		`TimeSheet_Date`,
-		`TimeSheet_PM`,
-		`TimeSheet_Normal`,
-		`TimeSheet_Overtime`,
-		`TimeSheet_Approved`,
-		`TimeSheet_Planned`,
-		`TimeSheet_Plan`,
-		`TimeSheet_Content`,
-		`TimeSheet_Problem`,
-		`TimeSheet_Assignment_ID`,
-		`TimeSheet_Approval_Status`,
-		`TimeSheet_Operate_Time`
+		<!--`TimeSheet_ID`,-->
+		<!--`Project_ID`,-->
+		<!--`Employee_ID`,-->
+		<!--`TimeSheet_Name`,-->
+		<!--`TimeSheet_Project_Cagegory`,-->
+		<!--`TimeSheet_Date`,-->
+		<!--`TimeSheet_PM`,-->
+		<!--`TimeSheet_Normal`,-->
+		<!--`TimeSheet_Overtime`,-->
+		<!--`TimeSheet_Approved`,-->
+		<!--`TimeSheet_Planned`,-->
+		<!--`TimeSheet_Plan`,-->
+		<!--`TimeSheet_Content`,-->
+		<!--`TimeSheet_Problem`,-->
+		<!--`TimeSheet_Assignment_ID`,-->
+		<!--`TimeSheet_Approval_Status`,-->
+		<!--`TimeSheet_Operate_Time`-->
 
-		)
+		<!--)-->
 
-		value(
+		<!--value(-->
 
-		#{timesheetId},
-		#{projectId},
-		#{employeeId},
-		#{timesheetName},
-		#{timesheetProjectCagegory},
-		#{timesheetDate},
-		#{timesheetPm},
+		<!--#{timesheetId},-->
+		<!--#{projectId},-->
+		<!--#{employeeId},-->
+		<!--#{timesheetName},-->
+		<!--#{timesheetProjectCagegory},-->
+		<!--#{timesheetDate},-->
+		<!--#{timesheetPm},-->
 
-		#{timesheetNormal},
-		#{timesheetOvertime},
-		#{timesheetApproved},
-		#{timesheetPlanned},
-		#{timesheetPlan},
-		#{timesheetContent},
-		#{timesheetProblem},
-		#{timesheetAssignmentId},
-		#{timesheetApprovalStatus},
-		#{timesheetOperateTime}
-		)
+		<!--#{timesheetNormal},-->
+		<!--#{timesheetOvertime},-->
+		<!--#{timesheetApproved},-->
+		<!--#{timesheetPlanned},-->
+		<!--#{timesheetPlan},-->
+		<!--#{timesheetContent},-->
+		<!--#{timesheetProblem},-->
+		<!--#{timesheetAssignmentId},-->
+		<!--#{timesheetApprovalStatus},-->
+		<!--#{timesheetOperateTime}-->
+		<!--)-->
+	<!--</insert>-->
 
-
-	</insert>
 	<select id="listDic" resultType="com.bootdo.timesheet.domain.TimesheetDO">
 		select Project_ID value,concat(Project_ID,' ',TimeSheet_PM) name from timesheet
 	</select>
@@ -387,7 +532,8 @@
 			<if test="timesheetProblem != null">`TimeSheet_Problem` = #{timesheetProblem}, </if>
 			<if test="timesheetAssignmentId != null">`TimeSheet_Assignment_ID` = #{timesheetAssignmentId}, </if>
 			<if test="timesheetApprovalStatus != null">`TimeSheet_Approval_Status` = #{timesheetApprovalStatus}, </if>
-			<if test="timesheetOperateTime != null">`TimeSheet_Operate_Time` = #{timesheetOperateTime}</if>
+			<if test="timesheetOperateTime != null">`TimeSheet_Operate_Time` = #{timesheetOperateTime},</if>
+			<if test="processInstanceId != null">`PROCESS_INSTANCE_ID` = #{processInstanceId}</if>
 		</set>
 		where TimeSheet_ID = #{timesheetId}
 	</update>

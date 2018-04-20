@@ -4,7 +4,7 @@ $().ready(function() {
 
 	loadCrmData("/sales/companyCustomer/listDic","customerId");
 	loadCrmData("/sales/business/listDic","businessId");
-	loadCrmData("/project/project/listDic","projectId");
+	loadCrmData("/sales/salesProject/listAllDic","projectId");
 	loadCrmData("/inner/orgJob/listDic","jobId");
 
 	loadCrmData("/inner/innerOrgEmployee/listDic","customerId");
@@ -15,8 +15,6 @@ $().ready(function() {
 	loadCrmData("/system/sysDept/listDic","deptId");
 	loadCrmDataValue ("/system/sysDept/listDic","assignmentDept");
 	loadCrmData("/system/sysDept/listDic","assignmentRecipientDept");
-		loadCrmData("/project/project/listDic","projectId");
-
 		//获取项目类型经理和编号
 $("#projectId").bind("change",getProjectId);
 
@@ -32,16 +30,18 @@ function getProjectId(){
 		},
 		success : function(data) {
 			var result = data.project;
-
+			//项目描述
 			$("input[name='projectDescription']").val(result.projectDescription);
+			//项目经理
 			$("input[name='employeeName']").val(result.employeeName);
-				$("input[name='projectOwner']").val(result.projectOwner);
-		 $("input[name='projectName']").val(result.projectName);
-         	 $("input[name='customerId']").val(result.customerId);
-         	  $("input[name='assignmentPm']").val(result.projectOwner);
-        $("input[name='timesheetPm']").val(result.employeeName);
-$("input[name='timesheetProjectCagegory']").val(result.projectGategory);
-$("input[name='assignmentProjectCagegory']").val(result.projectGategory);
+			//项目名称
+		 	$("input[name='projectName']").val(result.projectName);
+			$("input[name='projectOwner']").val(result.projectOwner);
+          	$("input[name='customerId']").val(result.customerId);
+          	$("input[name='assignmentPm']").val(result.projectOwner);
+        	$("input[name='timesheetPm']").val(result.employeeName);
+			$("input[name='timesheetProjectCagegory']").val(result.projectGategory);
+			$("input[name='assignmentProjectCagegory']").val(result.projectGategory);
 		}
 	});
 }
