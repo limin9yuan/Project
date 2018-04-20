@@ -13,15 +13,21 @@
 	</select>
 
 	<select id="view" resultType="com.bootdo.contract.domain.AdditionalRecordsDO">
-		select `Record_ID`,`Contract_ID`,`Record_Name`,`Record_Bulid_Company`,
+		select `Record_ID`,a.`Contract_ID`,b.Employee_Name as `Record_Name`,
+		`Record_Bulid_Company`,
 		`Record_Total_Price`,`Record_Description`,`Record_Reason`,
-		`Record_Sales`,`Record_Attachment`,`Record_Related_Contract_ID`,
+		c.Employee_Name as `Record_Sales`,`Record_Attachment`,
+		d.Contract_Name as `Record_Related_Contract_ID`,
 		`Record_Hardware_Equipment_List`,`Record_Software_Function_List`,
 		`Record_Remarks`,`Record_Approval_Status`,`Record_Operator`,
 		date_format(Record_Commit_Time,'%Y-%m-%d') `Record_Commit_Time`,
 		date_format(Pre_Invoice_Date,'%Y-%m-%d') `Pre_Invoice_Date`,
-		`Contract_Name`
-		from contract_additional_records where Record_ID = #{value}
+		a.`Contract_Name`
+		from contract_additional_records a
+		LEFT JOIN inner_org_employee b on a.Record_Name = b.Employee_ID
+		LEFT JOIN inner_org_employee c on a.Record_Sales = c.Employee_ID
+		LEFT JOIN contract d on a.Record_Related_Contract_ID = d.Contract_ID
+		where Record_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.contract.domain.AdditionalRecordsDO">
