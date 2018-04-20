@@ -137,7 +137,15 @@ public class ProjectController extends BaseController {
 		
 		return "sales/companyCustomer/examineProject";
 	}
-	
+	/**
+	 * 查看
+	 */
+	@GetMapping("/see/{projectId}")
+	@RequiresPermissions("project:project:see")
+	String see(@PathVariable("projectId") String projectId, Model model) {
+		model.addAttribute("projectId", projectId);
+		return "project/project/see";
+	}
 	/**
 	 * 保存
 	 */

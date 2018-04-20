@@ -49,5 +49,4 @@ public interface SalesProjectService {
 	
 	public void export(String[] titles, ServletOutputStream out, List<SalesProjectDO> list);
 	
-	String getMaxProjectId();
 } 

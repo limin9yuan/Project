@@ -46,8 +46,4 @@ public interface SalesProjectDao {
 	List<DictDO> listAllDic();
 	
 	List<DictDO> listDic();
-	
-	String getMaxProjectId();
-
-
 }

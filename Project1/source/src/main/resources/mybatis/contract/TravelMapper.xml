@@ -16,14 +16,29 @@
 	</select>
 
 	<select id="view" resultType="com.bootdo.contract.domain.TravelDO">
-		select `Travel_ID`,`Customer_ID`,`Project_ID`,`Business_ID`,
-		`Travel_Name`,`Travel_Place_Issue`,`Travel_Place_Ended`,
-		`Travel_Partner`,`Travel_Departure_Date`,`Travel_Return_Date`,
+		select `Travel_ID`,b.Customer_Name as `Customer_ID`,f.Project_Name as `Project_ID`,
+		c.Business_Name as `Business_ID`,
+		g.Employee_Name as `Travel_Name`,`Travel_Place_Issue`,`Travel_Place_Ended`,
+		h.Employee_Name as `Travel_Partner`,`Travel_Departure_Date`,`Travel_Return_Date`,
 		`Travel_Plan_Cost_Type`,`Travel_Visit_Mode`,`Travel_Plan_Task`,
-		`Travel_Actual_Performance`,`Travel_Uncompleted_Cause`,
-		`Travel_Task_Confirm`,`Travel_Approval_Status`,`Travel_Operator`,
+		CASE WHEN `Travel_Actual_Performance` = 1 THEN '完成'
+					WHEN `Travel_Actual_Performance` = 0 THEN '未完成' END as Travel_Actual_Performance,
+		`Travel_Uncompleted_Cause`,
+		CASE WHEN `Travel_Task_Confirm` = 1 THEN '完成'
+					WHEN `Travel_Task_Confirm` = 0 THEN '未完成' END as Travel_Task_Confirm,
+		`Travel_Approval_Status`,`Travel_Operator`,
 		`Travel_Operate_Time`,`Travel_Creator`,`Travel_Create_Time`
-		from approval_travel
+		from approval_travel a
+		LEFT JOIN sales_company_customer b on a.Customer_ID = b.Customer_ID
+		LEFT JOIN sales_business c on a.Business_ID = c.Business_ID
+		left JOIN (SELECT `Project_ID`,`Project_Name` from development_project
+				   UNION ALL
+				   select `Project_ID`,`Project_Name` from pre_sales_project d
+         		   WHERE NOT EXISTS
+         		   (select `Project_ID`,`Project_Name` from development_project e
+         		   WHERE d.Project_ID = e.Project_ID)) f on a.Project_ID = f.Project_ID
+		LEFT JOIN inner_org_employee g on a.Travel_Name = g.Employee_ID
+		LEFT JOIN inner_org_employee h on a.Travel_Partner = h.Employee_ID
 		where Travel_ID = #{value}
 	</select>
 

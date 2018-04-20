@@ -65,10 +65,10 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.projectId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.projectId
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+										var f = '<a class="btn btn-success btn-sm'+s_see_h+'" href="#" title="查看"  mce_href="#" onclick="see(\''
+										+ row.projectId
+										+ '\')"><i class="fa fa-search"></i></a> ';
+								        return f + e + d;
 									}
 								},{
 									field : 'projectGategory', 
@@ -107,7 +107,7 @@ function load() {
 								},{
 									field : 'projectPhase', 
 									title : '项目阶段' 
-								},{
+								}/*{
 									title : '组织架构',
 									field : 'id',
 									align : 'center',
@@ -117,17 +117,7 @@ function load() {
 												+ '\')"><i class="fa fa-edit"></i></a> ';
 										return e  ;
 									}
-								},{
-									title : '详细信息',
-									field : 'id',
-									align : 'center',
-									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="查看" onclick="viewDetail(\''
-												+ row.projectId
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										return e  ;
-									}
-								}/*
+								},*//*
 																{
 									field : 'customerId', 
 									title : '企业客户编号' 
@@ -218,6 +208,18 @@ function load() {
 function reLoad() {
 	//alert($('#projectId').val());
 	$('#exampleTable').bootstrapTable('refresh');
+}
+
+//查看
+function see(id) {
+	parent.layer.open({
+		type : 2,
+		title : '查看',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '950px', '95%' ],
+		content : prefix + '/see/' + id 
+	});
 }
 function add() {
 	parent.layer.open({

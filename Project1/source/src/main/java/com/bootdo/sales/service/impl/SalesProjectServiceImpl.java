@@ -446,10 +446,4 @@ public class SalesProjectServiceImpl implements SalesProjectService {
 		/*for (int i = 0; i < returnDate.size(); i++) {
 		}*/
 	}
-	
-	
-	@Override
-	public String getMaxProjectId() {
-		return salesProjectDao.getMaxProjectId();
-	}
 }
