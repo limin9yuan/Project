@@ -21,6 +21,11 @@ public class PurchaseServiceImpl implements PurchaseService {
 	private PurchaseDao purchaseDao;
 	@Autowired
 	private ActTaskServiceImpl actTaskService;
+
+    @Override
+    public PurchaseDO view(String purchaseId){
+        return purchaseDao.view(purchaseId);
+    }
 	
 	@Override
 	public PurchaseDO get(String purchaseId){
@@ -36,14 +41,35 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public int count(Map<String, Object> map){
 		return purchaseDao.count(map);
 	}
+
+	/**
+	 * ******************* 审批流程相关 *************************
+	 */
+	//审批处理保存
+	@Override
+	public int formUpdate(PurchaseDO purchase){
+       //流程审批处理
+       Map<String,Object> vars = new HashMap<>(16);
+       vars.put("taskAction",  purchase.getTaskAction() );
+       actTaskService.complete(purchase.getTaskId(),purchase.getProcessInstanceId(),purchase.getTaskComment(),"",vars);
+
+       return purchaseDao.update(purchase);
+	}
 	
 	@Override
 	public int save(PurchaseDO purchase){
-		int ret=purchaseDao.save(purchase);
-		String purchaseId=purchase.getPurchaseId();
-		//添加保存时发起审批流程
-		actTaskService.startProcess(ActivitiConstant.ACTIVITI_CONTRACT_PURCHASE[0],ActivitiConstant.ACTIVITI_CONTRACT_PURCHASE[1],purchaseId,purchase.getPurchasePerson(),new HashMap<String,Object>());
-		
+       int ret = purchaseDao.save(purchase);
+
+       String purchaseId=purchase.getPurchaseId();
+       //流程标题，每个业务根据自己特点，体现主要信息
+       String title="";
+       title=purchase.getPurchaseId()+"-"+purchase.getPurchasePerson();
+       //添加保存时发起审批流程
+       String PROCESS_INSTANCE_ID=actTaskService.startProcess(ActivitiConstant.ACTIVITI_APPROVAL_PURCHASE[0],
+               ActivitiConstant.ACTIVITI_APPROVAL_PURCHASE[1],purchaseId,title,new HashMap<String,Object>());
+       //更新流程实例ID到业务表
+       purchase.setProcessInstanceId(PROCESS_INSTANCE_ID);
+       purchaseDao.update(purchase);
 		return ret;
 	}
 	
@@ -61,17 +87,5 @@ public class PurchaseServiceImpl implements PurchaseService {
 	public int batchRemove(String[] purchaseIds){
 		return purchaseDao.batchRemove(purchaseIds);
 	}
-	/**
-	 * ******************* 审批流程相关 *************************
-	 */
-	//审批处理保存
-	@Override
-	public int formUpdate(PurchaseDO purchase){
-		//流程审批处理
-		Map<String,Object> vars = new HashMap<>(16);
-		vars.put("taskAction",  purchase.getTaskAction() );
-		actTaskService.complete(purchase.getTaskId(),vars);
-		
-		return purchaseDao.update(purchase);
-	}
+
 }

@@ -148,12 +148,12 @@ public class PurchaseController extends BaseController {
 	@RequiresPermissions("approval:purchase:add")
 	String formTask(@PathVariable("taskId") String taskId,Model model){
 		//取得流程表单数据
-		PurchaseDO purchase = purchaseService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+		PurchaseDO purchase = purchaseService.view(activitiUtils.getBusinessKeyByTaskId(taskId));
 		if(purchase!=null){
 			model.addAttribute("purchase", purchase);
 			//model.addAttribute("taskId",taskId);
 		}
-	    return "approval/purchase/edit";
+	    return "approval/purchase/viewPurchase";
 	}
 	
 	

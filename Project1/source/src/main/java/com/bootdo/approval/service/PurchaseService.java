@@ -13,7 +13,9 @@ import java.util.Map;
  * @date 2017-11-30 14:40:43
  */
 public interface PurchaseService {
-	
+
+	PurchaseDO view(String purchaseId);
+
 	PurchaseDO get(String purchaseId);
 	
 	List<PurchaseDO> list(Map<String, Object> map);

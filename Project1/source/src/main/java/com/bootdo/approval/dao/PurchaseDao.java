@@ -16,6 +16,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PurchaseDao {
 
+	PurchaseDO view(String purchaseId);
+
 	PurchaseDO get(String purchaseId);
 	
 	List<PurchaseDO> list(Map<String,Object> map);
