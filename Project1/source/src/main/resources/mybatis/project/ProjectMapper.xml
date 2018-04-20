@@ -87,9 +87,11 @@
 		left join sys_user f on a.`Project_Creator`=f.`user_id`
 		left join sales_company_customer g on a.`Customer_ID`=g.`Customer_ID`
 		left join sys_dept h on a.`Dept_ID`=h.`dept_id`
+		left join sys_user i on a.`Project_Operator`=i.`user_id`	
 		<where>  
 			<if test="projectId != null and projectId != ''"> and a.Project_ID LIKE #{projectId}</if>
-			<if test="customerId != null and customerId != ''"> and g.Customer_Name LIKE #{customerId} </if>
+			<if test="customerId != null and customerId != ''"> and a.Customer_ID LIKE #{customerId}</if>
+			<if test="customerName != null and customerName != ''"> and g.Customer_Name LIKE #{customerName} </if>
 			<if test="collectionId != null and collectionId != ''"> and Collection_ID = #{collectionId} </if>
 			<if test="projectName != null and projectName != ''"> and a.Project_Name LIKE #{projectName} </if>
 			<if test="projectRelatedId != null and projectRelatedId != ''"> and Project_Related_ID = #{projectRelatedId} </if>

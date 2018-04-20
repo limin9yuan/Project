@@ -158,12 +158,12 @@ public class AssignmentController extends BaseController {
 	@RequiresPermissions("approval:assignment:add")
 	String formTask(@PathVariable("taskId") String taskId,Model model){
 		//取得流程表单数据
-		AssignmentDO assignmentDO = assignmentService.get(activitiUtils.getBusinessKeyByTaskId(taskId));
+		AssignmentDO assignmentDO = assignmentService.view(activitiUtils.getBusinessKeyByTaskId(taskId));
 		if(assignmentDO!=null){
 			model.addAttribute("approvalAssignment", assignmentDO);
 			//model.addAttribute("taskId",taskId);
 		}
-		return "approval/assignment/edit";
+		return "approval/assignment/viewAssignment";
 	}
 
 

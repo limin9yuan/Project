@@ -17,6 +17,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AssignmentDao {
 
+	AssignmentDO view(String assignmentId);
+
 	AssignmentDO get(String assignmentId);
 	
 	List<AssignmentDO> list(Map<String,Object> map);

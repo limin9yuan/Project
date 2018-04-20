@@ -2,7 +2,7 @@
 var prefix = "/project/project"
 $(function() {
 	//var projectId = '';
-	getTreeData();
+	//getTreeData();
 	load();
 });
 
@@ -328,7 +328,7 @@ function viewZ(id) {
 		content : prefix + '/edit/' + id // iframe的url
 	});
 }
-function getTreeData() {
+/*function getTreeData() {
 	$.ajax({
 		type : "GET",
 		url : "/system/sysDept/tree",
@@ -364,4 +364,4 @@ $('#jstree').on("changed.jstree", function(e, data) {
 		$('#exampleTable').bootstrapTable('refresh',opt);
 	}
 
-});
+});*/

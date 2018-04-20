@@ -84,7 +84,26 @@ public class AssignmentDO implements Serializable {
 	private String taskAction;
 	//1是来源任务 0是工时录入
 	private int isTask;
+	//审批说明
+	private String taskComment;
+	//流程实例ID
+	private String processInstanceId;
 
+	public String getTaskComment() {
+		return taskComment;
+	}
+
+	public void setTaskComment(String taskComment) {
+		this.taskComment = taskComment;
+	}
+
+	public String getProcessInstanceId() {
+		return processInstanceId;
+	}
+
+	public void setProcessInstanceId(String processInstanceId) {
+		this.processInstanceId = processInstanceId;
+	}
 
 	public String getTaskId() {
 		return taskId;

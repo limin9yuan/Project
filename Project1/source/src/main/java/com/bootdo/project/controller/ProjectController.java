@@ -159,7 +159,6 @@ public class ProjectController extends BaseController {
 			
 		}
 		project.setProjectCreator(getUserId());
-
 		project.setProjectOperator(getUserId());
 		if (projectService.save(project) > 0) {
 			return R.ok();
@@ -175,8 +174,6 @@ public class ProjectController extends BaseController {
 	@RequiresPermissions("project:project:edit")
 	public R update(ProjectDO project) {
 		
-		project.setProjectCreator(getUserId());
-
 		project.setProjectOperator(getUserId());
 		if (projectService.update(project) > 0) {
 			return R.ok();
@@ -274,7 +271,7 @@ public class ProjectController extends BaseController {
 			@RequestParam(value = "projectName", required = false) String projectName,
 			@RequestParam(value = "projectOwner", required = false) String projectOwner,
 			@RequestParam(value = "projectPhase", required = false) String projectPhase,
-			@RequestParam(value = "customerId", required = false) String customerId,
+			@RequestParam(value = "customerName", required = false) String customerName,
 			@RequestParam(value = "deptId", required = false) String deptId, HttpServletResponse response,
 			HttpServletRequest request) throws ParseException {
 		
@@ -314,7 +311,7 @@ public class ProjectController extends BaseController {
 		params.put("projectName", (projectName!=null && !"".equals(projectName))?"%"+projectName+"%":projectName );
 		params.put("projectOwner", (projectOwner != null && !"".equals(projectOwner))?"%"+projectOwner+"%":projectOwner );
 		params.put("projectPhase", (projectPhase!=null && !"".equals(projectPhase))?"%"+projectPhase+"%":projectPhase );
-		params.put("customerId", (customerId != null && !"".equals(customerId))?"%"+customerId+"%":customerId );
+		params.put("customerName", (customerName != null && !"".equals(customerName))?"%"+customerName+"%":customerName );
 		params.put("deptId",(deptId != null && !"".equals(deptId))?"%"+deptId+"%":deptId );
 		List<ProjectDO> list = projectService.getQuery(params);
 		if(list.size()>0) {

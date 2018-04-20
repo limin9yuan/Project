@@ -15,7 +15,9 @@ import java.util.Map;
  * @date 2017-12-01 13:15:13
  */
 public interface AssignmentService {
-	
+
+	AssignmentDO view(String assignmentId);
+
 	AssignmentDO get(String assignmentId);
 	
 	List<AssignmentDO> list(Map<String, Object> map);

@@ -25,7 +25,12 @@ public class AssignmentServiceImpl implements AssignmentService {
 
 	@Autowired
 	private ActTaskServiceImpl actTaskService;
-	
+
+	@Override
+   public AssignmentDO view(String assignmentId){
+        return assignmentDao.view(assignmentId);
+    }
+
 	@Override
 	public AssignmentDO get(String assignmentId){
 		return assignmentDao.get(assignmentId);
@@ -40,20 +45,33 @@ public class AssignmentServiceImpl implements AssignmentService {
 	public int count(Map<String, Object> map){
 		return assignmentDao.count(map);
 	}
+
+	//审批处理保存
+	@Override
+	public int formUpdate(AssignmentDO assignment){
+       //流程审批处理
+       Map<String,Object> vars = new HashMap<>(16);
+       vars.put("taskAction",  assignment.getTaskAction() );
+       actTaskService.complete(assignment.getTaskId(),assignment.getProcessInstanceId(),
+               assignment.getTaskComment(),"",vars);
+
+       return assignmentDao.update(assignment);
+	}
 	
 	@Override
 	public int save(AssignmentDO assignment){
-		int ret=assignmentDao.save(assignment);
-		/*
-		此处获取自增长主键ID，此ID作为流程的businessId
-		需注意在SQL语句XML配置文件save中需增加：useGeneratedKeys="true" keyProperty="travelId" 用来获取数据库自增长ID
-		<insert id="save" parameterType="com.bootdo.contract.domain.TravelDO" useGeneratedKeys="true" keyProperty="travelId">
-		*/
-		String assignmentId=assignment.getAssignmentId();
-		//添加保存时发起审批流程
-		actTaskService.startProcess(ActivitiConstant.ACTIVITI_APPROVAL_ASSIGNMENT[0],
-				ActivitiConstant.ACTIVITI_APPROVAL_ASSIGNMENT[1],assignmentId,assignment.getAssignmentId(),new HashMap<String,Object>());
+       int ret = assignmentDao.save(assignment);
 
+       String assignmentId=assignment.getAssignmentId();
+       //流程标题，每个业务根据自己特点，体现主要信息
+       String title="";
+       title=assignment.getAssignmentId()+"-"+assignment.getAssignmentDept();
+       //添加保存时发起审批流程
+       String PROCESS_INSTANCE_ID=actTaskService.startProcess(ActivitiConstant.ACTIVITI_APPROVAL_ASSIGNMENT[0],
+               ActivitiConstant.ACTIVITI_APPROVAL_ASSIGNMENT[1],assignmentId,title,new HashMap<String,Object>());
+       //更新流程实例ID到业务表
+       assignment.setProcessInstanceId(PROCESS_INSTANCE_ID);
+       assignmentDao.update(assignment);
 		return ret;
 	}
 	
@@ -71,21 +89,6 @@ public class AssignmentServiceImpl implements AssignmentService {
 	public int batchRemove(String[] assignmentIds){
 		return assignmentDao.batchRemove(assignmentIds);
 	}
-
-	//审批处理保存
-	@Override
-	public int formUpdate(AssignmentDO assignmentDO){
-		//流程审批处理
-		Map<String,Object> vars = new HashMap<>(16);
-		vars.put("taskAction",  assignmentDO.getTaskAction() );
-		actTaskService.complete(assignmentDO.getTaskId(),vars);
-
-		return assignmentDao.update(assignmentDO);
-	}
-
-
-
-
 
 	@Override
 	public String saveAssignmentInTimesheet(TimesheetDO assignment){

@@ -56,7 +56,6 @@ public class ProjectServiceImpl implements ProjectService {
 	private ProjectDeptDao projectDeptDao;
 	
 	
-	
 	@Override
 	public ProjectDO get(String projectId){
 		return projectDao.get(projectId);
@@ -113,6 +112,8 @@ public class ProjectServiceImpl implements ProjectService {
 	
 	@Override
 	public int remove(String projectId){
+		
+		projectDeptDao.remove(projectId);			
 		return projectDao.remove(projectId);
 	}
 	
