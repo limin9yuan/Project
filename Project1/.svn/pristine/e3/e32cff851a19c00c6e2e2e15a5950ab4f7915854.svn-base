@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>欢迎页</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link href="/css/main.css" rel="stylesheet">
+    <!-- <link href="/css/layui.css" rel="stylesheet"> -->
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.0.0/jquery.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body class="gray-bg">
+    <div class="panel panel-default">
+        <div class="panel-heading">我的工作台</div>
+    </div>
+    <div class="col-sm-12">
+        <div class="taskAndLog">
+            <img class="taskAndLogPhoto" src="img/photo_s.jpg">
+            asdas
+        </div>
+        <div class="taskAndLog">
+            <img class="taskAndLogPhoto" src="img/photo_s.jpg">
+            asd
+        </div>
+        <div class="taskAndLog">
+            <img class="taskAndLogPhoto" src="img/photo_s.jpg">
+            ddd
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <div class="taskAndLogDescribe">
+            <input readonly="readonly" type="text" class="DescribeInput" value="任务 （被委托）">
+        </div>
+        <div class="taskAndLogDescribe">
+            <input readonly="readonly" type="text" class="DescribeInput" value="任务 （委托他人）">
+        </div>
+        <div class="taskAndLogDescribe">
+            <input readonly="readonly" type="text" class="DescribeInput" value="我的工作日志（待填报的工作日志）">
+        </div>
+    </div>
+    <div class="myTask">
+        <ul id="myTab" class="nav nav-tabs">
+           <li class="active"><a href="#myWork" data-toggle="tab">我的事务</a></li>
+           <li><a href="#waitApproval" data-toggle="tab">待审批</a></li>
+           <li><a href="#myApply" data-toggle="tab">我的申请</a></li>
+        </ul>
+        <div id="myTabContent" class="tab-content">
+           <div class="tab-pane fade in active" id="myWork">
+              <p>我的事务</p>
+           </div>
+           <div class="tab-pane fade" id="waitApproval">
+              <p>待审批</p>
+           </div>
+           <div class="tab-pane fade" id="myApply">
+              <p>我的申请</p>
+           </div>
+        </div>
+    </div>
+    <div class="totalFinance">
+
+    </div>
+    
+</body>
+</html>
