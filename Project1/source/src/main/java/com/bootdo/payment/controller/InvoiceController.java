@@ -148,6 +148,7 @@ public class InvoiceController extends BaseController {
 	Map<String, Object> getContractId(@PathVariable("contractId") String contractId) {
 		ContractDO contract = invoiceService.getContractId(contractId);
 		Map<String, Object> returnData = new HashMap<String, Object>();
+		System.out.println(contract.getContractReceivablePrice());
 		returnData.put("contract", contract);
 		return returnData;
 	}

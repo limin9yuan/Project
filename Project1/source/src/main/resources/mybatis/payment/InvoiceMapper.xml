@@ -4,12 +4,25 @@
 <mapper namespace="com.bootdo.payment.dao.InvoiceDao">
 
 	<select id="get" resultType="com.bootdo.payment.domain.InvoiceDO">
-		select `Invoice_ID`,`Contract_ID`,`Business_ID`,`Invoice_Number`,`Invoice_Price`,`Invoice_Type`,`Invoice_Content`,
+		select `Invoice_ID`,a.`Contract_ID`,`Invoice_Number`,`Invoice_Price`,`Invoice_Type`,`Invoice_Content`,
 		date_format(Invoice_Date,'%Y-%m-%d') `Invoice_Date`,
 		`Invoice_Person`,
 		date_format(Invoice_Receiver_Time,'%Y-%m-%d') `Invoice_Receiver_Time`,
-		`Invoice_Receiver`,`Invoice_Attachment`,`Invoice_Contract_Status`,`Invoice_Remarks`,`Invoice_Operator`,`Invoice_Operate_Time`,`Invoice_Company` 
-		from invoice where Invoice_ID = #{value}
+		`Invoice_Receiver`,`Invoice_Attachment`,`Invoice_Contract_Status`,`Invoice_Remarks`,
+		`Invoice_Operator`,`Invoice_Operate_Time`,`Invoice_Company`,
+        d.Customer_Name as Customer_ID,e.Business_Name as Business_ID,
+		g.Project_Name as Project_ID,f.Employee_Name as Contract_Sales,
+		b.Contract_Total_Price,b.Contract_Invoice_Type,
+		b.Contract_Invoice_Time,c.Receivable_Price as Receivable_Price,
+        SUM(Receivable_Price) as Contract_Receivable_Price 
+		from invoice a
+        left join contract b on a.`Contract_ID`=b.`Contract_ID`
+        left join accounts_receivable c on b.`Contract_ID`=c.`Contract_ID`
+        left join sales_company_customer d on b.Customer_ID = d.Customer_ID
+        left join sales_business e on b.Business_ID = e.Business_ID
+        left join inner_org_employee f on b.Contract_Sales = f.Employee_ID
+        left join development_project g on b.`Project_ID`=g.`Project_ID`
+		where Invoice_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.payment.domain.InvoiceDO">
@@ -178,13 +191,10 @@
 		select d.Customer_Name as Customer_ID,e.Business_Name as Business_ID,
 		b.Project_Name as Project_ID,f.Employee_Name as Contract_Sales,
 		Contract_Total_Price,Contract_Invoice_Type,
-		Contract_Invoice_Time,SUM(c.Receivable_Price) as Contract_Receivable_Price
+		Contract_Invoice_Time,c.Receivable_Price as Receivable_Price,
+        SUM(Receivable_Price) as Contract_Receivable_Price 
 		from contract a
-		left join(select `Project_ID`,`Project_Name` from pre_sales_project a where not exists
-		(select 1 from development_project where Project_ID=a.Project_ID)
-         UNION ALL
-         select `Project_ID`,`Project_Name` from development_project
-        )b on a.`Project_ID`=b.`Project_ID`
+		left join development_project b on a.`Project_ID`=b.`Project_ID`
         left join accounts_receivable c on a.`Contract_ID`=c.`Contract_ID`
         left join sales_company_customer d on a.Customer_ID = d.Customer_ID
         left join sales_business e on a.Business_ID = e.Business_ID

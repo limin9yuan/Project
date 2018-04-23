@@ -103,7 +103,7 @@ function load() {
 								},{
 									field : 'invoiceAttachment', 
 									title : '附件' 
-								},{
+								}/*,{
 									field : 'projectOwnerName', 
 									title : '项目经理' 
 								},{

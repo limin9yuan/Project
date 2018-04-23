@@ -44,11 +44,10 @@ function setContractId(){
 			$("input[name='contractTotalPrice']").val(result.contractTotalPrice);
 			$("input[name='contractInvoiceType']").val(result.contractInvoiceType);
 			$("input[name='contractInvoiceTime']").val(result.contractInvoiceTime);
-			$("input[name='contractReceivablePrice']").val(result.contractReceivablePrice);
+			$("input[name='contractReceivablePrice']").val(result.contractReceivablePrice); 
 		}
 	});
 }
-
 $.validator.setDefaults({
 	submitHandler : function() {
 		save();

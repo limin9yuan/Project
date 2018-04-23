@@ -70,6 +70,9 @@ public class ContractDO implements Serializable {
 	private String projectId;
 	//操作人姓名
 	private String contractOperatorName;
+	
+	//收款合计金额
+	private BigDecimal contractReceivablePrice;
 	//**********************流程相关属性****************************
 	//流程任务ID
 	private String taskId;
@@ -456,6 +459,14 @@ public class ContractDO implements Serializable {
 	}
 	public void setProjectId(String projectId) {
 		this.projectId = projectId;
+	}
+
+	public BigDecimal getContractReceivablePrice() {
+		return contractReceivablePrice;
+	}
+
+	public void setContractReceivablePrice(BigDecimal contractReceivablePrice) {
+		this.contractReceivablePrice = contractReceivablePrice;
 	}
 	
 }

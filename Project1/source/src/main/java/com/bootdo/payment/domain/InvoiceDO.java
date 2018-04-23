@@ -77,8 +77,6 @@ public class InvoiceDO implements Serializable {
 	private String contractInvoiceType;
 	//预计开具发票时间
 	private String contractInvoiceTime;
-	//收款合计金额
-	private BigDecimal contractReceivablePrice;
 
 	/**
 	 * 设置：发票序号
@@ -355,12 +353,6 @@ public class InvoiceDO implements Serializable {
 	}
 	public void setContractInvoiceTime(String contractInvoiceTime) {
 		this.contractInvoiceTime = contractInvoiceTime;
-	}
-	public BigDecimal getContractReceivablePrice() {
-		return contractReceivablePrice;
-	}
-	public void setContractReceivablePrice(BigDecimal contractReceivablePrice) {
-		this.contractReceivablePrice = contractReceivablePrice;
 	}
 	
 	
