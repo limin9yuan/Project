@@ -91,7 +91,14 @@ public class ExpensesTravelServiceImpl implements ExpensesTravelService {
 		//流程审批处理
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("taskAction",  expensesTravel.getTaskAction() );
-		actTaskService.complete(expensesTravel.getTaskId(),expensesTravel.getProcessInstanceId(),expensesTravel.getTaskComment(),"",vars);
+		actTaskService.complete(expensesTravel.getTaskId(),expensesTravel.getProcessInstanceId(),
+				expensesTravel.getTaskComment(),"",vars);
+		//判断流程是否结束
+		if(actTaskService.isProcessInstanceFinish(expensesTravel.getProcessInstanceId())){
+			expensesTravel.setExpensesTravelStatus("1");
+		}else{
+			expensesTravel.setExpensesTravelStatus("0");
+		}
 
 		return expensesTravelDao.update(expensesTravel);
 	}

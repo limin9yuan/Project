@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+<link href="/css/layui.css" rel="stylesheet">
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						    <div class="form-group">	
+								<label class="col-sm-3 control-label">合同名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<select data-placeholder="请选择" name="contractId"
+									id="contractId" class="form-control chosen-select"
+									tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							<label class="col-sm-3 control-label">业务名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="businessId" name="businessId" class="form-control" type="text" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">客户名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="customerId" name="customerId" class="form-control" type="text" readonly>
+								</div>
+								<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="projectId" name="projectId" class="form-control" type="text" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">销售负责人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractSales" name="contractSales" class="form-control" type="text" readonly>
+								</div>
+								<label class="col-sm-3 control-label">合同总金额：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractTotalPrice" name="contractTotalPrice" class="form-control" type="text" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">合同发票类型：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractInvoiceType" name="contractInvoiceType" class="form-control" type="text" readonly>
+								</div>
+								<label class="col-sm-3 control-label">预计开具发票时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractInvoiceTime" name="contractInvoiceTime" class="form-control" type="text" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">收款合计金额：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractReceivablePrice" name="contractReceivablePrice" class="form-control" type="text" readonly>
+								</div>
+							</div>
+						    <div class="form-group">	
+								<label class="col-sm-3 control-label">发票序号：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="invoiceId" name="invoiceId" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">开票公司：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="invoiceCompany" name="invoiceCompany" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">发票号码：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="invoiceNumber" name="invoiceNumber" class="form-control" type="text">
+								</div>
+								<label class="col-sm-3 control-label">发票金额：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="invoicePrice" name="invoicePrice" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">发票类型：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="invoiceType" name="invoiceType" class="form-control" type="text">
+								</div>	
+								<label class="col-sm-3 control-label">发票内容：</label>
+								<div class="col-sm-3">
+									<input id="invoiceContent" name="invoiceContent" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">开票人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <select data-placeholder="请选择" name="invoicePerson" id="invoicePerson"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</select>
+								</div>	
+								<label class="col-sm-3 control-label">发票领取人：</label>
+								<div class="col-sm-3">
+								    <select data-placeholder="请选择" name="invoiceReceiver" id="invoiceReceiver"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">开票日期：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="invoiceDate">
+							            <input class="form-control" type="text" name="invoiceDate">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>	
+								<label class="col-sm-3 control-label">领取日期：</label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="invoiceReceiverTime">
+							            <input class="form-control" type="text" name="invoiceReceiverTime">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">合同状态：<span class="mustin">*</span></label>
+								<div class="col-sm-9">
+								    <label class="radio-inline"> 
+									    <input type="radio" name="invoiceContractStatus" value="0" /> 未开始
+									</label> 
+									<label class="radio-inline"> 
+									    <input type="radio" name="invoiceContractStatus" value="1" /> 交付中
+									</label>
+									<label class="radio-inline"> 
+									    <input type="radio" name="invoiceContractStatus" value="2" /> 已完成
+									</label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">附件：</label>
+								<div class="col-sm-3">
+									<div class="file-manager">
+										<button type="button" class="layui-btn" id="test1"
+											style="width: 100%;">
+											<i class="fa fa-cloud"></i>上传文件
+										</button>
+										<input id="invoiceAttachment" name="invoiceAttachment"
+											type="hidden">
+									</div>
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-9">
+									<textarea id="invoiceRemarks" name="invoiceRemarks" class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+							 <div class="form-group">
+								 <div class="columns pull-right col-md-2">
+										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
+								   </div>
+								   <div class="columns pull-right col-md-2">
+										<button type="submit" class="btn btn-primary columns" >提交</button>
+								</div>
+							</div>
+							
+							<!--  
+							<div class="form-group">	
+								<label class="col-sm-3 control-label">合同编号：</label>
+								<div class="col-sm-8">
+									<input id="contractId" name="contractId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">业务编号：</label>
+								<div class="col-sm-8">
+									<input id="businessId" name="businessId" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">操作人：</label>
+								<div class="col-sm-8">
+									<input id="invoiceOperator" name="invoiceOperator" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">操作时间：</label>
+								<div class="col-sm-8">
+									<input id="invoiceOperateTime" name="invoiceOperateTime" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>-->
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/payment/invoice/add.js">
+	</script>
+</body>
+</html>

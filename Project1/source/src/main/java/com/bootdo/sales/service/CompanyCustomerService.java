@@ -1,7 +1,9 @@
 package com.bootdo.sales.service;
 
 import com.bootdo.common.domain.DictDO;
+import com.bootdo.common.domain.Tree;
 import com.bootdo.inner.domain.InnerOrgEmployeeDO;
+import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.sales.domain.CompanyCustomerDO;
 
 import java.io.File;
@@ -36,6 +38,8 @@ public interface CompanyCustomerService {
 	List<DictDO> listDic();
 	
 	List<DictDO> listAllDicByArea(String areaId);
+	
+	Tree<CompanyCustomerDO> getTree();
 	
 	Map<String, Object> Import(File file,long userid) ;
     List<CompanyCustomerDO> getQuery(Map<String, Object> params);

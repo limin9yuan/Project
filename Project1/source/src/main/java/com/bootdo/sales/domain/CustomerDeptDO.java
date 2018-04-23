@@ -42,7 +42,46 @@ public class CustomerDeptDO implements Serializable {
 //	private String customerCity;
 //	//区县
 //	private String customerCounty;
-
+	private String customerName;
+	
+	//子公司名称
+	private String childCompanyName;
+	//企业客户上级单位
+	private String customerParent;
+	/**
+	 * 企业客户上级单位
+	 * @return
+	 */
+	public String getCustomerParent() {
+		return customerParent;
+	}
+	/**
+	 * 企业客户上级单位
+	 * @return
+	 */
+	public void setCustomerParent(String customerParent) {
+		this.customerParent = customerParent;
+	}
+	/**
+	 *子公司名称
+	 * @return
+	 */
+	public String getChildCompanyName() {
+		return childCompanyName;
+	}
+	/**
+	 *子公司名称
+	 * @return
+	 */
+	public void setChildCompanyName(String childCompanyName) {
+		this.childCompanyName = childCompanyName;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
 	public Long getCustomerId() {
 		return customerId;
 	}

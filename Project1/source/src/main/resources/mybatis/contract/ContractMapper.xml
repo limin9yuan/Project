@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="view" resultType="com.bootdo.contract.domain.ContractDO">
-		select c.`Customer_Name`,b.`Business_Name`,e.Project_Name,e.`Employee_Name` as Contract_Applicant_Name,
+		select a.`Contract_ID`, c.`Customer_Name`,b.`Business_Name`,e.Project_Name,e.`Employee_Name` as Contract_Applicant_Name,
 		a.`Contract_Name`,a.`Contract_Build_Company`,a.`Contract_Type`,a.`Contract_Category`,
 		a.`Contract_Total_Price`,e.`Employee_Name` as `Contract_Applicant`,a.`Contract_Draft_Person`,
 		e.`Employee_Name` as `Contract_Sales`,a.`Contract_Commit_Time`, Contract_Name as Contract_Related_ID,
@@ -44,7 +44,9 @@
 		`Contract_Dept`,`Contract_Applicant`,`Contract_Draft_Person`,`Contract_Sales`,`Contract_Commit_Time`,
 		`Contract_Related_ID`,`Contract_Invoice_Type`,`Contract_Invoice_Time`,`Contract_Hardware_List`,
 		`Contract_Software_List`,`Contract_Project_Management`,`Contract_Remarks`,`Contract_Attachment`,
-		`Contract_Approval_Status`,`Contract_Operator`,`Contract_Operate_Time`,s.name as contractOperatorName,
+		case when `Contract_Approval_Status` = '1' then '已审批'
+			  when `Contract_Approval_Status` = '0' then '未审批' end as Contract_Approval_Status,
+		`Contract_Operator`,`Contract_Operate_Time`,s.name as contractOperatorName,
 		a.Project_ID, PROCESS_INSTANCE_ID
 		from contract a
 		left JOIN sys_user s on a.Contract_Operator = s.user_id
@@ -150,8 +152,7 @@
 			`Contract_Project_Management`, 
 			`Contract_Remarks`, 
 			`Contract_Attachment`, 
-			`Contract_Approval_Status`, 
-			`Contract_Operator`, 
+			`Contract_Operator`,
 			`Contract_Operate_Time`,
 			`Project_ID`
 		)
@@ -179,8 +180,7 @@
 			#{contractProjectManagement}, 
 			#{contractRemarks}, 
 			#{contractAttachment}, 
-			#{contractApprovalStatus}, 
-			#{contractOperator}, 
+			#{contractOperator},
 			#{contractOperateTime},
 			#{projectId}
 		)
@@ -203,7 +203,7 @@
 			<if test="contractCommitTime != null">`Contract_Commit_Time` = #{contractCommitTime}, </if>
 			<if test="contractRelatedId != null">`Contract_Related_ID` = #{contractRelatedId}, </if>
 			<if test="contractInvoiceType != null">`Contract_Invoice_Type` = #{contractInvoiceType}, </if>
-			<if test="contractInvoiceTime != null">`Contract_Invoice_Time` = #{contractInvoiceTime}, </if>
+			<if test="contractInvoiceTime != null and contractInvoiceTime != ''">`Contract_Invoice_Time` = #{contractInvoiceTime}, </if>
 			<if test="contractHardwareList != null">`Contract_Hardware_List` = #{contractHardwareList}, </if>
 			<if test="contractSoftwareList != null">`Contract_Software_List` = #{contractSoftwareList}, </if>
 			<if test="contractProjectManagement != null">`Contract_Project_Management` = #{contractProjectManagement}, </if>

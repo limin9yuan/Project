@@ -53,7 +53,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.approval.domain.AssignmentDO">
-		select `Assignment_ID`,
+		select a.`Assignment_ID`,
 		a.`Customer_ID`,b.`Customer_Name`,
 		a.`Business_ID`,c.`Business_Name`,
 		`Assignment_Project_Cagegory`,
@@ -63,9 +63,13 @@
 		`Assignment_Principal`,j.`Employee_Name` as `Assignment_Principal_Name`,
 		a.`Assignment_Recipient_Dept`,g.`Name`,
 		`Assignment_Recipient`,k.`Employee_Name` as `Assignment_Recipient_Name`,
-		`Assignment_Task_Description`,`Assignment_Task_Performance`,`Assignment_Task_Finish_Time`,`Assignment_Remarks`,`Assignment_Approval_Status`,`Assignment_Operator`,`Assignment_Operate_Time`,
-		`Assignment_Creator`,l.`name`,
-		`Assignment_Create_Time`, 
+		`Assignment_Task_Description`,`Assignment_Task_Performance`,`Assignment_Task_Finish_Time`,
+		`Assignment_Remarks`,
+		case when `Assignment_Approval_Status` = '1' then '已审批'
+			when `Assignment_Approval_Status` = '0' then '未审批' end as Assignment_Approval_Status,
+		a.`Assignment_Operator`,a.`Assignment_Operate_Time`,
+		a.`Assignment_Creator`,l.`name`,
+		a.`Assignment_Create_Time`,
 		a.`Assignment_Person`,i.`Employee_Name` as `Assignment_Person_Name`,
 		a.`Project_ID`,d.`Project_Name` as `Project_Name`,a.PROCESS_INSTANCE_ID
 		from approval_assignment a
@@ -183,8 +187,7 @@
 			`Assignment_Task_Performance`, 
 			`Assignment_Task_Finish_Time`, 
 			`Assignment_Remarks`, 
-			`Assignment_Approval_Status`, 
-			`Assignment_Operator`, 
+			`Assignment_Operator`,
 			`Assignment_Operate_Time`, 
 			`Assignment_Creator`, 
 			`Assignment_Create_Time`,
@@ -210,8 +213,7 @@
 			#{assignmentTaskPerformance}, 
 			#{assignmentTaskFinishTime}, 
 			#{assignmentRemarks}, 
-			#{assignmentApprovalStatus}, 
-			#{assignmentOperator}, 
+			#{assignmentOperator},
 			#{assignmentOperateTime}, 
 			#{assignmentCreator}, 
 			#{assignmentCreateTime},

@@ -31,6 +31,8 @@ public interface CustomerDeptDao {
 	
 	int batchRemove(String[] customerDeptIds);
 
+	Long[] listParentDept();
 	List<CustomerDeptDO> customerList(Map<String,Object> map);
+	List<CustomerDeptDO> listTree(Map<String, Object> params);
 
 }

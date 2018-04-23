@@ -125,7 +125,7 @@ function load() {
 																{
 									align : 'center',
 									field : 'expensesNormalRelatedid',
-									title : '关联请款申请人姓名' 
+									title : '关联请款申请人姓名'
 								},
 																{
 									align : 'center',
@@ -134,7 +134,16 @@ function load() {
 								},
 																{
 									align : 'center',
-									field : 'expensesNormalStatus',
+									formatter : function(value, row, index) {
+										if (row.expensesNormalStatus != null) {
+											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
+											+ row.processInstanceId
+											+ '\')">'
+											+ row.expensesNormalStatus + '</a> ';
+											return a;
+										}
+									},
+									// field : 'expensesNormalStatus',
 									title : '审批状态'
 								},
 																{
@@ -171,6 +180,16 @@ $("button[name=excelinsertbtn]").click(function () {
 		});
 
 })
+}
+function taskTrace(processInstanceId){
+	layer.open({
+		type : 2,
+		title : '流程跟踪',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '95%', '95%'],
+		content : '/activiti/task/taskTrace/'+processInstanceId
+	});
 }
 function reLoad() {
 	$('#expensesNormalTable').bootstrapTable('refresh');

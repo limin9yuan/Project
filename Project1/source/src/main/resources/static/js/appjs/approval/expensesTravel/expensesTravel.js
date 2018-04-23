@@ -137,7 +137,7 @@ function load() {
 																{
 									align : 'center',
 									field : 'expensesTravelPayid',
-									title : '关联请款申请人姓名' 
+									title : '关联请款申请人姓名'
 								},
 																{
 									align : 'center',
@@ -166,7 +166,16 @@ function load() {
 								},
 																{
 									align : 'center',
-									field : 'expensesTravelStatus',
+									formatter : function(value, row, index) {
+										if (row.expensesTravelStatus != null) {
+											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
+											+ row.processInstanceId
+											+ '\')">'
+											+ row.expensesTravelStatus + '</a> ';
+											return a;
+										}
+									},
+									// field : 'expensesTravelStatus',
 									title : '审批状态'
 								},
 																{
@@ -201,6 +210,16 @@ function load() {
 			});
 
 	})
+}
+function taskTrace(processInstanceId){
+	layer.open({
+		type : 2,
+		title : '流程跟踪',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '95%', '95%'],
+		content : '/activiti/task/taskTrace/'+processInstanceId
+	});
 }
 function reLoad() {
 

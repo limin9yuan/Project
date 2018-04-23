@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="assignmentId" name="assignmentId" class="form-control" type="hidden" th:value="${approvalAssignment.assignmentId}">
+						<div class="form-group">
+								<label class="col-sm-3 control-label">客户名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.customerId}" disabled="disabled" data-placeholder="请选择" name="customerId" id="customerId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+								<label class="col-sm-3 control-label">业务名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.businessId}" disabled="disabled" data-placeholder="请选择" name="businessId" id="businessId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.projectId}" disabled="disabled" data-placeholder="请选择" name="projectId" id="projectId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+								<label class="col-sm-3 control-label">项目类别：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.assignmentProjectCagegory}" disabled="disabled" data-placeholder="请选择" name="assignmentProjectCagegory" id="assignmentProjectCagegory"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">项目经理：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.assignmentPm}" disabled="disabled" data-placeholder="请选择" name="assignmentPm" id="assignmentPm"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+								<label class="col-sm-3 control-label">申请人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.assignmentPerson}" disabled="disabled" data-placeholder="请选择" name="assignmentPerson" id="assignmentPerson"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">任务名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${approvalAssignment.assignmentTaskName}" disabled="disabled" id="assignmentTaskName" name="assignmentTaskName"
+								           class="form-control" type="text">
+                                    </input>
+								</div>
+								<label class="col-sm-3 control-label">任务完成情况：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${approvalAssignment.assignmentTaskPerformance}" disabled="disabled" id="assignmentTaskPerformance" name="assignmentTaskPerformance"
+								           class="form-control" type="text">
+                                    </input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">任务委托时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="assignmentBeginTime">
+							            <input th:value="${approvalAssignment.assignmentBeginTime}" disabled="disabled" class="form-control" type="text" name="assignmentBeginTime">
+							            </input>
+							        </div>
+								</div>
+								<label class="col-sm-3 control-label">要求完成时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="assignmentEndTime">
+							            <input th:value="${approvalAssignment.assignmentEndTime}" disabled="disabled" class="form-control" type="text" name="assignmentEndTime">
+							            </input>
+							        </div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">委托部门：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.assignmentDept}" disabled="disabled" data-placeholder="请选择" name="assignmentDept" id="assignmentDept"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+								<label class="col-sm-3 control-label">委托人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.assignmentPrincipal}" disabled="disabled" data-placeholder="请选择" name="assignmentPrincipal" id="assignmentPrincipal"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">承接部门：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.assignmentRecipientDept}" disabled="disabled" data-placeholder="请选择" name="assignmentRecipientDept" id="assignmentRecipientDept"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+								<label class="col-sm-3 control-label">承接人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${approvalAssignment.assignmentRecipient}" disabled="disabled" data-placeholder="请选择" name="assignmentRecipient" id="assignmentRecipient"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">委托任务描述：<span class="mustin">*</span></label>
+								<div class="col-sm-9">
+									<textarea th:text="${approvalAssignment.assignmentTaskDescription}" disabled="disabled" id="assignmentTaskDescription" name="assignmentTaskDescription"
+									class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-9">
+								    <textarea th:text="${approvalAssignment.assignmentRemarks}" disabled="disabled" id="assignmentRemarks" name="assignmentRemarks"
+								    class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/approval/assignment/viewAssignment.js"></script>
+	</script>
+</body>
+</html>

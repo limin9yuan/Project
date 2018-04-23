@@ -12,6 +12,55 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 						    <div class="form-group">	
+								<label class="col-sm-3 control-label">合同名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<select data-placeholder="请选择" name="contractId"
+									id="contractId" class="form-control chosen-select"
+									tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							<label class="col-sm-3 control-label">业务名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="businessId" name="businessId" class="form-control" type="text" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">客户名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="customerId" name="customerId" class="form-control" type="text" readonly>
+								</div>
+								<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="projectId" name="projectId" class="form-control" type="text" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">销售负责人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractSales" name="contractSales" class="form-control" type="text" readonly>
+								</div>
+								<label class="col-sm-3 control-label">合同总金额：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractTotalPrice" name="contractTotalPrice" class="form-control" type="text" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">合同发票类型：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractInvoiceType" name="contractInvoiceType" class="form-control" type="text" readonly>
+								</div>
+								<label class="col-sm-3 control-label">预计开具发票时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractInvoiceTime" name="contractInvoiceTime" class="form-control" type="text" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">收款合计金额：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="contractReceivablePrice" name="contractReceivablePrice" class="form-control" type="text" readonly>
+								</div>
+							</div>
+						    <div class="form-group">	
 								<label class="col-sm-3 control-label">发票序号：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 									<input id="invoiceId" name="invoiceId" class="form-control" type="text">

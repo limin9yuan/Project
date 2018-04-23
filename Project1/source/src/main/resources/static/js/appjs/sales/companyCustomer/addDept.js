@@ -50,9 +50,10 @@ function validateRule() {
 			customerDeptDescription : {
 				required : true
 			},
-			customerDeptParentDept : {
-				required : true
-			},
+			
+//			customerDeptParentDept : {
+//				required : true
+//			},
 			childCompanyId : {
 				required : true
 			}
@@ -64,9 +65,10 @@ function validateRule() {
 			customerDeptDescription : {
 				required : icon + "请输入部门描述"
 			},
-			customerDeptParentDept : {
-				required : icon + "请输入上级部门"
-			},
+			
+//			customerdeptparentdept : {
+//				required : icon + "请输入上级部门"
+//			},
 			childCompanyId : {
 				required : icon + "请输入子公司编号"
 			}

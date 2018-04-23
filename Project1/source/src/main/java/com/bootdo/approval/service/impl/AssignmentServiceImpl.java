@@ -54,6 +54,12 @@ public class AssignmentServiceImpl implements AssignmentService {
        vars.put("taskAction",  assignment.getTaskAction() );
        actTaskService.complete(assignment.getTaskId(),assignment.getProcessInstanceId(),
                assignment.getTaskComment(),"",vars);
+		//判断流程是否结束
+		if(actTaskService.isProcessInstanceFinish(assignment.getProcessInstanceId())){
+			assignment.setAssignmentApprovalStatus("1");
+		}else{
+			assignment.setAssignmentApprovalStatus("0");
+		}
 
        return assignmentDao.update(assignment);
 	}

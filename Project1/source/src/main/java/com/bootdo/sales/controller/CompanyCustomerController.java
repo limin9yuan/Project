@@ -14,6 +14,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bootdo.common.domain.MainCopyPersonDO;
+import com.bootdo.common.domain.Tree;
 import com.bootdo.common.service.MainCopyPersonService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -41,6 +42,7 @@ import com.bootdo.common.utils.FileUtil;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.project.domain.ProjectDO;
 
 
 /**
@@ -80,6 +82,20 @@ public class CompanyCustomerController  extends BaseController {
 		PageUtils pageUtils = new PageUtils(companyCustomerList, total);
 		return pageUtils;
 	}
+	
+	
+	
+	@ResponseBody
+	@GetMapping("/listHot")
+	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+	public PageUtils listHot(@RequestParam Map<String, Object> params){
+		//查询列表数据
+        Query query = new Query(params);
+		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.list(query);
+		int total = companyCustomerService.count(query);
+		PageUtils pageUtils = new PageUtils(companyCustomerList, total);
+		return pageUtils;
+	}
 	//ajax修改绑定数据
 	@RequestMapping("/edit_ajax/{customerId}")
 	@ResponseBody
@@ -89,7 +105,20 @@ public class CompanyCustomerController  extends BaseController {
 		returnData.put("companyCustomer", companyCustomer);
 		return returnData;
 	}
-	
+	@GetMapping("/viewDetail/{customerId}")
+	@RequiresPermissions("sales:companyCustomer:viewDetail")
+	String viewDetail(@PathVariable("customerId") String customerId, Model model) {
+		CompanyCustomerDO customer = companyCustomerService.get(customerId);
+		model.addAttribute("customer", customer);
+		return "sales/companyCusyomer/viewDetail";
+	}
+	@GetMapping("/tree")
+	@ResponseBody
+	public Tree<CompanyCustomerDO> tree() {
+		Tree<CompanyCustomerDO> tree = new Tree<CompanyCustomerDO>();
+		tree = companyCustomerService.getTree();
+		return tree;
+	}
 	
 	@GetMapping("/add")
 	@RequiresPermissions("sales:companyCustomer:add")
@@ -123,17 +152,7 @@ public class CompanyCustomerController  extends BaseController {
 	    return "sales/companyCustomer/edit";
 	}
 	
-//	/**
-//	 * 查看联系人信息
-//	 */
-//	@GetMapping("/examine/{customerId}")
-//	@RequiresPermissions("sales:companyCustomer:examine")
-//	String examine(@PathVariable("customerId") String customerId, Model model) {
-//		model.addAttribute("customerId", customerId);
-//		
-//		return "sales/companyCustomer/examineContact";
-//	}
-//	
+
 	/**
 	 * 保存
 	 */
@@ -172,6 +191,16 @@ public class CompanyCustomerController  extends BaseController {
 			}
 		}
 		return R.error();
+	}
+	
+	/**
+	 * 查看
+	 */
+	@GetMapping("/examine/{customerId}")
+	@RequiresPermissions("sales:companyCustomer:examine")
+	String examine(@PathVariable("customerId") String customerId, Model model) {
+		model.addAttribute("customerId", customerId);
+		return "sales/companyCustomer/examineCompanyCustomer";
 	}
 //	/**
 //	 * 保存

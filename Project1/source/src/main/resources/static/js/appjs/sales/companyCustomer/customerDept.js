@@ -84,16 +84,6 @@ function loadDept() {
 									field : 'childCompanyId',
 									title : '子公司编号'
 								},
-								{
-									align : 'center',
-									field : 'customerDeptName',
-									title : '部门名称'
-								},
-								{
-									align : 'center',
-									field : 'customerDeptParentDept',
-									title : '上级部门'
-								},
 
 																{
 									align : 'center',

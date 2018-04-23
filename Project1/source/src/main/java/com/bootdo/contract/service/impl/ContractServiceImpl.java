@@ -100,7 +100,14 @@ public class ContractServiceImpl implements ContractService {
 		//流程审批处理
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("taskAction",  contract.getTaskAction() );
-		actTaskService.complete(contract.getTaskId(),contract.getProcessInstanceId(),contract.getTaskComment(),"",vars);
+		actTaskService.complete(contract.getTaskId(),contract.getProcessInstanceId(),
+				contract.getTaskComment(),"",vars);
+       //判断流程是否结束
+       if(actTaskService.isProcessInstanceFinish(contract.getProcessInstanceId())){
+           contract.setContractApprovalStatus("1");
+       }else{
+           contract.setContractApprovalStatus("0");
+       }
 
 		return contractDao.update(contract);
 	}
@@ -238,7 +245,7 @@ public class ContractServiceImpl implements ContractService {
 						} else if (j == 16) {
 							contractDO.setContractRemarks(cellvalue);
 						} else if (j == 17) {
-							contractDO.setContractApprovalStatus(new Integer(cellvalue));
+							contractDO.setContractApprovalStatus(cellvalue);
 						}
 					} // --->遍历列
 					contractDO.setContractId(cellvalue);
@@ -433,7 +440,7 @@ public class ContractServiceImpl implements ContractService {
 					// 审批状态
 					String ContractApprovalStatus = "";
 					if (report.getContractApprovalStatus() != null) {
-						Integer getContractApprovalStatus = report.getContractApprovalStatus();
+						String getContractApprovalStatus = report.getContractApprovalStatus();
 						ContractApprovalStatus = sdf.format(getContractApprovalStatus);
 					}
 					hssfRow.createCell(22).setCellValue(ContractApprovalStatus);

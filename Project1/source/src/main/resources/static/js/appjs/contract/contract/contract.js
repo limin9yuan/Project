@@ -91,7 +91,17 @@ function load() {
 									field : 'contractCommitTime',
 									title : '提交评审时间'
 								}, {
-									field : 'contractApprovalStatus',
+									align : 'center',
+									formatter : function(value, row, index) {
+										if (row.contractApprovalStatus != null) {
+											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
+											+ row.processInstanceId
+											+ '\')">'
+											+ row.contractApprovalStatus + '</a> ';
+											return a;
+										}
+									},
+									// field : 'contractApprovalStatus',
 									title : '合同审批状态'
 								},{
 									field : '',
@@ -114,6 +124,16 @@ function load() {
         $("div[name='contractFile_windows'] button[name='tab_excelinsertQuitbtn']").click(function () {
             $("div[name='contractFile_windows']").modal('hide')
         });
+}
+function taskTrace(processInstanceId){
+	layer.open({
+		type : 2,
+		title : '流程跟踪',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '95%', '95%'],
+		content : '/activiti/task/taskTrace/'+processInstanceId
+	});
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');

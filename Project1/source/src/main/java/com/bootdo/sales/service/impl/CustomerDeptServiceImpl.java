@@ -1,13 +1,19 @@
 package com.bootdo.sales.service.impl;
 
+import com.bootdo.system.dao.DeptDao;
 import com.bootdo.system.domain.DeptDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.common.domain.Tree;
+import com.bootdo.common.utils.BuildTree;
 import com.bootdo.sales.dao.CustomerDeptDao;
+import com.bootdo.sales.domain.CompanyCustomerDO;
 import com.bootdo.sales.domain.CustomerDeptDO;
 import com.bootdo.sales.service.CustomerDeptService;
 
@@ -17,7 +23,10 @@ import com.bootdo.sales.service.CustomerDeptService;
 public class CustomerDeptServiceImpl implements CustomerDeptService {
 	@Autowired
 	private CustomerDeptDao customerDeptDao;
-	
+	@Autowired
+	private CustomerDeptDao customerDeptTree;
+	@Autowired
+	private DeptDao sysDeptMapper;
 	@Override
 	public CustomerDeptDO get(String customerDeptId){
 		return customerDeptDao.get(customerDeptId);
@@ -54,11 +63,36 @@ public class CustomerDeptServiceImpl implements CustomerDeptService {
 	}
 
 	@Override
-	public List<CustomerDeptDO> getTreeList(Map<String, Object> params) {
+	public List<CustomerDeptDO> listTree(Map<String, Object> params) {
 
 		List<CustomerDeptDO> customerDepts = customerDeptDao.customerList(params);
 
 		return customerDepts;
 	}
-	
+
+	@Override
+	public Tree<DeptDO> getTree() {
+		List<Tree<DeptDO>> trees = new ArrayList<Tree<DeptDO>>();
+		List<CustomerDeptDO> customerDepts = customerDeptTree.listTree(new HashMap<String,Object>(16));
+		for (CustomerDeptDO customerDept : customerDepts) {
+			Tree<DeptDO> tree = new Tree<DeptDO>();
+			tree.setId(customerDept.getCustomerDeptId().toString());
+			tree.setParentId(customerDept.getCustomerDeptParentDept().toString());
+			tree.setText(customerDept.getCustomerDeptName());
+			Map<String, Object> state = new HashMap<>(16);
+			state.put("opened", true);
+			tree.setState(state);
+			trees.add(tree);
+		}
+		// 默认顶级菜单为０，根据数据库实际情况调整
+		Tree<DeptDO> t = BuildTree.build(trees);
+		return t;
+	}
+
+	@Override
+	public Long[] listParentDept() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

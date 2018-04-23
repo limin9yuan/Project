@@ -144,8 +144,7 @@
 			`Travel_Actual_Performance`, 
 			`Travel_Uncompleted_Cause`, 
 			`Travel_Task_Confirm`, 
-			`Travel_Approval_Status`, 
-			`Travel_Operator`, 
+			`Travel_Operator`,
 			`Travel_Operate_Time`, 
 			`Travel_Creator`, 
 			`Travel_Create_Time`
@@ -168,8 +167,7 @@
 			#{travelActualPerformance}, 
 			#{travelUncompletedCause}, 
 			#{travelTaskConfirm}, 
-			#{travelApprovalStatus}, 
-			#{travelOperator}, 
+			#{travelOperator},
 			#{travelOperateTime}, 
 			#{travelCreator}, 
 			#{travelCreateTime}

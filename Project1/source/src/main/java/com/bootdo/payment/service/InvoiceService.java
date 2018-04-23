@@ -1,6 +1,8 @@
 package com.bootdo.payment.service;
 
+import com.bootdo.contract.domain.ContractDO;
 import com.bootdo.payment.domain.InvoiceDO;
+import com.bootdo.project.domain.ProjectDO;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +29,6 @@ public interface InvoiceService {
 	int remove(String invoiceId);
 	
 	int batchRemove(String[] invoiceIds);
+	
+	ContractDO getContractId(String contractId);  
 }

@@ -11,15 +11,21 @@ $(function() {
 		cityId : 'city',
 		areaId : 'area'
 	});
+	
 	address.init();
-	load();
+	var customerId='';
+	
+ load(customerId);
+ getTreeData();
+//	load();
 
 	loadDic("sales_customer_level", "customerLevel");// 客户级别
 	loadCrmData("/inner/innerOrgEmployee/listDic", "customerSales");
 });
 
-function load() {
-
+//function load() {
+ function load(customerId) {
+	console.log("数据加载");
 	$('#exampleTable')
 			.bootstrapTable(
 					{
@@ -32,7 +38,7 @@ function load() {
 						toolbar : '#exampleToolbar',
 						sortable : true, // 是否启用排序
 						sortOrder : "desc",// 排序方式
-						sortName:'customerOperateTime',//排序字段
+						sortName:'customerOperateTime',// 排序字段
 						striped : true, // 设置为true会有隔行变色效果
 						dataType : "json", // 服务器返回的数据类型
 						pagination : true, // 设置为true会在底部显示分页条
@@ -62,7 +68,8 @@ function load() {
 								projectName : $('#projectName').val(),
 								customerSales : $('#customerSales').val(),
 								customerId : $('#customerId').val(),
-								customerLevel : $('#customerLevel').val()
+								customerLevel : $('#customerLevel').val(),
+								customerDeptId:$('#customerDeptId').val()
 
 							// name:$('#searchName').val(),
 							// username:$('#searchName').val()
@@ -83,25 +90,19 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var a = '<div style="width:70px"></div>'
-										var e = '<a class="btn btn-primary btn-sm '
-												+ s_edit_h
-												+ '" href="#" mce_href="#" title="编辑" onclick="edit(\''
+										var a = '<div style="width:110px"></div>'
+											var f = '<a class="btn btn-success" style="width:34px;height:30px" href="#" title="查看"  mce_href="#" onclick="examineCompanyCustomer(\''
+												+ row.customerId
+												+ '\')"><i class="fa fa-search"></i></a> ';
+										var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
 												+ row.customerId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '
-												+ s_remove_h
-												+ '" href="#" title="删除"  mce_href="#" onclick="remove(\''
+										var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.customerId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										// var f = '<a class="btn btn-success
-										// btn-sm '+s_examine_h+'" href="#"
-										// title="查看" mce_href="#"
-										// onclick="examine(\''
-										// + row.customerId
-										// + '\')"><i class="fa
-										// fa-search"></i></a> ';
-										return a + e + d;
+										
+										
+										return a +f+ e + d;
 									}
 								},
 								{
@@ -243,6 +244,18 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 
+//--查看详情页
+
+function examineCompanyCustomer(id) {
+	parent.layer.open({
+		type : 2,
+		title : '查看企业客户',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '95%', '95%' ],
+		content : prefix + '/examine/' + id
+	});
+}
 // ————查看联系人信息
 function examine(id) {
 	parent.layer.open({
@@ -318,6 +331,44 @@ function remove(id) {
 		});
 	})
 }
+function getTreeData(){
+	$.ajax({
+		type:"GEt",
+		url:"/sales/customerDept/tree",
+		success:function(tree){
+			loadTree(tree);
+		}
+	});
+}
+function loadTree(tree){
+	$('#jstree').jstree({
+		'core':{
+			'data':tree
+		},
+		"plugins":["search"]
+	});
+	$('#jstree').jstree().open_all();
+}
+$('#jstree').on("changed.jstree",function(e,data){
+	if (data.selected==-1) {
+		var opt={
+			query:{
+			customerId:'',
+				}
+		}
+		$('#exampleTable').bootstrapTable('refresh',opt);
+	}else{
+		var opt={
+			query:{
+			customerId:data.selected[0],
+				}
+		}
+		
+		$('#exampleTable').bootstrapTable('refresh',opt);
+	}
+	
+});
+
 // 导出
 
 function exportData() {

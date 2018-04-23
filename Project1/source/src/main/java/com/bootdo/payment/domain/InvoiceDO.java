@@ -65,6 +65,20 @@ public class InvoiceDO implements Serializable {
 	private String invoiceProjectName;
 	//项目编号
 	private String projectId;
+	
+
+	//客户编号
+	private String customerId;
+	//销售负责人
+	private String contractSales;
+	//合同总金额
+	private BigDecimal contractTotalPrice;
+	//合同发票类型
+	private String contractInvoiceType;
+	//预计开具发票时间
+	private String contractInvoiceTime;
+	//收款合计金额
+	private BigDecimal contractReceivablePrice;
 
 	/**
 	 * 设置：发票序号
@@ -311,6 +325,42 @@ public class InvoiceDO implements Serializable {
 	}
 	public void setProjectId(String projectId) {
 		this.projectId = projectId;
+	}
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	public String getContractSales() {
+		return contractSales;
+	}
+	public void setContractSales(String contractSales) {
+		this.contractSales = contractSales;
+	}
+	public BigDecimal getContractTotalPrice() {
+		return contractTotalPrice;
+	}
+	public void setContractTotalPrice(BigDecimal contractTotalPrice) {
+		this.contractTotalPrice = contractTotalPrice;
+	}
+	public String getContractInvoiceType() {
+		return contractInvoiceType;
+	}
+	public void setContractInvoiceType(String contractInvoiceType) {
+		this.contractInvoiceType = contractInvoiceType;
+	}
+	public String getContractInvoiceTime() {
+		return contractInvoiceTime;
+	}
+	public void setContractInvoiceTime(String contractInvoiceTime) {
+		this.contractInvoiceTime = contractInvoiceTime;
+	}
+	public BigDecimal getContractReceivablePrice() {
+		return contractReceivablePrice;
+	}
+	public void setContractReceivablePrice(BigDecimal contractReceivablePrice) {
+		this.contractReceivablePrice = contractReceivablePrice;
 	}
 	
 	

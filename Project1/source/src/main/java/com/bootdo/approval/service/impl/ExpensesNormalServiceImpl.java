@@ -106,7 +106,14 @@ public class ExpensesNormalServiceImpl implements ExpensesNormalService {
 		//流程审批处理
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("taskAction",  expensesNormal.getTaskAction() );
-		actTaskService.complete(expensesNormal.getTaskId(),expensesNormal.getProcessInstanceId(),expensesNormal.getTaskComment(),"",vars);
+		actTaskService.complete(expensesNormal.getTaskId(),expensesNormal.getProcessInstanceId(),
+				expensesNormal.getTaskComment(),"",vars);
+		//判断流程是否结束
+		if(actTaskService.isProcessInstanceFinish(expensesNormal.getProcessInstanceId())){
+			expensesNormal.setExpensesNormalStatus("1");
+		}else{
+			expensesNormal.setExpensesNormalStatus("0");
+		}
 
 		return expensesNormalDao.update(expensesNormal);
 	}

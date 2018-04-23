@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="planId" name="planId" th:value="${planId}" class="form-control"  type="hidden"> 
+							<div class="form-group">
+								<label class="col-sm-2 control-label">计划交付时间：<span class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<div class="input-group date" id="planDeliveryDate">
+										<input class="form-control" type="text" name=planDeliveryDate>
+										<span class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">计划交付内容：<span class="mustin">*</span></label>
+								<div class="col-sm-10">
+									<textarea id="planDeliveryContent" name="planDeliveryContent"
+										class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">备注：</label>
+								<div class="col-sm-10">
+									<textarea id="planRemarks" name="planRemarks"
+										class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								   <div class="columns pull-right col-md-2">
+										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
+								   </div>
+								   <div class="columns pull-right col-md-2">
+										<button type="submit" class="btn btn-primary columns" >提交</button>
+								  </div>
+							 </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/contract/additionalRecords/editPlan.js"></script>
+</body>
+</html>

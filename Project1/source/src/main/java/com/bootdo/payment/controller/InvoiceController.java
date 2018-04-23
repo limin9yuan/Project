@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.bootdo.payment.domain.InvoiceDO;
 import com.bootdo.payment.service.InvoiceService;
+import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.sales.domain.RequirementCategoryDO;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
@@ -31,6 +32,7 @@ import com.bootdo.common.utils.FileUtil;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.contract.domain.ContractDO;
 
 /**
  * 开票信息表
@@ -139,6 +141,15 @@ public class InvoiceController extends BaseController {
 	public R remove(@RequestParam("ids[]") String[] invoiceIds){
 		invoiceService.batchRemove(invoiceIds);
 		return R.ok();
+	}
+	
+	@RequestMapping("/getContractId/{contractId}")
+	@ResponseBody
+	Map<String, Object> getContractId(@PathVariable("contractId") String contractId) {
+		ContractDO contract = invoiceService.getContractId(contractId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("contract", contract);
+		return returnData;
 	}
 	/**
 	 * 上传文件

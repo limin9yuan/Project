@@ -75,6 +75,19 @@ function load() {
 									field : 'assignmentId',
 									title : '任务委托编号'
 								},{
+									align : 'center',
+									formatter : function(value, row, index) {
+										if (row.assignmentApprovalStatus != null) {
+											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
+											+ row.processInstanceId
+											+ '\')">'
+											+ row.assignmentApprovalStatus + '</a> ';
+											return a;
+										}
+									},
+									// field : 'assignmentId',
+									title : '审批状态'
+								},{
 									field : 'projectId',
 									title : '项目编号'
 								},{
@@ -107,6 +120,16 @@ function load() {
 								}
 																 ]
 					});
+}
+function taskTrace(processInstanceId){
+	layer.open({
+		type : 2,
+		title : '流程跟踪',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '95%', '95%'],
+		content : '/activiti/task/taskTrace/'+processInstanceId
+	});
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');

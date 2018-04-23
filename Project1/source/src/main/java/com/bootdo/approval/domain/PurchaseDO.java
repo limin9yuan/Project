@@ -53,7 +53,7 @@ public class PurchaseDO implements Serializable {
 	//备注
 	private String purchaseRemarks;
 	//审批状态
-	private Integer purchaseApprovalStatus;
+	private String purchaseApprovalStatus;
 	//操作人
 	private Long purchaseOperator;
 	//修改时间
@@ -342,13 +342,13 @@ public class PurchaseDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setPurchaseApprovalStatus(Integer purchaseApprovalStatus) {
+	public void setPurchaseApprovalStatus(String purchaseApprovalStatus) {
 		this.purchaseApprovalStatus = purchaseApprovalStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public Integer getPurchaseApprovalStatus() {
+	public String getPurchaseApprovalStatus() {
 		return purchaseApprovalStatus;
 	}
 	/**

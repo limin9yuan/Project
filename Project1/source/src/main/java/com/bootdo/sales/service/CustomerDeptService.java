@@ -1,5 +1,7 @@
 package com.bootdo.sales.service;
 
+import com.bootdo.common.domain.Tree;
+import com.bootdo.sales.domain.CompanyCustomerDO;
 import com.bootdo.sales.domain.CustomerDeptDO;
 import com.bootdo.system.domain.DeptDO;
 
@@ -28,7 +30,11 @@ public interface CustomerDeptService {
 	int remove(String customerDeptId);
 	
 	int batchRemove(String[] customerDeptIds);
+	
+	
+	Long[] listParentDept();
+	Tree<DeptDO> getTree();
 
-	List<CustomerDeptDO> getTreeList(Map<String, Object> params);
+	List<CustomerDeptDO> listTree(Map<String, Object> params);
 
 }

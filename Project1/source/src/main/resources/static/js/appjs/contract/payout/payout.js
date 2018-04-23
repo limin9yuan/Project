@@ -147,7 +147,7 @@ function load() {
 																{
 									align : 'center',
 									field : 'payoutRelatedContractId',
-									title : '关联出差申请人姓名' 
+									title : '关联出差申请人姓名'
 								},
 //																{
 //									field : 'payoutResult',
@@ -160,7 +160,16 @@ function load() {
 								},
 																{
 									align : 'center',
-									field : 'payoutApprovalStatus',
+									formatter : function(value, row, index) {
+										if (row.payoutApprovalStatus != null) {
+											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
+											+ row.processInstanceId
+											+ '\')">'
+											+ row.payoutApprovalStatus + '</a> ';
+											return a;
+										}
+									},
+									// field : 'payoutApprovalStatus',
 									title : '审批状态'
 								},
 																{
@@ -197,6 +206,16 @@ function load() {
 			});
 
 	})
+}
+function taskTrace(processInstanceId){
+	layer.open({
+		type : 2,
+		title : '流程跟踪',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '95%', '95%'],
+		content : '/activiti/task/taskTrace/'+processInstanceId
+	});
 }
 
 

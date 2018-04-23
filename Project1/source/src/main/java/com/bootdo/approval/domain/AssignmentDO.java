@@ -50,7 +50,7 @@ public class AssignmentDO implements Serializable {
 	//备注
 	private String assignmentRemarks;
 	//审批状态
-	private Integer assignmentApprovalStatus;
+	private String assignmentApprovalStatus;
 	//操作人
 	private Long assignmentOperator;
 	//修改时间
@@ -328,13 +328,13 @@ public class AssignmentDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setAssignmentApprovalStatus(Integer assignmentApprovalStatus) {
+	public void setAssignmentApprovalStatus(String assignmentApprovalStatus) {
 		this.assignmentApprovalStatus = assignmentApprovalStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public Integer getAssignmentApprovalStatus() {
+	public String getAssignmentApprovalStatus() {
 		return assignmentApprovalStatus;
 	}
 	/**

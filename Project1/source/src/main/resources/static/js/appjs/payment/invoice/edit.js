@@ -22,7 +22,30 @@ $().ready(function() {
 	validateRule();
 	datetimepicker();
 	invoiceMapper_edit();
+	
+	$("#contractId").bind("change", setContractId);
 });
+
+function setContractId(){
+	$.ajax({
+		url : '/payment/invoice/getContractId/' + $("#contractId").val(),
+		type : "get",
+		data : {
+			'contractId' : $("#contractId").val()
+		},
+		success : function(data) {
+			var result = data.contract;
+			$("input[name='businessId']").val(result.businessId);
+			$("input[name='customerId']").val(result.customerId);
+			$("input[name='projectId']").val(result.projectId);
+			$("input[name='contractSales']").val(result.contractSales);
+			$("input[name='contractTotalPrice']").val(result.contractTotalPrice);
+			$("input[name='contractInvoiceType']").val(result.contractInvoiceType);
+			$("input[name='contractInvoiceTime']").val(result.contractInvoiceTime);
+			$("input[name='contractReceivablePrice']").val(result.contractReceivablePrice);
+		}
+	});
+}
 
 $.validator.setDefaults({
 	submitHandler : function() {
@@ -153,8 +176,18 @@ function invoiceMapper_edit(){
 			$(":radio[name='invoiceContractStatus'][value='" + result.invoiceContractStatus + "']").prop("checked", "checked");
 			$("input[name='invoiceAttachment']").val(result.invoiceAttachment);
 			$("textarea[name='invoiceRemarks']").val(result.invoiceRemarks);
+			
+			$("input[name='businessId']").val(result.businessId);
+			$("input[name='customerId']").val(result.customerId);
+			$("input[name='projectId']").val(result.projectId);
+			$("input[name='contractSales']").val(result.contractSales);
+			$("input[name='contractTotalPrice']").val(result.contractTotalPrice);
+			$("input[name='contractInvoiceType']").val(result.contractInvoiceType);
+			$("input[name='contractInvoiceTime']").val(result.contractInvoiceTime);
+			$("input[name='contractReceivablePrice']").val(result.contractReceivablePrice);
+			loadCrmDataValue("/contract/contract/listDic","contractId",result.contractId);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoicePerson",result.invoicePerson);
-			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoiceReceiver",result.invoiceReceiver);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoiceReceiver",result.invoiceReceiver);			
 		}
 	});
 }

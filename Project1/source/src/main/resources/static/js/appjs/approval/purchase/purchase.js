@@ -1,7 +1,7 @@
 var prefix = "/approval/purchase"
 $(function() {
 	load();
-	loadCrmData("/project/project/listDic","projectId","全部"); 
+	loadCrmData("/project/project/listDic","projectId","全部");
 	datetimepicker();
 });
 
@@ -67,98 +67,118 @@ function load() {
 										return e + d ;
 									}
 								},{
-									field : 'purchaseId', 
-									title : '采购申请编号' 
+									field : 'purchaseId',
+									title : '采购申请编号'
 								},{
-									field : 'projectId', 
-									title : '项目编号' 
+									field : 'projectId',
+									title : '项目编号'
 								},{
-									field : 'projectName', 
-									title : '项目名称' 
+									field : 'projectName',
+									title : '项目名称'
 								},{
-									field : 'purchasePersonName', 
-									title : '申购人' 
+									field : 'purchasePersonName',
+									title : '申购人'
 								},{
-									field : 'purchaseDate', 
-									title : '申购时间' 
+									field : 'purchaseDate',
+									title : '申购时间'
 								},{
-									field : 'purchaseName', 
-									title : '物品名称' 
+									field : 'purchaseName',
+									title : '物品名称'
 								},{
-									field : 'purchaseNumber', 
-									title : '数量' 
+									field : 'purchaseNumber',
+									title : '数量'
 								},{
-									field : 'purchaseUnitPrice', 
-									title : '预算单价' 
+									field : 'purchaseUnitPrice',
+									title : '预算单价'
 								},{
-									field : 'purchaseTotalPrice', 
-									title : '总价' 
+									field : 'purchaseTotalPrice',
+									title : '总价'
 								},{
-									field : 'purchaseApprovalStatus', 
-									title : '审批状态' 
+									align : 'center',
+									formatter : function(value, row, index) {
+										if (row.purchaseApprovalStatus != null) {
+											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
+											+ row.processInstanceId
+											+ '\')">'
+											+ row.purchaseApprovalStatus + '</a> ';
+											return a;
+										}
+									},
+									// field : 'purchaseApprovalStatus',
+									title : '审批状态'
 								},{
-									field : 'purchaseOperatorName', 
-									title : '申请人员' 
+									field : 'purchaseOperatorName',
+									title : '申请人员'
 								}/*,
 																{
-									field : 'purchaseDept', 
-									title : '申购部门' 
+									field : 'purchaseDept',
+									title : '申购部门'
 								},
 																{
-									field : 'purchaseBrand', 
-									title : '品牌' 
+									field : 'purchaseBrand',
+									title : '品牌'
 								},
 																{
-									field : 'purchaseMode', 
-									title : '型号' 
+									field : 'purchaseMode',
+									title : '型号'
 								},
 																{
-									field : 'purchaseConfig', 
-									title : '规格/配置' 
+									field : 'purchaseConfig',
+									title : '规格/配置'
 								},
 																{
-									field : 'purchaseUnit', 
-									title : '单位' 
+									field : 'purchaseUnit',
+									title : '单位'
 								},
 								         						{
-									field : 'purchaseDeliveryTime', 
-									title : '要求交货时间' 
+									field : 'purchaseDeliveryTime',
+									title : '要求交货时间'
 								},
 																{
-									field : 'purchaseDeliveryPlace', 
-									title : '交货地点' 
+									field : 'purchaseDeliveryPlace',
+									title : '交货地点'
 								},
 																{
-									field : 'purchaseConsignee', 
-									title : '收货人' 
+									field : 'purchaseConsignee',
+									title : '收货人'
 								},
 																{
-									field : 'purchasePhoneNumber', 
-									title : '联系电话' 
+									field : 'purchasePhoneNumber',
+									title : '联系电话'
 								},
 																{
-									field : 'purchaseRemarks', 
-									title : '备注' 
+									field : 'purchaseRemarks',
+									title : '备注'
 								},
-																
+
 																{
-									field : 'purchaseOperator', 
-									title : '操作人' 
-								},
-																{
-									field : 'purchaseOperateTime', 
-									title : '修改时间' 
+									field : 'purchaseOperator',
+									title : '操作人'
 								},
 																{
-									field : 'purchaseCreator', 
-									title : '创建人' 
+									field : 'purchaseOperateTime',
+									title : '修改时间'
 								},
 																{
-									field : 'purchaseCreateTime', 
-									title : '创建时间' 
+									field : 'purchaseCreator',
+									title : '创建人'
+								},
+																{
+									field : 'purchaseCreateTime',
+									title : '创建时间'
 								},*/
 																 ]
 					});
+}
+function taskTrace(processInstanceId){
+	layer.open({
+		type : 2,
+		title : '流程跟踪',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '95%', '95%'],
+		content : '/activiti/task/taskTrace/'+processInstanceId
+	});
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
@@ -242,8 +262,8 @@ function batchRemove() {
 	});
 }
 function datetimepicker() {
-	 $('#purchaseDate').datetimepicker({  
-	        format: 'YYYY-MM-DD ',  
-	        locale: moment.locale('zh-cn')  
-	    }); 
+	 $('#purchaseDate').datetimepicker({
+	        format: 'YYYY-MM-DD ',
+	        locale: moment.locale('zh-cn')
+	    });
 }

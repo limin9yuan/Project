@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="purchaseId" name="purchaseId" th:value="${purchase.purchaseId}" class="form-control" type="hidden">
+						<div class="form-group">
+								<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								   <input th:value="${purchase.projectId}" disabled="disabled" data-placeholder="请选择" name="projectId" id="projectId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+								<label class="col-sm-3 control-label">申购部门：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								   <input th:value="${purchase.purchaseDept}" disabled="disabled" data-placeholder="请选择" name="purchaseDept" id="purchaseDept"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">申购人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <input th:value="${purchase.purchasePerson}" disabled="disabled" data-placeholder="请选择" name="purchasePerson" id="purchasePerson"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</input>
+								</div>
+								<label class="col-sm-3 control-label">收货人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseConsignee}" disabled="disabled" id="purchaseConsignee" name="purchaseConsignee"
+									class="form-control" type="text">
+                                    </input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">申购时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<div class="input-group date" id="purchaseDate">
+							            <input th:value="${purchase.purchaseDate}" disabled="disabled" class="form-control" type="text" name="purchaseDate">
+							            </input>
+							        </div>
+								</div>
+								<label class="col-sm-3 control-label">要求交货时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<div class="input-group date" id="purchaseDeliveryTime">
+							            <input th:value="${purchase.purchaseDeliveryTime}" disabled="disabled" class="form-control" type="text" name="purchaseDeliveryTime">
+							            </input>
+							        </div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">交货地点：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseDeliveryPlace}" disabled="disabled" id="purchaseDeliveryPlace" name="purchaseDeliveryPlace"
+									class="form-control" type="text">
+                                    </input>
+								</div>
+								<label class="col-sm-3 control-label">联系电话：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchasePhoneNumber}" disabled="disabled" id="purchasePhoneNumber" name="purchasePhoneNumber"
+									 class="form-control" type="text">
+                                    </input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">物品名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseName}" disabled="disabled" id="purchaseName" name="purchaseName"
+									 class="form-control" type="text">
+                                    </input>
+								</div>
+								<label class="col-sm-3 control-label">规格/配置：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseConfig}" disabled="disabled" id="purchaseConfig" name="purchaseConfig"
+									class="form-control" type="text">
+                                    </input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">品牌：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseBrand}" disabled="disabled" id="purchaseBrand" name="purchaseBrand"
+									 class="form-control" type="text">
+                                    </input>
+								</div>
+								<label class="col-sm-3 control-label">型号：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseMode}" disabled="disabled" id="purchaseMode" name="purchaseMode"
+									 class="form-control" type="text">
+                                    </input>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label">单位：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseUnit}" disabled="disabled" id="purchaseUnit" name="purchaseUnit"
+									 class="form-control" type="text">
+                                    </input>
+								</div>
+								<label class="col-sm-3 control-label">数量：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseNumber}" disabled="disabled" id="purchaseNumber" name="purchaseNumber"
+									 class="form-control" type="text">
+                                    </input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">预算单价：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseUnitPrice}" disabled="disabled" id="purchaseUnitPrice" name="purchaseUnitPrice"
+									 class="form-control" type="text">
+                                    </input>
+								</div>
+								<label class="col-sm-3 control-label">总价：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input th:value="${purchase.purchaseTotalPrice}" disabled="disabled" id="purchaseTotalPrice" name="purchaseTotalPrice"
+									class="form-control" type="text">
+                                    </input>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-9">
+								    <textarea th:text="${purchase.purchaseRemarks}" disabled="disabled" id="purchaseRemarks" name="purchaseRemarks"
+								     class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/approval/purchase/viewPurchase.js">
+	</script>
+</body>
+</html>

@@ -33,7 +33,10 @@ import java.util.Map;
 import javax.servlet.ServletOutputStream;
 
 import com.bootdo.common.domain.DictDO;
+import com.bootdo.common.domain.Tree;
+import com.bootdo.common.utils.BuildTree;
 import com.bootdo.inner.domain.InnerOrgEmployeeDO;
+import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.sales.dao.CompanyCustomerDao;
 import com.bootdo.sales.domain.CompanyCustomerDO;
 import com.bootdo.sales.domain.CustomerContactDO;
@@ -43,6 +46,8 @@ import com.bootdo.sales.service.CompanyCustomerService;
 public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 	@Autowired
 	private CompanyCustomerDao companyCustomerDao;
+	@Autowired
+	private CompanyCustomerDao companyCustomerTree;
 
 	@Override
 	public CompanyCustomerDO get(String customerId) {
@@ -815,4 +820,49 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 		// TODO Auto-generated method stub
 		return companyCustomerDao.listAllDicByArea(areaId);
 	}
+
+	@Override
+	public Tree<CompanyCustomerDO> getTree() {
+		List<Tree<CompanyCustomerDO>> trees = new ArrayList<Tree<CompanyCustomerDO>>();
+		List<CompanyCustomerDO> customers = companyCustomerTree.list(new HashMap<String,Object>(16));
+		for (CompanyCustomerDO customer : customers) {
+			Tree<CompanyCustomerDO> tree = new Tree<CompanyCustomerDO>();
+			tree.setId(customer.getCustomerId().toString());
+//			tree.setParentId(customer.getCustomerParent());
+			tree.setText(customer.getCustomerName());
+			Map<String, Object> state = new HashMap<>(16);
+			state.put("opened", true);
+			tree.setState(state);
+			trees.add(tree);
+		}
+		// 默认顶级菜单为０，根据数据库实际情况调整
+		Tree<CompanyCustomerDO> t = BuildTree.build(trees);
+		return t;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

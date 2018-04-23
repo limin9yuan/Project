@@ -1,6 +1,7 @@
 $().ready(function() {
 	loadCrmData("/inner/innerOrgEmployee/listDic","invoicePerson");
 	loadCrmData("/inner/innerOrgEmployee/listDic","invoiceReceiver");
+	loadCrmData("/contract/contract/listDic","contractId");
 	layui.use('upload', function () {
         var upload = layui.upload;
         //执行实例
@@ -22,7 +23,31 @@ $().ready(function() {
     });
 	validateRule();
 	datetimepicker();
+	
+	$("#contractId").bind("change", setContractId);
 });
+
+
+function setContractId(){
+	$.ajax({
+		url : '/payment/invoice/getContractId/' + $("#contractId").val(),
+		type : "get",
+		data : {
+			'contractId' : $("#contractId").val()
+		},
+		success : function(data) {
+			var result = data.contract;
+			$("input[name='businessId']").val(result.businessId);
+			$("input[name='customerId']").val(result.customerId);
+			$("input[name='projectId']").val(result.projectId);
+			$("input[name='contractSales']").val(result.contractSales);
+			$("input[name='contractTotalPrice']").val(result.contractTotalPrice);
+			$("input[name='contractInvoiceType']").val(result.contractInvoiceType);
+			$("input[name='contractInvoiceTime']").val(result.contractInvoiceTime);
+			$("input[name='contractReceivablePrice']").val(result.contractReceivablePrice);
+		}
+	});
+}
 
 $.validator.setDefaults({
 	submitHandler : function() {

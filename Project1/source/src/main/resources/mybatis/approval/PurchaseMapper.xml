@@ -41,7 +41,8 @@
 		`Purchase_Config`,`Purchase_Unit`,`Purchase_Number`,`Purchase_Unit_Price`,
 		`Purchase_Total_Price`,`Purchase_Delivery_Time`,`Purchase_Delivery_Place`,
 		`Purchase_Consignee`,`Purchase_Phone_Number`,`Purchase_Remarks`,
-		`Purchase_Approval_Status`,
+		case when `Purchase_Approval_Status` = '1' then '已审批'
+			  when `Purchase_Approval_Status` = '0' then '未审批' end as Purchase_Approval_Status,
 		`Purchase_Operator`,`Purchase_Operate_Time`,
 		`Purchase_Creator`,e.`name`as Purchase_Operator_Name,
 		`Purchase_Create_Time`,a.PROCESS_INSTANCE_ID,
@@ -144,8 +145,7 @@
 			`Purchase_Consignee`, 
 			`Purchase_Phone_Number`, 
 			`Purchase_Remarks`, 
-			`Purchase_Approval_Status`, 
-			`Purchase_Operator`, 
+			`Purchase_Operator`,
 			`Purchase_Operate_Time`, 
 			`Purchase_Creator`, 
 			`Purchase_Create_Time`
@@ -170,8 +170,7 @@
 			#{purchaseConsignee}, 
 			#{purchasePhoneNumber}, 
 			#{purchaseRemarks}, 
-			#{purchaseApprovalStatus}, 
-			#{purchaseOperator}, 
+			#{purchaseOperator},
 			#{purchaseOperateTime}, 
 			#{purchaseCreator}, 
 			#{purchaseCreateTime}

@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.contract.domain.ContractDO;
 import com.bootdo.payment.dao.InvoiceDao;
 import com.bootdo.payment.domain.InvoiceDO;
 import com.bootdo.payment.service.InvoiceService;
+import com.bootdo.project.domain.ProjectDO;
 
 
 
@@ -51,5 +53,9 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public int batchRemove(String[] invoiceIds){
 		return invoiceDao.batchRemove(invoiceIds);
 	}
+	@Override
+	public ContractDO getContractId(String contractId) {
+		return invoiceDao.getContractId(contractId);
+	}	
 	
 }

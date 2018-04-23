@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.bootdo.system.domain.DeptDO;
+import com.bootdo.system.service.DeptService;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -18,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bootdo.sales.domain.CompanyCustomerDO;
 import com.bootdo.sales.domain.CustomerDeptDO;
 import com.bootdo.sales.domain.CustomerJobDO;
 import com.bootdo.sales.service.CustomerDeptService;
 import com.bootdo.common.controller.BaseController;
+import com.bootdo.common.domain.Tree;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -39,7 +43,8 @@ import com.bootdo.common.utils.R;
 public class CustomerDeptController extends BaseController{
 	@Autowired
 	private CustomerDeptService customerDeptService;
-	
+	@Autowired
+	private DeptService sysDeptService;
 	@GetMapping()
 	@RequiresPermissions("sales:customerDept:customerDept")
 	String CustomerDept(){
@@ -57,7 +62,17 @@ public class CustomerDeptController extends BaseController{
 		PageUtils pageUtils = new PageUtils(customerDeptList, total);
 		return pageUtils;
 	}
-	
+	//树形节点
+		@ResponseBody
+		@GetMapping("/listTree")
+		@RequiresPermissions("sales:companyCustomer:companyCustomer")
+		public List<CustomerDeptDO> listTree(@RequestParam Map<String, Object> params){
+				Query query =new Query(params);
+			//			Map<String, Object> query=new HashMap<>(16);
+			List<CustomerDeptDO> customerDeptList = customerDeptService.listTree(query);
+			return customerDeptList;
+			
+		}
 	@GetMapping("/add/{customerId}")
 	@RequiresPermissions("sales:customerDept:add")
 	String add(@PathVariable("customerId") String customerId,Model model){
@@ -80,6 +95,13 @@ public class CustomerDeptController extends BaseController{
 	String detailedInformation(){
 		return "sales/companyCustomer/detailedInformation";
 	}
+	@GetMapping("/tree")
+	@ResponseBody
+	public Tree<DeptDO> tree() {
+		Tree<DeptDO> tree = new Tree<DeptDO>();
+		tree = customerDeptService.getTree();
+		return tree;
+	}
 
 	@GetMapping("/edit/{customerDeptId}")
 	@RequiresPermissions("sales:customerDept:edit")
@@ -89,13 +111,15 @@ public class CustomerDeptController extends BaseController{
 	    return "sales/companyCustomer/editDept";
 	}
 
-	@GetMapping("/treeList")
-	@ResponseBody
-	public List<CustomerDeptDO> treeList(@RequestParam Map<String, Object> params) {
-		List<CustomerDeptDO> list = new ArrayList<CustomerDeptDO>();
-		list = customerDeptService.getTreeList(params);
-		return list;
-	}
+	
+//	@ResponseBody
+//	@GetMapping("/treeList")
+//	@RequiresPermissions("sales:customerDept:customerDept")
+//	public List<CustomerDeptDO> treeList(@RequestParam Map<String, Object> params) {
+//		List<CustomerDeptDO> list = new ArrayList<CustomerDeptDO>();
+//		list = customerDeptService.getTreeList(params);
+//		return list;
+//	}
 	
 	/**
 	 * 保存

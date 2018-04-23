@@ -72,7 +72,14 @@ public class PayoutServiceImpl implements PayoutService {
 		//流程审批处理
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("taskAction",  payout.getTaskAction() );
-		actTaskService.complete(payout.getTaskId(),payout.getProcessInstanceId(),payout.getTaskComment(),"",vars);
+		actTaskService.complete(payout.getTaskId(),payout.getProcessInstanceId(),
+				payout.getTaskComment(),"",vars);
+		//判断流程是否结束
+		if(actTaskService.isProcessInstanceFinish(payout.getProcessInstanceId())){
+			payout.setPayoutApprovalStatus("1");
+		}else{
+			payout.setPayoutApprovalStatus("0");
+		}
 
 		return payoutDao.update(payout);
 	}

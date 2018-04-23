@@ -173,5 +173,23 @@
 			#{invoiceId}
 		</foreach>
 	</delete>
+	
+	<select id="getContractId" resultType="com.bootdo.contract.domain.ContractDO">
+		select d.Customer_Name as Customer_ID,e.Business_Name as Business_ID,
+		b.Project_Name as Project_ID,f.Employee_Name as Contract_Sales,
+		Contract_Total_Price,Contract_Invoice_Type,
+		Contract_Invoice_Time,SUM(c.Receivable_Price) as Contract_Receivable_Price
+		from contract a
+		left join(select `Project_ID`,`Project_Name` from pre_sales_project a where not exists
+		(select 1 from development_project where Project_ID=a.Project_ID)
+         UNION ALL
+         select `Project_ID`,`Project_Name` from development_project
+        )b on a.`Project_ID`=b.`Project_ID`
+        left join accounts_receivable c on a.`Contract_ID`=c.`Contract_ID`
+        left join sales_company_customer d on a.Customer_ID = d.Customer_ID
+        left join sales_business e on a.Business_ID = e.Business_ID
+        left join inner_org_employee f on a.Contract_Sales = f.Employee_ID
+		where a.Contract_ID = #{value}
+	</select>
 
 </mapper>

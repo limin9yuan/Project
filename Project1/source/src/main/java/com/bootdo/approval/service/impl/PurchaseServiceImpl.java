@@ -51,7 +51,14 @@ public class PurchaseServiceImpl implements PurchaseService {
        //流程审批处理
        Map<String,Object> vars = new HashMap<>(16);
        vars.put("taskAction",  purchase.getTaskAction() );
-       actTaskService.complete(purchase.getTaskId(),purchase.getProcessInstanceId(),purchase.getTaskComment(),"",vars);
+       actTaskService.complete(purchase.getTaskId(),purchase.getProcessInstanceId(),
+				 purchase.getTaskComment(),"",vars);
+		//判断流程是否结束
+		if(actTaskService.isProcessInstanceFinish(purchase.getProcessInstanceId())){
+			purchase.setPurchaseApprovalStatus("1");
+		}else{
+			purchase.setPurchaseApprovalStatus("0");
+		}
 
        return purchaseDao.update(purchase);
 	}
