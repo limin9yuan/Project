@@ -23,8 +23,7 @@
 								<li><a href="#Custom" data-toggle="tab">自定义字段 </a></li>
 							</ul>
 
-							<input id="customerId" name="customerId" th:value="${customerId}"
-								class="form-control" type="hidden">
+							<input id="customerId" name="customerId" th:value="${customerId}" class="form-control" type="hidden">
 							<div id="myTabContent" class="tab-content"
 								style="padding-top: 20px">
 								<div class="tab-pane fade in active" id="baseInfo">
@@ -208,15 +207,13 @@
 											<input id="customerEmpNumber" name="customerEmpNumber"
 												class="form-control" type="text">
 										</div>
-										<label class="col-sm-2 control-label"><span
-											class="mustin">*&nbsp;</span>上级单位：</label>
-										<div class="col-sm-4">
-											<input id="customerParent" name="customerParent"
-												class="form-control" type="text">
-										</div>
-									</div>
+										<!-- 										<label class="col-sm-2 control-label"><span -->
+										<!-- 											class="mustin">*&nbsp;</span>上级单位：</label> -->
+										<!-- 										<div class="col-sm-4"> -->
+										<!-- 											<input id="customerParent" name="customerParent" -->
+										<!-- 												class="form-control" type="text"> -->
+										<!-- 										</div> -->
 
-									<div class="form-group">
 										<label class="col-sm-2 control-label">拜访交通方式：</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="customerVisitMode"
@@ -225,6 +222,9 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
+									</div>
+
+									<div class="form-group">
 										<label class="col-sm-2 control-label">旧客户编号：</label>
 										<div class="col-sm-4">
 											<input id="customerOldId" name="customerOldId"
@@ -233,35 +233,37 @@
 
 									</div>
 
+									
+
+
+<!-- 									<div class="form-group"> -->
+<!-- 										<label class="col-sm-2 control-label">附件：</label> -->
+<!-- 										<div class="col-sm-4"> -->
+<!-- 											<div class="file-manager"> -->
+<!-- 												<button type="button" class="layui-btn" id="test1" -->
+<!-- 													style="width: 100%;"> -->
+<!-- 													<i class="fa fa-cloud"></i>上传文件 -->
+<!-- 												</button> -->
+<!-- 												<input id="customerAttachment" name="customerAttachment" -->
+<!-- 													type="hidden"> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+									
 									<div class="form-group">
 										<label class="col-sm-2 control-label">需求简要描述：</label>
-										<div class="col-sm-4">
-											<input id="customerReqDes" name="customerReqDes"
-												class="form-control" type="text">
+										<div class="col-sm-8">
+											<textarea id="customerReqDes" name="customerReqDes"
+												class="form-control" rows="3" style="width: 1200px"></textarea>
 										</div>
 
-									</div>
-
-
-									<div class="form-group">
-										<label class="col-sm-2 control-label">附件：</label>
-										<div class="col-sm-4">
-											<div class="file-manager">
-												<button type="button" class="layui-btn" id="test1"
-													style="width: 100%;">
-													<i class="fa fa-cloud"></i>上传文件
-												</button>
-												<input id="customerAttachment" name="customerAttachment"
-													type="hidden">
-											</div>
-										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">公司简介：</label>
-										<div class="col-sm-4">
+										<div class="col-sm-8">
 											<textarea id="customerIntroduction"
 												name="customerIntroduction" class="form-control"
-												style="width: 1200px" rows="3"></textarea>
+												class="form-control" style="width: 1200px" rows="3"></textarea>
 
 										</div>
 									</div>
@@ -481,6 +483,16 @@
 										<div class="col-sm-4">
 											<input id="customerVolume" name="customerVolume"
 												class="form-control" type="text">
+										</div>
+
+										<label class="col-sm-2 control-label"><a
+											style="color: red; font-size: 14px">*&nbsp;</a>热点客户分类：</label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="customerHotClassif"
+												id="customerHotClassif" class="form-control chosen-select"
+												tabindex="2" style="width: 100%">
+												
+											</select>
 										</div>
 									</div>
 									<div class="form-group">
@@ -773,7 +785,8 @@
 													<div class="fixed-table-toolbar">
 														<div class="columns pull-left">
 															<button shiro:hasPermission="sales:competitor:add"
-																type="button" class="btn  btn-primary" onclick="addCompetitor()">
+																type="button" class="btn  btn-primary"
+																onclick="addCompetitor()">
 																<i class="fa fa-plus" aria-hidden="true"></i>添加
 															</button>
 															<button
@@ -890,20 +903,12 @@
 	</div>
 	<div th:include="include::footer"></div>
 	<script type="text/javascript" src="/js/provinceCustomer.js"></script>
-	<script type="text/javascript"
-		src="/js/appjs/sales/companyCustomer/edit.js">
-		
-	</script>
-	<script type="text/javascript"
-		src="/js/appjs/sales/companyCustomer/customerDept.js"></script>
-	<script type="text/javascript"
-		src="/js/appjs/sales/companyCustomer/customerJob.js"></script>
-	<script type="text/javascript"
-		src="/js/appjs/sales/companyCustomer/competitor.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/edit.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/customerDept.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/customerJob.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/competitor.js"></script>
 	<script type="text/javascript" src="/js/province.js"></script>
-	<script type="text/javascript"
-		src="/js/appjs/sales/companyCustomer/customerChild.js"></script>
-	<script type="text/javascript"
-		src="/js/appjs/sales/companyCustomer/companyCustomer.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/customerChild.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/companyCustomer.js"></script>
 </body>
 </html>

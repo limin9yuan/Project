@@ -34,6 +34,7 @@
 		left join sys_user u on a.Customer_Operator = u.user_id
 		left join sys_dict d on d.type='sales_customer_credit_Rank' and d.value=a.Customer_Credit_Rank
 		left join sys_dict e on e.type='sales_customer_level' and e.value=a.Customer_Level
+		left join sys_dict chc on chc.type='sales_Customer_Hot_Classif' and chc.value=a.Customer_Hot_Classif
 		left join  
 		(	select Customer_ID,Contact_Name from  sales_customer_contact 
 			where case when #{contactName} !='' then  contact_Name else  #{contactName} end like #{contactName}
@@ -149,7 +150,6 @@
 			`Customer_Credit_Rank`, 
 			`Customer_Potential`, 
 			`Customer_Emp_Number`, 
-			`Customer_Parent`, 
 			`Customer_Introduction`, 
 			`Customer_Visit_Mode`, 
 			`Customer_Old_ID`, 
@@ -220,7 +220,6 @@
 			#{customerCreditRank}, 
 			#{customerPotential}, 
 			#{customerEmpNumber}, 
-			#{customerParent}, 
 			#{customerIntroduction}, 
 			#{customerVisitMode}, 
 			#{customerOldId}, 

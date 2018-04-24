@@ -3,7 +3,7 @@ $(function() {
 	// getTreeData()
 	// loadCrmData("/inner/innerOrgEmployee/listDic","employeeId");
 	load();
-    validateRule();
+//    validateRule();
 });
 function load() {
 	$('#exampleTable')
@@ -144,18 +144,18 @@ function deleteSendPerson(id) {
 function deleteRecivePerson(id) {
 	$("#"+id).remove();
 }
-function validateRule() {
-	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#signupForm").validate({
-		rules : {
-			name : {
-				required : true
-			}
-		},
-		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
-		}
-	})
-}
+//function validateRule() {
+//	var icon = "<i class='fa fa-times-circle'></i> ";
+//	$("#signupForm").validate({
+//		rules : {
+//			name : {
+//				required : true
+//			}
+//		},
+//		messages : {
+//			name : {
+//				required : icon + "请输入姓名"
+//			}
+//		}
+//	})
+//}

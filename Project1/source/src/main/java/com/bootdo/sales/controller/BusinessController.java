@@ -3,6 +3,7 @@ package com.bootdo.sales.controller;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -123,7 +124,7 @@ public class BusinessController extends BaseController {
 	@RequiresPermissions("sales:business:business")
 	String examineB(@PathVariable("customerId") String customerId, Model model) {
 		model.addAttribute("customerId", customerId);
-		
+	
 		return "sales/companyCustomer/examineBusiness";
 	}
 	

@@ -12,6 +12,7 @@ $().ready(function() {
 	loadDic("sales_customer_credit_Rank", "customerCreditRank");
 	loadDic("sales_customer_potential", "customerPotential");
 	loadDic("sales_customer_visit_Mode", "customerVisitMode");
+
 	loadCrmData("/inner/innerOrgEmployee/listDic", "customerOwner");
 	loadCrmData("/inner/innerOrgEmployee/listDic", "customerSales");
 
@@ -30,6 +31,9 @@ $().ready(function() {
 	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e) {
 		if ($("#customerHotRank option").length == 1) {
 			loadDic("sales_customer_hot_Rank", "customerHotRank");
+		}
+		if($("#customerHotClassif option").length == 1){
+			loadDic("sales_Customer_Hot_Classif","customerHotClassif");
 		}
 
 	});
@@ -211,12 +215,12 @@ function validateRule() {
 			customerInnerPhase : {
 				required : true
 			},
-			customerParent : {
-				required : true
-			},
-//				  label1 : {
+//			customerParent : {
 //				required : true
 //			},
+				  customerHotClassif : {
+				required : true
+			},
 			customerHotRank : {
 				required : true
 			},
@@ -324,12 +328,12 @@ function validateRule() {
 			customerInnerPhase : {
 				required : icon + "请输入客户内部阶段！"
 			},
-			customerParent : {
-				required : icon + "请输入上级单位！"
-			},
-//			label1 : {
-//				required : icon + "热点客户不能为空！"
+//			customerParent : {
+//				required : icon + "请输入上级单位！"
 //			},
+			label1 : {
+				required : icon + "热点客户分类为空！"
+			},
 			customerHotRank : {
 				required : icon + "请热度不能为空！"
 			},

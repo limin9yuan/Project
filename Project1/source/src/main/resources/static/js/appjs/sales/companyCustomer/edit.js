@@ -23,7 +23,9 @@ $().ready(function() {
 			
 			 loadDicValue("sales_customer_hot_Rank","customerHotRank",result.customerHotRank);//热度s
 		 }
-	    
+		 if($("#customerHotClassif option").length == 0){
+			   loadDicValue("sales_Customer_Hot_Classif","customerHotClassif",result.customerHotClassif);//热点客户分类  
+			}
 	 });
 	$('#myTab a[href="#linkInfo"]').on('shown.bs.tab', function(e){
 		
@@ -67,14 +69,14 @@ $().ready(function() {
 //    });
 	validateRule();
 	companyCustomer_edit();
-	if (address == null) {
-		address = new addressResolve({
-			proId : 'province',
-			cityId : 'city',
-			areaId : 'area'
-		});
-		address.init();
-	}
+//	if (address == null) {
+//		address = new addressResolve({
+//			proId : 'province',
+//			cityId : 'city',
+//			areaId : 'area'
+//		});
+//		address.init();
+//	}
 });
 
 
@@ -144,7 +146,7 @@ function validateRule() {
 			customerInnerPhase : {
 				required : true
 			},
-			customerParent : {
+			customerHotClassif : {
 				required : true
 			},
 			customerVolume : {
@@ -233,8 +235,8 @@ function validateRule() {
 			customerInnerPhase : {
 				required : icon + "请输入客户内部阶段！"
 			},
-			customerParent : {
-				required : icon + "请输入上级单位！"
+			customerHotClassif : {
+				required : icon + "请输入热点客户分类！"
 			},			
 			customerVolume : {
 				required : icon + "与其成交金额不能为空！",
@@ -337,7 +339,7 @@ function companyCustomer_edit(){
 			
 			$("input[name='customerParent']").val(result.customerParent);//上级单位//
 			
-			$("input[name='customerReqDes']").val(result.customerReqDes);//需求简要描述//
+			$("textarea[name='customerReqDes']").val(result.customerReqDes);//需求简要描述//
 			
 			$("input[name='customerOldId']").val(result.customerOldId);//旧客户编号//
 			
@@ -364,7 +366,7 @@ function companyCustomer_edit(){
 			$("input[name='customerVolume']").val(result.customerVolume);//预期成交金额
 			
 			$("input[name='customerHotDesc']").val(result.customerHotDesc);//热点说明
-						  
+		
 			
 			
 			//开票信息

@@ -190,10 +190,6 @@ $(function() {
 									title : '客户内部阶段'
 								}, {
 									align : 'center',
-									field : 'customerParent',
-									title : '上级单位'
-								}, {
-									align : 'center',
 									field : 'customerHot',
 									title : '热点客户'
 								}, {
@@ -299,7 +295,7 @@ function add() {
 		area : [ '95%', '95%' ],
 		content : prefix + '/add' // iframe的url
 	});
-}
+} 
 function edit(id) {
 	parent.layer.open({
 		type : 2,
@@ -308,6 +304,16 @@ function edit(id) {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '80%', '80%' ],
 		content : prefix + '/edit/' + id // iframe的url
+	});
+}
+function examineEdit() {
+	parent.layer.open({
+		type : 2,
+		title : '编辑',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '80%', '80%' ],
+		content : prefix + '/edit/' + $(customerId).val() // iframe的url
 	});
 }
 function remove(id) {
@@ -319,6 +325,27 @@ function remove(id) {
 			type : "post",
 			data : {
 				'customerId' : id
+			},
+			success : function(r) {
+				if (r.code == 0) {
+					layer.msg(r.msg);
+					reLoad();
+				} else {
+					layer.msg(r.msg);
+				}
+			}
+		});
+	})
+}
+function examineRemove() {
+	layer.confirm('确定要删除选中的记录？删除后不可恢复！', {
+		btn : [ '确定', '取消' ]
+	}, function() {
+		$.ajax({
+			url : prefix + "/remove",
+			type : "post",
+			data : {
+				'customerId' :$(customerId).val()
 			},
 			success : function(r) {
 				if (r.code == 0) {

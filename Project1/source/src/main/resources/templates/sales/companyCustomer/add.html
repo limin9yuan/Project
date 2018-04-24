@@ -198,12 +198,12 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-sm-2 control-label"><a
-											style="color: red;">*&nbsp;</a>上级单位：</label>
-										<div class="col-sm-4">
-											<input id="customerParent" name="customerParent"
-												class="form-control" type="text">
-										</div>
+<!-- 										<label class="col-sm-2 control-label"><a -->
+<!-- 											style="color: red;">*&nbsp;</a>上级单位：</label> -->
+<!-- 										<div class="col-sm-4"> -->
+<!-- 											<input id="customerParent" name="customerParent" -->
+<!-- 												class="form-control" type="text"> -->
+<!-- 										</div> -->
 										<label class="col-sm-2 control-label">拜访交通方式：</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="customerVisitMode"
@@ -212,28 +212,15 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-									</div>
-
-									<div class="form-group">
-										<label class="col-sm-2 control-label">公司简介：</label>
-										<div class="col-sm-4">
-											<textarea id="customerIntroduction"
-												name="customerIntroduction" class="form-control" rows="3"></textarea>
-										</div>
-										<label class="col-sm-2 control-label">需求简要描述：</label>
-										<div class="col-sm-4">
-											<input id="customerReqDes" name="customerReqDes"
-												class="form-control" type="text">
-										</div>
-									</div>
-
-									<div class="form-group">
 										<label class="col-sm-2 control-label">旧客户编号：</label>
 										<div class="col-sm-4">
 											<input id="customerOldId" name="customerOldId"
 												class="form-control" type="text">
 										</div>
 									</div>
+
+									
+
 									<div class="form-group">
 										<label class="col-sm-2 control-label">附件：</label>
 										<div class="col-sm-4">
@@ -247,6 +234,23 @@
 											</div>
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">公司简介：</label>
+										<div class="col-sm-8">
+											<textarea id="customerIntroduction"
+												name="customerIntroduction" class="form-control" rows="3"></textarea>
+										</div>
+										
+									</div>
+									<div class="form-group">
+									<label class="col-sm-2 control-label">需求简要描述：</label>
+										<div class="col-sm-8">
+											<textarea id="customerReqDes" name="customerReqDes"
+												class="form-control"  rows="3"></textarea>
+										</div>
+									
+									</div>
+									
 									<div class="form-group">
 										<label class="col-sm-2 control-label">备注：</label>
 										<div class="col-sm-8">
@@ -498,6 +502,16 @@
 										<div class="col-sm-4">
 											<input id="customerVolume" name="customerVolume"
 												class="form-control" type="text">
+										</div>
+										
+										
+										<label class="col-sm-2 control-label"><a style="color: red; font-size: 14px">*&nbsp;</a>热点客户分类：</label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="customerHotClassif"
+												id="customerHotClassif" class="form-control chosen-select"
+												tabindex="2" style="width: 100%">
+												<option value="">请选择</option>
+											</select>
 										</div>
 									</div>
 									<div class="form-group">
@@ -923,13 +937,10 @@
 	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/add.js"></script>
 	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/competitor.js"></script>
 	<script type="text/javascript" src="/js/province.js"></script>
-	<!-- 		<script type="text/javascript" src="/js/appjs/sales/customerContact/add.js"></script> -->
+<!-- 			<script type="text/javascript" src="/js/appjs/sales/customerContact/add.js"></script> -->
 <!-- 	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/editChild.js"></script> -->
-	<!-- <script type="text/javascript" src="/js/appjs/sales/companyCustomer/sendToReceivePerson.js"></script> -->
+<!-- 	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/sendToReceivePerson.js"></script> -->
 	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/customerChild.js"></script>
-	<script type="text/javascript"
-		src="/js/appjs/sales/companyCustomer/customerChild.js"></script>
-	<script type="text/javascript"
-		src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
+	<script type="text/javascript" src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
 </body>
 </html>
