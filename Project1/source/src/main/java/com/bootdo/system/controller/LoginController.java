@@ -1,7 +1,15 @@
 package com.bootdo.system.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import com.bootdo.common.domain.MainDO;
+import com.bootdo.common.utils.Query;
+import com.bootdo.contract.domain.ContractDO;
+import com.bootdo.contract.service.ContractService;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.LogoutAware;
@@ -14,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootdo.common.annotation.Log;
@@ -31,6 +40,8 @@ public class LoginController extends BaseController {
 
 	@Autowired
 	MenuService menuService;
+    @Autowired
+    private ContractService contractService;
 
 	@GetMapping({ "/", "" })
 	String welcome(Model model) {
@@ -93,7 +104,15 @@ public class LoginController extends BaseController {
 	}
 
 	@GetMapping("/main")
-	String main() {
+	String main(@RequestParam Map<String, Object> params, Model model) {
+       Calendar date = Calendar.getInstance();
+       String currentYear = String.valueOf(date.get(Calendar.YEAR));
+       params.put("offset",1);
+       params.put("limit",2);
+       params.put("currentYear",currentYear);
+       Query query = new Query(params);
+       List<MainDO> contractGetDataList = contractService.getDataList(query);
+       model.addAttribute("contractGetDataList", contractGetDataList);
 		return "main";
 	}
 

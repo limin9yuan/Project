@@ -1,6 +1,7 @@
 package com.bootdo.contract.dao;
 
 import com.bootdo.common.domain.DictDO;
+import com.bootdo.common.domain.MainDO;
 import com.bootdo.contract.domain.ContractDO;
 
 import java.util.List;
@@ -18,6 +19,8 @@ import org.apache.ibatis.annotations.Mapper;
 public interface ContractDao {
 
 	ContractDO get(String contractId);
+
+    List<MainDO> getDataList(Map<String,Object> map);
 
 	ContractDO view(String contractId);
 

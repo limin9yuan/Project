@@ -54,6 +54,9 @@ public class PaidDO implements Serializable {
 	//项目编号
 	private String projectId;
 	
+	//付款类型
+	private int paidmentType;
+	
 	
 
 	/**
@@ -241,6 +244,12 @@ public class PaidDO implements Serializable {
 	}
 	public void setProjectId(String projectId) {
 		this.projectId = projectId;
+	}
+	public int getPaidmentType() {
+		return paidmentType;
+	}
+	public void setPaidmentType(int paidmentType) {
+		this.paidmentType = paidmentType;
 	}
 	
 	

@@ -3,6 +3,7 @@ package com.bootdo.contract.service.impl;
 import com.bootdo.activiti.config.ActivitiConstant;
 import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.service.impl.ActTaskServiceImpl;
+import com.bootdo.common.domain.MainDO;
 import com.bootdo.contract.domain.TravelDO;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -60,6 +61,11 @@ public class ContractServiceImpl implements ContractService {
 	public ContractDO view(String contractId) {
 		return contractDao.view(contractId);
 	}
+
+    @Override
+    public List<MainDO> getDataList(Map<String, Object> map) {
+        return contractDao.getDataList(map);
+    }
 
 	@Override
 	public List<ContractDO> list(Map<String, Object> map) {

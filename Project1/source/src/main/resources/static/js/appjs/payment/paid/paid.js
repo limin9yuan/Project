@@ -74,9 +74,6 @@ function load() {
 									field : 'paidTime', 
 									title : '付款时间' 
 								},{
-									field : 'receiptDelayTime', 
-									title : '收款延迟时间' 
-								},{
 									field : 'paidPrice', 
 									title : '付款金额' 
 								},{
@@ -91,7 +88,7 @@ function load() {
 								},{
 									field : 'paidStatus', 
 									title : '合同状态' 
-								},{
+								}/*,{
 									field : 'projectOwnerName', 
 									title : '项目经理' 
 								},{

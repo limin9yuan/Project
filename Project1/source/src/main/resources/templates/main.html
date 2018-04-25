@@ -93,119 +93,23 @@
                       <th class="month">12月</th>
                       <th class="month">合计</th>
                     </tr>
-                    <tr>
-                      <td>项目合同金额</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>项目回款金额</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                    <tr th:each="gdl, iterStat : ${contractGetDataList}">
+                      <td th:text="${gdl.name}"></td>
+                      <td th:text="${gdl.January}"></td>
+                      <td th:text="${gdl.February}"></td>
+                      <td th:text="${gdl.March}"></td>
+                      <td th:text="${gdl.April}"></td>
+                      <td th:text="${gdl.May}"></td>
+                      <td th:text="${gdl.June}"></td>
+                      <td th:text="${gdl.July}"></td>
+                      <td th:text="${gdl.August}"></td>
+                      <td th:text="${gdl.September}"></td>
+                      <td th:text="${gdl.October}"></td>
+                      <td th:text="${gdl.November}"></td>
+                      <td th:text="${gdl.December}"></td>
                       <td></td>
                     </tr>
-                    <tr>
-                      <td>项目付款金额</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>项目人力成本</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>项目差旅报销</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>其他报销</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>项目采购成本</td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
+                    <!-- <tr>
                       <td>未扣除其他成本利润</td>
                       <td></td>
                       <td></td>
@@ -220,7 +124,7 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                    </tr>
+                    </tr> -->
                 </table>
             </div>
             <div id="firstPieChart" style="width: 20%;height:300px;float:right;"></div>

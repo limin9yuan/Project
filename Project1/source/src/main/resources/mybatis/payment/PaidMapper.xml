@@ -20,7 +20,7 @@
 		`Paid_Remarks`,`Paid_Operator`,`Paid_Operate_Time`,
 		b.`Contract_Total_Price`as `Paid_Account_Price`
 		from payment_paid a
-		left join contract b on a.`Contract__D`=b.`Contract_ID`
+		left join contract b on a.`Contract_ID`=b.`Contract_ID`
         left join development_project c on b.`Project_ID`=c.`Project_ID`
         left join inner_org_employee d on d.`Employee_ID`=c.`Project_Owner`
         <where>  

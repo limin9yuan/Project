@@ -115,11 +115,6 @@ public class TimesheetServiceImpl implements TimesheetService {
 				timesheet.getTaskComment(),"",vars);
 		//判断流程是否结束
 		if(actTaskService.isProcessInstanceFinish(timesheet.getProcessInstanceId())){
-			timesheet.setTimesheetApprovalStatus(1);
-		}else{
-			timesheet.setTimesheetApprovalStatus(0);
-		}
-		if(actTaskService.isProcessInstanceFinish(timesheet.getProcessInstanceId())){
 			timesheet.setTimesheetApprovalStatus("1");
 			timesheet.setAssignmentApprovalTime(new Date());
 		}else{
@@ -137,9 +132,9 @@ public class TimesheetServiceImpl implements TimesheetService {
 		actTaskService.complete(timesheet.getTaskId(),timesheet.getProcessInstanceId(),timesheet.getTaskComment(),"",vars);
         //判断流程是否结束
 		if(actTaskService.isProcessInstanceFinish(timesheet.getProcessInstanceId())){
-			timesheet.setTimesheetApprovalStatus(1);
+			timesheet.setTimesheetApprovalStatus("1");
 		}else{
-			timesheet.setTimesheetApprovalStatus(0);
+			timesheet.setTimesheetApprovalStatus("0");
 		}
 		return timesheetDao.update(timesheet);
 	}

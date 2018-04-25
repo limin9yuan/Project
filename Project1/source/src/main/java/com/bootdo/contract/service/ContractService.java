@@ -1,6 +1,7 @@
 package com.bootdo.contract.service;
 
 import com.bootdo.common.domain.DictDO;
+import com.bootdo.common.domain.MainDO;
 import com.bootdo.contract.domain.ContractDO;
 import com.bootdo.contract.domain.TravelDO;
 import com.bootdo.payment.domain.ContractApprovalDO;
@@ -22,7 +23,9 @@ import javax.servlet.ServletOutputStream;
 public interface ContractService {
 	
 	ContractDO get(String contractId);
-	
+
+	List<MainDO> getDataList(Map<String, Object> map);
+
 	List<ContractDO> list(Map<String, Object> map);
 
 	ContractDO view(String contractId);

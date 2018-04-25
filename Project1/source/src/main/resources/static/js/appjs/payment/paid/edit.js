@@ -105,6 +105,7 @@ function paidMapper_edit(){
 		},
 		success : function(data) {
 			var result = data.paid;
+			$("input[name='purchaseId']").val(result.purchaseId);
 			$("input[name='paidId']").val(result.paidId);
 			$("input[name='paidPrice']").val(result.paidPrice);
 			$("input[name='paidAccountPrice']").val(result.paidAccountPrice);
@@ -116,4 +117,25 @@ function paidMapper_edit(){
 			$("textarea[name='paidRemarks']").val(result.paidRemarks);		
 		}
 	});
+}
+function getType(){
+	var paidmentType=$("#paidmentType").val();
+	if(paidmentType=="0"){
+		$("#typeName").html("采购编号");
+		$("#purchaseId").val("");
+	}	
+	if(paidmentType=="1"){
+		$("#typeName").html("合同编号");
+		$("#purchaseId").val("");
+	}
+	
+};
+function openSelectWin(){
+	var paidmentType=$("#paidmentType").val();
+	if(paidmentType=="0"){
+		addPurchase();
+	}	
+	if(paidmentType=="1"){
+		addContract();
+	}
 }

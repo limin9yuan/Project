@@ -73,6 +73,7 @@ public class ContractDO implements Serializable {
 	
 	//收款合计金额
 	private BigDecimal contractReceivablePrice;
+
 	//**********************流程相关属性****************************
 	//流程任务ID
 	private String taskId;

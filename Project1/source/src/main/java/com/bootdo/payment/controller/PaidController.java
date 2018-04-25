@@ -95,11 +95,25 @@ public class PaidController extends BaseController {
 	
 	/**
 	 * 保存
+	 * @param paidmentType 
+	 * @param purchaseId 
 	 */
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("payment:paid:add")
-	public R save( PaidDO paid){
+	public R save( PaidDO paid, String paidmentType, String purchaseId){
+		//Map<String, Object> params = new HashMap<>(16);
+		//params.put("paidmentType",10);
+		//params.put("purchaseId",10);
+		//Integer.parseInt(paidmentType); 
+		if(Integer.parseInt(paidmentType)==0){
+			paid.setPurchaseId(purchaseId); 
+			paid.setContractId(""); 
+		}
+		else if(Integer.parseInt(paidmentType)==1){
+			paid.setContractId(purchaseId);
+			paid.setPurchaseId("");			
+		}
 		paid.setPaidOperator(getUserId());
 		if(paidService.save(paid)>0){
 			return R.ok();
@@ -112,7 +126,15 @@ public class PaidController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("payment:paid:edit")
-	public R update( PaidDO paid){
+	public R update( PaidDO paid, String paidmentType, String purchaseId){
+		if(Integer.parseInt(paidmentType)==0){
+			paid.setPurchaseId(purchaseId); 
+			paid.setContractId(""); 
+		}
+		else if(Integer.parseInt(paidmentType)==1){
+			paid.setContractId(purchaseId);
+			paid.setPurchaseId("");			
+		}
 		paid.setPaidOperator(getUserId());
 		paidService.update(paid);
 		return R.ok();

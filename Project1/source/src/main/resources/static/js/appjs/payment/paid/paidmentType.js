@@ -90,8 +90,9 @@ function getPurchase() {
 
     // 遍历所有选择的行数据，取每条数据对应的ID
     $.each(rows, function(i, row) {
-    	alert(row['purchaseId']);
-        $("#myLabel",window.parent.document).val(row['purchaseId']);
+    	//alert(row['purchaseId']);
+        $("#purchaseId",window.parent.document).val(row['purchaseId']);
+        $("#paidAccountPrice",window.parent.document).val(row['purchaseTotalPrice']);
     });
     //alert(purchaseIds.text);
     closeWin();
@@ -176,7 +177,8 @@ function getContract() {
 	// var isCopyPerson = 2;
     // 遍历所有选择的行数据，取每条数据对应的ID
     $.each(rows, function(i, row) {
-        $("#myLabel",window.parent.document).val(row['contractId']);
+        $("#purchaseId",window.parent.document).val(row['contractId']);
+        $("#paidAccountPrice",window.parent.document).val(row['contractTotalPrice']);
     });
     closeWin();
 }
