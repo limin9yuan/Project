@@ -38,6 +38,211 @@
 		where a.Contract_ID = #{value}
 	</select>
 
+	<select id="getData" resultType="com.bootdo.contract.domain.ContractDO">
+		SELECT CASE WHEN MONTH(Contract_Commit_Time) = '1'
+			THEN SUM(Contract_Total_Price)END as '1月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '2'
+			THEN SUM(Contract_Total_Price)END as '2月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '3'
+			THEN SUM(Contract_Total_Price)END as '3月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '4'
+			THEN SUM(Contract_Total_Price)END as '4月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '5'
+			THEN SUM(Contract_Total_Price)END as '5月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '6'
+			THEN SUM(Contract_Total_Price)END as '6月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '7'
+			THEN SUM(Contract_Total_Price)END as '7月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '8'
+			THEN SUM(Contract_Total_Price)END as '8月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '9'
+			THEN SUM(Contract_Total_Price)END as '9月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '10'
+			THEN SUM(Contract_Total_Price)END as '10月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '11'
+			THEN SUM(Contract_Total_Price)END as '11月',
+			CASE WHEN MONTH(Contract_Commit_Time) = '12'
+			THEN SUM(Contract_Total_Price)END as '12月'
+        FROM contract
+        WHERE YEAR(Contract_Commit_Time) = #{value} and Contract_Approval_Status = '1'
+        UNION ALL
+        SELECT CASE WHEN MONTH(Received_Time) = '1'
+			THEN SUM(Received_Price)END as '1月',
+			CASE WHEN MONTH(Received_Time) = '2'
+			THEN SUM(Received_Price)END as '2月',
+			CASE WHEN MONTH(Received_Time) = '3'
+			THEN SUM(Received_Price)END as '3月',
+			CASE WHEN MONTH(Received_Time) = '4'
+			THEN SUM(Received_Price)END as '4月',
+			CASE WHEN MONTH(Received_Time) = '5'
+			THEN SUM(Received_Price)END as '5月',
+			CASE WHEN MONTH(Received_Time) = '6'
+			THEN SUM(Received_Price)END as '6月',
+			CASE WHEN MONTH(Received_Time) = '7'
+			THEN SUM(Received_Price)END as '7月',
+			CASE WHEN MONTH(Received_Time) = '8'
+			THEN SUM(Received_Price)END as '8月',
+			CASE WHEN MONTH(Received_Time) = '9'
+			THEN SUM(Received_Price)END as '9月',
+			CASE WHEN MONTH(Received_Time) = '10'
+			THEN SUM(Received_Price)END as '10月',
+			CASE WHEN MONTH(Received_Time) = '11'
+			THEN SUM(Received_Price)END as '11月',
+			CASE WHEN MONTH(Received_Time) = '12'
+			THEN SUM(Received_Price)END as '12月'
+        FROM payment_received
+        WHERE YEAR(Received_Time) = #{value}
+        UNION ALL
+        SELECT CASE WHEN MONTH(Paid_Time) = '1'
+			THEN SUM(Paid_Price)END as '1月',
+			CASE WHEN MONTH(Paid_Time) = '2'
+			THEN SUM(Paid_Price)END as '2月',
+			CASE WHEN MONTH(Paid_Time) = '3'
+			THEN SUM(Paid_Price)END as '3月',
+			CASE WHEN MONTH(Paid_Time) = '4'
+			THEN SUM(Paid_Price)END as '4月',
+			CASE WHEN MONTH(Paid_Time) = '5'
+			THEN SUM(Paid_Price)END as '5月',
+			CASE WHEN MONTH(Paid_Time) = '6'
+			THEN SUM(Paid_Price)END as '6月',
+			CASE WHEN MONTH(Paid_Time) = '7'
+			THEN SUM(Paid_Price)END as '7月',
+			CASE WHEN MONTH(Paid_Time) = '8'
+			THEN SUM(Paid_Price)END as '8月',
+			CASE WHEN MONTH(Paid_Time) = '9'
+			THEN SUM(Paid_Price)END as '9月',
+			CASE WHEN MONTH(Paid_Time) = '10'
+			THEN SUM(Paid_Price)END as '10月',
+			CASE WHEN MONTH(Paid_Time) = '11'
+			THEN SUM(Paid_Price)END as '11月',
+			CASE WHEN MONTH(Paid_Time) = '12'
+			THEN SUM(Paid_Price)END as '12月'
+        FROM payment_paid
+        WHERE YEAR(Paid_Time) = #{value}
+        UNION ALL
+        SELECT CASE WHEN MONTH(TimeSheet_Date) = '1'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '1月',
+			CASE WHEN MONTH(TimeSheet_Date) = '2'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '2月',
+			CASE WHEN MONTH(TimeSheet_Date) = '3'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '3月',
+			CASE WHEN MONTH(TimeSheet_Date) = '4'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '4月',
+			CASE WHEN MONTH(TimeSheet_Date) = '5'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '5月',
+			CASE WHEN MONTH(TimeSheet_Date) = '6'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '6月',
+			CASE WHEN MONTH(TimeSheet_Date) = '7'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '7月',
+			CASE WHEN MONTH(TimeSheet_Date) = '8'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '8月',
+			CASE WHEN MONTH(TimeSheet_Date) = '9'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '9月',
+			CASE WHEN MONTH(TimeSheet_Date) = '10'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '10月',
+			CASE WHEN MONTH(TimeSheet_Date) = '11'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '11月',
+			CASE WHEN MONTH(TimeSheet_Date) = '12'
+			THEN SUM(a.TimeSheet_Normal * b.Employee_Salary_Hour +
+			        a.TimeSheet_Overtime * b.Employee_Salary_Hour)END as '12月'
+        FROM timesheet a
+        LEFT JOIN inner_org_employee b on a.Employee_ID = b.Employee_ID
+        WHERE YEAR(TimeSheet_Date) = #{value} and TimeSheet_Approval_Status = '1'
+        UNION ALL
+        SELECT CASE WHEN MONTH(Expenses_Travel_Create_Time) = '1'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '1月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '2'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '2月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '3'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '3月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '4'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '4月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '5'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '5月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '6'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '6月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '7'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '7月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '8'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '8月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '9'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '9月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '10'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '10月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '11'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '11月',
+			CASE WHEN MONTH(Expenses_Travel_Create_Time) = '12'
+			THEN SUM(Expenses_Travel_Pay_Price)END as '12月'
+        FROM approval_expenses__travel
+        WHERE YEAR(Expenses_Travel_Create_Time) = #{value} and Expenses_Travel_Status = '1'
+        UNION ALL
+        SELECT CASE WHEN MONTH(Expenses_Normal_Create_Time) = '1'
+			THEN SUM(Expenses_Normal_Price)END as '1月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '2'
+			THEN SUM(Expenses_Normal_Price)END as '2月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '3'
+			THEN SUM(Expenses_Normal_Price)END as '3月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '4'
+			THEN SUM(Expenses_Normal_Price)END as '4月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '5'
+			THEN SUM(Expenses_Normal_Price)END as '5月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '6'
+			THEN SUM(Expenses_Normal_Price)END as '6月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '7'
+			THEN SUM(Expenses_Normal_Price)END as '7月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '8'
+			THEN SUM(Expenses_Normal_Price)END as '8月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '9'
+			THEN SUM(Expenses_Normal_Price)END as '9月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '10'
+			THEN SUM(Expenses_Normal_Price)END as '10月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '11'
+			THEN SUM(Expenses_Normal_Price)END as '11月',
+			CASE WHEN MONTH(Expenses_Normal_Create_Time) = '12'
+			THEN SUM(Expenses_Normal_Price)END as '12月'
+        FROM approval_expenses_normal
+        WHERE YEAR(Expenses_Normal_Create_Time) = #{value} and Expenses_Normal_Status = '1'
+        UNION ALL
+        SELECT CASE WHEN MONTH(Purchase_Create_Time) = '1'
+			THEN SUM(Purchase_Total_Price)END as '1月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '2'
+			THEN SUM(Purchase_Total_Price)END as '2月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '3'
+			THEN SUM(Purchase_Total_Price)END as '3月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '4'
+			THEN SUM(Purchase_Total_Price)END as '4月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '5'
+			THEN SUM(Purchase_Total_Price)END as '5月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '6'
+			THEN SUM(Purchase_Total_Price)END as '6月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '7'
+			THEN SUM(Purchase_Total_Price)END as '7月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '8'
+			THEN SUM(Purchase_Total_Price)END as '8月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '9'
+			THEN SUM(Purchase_Total_Price)END as '9月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '10'
+			THEN SUM(Purchase_Total_Price)END as '10月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '11'
+			THEN SUM(Purchase_Total_Price)END as '11月',
+			CASE WHEN MONTH(Purchase_Create_Time) = '12'
+			THEN SUM(Purchase_Total_Price)END as '12月'
+        FROM approval_purchase
+        WHERE YEAR(Purchase_Create_Time) = #{value} and Purchase_Approval_Status = '1'
+
+	</select>
+
 	<select id="list" resultType="com.bootdo.contract.domain.ContractDO">
 		select a.`Contract_ID`,a.`Customer_ID`,`Business_ID`,`Contract_Name`,`Contract_Applicant_Name`,
 		`Contract_Build_Company`,`Contract_Type`,`Contract_Category`,`Contract_Total_Price`,

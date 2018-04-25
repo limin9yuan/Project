@@ -2,12 +2,12 @@ var prefix = "/timesheet/timesheet"
 
 $().ready(function() {
 
-	loadCrmData("/sales/companyCustomer/listDic","customerId");
+	//loadCrmData("/sales/companyCustomer/listDic","customerId");
 	loadCrmData("/sales/business/listDic","businessId");
 	loadCrmData("/sales/salesProject/listAllDic","projectId");
 	loadCrmData("/inner/orgJob/listDic","jobId");
 
-	loadCrmData("/inner/innerOrgEmployee/listDic","customerId");
+	//loadCrmData("/inner/innerOrgEmployee/listDic","customerId");
 
 	loadCrmData("/inner/innerOrgEmployee/listDic","assignmentPerson");
 	loadCrmData("/inner/innerOrgEmployee/listDic","assignmentPrincipal");
@@ -21,12 +21,14 @@ $("#projectId").bind("change",getProjectId);
 datetimepicker();
 	validateRule();
 });
+
 function getProjectId(){
 	$.ajax({
 		url : '/timesheet/timesheet/getProjectId/'+$("#projectId").val(),
 		type : "get",
 		data : {
 			'projectId' : $("#projectId").val()
+
 		},
 		success : function(data) {
 			var result = data.project;
@@ -42,6 +44,7 @@ function getProjectId(){
         	$("input[name='timesheetPm']").val(result.employeeName);
 			$("input[name='timesheetProjectCagegory']").val(result.projectGategory);
 			$("input[name='assignmentProjectCagegory']").val(result.projectGategory);
+
 		}
 	});
 }

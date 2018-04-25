@@ -6,11 +6,11 @@ $().ready(function() {
 });
 function datetimepicker() {
 	$('#pickDate').datetimepicker({
-		format : 'YYYY-MM-DD',
+		format : 'YYYY',
 		locale : moment.locale('zh-cn')
 	});
     $('#pickTime').datetimepicker({
-		format : 'YYYY-MM-DD',
+		format : 'YYYY',
 		locale : moment.locale('zh-cn')
 	});
 }

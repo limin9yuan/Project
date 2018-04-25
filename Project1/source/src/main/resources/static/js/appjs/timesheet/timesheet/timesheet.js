@@ -135,8 +135,6 @@ function load() {
 																{
 									field : 'projectName',
 									title : '项目名称'
-
-
 								},
 
 																{
@@ -152,7 +150,7 @@ function load() {
 
                                         var a='<div  align=center><p>'+row.contentDate1+'<p><div2  align=center> <p2>'+row.normalDate1+'<p2> <p3>'+row.overDate1+'<p3></div2> ';
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''+ row.idDate1+ '\')"><i class="fa fa-edit"></i></a> ';
-var c=-1;
+                              var c=-1;
                                var m = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\'' + c + '\',\''+row.projectId+'\')"><i class="fa fa-edit"></i></a> ';
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.idDate1
@@ -182,7 +180,7 @@ var c=-1;
                                formatter : function(value, row, index) {
                                 var a='<div align=center><p>'+row.contentDate2+'<p><div2  align=center> <p2>'+row.normalDate2+'<p2> <p3>'+row.overDate2+'<p3></div2> ';
 
-var c=-1;
+                            var c=-1;
                                var m = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\'' + c + '\',\''+row.projectId+'\')"><i class="fa fa-edit"></i></a> ';
                                var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
                                 + row.idDate2
@@ -207,9 +205,9 @@ var c=-1;
                                   {
                                   return a;
                                   }
-}
+                               }
                                 								},
-{
+                            {
                                title : "<div id='test3'>"+$('#Date3').val()+"<br>星期三</br></div>",
                                 field : 'timesheetId',
                                align : 'center',
@@ -244,7 +242,7 @@ var c=-1;
                                 									}
 
                                 								},
-{
+                      {
                                title : "<div id='test4'>"+$('#Date4').val()+"<br>星期四</br></div>",
                               field : 'timesheetId',
                                align : 'center',

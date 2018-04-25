@@ -64,8 +64,18 @@ public class PayoutDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
+	//流程审批时间
+	private Date payoutApprovalTime;
 
-	public String getTaskId() {
+    public Date getPayoutApprovalTime() {
+        return payoutApprovalTime;
+    }
+
+    public void setPayoutApprovalTime(Date payoutApprovalTime) {
+        this.payoutApprovalTime = payoutApprovalTime;
+    }
+
+    public String getTaskId() {
 		return taskId;
 	}
 

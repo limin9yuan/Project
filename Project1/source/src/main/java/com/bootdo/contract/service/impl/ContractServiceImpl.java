@@ -105,6 +105,7 @@ public class ContractServiceImpl implements ContractService {
        //判断流程是否结束
        if(actTaskService.isProcessInstanceFinish(contract.getProcessInstanceId())){
            contract.setContractApprovalStatus("1");
+           contract.setContractApprovalTime(new Date());
        }else{
            contract.setContractApprovalStatus("0");
        }

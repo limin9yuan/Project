@@ -67,8 +67,18 @@ public class ExpensesTravelDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
+	//流程审批时间
+	private Date expensesTravelApprovalTime;
 
-	public String getTaskComment() {
+    public Date getExpensesTravelApprovalTime() {
+        return expensesTravelApprovalTime;
+    }
+
+    public void setExpensesTravelApprovalTime(Date expensesTravelApprovalTime) {
+        this.expensesTravelApprovalTime = expensesTravelApprovalTime;
+    }
+
+    public String getTaskComment() {
 		return taskComment;
 	}
 

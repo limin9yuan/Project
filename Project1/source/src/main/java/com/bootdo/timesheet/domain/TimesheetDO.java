@@ -51,7 +51,7 @@ public class TimesheetDO extends AssignmentDO implements Serializable {
 	//关联工作委托编号
 	private String timesheetAssignmentId;
 	//审批状态
-	private Integer timesheetApprovalStatus;
+	private String timesheetApprovalStatus;
 	//操作时间
 	private Date timesheetOperateTime;
 	//业务名称
@@ -179,7 +179,16 @@ public class TimesheetDO extends AssignmentDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
+	//流程审批时间
+	private Date timeSheetApprovalTime;
 
+	public Date getTimeSheetApprovalTime() {
+		return timeSheetApprovalTime;
+	}
+
+	public void setTimeSheetApprovalTime(Date timeSheetApprovalTime) {
+		this.timeSheetApprovalTime = timeSheetApprovalTime;
+	}
 
 	public int getTimeSheetApprovalStatusDate2() {
 		return TimeSheetApprovalStatusDate2;
@@ -508,13 +517,13 @@ public class TimesheetDO extends AssignmentDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setTimesheetApprovalStatus(Integer timesheetApprovalStatus) {
+	public void setTimesheetApprovalStatus(String timesheetApprovalStatus) {
 		this.timesheetApprovalStatus = timesheetApprovalStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public Integer getTimesheetApprovalStatus() {
+	public String getTimesheetApprovalStatus() {
 		return timesheetApprovalStatus;
 	}
 	/**

@@ -80,8 +80,18 @@ public class PurchaseDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
+	//流程审批时间
+	private Date purchaseApprovalTime;
 
-    public String getTaskComment() {
+	public Date getPurchaseApprovalTime() {
+		return purchaseApprovalTime;
+	}
+
+	public void setPurchaseApprovalTime(Date purchaseApprovalTime) {
+		this.purchaseApprovalTime = purchaseApprovalTime;
+	}
+
+	public String getTaskComment() {
         return taskComment;
     }
 

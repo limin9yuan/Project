@@ -88,6 +88,16 @@ public class AssignmentDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
+	//流程审批时间
+	private Date assignmentApprovalTime;
+
+	public Date getAssignmentApprovalTime() {
+		return assignmentApprovalTime;
+	}
+
+	public void setAssignmentApprovalTime(Date assignmentApprovalTime) {
+		this.assignmentApprovalTime = assignmentApprovalTime;
+	}
 
 	public String getTaskComment() {
 		return taskComment;

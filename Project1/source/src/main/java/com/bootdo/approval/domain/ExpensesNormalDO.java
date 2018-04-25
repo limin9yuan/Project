@@ -55,8 +55,18 @@ public class ExpensesNormalDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
+	//流程审批时间
+	private Date expensesNormalApprovalTime;
 
-	public String getTaskComment() {
+    public Date getExpensesNormalApprovalTime() {
+        return expensesNormalApprovalTime;
+    }
+
+    public void setExpensesNormalApprovalTime(Date expensesNormalApprovalTime) {
+        this.expensesNormalApprovalTime = expensesNormalApprovalTime;
+    }
+
+    public String getTaskComment() {
 		return taskComment;
 	}
 

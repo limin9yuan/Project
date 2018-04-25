@@ -77,6 +77,7 @@ public class PayoutServiceImpl implements PayoutService {
 		//判断流程是否结束
 		if(actTaskService.isProcessInstanceFinish(payout.getProcessInstanceId())){
 			payout.setPayoutApprovalStatus("1");
+			payout.setPayoutApprovalTime(new Date());
 		}else{
 			payout.setPayoutApprovalStatus("0");
 		}

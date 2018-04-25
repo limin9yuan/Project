@@ -8,6 +8,7 @@ import com.bootdo.contract.dao.ContractDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public class TimesheetServiceImpl implements TimesheetService {
 	}
 	@Override
 	public List<TimesheetDO> approvelist(Map<String, Object> map){
-		return timesheetDao.list(map);
+		return timesheetDao.approvelist(map);
 	}
 	
 	@Override
@@ -110,8 +111,36 @@ public class TimesheetServiceImpl implements TimesheetService {
 		//流程审批处理
 		Map<String,Object> vars = new HashMap<>(16);
 		vars.put("taskAction",  timesheet.getTaskAction() );
-		actTaskService.complete(timesheet.getTaskId(),timesheet.getProcessInstanceId(),timesheet.getTaskComment(),"",vars);
+		actTaskService.complete(timesheet.getTaskId(),timesheet.getProcessInstanceId(),
+				timesheet.getTaskComment(),"",vars);
+		//判断流程是否结束
+		if(actTaskService.isProcessInstanceFinish(timesheet.getProcessInstanceId())){
+			timesheet.setTimesheetApprovalStatus(1);
+		}else{
+			timesheet.setTimesheetApprovalStatus(0);
+		}
+		if(actTaskService.isProcessInstanceFinish(timesheet.getProcessInstanceId())){
+			timesheet.setTimesheetApprovalStatus("1");
+			timesheet.setAssignmentApprovalTime(new Date());
+		}else{
+			timesheet.setTimesheetApprovalStatus("0");
+		}
 
+		return timesheetDao.update(timesheet);
+	}
+	//审批处理保存
+	@Override
+	public int formUpdateall(TimesheetDO timesheet){
+		//流程审批处理
+		Map<String,Object> vars = new HashMap<>(16);
+		vars.put("taskAction",  timesheet.getTaskAction() );
+		actTaskService.complete(timesheet.getTaskId(),timesheet.getProcessInstanceId(),timesheet.getTaskComment(),"",vars);
+        //判断流程是否结束
+		if(actTaskService.isProcessInstanceFinish(timesheet.getProcessInstanceId())){
+			timesheet.setTimesheetApprovalStatus(1);
+		}else{
+			timesheet.setTimesheetApprovalStatus(0);
+		}
 		return timesheetDao.update(timesheet);
 	}
 

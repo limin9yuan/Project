@@ -37,5 +37,5 @@ public interface TimesheetService {
 	ProjectDO getProjectId(String projectId);
 	List<DictDO> listDic();
 	int formUpdate(TimesheetDO timesheet);
-
+	int formUpdateall(TimesheetDO timesheet);
 }

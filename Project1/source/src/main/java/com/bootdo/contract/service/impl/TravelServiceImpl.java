@@ -3,6 +3,7 @@ package com.bootdo.contract.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -128,6 +129,7 @@ public class TravelServiceImpl implements TravelService {
 		//判断流程是否结束
 		if(actTaskService.isProcessInstanceFinish(travel.getProcessInstanceId())){
 			travel.setTravelApprovalStatus("1");
+			travel.setTravelApprovalTime(new Date());
 		}else{
 			travel.setTravelApprovalStatus("0");
 		}

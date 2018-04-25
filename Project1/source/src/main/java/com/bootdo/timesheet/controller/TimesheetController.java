@@ -1,7 +1,10 @@
 package com.bootdo.timesheet.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.common.utils.ShiroUtils;
 import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.approval.domain.AssignmentDO;
@@ -22,7 +25,7 @@ import com.bootdo.project.service.ProjectService;
 import com.bootdo.timesheet.service.TimesheetService;
 import com.bootdo.approval.service.AssignmentService;
 import com.bootdo.common.controller.BaseController;
-
+import com.bootdo.activiti.service.impl.ActTaskServiceImpl;
 
 import java.util.Calendar;
 
@@ -31,6 +34,8 @@ import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
 import org.activiti.engine.task.Task;
 import org.activiti.engine.TaskService;
+import org.springframework.web.servlet.ModelAndView;
+
 /**
  * 工时信息表
  * 
@@ -53,7 +58,11 @@ public class TimesheetController extends BaseController {
 	TaskService taskService;
 
 	@Autowired
+	ActTaskService actTaskService;
+	@Autowired
 	ActivitiUtils activitiUtils;
+
+
 	/**
 	 * ********************** 审批流程相关  *********************************
 	 */
@@ -71,7 +80,7 @@ public class TimesheetController extends BaseController {
 		TimesheetDO timesheet = timesheetService.view(activitiUtils.getBusinessKeyByTaskId(taskId));
 		if(timesheet!=null){
 			model.addAttribute("timesheet", timesheet);
-			//model.addAttribute("taskId",taskId);
+
 		}
 		return "timesheet/timesheet/viewTimeSheet";
 	}
@@ -83,9 +92,19 @@ public class TimesheetController extends BaseController {
 	@RequiresPermissions("timesheet:timesheet:edit")
 	public R formUpdate( TimesheetDO timesheet){
 
+		timesheetService.formUpdate(timesheet);//审批流程保存
+		return R.ok();
+	}
+	//审批处理保存
+	@ResponseBody
+	@RequestMapping("/form/updateAll")
+	@RequiresPermissions("timesheet:timesheet:edit")
+	public R formUpdateall( TimesheetDO timesheet){
+
 		timesheetService.formUpdate(timesheet);
 		return R.ok();
 	}
+
 
 
 
@@ -157,7 +176,7 @@ public class TimesheetController extends BaseController {
 
 	@GetMapping("/approvetimesheet")
 	@RequiresPermissions("timesheet:timesheet:approvetimesheet")
-	String Approvetimesheet(Model model){
+	String approvetimesheet(Model model){
 		SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM-dd");//日期方法
 
 		Calendar cal = Calendar.getInstance();
@@ -484,20 +503,20 @@ public class TimesheetController extends BaseController {
 //		查询列表数据
 		params.put("uerId",getUserId());
 		Query query = new Query(params);
-		List<TimesheetDO> timesheetList = timesheetService.list(query);
+		List<TimesheetDO> timesheetList = timesheetService.approvelist(query);
 
 		Task task =null;
 		for(TimesheetDO timesheet : timesheetList){
 
 			if(timesheet.getTimeSheetApprovalStatusDate1()==0){
-				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				task = taskService.createTaskQuery().processDefinitionKey("timeSheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getIdDate1()).singleResult();//admin
 				if(task!=null){
 					timesheet.setTaskIdDate1(task.getId());
 					timesheet.setPdIdDate1(task.getProcessDefinitionId());
 				}
 			}
 			if(timesheet.getTimeSheetApprovalStatusDate2()==0){
-				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				task = taskService.createTaskQuery().processDefinitionKey("timeSheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getIdDate2()).singleResult();//admin
 				if(task!=null){
 					timesheet.setTaskIdDate2(task.getId());
 					timesheet.setPdIdDate2(task.getProcessDefinitionId());
@@ -505,7 +524,7 @@ public class TimesheetController extends BaseController {
 			}
 
 			if(timesheet.getTimeSheetApprovalStatusDate3()==0){
-				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				task = taskService.createTaskQuery().processDefinitionKey("timeSheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getIdDate3()).singleResult();//admin
 				if(task!=null){
 					timesheet.setTaskIdDate3(task.getId());
 					timesheet.setPdIdDate3(task.getProcessDefinitionId());
@@ -513,7 +532,7 @@ public class TimesheetController extends BaseController {
 			}
 
 			if(timesheet.getTimeSheetApprovalStatusDate4()==0){
-				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				task = taskService.createTaskQuery().processDefinitionKey("timeSheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getIdDate4()).singleResult();//admin
 				if(task!=null){
 					timesheet.setTaskIdDate4(task.getId());
 					timesheet.setPdIdDate4(task.getProcessDefinitionId());
@@ -521,7 +540,7 @@ public class TimesheetController extends BaseController {
 			}
 
 			if(timesheet.getTimeSheetApprovalStatusDate5()==0){
-				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				task = taskService.createTaskQuery().processDefinitionKey("timeSheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getIdDate5()).singleResult();//admin
 				if(task!=null){
 					timesheet.setTaskIdDate5(task.getId());
 					timesheet.setPdIdDate5(task.getProcessDefinitionId());
@@ -529,7 +548,7 @@ public class TimesheetController extends BaseController {
 			}
 
 			if(timesheet.getTimeSheetApprovalStatusDate6()==0){
-				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				task = taskService.createTaskQuery().processDefinitionKey("timeSheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getIdDate6()).singleResult();//admin
 				if(task!=null){
 					timesheet.setTaskIdDate6(task.getId());
 					timesheet.setPdIdDate6(task.getProcessDefinitionId());
@@ -537,7 +556,7 @@ public class TimesheetController extends BaseController {
 			}
 
 			if(timesheet.getTimeSheetApprovalStatusDate7()==0){
-				task = taskService.createTaskQuery().processDefinitionKey("timesheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getTimesheetId()).singleResult();//admin
+				task = taskService.createTaskQuery().processDefinitionKey("timeSheet").taskAssignee(ShiroUtils.getUser().getUsername()).processInstanceBusinessKey(timesheet.getIdDate7()).singleResult();//admin
 				if(task!=null){
 					timesheet.setTaskIdDate7(task.getId());
 					timesheet.setPdIdDate7(task.getProcessDefinitionId());
@@ -728,6 +747,162 @@ public class TimesheetController extends BaseController {
 	}
 
 
+	@GetMapping("/approve/{procDefId}/{taskId}")
+	public ModelAndView approve(@PathVariable("procDefId") String procDefId, @PathVariable("taskId") String taskId, Model model) throws IOException {
+
+
+		String formKey = actTaskService.getFormKey(procDefId, taskId);//获取流程表单
+		model.addAttribute("taskId", taskId);
+		model.addAttribute("formSrc", formKey+"/"+taskId);
+		model.addAttribute("formSubmit", formKey+"/update");//流程审批处理保存
+
+		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();//根据任务id查询实例id
+		model.addAttribute("taskName", task.getName());
+		model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+		model.addAttribute("executionId", task.getExecutionId());
+		model.addAttribute("processInstanceId", task.getProcessInstanceId());
+
+		return new ModelAndView("act/task/formComm");
+	}
+
+
+
+
+
+
+	@PostMapping("/approveall")
+	public ModelAndView approveall(String pdIdDate1,String taskIdDate1,
+								  String pdIdDate2,String taskIdDate2,
+								  String pdIdDate3,String taskIdDate3,
+								  String pdIdDate4,String taskIdDate4,
+								  String pdIdDate5,String taskIdDate5,
+								  String pdIdDate6,String taskIdDate6,
+								  String pdIdDate7,String taskIdDate7,
+								  Model model) throws IOException {
+		//传参数判断是否为空
+  if (pdIdDate1 != null && !"".equals(pdIdDate1) )
+  {
+  if (taskIdDate1 != null && !"".equals(taskIdDate1))
+  {
+			   String formKey = actTaskService.getFormKey(pdIdDate1, taskIdDate1);//获取流程表单
+
+			   model.addAttribute("taskId", taskIdDate1);
+			   model.addAttribute("formSrc", formKey + "/" + taskIdDate1);
+			   model.addAttribute("formSubmit", formKey + "/update");//流程审批处理保存
+
+			   Task task = taskService.createTaskQuery().taskId(taskIdDate1).singleResult();//根据任务id查询实例id
+			   model.addAttribute("taskName", task.getName());
+			   model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+			   model.addAttribute("executionId", task.getExecutionId());
+			   model.addAttribute("processInstanceId", task.getProcessInstanceId());
+		   }
+	   }
+		if (pdIdDate2 != null && !"".equals(pdIdDate2) )
+		{
+			if (taskIdDate2 != null && !"".equals(taskIdDate2))
+			{
+				String formKey = actTaskService.getFormKey(pdIdDate2, taskIdDate2);//获取流程表单
+
+				model.addAttribute("taskId", taskIdDate2);
+				model.addAttribute("formSrc", formKey + "/" + taskIdDate2);
+				model.addAttribute("formSubmit", formKey + "/update");//流程审批处理保存
+
+				Task task = taskService.createTaskQuery().taskId(taskIdDate2).singleResult();//根据任务id查询实例id
+				model.addAttribute("taskName", task.getName());
+				model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+				model.addAttribute("executionId", task.getExecutionId());
+				model.addAttribute("processInstanceId", task.getProcessInstanceId());
+			}
+		}
+		if (pdIdDate3 != null && !"".equals(pdIdDate3) )
+		{
+			if (taskIdDate3 != null && !"".equals(taskIdDate3))
+			{
+				String formKey = actTaskService.getFormKey(pdIdDate3, taskIdDate3);//获取流程表单
+
+				model.addAttribute("taskId", taskIdDate3);
+				model.addAttribute("formSrc", formKey + "/" + taskIdDate3);
+				model.addAttribute("formSubmit", formKey + "/update");//流程审批处理保存
+
+				Task task = taskService.createTaskQuery().taskId(taskIdDate3).singleResult();//根据任务id查询实例id
+				model.addAttribute("taskName", task.getName());
+				model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+				model.addAttribute("executionId", task.getExecutionId());
+				model.addAttribute("processInstanceId", task.getProcessInstanceId());
+			}
+		}
+		if (pdIdDate4 != null && !"".equals(pdIdDate4) )
+		{
+			if (taskIdDate4 != null && !"".equals(taskIdDate4))
+			{
+				String formKey = actTaskService.getFormKey(pdIdDate4, taskIdDate4);//获取流程表单
+
+				model.addAttribute("taskId", taskIdDate4);
+				model.addAttribute("formSrc", formKey + "/" + taskIdDate4);
+				model.addAttribute("formSubmit", formKey + "/update");//流程审批处理保存
+
+				Task task = taskService.createTaskQuery().taskId(taskIdDate4).singleResult();//根据任务id查询实例id
+				model.addAttribute("taskName", task.getName());
+				model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+				model.addAttribute("executionId", task.getExecutionId());
+				model.addAttribute("processInstanceId", task.getProcessInstanceId());
+			}
+		}
+		if (pdIdDate5 != null && !"".equals(pdIdDate5) )
+		{
+			if (taskIdDate5 != null && !"".equals(taskIdDate5))
+			{
+				String formKey = actTaskService.getFormKey(pdIdDate5, taskIdDate5);//获取流程表单
+
+				model.addAttribute("taskId", taskIdDate5);
+				model.addAttribute("formSrc", formKey + "/" + taskIdDate5);
+				model.addAttribute("formSubmit", formKey + "/update");//流程审批处理保存
+
+				Task task = taskService.createTaskQuery().taskId(taskIdDate5).singleResult();//根据任务id查询实例id
+				model.addAttribute("taskName", task.getName());
+				model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+				model.addAttribute("executionId", task.getExecutionId());
+				model.addAttribute("processInstanceId", task.getProcessInstanceId());
+			}
+		}
+		if (pdIdDate6 != null && !"".equals(pdIdDate6) )
+		{
+			if (taskIdDate6 != null && !"".equals(taskIdDate6))
+			{
+				String formKey = actTaskService.getFormKey(pdIdDate6, taskIdDate6);//获取流程表单
+
+				model.addAttribute("taskId", taskIdDate6);
+				model.addAttribute("formSrc", formKey + "/" + taskIdDate6);
+				model.addAttribute("formSubmit", formKey + "/update");//流程审批处理保存
+
+				Task task = taskService.createTaskQuery().taskId(taskIdDate6).singleResult();//根据任务id查询实例id
+				model.addAttribute("taskName", task.getName());
+				model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+				model.addAttribute("executionId", task.getExecutionId());
+				model.addAttribute("processInstanceId", task.getProcessInstanceId());
+			}
+		}
+		if (pdIdDate7 != null && !"".equals(pdIdDate7) )
+		{
+			if (taskIdDate7 != null && !"".equals(taskIdDate7))
+			{
+				String formKey = actTaskService.getFormKey(pdIdDate7, taskIdDate7);//获取流程表单
+
+				model.addAttribute("taskId", taskIdDate7);
+				model.addAttribute("formSrc", formKey + "/" + taskIdDate7);
+				model.addAttribute("formSubmit", formKey + "/update");//流程审批处理保存
+
+				Task task = taskService.createTaskQuery().taskId(taskIdDate7).singleResult();//根据任务id查询实例id
+				model.addAttribute("taskName", task.getName());
+				model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+				model.addAttribute("executionId", task.getExecutionId());
+				model.addAttribute("processInstanceId", task.getProcessInstanceId());
+			}
+		}
+
+			return new ModelAndView("act/task/formComm");
+
+	}
 
 
 
@@ -840,7 +1015,7 @@ public class TimesheetController extends BaseController {
 	/**
 	 * 删除
 	 */
-	@PostMapping( "/batchRemove")
+	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("timesheet:timesheet:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] timesheetIds){
@@ -853,6 +1028,8 @@ public class TimesheetController extends BaseController {
 		ProjectDO project = timesheetService.getProjectId(projectId);
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		returnData.put("project",project);
+
+
 		return returnData;
 	}
 

@@ -66,7 +66,17 @@ public class TravelDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
-	
+	//流程审批时间
+	private Date travelApprovalTime;
+
+	public Date getTravelApprovalTime() {
+		return travelApprovalTime;
+	}
+
+	public void setTravelApprovalTime(Date travelApprovalTime) {
+		this.travelApprovalTime = travelApprovalTime;
+	}
+
 	/**
 	 * 设置：流程实例ID
 	 */

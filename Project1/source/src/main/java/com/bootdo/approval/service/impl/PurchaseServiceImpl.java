@@ -3,6 +3,7 @@ package com.bootdo.approval.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,6 +57,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 		//判断流程是否结束
 		if(actTaskService.isProcessInstanceFinish(purchase.getProcessInstanceId())){
 			purchase.setPurchaseApprovalStatus("1");
+			purchase.setPurchaseApprovalTime(new Date());
 		}else{
 			purchase.setPurchaseApprovalStatus("0");
 		}

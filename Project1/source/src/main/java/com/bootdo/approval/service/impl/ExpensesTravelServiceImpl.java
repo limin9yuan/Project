@@ -96,6 +96,7 @@ public class ExpensesTravelServiceImpl implements ExpensesTravelService {
 		//判断流程是否结束
 		if(actTaskService.isProcessInstanceFinish(expensesTravel.getProcessInstanceId())){
 			expensesTravel.setExpensesTravelStatus("1");
+			expensesTravel.setExpensesTravelApprovalTime(new Date());
 		}else{
 			expensesTravel.setExpensesTravelStatus("0");
 		}

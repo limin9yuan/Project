@@ -111,6 +111,7 @@ public class ExpensesNormalServiceImpl implements ExpensesNormalService {
 		//判断流程是否结束
 		if(actTaskService.isProcessInstanceFinish(expensesNormal.getProcessInstanceId())){
 			expensesNormal.setExpensesNormalStatus("1");
+			expensesNormal.setExpensesNormalApprovalTime(new Date());
 		}else{
 			expensesNormal.setExpensesNormalStatus("0");
 		}

@@ -10,6 +10,25 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 						<div class="form-group">	
+								<label class="col-sm-3 control-label">付款类型：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<select data-placeholder="请选择" name="paidmentType" id="paidmentType" onchange="getType()"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">										
+										<option value="0">采购付款</option>  
+										<option value="1">合同付款</option>
+									</select>
+								</div>
+								<label id="label" class="col-sm-3 control-label"><div id="typeName">采购编号</div></label>
+								<div class="col-sm-3">
+									<input id="labelId" name="labelId" type="hidden">
+									<div style="float: left;" id="labelName"></div>
+									<input id="myLabel" name="myLabel" class="form-control" type="text"
+										style="cursor: pointer;" onclick="openSelectWin()"
+										readonly="readonly" placeholder="">
+								</div>
+							</div>
+						<div class="form-group">	
 								<label class="col-sm-3 control-label">付款金额：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 									<input id="paidPrice" name="paidPrice" class="form-control" type="text">
@@ -38,10 +57,6 @@
 							               <span class="glyphicon glyphicon-calendar"></span>
 							            </span>
 							        </div>
-								</div>
-							<label class="col-sm-3 control-label">收款延迟时间：</label>
-								<div class="col-sm-3">
-									<input id="receiptDelayTime" name="receiptDelayTime" class="form-control" type="text">
 								</div>
 						</div>							
 						<div class="form-group">	
@@ -72,6 +87,7 @@
 										<button type="submit" class="btn btn-primary columns" >提交</button>
 								</div>
 							</div>
+							
 							<!-- 
 							<div class="form-group">	
 								<label class="col-sm-3 control-label">合同编号2：</label>
@@ -112,10 +128,10 @@
 					</div>
 				</div>
 			</div>
-	</div>
+		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/payment/paid/add.js">
-	</script>
+	<script type="text/javascript" src="/js/appjs/payment/paid/add.js"></script>
+	<script type="text/javascript" src="/js/appjs/payment/paid/paidmentType.js"></script>
 </body>
 </html>

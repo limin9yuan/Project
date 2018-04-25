@@ -93,3 +93,23 @@ function datetimepicker() {
 	        locale: moment.locale('zh-cn')  
 	    });   
 }
+
+function getType(){
+	var paidmentType=$("#paidmentType").val();
+	if(paidmentType=="0"){
+		$("#typeName").html("采购编号");
+	}	
+	if(paidmentType=="1"){
+		$("#typeName").html("合同编号");
+	}
+	
+};
+function openSelectWin(){
+	var paidmentType=$("#paidmentType").val();
+	if(paidmentType=="0"){
+		addPurchase();
+	}	
+	if(paidmentType=="1"){
+		addContract();
+	}
+}

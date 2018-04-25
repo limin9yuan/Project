@@ -8,6 +8,7 @@
 		`Customer_ID`,`Employee_Name`,`Project_Gategory`
 		from development_project a
 		left join inner_org_employee b on a.Project_Owner=b.Employee_ID
+
 		where Project_ID = #{value}
 
 
@@ -170,15 +171,16 @@
 
 
 
+
 		select d.Project_ID,b.Project_Name,d.Assignment_Task_Name,
 
-		id_date1,content_date1,normal_date1,over_date1,
-		id_date2,content_date2,normal_date1,over_date2,
-		id_date3,content_date3,normal_date1,over_date3,
-		id_date4,content_date4,normal_date1,over_date4,
-		id_date5,content_date5,normal_date1,over_date5,
-		id_date6,content_date6,normal_date1,over_date6,
-		id_date7,content_date7,normal_date1,over_date7
+		id_date1,content_date1,normal_date1,over_date1,TimeSheetApprovalStatusDate1,
+		id_date2,content_date2,normal_date2,over_date2,TimeSheetApprovalStatusDate2,
+		id_date3,content_date3,normal_date3,over_date3,TimeSheetApprovalStatusDate3,
+		id_date4,content_date4,normal_date4,over_date4,TimeSheetApprovalStatusDate4,
+		id_date5,content_date5,normal_date5,over_date5,TimeSheetApprovalStatusDate5,
+		id_date6,content_date6,normal_date6,over_date6,TimeSheetApprovalStatusDate6,
+		id_date7,content_date7,normal_date7,over_date7,TimeSheetApprovalStatusDate7
 		from
 		approval_assignment d
 
@@ -188,36 +190,43 @@
 		max(content_date1) content_date1,
 		max(normal_date1) normal_date1,
 		max(over_date1) over_date1,
+		max(TimeSheetApprovalStatusDate1) TimeSheetApprovalStatusDate1,
 
 		max(id_date2)  id_date2,
 		max(content_date2) content_date2,
 		max(normal_date2) normal_date2,
 		max(over_date2) over_date2,
+		max(TimeSheetApprovalStatusDate2) TimeSheetApprovalStatusDate2,
 
 		max(id_date3)  id_date3,
 		max(content_date3) content_date3,
 		max(normal_date3) normal_date3,
 		max(over_date3) over_date3,
+		max(TimeSheetApprovalStatusDate3) TimeSheetApprovalStatusDate3,
 
 		max(id_date4)  id_date4,
 		max(content_date4) content_date4,
 		max(normal_date4) normal_date4,
 		max(over_date4) over_date4,
+		max(TimeSheetApprovalStatusDate4) TimeSheetApprovalStatusDate4,
 
 		max(id_date5)  id_date5,
 		max(content_date5) content_date5,
 		max(normal_date5) normal_date5,
 		max(over_date5) over_date5,
+		max(TimeSheetApprovalStatusDate5) TimeSheetApprovalStatusDate5,
 
 		max(id_date6)  id_date6,
 		max(content_date6) content_date6,
 		max(normal_date6) normal_date6,
 		max(over_date6) over_date6,
+		max(TimeSheetApprovalStatusDate6) TimeSheetApprovalStatusDate6,
 
 		max(id_date7)  id_date7,
 		max(content_date7) content_date7,
 		max(normal_date7) normal_date7,
-		max(over_date7) over_date7
+		max(over_date7) over_date7,
+		max(TimeSheetApprovalStatusDate7) TimeSheetApprovalStatusDate7
 
 
 
@@ -228,37 +237,43 @@
 		case when TimeSheet_Date=#{date1} then TimeSheet_Content else '' end content_date1,
 		case when TimeSheet_Date=#{date1} then TimeSheet_Normal else '' end normal_date1,
 		case when TimeSheet_Date=#{date1} then TimeSheet_Overtime else '' end over_date1,
-
+		case when TimeSheet_Date=#{date1} then TimeSheet_Approval_Status else '' end TimeSheetApprovalStatusDate1,
 
 		case when TimeSheet_Date=#{date2} then TimeSheet_ID else '' end id_date2,
 		case when TimeSheet_Date=#{date2} then TimeSheet_Content else '' end content_date2,
 		case when TimeSheet_Date=#{date2} then TimeSheet_Normal else '' end normal_date2,
 		case when TimeSheet_Date=#{date2} then TimeSheet_Overtime else '' end over_date2,
+		case when TimeSheet_Date=#{date2} then TimeSheet_Approval_Status else '' end TimeSheetApprovalStatusDate2,
 
 		case when TimeSheet_Date=#{date3} then TimeSheet_ID else '' end id_date3,
 		case when TimeSheet_Date=#{date3} then TimeSheet_Content else '' end content_date3,
 		case when TimeSheet_Date=#{date3} then TimeSheet_Normal else '' end normal_date3,
 		case when TimeSheet_Date=#{date3}then TimeSheet_Overtime else '' end over_date3,
+		case when TimeSheet_Date=#{date3} then TimeSheet_Approval_Status else '' end TimeSheetApprovalStatusDate3,
 
 		case when TimeSheet_Date=#{date4} then TimeSheet_ID else '' end id_date4,
 		case when TimeSheet_Date=#{date4} then TimeSheet_Content else '' end content_date4,
 		case when TimeSheet_Date=#{date4} then TimeSheet_Normal else '' end normal_date4,
 		case when TimeSheet_Date=#{date4} then TimeSheet_Overtime else '' end over_date4,
+		case when TimeSheet_Date=#{date4} then TimeSheet_Approval_Status else '' end TimeSheetApprovalStatusDate4,
 
 		case when TimeSheet_Date=#{date5} then TimeSheet_ID else '' end id_date5,
 		case when TimeSheet_Date=#{date5}  then TimeSheet_Content else '' end content_date5,
 		case when TimeSheet_Date=#{date5}  then TimeSheet_Normal else '' end normal_date5,
 		case when TimeSheet_Date=#{date5} then TimeSheet_Overtime else '' end over_date5,
+		case when TimeSheet_Date=#{date5} then TimeSheet_Approval_Status else '' end TimeSheetApprovalStatusDate5,
 
 		case when TimeSheet_Date=#{date6}  then TimeSheet_ID else '' end id_date6,
 		case when TimeSheet_Date=#{date6}then TimeSheet_Content else '' end content_date6,
 		case when TimeSheet_Date=#{date6} then TimeSheet_Normal else '' end normal_date6,
 		case when TimeSheet_Date=#{date6} then TimeSheet_Overtime else '' end over_date6,
+		case when TimeSheet_Date=#{date6} then TimeSheet_Approval_Status else '' end TimeSheetApprovalStatusDate6,
 
 		case when TimeSheet_Date=#{date7} then TimeSheet_ID else '' end id_date7,
 		case when TimeSheet_Date=#{date7} then TimeSheet_Content else '' end content_date7,
 		case when TimeSheet_Date=#{date7} then TimeSheet_Normal else '' end normal_date7,
-		case when TimeSheet_Date=#{date7}then TimeSheet_Overtime else '' end over_date7
+		case when TimeSheet_Date=#{date7}then TimeSheet_Overtime else '' end over_date7,
+		case when TimeSheet_Date=#{date7} then TimeSheet_Approval_Status else '' end TimeSheetApprovalStatusDate7
 
 		from timesheet a
 
@@ -451,7 +466,7 @@
 			#{timesheetContent},
 			#{timesheetProblem},
 			#{timesheetAssignmentId},
-			#{timesheetApprovalStatus},
+			0,
 			#{timesheetOperateTime}
 		)
 

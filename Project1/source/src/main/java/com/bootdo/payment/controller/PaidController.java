@@ -18,11 +18,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootdo.payment.domain.InvoiceDO;
 import com.bootdo.payment.domain.PaidDO;
+import com.bootdo.payment.domain.PurchaseManagementDO;
 import com.bootdo.payment.service.PaidService;
+import com.bootdo.payment.service.PurchaseManagementService;
 import com.bootdo.common.controller.BaseController;
+import com.bootdo.common.domain.MainCopyPersonDO;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.contract.domain.ContractDO;
+import com.bootdo.contract.service.ContractService;
 
 /**
  * 付款信息表
@@ -37,13 +42,21 @@ import com.bootdo.common.utils.R;
 public class PaidController extends BaseController {
 	@Autowired
 	private PaidService paidService;
-	
 	@GetMapping()
 	@RequiresPermissions("payment:paid:paid")
 	String Paid(){
 	    return "payment/paid/paid";
 	}
 	
+	@GetMapping("/purchaseType")
+    String purchaseType(){
+        return "payment/paid/purchaseType";
+    }
+	
+	@GetMapping("/contractType")
+    String contractType(){
+        return "payment/paid/contractType";
+    }
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("payment:paid:paid")
@@ -128,5 +141,4 @@ public class PaidController extends BaseController {
 		paidService.batchRemove(paidIds);
 		return R.ok();
 	}
-	
 }

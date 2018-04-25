@@ -88,6 +88,16 @@ public class ContractDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
+	//流程审批时间
+	private Date contractApprovalTime;
+
+	public Date getContractApprovalTime() {
+		return contractApprovalTime;
+	}
+
+	public void setContractApprovalTime(Date contractApprovalTime) {
+		this.contractApprovalTime = contractApprovalTime;
+	}
 
 	public String getTaskComment() {
 		return taskComment;

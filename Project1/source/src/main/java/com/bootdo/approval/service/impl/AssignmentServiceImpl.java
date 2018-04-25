@@ -8,6 +8,7 @@ import com.bootdo.timesheet.domain.TimesheetDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -57,6 +58,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 		//判断流程是否结束
 		if(actTaskService.isProcessInstanceFinish(assignment.getProcessInstanceId())){
 			assignment.setAssignmentApprovalStatus("1");
+			assignment.setAssignmentApprovalTime(new Date());
 		}else{
 			assignment.setAssignmentApprovalStatus("0");
 		}
