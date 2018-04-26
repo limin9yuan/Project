@@ -1,4 +1,4 @@
-var prefix = "/sales/business"
+var prefixBusiness = "/sales/business"
 $(function() {
 	load();
 	loadCrmData("/sales/business/listDic","businessName");
@@ -14,7 +14,7 @@ function load() {
 	$('#exampleTable').bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefixBusiness + "/list", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -121,7 +121,7 @@ function load() {
 					maxmin : true,
 					shadeClose : false, // 点击遮罩关闭层
 					area : [ '500px', '70%' ],
-					content : prefix + '/import'  // iframe的url
+					content : prefixBusiness + '/import'  // iframe的url
 				});
         });
 }
@@ -136,7 +136,7 @@ function examine(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],
-		content : prefix + '/examine/' + id 
+		content : prefixBusiness + '/examine/' + id 
 	});
 }
 function add() {
@@ -145,8 +145,18 @@ function add() {
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
+		area : [ '75%', '75%' ],
+		content : prefixBusiness + '/add/' // iframe的url
+	});
+}
+function addBusiness() {
+	parent.layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],
-		content : prefix + '/add/' // iframe的url
+		content : prefixBusiness + '/add/' // iframe的url
 	});
 }
 function edit(id) {
@@ -156,7 +166,7 @@ function edit(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefixBusiness + '/edit/' + id // iframe的url
 	});
 }
 function remove(id) {
@@ -164,7 +174,7 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/remove",
+			url : prefixBusiness+"/remove",
 			type : "post",
 			data : {
 				'businessId' : id
@@ -210,7 +220,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : prefixBusiness + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);

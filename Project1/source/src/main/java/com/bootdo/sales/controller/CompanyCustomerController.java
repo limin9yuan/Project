@@ -36,6 +36,7 @@ import com.bootdo.sales.domain.CustomerContactDO;
 import com.bootdo.sales.service.BusinessService;
 import com.bootdo.sales.service.CompanyCustomerService;
 import com.bootdo.sales.service.CustomerContactService;
+import com.alibaba.druid.sql.visitor.functions.Length;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.DictDO;
@@ -47,7 +48,11 @@ import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
 import com.bootdo.contract.domain.ContractDO;
+import com.bootdo.contract.domain.ReceivableDO;
 import com.bootdo.contract.service.ContractService;
+import com.bootdo.contract.service.ReceivableService;
+import com.bootdo.payment.domain.ReceivedDO;
+import com.bootdo.payment.service.ReceivedService;
 import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.project.service.ProjectService;
 
@@ -78,21 +83,42 @@ public class CompanyCustomerController extends BaseController {
 	private ContractService contractService;
 	@Autowired
 	private CustomerContactService customerContactService;
+	@Autowired
+	private ReceivableService receivableService;
+	@Autowired
+	private ReceivedService receivedService;
 	@GetMapping()
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
-	String CompanyCustomer() {
+	String CompanyCustomer(Model model) {
+		Map<String, Object> params = new  HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		Query query = new Query(params);
+		
+		//新客户
+		List<CompanyCustomerDO> newCustomer=companyCustomerService.newCustomer(query);
+		model.addAttribute("newCustomer", newCustomer);
+		//旧客户
+		List<CompanyCustomerDO> oldCustomer=companyCustomerService.oldCustomer(query);
+		model.addAttribute("oldCustomer", oldCustomer);
+		//实际回款
+		List<ReceivedDO> receivedDO=receivedService.sumReceivedPrice(query);
+		model.addAttribute("receivedDO", receivedDO);
 		return "sales/companyCustomer/companyCustomer";
 	}
 
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
-	public PageUtils list(@RequestParam Map<String, Object> params) {
+	public PageUtils list(@RequestParam Map<String, Object> params,Model model) {
 		// 查询列表数据
+		
 		Query query = new Query(params);
 		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.list(query);
 		int total = companyCustomerService.count(query);
 		PageUtils pageUtils = new PageUtils(companyCustomerList, total);
+		
+		
 		return pageUtils;
 	}
 
@@ -234,9 +260,49 @@ public class CompanyCustomerController extends BaseController {
 		//联系人信息
 		List<CustomerContactDO> lianxiList = customerContactService.list(query);
 		model.addAttribute("lianxiList", lianxiList);
+		//详情页应收信息回款计划Receivable_Price字段求和
+		List<ReceivableDO> price=receivableService.sumReceivablePrice(query);
+		model.addAttribute("price", price);
+		//详情页应收信息实际回款
+		List<ReceivedDO> receivedDO=receivedService.sumReceivedPrice(query);
+		model.addAttribute("receivedDO", receivedDO);
+		//详情页应收信息回款率
+		List<ReceivedDO> reimbursementRate=receivedService.reimbursementRate(query);
+		model.addAttribute("reimbursementRate", reimbursementRate);
 		return "sales/companyCustomer/examineCompanyCustomer";
 	}
-
+	/**
+	 * 业务信息更多
+	 */
+	@GetMapping("/examineBusiness")
+	@RequiresPermissions("sales:companyCustomer:examineBusiness")
+	String examineBusiness() {
+ 		return "sales/companyCustomer/examineBusinessCustomer";
+	}
+	/**
+	 * 项目信息更多
+	 */
+	@GetMapping("/examineProject")
+	@RequiresPermissions("sales:companyCustomer:examineProject")
+	String examineProject() {
+		return "sales/companyCustomer/examineProjectCustomer";
+	}
+	/**
+	 * 合同信息更多
+	 */
+	@GetMapping("/examineContract")
+	@RequiresPermissions("sales:companyCustomer:examineContract")
+	String examineContract() {
+		return "sales/companyCustomer/examineContractCustomer";
+	}
+	/**
+	 * 联系人信息更多
+	 */
+	@GetMapping("/examineContact")
+	@RequiresPermissions("sales:companyCustomer:examineContact")
+	String examineContact() {
+		return "sales/companyCustomer/exaimeContactCustomer";
+	}
 	// /**
 	// * 保存
 	// */

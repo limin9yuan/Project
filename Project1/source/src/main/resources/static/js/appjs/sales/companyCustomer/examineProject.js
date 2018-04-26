@@ -1,10 +1,10 @@
 var prefixProject = "/project/project"
 $(function() {
 
-	load();
+	loadProject();
 });
 
-function load() {
+function loadProject() {
 	console.log("数据加载");
 	$('#exampleTable').bootstrapTable({
 		method : 'get', // 服务器数据的请求方式 get or post

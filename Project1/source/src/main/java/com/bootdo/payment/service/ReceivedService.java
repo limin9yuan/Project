@@ -21,6 +21,8 @@ public interface ReceivedService {
 	List<ReceivedDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
+	List<ReceivedDO> sumReceivedPrice(Map<String, Object>map);
+	List<ReceivedDO> reimbursementRate(Map<String, Object>map);
 	
 	int save(ReceivedDO received);
 	

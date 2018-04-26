@@ -839,6 +839,19 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 		Tree<CompanyCustomerDO> t = BuildTree.build(trees);
 		return t;
 	}
+
+	@Override
+	public List<CompanyCustomerDO> newCustomer(Map<String, Object> map) {
+		// TODO 新客户
+		return companyCustomerDao.newCustomer(map);
+	}
+
+	@Override
+	public List<CompanyCustomerDO> oldCustomer(Map<String, Object> map) {
+		// TODO 旧客户
+		return companyCustomerDao.oldCustomer(map);
+	}
+
 }
 
 

@@ -20,29 +20,36 @@ import javax.servlet.ServletOutputStream;
  * @date 2017-11-16 11:25:16
  */
 public interface CompanyCustomerService {
-	
+
 	CompanyCustomerDO get(String customerId);
-	
+
 	List<CompanyCustomerDO> list(Map<String, Object> map);
-	
+
+	// 新客户
+	List<CompanyCustomerDO> newCustomer(Map<String, Object> map);
+
+	// 旧客户
+	List<CompanyCustomerDO> oldCustomer(Map<String, Object> map);
+
 	int count(Map<String, Object> map);
-	
+
 	int save(CompanyCustomerDO companyCustomer);
-	
+
 	int update(CompanyCustomerDO companyCustomer);
-	
+
 	int remove(String customerId);
-	
+
 	int batchRemove(String[] customerIds);
-	
+
 	List<DictDO> listDic();
-	
+
 	List<DictDO> listAllDicByArea(String areaId);
-	
+
 	Tree<CompanyCustomerDO> getTree();
-	
-	Map<String, Object> Import(File file,long userid) ;
-    List<CompanyCustomerDO> getQuery(Map<String, Object> params);
-	
+
+	Map<String, Object> Import(File file, long userid);
+
+	List<CompanyCustomerDO> getQuery(Map<String, Object> params);
+
 	public void export(String[] titles, ServletOutputStream out, List<CompanyCustomerDO> list);
 }

@@ -14,10 +14,10 @@
 				name="customerId" /> <input type="hidden" name="customerSales" />
 			<input type="hidden" name="customerLevel" />
 		</form>
-		
-		<div class="row" style="border-radius: 10px;margin-left: 15px">
-			<div style=" float: left; width: 20%"
-				class="col-sm-3">
+
+		<div class="row" style="border-radius: 10px; margin-left: 15px">
+			<!-- 		左侧树节点 -->
+			<div style="float: left; width: 20%;padding-top: 10px" class="col-sm-3">
 				<div class="ibox ibox-body">
 					<div class="ibox-title">
 						<h5>海心信息</h5>
@@ -27,70 +27,89 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-sm-9" >
 
-				<div
-					style="float: left; width: 30%; height: 100px; background: #EBEBEB; margin-bottom: 30px; border-radius: 10px"
-					class="ibox-body">
-					<div class="form-group">
-						<label
-							style="font-size: 14px; padding-top: 15px; padding-left: 15px">热点客户</label>
-						<hr
-							style="background-color: black; height: 1px; border: none; width: 95%;"
-							align="center" />
-						<br />
-						<div class="fixed-table-toolbar">
-							<table id="hottable" data-mobile-responsive="true">
-							</table>
-						</div>
-					</div>
+			<div class="col-sm-9">
+				<!-- 			中上热点客户，本月回款情况，本月计划回款 -->
+				<div class="ibox ibox-body" style="padding-top: 1px">
+					<ol style="list-style-type: none; padding: 0px">
+						<!-- 				热点客户 -->
+						<li style="float: left; list-style-type: none; margin: 10px">
+							<div class="ibox-title">
+								<h4>热点客户</h4>
+								<div class="ibox-content" style="width: 360px;height: 165px">
+									<table
+										style="width: 320px; height: 128px; border: 1px solid #E7EAEC"
+										class="table-hover table-bordered">
+										<tr th:each="bo, iterStat : ${newCustomer}">
+											<td align="center" valign="middle"><span class="STYLE1">新客户</span></td>
+											<td width="211" align="center" valign="middle" th:text="${bo.customerName}"></td>
+										</tr>
+										<tr th:each="old, iterStat : ${oldCustomer}">
+											<td align="center" valign="middle"><span class="STYLE1">旧客户</span></td>
+											<td align="center" valign="middle" th:text="${old.customerName}">&nbsp;</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</li>
+						<!-- 					本月回款情况 -->
+						<li style="float: left; list-style-type: none; margin: 10px">
+							<div class="ibox-title">
+								<h4>本月回款情况</h4>
+							</div>
+							<div class="ibox-content" style="width: 360px; height: 165px;">
+								<table class="table-hover table-bordered" style="width: 320px; height: 90px;">
+									<tr style="text-align: center;">
+										<th>已回款企业数目</th>
+										<th>未回款企业数目</th>
+									</tr>
+									<tr th:each="bo, iterStat : ${receivedDO}">
+										<td align="center" th:text="${bo.reimbursementNumber}"></td>
+									</tr>
+									
+									<tr th:each="bo, iterStat : ${receivedDO}" >
+										<td align="center" valign="middle" th:text="${'总计'+bo.sumReceivedPrice}+元"></td>
+									</tr>
+									
+								</table>
+							</div>
+
+						</li>
+						<!-- 					本月计划回款 -->
+						<li style="float: left; list-style-type: none; margin: 10px">
+							<div class="ibox-title" >
+								<h4>本月计划回款</h4>
+								<div class="ibox-content" style="width: 360px;height: 165px;">
+									<table
+										style="width: 320px; height: 90px; border: 1px solid #E7EAEC"
+										class="table-hover table-bordered">
+										<tr style="text-align: center;">
+											<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;本月计划回款客户数目</th>
+											<th>&nbsp;&nbsp;&nbsp;&nbsp;实际回款客户数目</th>
+										</tr>
+										<tr>
+											<td align="center">ss</td>
+											<td align="center">ss</td>
+										</tr>
+										<tr>
+											<td align="center">ss</td>
+											<td align="center">ss</td>
+										</tr>
+									</table>
+								</div>
+							</div>
+						</li>
+					</ol>
 				</div>
 
-				<div
-					style="float: left; width: 30%; height: 100px; background: #EBEBEB; margin-left: 80px; border-radius: 10px"
-					class="ibox-body">
-					<div class="form-group">
-						<label
-							style="font-size: 14px; padding-top: 15px; padding-left: 15px">本月回款情况</label>
-						<hr
-							style="background-color: black; height: 1px; border: none; width: 95%"
-							align="center" />
-						<br />
-						<div class="fixed-table-toolbar">
-							<table id="hTable" data-mobile-responsive="true">
-							</table>
-						</div>
-					</div>
-				</div>
-
-				<div
-					style="float: right; width: 30%; height: 100px; background: #EBEBEB; border-radius: 10px"
-					class="ibox-body">
-					<div class="form-group">
-						<label
-							style="font-size: 14px; padding-top: 15px; padding-left: 15px">本月计划回款</label>
-						<hr
-							style="background-color: black; height: 1px; border: none; width: 95%"
-							align="center" />
-						<br />
-						<div class="fixed-table-toolbar">
-							<table id="jTable" data-mobile-responsive="true">
-							</table>
-						</div>
-					</div>
-				</div>
-
-
-
-
-
-				<div class="ibox float-e-margins">
+				<!-- 下面列表 -->
+				<div class="ibox float-e-margins" style="padding-top: 10px">
 					<hr
 						style="height: 1px; border: none; border-top: 1px dashed black;">
 					<form class="form-horizontal m-t" id="signupForm">
 						<div class="form-group">
-							<label class="col-sm-1 control-label">行政区划：</label>
-							<div class="col-sm-3">
+							<label class="col-sm-2 control-label">行政区划：</label>
+							<div class="col-sm-4">
 								<select data-placeholder="省" name="province" id="province"
 									class="form-control chosen-select" tabindex="1"
 									style="width: 100px">
@@ -102,55 +121,57 @@
 									style="width: 100px">
 								</select>
 							</div>
-							<label class="col-sm-1 control-label">企业名称：</label>
-							<div class="col-sm-3">
+							<label class="col-sm-2 control-label">企业名称：</label>
+							<div class="col-sm-4">
 								<input id="customerName" name="customerName"
 									class="form-control" type="text">
 							</div>
-							<label class="col-sm-1 ">企业客户编号：</label>
-							<div class="col-sm-3">
+
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-2 control-label">企业客户编号：</label>
+							<div class="col-sm-4">
 								<input id="customerId" name="customerId" class="form-control"
 									type="text">
 							</div>
-						</div>
-						<div class="form-group">
-							<label class="col-sm-1 control-label">联系人姓名：</label>
-							<div class="col-sm-3">
+							<label class="col-sm-2 control-label">联系人姓名：</label>
+							<div class="col-sm-4">
 								<input id="contactName" name="contactName" class="form-control"
 									type="text">
 							</div>
-							<label class="col-sm-1 control-label">业务名称：</label>
-							<div class="col-sm-3">
+
+						</div>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">业务名称：</label>
+							<div class="col-sm-4">
 								<input id="businessName" name="businessName"
 									class="form-control" type="text">
 							</div>
-							<label class="col-sm-1 control-label">项目信息：</label>
-							<div class="col-sm-3">
+							<label class="col-sm-2 control-label">项目信息：</label>
+							<div class="col-sm-4">
 								<input id="projectName" name="projectName" class="form-control"
 									type="text">
 							</div>
 
-
 						</div>
 						<div class="form-group">
-
-							<label class="col-sm-1 control-label">销售负责人：</label>
-							<div class="col-sm-3">
+							<label class="col-sm-2 control-label">销售负责人：</label>
+							<div class="col-sm-4">
 								<select data-placeholder="请选择" name="customerSales"
 									id="customerSales" class="form-control chosen-select"
 									tabindex="2" style="width: 100%">
 									<option value="">请选择</option>
 								</select>
 							</div>
-							<label class="col-sm-1 control-label">客户级别：</label>
-							<div class="col-sm-3">
+							<label class="col-sm-2 control-label">客户级别：</label>
+							<div class="col-sm-4">
 								<select data-placeholder="请选择" name="customerLevel"
 									id="customerLevel" class="form-control chosen-select"
 									tabindex="2" style="width: 100%">
 									<option value="">请选择</option>
 								</select>
 							</div>
-
 						</div>
 						<div class="text-right form-group">
 							<button class="btn  btn-primary" onclick="reLoad()" type="button">

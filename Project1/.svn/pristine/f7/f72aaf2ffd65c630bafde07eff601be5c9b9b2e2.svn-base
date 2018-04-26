@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.contract.dao.ReceivableDao">
+
+	<select id="get" resultType="com.bootdo.contract.domain.ReceivableDO">
+		select `Receivable_ID`,`Contract_ID`,
+		date_format(Receivable_Date,'%Y-%m-%d') as Receivable_Date,
+		`Receivable_Price`,`Receivable_Owner`,`Receivable_Remarks`,`Receivable_Operator`,`Receivable_Operate_Time` from accounts_receivable where Receivable_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.contract.domain.ReceivableDO">
+		select `Receivable_ID`,`Contract_ID`,`Receivable_Date`,`Receivable_Price`,`Receivable_Owner`,`Receivable_Remarks`,`Receivable_Operator`,`Receivable_Operate_Time` from accounts_receivable
+        <where>  
+		  		  <if test="receivableId != null and receivableId != ''"> and Receivable_ID = #{receivableId} </if>
+		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
+		  		  <if test="receivableDate != null and receivableDate != ''"> and Receivable_Date = #{receivableDate} </if>
+		  		  <if test="receivablePrice != null and receivablePrice != ''"> and Receivable_Price = #{receivablePrice} </if>
+		  		  <if test="receivableOwner != null and receivableOwner != ''"> and Receivable_Owner = #{receivableOwner} </if>
+		  		  <if test="receivableRemarks != null and receivableRemarks != ''"> and Receivable_Remarks = #{receivableRemarks} </if>
+		  		  <if test="receivableOperator != null and receivableOperator != ''"> and Receivable_Operator = #{receivableOperator} </if>
+		  		  <if test="receivableOperateTime != null and receivableOperateTime != ''"> and Receivable_Operate_Time = #{receivableOperateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Receivable_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from accounts_receivable
+		 <where>  
+		  		  <if test="receivableId != null and receivableId != ''"> and Receivable_ID = #{receivableId} </if>
+		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
+		  		  <if test="receivableDate != null and receivableDate != ''"> and Receivable_Date = #{receivableDate} </if>
+		  		  <if test="receivablePrice != null and receivablePrice != ''"> and Receivable_Price = #{receivablePrice} </if>
+		  		  <if test="receivableOwner != null and receivableOwner != ''"> and Receivable_Owner = #{receivableOwner} </if>
+		  		  <if test="receivableRemarks != null and receivableRemarks != ''"> and Receivable_Remarks = #{receivableRemarks} </if>
+		  		  <if test="receivableOperator != null and receivableOperator != ''"> and Receivable_Operator = #{receivableOperator} </if>
+		  		  <if test="receivableOperateTime != null and receivableOperateTime != ''"> and Receivable_Operate_Time = #{receivableOperateTime} </if>
+		  		</where>
+	</select>
+	 	 <select id="sumReceivablePrice" resultType="com.bootdo.contract.domain.ReceivableDO">
+	 select sum(Receivable_Price) AS price from accounts_receivable
+	 </select>
+	<insert id="save" parameterType="com.bootdo.contract.domain.ReceivableDO">
+		insert into accounts_receivable
+		(
+			 `Receivable_ID`,  
+			`Contract_ID`, 
+			`Receivable_Date`, 
+			`Receivable_Price`, 
+			`Receivable_Owner`, 
+			`Receivable_Remarks`, 
+			`Receivable_Operator`, 
+			`Receivable_Operate_Time`
+		)
+		values
+		(
+			 #{receivableId},  
+			#{contractId}, 
+			#{receivableDate}, 
+			#{receivablePrice}, 
+			#{receivableOwner}, 
+			#{receivableRemarks}, 
+			#{receivableOperator}, 
+			#{receivableOperateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.contract.domain.ReceivableDO">
+		update accounts_receivable 
+		<set>
+			<if test="contractId != null">`Contract_ID` = #{contractId}, </if>
+			<if test="receivableDate != null">`Receivable_Date` = #{receivableDate}, </if>
+			<if test="receivablePrice != null">`Receivable_Price` = #{receivablePrice}, </if>
+			<if test="receivableOwner != null">`Receivable_Owner` = #{receivableOwner}, </if>
+			<if test="receivableRemarks != null">`Receivable_Remarks` = #{receivableRemarks}, </if>
+			<if test="receivableOperator != null">`Receivable_Operator` = #{receivableOperator}, </if>
+			<if test="receivableOperateTime != null">`Receivable_Operate_Time` = #{receivableOperateTime}</if>
+		</set>
+		where Receivable_ID = #{receivableId}
+	</update>
+	
+	<delete id="remove">
+		delete from accounts_receivable where Receivable_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from accounts_receivable where Receivable_ID in 
+		<foreach item="receivableId" collection="array" open="(" separator="," close=")">
+			#{receivableId}
+		</foreach>
+	</delete>
+
+</mapper>

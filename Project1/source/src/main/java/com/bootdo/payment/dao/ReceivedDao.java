@@ -1,5 +1,6 @@
 package com.bootdo.payment.dao;
 
+import com.bootdo.contract.domain.ReceivableDO;
 import com.bootdo.payment.domain.ReceivedDO;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public interface ReceivedDao {
 	List<ReceivedDO> list(Map<String,Object> map);
 	
 	int count(Map<String,Object> map);
+	
+	List<ReceivedDO> sumReceivedPrice(Map<String, Object>map);
+	
+	List<ReceivedDO> reimbursementRate(Map<String, Object>map);
 	
 	int save(ReceivedDO received);
 	

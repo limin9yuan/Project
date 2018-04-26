@@ -116,7 +116,18 @@
 		  		  <if test="area != null and area != ''"> and Customer_County = #{area} </if>
 		  		</where>
 	</select>
-	 
+<!-- 	 新客户 -->
+	<select id="newCustomer" resultType="com.bootdo.sales.domain.CompanyCustomerDO">
+		select a.Customer_Name
+		from sales_company_customer a
+		where a.Customer_ID!='' and a.Customer_Old_ID='' and a.Customer_Old_ID is not null limit 2 
+	</select>
+<!-- 	旧客户 -->
+	<select id="oldCustomer" resultType="com.bootdo.sales.domain.CompanyCustomerDO">
+		select a.Customer_Name
+		from sales_company_customer a
+		where a.Customer_ID!='' and a.Customer_Old_ID!=''  
+	</select>
 	 <select id="listHot" resultType="com.bootdo.sales.domain.CompanyCustomerDO">
 	 	select a.Customer_Name,a.Customer_Old_ID
 		from sales_company_customer a

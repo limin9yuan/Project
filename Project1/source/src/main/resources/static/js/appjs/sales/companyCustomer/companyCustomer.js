@@ -274,6 +274,8 @@ function examineB(id) {
 		content : profixBusiness + '/examineB/' + id
 	});
 }
+
+
 // ---查看项目信息
 function examineP(id) {
 	parent.layer.open({
@@ -357,6 +359,62 @@ function examineRemove() {
 			}
 		});
 	})
+}
+
+//---更多业务信息
+function examineBusiness() {
+	parent.layer.open({
+		type : 2,
+		title : '更多业务信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '70%', '70%' ],
+		content : prefix + '/examineBusiness' 
+	});
+}
+//---更多项目信息
+function examineProject() {
+	parent.layer.open({
+		type : 2,
+		title : '更多项目信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '70%', '70%' ],
+		content : prefix + '/examineProject' 
+	});
+}
+//---更多合同信息
+function examineContract() {
+	parent.layer.open({
+		type : 2,
+		title : '更多合同信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '70%', '70%' ],
+		content : prefix + '/examineContract' 
+	});
+}
+//---合同信息添加
+function addContract() {
+	parent.layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '90%', '90%' ],
+		content : '/contract/contract/add' // iframe的url
+	});
+}
+//---更多联系人信息
+function examineContact() {
+	parent.layer.open({
+		type : 2,
+		title : '更多联系人信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '70%', '70%' ],
+		content : prefix + '/examineContact' 
+	});
 }
 function getTreeData(){
 	$.ajax({

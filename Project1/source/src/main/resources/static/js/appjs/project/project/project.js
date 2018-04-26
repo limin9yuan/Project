@@ -1,5 +1,5 @@
 
-var prefix = "/project/project"
+var prefixProject = "/project/project"
 $(function() {
 	//var projectId = '';
 	//getTreeData();
@@ -12,7 +12,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefixProject + "/list", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -196,7 +196,7 @@ function load() {
 				maxmin : true,
 				shadeClose : false, // 点击遮罩关闭层
 				area : [ '400px', '55%' ],
-				content : prefix + '/import'  // iframe的url
+				content : prefixProject + '/import'  // iframe的url
 			});
 
     })
@@ -218,7 +218,7 @@ function see(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
-		content : prefix + '/see/' + id 
+		content : prefixProject + '/see/' + id 
 	});
 }
 function add() {
@@ -228,7 +228,17 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
-		content : prefix + '/add' // iframe的url
+		content : prefixProject + '/add' // iframe的url
+	});
+}
+function addProject() {
+	parent.layer.open({
+		type : 2,
+		title : '项目新增',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '950px', '95%' ],
+		content : prefixProject + '/add' // iframe的url
 	});
 }
 function edit(id) {
@@ -238,7 +248,7 @@ function edit(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefixProject + '/edit/' + id // iframe的url
 	});
 }
 function remove(id) {
@@ -246,7 +256,7 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/remove",
+			url : prefixProject+"/remove",
 			type : "post",
 			data : {
 				'projectId' : id
@@ -296,7 +306,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : prefixProject + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
@@ -317,7 +327,7 @@ function viewDetail(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '95%' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefixProject + '/edit/' + id // iframe的url
 	});
 }
 function viewZ(id) {
@@ -327,7 +337,7 @@ function viewZ(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '95%' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefixProject + '/edit/' + id // iframe的url
 	});
 }
 /*function getTreeData() {

@@ -20,6 +20,10 @@ public interface CompanyCustomerDao {
 	CompanyCustomerDO get(String customerId);
 	
 	List<CompanyCustomerDO> list(Map<String,Object> map);
+	//新客户
+	List<CompanyCustomerDO> newCustomer(Map<String, Object> map);
+	//旧客户
+	List<CompanyCustomerDO> oldCustomer(Map<String, Object> map);
 	
 	int count(Map<String,Object> map);
 	

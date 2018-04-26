@@ -123,21 +123,7 @@ public class TimesheetServiceImpl implements TimesheetService {
 
 		return timesheetDao.update(timesheet);
 	}
-	//审批处理保存
-	@Override
-	public int formUpdateall(TimesheetDO timesheet){
-		//流程审批处理
-		Map<String,Object> vars = new HashMap<>(16);
-		vars.put("taskAction",  timesheet.getTaskAction() );
-		actTaskService.complete(timesheet.getTaskId(),timesheet.getProcessInstanceId(),timesheet.getTaskComment(),"",vars);
-        //判断流程是否结束
-		if(actTaskService.isProcessInstanceFinish(timesheet.getProcessInstanceId())){
-			timesheet.setTimesheetApprovalStatus("1");
-		}else{
-			timesheet.setTimesheetApprovalStatus("0");
-		}
-		return timesheetDao.update(timesheet);
-	}
+
 
 
 

@@ -21,6 +21,7 @@ public interface ReceivableDao {
 	List<ReceivableDO> list(Map<String,Object> map);
 	
 	int count(Map<String,Object> map);
+	List<ReceivableDO> sumReceivablePrice(Map<String, Object>map);
 	
 	int save(ReceivableDO receivable);
 	

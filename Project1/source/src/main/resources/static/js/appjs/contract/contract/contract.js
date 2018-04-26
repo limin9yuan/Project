@@ -1,6 +1,6 @@
-var prefix = "/contract/contract"
+var prefixContract = "/contract/contract"
 $(function() {
-		loadCrmData("/sales/companyCustomer/listDic","customerId");
+//		loadCrmData("/sales/companyCustomer/listDic","customerId");
 		loadCrmData("/sales/business/listDic","businessId");
 		loadCrmData("/project/project/listDic","projectId");
 	load();
@@ -11,7 +11,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefixContract + "/list", // 服务器数据的加载地址
 				        clickToSelect: true,
 					//	showRefresh : true,
 					//	showToggle : true,
@@ -117,7 +117,7 @@ function load() {
 					maxmin : true,
 					shadeClose : false, // 点击遮罩关闭层
 					area : [ '500px', '70%' ],
-					content : prefix + '/import'  // iframe的url
+					content : prefixContract + '/import'  // iframe的url
 				});
         })
 		// 导入弹出框返回按钮tab_excelinsertQuitbtn
@@ -152,7 +152,17 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '90%', '90%' ],
-		content : prefix + '/add' // iframe的url
+		content : prefixContract + '/add' // iframe的url
+	});
+}
+function addContract() {
+	parent.layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '90%', '90%' ],
+		content : prefixContract + '/add' // iframe的url
 	});
 }
 function edit(id) {
@@ -162,7 +172,7 @@ function edit(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefixContract + '/edit/' + id // iframe的url
 	});
 }
 function remove(id) {
@@ -170,7 +180,7 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/remove",
+			url : prefixContract+"/remove",
 			type : "post",
 			data : {
 				'contractId' : id
@@ -209,7 +219,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : prefixContract + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);

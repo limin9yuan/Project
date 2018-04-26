@@ -32,7 +32,28 @@ public class ReceivableDO implements Serializable {
 	private Long receivableOperator;
 	//操作时间
 	private Date receivableOperateTime;
-
+	//计划回款
+	private String price;
+	//回款率
+		private String reimbursementRate;
+		/**
+		 * 回款率
+		 */
+		public String getReimbursementRate() {
+			return reimbursementRate;
+		}
+		public void setReimbursementRate(String reimbursementRate) {
+			this.reimbursementRate = reimbursementRate;
+		}
+	/**
+	 * 收款计划金额
+	 */
+	public String getPrice() {
+		return price;
+	}
+	public void setPrice(String price) {
+		this.price = price;
+	}
 	/**
 	 * 设置：收款计划ID
 	 */

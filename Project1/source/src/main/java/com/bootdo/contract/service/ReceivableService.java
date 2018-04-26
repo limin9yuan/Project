@@ -20,6 +20,8 @@ public interface ReceivableService {
 	
 	int count(Map<String, Object> map);
 	
+	List<ReceivableDO> sumReceivablePrice(Map<String, Object>map);
+	
 	int save(ReceivableDO receivable);
 	
 	int update(ReceivableDO receivable);

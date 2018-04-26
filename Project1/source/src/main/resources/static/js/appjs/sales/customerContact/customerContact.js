@@ -1,5 +1,5 @@
 
-var prefix = "/sales/customerContact"
+var prefixContact = "/sales/customerContact"
 $(function() {
 	//loadCrmData("/sales/province/listDic","province");
 	//loadCrmData("/sales/province/listDic","city");
@@ -19,7 +19,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefixContact + "/list", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -131,7 +131,7 @@ function load() {
 				maxmin : true,
 				shadeClose : false, // 点击遮罩关闭层
 				area : [ '400px', '55%' ],
-				content : prefix + '/import'  // iframe的url
+				content : prefixContact + '/import'  // iframe的url
 			});
 
 	})
@@ -147,7 +147,17 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
-		content : prefix + '/add'
+		content : prefixContact + '/add'
+	});
+}
+function addContact() {
+	parent.layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '950px', '95%' ],
+		content : prefixContact + '/add'
 	});
 }
 function edit(id) {
@@ -157,7 +167,7 @@ function edit(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefixContact + '/edit/' + id // iframe的url
 	});
 }
 function remove(id) {
@@ -165,7 +175,7 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/remove",
+			url : prefixContact+"/remove",
 			type : "post",
 			data : {
 				'contactId' : id
@@ -215,7 +225,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : prefixContact + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);

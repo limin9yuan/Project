@@ -39,9 +39,39 @@ public class ReceivedDO implements Serializable {
 	private Date receivedOperateTime;
 	//操作人姓名
 	private String receivedOperatorName;
-	
-	
-	
+	//实际回款
+	private String sumReceivedPrice;
+	//回款率
+	private String reimbursementRate;
+	//企业回款数量
+	private String reimbursementNumber;
+	/**
+	 * 企业回款数量
+	 */
+	public String getReimbursementNumber() {
+		return reimbursementNumber;
+	}
+	public void setReimbursementNumber(String reimbursementNumber) {
+		this.reimbursementNumber = reimbursementNumber;
+	}
+	/**
+	 * 回款率
+	 */
+	public String getReimbursementRate() {
+		return reimbursementRate;
+	}
+	public void setReimbursementRate(String reimbursementRate) {
+		this.reimbursementRate = reimbursementRate;
+	}
+	/**
+	 * 实际回款
+	 */
+	public String getSumReceivedPrice() {
+		return sumReceivedPrice;
+	}
+	public void setSumReceivedPrice(String sumReceivedPrice) {
+		this.sumReceivedPrice = sumReceivedPrice;
+	}
 	/**
 	 * 设置：回款信息编号
 	 */

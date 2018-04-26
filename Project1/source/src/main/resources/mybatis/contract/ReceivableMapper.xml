@@ -47,7 +47,9 @@
 		  		  <if test="receivableOperateTime != null and receivableOperateTime != ''"> and Receivable_Operate_Time = #{receivableOperateTime} </if>
 		  		</where>
 	</select>
-	 
+	 	 <select id="sumReceivablePrice" resultType="com.bootdo.contract.domain.ReceivableDO">
+	 select sum(Receivable_Price) AS price from accounts_receivable
+	 </select>
 	<insert id="save" parameterType="com.bootdo.contract.domain.ReceivableDO">
 		insert into accounts_receivable
 		(

@@ -30,22 +30,19 @@
 							</div> <!-- 							<div class="fixed-table-toolbar"> --> <!-- 									<table id="yingShouTable" data-mobile-responsive="true"></table> -->
 							<!-- 								</div> -->
 							<div class="ibox-content">
-								<table style="width: 200px;" align="center">
-									<tr style="border: 1px solid black;">
-										<td
-											style="width: 150px; height: 34px; border: 1px solid black;"
-											align="center">回款计划</td>
-										<td align="center">&nbsp;ff</td>
+								<table style="width: 380px ;height:128px; border: 1px solid #E7EAEC" class="table-hover table-bordered">
+									<tr th:each="bo, iterStat : ${price}" >
+										<td width="159" align="center" valign="middle" ><span
+											class="STYLE1">回款计划</span></td>
+										<td width="211" align="center" valign="middle" th:text="${bo.price}+元"></td>
 									</tr>
-									<tr style="border: 1px solid black; width: 150px">
-										<td style="border: 1px solid black; height: 34px; width: 150x"
-											align="center">实际回款</td>
-										<td style="width: 150px" align="center">&nbsp;dd</td>
+									<tr th:each="bo, iterStat : ${receivedDO}" >
+										<td align="center" valign="middle" ><span class="STYLE1">实际回款</span></td>
+										<td align="center" valign="middle" th:text="${bo.sumReceivedPrice}+元"></td>
 									</tr>
-									<tr style="border: 1px solid black;">
-										<td style="border: 1px solid black; height: 34px"
-											align="center">回款率</td>
-										<td align="center">&nbsp;dd</td>
+									<tr th:each="bo, iterStat : ${reimbursementRate}">
+										<td align="center" valign="middle" ><span class="STYLE1">回款率</span></td>
+										<td align="center" valign="middle" th:text="${bo.reimbursementRate}+'%'"></td>
 									</tr>
 								</table>
 							</div>
@@ -56,42 +53,90 @@
 							</div>
 							<div class="ibox-content">
 								<label class="control-labe">业务信息</label>
-									<table class="table table-bordered table-hover" >
-										<tr style="text-align: center;">
-											<th>业务编号</th>
-											<th>业务名称</th>
-										</tr>
-										<tr th:each="bo, iterStat : ${businessList}">
-											<td align="center" th:text="${bo.businessId}" ></td>
-											<td align="center" th:text="${bo.businessName}"></td>
-										</tr>
-									</table>
+								<table class="table table-bordered table-hover">
+									<tr style="text-align: center;">
+										<th>序号</th>
+										<th>业务编号</th>
+										<th>业务名称</th>
+									</tr>
+									<tr th:each="bo, iterStat : ${businessList}">
+										<td align="center" th:text="${iterStat.count}"></td>
+										<td align="center" th:text="${bo.businessId}"></td>
+										<td align="center" th:text="${bo.businessName}"></td>
+									</tr>
+									<div class="columns pull-right">
+										<button shiro:hasPermission="sales:business:add" type="button"
+											class="btn  btn-primary" onclick="addBusiness()">
+											<i class="fa fa-plus" aria-hidden="true"></i>新增
+										</button>
+										<button
+											shiro:hasPermission="sales:companyCustomer:examineBusiness"
+											type="button" class="btn  btn-success btn-sm"
+											onclick="examineBusiness()" style="width: 65px; height: 34px">
+											<i class="fa fa-search" aria-hidden="true"></i>更多
+										</button>
+									</div>
+								</table>
+
 							</div>
 							<div class="ibox-content">
 								<label class="control-labe">项目信息</label>
-									<table class="table table-bordered table-hover" >
-										<tr style="text-align: center;">
-											<th>项目编号</th>
-											<th>项目名称</th>
-										</tr>
-										<tr th:each="bo, iterStat : ${projectList}">
-											<td align="center" th:text="${bo.projectId}" ></td>
-											<td align="center" th:text="${bo.projectName}"></td>
-										</tr>
-									</table>
+								<table class="table table-bordered table-hover">
+									<tr style="text-align: center;">
+										<th>序号</th>
+										<th>项目编号</th>
+										<th>项目名称</th>
+										<th>项目经理</th>
+									</tr>
+									<tr th:each="bo, iterStat : ${projectList}">
+										<td align="center" th:text="${iterStat.count}"></td>
+										<td align="center" th:text="${bo.projectId}"></td>
+										<td align="center" th:text="${bo.projectName}"></td>
+										<td align="center" th:text="${bo.projectManager}"></td>
+									</tr>
+									<div class="columns pull-right">
+										<button shiro:hasPermission="project:project:add"
+											type="button" class="btn  btn-primary" onclick="addProject()">
+											<i class="fa fa-plus" aria-hidden="true"></i>新增
+										</button>
+										<button
+											shiro:hasPermission="sales:companyCustomer:examineProject"
+											type="button" class="btn  btn-success btn-sm"
+											onclick="examineProject()" style="width: 65px; height: 34px">
+											<i class="fa fa-search" aria-hidden="true"></i>更多
+										</button>
+									</div>
+								</table>
 							</div>
 							<div class="ibox-content">
 								<label class="control-labe">合同信息</label>
-								<table class="table table-bordered table-hover" >
-										<tr style="text-align: center;">
-											<th>合同编号</th>
-											<th>合同名称</th>
-										</tr>
-										<tr th:each="bo, iterStat : ${contractList}">
-											<td align="center" th:text="${bo.contractId}" ></td>
-											<td align="center" th:text="${bo.contractName}"></td>
-										</tr>
-									</table>
+								<table class="table table-bordered table-hover">
+									<tr style="text-align: center;">
+										<th>序号</th>
+										<th>合同编号</th>
+										<th>合同名称</th>
+										<th>合同金额</th>
+									</tr>
+									<tr th:each="bo, iterStat : ${contractList}">
+										<td align="center" th:text="${iterStat.count}"></td>
+										<td align="center" th:text="${bo.contractId}"></td>
+										<td align="center" th:text="${bo.contractName}"></td>
+										<td align="center" th:text="${bo.contractTotalPrice}"></td>
+									</tr>
+									<div class="columns pull-right">
+										<button shiro:hasPermission="contract:contract:add"
+											type="button" class="btn  btn-primary"
+											onclick="addContract()">
+											<i class="fa fa-plus" aria-hidden="true"></i>新增
+										</button>
+										<button
+											shiro:hasPermission="sales:companyCustomer:examineContract"
+											type="button" class="btn  btn-success btn-sm"
+											onclick="examineContract()" style="width: 65px; height: 34px">
+											<i class="fa fa-search" aria-hidden="true"></i>更多
+										</button>
+									</div>
+								</table>
 							</div>
 						</li>
 						<li>
@@ -107,18 +152,32 @@
 								<h3>联系人信息</h3>
 							</div>
 							<div class="ibox-content">
-							<table class="table table-bordered table-hover" >
-										<tr style="text-align: center;">
-											<th>姓名</th>
-											<th>部门</th>
-											<th>联系电话</th>
-										</tr>
-										<tr th:each="bo, iterStat : ${lianxiList}">
-											<td align="center" th:text="${bo.contactName}" ></td>
-											<td align="center" th:text="${bo.contactDept}"></td>
-											<td align="center" th:text="${bo.contactPhoneNumber}"></td>
-										</tr>
-									</table>
+								<table class="table table-bordered table-hover">
+									<tr style="text-align: center;">
+										<th>序号</th>
+										<th>姓名</th>
+										<th>部门</th>
+										<th>联系电话</th>
+									</tr>
+									<tr th:each="bo, iterStat : ${lianxiList}">
+										<td align="center" th:text="${iterStat.count}"></td>
+										<td align="center" th:text="${bo.contactName}"></td>
+										<td align="center" th:text="${bo.contactDept}"></td>
+										<td align="center" th:text="${bo.contactPhoneNumber}"></td>
+									</tr>
+									<div class="columns pull-right">
+										<button shiro:hasPermission="sales:business:add" type="button"
+											class="btn  btn-primary" onclick="addContact()">
+											<i class="fa fa-plus" aria-hidden="true"></i>新增
+										</button>
+										<button
+											shiro:hasPermission="sales:companyCustomer:examineContact"
+											type="button" class="btn  btn-success btn-sm"
+											onclick="examineContact()" style="width: 65px; height: 34px">
+											<i class="fa fa-search" aria-hidden="true"></i>更多
+										</button>
+									</div>
+								</table>
 							</div>
 						</li>
 					</ol>
@@ -141,17 +200,6 @@
 									style="border: none; width: 8%; background-color: #F5F5F5;"
 									readonly="readonly">
 							</div>
-							<!-- 							<div class="columns pull-right" style="padding-right: 15px"> -->
-							<!-- 								<button shiro:hasPermission="sales:companyCustomer:edit" -->
-							<!-- 									type="button" class="btn  btn-primary" onclick="edit()"> -->
-							<!-- 									<i class="fa fa-edit" aria-hidden="true"></i>修改 -->
-							<!-- 								</button> -->
-							<!-- 								<button shiro:hasPermission="sales:companyCustomer:batchRemove" -->
-							<!-- 									type="button" class="btn  btn-danger" onclick="batchRemove()"> -->
-							<!-- 									<i class="fa fa-trash" aria-hidden="true"></i>删除 -->
-							<!-- 								</button> -->
-
-							<!-- 							</div> -->
 						</div>
 					</div>
 					<div class="ibox-content">
@@ -452,28 +500,28 @@
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">需求简要描述：</label>
-										<div class="col-sm-8">
+										<div class="col-sm-10">
 											<textarea id="customerReqDes" name="customerReqDes"
 												readonly="readonly" class="form-control" rows="3"
-												style="width: 940px"></textarea>
+												style="width: 100%"></textarea>
 
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">公司简介：</label>
-										<div class="col-sm-4">
+										<div class="col-sm-10">
 											<textarea id="customerIntroduction" readonly="readonly"
 												name="customerIntroduction" class="form-control"
-												style="width: 940px" rows="3"></textarea>
+												style="width: 100%" rows="3"></textarea>
 
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">备注：</label>
-										<div class="col-sm-8">
+										<div class="col-sm-10">
 											<textarea id="customerRemarks" name="customerRemarks"
 												readonly="readonly" class="form-control" rows="3"
-												style="width: 940px"></textarea>
+												style="width: 100%"></textarea>
 
 										</div>
 									</div>
@@ -1079,7 +1127,7 @@
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">备注：</label>
-										<div class="col-sm-8">
+										<div class="col-sm-10">
 											<textarea id="Remarks" name="Remarks" class="form-control"
 												readonly="readonly" rows="3">
 											</textarea>
@@ -1135,6 +1183,12 @@
 		src="/js/appjs/sales/companyCustomer/examineCompanyCustomer.js"></script>
 	<!-- 	业务信息 -->
 	<script type="text/javascript"
-		src="/js/appjs/sales/companyCustomer/customerBusiness.js"></script>
+		src="/js/appjs/sales/business/business.js"></script>
+	<!-- 	项目信息 -->
+	<script type="text/javascript"
+		src="/js/appjs/project/project/project.js"></script>
+	<!-- 联系人信息 -->
+	<script type="text/javascript"
+		src="/js/appjs/sales/customerContact/customerContact.js"></script>
 </body>
 </html>

@@ -17,13 +17,15 @@ function datetimepicker() {
 	});
 }
 function firstPieChart() {
+    var totalCost = $("#totalCost").val();
+    var totalNet = $("#totalNet").val();
     // 基于准备好的dom，初始化echarts实例
     var myChartFirstPie = echarts.init(document.getElementById('firstPieChart'));
 
     var option = {
         title : {
             // text: '总金额、利润占比',
-            subtext: '总金额、利润占比',
+            subtext: '成本、利润占比',
             x:'center'
         },
         tooltip : {
@@ -37,13 +39,13 @@ function firstPieChart() {
         },
         series : [
             {
-                name: '访问来源',
+                name: '成本、利润占比',
                 type: 'pie',
                 radius : '55%',
                 center: ['50%', '60%'],
                 data:[
-                    {value:335, name:'利润'},
-                    {value:310, name:'成本'}
+                    {value:totalNet, name:'利润'},
+                    {value:totalCost, name:'成本'}
 
                 ],
                 itemStyle: {

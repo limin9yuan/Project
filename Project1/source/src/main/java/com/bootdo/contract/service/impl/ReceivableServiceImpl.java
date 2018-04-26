@@ -51,5 +51,11 @@ public class ReceivableServiceImpl implements ReceivableService {
 	public int batchRemove(String[] receivableIds){
 		return receivableDao.batchRemove(receivableIds);
 	}
+
+	@Override
+	public List<ReceivableDO> sumReceivablePrice(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return receivableDao.sumReceivablePrice(map);
+	}
 	
 }

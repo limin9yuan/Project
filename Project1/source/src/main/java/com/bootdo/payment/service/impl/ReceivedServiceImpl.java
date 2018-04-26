@@ -197,4 +197,14 @@ public class ReceivedServiceImpl implements ReceivedService {
 		}
 		return result;
 	}
+
+	@Override
+	public List<ReceivedDO> sumReceivedPrice(Map<String, Object> map) {
+		return receivedDao.sumReceivedPrice(map);
+	}
+
+	@Override
+	public List<ReceivedDO> reimbursementRate(Map<String, Object> map) {
+		return receivedDao.reimbursementRate(map);
+	}
 }
