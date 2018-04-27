@@ -207,4 +207,34 @@ public class ReceivedServiceImpl implements ReceivedService {
 	public List<ReceivedDO> reimbursementRate(Map<String, Object> map) {
 		return receivedDao.reimbursementRate(map);
 	}
+
+	@Override
+	public List<ReceivedDO> moneyNumber(Map<String, Object> map) {
+		// TODO moneyNumber回款企业金额数量
+		return receivedDao.moneyNumber(map);
+	}
+
+	@Override
+	public List<ReceivedDO> priceNumberExamine(Map<String, Object> map) {
+		// TODO 回款数量详情页
+		return receivedDao.priceNumberExamine(map);
+	}
+
+	@Override
+	public List<ReceivedDO> noPriceNumberExamine(Map<String, Object> map) {
+		// TODO 未回款数量详情页
+		return receivedDao.noPriceNumberExamine(map);
+	}
+
+	@Override
+	public int countPriceNumberExamine(Map<String, Object> map) {
+		// TODO 
+		return receivedDao.countPriceNumberExamine(map);
+	}
+
+	@Override
+	public int countNoPriceNumberExamine(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return receivedDao.countNoPriceNumberExamine(map);
+	}
 }

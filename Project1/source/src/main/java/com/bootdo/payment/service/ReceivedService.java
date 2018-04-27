@@ -21,7 +21,19 @@ public interface ReceivedService {
 	List<ReceivedDO> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
+	
+	int countNoPriceNumberExamine(Map<String, Object>map);
+	
+	int countPriceNumberExamine(Map<String, Object>map);
+	
+	List<ReceivedDO> noPriceNumberExamine(Map<String, Object>map);
+	
+	List<ReceivedDO> priceNumberExamine(Map<String, Object>map);
+	
+	List<ReceivedDO> moneyNumber(Map<String, Object>map);
+	
 	List<ReceivedDO> sumReceivedPrice(Map<String, Object>map);
+	
 	List<ReceivedDO> reimbursementRate(Map<String, Object>map);
 	
 	int save(ReceivedDO received);

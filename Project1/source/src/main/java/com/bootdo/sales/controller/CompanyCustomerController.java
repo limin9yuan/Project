@@ -87,41 +87,48 @@ public class CompanyCustomerController extends BaseController {
 	private ReceivableService receivableService;
 	@Autowired
 	private ReceivedService receivedService;
+
 	@GetMapping()
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
 	String CompanyCustomer(Model model) {
-		Map<String, Object> params = new  HashMap<String, Object>();
-		params.put("offset",1);
-		params.put("limit",2);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", 1);
+		params.put("limit", 2);
 		Query query = new Query(params);
-		
-		//新客户
-		List<CompanyCustomerDO> newCustomer=companyCustomerService.newCustomer(query);
+		// *****************热点客户、本月回款情况、本月计划回款*********************************
+		// 新客户
+		List<CompanyCustomerDO> newCustomer = companyCustomerService.newCustomer(query);
 		model.addAttribute("newCustomer", newCustomer);
-		//旧客户
-		List<CompanyCustomerDO> oldCustomer=companyCustomerService.oldCustomer(query);
+		// 旧客户
+		List<CompanyCustomerDO> oldCustomer = companyCustomerService.oldCustomer(query);
 		model.addAttribute("oldCustomer", oldCustomer);
-		//实际回款
-		List<ReceivedDO> receivedDO=receivedService.sumReceivedPrice(query);
+		// 实际回款
+		List<ReceivedDO> receivedDO = receivedService.sumReceivedPrice(query);
 		model.addAttribute("receivedDO", receivedDO);
+		// 未回款
+		List<ReceivedDO> moneyNumber = receivedService.moneyNumber(query);
+		model.addAttribute("moneyNumber", moneyNumber);
+		// 计划回款
+		List<ReceivableDO> planCunstomerNumber = receivableService.planCunstomerNumber(query);
+		model.addAttribute("planCunstomerNumber", planCunstomerNumber);
+		// **********************END******************************************************
 		return "sales/companyCustomer/companyCustomer";
 	}
 
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
-	public PageUtils list(@RequestParam Map<String, Object> params,Model model) {
+	public PageUtils list(@RequestParam Map<String, Object> params, Model model) {
 		// 查询列表数据
-		
+
 		Query query = new Query(params);
 		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.list(query);
 		int total = companyCustomerService.count(query);
 		PageUtils pageUtils = new PageUtils(companyCustomerList, total);
-		
-		
 		return pageUtils;
 	}
 
+	// 热点列表
 	@ResponseBody
 	@GetMapping("/listHot")
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
@@ -227,7 +234,7 @@ public class CompanyCustomerController extends BaseController {
 					}
 				}
 			}
-			if ( customerIds > 0) {
+			if (customerIds > 0) {
 				R r = R.ok();
 				r.put("customerId", customerIds);
 				return r;
@@ -236,6 +243,122 @@ public class CompanyCustomerController extends BaseController {
 		return R.error();
 	}
 
+	// *****************************列表页Top热点客户块*******************************************************************************
+	// 新客户要更多信息页面
+	@GetMapping("/newCustomerMore")
+	@RequiresPermissions("sales:companyCustomer:newCustomerMore")
+	String newCustomerMore() {
+		return "/sales/companyCustomer/examineHotCustomers/newCustomerMore";
+	}
+
+	// 新客户要更多信息列表
+	@ResponseBody
+	@GetMapping("/listNewCustomerMore")
+	@RequiresPermissions("sales:companyCustomer:newCustomerMore")
+	public PageUtils listNewCustomerMore(@RequestParam Map<String, Object> params, Model model) {
+		// 查询新客户列表数据
+		Query query = new Query(params);
+		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.newCustomer(query);
+		int total = companyCustomerService.countNewCustomer(query);
+		PageUtils pageUtils = new PageUtils(companyCustomerList, total);
+		return pageUtils;
+	}
+
+	// 旧客户要更多信息页面
+	@GetMapping("/oldCustomerMore")
+	@RequiresPermissions("sales:companyCustomer:oldCustomerMore")
+	String oldCustomerMore() {
+		return "/sales/companyCustomer/examineHotCustomers/oldCustomerMore";
+	}
+
+	// 旧客户要更多信息
+	@ResponseBody
+	@GetMapping("/listOldCustomerMore")
+	@RequiresPermissions("sales:companyCustomer:oldCustomerMore")
+	public PageUtils listOldCustomerMore(@RequestParam Map<String, Object> params, Model model) {
+		// 查询新客户列表数据
+		params.put("offset", 1);
+		params.put("limit", 10);
+		Query query = new Query(params);
+		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.oldCustomer(query);
+		int total = companyCustomerService.countOldCustomer(query);
+		PageUtils pageUtils = new PageUtils(companyCustomerList, total);
+		return pageUtils;
+	}
+	// *****************************END***************************************************************************************
+
+	// *****************************本月回款情况块*********************************************************************************
+	// 已回款企业数目页面
+	@GetMapping("/examineReimbursementEnterprise")
+	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+	String examineReimbursementEnterprise() {
+		return "/sales/companyCustomer/examinePlannedReturn/examineReimbursementEnterprise";
+	}
+
+	// 已回款企业数目列表页面
+	@ResponseBody
+	@GetMapping("/priceNumberExamine")
+	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+	public PageUtils priceNumberExamine(@RequestParam Map<String, Object> params, Model model) {
+		// 查询新客户列表数据
+		params.put("offset", 1);
+		params.put("limit", 10);
+		Query query = new Query(params);
+		List<ReceivedDO> companyCustomerList = receivedService.priceNumberExamine(query);
+		int total = receivedService.countPriceNumberExamine(query);
+		PageUtils pageUtils = new PageUtils(companyCustomerList, total);
+		return pageUtils;
+	}
+
+	// 未回款企业数目页面
+	@GetMapping("/examineNonPaymentEnterprise")
+	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+	String examineNonPaymentEnterprise() {
+		return "/sales/companyCustomer/examinePlannedReturn/examineNonPaymentEnterprise";
+	}
+
+	// 未回款企业数目列表页面
+	@ResponseBody
+	@GetMapping("/noPriceNumberExamine")
+	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+	public PageUtils noPriceNumberExamine(@RequestParam Map<String, Object> params, Model model) {
+		// 查询新客户列表数据
+		params.put("offset", 1);
+		params.put("limit", 10);
+		Query query = new Query(params);
+		List<ReceivedDO> companyCustomerList = receivedService.noPriceNumberExamine(query);
+		int total = receivedService.countNoPriceNumberExamine(query);
+		PageUtils pageUtils = new PageUtils(companyCustomerList, total);
+		return pageUtils;
+	}
+
+	// *****************************END***************************************************************************************
+
+	// *****************************本月计划回款*********************************************************************************
+	// 本月计划回款客户数目页面
+	@GetMapping("/examineNumberPlannedReturns")
+	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+	String examineNumberPlannedReturns() {
+		return "/sales/companyCustomer/examineReimbursementSituation/examineNumberPlannedReturns";
+	}
+
+	// 本月计划回款客户数目列表页面
+	@ResponseBody
+	@GetMapping("/plannedReturn")
+	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+	public PageUtils plannedReturn(@RequestParam Map<String, Object> params, Model model) {
+		// 查询新客户列表数据
+		params.put("offset", 1);
+		params.put("limit", 10);
+		Query query = new Query(params);
+		List<ReceivableDO> companyCustomerList = receivableService.examinePlanCunstomerNumber(query);
+		int total = receivableService.countExaminePlanCunstomerNumber(query);
+		PageUtils pageUtils = new PageUtils(companyCustomerList, total);
+		return pageUtils;
+	}
+	// *****************************END***************************************************************************************
+
+	// *****************************列表页详情内查看********************************************************************************
 	/**
 	 * 查看
 	 */
@@ -244,41 +367,43 @@ public class CompanyCustomerController extends BaseController {
 	String examine(@PathVariable("customerId") String customerId, Model model) {
 		model.addAttribute("customerId", customerId);
 		// 查询列表数据
-		 Map<String, Object> params = new  HashMap<String, Object>();
-		params.put("offset",1);
-		params.put("limit",2);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", 1);
+		params.put("limit", 2);
 		Query query = new Query(params);
-		//业务信息
+		// 业务信息
 		List<BusinessDO> businessList = businessService.list(query);
 		model.addAttribute("businessList", businessList);
-		//项目信息
+		// 项目信息
 		List<ProjectDO> projectList = projectService.list(query);
 		model.addAttribute("projectList", projectList);
-		//合同信息
+		// 合同信息
 		List<ContractDO> contractList = contractService.list(query);
 		model.addAttribute("contractList", contractList);
-		//联系人信息
+		// 联系人信息
 		List<CustomerContactDO> lianxiList = customerContactService.list(query);
 		model.addAttribute("lianxiList", lianxiList);
-		//详情页应收信息回款计划Receivable_Price字段求和
-		List<ReceivableDO> price=receivableService.sumReceivablePrice(query);
+		// 详情页应收信息回款计划Receivable_Price字段求和
+		List<ReceivableDO> price = receivableService.sumReceivablePrice(query);
 		model.addAttribute("price", price);
-		//详情页应收信息实际回款
-		List<ReceivedDO> receivedDO=receivedService.sumReceivedPrice(query);
+		// 详情页应收信息实际回款
+		List<ReceivedDO> receivedDO = receivedService.sumReceivedPrice(query);
 		model.addAttribute("receivedDO", receivedDO);
-		//详情页应收信息回款率
-		List<ReceivedDO> reimbursementRate=receivedService.reimbursementRate(query);
+		// 详情页应收信息回款率
+		List<ReceivedDO> reimbursementRate = receivedService.reimbursementRate(query);
 		model.addAttribute("reimbursementRate", reimbursementRate);
 		return "sales/companyCustomer/examineCompanyCustomer";
 	}
+
 	/**
 	 * 业务信息更多
 	 */
 	@GetMapping("/examineBusiness")
 	@RequiresPermissions("sales:companyCustomer:examineBusiness")
 	String examineBusiness() {
- 		return "sales/companyCustomer/examineBusinessCustomer";
+		return "sales/companyCustomer/examineBusinessCustomer";
 	}
+
 	/**
 	 * 项目信息更多
 	 */
@@ -287,6 +412,7 @@ public class CompanyCustomerController extends BaseController {
 	String examineProject() {
 		return "sales/companyCustomer/examineProjectCustomer";
 	}
+
 	/**
 	 * 合同信息更多
 	 */
@@ -295,6 +421,7 @@ public class CompanyCustomerController extends BaseController {
 	String examineContract() {
 		return "sales/companyCustomer/examineContractCustomer";
 	}
+
 	/**
 	 * 联系人信息更多
 	 */
@@ -303,6 +430,8 @@ public class CompanyCustomerController extends BaseController {
 	String examineContact() {
 		return "sales/companyCustomer/exaimeContactCustomer";
 	}
+
+	// **************************END****************************************************************************************
 	// /**
 	// * 保存
 	// */

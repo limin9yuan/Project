@@ -71,7 +71,7 @@ function secondPieChart(totalFinCost,totalFinNet) {
         var option = {
             title : {
                 // text: '总金额、利润占比',
-                subtext: '总金额、利润占比',
+                subtext: '成本、利润占比',
                 x:'center'
             },
             tooltip : {
@@ -85,7 +85,7 @@ function secondPieChart(totalFinCost,totalFinNet) {
             },
             series : [
                 {
-                    name: '访问来源',
+                    name: '成本、利润占比',
                     type: 'pie',
                     radius : '55%',
                     center: ['50%', '60%'],
@@ -229,15 +229,14 @@ function GetFinanceDataList_ajax(){
                         "<td>"+(result[i].november==null?"":result[i].november)+"</td>"+
                         "<td>"+(result[i].december==null?"":result[i].december)+"</td>"+
                         "<td>"+(result[i].total==null?"":result[i].total)+"</td></tr>";
-                        // alert(strHTML);
 
             }
                 $('#financeTable').html(strHTML);
-                var totalFinCost = (result[2].total==null? 0:result[2].total)+
-                                    (result[3].total==null? 0:result[3].total)+
-                                    (result[4].total==null? 0:result[4].total)+
-                                    (result[5].total==null? 0:result[5].total)+
-                                    (result[6].total==null? 0:result[6].total);
+                var totalFinCost = (result[2].total==null? 0:Number(result[2].total))+
+                                    (result[3].total==null? 0:Number(result[3].total))+
+                                    (result[4].total==null? 0:Number(result[4].total))+
+                                    (result[5].total==null? 0:Number(result[5].total))+
+                                    (result[6].total==null? 0:Number(result[6].total));
                 var totalFinNet = result[7].total;
                 secondPieChart(totalFinCost,totalFinNet);
 

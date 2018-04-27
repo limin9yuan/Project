@@ -252,6 +252,61 @@ function examineCompanyCustomer(id) {
 		content : prefix + '/examine/' + id
 	});
 }
+//---更多新客户信息
+function newCustomerMore() {
+	parent.layer.open({
+		type : 2,
+		title : '更多新客户信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '30%', '80%' ],
+		content : prefix + '/newCustomerMore' 
+	});
+}
+//---更多旧客户信息
+function oldCustomerMore() {
+	parent.layer.open({
+		type : 2,
+		title : '更多旧客户信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '30%', '80%' ],
+		content : prefix + '/oldCustomerMore' 
+	});
+}
+//已回款企业详情
+function examineReimbursementEnterprise() {
+	parent.layer.open({
+		type : 2,
+		title : '更多已回款企业信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '30%', '80%' ],
+		content : prefix + '/examineReimbursementEnterprise' 
+	});
+}
+//未回款企业详情
+function examineNonPaymentEnterprise() {
+	parent.layer.open({
+		type : 2,
+		title : '更多未回款企业信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '30%', '80%' ],
+		content : prefix + '/examineNonPaymentEnterprise' 
+	});
+}
+//本月计划回款客户详情
+function examineNumberPlannedReturns() {
+	parent.layer.open({
+		type : 2,
+		title : '本月计划回款客户信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '30%', '80%' ],
+		content : prefix + '/examineNumberPlannedReturns' 
+	});
+}
 // ————查看联系人信息
 function examine(id) {
 	parent.layer.open({

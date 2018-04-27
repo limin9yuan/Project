@@ -57,5 +57,23 @@ public class ReceivableServiceImpl implements ReceivableService {
 		// TODO Auto-generated method stub
 		return receivableDao.sumReceivablePrice(map);
 	}
+
+	@Override
+	public List<ReceivableDO> planCunstomerNumber(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return receivableDao.planCunstomerNumber(map);
+	}
+
+	@Override
+	public List<ReceivableDO> examinePlanCunstomerNumber(Map<String, Object> map) {
+		// TODO 未回款企业详情
+		return receivableDao.examinePlanCunstomerNumber(map);
+	}
+
+	@Override
+	public int countExaminePlanCunstomerNumber(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return receivableDao.countExaminePlanCunstomerNumber(map);
+	}
 	
 }

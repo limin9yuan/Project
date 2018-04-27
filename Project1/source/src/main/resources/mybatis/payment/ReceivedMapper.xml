@@ -71,17 +71,66 @@
 			<if test="receivedOperateTime != null and receivedOperateTime != ''"> and Received_Operate_Time = #{receivedOperateTime} </if>
 		</where>
 	</select>
-	<!-- 实际回款 -->
+	<!-- 	*************************************************************************************************** -->
+	<!-- 实际回款/本月回款情况 -->
 	<select id="sumReceivedPrice" resultType="com.bootdo.payment.domain.ReceivedDO">
 		select
-		sum(Received_Price) as sumReceivedPrice ,count(Received_ID)as reimbursementNumber from payment_received
+		sum(Received_Price) as sumReceivedPrice ,count(Received_ID)as
+		reimbursementNumber from payment_received
+		where Received_Price!='' and Received_Price is not null
 	</select>
 	<!-- 回款率 -->
 	<select id="reimbursementRate" resultType="com.bootdo.payment.domain.ReceivedDO">
-	select sum(Received_Price)
-	/(select sum(Receivable_Price) from accounts_receivable)*100 as reimbursementRate
-	from payment_received
-</select>
+		select sum(Received_Price)
+		/(select sum(Receivable_Price) from accounts_receivable)*100 as
+		reimbursementRate
+		from payment_received
+	</select>
+<!-- 	*************************************************************************************************** -->
+<!-- 	回款数量详情页 -->
+	<select id="priceNumberExamine" resultType="com.bootdo.payment.domain.ReceivedDO">
+		select a.Received_Price,a.Received_Time,s.Customer_Name,s.Customer_Id
+		from payment_received a
+		left join contract c on a.Contract_ID=c.Contract_ID
+		left join sales_company_customer s on c.Customer_ID=s.Customer_ID
+		where a.Received_Price!='' and a.Received_Price is not null
+	</select>
+<!-- 		回款数量详情页数量 -->
+	<select id="countPriceNumberExamine" resultType="int">
+		select count(*)
+		from payment_received a
+		left join contract c on a.Contract_ID=c.Contract_ID
+		left join sales_company_customer s on c.Customer_ID=s.Customer_ID
+		where a.Received_Price!='' and a.Received_Price is not null
+	</select>
+<!-- 	*************************************************************************************************** -->
+<!-- 	未回款企业详情 -->
+	<select id="noPriceNumberExamine" resultType="com.bootdo.payment.domain.ReceivedDO">
+		select a.Received_Price,a.Received_Time,s.Customer_Name
+		from payment_received a
+		left join contract c on a.Contract_ID=c.Contract_ID
+		left join sales_company_customer s on c.Customer_ID=s.Customer_ID
+		where a.Received_Price='' and a.Received_Price is null
+	</select>
+<!-- 		未回款企业详情数量 -->
+	<select id="countNoPriceNumberExamine" resultType="int">
+		select count(*)
+		from payment_received a
+		left join contract c on a.Contract_ID=c.Contract_ID
+		left join sales_company_customer s on c.Customer_ID=s.Customer_ID
+		where a.Received_Price='' and a.Received_Price is null
+	</select>
+<!-- 	*************************************************************************************************** -->				
+	
+	<!-- 未回款企业数目 -->
+	<select id="moneyNumber" resultType="com.bootdo.payment.domain.ReceivedDO">
+		<!-- /*未回款企业数目*/ -->
+		select count(Receivable_ID)-(select count(Received_ID) from
+		payment_received) as number,
+		sum(Receivable_Price)-(select sum(Received_Price) from payment_received) as money
+		from accounts_receivable
+	</select>
+<!-- 	*************************************************************************************************** -->
 	<insert id="save" parameterType="com.bootdo.payment.domain.ReceivedDO">
 		insert into payment_received
 		(

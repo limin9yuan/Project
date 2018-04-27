@@ -203,6 +203,7 @@ public class CompanyCustomerDO implements Serializable {
 	private Long customerDeptId;
 	//上级部门
 	private Long customerDeptParentDept;
+
 	public Long getCustomerDeptParentDept() {
 		return customerDeptParentDept;
 	}

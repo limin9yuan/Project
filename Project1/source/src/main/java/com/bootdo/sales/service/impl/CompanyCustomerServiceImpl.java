@@ -852,6 +852,18 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 		return companyCustomerDao.oldCustomer(map);
 	}
 
+	@Override
+	public int countNewCustomer(Map<String, Object> map) {
+		// TODO 新客户数量
+		return companyCustomerDao.countNewCustomer(map);
+	}
+
+	@Override
+	public int countOldCustomer(Map<String, Object> map) {
+		// TODO 旧客户数量
+		return companyCustomerDao.countOldCustomer(map);
+	}
+
 }
 
 

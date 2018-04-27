@@ -35,7 +35,46 @@ public class ReceivableDO implements Serializable {
 	//计划回款
 	private String price;
 	//回款率
-		private String reimbursementRate;
+	private String reimbursementRate;
+	//本月计划回款客户数目
+	private String planNumber;
+	//本月计划回款客户金额
+	private String planMoney;
+	//企业客户编号
+	private String customerId;
+	//企业客户名称
+	private String customerName;
+	
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	/**
+	 * 本月计划回款客户数目
+	 */
+		public String getPlanNumber() {
+		return planNumber;
+	}
+	public void setPlanNumber(String planNumber) {
+		this.planNumber = planNumber;
+	}
+	/**
+	 * 本月计划回款客户金额
+	 */
+	public String getPlanMoney() {
+		return planMoney;
+	}
+	public void setPlanMoney(String planMoney) {
+		this.planMoney = planMoney;
+	}
 		/**
 		 * 回款率
 		 */

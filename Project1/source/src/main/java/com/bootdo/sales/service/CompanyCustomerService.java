@@ -31,6 +31,10 @@ public interface CompanyCustomerService {
 	// 旧客户
 	List<CompanyCustomerDO> oldCustomer(Map<String, Object> map);
 
+	int countNewCustomer(Map<String, Object>map);
+	
+	int countOldCustomer(Map<String, Object>map);
+	
 	int count(Map<String, Object> map);
 
 	int save(CompanyCustomerDO companyCustomer);

@@ -20,7 +20,14 @@ public interface ReceivableDao {
 	
 	List<ReceivableDO> list(Map<String,Object> map);
 	
+	List<ReceivableDO> examinePlanCunstomerNumber(Map<String, Object>map);
+	
 	int count(Map<String,Object> map);
+	
+	int countExaminePlanCunstomerNumber(Map<String, Object>map);
+	
+	List<ReceivableDO> planCunstomerNumber(Map<String, Object>map);
+	
 	List<ReceivableDO> sumReceivablePrice(Map<String, Object>map);
 	
 	int save(ReceivableDO receivable);

@@ -50,6 +50,29 @@
 	 	 <select id="sumReceivablePrice" resultType="com.bootdo.contract.domain.ReceivableDO">
 	 select sum(Receivable_Price) AS price from accounts_receivable
 	 </select>
+	 <select id="planCunstomerNumber" resultType="com.bootdo.contract.domain.ReceivableDO">
+<!-- 	 	/*本月计划回款客户数目*/                                                    -->
+		select count(Receivable_ID) as planNumber ,          
+		sum(Receivable_Price) as planMoney          
+		from accounts_receivable       
+	 </select>
+<!-- 	 ************************************************************************************ -->
+<!-- 	 本月计划回款客户详情 -->
+	<select id="examinePlanCunstomerNumber" resultType="com.bootdo.contract.domain.ReceivableDO">
+		select a.Receivable_Price,a.Receivable_Date,s.Customer_ID,s.Customer_Name
+		from accounts_receivable a 
+		left join contract c on a.Contract_ID=c.Contract_ID
+		left join sales_company_customer s on c.Customer_ID=s.Customer_ID
+		where a.Receivable_Price!='' and a.Receivable_Price is not null
+	</select>
+	<select id="countExaminePlanCunstomerNumber" resultType="int">
+		select count(*)
+		from accounts_receivable a 
+		left join contract c on a.Contract_ID=c.Contract_ID
+		left join sales_company_customer s on c.Customer_ID=s.Customer_ID
+		where a.Receivable_Price!='' and a.Receivable_Price is not null
+	</select>
+<!-- 	 ************************************************************************************ -->	
 	<insert id="save" parameterType="com.bootdo.contract.domain.ReceivableDO">
 		insert into accounts_receivable
 		(

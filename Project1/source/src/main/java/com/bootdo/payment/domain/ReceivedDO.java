@@ -45,6 +45,47 @@ public class ReceivedDO implements Serializable {
 	private String reimbursementRate;
 	//企业回款数量
 	private String reimbursementNumber;
+	//已回款数量
+	private String number;
+	//已回款金额
+	private String money;
+	//企业名称
+	private String customerName;
+	//企业客户编号
+	private String customerId;
+	
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	/**
+	 * 数量
+	 * @return
+	 */
+	public String getNumber() {
+		return number;
+	}
+	public void setNumber(String number) {
+		this.number = number;
+	}
+	/**
+	 * 金额
+	 * @return
+	 */
+	public String getMoney() {
+		return money;
+	}
+	public void setMoney(String money) {
+		this.money = money;
+	}
 	/**
 	 * 企业回款数量
 	 */

@@ -116,18 +116,36 @@
 		  		  <if test="area != null and area != ''"> and Customer_County = #{area} </if>
 		  		</where>
 	</select>
+<!--****************************************************************************************************** -->
 <!-- 	 新客户 -->
 	<select id="newCustomer" resultType="com.bootdo.sales.domain.CompanyCustomerDO">
-		select a.Customer_Name
+		select *
 		from sales_company_customer a
-		where a.Customer_ID!='' and a.Customer_Old_ID='' and a.Customer_Old_ID is not null limit 2 
+		where a.Customer_ID!='' and a.Customer_Old_ID='' and a.Customer_Old_ID is not null
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
+<!-- 	新客户数量 -->
+	<select id="countNewCustomer" resultType="int">
+		SELECT count(*)
+		FROM sales_company_customer a
+		where a.Customer_ID!='' and a.Customer_Old_ID='' and a.Customer_Old_ID is not null
+	</select>
+<!--****************************************************************************************************** -->
 <!-- 	旧客户 -->
 	<select id="oldCustomer" resultType="com.bootdo.sales.domain.CompanyCustomerDO">
-		select a.Customer_Name
+		select *
 		from sales_company_customer a
 		where a.Customer_ID!='' and a.Customer_Old_ID!=''  
 	</select>
+<!-- 	旧客户数量 -->
+	<select id="countOldCustomer" resultType="int">
+		select count(*)
+		from sales_company_customer a
+		where a.Customer_ID!='' and a.Customer_Old_ID!=''  
+	</select>
+<!--****************************************************************************************************** -->	
 	 <select id="listHot" resultType="com.bootdo.sales.domain.CompanyCustomerDO">
 	 	select a.Customer_Name,a.Customer_Old_ID
 		from sales_company_customer a
