@@ -74,8 +74,14 @@ function validateRule() {
 				minlength : 6,
 				equalTo : "#password"
 			},
+			deptName : {
+				required : true
+			},
+			status:{
+				required : true
+			},
 			email : {
-				required : true,
+				required : false,
 				email : true
 			},
 			topic : {

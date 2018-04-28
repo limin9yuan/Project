@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+
+	<div class="wrapper wrapper-content ">
+
+		<div class="row">
+		<div class="col-sm-12">
+
+				<fieldset>
+                                <legend style="color:blue" id="TaskTitle">审批信息</legend>
+								<div class="form-group">
+									<div class="col-sm-12">
+									    <label class="radio-inline">
+										    <input name="taskAction" type="radio" value="0" checked /> 通过
+										</label>
+										<label class="radio-inline">
+										    <input name="taskAction" type="radio" value="1" /> 驳回(上一节点)
+										</label>
+										<label class="radio-inline">
+										    <input name="taskAction" type="radio" value="2" /> 驳回(发起人)
+										</label>
+									</div>
+								</div>
+								<br>
+								<div class="form-group">
+
+									<div class="col-sm-12">
+										<textarea class="form-control" id="taskComment" placeholder="审批说明" name="taskComment" rows="3"></textarea>
+									</div>
+								</div>
+						</fieldset>
+						<div class="modal-footer">
+							<div class="form-group">
+								<div class="col-sm-12 col-sm-offset-1">
+									<button type="button" id="btnSubmit" class="btn btn-primary"><i class="fa fa-check"></i> 提交</button>
+									<br>
+									<button type="button" id="btnFlowChart" class="btn btn-primary"><i class="fa fa-external-link"></i> 审批记录</button>
+								</div>
+							</div>
+						</div>
+						<div class="ibox ibox-body">
+					<div class="ibox-title">
+						<h5>流转记录</h5>
+						<table id="tableTraceList" data-mobile-responsive="true">
+								</table>
+					</div>
+					<div class="ibox-content">
+						<div id="jstree"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-9">
+
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<input id="taskId" name=taskId th:value="${taskId}"  type="hidden">
+						<input id="formSrc" name=formSrc th:value="${formSrc}"  type="hidden">
+						<input id="formSubmit" name=formSubmit th:value="${formSubmit}"  type="hidden">
+						<input id="taskName" name=taskName th:value="${taskName}"  type="hidden">
+						<input id="processDefinitionId" name=processDefinitionId th:value="${processDefinitionId}"  type="hidden">
+						<input id="executionId" name=executionId th:value="${executionId}"  type="hidden">
+						<input id="processInstanceId" name=processInstanceId th:value="${processInstanceId}"  type="hidden">
+						<input id="timeSheetId" name=timeSheetId th:value="${timeSheetId}"  type="hidden">
+
+
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/act/task/formTimeSheet.js">
+	</script>
+</body>
+</html>

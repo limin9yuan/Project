@@ -34,5 +34,6 @@ public interface CustomerDeptDao {
 	Long[] listParentDept();
 	List<CustomerDeptDO> customerList(Map<String,Object> map);
 	List<CustomerDeptDO> listTree(Map<String, Object> params);
+	List<CustomerDeptDO> getTreeList(Map<String, Object> params);
 
 }

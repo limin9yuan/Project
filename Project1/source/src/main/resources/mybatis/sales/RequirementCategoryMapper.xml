@@ -4,7 +4,7 @@
 <mapper namespace="com.bootdo.sales.dao.RequirementCategoryDao">
 
 	<select id="get" resultType="com.bootdo.sales.domain.RequirementCategoryDO">
-		select `Requirement_ID`,`Complaint_ID`,`Service_ID`,`Product_ID`,`Module_ID`,`Feedback_ID`,`Consultation_ID`,`Requirement_Description`,`Requirement_Remarks`,`Requirement_Recorder`,`Requirement_Record_Time`,`Requirement_Creator`,`Requirement_Create_Time`,`Else_Category` from sales_requirement_category where Requirement_ID = #{value}
+		select `Requirement_ID`,`Complaint_ID`,`Service_ID`,`Product_ID`,`Module_ID`,`Feedback_ID`,`Consultation_ID`,`Requirement_Description`,`Requirement_Remarks`,`Requirement_Recorder`,`Requirement_Record_Time`,`Requirement_Creator`,`Requirement_Create_Time`,`Else_Category`,`Requirement_Category_Type` from sales_requirement_category where Requirement_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.RequirementCategoryDO">
@@ -15,7 +15,7 @@
 		`Requirement_Recorder`,e.`name` as `Requirement_Recorder_Name`,
 		`Requirement_Record_Time`,
 		`Requirement_Creator`,d.`name`,
-		`Requirement_Create_Time`,a.`Else_Category`  
+		`Requirement_Create_Time`,a.`Else_Category`,`Requirement_Category_Type`  
 		from sales_requirement_category a
 		left join sales_product_category b on a.`Product_ID`=b.`Product_ID`
 		left join sales_module_category c on a.`Module_ID`=c.`Module_ID`
@@ -36,6 +36,7 @@
 		  		  <if test="requirementCreator != null and requirementCreator != ''"> and Requirement_Creator = #{requirementCreator} </if>
 		  		  <if test="requirementCreateTime != null and requirementCreateTime != ''"> and Requirement_Create_Time = #{requirementCreateTime} </if>
 		  		  <if test="elseCategory != null and elseCategory != ''"> and Else_Category = #{elseCategory} </if>
+		  		  <if test="requirementCategoryType != null and requirementCategoryType != ''"> and Requirement_Category_Type = #{requirementCategoryType} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -72,6 +73,7 @@
 		  		  <if test="requirementCreator != null and requirementCreator != ''"> and Requirement_Creator = #{requirementCreator} </if>
 		  		  <if test="requirementCreateTime != null and requirementCreateTime != ''"> and Requirement_Create_Time = #{requirementCreateTime} </if>
 		  		  <if test="elseCategory != null and elseCategory != ''"> and Else_Category = #{elseCategory} </if>
+		  		  <if test="requirementCategoryType != null and requirementCategoryType != ''"> and Requirement_Category_Type = #{requirementCategoryType} </if>
 		  		</where>
 	</select>
 	 
@@ -90,7 +92,8 @@
 			`Requirement_Recorder`, 
 			`Requirement_Creator`, 
 			`Requirement_Create_Time`,
-			`Else_Category`
+			`Else_Category`,
+			`Requirement_Category_Type`
 		)
 		values
 		(
@@ -106,7 +109,8 @@
 			#{requirementRecorder},  
 			#{requirementCreator}, 
 			#{requirementCreateTime},
-			#{elseCategory}
+			#{elseCategory},
+			#{requirementCategoryType}
 		)
 	</insert>
 	 
@@ -123,7 +127,8 @@
 			<if test="requirementRemarks != null">`Requirement_Remarks` = #{requirementRemarks}, </if>
 			<if test="requirementRecorder != null">`Requirement_Recorder` = #{requirementRecorder}, </if>
 			<if test="requirementRecordTime != null">`Requirement_Record_Time` = #{requirementRecordTime}, </if>
-			<if test="elseCategory != null">`Else_Category` = #{elseCategory}</if>
+			<if test="elseCategory != null">`Else_Category` = #{elseCategory},</if>
+			<if test="requirementCategoryType != null">`Requirement_Category_Type` = #{requirementCategoryType}</if>
 		</set>
 		where Requirement_ID = #{requirementId}
 	</update>

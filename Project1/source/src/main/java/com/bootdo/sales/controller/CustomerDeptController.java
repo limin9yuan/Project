@@ -90,9 +90,10 @@ public class CustomerDeptController extends BaseController{
 			return returnData;
 		}
 	//结构详情
-	@GetMapping("/detailedInformation")
+	@GetMapping("/detailedInformation/{customerId}")
 	@RequiresPermissions("sales:customerDept:detailed_information")
-	String detailedInformation(){
+	String detailedInformation(@PathVariable("customerId") String customerId,Model model){
+		model.addAttribute("customerId", customerId);
 		return "sales/companyCustomer/detailedInformation";
 	}
 	@GetMapping("/tree")
@@ -112,14 +113,14 @@ public class CustomerDeptController extends BaseController{
 	}
 
 	
-//	@ResponseBody
-//	@GetMapping("/treeList")
-//	@RequiresPermissions("sales:customerDept:customerDept")
-//	public List<CustomerDeptDO> treeList(@RequestParam Map<String, Object> params) {
-//		List<CustomerDeptDO> list = new ArrayList<CustomerDeptDO>();
-//		list = customerDeptService.getTreeList(params);
-//		return list;
-//	}
+	@ResponseBody
+	@GetMapping("/treeList")
+	@RequiresPermissions("sales:customerDept:customerDept")
+	public List<CustomerDeptDO> treeList(@RequestParam Map<String, Object> params) {
+		List<CustomerDeptDO> list = new ArrayList<CustomerDeptDO>();
+		list = customerDeptService.getTreeList(params);
+		return list;
+	}
 	
 	/**
 	 * 保存

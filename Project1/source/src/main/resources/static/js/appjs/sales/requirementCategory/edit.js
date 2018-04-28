@@ -39,7 +39,7 @@ function validateRule() {
 	$("#signupForm").validate({
 		ignore: ":hidden:not(select)",
 		rules : {
-			category : {
+			requirementCategoryType : {
 				required : true
 			},
 			bugCategory : {
@@ -60,7 +60,7 @@ function validateRule() {
 			}
 		},
 		messages : {
-			category : {
+			requirementCategoryType : {
 				required : icon + "请选择分类类别"
 			},
 			bugCategory : {
@@ -97,7 +97,7 @@ function requirementCategoryMapper_edit(){
 			$("input[name='elseCategory']").val(result.elseCategory);
 			$("textarea[name='requirementDescription']").val(result.requirementDescription);
 			$("textarea[name='requirementRemarks']").val(result.requirementRemarks);			
-			loadDicValue("sales_gategory","category",result.category););
+			loadDicValue("sales_categoryType","requirementCategoryType",result.requirementCategoryType););
 			loadDicValue("sales_newCategory","newCategory",result.newCategory);
 			loadCrmDataValue("/project/moduleCategory/listDic","bugCategory",result.bugCategory);
 			loadCrmDataValue("/project/productCategory/listDic","productId",result.productId);

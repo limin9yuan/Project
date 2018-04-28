@@ -1,5 +1,5 @@
 $().ready(function() {
-	loadDic("sales_gategory","category");
+	loadDic("sales_categoryType","requirementCategoryType");
 	loadDic("sales_newCategory","newCategory");
 	loadCrmData("/project/moduleCategory/listDic","bugCategory");
 	loadCrmData("/project/productCategory/listDic","productId");
@@ -42,7 +42,7 @@ function validateRule() {
 	$("#signupForm").validate({
 		ignore: ":hidden:not(select)",
 		rules : {
-			category : {
+			requirementCategoryType : {
 				required : true
 			},
 			bugCategory : {
@@ -63,7 +63,7 @@ function validateRule() {
 			}
 		},
 		messages : {
-			category : {
+			requirementCategoryType : {
 				required : icon + "请选择分类类别"
 			},
 			bugCategory : {

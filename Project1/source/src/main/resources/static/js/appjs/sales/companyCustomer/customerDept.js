@@ -84,6 +84,11 @@ function loadDept() {
 									field : 'childCompanyId',
 									title : '子公司编号'
 								},
+								{
+									align : 'center',
+									field : 'customerDeptName',
+									title : '部门名称'
+								},
 
 																{
 									align : 'center',
@@ -120,7 +125,7 @@ function detailedInformation(){
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '95%' ],
-		content : prefixDept + '/detailedInformation' // iframe的url
+		content : prefixDept + '/detailedInformation/'+ $(customerId).val() // iframe的url
 	})
 }
 

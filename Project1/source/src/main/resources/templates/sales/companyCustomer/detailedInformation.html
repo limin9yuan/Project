@@ -14,7 +14,7 @@
         var array = new Array();
         $.ajax({
             type : "GET",
-            url : "/sales/customerDept/treeList?customerId="+$('#customerId',window.parent.document).val(),
+            url : "/sales/customerDept/treeList?customerId="+$('#customerId').val(),
             success : function(tree) {
                 for(i=0;i<tree.length;i++){
                     var subArray = new Array();
@@ -60,6 +60,7 @@
    </style>
     </head>
     <body  onselectstart="return false">
+    <input id="customerId" name="customerId" th:value="${customerId}" type="hidden">
         <div id="chart_div"></div>
     </body>
 </html>

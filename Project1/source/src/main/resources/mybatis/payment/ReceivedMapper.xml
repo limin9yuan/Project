@@ -81,8 +81,8 @@
 	</select>
 	<!-- 回款率 -->
 	<select id="reimbursementRate" resultType="com.bootdo.payment.domain.ReceivedDO">
-		select sum(Received_Price)
-		/(select sum(Receivable_Price) from accounts_receivable)*100 as
+		select round(sum(Received_Price)
+		/(select sum(Receivable_Price) from accounts_receivable)*100 ,2) as
 		reimbursementRate
 		from payment_received
 	</select>

@@ -1,4 +1,4 @@
-var prefix = "/inner/innerOrgEmployee"
+var prefixMain = "/inner/innerOrgEmployee"
 $(function() {
 	// getTreeData()
 	// loadCrmData("/inner/innerOrgEmployee/listDic","employeeId");
@@ -10,7 +10,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
+						url : prefixMain + "/list", // 服务器数据的加载地址
 					// showRefresh : true,
 					// showToggle : true,
 					// showColumns : true,

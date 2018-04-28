@@ -52,7 +52,7 @@ public class RequirementCategoryDO implements Serializable {
 	private String requirementRecorderName;
 		
 	//分类类别
-	private String category;
+	private String requirementCategoryType;
 	//其他分类
 	private String elseCategory;
 
@@ -263,18 +263,6 @@ public class RequirementCategoryDO implements Serializable {
 		return requirementRecorderName;
 	}
 	/**
-	 * 设置：分类类别
-	 */
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	/**
-	 * 获取：分类类别
-	 */
-	public String getCategory() {
-		return category;
-	}
-	/**
 	 * 设置：其他分类
 	 */
 	public void setElseCategory(String elseCategory) {
@@ -285,6 +273,12 @@ public class RequirementCategoryDO implements Serializable {
 	 */
 	public String getElseCategory() {
 		return elseCategory;
+	}
+	public String getRequirementCategoryType() {
+		return requirementCategoryType;
+	}
+	public void setRequirementCategoryType(String requirementCategoryType) {
+		this.requirementCategoryType = requirementCategoryType;
 	}
 
 }

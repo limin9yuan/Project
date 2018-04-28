@@ -2,7 +2,7 @@
 var prefix = "/sales/bugCategory"
 $(function() {
 	load();
-	loadDic("sales_gategory","category","全部");
+	loadDic("sales_categoryType","bugCategoryType","全部");
 	loadCrmData("/project/moduleCategory/listDic","bugCategory","全部");
 });
 
@@ -36,7 +36,7 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
 								bugCategory:$('#bugCategory').val(),
-								category:$('#category').val()
+								bugCategoryType:$('#bugCategoryType').val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -80,7 +80,7 @@ function load() {
 									field : 'bugRecorderName', 
 									title : '分类记录人' 
 								},{
-									field : 'category', 
+									field : 'bugCategoryType', 
 									title : '分类类别' 
 								},{
 									field : 'bugCategory', 

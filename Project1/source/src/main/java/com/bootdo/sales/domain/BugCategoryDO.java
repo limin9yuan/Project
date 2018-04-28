@@ -48,7 +48,7 @@ public class BugCategoryDO implements Serializable {
 	private String bugRecorderName;
 	
 	//分类类别
-	private String category;
+	private String bugCategoryType;
 	//其他分类
 	private String elseCategory;
 
@@ -234,18 +234,6 @@ public class BugCategoryDO implements Serializable {
 		return bugRecorderName;
 	}
 	/**
-	 * 设置：分类类别
-	 */
-	public void setCategory(String category) {
-		this.category = category;
-	}
-	/**
-	 * 获取：分类类别
-	 */
-	public String getCategory() {
-		return category;
-	}
-	/**
 	 * 设置：其他分类
 	 */
 	public void setElseCategory(String elseCategory) {
@@ -256,6 +244,12 @@ public class BugCategoryDO implements Serializable {
 	 */
 	public String getElseCategory() {
 		return elseCategory;
+	}
+	public String getBugCategoryType() {
+		return bugCategoryType;
+	}
+	public void setBugCategoryType(String bugCategoryType) {
+		this.bugCategoryType = bugCategoryType;
 	}
 
 }

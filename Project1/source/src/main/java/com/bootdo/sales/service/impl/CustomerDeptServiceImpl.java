@@ -95,4 +95,11 @@ public class CustomerDeptServiceImpl implements CustomerDeptService {
 		return null;
 	}
 
+	@Override
+	public List<CustomerDeptDO> getTreeList(Map<String, Object> params) {
+
+		List<CustomerDeptDO> customerDepts = customerDeptDao.customerList(params);
+
+		return customerDepts;
+	}
 }

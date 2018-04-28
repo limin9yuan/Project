@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.activiti.engine.IdentityService;
+import org.activiti.engine.identity.Group;
+import org.activiti.engine.identity.User;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +36,8 @@ public class UserServiceImpl implements UserService {
 	UserRoleDao userRoleMapper;
 	@Autowired
 	DeptDao deptMapper;
+	@Autowired
+	IdentityService identityService;
 	private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 	
 	@Override
@@ -67,9 +72,23 @@ public class UserServiceImpl implements UserService {
 			ur.setUserId(userId);
 			ur.setRoleId(roleId);
 			list.add(ur);
+			
 		}
 		if (list.size() > 0) {
 			userRoleMapper.batchSave(list);
+		}
+		//同步流程用户
+		User actUser=identityService.newUser(user.getUsername());
+		identityService.saveUser(actUser);
+		for (Long roleId : roles) {
+			/*
+			Group actGroup=identityService.createGroupQuery().groupId(roleId.toString()).singleResult();
+			if(actGroup==null){
+				actGroup=identityService.newGroup(roleId.toString());
+				identityService.saveGroup(actGroup);
+			}
+			*/
+			identityService.createMembership(user.getUsername(), roleId.toString());
 		}
 		return count;
 	}
@@ -79,22 +98,41 @@ public class UserServiceImpl implements UserService {
 		int r = userMapper.update(user);
 		Long userId = user.getUserId();
 		List<Long> roles = user.getroleIds();
+		List<Long> rolesOld=userRoleMapper.listRoleId(userId);
+		//同步删除流程用户与角色关系
+		for (Long roleId : rolesOld) {
+			identityService.deleteMembership(user.getUsername(), roleId.toString());
+		}
 		userRoleMapper.removeByUserId(userId);
+		
 		List<UserRoleDO> list = new ArrayList<>();
 		for (Long roleId : roles) {
 			UserRoleDO ur = new UserRoleDO();
 			ur.setUserId(userId);
 			ur.setRoleId(roleId);
 			list.add(ur);
+			//同步流程用户与角色关系
+			
+			identityService.createMembership(user.getUsername(), roleId.toString());
 		}
 		if (list.size() > 0) {
 			userRoleMapper.batchSave(list);
 		}
+		
 		return r;
 	}
 
 	@Override
 	public int remove(Long userId) {
+		//*** 同步删除流程用户 begin *** 
+		List<Long> rolesOld=userRoleMapper.listRoleId(userId);
+		UserDO user= userMapper.get(userId);
+		for (Long roleId : rolesOld) {
+			identityService.deleteMembership(user.getUsername(), roleId.toString());
+		}
+		identityService.deleteUser(user.getUsername());
+		//*** 同步删除流程用户 end ***
+		
 		userRoleMapper.removeByUserId(userId);
 		return userMapper.remove(userId);
 	}
@@ -173,4 +211,9 @@ public class UserServiceImpl implements UserService {
 		UserDO user = userMapper.getByUsername(username);
 		return user;
 	}
+	
+	 @Override
+		public List<UserDO> listUserByRoleId(Long role_id) {
+			return userRoleMapper.listUserByRoleId(role_id);
+		}
 }

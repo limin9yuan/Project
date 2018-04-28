@@ -187,8 +187,8 @@ public class CompanyCustomerController extends BaseController {
 	@GetMapping("/edit/{customerId}")
 	@RequiresPermissions("sales:companyCustomer:edit")
 	String edit(@PathVariable("customerId") String customerId, Model model) {
-		// CompanyCustomerDO companyCustomer = companyCustomerService.get(customerId);
-		model.addAttribute("customerId", customerId);
+		 CompanyCustomerDO companyCustomer = companyCustomerService.get(customerId);
+		model.addAttribute("companyCustomer", companyCustomer);
 		return "sales/companyCustomer/edit";
 	}
 

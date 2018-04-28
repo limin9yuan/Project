@@ -80,8 +80,11 @@ function validateRule() {
 				equalTo : "#password"
 			},
 			email : {
-				required : true,
+				required : false,
 				email : true
+			},
+			status:{
+				required : true
 			},
 			topic : {
 				required : "#newsletter:checked",

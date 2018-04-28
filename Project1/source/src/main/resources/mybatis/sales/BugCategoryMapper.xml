@@ -4,7 +4,7 @@
 <mapper namespace="com.bootdo.sales.dao.BugCategoryDao">
 
 	<select id="get" resultType="com.bootdo.sales.domain.BugCategoryDO">
-		select `BUG_ID`,`Complaint_ID`,`Service_ID`,`Product_ID`,`Module_ID`,`Feedback_ID`,`Bug_Remarks`,`Bug_Recorder`,`Bug_Record_Time`,`Bug_Creator`,`Bug_Create_Time`,`Else_Category` from sales_bug_category where BUG_ID = #{value}
+		select `BUG_ID`,`Complaint_ID`,`Service_ID`,`Product_ID`,`Module_ID`,`Feedback_ID`,`Bug_Remarks`,`Bug_Recorder`,`Bug_Record_Time`,`Bug_Creator`,`Bug_Create_Time`,`Else_Category`,`Bug_Category_Type` from sales_bug_category where BUG_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.BugCategoryDO">
@@ -15,7 +15,7 @@
 		`Bug_Recorder`,e.`name`as `Bug_Recorder_Name`,
 		`Bug_Record_Time`,
 		`Bug_Creator`,d.`name`,
-		`Bug_Create_Time`,a.`Else_Category` 
+		`Bug_Create_Time`,a.`Else_Category`,`Bug_Category_Type` 
 		from sales_bug_category a
 		left join sales_product_category b on a.`Product_ID`=b.`Product_ID`
 		left join sales_module_category c on a.`Module_ID`=c.`Module_ID`
@@ -34,6 +34,7 @@
 		  		  <if test="bugCreator != null and bugCreator != ''"> and Bug_Creator = #{bugCreator} </if>
 		  		  <if test="bugCreateTime != null and bugCreateTime != ''"> and Bug_Create_Time = #{bugCreateTime} </if>
 		  		  <if test="elseCategory != null and elseCategory != ''"> and Else_Category = #{elseCategory} </if>
+		  		  <if test="bugCategoryType != null and bugCategoryType != ''"> and Bug_Category_Type = #{bugCategoryType} </if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -68,6 +69,7 @@
 		  		  <if test="bugCreator != null and bugCreator != ''"> and Bug_Creator = #{bugCreator} </if>
 		  		  <if test="bugCreateTime != null and bugCreateTime != ''"> and Bug_Create_Time = #{bugCreateTime} </if>
 		  		  <if test="elseCategory != null and elseCategory != ''"> and Else_Category = #{elseCategory} </if>
+		  		  <if test="bugCategoryType != null and bugCategoryType != ''"> and Bug_Category_Type = #{bugCategoryType} </if>
 		  		</where>
 	</select>
 	 
@@ -84,7 +86,8 @@
 			`Bug_Recorder`,
 			`Bug_Creator`, 
 			`Bug_Create_Time`,
-			`Else_Category`
+			`Else_Category`,
+			`Bug_Category_Type`
 		)
 		values
 		(
@@ -98,7 +101,8 @@
 			#{bugRecorder},  
 			#{bugCreator}, 
 			#{bugCreateTime},
-			#{elseCategory}
+			#{elseCategory},
+			#{bugCategoryType}
 		)
 	</insert>
 	 
@@ -113,7 +117,8 @@
 			<if test="bugRemarks != null">`Bug_Remarks` = #{bugRemarks}, </if>
 			<if test="bugRecorder != null">`Bug_Recorder` = #{bugRecorder}, </if>
 			<if test="bugRecordTime != null">`Bug_Record_Time` = #{bugRecordTime}, </if>
-			<if test="elseCategory != null">`Else_Category` = #{elseCategory}</if>
+			<if test="elseCategory != null">`Else_Category` = #{elseCategory},</if>
+			<if test="bugCategoryType != null">`Bug_Category_Type` = #{bugCategoryType}</if>
 		</set>
 		where BUG_ID = #{bugId}
 	</update>

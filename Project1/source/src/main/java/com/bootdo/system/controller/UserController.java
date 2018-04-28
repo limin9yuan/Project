@@ -14,6 +14,7 @@ import com.bootdo.system.domain.RoleDO;
 import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.service.RoleService;
 import com.bootdo.system.service.UserService;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -50,6 +51,12 @@ public class UserController extends BaseController {
 		return pageUtil;
 	}
 	
+	@GetMapping("/list/{role_id}")
+	@ResponseBody()
+	List<UserDO> list(@PathVariable("role_id")Long role_id) {
+		List<UserDO> users = userService.listUserByRoleId(role_id);
+		return users;
+	}
 	
 	@RequiresPermissions("sys:user:add")
 	@Log("添加用户")

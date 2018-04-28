@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
+import org.activiti.engine.IdentityService;
+import org.activiti.engine.identity.Group;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -23,7 +25,7 @@ import com.bootdo.system.service.RoleService;
 @Service
 public class RoleServiceImpl implements RoleService {
 
-	public static final String ROLE_ALL_KEY = "\"role_all\"";
+	public static final String ROLE_ALL_KEY = "#userId";
 
 	public static final String DEMO_CACHE_NAME = "role";
 
@@ -35,6 +37,9 @@ public class RoleServiceImpl implements RoleService {
 	UserDao userMapper;
 	@Autowired
 	UserRoleDao userRoleMapper;
+	
+	@Autowired
+	IdentityService identityService;
 
 	@Override
 	public List<RoleDO> list() {
@@ -42,7 +47,7 @@ public class RoleServiceImpl implements RoleService {
 		return roles;
 	}
 
-	@Cacheable(value = DEMO_CACHE_NAME, key = ROLE_ALL_KEY)
+	//@Cacheable(value = DEMO_CACHE_NAME, key = ROLE_ALL_KEY)
 	@Override
 	public List<RoleDO> list(Long userId) {
 		List<Long> rolesIds = userRoleMapper.listRoleId(userId);
@@ -76,6 +81,9 @@ public class RoleServiceImpl implements RoleService {
 		if (rms.size() > 0) {
 			roleMenuMapper.batchSave(rms);
 		}
+		//同步流程角色
+		Group actGroup=identityService.newGroup(roleId.toString());
+		identityService.saveGroup(actGroup);
 		return count;
 	}
 
@@ -85,6 +93,8 @@ public class RoleServiceImpl implements RoleService {
 	public int remove(Long id) {
 		int count = roleMapper.remove(id);
 		roleMenuMapper.removeByRoleId(id);
+		//同步删除流程角色
+		identityService.deleteGroup(id.toString());
 		return count;
 	}
 

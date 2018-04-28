@@ -5,6 +5,8 @@ var prefixContact = "/sales/customerContact"
 var profixBusiness = "/sales/business"
 // 项目信息
 var prefixProject = "/project/project"
+//组织机构	
+var prefixDept= "/sales/customerDept"
 $(function() {
 	var address = new addressResolve({
 		proId : 'province',
@@ -67,7 +69,6 @@ $(function() {
 								businessName : $('#businessName').val(),
 								projectName : $('#projectName').val(),
 								customerSales : $('#customerSales').val(),
-								customerId : $('#customerId').val(),
 								customerLevel : $('#customerLevel').val(),
 								customerDeptId:$('#customerDeptId').val()
 
@@ -106,12 +107,33 @@ $(function() {
 									}
 								},
 								{
+									align : 'center',
 									field : 'customerId',
 									title : '企业客户编号'
 								},
+								
 								{
+									align : 'center',
 									field : 'customerName',
 									title : '企业名称'
+								},
+								{
+									align : 'center',
+									formatter : function(value, row, index) {
+										if (row.customerDeptId != null) {
+											var a = '<a href="#" mce_href="#"  onclick="detailedInformationT(\''
+												+ row.customerId
+												+ '\')">查看</a> ';
+											return a;
+										}
+//										if (row.customerDeptId == null) {
+//											var a = '<h5>空</h5>';
+//											return a;
+//										}
+									},
+
+									// field : 'contactName',
+									title : '组织机构'
 								},
 								{
 									align : 'center',
@@ -120,6 +142,12 @@ $(function() {
 
 								},
 								{
+									align : 'center',
+									field : 'customerOperateTime',
+									title : '修改时间'
+								},
+								{
+									align : 'center',
 									field : 'customerSales',
 									title : '销售负责人'
 								},
@@ -134,6 +162,10 @@ $(function() {
 													+ row.customerId
 													+ '\')">'
 													+ row.contactName + '</a> ';
+											return a;
+										}
+										if (row.contactName == null) {
+											var a = '<h5>空</h5> ';
 											return a;
 										}
 									},
@@ -153,6 +185,10 @@ $(function() {
 													+ '</a> ';
 											return b;
 										}
+										if (row.businessName == null) {
+											var a = '<h5>空</h5> ';
+											return a;
+										}
 									},
 									// field : 'businessName',
 									title : '业务信息'
@@ -167,6 +203,10 @@ $(function() {
 													+ '\')">'
 													+ row.projectName + '</a> ';
 											return c;
+										}
+										if (row.projectName == null) {
+											var a = '<h5>空</h5> ';
+											return a;
 										}
 									},
 									// field : 'projectName',
@@ -239,7 +279,17 @@ $(function() {
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
-
+//组织机构图
+function detailedInformationT(id){
+	layer.open({
+		type : 2,
+		title : '结构详情',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '95%' ],
+		content : prefixDept + '/detailedInformation/'+ id // iframe的url
+	})
+}
 //--查看详情页
 
 function examineCompanyCustomer(id) {
@@ -359,17 +409,18 @@ function edit(id) {
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '80%', '80%' ],
+		area : [ '95%', '95%' ],
 		content : prefix + '/edit/' + id // iframe的url
 	});
 }
-function examineEdit() {
+//详情修改
+function examineCustomerEdit(id) {
 	parent.layer.open({
 		type : 2,
-		title : '编辑',
+		title : '详情编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '80%', '80%' ],
+		area : [ '95%', '95%' ],
 		content : prefix + '/edit/' + $(customerId).val() // iframe的url
 	});
 }
@@ -394,7 +445,7 @@ function remove(id) {
 		});
 	})
 }
-function examineRemove() {
+function examineRemove(id) {
 	layer.confirm('确定要删除选中的记录？删除后不可恢复！', {
 		btn : [ '确定', '取消' ]
 	}, function() {
@@ -407,12 +458,13 @@ function examineRemove() {
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
-					reLoad();
+					parent.reLoad();
 				} else {
 					layer.msg(r.msg);
 				}
 			}
 		});
+		closeWin();
 	})
 }
 

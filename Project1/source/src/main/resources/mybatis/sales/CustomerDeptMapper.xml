@@ -5,7 +5,7 @@
 
 	<select id="get" resultType="com.bootdo.sales.domain.CustomerDeptDO">
 		select
-		a.`Customer_Dept_ID`,Customer_ID,a.`Child_Company_ID`,`Customer_Dept_Name`,`Customer_Dept_Description`,`Customer_Dept_Parent_Dept`,`Customer_Dept_Remarks`,`Customer_Dept_Operator`,`Customer_Dept_Operate_Time`,`Customer_Dept_Create_Time`
+		`Customer_Dept_ID`,Customer_ID,`Child_Company_ID`,`Customer_Dept_Name`,`Customer_Dept_Description`,`Customer_Dept_Parent_Dept`,`Customer_Dept_Remarks`,`Customer_Dept_Operator`,`Customer_Dept_Operate_Time`,`Customer_Dept_Create_Time`
 		from sales_customer_dept where Customer_Dept_ID = #{value}
 	</select>
 

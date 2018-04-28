@@ -9,6 +9,17 @@
     padding-left: 30px;
     padding-top: 20px;
 }
+.taskAndLogNumbers{
+    margin-top: 25px;
+    margin-right: 60px;
+    float:right;
+    font-size:300%;
+    font-weight:bold;
+    color: black;
+}
+#undoTask{
+    color: red;
+}
 .taskAndLogDescribe{
     background-color: #d8d4d4;
     height: 32px;

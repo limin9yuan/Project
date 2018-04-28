@@ -2,7 +2,7 @@
 var prefix = "/sales/requirementCategory"
 $(function() {
 	load();
-	loadDic("sales_gategory","category","全部");
+	loadDic("sales_categoryType","requirementCategoryType","全部");
 	loadCrmData("/project/moduleCategory/listDic","bugCategory","全部");
 });
 
@@ -36,7 +36,7 @@ function load() {
 								limit: params.limit,
 								offset:params.offset,
 								bugCategory:$('#bugCategory').val(),
-								category:$('#category').val()
+								requirementCategoryType:$('#requirementCategoryType').val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -80,7 +80,7 @@ function load() {
 									field : 'requirementRecorderName', 
 									title : '分类记录人' 
 								},{
-									field : 'category', 
+									field : 'requirementCategoryType', 
 									title : '分类类别' 
 								},{
 									field : 'bugCategory', 

@@ -39,5 +39,7 @@ public interface UserService {
 	public List<DictDO> listDic();
 	
 	UserDO getByUsername(String username);
+	
+	List<UserDO> listUserByRoleId(Long role_id);
 
 }

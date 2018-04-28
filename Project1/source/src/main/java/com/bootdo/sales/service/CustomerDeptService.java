@@ -36,5 +36,7 @@ public interface CustomerDeptService {
 	Tree<DeptDO> getTree();
 
 	List<CustomerDeptDO> listTree(Map<String, Object> params);
+	
+	List<CustomerDeptDO> getTreeList(Map<String, Object> params);
 
 }

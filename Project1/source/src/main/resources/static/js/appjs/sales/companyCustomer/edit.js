@@ -24,7 +24,7 @@ $().ready(function() {
 			 loadDicValue("sales_customer_hot_Rank","customerHotRank",result.customerHotRank);//热度s
 		 }
 		 if($("#customerHotClassif option").length == 0){
-			   loadDicValue("sales_Customer_Hot_Classif","customerHotClassif",result.customerHotClassif);//热点客户分类  
+			 loadDicValue("sales_Customer_Hot_Classif","customerHotClassif",result.customerHotClassif);//热点客户分类  
 			}
 	 });
 	$('#myTab a[href="#linkInfo"]').on('shown.bs.tab', function(e){
@@ -51,16 +51,16 @@ $().ready(function() {
 //	layui.use('upload', function () {
 //        var upload = layui.upload;
 //        //执行实例
-//        var uploadInst = upload.render({
+//        var uploadinst = upload.render({
 //            elem: '#test1', //绑定元素
-//            url: '/common/sysFile/upload', //上传接口
+//            url: '/common/sysfile/upload', //上传接口
 //            size: 1000,
 //            accept: 'file',
 //            done: function (r) {
-//            	//alert(r.fileName);
-//            	$("#serviceAttachment").val(r.fileName);
+//            	//alert(r.filename);
+//            	$("#serviceattachment").val(r.filename);
 //                //layer.msg(r.msg);
-//                //app.getData();
+//                //app.getdata();
 //            },
 //            error: function (r) {
 //                layer.msg(r.msg);
@@ -69,14 +69,6 @@ $().ready(function() {
 //    });
 	validateRule();
 	companyCustomer_edit();
-//	if (address == null) {
-//		address = new addressResolve({
-//			proId : 'province',
-//			cityId : 'city',
-//			areaId : 'area'
-//		});
-//		address.init();
-//	}
 });
 
 
@@ -110,7 +102,6 @@ function update() {
 
 		}
 	});
-
 }
 
 //验证
@@ -365,7 +356,7 @@ function companyCustomer_edit(){
 			
 			$("input[name='customerVolume']").val(result.customerVolume);//预期成交金额
 			
-			$("input[name='customerHotDesc']").val(result.customerHotDesc);//热点说明
+			$("textarea[name='customerHotDesc']").val(result.customerHotDesc);//热点说明
 		
 			
 			

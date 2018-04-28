@@ -1,5 +1,6 @@
 package com.bootdo.system.dao;
 
+import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.domain.UserRoleDO;
 
 import java.util.List;
@@ -38,4 +39,6 @@ public interface UserRoleDao {
 	int batchSave(List<UserRoleDO> list);
 
 	int batchRemoveByUserId(Long[] ids);
+	
+	List<UserDO> listUserByRoleId(Long role_id);
 }
