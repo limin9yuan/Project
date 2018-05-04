@@ -34,6 +34,42 @@
 		</if>
 	</select>
 	
+	<select id="getContractId" resultType="com.bootdo.contract.domain.ReceivableDO">
+		select `Receivable_ID`,a.`Contract_ID`,`Receivable_Date`,`Receivable_Price`,
+		`Receivable_Owner`,`Receivable_Remarks`,
+		b.Business_ID as Business_ID
+		from accounts_receivable a
+		inner join contract b on a.`Contract_ID`=b.`Contract_ID`
+		union all
+		select `Receivable_ID`,a.`Contract_ID`,`Receivable_Date`,`Receivable_Price`,
+		`Receivable_Owner`,`Receivable_Remarks`,d.Business_ID as Business_ID
+		from accounts_receivable a
+        inner join contract_additional_records c on a.`Contract_ID`=c.`Record_ID`
+		inner join contract d on c.`Contract_ID`=d.`Contract_ID`
+		where a.Contract_ID = #{value}	
+        <where>  
+		  		  <if test="receivableId != null and receivableId != ''"> and Receivable_ID = #{receivableId} </if>
+		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
+		  		  <if test="receivableDate != null and receivableDate != ''"> and Receivable_Date = #{receivableDate} </if>
+		  		  <if test="receivablePrice != null and receivablePrice != ''"> and Receivable_Price = #{receivablePrice} </if>
+		  		  <if test="receivableOwner != null and receivableOwner != ''"> and Receivable_Owner = #{receivableOwner} </if>
+		  		  <if test="receivableRemarks != null and receivableRemarks != ''"> and Receivable_Remarks = #{receivableRemarks} </if>
+		  		  <if test="receivableOperator != null and receivableOperator != ''"> and Receivable_Operator = #{receivableOperator} </if>
+		  		  <if test="receivableOperateTime != null and receivableOperateTime != ''"> and Receivable_Operate_Time = #{receivableOperateTime} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Receivable_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
  	<select id="count" resultType="int">
 		select count(*) from accounts_receivable
 		 <where>  

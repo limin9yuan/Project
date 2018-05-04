@@ -1,5 +1,6 @@
 package com.bootdo.sales.dao;
 
+import com.bootdo.common.domain.Tree;
 import com.bootdo.sales.domain.CustomerDeptDO;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public interface CustomerDeptDao {
 
 	CustomerDeptDO get(String customerDeptId);
 	
-	List<CustomerDeptDO> list(Map<String,Object> map);
+	List<CustomerDeptDO> list(String customerId);
 	
 	int count(Map<String,Object> map);
 	
@@ -30,7 +31,7 @@ public interface CustomerDeptDao {
 	int remove(String Customer_Dept_ID);
 	
 	int batchRemove(String[] customerDeptIds);
-
+	Tree<DeptDO> getTree();
 	Long[] listParentDept();
 	List<CustomerDeptDO> customerList(Map<String,Object> map);
 	List<CustomerDeptDO> listTree(Map<String, Object> params);

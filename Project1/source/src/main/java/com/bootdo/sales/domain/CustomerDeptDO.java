@@ -16,7 +16,7 @@ public class CustomerDeptDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	//企业客户编号
-	private Long customerId;
+	private String customerId;
 
 	//部门编号
 	private String customerDeptId;
@@ -48,6 +48,23 @@ public class CustomerDeptDO implements Serializable {
 	private String childCompanyName;
 	//企业客户上级单位
 	private String customerParent;
+	//父id
+	private String parentId;
+	
+	private String deptId;
+	
+	public String getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+	public String getParentId() {
+		return parentId;
+	}
+	public void setParentId(String parentId) {
+		this.parentId = parentId;
+	}
 	/**
 	 * 企业客户上级单位
 	 * @return
@@ -82,10 +99,10 @@ public class CustomerDeptDO implements Serializable {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-	public Long getCustomerId() {
+	public String getCustomerId() {
 		return customerId;
 	}
-	public void setCustomerId(Long customerId) {
+	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
 	

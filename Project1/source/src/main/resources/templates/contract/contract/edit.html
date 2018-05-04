@@ -227,12 +227,12 @@
 										<div class="ibox-body">
 											<div class="fixed-table-toolbar">
 												<div class="columns pull-left">
-													<button shiro:hasPermission="contract:payable:add"
+													<button shiro:hasPermission="contract:contract:add"
 														type="button" class="btn  btn-primary"
 														onclick="addPayable()">
 														<i class="fa fa-plus" aria-hidden="true"></i>添加
 													</button>
-													<button shiro:hasPermission="contract:payable:batchRemove"
+													<button shiro:hasPermission="contract:contract:batchRemove"
 														type="button" class="btn  btn-danger"
 														onclick="batchRemovePayable()">
 														<i class="fa fa-trash" aria-hidden="true"></i>批量删除
@@ -240,23 +240,6 @@
 												</div>
 											</div>
 											<table id="payableTable" data-mobile-responsive="true"> </table>
-										</div>
-										<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-										<div>
-											<script type="text/javascript">
-												var s_payoutedit_h = 'hidden';
-												var s_payoutremove_h = 'hidden';
-											</script>
-										</div>
-										<div shiro:hasPermission="contract:payable:edit">
-											<script type="text/javascript">
-												var s_payoutedit_h = '';
-											</script>
-										</div>
-										<div shiro:hasPermission="contract:payable:remove">
-											<script type="text/javascript">
-												var s_payoutremove_h = '';
-											</script>
 										</div>
 									</div>
 								</div>
@@ -266,12 +249,12 @@
 										<div class="ibox-body">
 											<div class="fixed-table-toolbar">
 												<div class="columns pull-left">
-													<button shiro:hasPermission="contract:receivable:add"
+													<button shiro:hasPermission="contract:contract:add"
 														type="button" class="btn  btn-primary" onclick="addReceivable()">
 														<i class="fa fa-plus" aria-hidden="true"></i>添加
 													</button>
 													<button
-														shiro:hasPermission="contract:receivable:batchRemove"
+														shiro:hasPermission="contract:contract:batchRemove"
 														type="button" class="btn  btn-danger" onclick="batchRemoveReceivable()">
 														<i class="fa fa-trash" aria-hidden="true"></i>批量删除
 													</button>
@@ -280,29 +263,6 @@
 											<table id="receivableTable" data-mobile-responsive="true"></table>
 										</div>
 									</div>
-									<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
-									<div>
-										<script type="text/javascript">
-											var s_edit_h = 'hidden';
-											var s_remove_h = 'hidden';
-											var s_resetPwd_h = 'hidden';
-										</script>
-									</div>
-									<div shiro:hasPermission="contract:receivable:edit">
-										<script type="text/javascript">
-											s_edit_h = '';
-										</script>
-									</div>
-									<div shiro:hasPermission="contract:receivable:remove">
-										<script type="text/javascript">
-											var s_remove_h = '';
-										</script>
-									</div>
-									<div shiro:hasPermission="contract:receivable:resetPwd">
-										<script type="text/javascript">
-											var s_resetPwd_h = '';
-										</script>
-									</div>
 								</div>
 <!-- 计划信息 -->
 								<div class="tab-pane fade" id="plan">
@@ -310,11 +270,11 @@
 										<div class="ibox-body">
 											<div class="fixed-table-toolbar">
 												<div class="columns pull-left">
-													<button shiro:hasPermission="contract:plan:add"
+													<button shiro:hasPermission="contract:contract:add"
 														type="button" class="btn  btn-primary" onclick="addPlan()">
 														<i class="fa fa-plus" aria-hidden="true"></i>添加
 													</button>
-													<button shiro:hasPermission="contract:plan:batchRemove"
+													<button shiro:hasPermission="contract:contract:batchRemove"
 														type="button" class="btn  btn-danger"
 														onclick="batchRemovePlan()">
 														<i class="fa fa-trash" aria-hidden="true"></i>批量删除
@@ -332,17 +292,17 @@
 											var s_resetPwd_h = 'hidden';
 										</script>
 									</div>
-									<div shiro:hasPermission="contract:plan:edit">
+									<div shiro:hasPermission="contract:contract:edit">
 										<script type="text/javascript">
 											s_edit_h = '';
 										</script>
 									</div>
-									<div shiro:hasPermission="contract:plan:remove">
+									<div shiro:hasPermission="contract:contract:remove">
 										<script type="text/javascript">
 											var s_remove_h = '';
 										</script>
 									</div>
-									<div shiro:hasPermission="contract:plan:resetPwd">
+									<div shiro:hasPermission="contract:contract:resetPwd">
 										<script type="text/javascript">
 											var s_resetPwd_h = '';
 										</script>

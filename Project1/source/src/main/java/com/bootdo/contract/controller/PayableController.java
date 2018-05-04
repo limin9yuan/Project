@@ -45,14 +45,14 @@ public class PayableController  extends BaseController{
 	private PayableService payableService;
 	
 	@GetMapping()
-	@RequiresPermissions("contract:payable:payable")
+	@RequiresPermissions("contract:contract:contract")
 	String Payable(){
 	    return "contract/contract/payable";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("contract:payable:payable")
+	@RequiresPermissions("contract:contract:contract")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
@@ -63,7 +63,7 @@ public class PayableController  extends BaseController{
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("contract:payable:add")
+	@RequiresPermissions("contract:contract:add")
 	String add(){
 	    return "contract/contract/addPayable";
 	}
@@ -78,7 +78,7 @@ public class PayableController  extends BaseController{
 	}
 	
 	@GetMapping("/edit/{payableId}")
-	@RequiresPermissions("contract:payable:edit")
+	@RequiresPermissions("contract:contract:edit")
 	String edit(@PathVariable("payableId") String payableId,Model model){
 		model.addAttribute("payableId", payableId);
 	    return "contract/contract/editPayable";
@@ -98,7 +98,7 @@ public class PayableController  extends BaseController{
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("contract:payable:add")
+	@RequiresPermissions("contract:contract:add")
 	public R save( PayableDO payable){
 		payable.setPayableOperator(getUserId());
 		if(payableService.save(payable)>0){
@@ -112,7 +112,7 @@ public class PayableController  extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("contract:payable:edit")
+	@RequiresPermissions("contract:contract:edit")
 	public R update(PayableDO payable){
 		payable.setPayableOperator(getUserId());
 		payableService.update(payable);
@@ -124,7 +124,7 @@ public class PayableController  extends BaseController{
 	 */
 	@PostMapping("/remove")
 	@ResponseBody
-	@RequiresPermissions("contract:payable:remove")
+	@RequiresPermissions("contract:contract:remove")
 	public R remove(String payableId){
 		if(payableService.remove(payableId)>0){
 		return R.ok();
@@ -137,7 +137,7 @@ public class PayableController  extends BaseController{
 	 */
 	@PostMapping("/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("contract:payable:batchRemove")
+	@RequiresPermissions("contract:contract:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] payableIds){
 		payableService.batchRemove(payableIds);
 		return R.ok();

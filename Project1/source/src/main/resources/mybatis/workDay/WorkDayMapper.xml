@@ -4,61 +4,82 @@
 <mapper namespace="com.bootdo.workDay.dao.WorkDayDao">
 
 	<select id="get" resultType="com.bootdo.workDay.domain.WorkDayDO">
-		select `id`,`work_day` from work_day where id = #{value}
+		select `id`,`Holiday_Name`,`Start_Day`,`End_Day`
+		from holiday
+		where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.workDay.domain.WorkDayDO">
-		select `id`,`work_day` from work_day
-        <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="workDay != null and workDay != ''"> and work_day = #{workDay} </if>
-		  		</where>
-        <choose>
-            <when test="sort != null and sort.trim() != ''">
-                order by ${sort} ${order}
-            </when>
+		select `id`,`Holiday_Name`,`Start_Day`,`End_Day`
+		from holiday
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="holidayName != null and holidayName != ''"> and Holiday_Name = #{holidayName} </if>
+			<if test="startDay != null and startDay != ''"> and Start_Day = #{startDay} </if>
+			<if test="endDay != null and endDay != ''"> and End_Day = #{endDay} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
 			<otherwise>
-                order by id desc
+				order by id desc
 			</otherwise>
-        </choose>
+		</choose>
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
 	</select>
-	
- 	<select id="count" resultType="int">
-		select count(*) from work_day
-		 <where>  
-		  		  <if test="id != null and id != ''"> and id = #{id} </if>
-		  		  <if test="workDay != null and workDay != ''"> and work_day = #{workDay} </if>
-		  		</where>
+
+	<select id="count" resultType="int">
+		select count(*) from holiday
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="holidayName != null and holidayName != ''"> and Holiday_Name = #{holidayName} </if>
+			<if test="startDay != null and startDay != ''"> and Start_Day = #{startDay} </if>
+			<if test="endDay != null and endDay != ''"> and End_Day = #{endDay} </if>
+		</where>
 	</select>
-	 
+
+	<insert id="holiday" parameterType="com.bootdo.workDay.domain.WorkDayDO" useGeneratedKeys="true" keyProperty="id">
+		insert into work_day(Work_Day)
+		select rep_date from obj_date a
+		where not EXISTS(select * from holiday where a.rep_date &gt; Start_Day and a.rep_date &lt; End_Day)
+		and DAYOFWEEK(rep_date)!=1 and DAYOFWEEK(rep_date)!=7
+		and rep_year= #{currentYear}
+	</insert>
+
 	<insert id="save" parameterType="com.bootdo.workDay.domain.WorkDayDO" useGeneratedKeys="true" keyProperty="id">
-		insert into work_day
+		insert into holiday
 		(
-			`work_day`
+			`Holiday_Name`,
+			`Start_Day`,
+			`End_Day`
 		)
 		values
 		(
-			#{workDay}
+			#{holidayName},
+			#{startDay},
+			#{endDay}
 		)
 	</insert>
-	 
+
 	<update id="update" parameterType="com.bootdo.workDay.domain.WorkDayDO">
-		update work_day 
+		update holiday
 		<set>
-			<if test="workDay != null">`work_day` = #{workDay}</if>
+			<if test="holidayName != null">`Holiday_Name` = #{holidayName}, </if>
+			<if test="startDay != null">`Start_Day` = #{startDay}, </if>
+			<if test="endDay != null">`End_Day` = #{endDay}</if>
 		</set>
 		where id = #{id}
 	</update>
-	
+
 	<delete id="remove">
-		delete from work_day where id = #{value}
+		delete from holiday where id = #{value}
 	</delete>
-	
+
 	<delete id="batchRemove">
-		delete from work_day where id in 
+		delete from holiday where id in
 		<foreach item="id" collection="array" open="(" separator="," close=")">
 			#{id}
 		</foreach>

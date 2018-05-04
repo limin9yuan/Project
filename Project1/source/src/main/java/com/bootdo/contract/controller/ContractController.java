@@ -138,7 +138,7 @@ public class ContractController extends BaseController {
 	 */
 	@PostMapping("/remove")
 	@ResponseBody
-	@RequiresPermissions("contract:contract:batchRemove")
+	@RequiresPermissions("contract:contract:remove")
 	public R remove(String contractId) {
 		if (contractService.remove(contractId) > 0) {
 			return R.ok();

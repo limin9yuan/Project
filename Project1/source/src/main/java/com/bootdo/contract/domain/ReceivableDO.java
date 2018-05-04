@@ -45,6 +45,12 @@ public class ReceivableDO implements Serializable {
 	//企业客户名称
 	private String customerName;
 	
+	
+	//业务编号
+	private String businessId;
+	
+	
+	
 	public String getCustomerId() {
 		return customerId;
 	}
@@ -188,5 +194,11 @@ public class ReceivableDO implements Serializable {
 	 */
 	public Date getReceivableOperateTime() {
 		return receivableOperateTime;
+	}
+	public String getBusinessId() {
+		return businessId;
+	}
+	public void setBusinessId(String businessId) {
+		this.businessId = businessId;
 	}
 }

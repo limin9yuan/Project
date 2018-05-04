@@ -33,8 +33,8 @@ public class CustomerDeptServiceImpl implements CustomerDeptService {
 	}
 	
 	@Override
-	public List<CustomerDeptDO> list(Map<String, Object> map){
-		return customerDeptDao.list(map);
+	public List<CustomerDeptDO> list(String customerId){
+		return customerDeptDao.list(customerId);
 	}
 	
 	@Override

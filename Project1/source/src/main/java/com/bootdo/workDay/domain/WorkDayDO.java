@@ -1,6 +1,7 @@
 package com.bootdo.workDay.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 
 /**
@@ -12,34 +13,54 @@ import java.io.Serializable;
  */
 public class WorkDayDO implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
-	//主键
+	//id
 	private Integer id;
+	//假日名称
+	private String holidayName;
+	//起始日
+	private String startDay;
+	//结束日
+	private String endDay;
 	//工作日
-	private Integer workDay;
+	private String workDay;
 
-	/**
-	 * 设置：主键
-	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public String getWorkDay() {
+		return workDay;
 	}
-	/**
-	 * 获取：主键
-	 */
+
+	public void setWorkDay(String workDay) {
+		this.workDay = workDay;
+	}
+
 	public Integer getId() {
 		return id;
 	}
-	/**
-	 * 设置：工作日
-	 */
-	public void setWorkDay(Integer workDay) {
-		this.workDay = workDay;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	/**
-	 * 获取：工作日
-	 */
-	public Integer getWorkDay() {
-		return workDay;
+
+	public String getHolidayName() {
+		return holidayName;
+	}
+
+	public void setHolidayName(String holidayName) {
+		this.holidayName = holidayName;
+	}
+
+	public String getStartDay() {
+		return startDay;
+	}
+
+	public void setStartDay(String startDay) {
+		this.startDay = startDay;
+	}
+
+	public String getEndDay() {
+		return endDay;
+	}
+
+	public void setEndDay(String endDay) {
+		this.endDay = endDay;
 	}
 }

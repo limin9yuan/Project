@@ -19,7 +19,7 @@ public interface CustomerDeptService {
 	
 	CustomerDeptDO get(String customerDeptId);
 	
-	List<CustomerDeptDO> list(Map<String, Object> map);
+	List<CustomerDeptDO> list(String customerId);
 	
 	int count(Map<String, Object> map);
 	

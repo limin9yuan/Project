@@ -9,21 +9,25 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="system:day:add" type="button" class="btn  btn-primary" onclick="add()">
-								<i class="fa fa-plus" aria-hidden="true"></i>添加
+							<button shiro:hasPermission="workDay:workDay:add" type="button" class="btn  btn-primary" onclick="add()">
+								<i class="fa fa-plus" aria-hidden="true"></i>添加假期
 							</button>
-							<button shiro:hasPermission="system:day:batchRemove" type="button" class="btn  btn-danger"
+							<button shiro:hasPermission="workDay:workDay:batchRemove" type="button" class="btn  btn-danger"
 								onclick="batchRemove()">
-								<i class="fa fa-trash" aria-hidden="true"></i>删除
+								<i class="fa fa-trash" aria-hidden="true"></i>批量删除假期
+							</button>
+							<button shiro:hasPermission="workDay:workDay:day" type="button" class="btn  btn-info"
+								onclick="workDay()">
+								<i class="fa fa-plus" aria-hidden="true"></i>生成工作日
 							</button>
 						</div>
-						<div class="columns pull-right">
+						<!-- <div class="columns pull-right">
 							<button class="btn btn-success" onclick="reLoad()">查询</button>
 						</div>
 						<div class="columns pull-right col-md-2 nopadding">
 							<input id="searchName" type="text" class="form-control"
 								placeholder="">
-						</div>
+						</div> -->
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>
@@ -39,12 +43,12 @@
 				var s_resetPwd_h = 'hidden';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:day:edit">
+		<div shiro:hasPermission="workDay:workDay:edit">
 			<script type="text/javascript">
 				s_edit_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="system:day:remove">
+		<div shiro:hasPermission="workDay:workDay:batchRemove">
 			<script type="text/javascript">
 				var s_remove_h = '';
 			</script>
@@ -56,6 +60,6 @@
 		</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/system/day/day.js"></script>
+	<script type="text/javascript" src="/js/appjs/workDay/workDay.js"></script>
 </body>
 </html>

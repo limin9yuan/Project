@@ -26,7 +26,7 @@ import com.bootdo.common.utils.FileUtil;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
-import com.bootdo.inner.domain.OrgJobDO;
+import com.bootdo.contract.domain.ReceivableDO;
 
 /**
  * 回款信息表 
@@ -49,6 +49,12 @@ public class ReceivedController extends BaseController {
 	String Received() {
 		return "payment/received/received";
 	}
+	
+	
+	@GetMapping("/receivableType")
+    String receivedType(){
+        return "payment/received/receivableType";
+    }
 
 	@ResponseBody
 	@GetMapping("/list")

@@ -187,7 +187,7 @@ public class CompanyCustomerController extends BaseController {
 	@GetMapping("/edit/{customerId}")
 	@RequiresPermissions("sales:companyCustomer:edit")
 	String edit(@PathVariable("customerId") String customerId, Model model) {
-		 CompanyCustomerDO companyCustomer = companyCustomerService.get(customerId);
+		CompanyCustomerDO companyCustomer = companyCustomerService.get(customerId);
 		model.addAttribute("companyCustomer", companyCustomer);
 		return "sales/companyCustomer/edit";
 	}
@@ -234,11 +234,9 @@ public class CompanyCustomerController extends BaseController {
 					}
 				}
 			}
-			if (customerIds > 0) {
-				R r = R.ok();
-				r.put("customerId", customerIds);
-				return r;
-			}
+			R r = R.ok();
+			r.put("customerId", customerIds);
+			return r;
 		}
 		return R.error();
 	}

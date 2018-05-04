@@ -126,10 +126,6 @@ $(function() {
 												+ '\')">查看</a> ';
 											return a;
 										}
-										if (row.customerDeptId == null) {
-											var a = '<h5>空</h5>';
-											return a;
-										}
 									},
 
 									// field : 'contactName',
@@ -138,18 +134,13 @@ $(function() {
 								{
 									align : 'center',
 									field : 'customerCreateTime',
-									title : '创建时间'
-
+									title : '创建时间',
 								},
 								{
 									align : 'center',
 									formatter : function(value, row, index) {
 										if (row.customerOperateTime != null) {
 											var a = '<span>'+row.customerOperateTime+'</span>';
-											return a;
-										}
-										if (row.customerOperateTime == null) {
-											var a = '<span>未修改</span>';
 											return a;
 										}
 									},
@@ -174,10 +165,6 @@ $(function() {
 													+ row.contactName + '</a> ';
 											return a;
 										}
-										if (row.contactName == null) {
-											var a = '<h5>空</h5> ';
-											return a;
-										}
 									},
 
 									// field : 'contactName',
@@ -195,10 +182,6 @@ $(function() {
 													+ '</a> ';
 											return b;
 										}
-										if (row.businessName == null) {
-											var a = '<h5>空</h5> ';
-											return a;
-										}
 									},
 									// field : 'businessName',
 									title : '业务信息'
@@ -213,10 +196,6 @@ $(function() {
 													+ '\')">'
 													+ row.projectName + '</a> ';
 											return c;
-										}
-										if (row.projectName == null) {
-											var a = '<h5>空</h5> ';
-											return a;
 										}
 									},
 									// field : 'projectName',

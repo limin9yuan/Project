@@ -29,20 +29,20 @@ import com.bootdo.common.utils.R;
  */
  
 @Controller
-@RequestMapping("/system/day")
+@RequestMapping("/workDay/workDay")
 public class WorkDayController {
 	@Autowired
 	private WorkDayService workDayService;
 	
 	@GetMapping()
-	@RequiresPermissions("system:day:day")
+	@RequiresPermissions("workDay:workDay:workDay")
 	String Day(){
-	    return "system/day/day";
+	    return "/workDay/workDay";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("system:day:day")
+	@RequiresPermissions("workDay:workDay:workDay")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
@@ -53,17 +53,30 @@ public class WorkDayController {
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("system:day:add")
+	@RequiresPermissions("workDay:workDay:add")
 	String add(){
-	    return "system/day/add";
+	    return "/workDay/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("system:day:edit")
+	@RequiresPermissions("workDay:workDay:edit")
 	String edit(@PathVariable("id") Integer id,Model model){
 		WorkDayDO day = workDayService.get(id);
 		model.addAttribute("day", day);
-	    return "system/day/edit";
+	    return "/workDay/edit";
+	}
+
+	/**
+	 * 生成工作日
+	 */
+	@ResponseBody
+	@PostMapping("/holiday")
+	@RequiresPermissions("workDay:workDay:holiday")
+	public R workDay( WorkDayDO day){
+		if(workDayService.holiday(day)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
@@ -71,7 +84,7 @@ public class WorkDayController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:day:add")
+	@RequiresPermissions("workDay:workDay:add")
 	public R save( WorkDayDO day){
 		if(workDayService.save(day)>0){
 			return R.ok();
@@ -83,7 +96,7 @@ public class WorkDayController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:day:edit")
+	@RequiresPermissions("workDay:workDay:edit")
 	public R update( WorkDayDO day){
 		workDayService.update(day);
 		return R.ok();
@@ -94,7 +107,7 @@ public class WorkDayController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:day:remove")
+	@RequiresPermissions("workDay:workDay:batchRemove")
 	public R remove( Integer id){
 		if(workDayService.remove(id)>0){
 		return R.ok();
@@ -107,7 +120,7 @@ public class WorkDayController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:day:batchRemove")
+	@RequiresPermissions("workDay:workDay:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] ids){
 		workDayService.batchRemove(ids);
 		return R.ok();

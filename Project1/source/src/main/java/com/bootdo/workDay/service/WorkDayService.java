@@ -21,7 +21,9 @@ public interface WorkDayService {
 	int count(Map<String, Object> map);
 	
 	int save(WorkDayDO day);
-	
+
+	int holiday(WorkDayDO day);
+
 	int update(WorkDayDO day);
 	
 	int remove(Integer id);

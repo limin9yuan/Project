@@ -37,14 +37,14 @@ public class PlanController  extends BaseController{
 	private PlanService planService;
 	
 	@GetMapping()
-	@RequiresPermissions("contract:plan:plan")
+	@RequiresPermissions("contract:contract:contract")
 	String Plan(){
 	    return "contract/contract/plan";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("contract:plan:plan")
+	@RequiresPermissions("contract:contract:contract")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
@@ -55,13 +55,13 @@ public class PlanController  extends BaseController{
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("contract:plan:add")
+	@RequiresPermissions("contract:contract:add")
 	String add(){
 	    return "contract/contract/addPla‪n";
 	}
 
 	@GetMapping("/edit/{planId}")
-	@RequiresPermissions("contract:plan:edit")
+	@RequiresPermissions("contract:contract:edit")
 	String edit(@PathVariable("planId") String planId,Model model){
 		PlanDO plan = planService.get(planId);
 		model.addAttribute("plan", plan);
@@ -73,7 +73,7 @@ public class PlanController  extends BaseController{
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("contract:plan:add")
+	@RequiresPermissions("contract:contract:add")
 	public R save( PlanDO plan){
 		plan.setPlanId(getUserId());
 		if(planService.save(plan)>0){
@@ -86,7 +86,7 @@ public class PlanController  extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("contract:plan:edit")
+	@RequiresPermissions("contract:contract:edit")
 	public R update( PlanDO plan){
 		plan.setPlanId(getUserId());
 		planService.update(plan);
@@ -98,7 +98,7 @@ public class PlanController  extends BaseController{
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("contract:plan:remove")
+	@RequiresPermissions("contract:contract:remove")
 	public R remove( String planId){
 		if(planService.remove(planId)>0){
 		return R.ok();
@@ -111,7 +111,7 @@ public class PlanController  extends BaseController{
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("contract:plan:batchRemove")
+	@RequiresPermissions("contract:contract:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] planIds){
 		planService.batchRemove(planIds);
 		return R.ok();

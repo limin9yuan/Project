@@ -103,7 +103,7 @@ function loadreceived() {
 									title : '款项类型'
 								},
 								{
-									field : '',
+									field : 'receiptDelayTime',
 									title : '收款延迟时间'
 								},
 								{
@@ -111,17 +111,17 @@ function loadreceived() {
 									title : '合同状态'
 								},
 								{
-									field : '',
+									field : 'receivablePrice',
 									title : '应收款金额'
 								},
 								{
-									field : '',
-									title : '回款率'
-								},
+									field : 'reimbursementRate',
+									title : '回款率%'
+								}/*,
 								{
 									field : '',
 									title : '详细信息'
-								}
+								}*/
 																 ]
 					});
 	// 导入弹出层
@@ -149,7 +149,7 @@ function addreceived() {
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '95%', '95%' ],
+		area : [ '950px', '95%' ],
 		content : prefixreceived + '/add' // iframe的url
 	});
 }
@@ -159,7 +159,7 @@ function editreceived(id) {
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '95%', '95%' ],
+		area : [ '950px', '95%' ],
 		content : prefixreceived + '/edit/' + id // iframe的url
 	});
 }

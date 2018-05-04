@@ -1,9 +1,33 @@
 
-var prefix = "/system/day"
+var prefix = "/workDay/workDay"
 $(function() {
 	load();
 });
+function save() {
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/workDay/workDay/day",
+		data : $('#signupForm').serialize(),// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				parent.reLoad();
+				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				parent.layer.close(index);
 
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+
+}
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(
@@ -48,14 +72,6 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'id', 
-									title : '主键' 
-								},
-																{
-									field : 'workDay', 
-									title : '工作日' 
-								},
-																{
 									title : '操作',
 									field : 'id',
 									align : 'center',
@@ -71,7 +87,21 @@ function load() {
 												+ '\')"><i class="fa fa-key"></i></a> ';
 										return e + d ;
 									}
-								} ]
+								} ,
+																{
+									field : 'holidayName',
+									title : '假日名称'
+								},
+																{
+									field : 'startDay',
+									title : '起始日'
+								},
+																{
+									field : 'endDay',
+									title : '结束日'
+								}
+
+							]
 					});
 }
 function reLoad() {

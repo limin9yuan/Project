@@ -20,6 +20,8 @@ public interface ReceivableDao {
 	
 	List<ReceivableDO> list(Map<String,Object> map);
 	
+	List<ReceivableDO> getContractId(Map<String,Object> map);
+	
 	List<ReceivableDO> examinePlanCunstomerNumber(Map<String, Object>map);
 	
 	int count(Map<String,Object> map);

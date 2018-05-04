@@ -125,8 +125,8 @@ public class CustomerChildCompanyController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("sales:customerChildCompany:batchRemove")
 	public R remove( String childCompanyId){
-		if(customerChildCompanyService.remove(childCompanyId)>0){
-		return R.ok();
+		if (customerChildCompanyService.remove(childCompanyId) > 0) {
+			return R.ok();
 		}
 		return R.error();
 	}

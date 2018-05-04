@@ -28,6 +28,11 @@ public class ReceivableServiceImpl implements ReceivableService {
 	}
 	
 	@Override
+	public List<ReceivableDO> getContractId(Map<String, Object> map){
+		return receivableDao.getContractId(map);
+	}
+	
+	@Override
 	public int count(Map<String, Object> map){
 		return receivableDao.count(map);
 	}

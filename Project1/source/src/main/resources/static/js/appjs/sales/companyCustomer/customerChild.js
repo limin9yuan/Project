@@ -53,9 +53,9 @@ function loadChild() {
 										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="editChild(\''
 												+ row.childCompanyId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="removeChild(\''
+										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="removeChildCustomer(\''
 												+ row.childCompanyId
-												+ '\')"><i class="fa fa-remove"></i></a> ';
+												+ '\')"><i class="fa fa-remove"></i></a>';
 										return e + d ;
 									}
 								} ,
@@ -110,7 +110,7 @@ function addChild() {
 		content : childPrefix + '/add/'+$('#customerId').val() // iframe的url
 	});
 }
-function editChild(id) {
+function editChild() {
 	layer.open({
 		type : 2,
 		title : '编辑',
@@ -121,12 +121,12 @@ function editChild(id) {
 		
 	});
 }
-function removeChild(id) {
+function removeChildCustomer(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : childPrefix+"/remove",
+			url : "/sales/customerChildCompany/remove",
 			type : "post",
 			data : {
 				'childCompanyId' : id

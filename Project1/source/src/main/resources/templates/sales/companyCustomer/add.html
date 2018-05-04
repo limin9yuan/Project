@@ -31,6 +31,7 @@
 							<!-- 				<form class="form-horizontal m-t" id="signupForm"> -->
 							<div id="myTabContent" class="tab-content" style="padding-top: 20px">
 								<input id="customerIds" name="customerIds" class="form-control" type="hidden"value="-1">
+							
 								<div class="tab-pane fade in active" id="baseInfo">
 									<div class="form-group">
 										<label class="col-sm-2 control-label"><span
@@ -418,7 +419,7 @@
 														<div class="columns pull-left">
 															<button shiro:hasPermission="sales:customerDept:add"
 																type="button" class="btn  btn-primary"
-																onclick="addDept()">
+																onclick="addDept(0)">
 																<i class="fa fa-plus" aria-hidden="true"></i>添加
 															</button>
 															<button
@@ -435,9 +436,8 @@
 															</button>
 														</div>
 													</div>
+													<table id="exampleDeptTable" data-mobile-responsive="true"></table>
 												</div>
-												<table id="DeptTable" data-mobile-responsive="true">
-												</table>
 											</div>
 										</div>
 									</div>

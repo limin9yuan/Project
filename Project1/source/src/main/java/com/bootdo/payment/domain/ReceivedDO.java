@@ -41,8 +41,6 @@ public class ReceivedDO implements Serializable {
 	private String receivedOperatorName;
 	//实际回款
 	private String sumReceivedPrice;
-	//回款率
-	private String reimbursementRate;
 	//企业回款数量
 	private String reimbursementNumber;
 	//已回款数量
@@ -53,6 +51,20 @@ public class ReceivedDO implements Serializable {
 	private String customerName;
 	//企业客户编号
 	private String customerId;
+	
+	
+	//回款率
+	private BigDecimal reimbursementRate;
+	//收款计划ID
+	private String receivableId;
+	//应收款金额
+	private BigDecimal receivablePrice;
+	//收款计划时间
+	private String receivableDate;
+	//收款延迟时间
+	private Integer receiptDelayTime;
+	
+	
 	
 	public String getCustomerId() {
 		return customerId;
@@ -98,10 +110,10 @@ public class ReceivedDO implements Serializable {
 	/**
 	 * 回款率
 	 */
-	public String getReimbursementRate() {
+	public BigDecimal getReimbursementRate() {
 		return reimbursementRate;
 	}
-	public void setReimbursementRate(String reimbursementRate) {
+	public void setReimbursementRate(BigDecimal reimbursementRate) {
 		this.reimbursementRate = reimbursementRate;
 	}
 	/**
@@ -250,6 +262,30 @@ public class ReceivedDO implements Serializable {
 	}
 	public void setReceivedOperatorName(String receivedOperatorName) {
 		this.receivedOperatorName = receivedOperatorName;
+	}
+	public String getReceivableId() {
+		return receivableId;
+	}
+	public void setReceivableId(String receivableId) {
+		this.receivableId = receivableId;
+	}
+	public BigDecimal getReceivablePrice() {
+		return receivablePrice;
+	}
+	public void setReceivablePrice(BigDecimal receivablePrice) {
+		this.receivablePrice = receivablePrice;
+	}
+	public String getReceivableDate() {
+		return receivableDate;
+	}
+	public void setReceivableDate(String receivableDate) {
+		this.receivableDate = receivableDate;
+	}
+	public Integer getReceiptDelayTime() {
+		return receiptDelayTime;
+	}
+	public void setReceiptDelayTime(Integer receiptDelayTime) {
+		this.receiptDelayTime = receiptDelayTime;
 	}
 	
 }

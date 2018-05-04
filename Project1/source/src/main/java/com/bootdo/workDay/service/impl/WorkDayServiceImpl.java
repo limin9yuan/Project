@@ -36,6 +36,11 @@ public class WorkDayServiceImpl implements WorkDayService {
 	public int save(WorkDayDO day){
 		return workDayDao.save(day);
 	}
+
+	@Override
+	public int holiday(WorkDayDO day){
+		return workDayDao.holiday(day);
+	}
 	
 	@Override
 	public int update(WorkDayDO day){

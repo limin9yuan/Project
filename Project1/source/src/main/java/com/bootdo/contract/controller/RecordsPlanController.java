@@ -60,6 +60,7 @@ public class RecordsPlanController  extends BaseController{
 	    return "contract/additionalRecords/addPla‪n";
 	}
 
+	//————修改
 	@RequestMapping("/edit_ajax/{planId}")
 	@ResponseBody
 	Map<String, Object> edit_ajax(@PathVariable("planId") String planId) {

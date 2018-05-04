@@ -37,14 +37,14 @@ public class ReceivableController  extends BaseController{
 	private ReceivableService receivableService;
 	
 	@GetMapping()
-	@RequiresPermissions("contract:receivable:receivable")
+	@RequiresPermissions("contract:contract:contract")
 	String Receivable(){
 	    return "contract/contract/receivable";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("contract:receivable:receivable")
+	@RequiresPermissions("contract:contract:contract")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
@@ -54,14 +54,27 @@ public class ReceivableController  extends BaseController{
 		return pageUtils;
 	}
 	
+	
+	@ResponseBody
+	@GetMapping("/getContractId")
+	public PageUtils getContractId(@RequestParam Map<String, Object> params){
+		//查询列表数据
+        Query query = new Query(params);
+		List<ReceivableDO> receivableList = receivableService.getContractId(query);
+		int total = receivableService.count(query);
+		PageUtils pageUtils = new PageUtils(receivableList, total);
+		return pageUtils;
+	}
+	
+	
 	@GetMapping("/add")
-	@RequiresPermissions("contract:receivable:add")
+	@RequiresPermissions("contract:contract:add")
 	String add(){
 	    return "contract/contract/addReceivable";
 	}
 
 	@GetMapping("/edit/{receivableId}")
-	@RequiresPermissions("contract:receivable:edit")
+	@RequiresPermissions("contract:contract:edit")
 	String edit(@PathVariable("receivableId") String receivableId,Model model){
 		ReceivableDO receivable = receivableService.get(receivableId);
 		model.addAttribute("receivable", receivable);
@@ -73,7 +86,7 @@ public class ReceivableController  extends BaseController{
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("contract:receivable:add")
+	@RequiresPermissions("contract:contract:add")
 	public R save( ReceivableDO receivable){
 		receivable.setReceivableId(getUserId());
 		if(receivableService.save(receivable)>0){
@@ -86,7 +99,7 @@ public class ReceivableController  extends BaseController{
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("contract:receivable:edit")
+	@RequiresPermissions("contract:contract:edit")
 	public R update( ReceivableDO receivable){
 		receivable.setReceivableId(getUserId());
 		receivableService.update(receivable);
@@ -98,7 +111,7 @@ public class ReceivableController  extends BaseController{
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("contract:receivable:remove")
+	@RequiresPermissions("contract:contract:remove")
 	public R remove( String receivableId){
 		if(receivableService.remove(receivableId)>0){
 		return R.ok();
@@ -111,7 +124,7 @@ public class ReceivableController  extends BaseController{
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("contract:receivable:batchRemove")
+	@RequiresPermissions("contract:contract:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] receivableIds){
 		receivableService.batchRemove(receivableIds);
 		return R.ok();

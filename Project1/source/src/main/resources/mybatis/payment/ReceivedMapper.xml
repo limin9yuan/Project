@@ -5,23 +5,26 @@
 
 	<select id="get" resultType="com.bootdo.payment.domain.ReceivedDO">
 		select
-		`Received_ID`,`Contract_ID`,`Business_ID`,`Received_Time`,`Received_Price`,`Received_Card_Number`,`Received_Type`,`Received_Contract_Status`,`Received_Remarks`,`Received_Operator`,`Received_Operate_Time`
+		`Received_ID`,`Contract_ID`,`Business_ID`,`Received_Time`,`Received_Price`,`Received_Card_Number`,`Received_Type`,`Received_Contract_Status`,`Received_Remarks`,`Received_Operator`,`Received_Operate_Time`,
+		`Receivable_ID`,`Receivable_Price`,`Receivable_Date`,`Receipt_Delay_Time`,`Reimbursement_Rate`
 		from payment_received where Received_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.payment.domain.ReceivedDO">
 		select
 		`Received_ID`,a.`Contract_ID`,a.`Business_ID`,`Received_Time`,`Received_Price`,
-		`Received_Card_Number`,`Received_Type`,`Received_Contract_Status`,`Received_Remarks`,
-		`Received_Operator`,`Received_Operate_Time`,b.name
-		receivedOperatorName
+		`Received_Card_Number`,`Received_Type`,
+		CASE WHEN `Received_Contract_Status` = '0' THEN '未开始'
+		WHEN `Received_Contract_Status` = '1' THEN '交付中' 
+		WHEN `Received_Contract_Status` = '2' THEN '已完成' 
+		END AS `Received_Contract_Status`,
+		`Received_Remarks`,
+		`Received_Operator`,`Received_Operate_Time`,
+		`Receivable_ID`,`Receivable_Price`,`Receivable_Date`,`Receipt_Delay_Time`,`Reimbursement_Rate`
 		from payment_received a
-		left join sys_user b on
-		a.Received_Operator=b.user_id
-		left join contract c on a.Contract_ID =
-		c.Contract_ID
-		left join development_project d on c.Project_ID =
-		d.Project_ID
+		left join contract b on a.`Contract_ID`=b.`Contract_ID`
+        left join development_project c on b.`Project_ID`=c.`Project_ID`
+        left join inner_org_employee d on d.`Employee_ID`=c.`Project_Owner`
 		<where>
 			<if test="receivedId != null and receivedId != ''"> and Received_ID = #{receivedId} </if>
 			<if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
@@ -30,16 +33,21 @@
 			<if test="receivedPrice != null and receivedPrice != ''"> and Received_Price = #{receivedPrice} </if>
 			<if test="receivedCardNumber != null and receivedCardNumber != ''"> and Received_Card_Number = #{receivedCardNumber} </if>
 			<if test="receivedType != null and receivedType != ''"> and Received_Type = #{receivedType} </if>
-			<if test="receivedContractStatus != null and receivedContractStatus != ''"> and Received_Contract_Status = #{receivedContractStatus}
-			</if>
+			<if test="receivedContractStatus != null and receivedContractStatus != ''"> and Received_Contract_Status = #{receivedContractStatus}</if>
 			<if test="receivedRemarks != null and receivedRemarks != ''"> and Received_Remarks = #{receivedRemarks} </if>
 			<if test="receivedOperator != null and receivedOperator != ''"> and Received_Operator = #{receivedOperator} </if>
 			<if test="receivedOperateTime != null and receivedOperateTime != ''"> and Received_Operate_Time = #{receivedOperateTime} </if>
-			<if test="projectName != null and projectName != ''"> and d.Project_ID = #{projectName} </if>
-			<if test="saleManager != null and saleManager != ''"> and d.Project_Owner like #{saleManager} </if>
+			<if test="receivableId != null and receivableId != ''"> and Receivable_ID = #{receivableId} </if>
+			<if test="receivablePrice != null and receivablePrice != ''"> and Receivable_Price = #{receivablePrice}</if>
+			<if test="receivableDate != null and receivableDate != ''"> and Receivable_Date = #{receivableDate} </if>
+			<if test="receiptDelayTime != null and receiptDelayTime != ''"> and Receipt_Delay_Time = #{receiptDelayTime} </if>
+			<if test="reimbursementRate != null and reimbursementRate != ''"> and Reimbursement_Rate = #{reimbursementRate} </if>
+			
+			<if test="projectName != null and projectName != ''"> and c.Project_ID = #{projectName} </if>
+			<if test="saleManager != null and saleManager != ''"> and d.`Employee_Name` LIKE #{saleManager} </if>
 			<if test="timeMin != null and timeMin != ''"> and Received_Time &gt;= #{timeMin}</if>
 			<if test="timeMax != null and timeMax != ''"> and Received_Time &lt;= #{timeMax}</if>
-			<if test="projectId != null and projectId != ''"> and a.`Contract_ID` = #{projectId} </if>
+			<if test="projectId != null and projectId != ''"> and c.Project_ID LIKE #{projectId} </if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -55,7 +63,11 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*) from payment_received
+		select count(*)
+        from payment_received a
+		left join contract b on a.`Contract_ID`=b.`Contract_ID`
+        left join development_project c on b.`Project_ID`=c.`Project_ID`
+        left join inner_org_employee d on d.`Employee_ID`=c.`Project_Owner`
 		<where>
 			<if test="receivedId != null and receivedId != ''"> and Received_ID = #{receivedId} </if>
 			<if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
@@ -64,11 +76,21 @@
 			<if test="receivedPrice != null and receivedPrice != ''"> and Received_Price = #{receivedPrice} </if>
 			<if test="receivedCardNumber != null and receivedCardNumber != ''"> and Received_Card_Number = #{receivedCardNumber} </if>
 			<if test="receivedType != null and receivedType != ''"> and Received_Type = #{receivedType} </if>
-			<if test="receivedContractStatus != null and receivedContractStatus != ''"> and Received_Contract_Status = #{receivedContractStatus}
-			</if>
+			<if test="receivedContractStatus != null and receivedContractStatus != ''"> and Received_Contract_Status = #{receivedContractStatus}</if>
 			<if test="receivedRemarks != null and receivedRemarks != ''"> and Received_Remarks = #{receivedRemarks} </if>
 			<if test="receivedOperator != null and receivedOperator != ''"> and Received_Operator = #{receivedOperator} </if>
 			<if test="receivedOperateTime != null and receivedOperateTime != ''"> and Received_Operate_Time = #{receivedOperateTime} </if>
+			<if test="receivableId != null and receivableId != ''"> and Receivable_ID = #{receivableId} </if>
+			<if test="receivablePrice != null and receivablePrice != ''"> and Receivable_Price = #{receivablePrice}</if>
+			<if test="receivableDate != null and receivableDate != ''"> and Receivable_Date = #{receivableDate} </if>
+			<if test="receiptDelayTime != null and receiptDelayTime != ''"> and Receipt_Delay_Time = #{receiptDelayTime} </if>
+			<if test="reimbursementRate != null and reimbursementRate != ''"> and Reimbursement_Rate = #{reimbursementRate} </if>
+			
+			<if test="projectName != null and projectName != ''"> and c.Project_ID = #{projectName} </if>
+			<if test="saleManager != null and saleManager != ''"> and d.`Employee_Name` LIKE #{saleManager} </if>
+			<if test="timeMin != null and timeMin != ''"> and Received_Time &gt;= #{timeMin}</if>
+			<if test="timeMax != null and timeMax != ''"> and Received_Time &lt;= #{timeMax}</if>
+			<if test="projectId != null and projectId != ''"> and c.Project_ID LIKE #{projectId} </if>
 		</where>
 	</select>
 	<!-- 	*************************************************************************************************** -->
@@ -81,8 +103,8 @@
 	</select>
 	<!-- 回款率 -->
 	<select id="reimbursementRate" resultType="com.bootdo.payment.domain.ReceivedDO">
-		select round(sum(Received_Price)
-		/(select sum(Receivable_Price) from accounts_receivable)*100 ,2) as
+		select sum(Received_Price)
+		/(select sum(Receivable_Price) from accounts_receivable)*100  as
 		reimbursementRate
 		from payment_received
 	</select>
@@ -143,7 +165,12 @@
 		`Received_Contract_Status`,
 		`Received_Remarks`,
 		`Received_Operator`,
-		`Received_Operate_Time`
+		`Received_Operate_Time`,
+		`Receivable_ID`,
+		`Receivable_Price`,
+		`Receivable_Date`,
+		`Receipt_Delay_Time`,
+		`Reimbursement_Rate`
 		)
 		values
 		(
@@ -156,7 +183,12 @@
 		#{receivedContractStatus},
 		#{receivedRemarks},
 		#{receivedOperator},
-		#{receivedOperateTime}
+		#{receivedOperateTime},
+		#{receivableId},
+		#{receivablePrice},
+		#{receivableDate},
+		#{receiptDelayTime},
+		#{reimbursementRate}
 		)
 	</insert>
 
@@ -169,11 +201,15 @@
 			<if test="receivedPrice != null">`Received_Price` = #{receivedPrice}, </if>
 			<if test="receivedCardNumber != null">`Received_Card_Number` = #{receivedCardNumber}, </if>
 			<if test="receivedType != null">`Received_Type` = #{receivedType}, </if>
-			<if test="receivedContractStatus != null">`Received_Contract_Status` = #{receivedContractStatus},
-			</if>
+			<if test="receivedContractStatus != null">`Received_Contract_Status` = #{receivedContractStatus},</if>
 			<if test="receivedRemarks != null">`Received_Remarks` = #{receivedRemarks}, </if>
 			<if test="receivedOperator != null">`Received_Operator` = #{receivedOperator}, </if>
-			<if test="receivedOperateTime != null">`Received_Operate_Time` = #{receivedOperateTime}</if>
+			<if test="receivedOperateTime != null">`Received_Operate_Time` = #{receivedOperateTime},</if>
+			<if test="receivableId != null">`Receivable_ID` = #{receivableId}, </if>
+			<if test="receivablePrice != null">`Receivable_Price` = #{receivablePrice},</if>
+			<if test="receivableDate != null">`Receivable_Date` = #{receivableDate}, </if>
+			<if test="receiptDelayTime != null">`Receipt_Delay_Time` = #{receiptDelayTime}, </if>
+			<if test="reimbursementRate != null">`Reimbursement_Rate` = #{reimbursementRate}</if>
 		</set>
 		where Received_ID = #{receivedId}
 	</update>

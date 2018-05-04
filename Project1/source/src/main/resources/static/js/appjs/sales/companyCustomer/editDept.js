@@ -1,3 +1,4 @@
+var deptPrefix="/sales/customerDept"
 $().ready(function() {
 	
 	dept_edit();
@@ -38,7 +39,7 @@ function updateDept() {
 //修改--实现绑定数据
 function dept_edit() {
 	$.ajax({
-		url :  '/sales/customerDept/edit_ajax/' + $("#customerDeptId").val(),
+		url :  deptPrefix+'/edit_ajax/' + $("#customerDeptId").val(),
 		type : "get",
 		data : {
 			'customerDeptId' : $("#customerDeptId").val(),

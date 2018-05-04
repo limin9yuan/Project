@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.sales.dao.CustomerDeptDao">
+
+	<select id="get" resultType="com.bootdo.sales.domain.CustomerDeptDO">
+		select
+		`Customer_Dept_ID`,Customer_ID,`Child_Company_ID`,`Customer_Dept_Name`,`Customer_Dept_Description`,`Customer_Dept_Parent_Dept` as parentId,`Customer_Dept_Remarks`,`Customer_Dept_Operator`,`Customer_Dept_Operate_Time`,`Customer_Dept_Create_Time`
+		from sales_customer_dept where Customer_Dept_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.sales.domain.CustomerDeptDO"  parameterType="java.lang.String">
+		select
+		Customer_Dept_ID,`Customer_Dept_ID` as deptId,a.`Customer_ID`
+		,a.`Child_Company_ID`,`Customer_Dept_Name`,`Customer_Dept_Description`,Customer_Dept_Parent_Dept,`Customer_Dept_Parent_Dept` as parentId,`Customer_Dept_Remarks`,
+		s.name AS
+		`Customer_Dept_Operator`,`Customer_Dept_Operate_Time`,`Customer_Dept_Create_Time`
+		from sales_customer_dept a
+		left join sales_company_customer b on
+		a.Customer_ID=b.Customer_ID
+		left join sys_user s on
+		a.Customer_Dept_Operator=s.user_id
+
+		<where>
+			<if test="_parameter !=null and _parameter !=''">a.Customer_ID =#{_parameter}</if>
+<!-- 			<if test="customerDeptId != null and customerDeptId != ''"> and Customer_Dept_ID = #{customerDeptId} </if> -->
+<!-- 			<if test="childCompanyId != null and childCompanyId != ''"> and Child_Company_ID = #{childCompanyId} </if> -->
+<!-- 			<if test="customerDeptName != null and customerDeptName != ''"> and Customer_Dept_Name = #{customerDeptName} </if> -->
+<!-- 			<if -->
+<!-- 				test="customerDeptDescription != null and customerDeptDescription != ''"> and Customer_Dept_Description = #{customerDeptDescription} -->
+<!-- 			</if> -->
+<!-- 			<if test="customerDeptParentDept != null and customerDeptParentDept != ''"> and Customer_Dept_Parent_Dept = -->
+<!-- 				#{customerDeptParentDept} -->
+<!-- 			</if> -->
+<!-- 			<if test="customerDeptRemarks != null and customerDeptRemarks != ''"> and Customer_Dept_Remarks = #{customerDeptRemarks} </if> -->
+<!-- 			<if test="customerDeptOperator != null and customerDeptOperator != ''"> and Customer_Dept_Operator = #{customerDeptOperator} -->
+<!-- 			</if> -->
+<!-- 			<if -->
+<!-- 				test="customerDeptOperateTime != null and customerDeptOperateTime != ''"> and Customer_Dept_Operate_Time = #{customerDeptOperateTime} -->
+<!-- 			</if> -->
+<!-- 			<if test="customerDeptCreateTime != null and customerDeptCreateTime != ''"> and Customer_Dept_Create_Time = -->
+<!-- 				#{customerDeptCreateTime} -->
+<!-- 			</if> -->
+		</where>
+<!-- 		<choose> -->
+<!-- 			<when test="sort != null and sort.trim() != ''"> -->
+<!-- 				order by ${sort} ${order} -->
+<!-- 			</when> -->
+<!-- 			<otherwise> -->
+<!-- 				order by Customer_Dept_ID desc -->
+<!-- 			</otherwise> -->
+<!-- 		</choose> -->
+<!-- 		<if test="offset != null and limit != null"> -->
+<!-- 			limit #{offset}, #{limit} -->
+<!-- 		</if> -->
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*)
+		from sales_customer_dept a
+		left join
+		sales_company_customer b on a.Customer_ID=b.Customer_ID
+		left join
+		sys_user s on a.Customer_Dept_Operator=s.user_id
+		<where>
+			<if test="customerId !=null and customerId !=''">a.Customer_ID =#{customerId}</if>
+			<if test="customerDeptId != null and customerDeptId != ''"> and Customer_Dept_ID = #{customerDeptId} </if>
+			<if test="childCompanyId != null and childCompanyId != ''"> and Child_Company_ID = #{childCompanyId} </if>
+			<if test="customerDeptName != null and customerDeptName != ''"> and Customer_Dept_Name = #{customerDeptName} </if>
+			<if
+				test="customerDeptDescription != null and customerDeptDescription != ''"> and Customer_Dept_Description = #{customerDeptDescription}
+			</if>
+			<if test="customerDeptParentDept != null and customerDeptParentDept != ''"> and Customer_Dept_Parent_Dept =
+				#{customerDeptParentDept}
+			</if>
+			<if test="customerDeptRemarks != null and customerDeptRemarks != ''"> and Customer_Dept_Remarks = #{customerDeptRemarks} </if>
+			<if test="customerDeptOperator != null and customerDeptOperator != ''"> and Customer_Dept_Operator = #{customerDeptOperator}
+			</if>
+			<if
+				test="customerDeptOperateTime != null and customerDeptOperateTime != ''"> and Customer_Dept_Operate_Time = #{customerDeptOperateTime}
+			</if>
+			<if test="customerDeptCreateTime != null and customerDeptCreateTime != ''"> and Customer_Dept_Create_Time =
+				#{customerDeptCreateTime}
+			</if>
+		</where>
+	</select>
+
+	<select id="listTree" resultType="com.bootdo.sales.domain.CustomerDeptDO">
+		select `Customer_ID` AS Customer_Dept_ID,Customer_Name As Customer_Dept_Name,'0' AS Customer_Dept_Parent_Dept
+		from sales_company_customer
+
+		UNION ALL
+		SELECT Child_Company_ID,Child_Company_Name,Customer_ID
+		FROM sales_customer_child_company
+
+		UNION ALL
+		SELECT Customer_Dept_ID ,Customer_Dept_Name,Child_Company_ID
+		FROM sales_customer_dept where Customer_Dept_Parent_Dept=0
+
+		UNION ALL
+		SELECT `Customer_Dept_ID`,`Customer_Dept_Name`,`Customer_Dept_Parent_Dept`
+		FROM sales_customer_dept where Customer_Dept_Parent_Dept!=0
+
+		
+		
+	</select>
+	<insert id="save" parameterType="com.bootdo.sales.domain.CustomerDeptDO" useGeneratedKeys="true" keyProperty="customerDeptId">
+		insert into sales_customer_dept
+		(
+		Customer_ID,
+		Customer_Dept_Parent_Dept,
+		`Customer_Dept_ID`,
+		`Child_Company_ID`,
+		`Customer_Dept_Name`,
+		`Customer_Dept_Description`,
+		`Customer_Dept_Remarks`,
+		`Customer_Dept_Operator`,
+		`Customer_Dept_Operate_Time`,
+		`Customer_Dept_Create_Time`
+		<!-- ， -->
+		<!-- `Customer_Province`, -->
+		<!-- `Customer_City`, -->
+		<!-- `Customer_County` -->
+		)
+		values
+		(
+		#{customerId},
+		#{customerDeptParentDept},
+		#{customerDeptId},
+		#{childCompanyId},
+		#{customerDeptName},
+		#{customerDeptDescription},
+		#{customerDeptRemarks},
+		#{customerDeptOperator},
+		#{customerDeptOperateTime},
+		now()
+		<!-- , -->
+		<!-- #{customerProvince}, -->
+		<!-- #{customerCity}, -->
+		<!-- #{customerCounty} -->
+		)
+	</insert>
+
+	<update id="update" parameterType="com.bootdo.sales.domain.CustomerDeptDO">
+		update sales_customer_dept a
+		<set>
+
+			<if test="childCompanyId != null">a.`Child_Company_ID` = #{childCompanyId}, </if>
+			<if test="customerDeptName != null">`Customer_Dept_Name` = #{customerDeptName}, </if>
+			<if test="customerDeptDescription != null">`Customer_Dept_Description` = #{customerDeptDescription},
+			</if>
+			<if test="customerDeptParentDept != null">`Customer_Dept_Parent_Dept` = #{customerDeptParentDept},
+			</if>
+			<if test="customerDeptRemarks != null">`Customer_Dept_Remarks` = #{customerDeptRemarks}, </if>
+			<if test="customerDeptOperator != null">`Customer_Dept_Operator` = #{customerDeptOperator}, </if>
+			<!-- <if test="customerDeptOperateTime != null">`Customer_Dept_Operate_Time` 
+				= -->
+			<!-- #{customerDeptOperateTime}, -->
+			<!-- </if> -->
+			<if test="customerDeptCreateTime != null">`Customer_Dept_Create_Time` = #{customerDeptCreateTime},
+			</if>
+			a.Customer_Dept_Operate_Time=now()
+		</set>
+		where Customer_Dept_ID = #{customerDeptId}
+	</update>
+
+	<delete id="remove">
+		delete from sales_customer_dept where
+		Customer_Dept_ID = #{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from sales_customer_dept where Customer_Dept_ID in
+		<foreach item="customerDeptId" collection="array" open="("
+			separator="," close=")">
+			#{customerDeptId}
+		</foreach>
+	</delete>
+	<select id="customerList" resultType="com.bootdo.sales.domain.CustomerDeptDO">
+		select
+		Child_Company_ID,Child_Company_Remarks as
+		customerDeptDescription,
+		'' as
+		`Customer_Dept_Parent_Dept`,
+		Child_Company_Name as customerDeptName
+		from
+		sales_customer_child_company where Customer_ID=#{customerId}
+		union
+		all
+		select customer_dept_id `dept_id`,Customer_Dept_Description,
+		case
+		when
+		Customer_Dept_Parent_Dept is null or Customer_Dept_Parent_Dept=''
+		then
+		a.Child_Company_ID else Customer_Dept_Parent_Dept end `parent_id`,
+		Customer_Dept_Name `name` from
+		sales_customer_dept a left join
+		sales_customer_child_company b on
+		a.Child_Company_ID=b.Child_Company_ID
+		and b.Customer_ID=#{customerId}
+		where a.Customer_ID = #{customerId}
+
+
+	</select>
+
+</mapper>

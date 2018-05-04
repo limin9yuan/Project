@@ -35,4 +35,6 @@ public interface ReceivableService {
 	int remove(String receivableId);
 	
 	int batchRemove(String[] receivableIds);
+	
+	List<ReceivableDO> getContractId(Map<String, Object> map);
 }
