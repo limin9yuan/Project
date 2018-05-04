@@ -26,9 +26,13 @@ public interface WorkDayService {
 	
 	int save(WorkDayDO day);
 
+	int saveOfficeDay(WorkDayDO day);
+
 	int holiday(WorkDayDO day);
 
 	int update(WorkDayDO day);
+
+	int updateOfficeDay(WorkDayDO day);
 	
 	int remove(Integer id);
 	

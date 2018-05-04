@@ -84,6 +84,14 @@ public class WorkDayController {
 	    return "/workDay/edit";
 	}
 
+	@GetMapping("/editOfficeDay/{officeId}")
+	@RequiresPermissions("workDay:workDay:editOfficeDay")
+	String editOfficeDay(@PathVariable("officeId") Integer id,Model model){
+		WorkDayDO day = workDayService.get(id);
+		model.addAttribute("office", day);
+		return "/workDay/editOfficeDay";
+	}
+
 	/**
 	 * 生成工作日
 	 */
@@ -109,6 +117,19 @@ public class WorkDayController {
 		}
 		return R.error();
 	}
+
+	/**
+	 * 保存
+	 */
+	@ResponseBody
+	@PostMapping("/saveOfficeDay")
+	@RequiresPermissions("workDay:workDay:addOfficeDay")
+	public R saveOfficeDay( WorkDayDO day){
+		if(workDayService.saveOfficeDay(day)>0){
+			return R.ok();
+		}
+		return R.error();
+	}
 	/**
 	 * 修改
 	 */
@@ -117,6 +138,17 @@ public class WorkDayController {
 	@RequiresPermissions("workDay:workDay:edit")
 	public R update( WorkDayDO day){
 		workDayService.update(day);
+		return R.ok();
+	}
+
+	/**
+	 * 修改
+	 */
+	@ResponseBody
+	@RequestMapping("/updateOfficeDay")
+	@RequiresPermissions("workDay:workDay:editOfficeDay")
+	public R updateOfficeDay( WorkDayDO day){
+		workDayService.updateOfficeDay(day);
 		return R.ok();
 	}
 	

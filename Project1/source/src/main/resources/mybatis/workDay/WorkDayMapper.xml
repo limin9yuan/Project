@@ -104,6 +104,28 @@
 		where Holiday_Id = #{holidayId}
 	</update>
 
+	<insert id="saveOfficeDay" parameterType="com.bootdo.workDay.domain.WorkDayDO" useGeneratedKeys="true" keyProperty="officeId">
+		insert into office_day
+		(
+			`Name`,
+			`Office_Day`
+		)
+		values
+		(
+			#{name},
+			#{officeDay}
+		)
+	</insert>
+
+	<update id="updateOfficeDay" parameterType="com.bootdo.workDay.domain.WorkDayDO">
+		update office_day
+		<set>
+			<if test="name != null">`Name` = #{name}, </if>
+			<if test="officeDay != null">`Office_Day` = #{officeDay}</if>
+		</set>
+		where Office_Id = #{officeId}
+	</update>
+
 	<delete id="remove">
 		delete from holiday where Holiday_Id = #{value}
 	</delete>

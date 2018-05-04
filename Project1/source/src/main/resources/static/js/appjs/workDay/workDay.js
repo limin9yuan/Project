@@ -191,6 +191,16 @@ function add() {
 		content : prefix + '/add' // iframe的url
 	});
 }
+function addOfficeDay() {
+	layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '95%' ],
+		content : prefix + '/addOfficeDay' // iframe的url
+	});
+}
 function edit(id) {
 	layer.open({
 		type : 2,
@@ -199,6 +209,16 @@ function edit(id) {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '95%' ],
 		content : prefix + '/edit/' + id // iframe的url
+	});
+}
+function editOfficeDay(id) {
+	layer.open({
+		type : 2,
+		title : '编辑',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '95%' ],
+		content : prefix + '/editOfficeDay/' + id // iframe的url
 	});
 }
 function remove(id) {

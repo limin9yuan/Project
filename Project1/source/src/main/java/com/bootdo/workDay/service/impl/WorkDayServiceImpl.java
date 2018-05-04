@@ -48,6 +48,11 @@ public class WorkDayServiceImpl implements WorkDayService {
 	}
 
 	@Override
+	public int saveOfficeDay(WorkDayDO day){
+		return workDayDao.saveOfficeDay(day);
+	}
+
+	@Override
 	public int holiday(WorkDayDO day){
 		return workDayDao.holiday(day);
 	}
@@ -55,6 +60,11 @@ public class WorkDayServiceImpl implements WorkDayService {
 	@Override
 	public int update(WorkDayDO day){
 		return workDayDao.update(day);
+	}
+
+	@Override
+	public int updateOfficeDay(WorkDayDO day){
+		return workDayDao.updateOfficeDay(day);
 	}
 	
 	@Override
