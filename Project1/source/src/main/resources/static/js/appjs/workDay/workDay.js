@@ -4,31 +4,31 @@ $(function() {
 	load();
 	loadOfficeDay();
 });
-function save() {
-	$.ajax({
-		cache : true,
-		type : "POST",
-		url : "/workDay/workDay/day",
-		data : $('#signupForm').serialize(),// 你的formid
-		async : false,
-		error : function(request) {
-			parent.layer.alert("Connection error");
-		},
-		success : function(data) {
-			if (data.code == 0) {
-				parent.layer.msg("操作成功");
-				parent.reLoad();
-				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-				parent.layer.close(index);
-
-			} else {
-				parent.layer.alert(data.msg)
-			}
-
-		}
-	});
-
-}
+// function save() {
+// 	$.ajax({
+// 		cache : true,
+// 		type : "POST",
+// 		url : "/workDay/workDay/day",
+// 		data : $('#signupForm').serialize(),// 你的formid
+// 		async : false,
+// 		error : function(request) {
+// 			parent.layer.alert("Connection error");
+// 		},
+// 		success : function(data) {
+// 			if (data.code == 0) {
+// 				parent.layer.msg("操作成功");
+// 				parent.reLoad();
+// 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+// 				parent.layer.close(index);
+//
+// 			} else {
+// 				parent.layer.alert(data.msg)
+// 			}
+//
+// 		}
+// 	});
+//
+// }
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(
@@ -199,6 +199,16 @@ function addOfficeDay() {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '95%' ],
 		content : prefix + '/addOfficeDay' // iframe的url
+	});
+}
+function addWorkDay() {
+	layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '800px', '95%' ],
+		content : prefix + '/pickYear' // iframe的url
 	});
 }
 function edit(id) {

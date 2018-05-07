@@ -28,11 +28,11 @@ public interface WorkDayDao {
 
 	int countOfficeDay(Map<String,Object> map);
 
-	int save(WorkDayDO day);
+	int saveHoliday(WorkDayDO day);
 
 	int saveOfficeDay(WorkDayDO day);
 
-	int holiday(WorkDayDO day);
+	int saveWorkDay(WorkDayDO day);
 
 	int update(WorkDayDO day);
 
@@ -43,6 +43,8 @@ public interface WorkDayDao {
 	int batchRemove(Integer[] ids);
 
 	int removeOfficeDay(Integer id);
+
+	int removeWorkDay(String id);
 
 	int batchRemoveOfficeDay(Integer[] ids);
 }

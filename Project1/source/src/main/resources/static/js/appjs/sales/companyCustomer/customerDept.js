@@ -130,7 +130,7 @@ function removeDept(id) {
 			url : "/sales/customerDept/remove",
 			type : "post",
 			data : {
-				'deptId' : id
+				'customerDeptId' : id
 			},
 			success : function(r) {
 				if (r.code==0) {

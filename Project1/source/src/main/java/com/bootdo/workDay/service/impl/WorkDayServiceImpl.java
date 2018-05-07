@@ -46,11 +46,6 @@ public class WorkDayServiceImpl implements WorkDayService {
 	public int countOfficeDay(Map<String, Object> map){
 		return workDayDao.countOfficeDay(map);
 	}
-	
-	@Override
-	public int save(WorkDayDO day){
-		return workDayDao.save(day);
-	}
 
 	@Override
 	public int saveOfficeDay(WorkDayDO day){
@@ -58,8 +53,13 @@ public class WorkDayServiceImpl implements WorkDayService {
 	}
 
 	@Override
-	public int holiday(WorkDayDO day){
-		return workDayDao.holiday(day);
+	public int saveWorkDay(WorkDayDO day){
+		return workDayDao.saveWorkDay(day);
+	}
+
+	@Override
+	public int saveHoliday(WorkDayDO day){
+		return workDayDao.saveHoliday(day);
 	}
 	
 	@Override
@@ -85,6 +85,11 @@ public class WorkDayServiceImpl implements WorkDayService {
 	@Override
 	public int removeOfficeDay(Integer id){
 		return workDayDao.removeOfficeDay(id);
+	}
+
+	@Override
+	public int removeWorkDay(String id){
+		return workDayDao.removeWorkDay(id);
 	}
 
 	@Override

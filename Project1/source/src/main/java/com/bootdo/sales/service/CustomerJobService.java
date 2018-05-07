@@ -1,5 +1,6 @@
 package com.bootdo.sales.service;
 
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.sales.domain.CustomerJobDO;
 
 import java.util.List;
@@ -25,6 +26,8 @@ public interface CustomerJobService {
 	int update(CustomerJobDO customerJob);
 	
 	int remove(String customerJobId);
+	
+	List<DictDO> listDic();
 	
 	int batchRemove(String[] customerJobIds);
 }

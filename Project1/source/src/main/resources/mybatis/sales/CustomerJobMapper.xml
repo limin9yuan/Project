@@ -121,5 +121,10 @@
 			#{customerJobId}
 		</foreach>
 	</delete>
-
+	<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
+		select `Customer_Job_ID`
+		value,concat(`Customer_Job_ID`,' ',`Customer_Job_name`) name
+		from
+		sales_customer__job
+	</select>
 </mapper>

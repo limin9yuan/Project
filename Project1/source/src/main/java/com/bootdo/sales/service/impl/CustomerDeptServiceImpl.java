@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.utils.BuildTree;
 import com.bootdo.sales.dao.CustomerDeptDao;
@@ -101,5 +102,10 @@ public class CustomerDeptServiceImpl implements CustomerDeptService {
 		List<CustomerDeptDO> customerDepts = customerDeptDao.customerList(params);
 
 		return customerDepts;
+	}
+
+	@Override
+	public List<DictDO> listDic() {
+		return customerDeptDao.listDic();
 	}
 }

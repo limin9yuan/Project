@@ -20,7 +20,7 @@ public class CustomerContactDO implements Serializable {
 	//姓名
 	private String contactName;
 	//性别
-	private Integer contactSex;
+	private String contactSex;
 	//称谓
 	private String contactSalutation;
 	//职务
@@ -36,7 +36,7 @@ public class CustomerContactDO implements Serializable {
 	//岗位
 	private String contactJob;
 	//婚否
-	private Integer contactMaritalStatus;
+	private String contactMaritalStatus;
 	//年龄
 	private Integer contactAge;
 	//家庭情况
@@ -48,7 +48,7 @@ public class CustomerContactDO implements Serializable {
 	//工作年限
 	private Integer contactYearsWorking;
 	//工作经验
-	private Integer contactExperience;
+	private String contactExperience;
 	//曾供职单位
 	private String contactPreviousCompany;
 	//上级领导
@@ -86,32 +86,92 @@ public class CustomerContactDO implements Serializable {
 	//备注
 	private String contactRemarks;
 	//创建人
-	private long contactOperator;
+	private String contactOperator;
 	//创建人姓名
     private String contactOperatorName;
 	
-	//创建时间
+	//修改时间
 	private Date contactOperateTime;
-	//生日
-	private String birthDay ;
+	//出生日期
+	private String contactBirthDay ;
+	//创建时间
+	private Date contactCreateTime;
+	
 	//单位地址
 	private String Work_Address;
 	//企业名称
 	private String customerName;
-
-
-	
+	//业务名称
+	private String businessName;
+	//项目名称
+	private String projectName;
+	//客户级别
+	private String customerLevel;
+	/*
+	 * 创建时间
+	 */
+	public Date getContactCreateTime() {
+		return contactCreateTime;
+	}
+	/*
+	 *创建时间
+	 */
+	public void setContactCreateTime(Date contactCreateTime) {
+		this.contactCreateTime = contactCreateTime;
+	}
+	/*
+	 * 客户级别
+	 */
+	public String getCustomerLevel() {
+		return customerLevel;
+	}
+	/*
+	 * 客户级别
+	 */
+	public void setCustomerLevel(String customerLevel) {
+		this.customerLevel = customerLevel;
+	}
+	/**
+	 * 业务名称
+	 */
+	public String getBusinessName() {
+		return businessName;
+	}
+	/**
+	 * 业务名称
+	 */
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
+	/**
+	 * 项目名称
+	 */
+	public String getProjectName() {
+		return projectName;
+	}
+	/**
+	 * 项目名称
+	 */
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
+	}
 	public String getContactOperatorName() {
 		return contactOperatorName;
 	}
 	public void setContactOperatorName(String contactOperatorName) {
 		this.contactOperatorName = contactOperatorName;
 	}
-	public String getBirthDay() {
-		return birthDay;
+	/*
+	 * 出生日期
+	 */
+	public String getContactBirthDay() {
+		return contactBirthDay;
 	}
-	public void setBirthDay(String birthDay) {
-		this.birthDay = birthDay;
+	/*
+	 * 出生日期
+	 */
+	public void setContactBirthDay(String contactBirthDay) {
+		this.contactBirthDay = contactBirthDay;
 	}
 	public String getWork_Address() {
 		return Work_Address;
@@ -152,13 +212,13 @@ public class CustomerContactDO implements Serializable {
 	/**
 	 * 设置：性别
 	 */
-	public void setContactSex(Integer contactSex) {
+	public void setContactSex(String contactSex) {
 		this.contactSex = contactSex;
 	}
 	/**
 	 * 获取：性别
 	 */
-	public Integer getContactSex() {
+	public String getContactSex() {
 		return contactSex;
 	}
 	/**
@@ -248,13 +308,13 @@ public class CustomerContactDO implements Serializable {
 	/**
 	 * 设置：婚否
 	 */
-	public void setContactMaritalStatus(Integer contactMaritalStatus) {
+	public void setContactMaritalStatus(String contactMaritalStatus) {
 		this.contactMaritalStatus = contactMaritalStatus;
 	}
 	/**
 	 * 获取：婚否
 	 */
-	public Integer getContactMaritalStatus() {
+	public String getContactMaritalStatus() {
 		return contactMaritalStatus;
 	}
 	/**
@@ -320,13 +380,13 @@ public class CustomerContactDO implements Serializable {
 	/**
 	 * 设置：工作经验
 	 */
-	public void setContactExperience(Integer contactExperience) {
+	public void setContactExperience(String contactExperience) {
 		this.contactExperience = contactExperience;
 	}
 	/**
 	 * 获取：工作经验
 	 */
-	public Integer getContactExperience() {
+	public String getContactExperience() {
 		return contactExperience;
 	}
 	/**
@@ -548,23 +608,23 @@ public class CustomerContactDO implements Serializable {
 	/**
 	 * 设置：创建人
 	 */
-	public void setContactOperator(long  contactOperator) {
+	public void setContactOperator(String  contactOperator) {
 		this.contactOperator = contactOperator;
 	}
 	/**
 	 * 获取：创建人
 	 */
-	public long  getContactOperator() {
+	public String  getContactOperator() {
 		return contactOperator;
 	}
 	/**
-	 * 设置：创建时间
+	 * 设置：修改时间
 	 */
 	public void setContactOperateTime(Date contactOperateTime) {
 		this.contactOperateTime = contactOperateTime;
 	}
 	/**
-	 * 获取：创建时间
+	 * 获取：修改时间
 	 */
 	public Date getContactOperateTime() {
 		return contactOperateTime;

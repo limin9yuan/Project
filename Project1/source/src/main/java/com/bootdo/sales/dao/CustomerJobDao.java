@@ -1,5 +1,6 @@
 package com.bootdo.sales.dao;
 
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.sales.domain.CustomerJobDO;
 
 import java.util.List;
@@ -23,6 +24,8 @@ public interface CustomerJobDao {
 	int count(Map<String,Object> map);
 	
 	int save(CustomerJobDO customerJob);
+	
+	List<DictDO> listDic();
 	
 	int update(CustomerJobDO customerJob);
 	

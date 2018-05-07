@@ -17,6 +17,8 @@ public class WorkDayDO implements Serializable {
 	private Integer holidayId;
 	//上班日id
 	private Integer officeId;
+	//工作日id
+	private Integer workId;
 	//假日名称
 	private String holidayName;
 	//起始日
@@ -29,6 +31,24 @@ public class WorkDayDO implements Serializable {
 	private String name;
 
 	private String officeDay;
+
+	private String currentYear;
+
+	public String getCurrentYear() {
+		return currentYear;
+	}
+
+	public void setCurrentYear(String currentYear) {
+		this.currentYear = currentYear;
+	}
+
+	public Integer getWorkId() {
+		return workId;
+	}
+
+	public void setWorkId(Integer workId) {
+		this.workId = workId;
+	}
 
 	public String getName() {
 		return name;

@@ -106,11 +106,11 @@ public class CustomerContactController extends BaseController {
 	/**
 	 * 查看联系人信息
 	 */
-	@GetMapping("/examine/{customerId}")
+	@GetMapping("/examine/{contactId}")
 	@RequiresPermissions("sales:customerContact:customerContact")
-	String examine(@PathVariable("customerId") String customerId, Model model) {
-		model.addAttribute("customerId", customerId);
-		return "sales/companyCustomer/examineContact";
+	String examine(@PathVariable("contactId") String contactId, Model model) {
+		model.addAttribute("contactId", contactId);
+		return "sales/customerContact/examineContact";
 	}
 	
 	
@@ -121,7 +121,7 @@ public class CustomerContactController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("sales:customerContact:add")
 	public R save( CustomerContactDO customerContact){
-		customerContact.setContactOperator(getUserId());
+		customerContact.setContactOperator(Long.toString(getUserId()));
 		if(customerContactService.save(customerContact)>0){
 			return R.ok();
 		}
@@ -225,7 +225,7 @@ public class CustomerContactController extends BaseController {
 				ServletOutputStream out = response.getOutputStream();
 				String fileName = new String((new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date()).getBytes(),"UTF-8");
 				response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xls");
-				String[] titles = { "联系人编号","姓名","性别","称谓","职务","负责业务","角色","企业客户编号","部门","岗位","婚否","年龄","家庭情况","毕业院校","专业技能","工作年限","工作经验","曾供职单位","上级领导","联系人状态","联系情况","客户所有者","销售负责人","手机","邮箱","工作电话","家庭电话","传真","家庭住址","微信","QQ","纪念日类别","纪念日","爱好","备注","创建人","创建时间"};
+				String[] titles = { "联系人编号","姓名","性别","称谓","职务","负责业务","角色","企业客户编号","部门","岗位","婚否","出生日期","年龄","家庭情况","毕业院校","专业技能","工作年限","工作经验","曾供职单位","上级领导","联系人状态","联系情况","客户所有者","销售负责人","手机","邮箱","工作电话","家庭电话","传真","家庭住址","微信","QQ","纪念日类别","纪念日","爱好","备注","创建人","创建时间","修改时间"};
 				customerContactService.export(titles, out, list);
 			} catch (Exception e) {
 				e.printStackTrace();

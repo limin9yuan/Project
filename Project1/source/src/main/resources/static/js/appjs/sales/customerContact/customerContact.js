@@ -1,16 +1,17 @@
-
 var prefixContact = "/sales/customerContact"
 $(function() {
-	//loadCrmData("/sales/province/listDic","province");
-	//loadCrmData("/sales/province/listDic","city");
-	//loadCrmData("/sales/province/listDic","area");
-
+	// loadCrmData("/sales/province/listDic","province");
+	// loadCrmData("/sales/province/listDic","city");
+	// loadCrmData("/sales/province/listDic","area");
+	loadDic("sales_customer_level", "customerLevel");// 客户级别
+	loadCrmData("/inner/innerOrgEmployee/listDic", "contactSales");//销售负责人
 	var address = new addressResolve({
-	    proId: 'province',
-	    cityId: 'city',
-	    areaId: 'area'
-	  });
-	address.init(); 
+		proId : 'province',
+		cityId : 'city',
+		areaId : 'area'
+	});
+	address.init();
+	getTreeData();
 	load();
 });
 
@@ -20,9 +21,9 @@ function load() {
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
 						url : prefixContact + "/list", // 服务器数据的加载地址
-					//	showRefresh : true,
-					//	showToggle : true,
-					//	showColumns : true,
+						// showRefresh : true,
+						// showToggle : true,
+						// showColumns : true,
 						iconSize : 'outline',
 						toolbar : '#exampleToolbar',
 						striped : true, // 设置为true会有隔行变色效果
@@ -35,20 +36,26 @@ function load() {
 						// //发送到服务器的数据编码类型
 						pageSize : 10, // 如果设置了分页，每页数据条数
 						pageNumber : 1, // 如果设置了分布，首页页码
-						//search : true, // 是否显示搜索框
+						// search : true, // 是否显示搜索框
 						showColumns : false, // 是否显示内容下拉框（选择显示的列）
-						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
+													// "server"
 						queryParams : function(params) {
 							return {
-								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-								limit: params.limit,
-								offset:params.offset,
-								province:$('#province').val(),
-								city:$('#city').val(),
-								area:$('#area').val(),
-					            customerName:$('#customerName').val(),
-					            customerId:$('#customerId').val()
-					           // username:$('#searchName').val()
+								// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+								limit : params.limit,
+								offset : params.offset,
+								province : $('#province').val(),
+								city : $('#city').val(),
+								area : $('#area').val(),
+								customerName : $('#customerName').val(),
+								customerId : $('#customerId').val(),
+								contactName:$('#contactName').val(),
+								businessName:$('#businessName').val(),
+								projectName:$('#projectName').val(),
+								contactSales:$('#contactSales').val(),
+								customerLevel:$('#customerLevel').val()
+							// username:$('#searchName').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -61,84 +68,119 @@ function load() {
 								{
 									checkbox : true
 								},
-								                                {
+								{
 									title : '操作',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+										var a = '<div style="width:110px"></div>'
+										var e = '<a class="btn btn-primary btn-sm '
+												+ s_edit_h
+												+ '" href="#" mce_href="#" title="编辑" onclick="edit(\''
 												+ row.contactId
 												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
+										var d = '<a class="btn btn-warning btn-sm '
+												+ s_remove_h
+												+ '" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.contactId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="examine(\''
 												+ row.contactId
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
-									}},
-																{
-									field : 'contactId', 
-									title : '联系人编号' 
+												+ '\')"><i class="fa fa-search"></i></a> ';
+										return a+f+e + d;
+									}
+								}, {
+									align : 'center',
+									field : 'contactId',
+									title : '联系人编号'
 								},
-																{
-									field : 'contactName', 
-									title : '姓名' 
+								{
+									align : 'center',
+									field : 'contactCreateTime',
+									title : '创建时间'
 								},
-								                                 {
-									field : 'contactStatus', 
-									title : '联系人状态' 
+								{
+									align : 'center',
+									field : 'contactOperateTime',
+									title : '修改时间'
 								},
-																{
-									field : 'contactIntroduction', 
-									title : '联系情况' 
-								},
-								                                {
-									field : 'contactOwner', 
-									title : '客户所有者' 
-								},
-																{
-									field : 'contactSales', 
-									title : '销售负责人' 
-								},
-																{
-									field : 'contactPhoneNumber', 
-									title : '手机' 
-								},
-								                                  {
-									field : 'customerId', 
-									title : '企业客户编号' 
-								},    
-								                                 {
-									field : 'contactDept', 
-									title : '部门' 
-								},
-								                                    {
-									field : 'contactResponsibility', 
-									title : '负责业务' 
-								},
-								                                    {
-									field : 'contactTitle', 
-									title : '职务' 
-								}					
-								]
+								{
+									align : 'center',
+									field : 'contactName',
+									title : '姓名'
+								}, {
+									align : 'center',
+									field : 'contactStatus',
+									title : '联系人状态'
+								}, {
+									align : 'center',
+									field : 'contactIntroduction',
+									title : '联系情况'
+								}, {
+									align : 'center',
+									field : 'contactOwner',
+									title : '客户所有者'
+								}, {
+									align : 'center',
+									field : 'contactSales',
+									title : '销售负责人'
+								}, {
+									align : 'center',
+									field : 'contactPhoneNumber',
+									title : '手机'
+								}, {
+									align : 'center',
+									field : 'customerName',
+									title : '公司名称'
+								}, {
+									align : 'center',
+									field : 'customerId',
+									title : '企业客户编号'
+								}, {
+									align : 'center',
+									field : 'contactDept',
+									title : '部门'
+								}, {
+									align : 'center',
+									field : 'contactResponsibility',
+									title : '负责业务'
+								}, {
+									align : 'center',
+									field : 'contactTitle',
+									title : '职务'
+								}, {
+									align : 'center',
+									field : 'contactOperator',
+									title : '操作人'
+								} ]
 					});
 	// 页面导入按钮点击事件
-	$("button[name=excelinsertbtn]").click(function () {
-	    layer.open({
-				type : 2,
-				title :'导入',
-				maxmin : true,
-				shadeClose : false, // 点击遮罩关闭层
-				area : [ '400px', '55%' ],
-				content : prefixContact + '/import'  // iframe的url
-			});
+	$("button[name=excelinsertbtn]").click(function() {
+		layer.open({
+			type : 2,
+			title : '导入',
+			maxmin : true,
+			shadeClose : false, // 点击遮罩关闭层
+			area : [ '400px', '55%' ],
+			content : prefixContact + '/import' // iframe的url
+		});
 
 	})
 }
 function reLoad() {
-	alert('reload');
 	$('#exampleTable').bootstrapTable('refresh');
+}
+//--查看详情页
+
+function examine(id) {
+	parent.layer.open({
+		type : 2,
+		title : '查看联系人信息',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '950px', '95%' ],
+		content : prefixContact + '/examine/' + id
+	});
 }
 function add() {
 	parent.layer.open({
@@ -166,7 +208,7 @@ function edit(id) {
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '95%', '95%' ],
+		area : [ '950px', '95%' ],
 		content : prefixContact + '/edit/' + id // iframe的url
 	});
 }
@@ -175,31 +217,69 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefixContact+"/remove",
+			url : prefixContact + "/remove",
 			type : "post",
 			data : {
 				'contactId' : id
 			},
 			success : function(r) {
-				if (r.code==0) {
+				if (r.code == 0) {
 					layer.msg(r.msg);
 					reLoad();
-				}else{
+				} else {
 					layer.msg(r.msg);
 				}
 			}
 		});
 	})
 }
-//导出
 
-function exportData(){
-	customerContactform.province.value=$('#province').val();
-	customerContactform.city.value=$('#city').val();
-	customerContactform.area.value=$('#area').val();
-	customerContactform.customerName.value=$('#customerName').val();
-	customerContactform.customerId.value=$('#customerId').val();
+function getTreeData(){
+	$.ajax({
+		type:"GEt",
+		url:"/sales/customerDept/tree",
+		success:function(tree){
+			loadTree(tree);
+		}
+	});
+}
+function loadTree(tree){
+	$('#jstree').jstree({
+		'core':{
+			'data':tree
+		},
+		"plugins":["search"]
+	});
+	$('#jstree').jstree().open_all();
+}
+$('#jstree').on("changed.jstree",function(e,data){
+	if (data.selected==-1) {
+		var opt={
+			query:{
+			customerId:'',
+				}
+		}
+		$('#exampleTable').bootstrapTable('refresh',opt);
+	}else{
+		var opt={
+			query:{
+			customerId:data.selected[0],
+				}
+		}
+		
+		$('#exampleTable').bootstrapTable('refresh',opt);
+	}
 	
+});
+// 导出
+
+function exportData() {
+	customerContactform.province.value = $('#province').val();
+	customerContactform.city.value = $('#city').val();
+	customerContactform.area.value = $('#area').val();
+	customerContactform.customerName.value = $('#customerName').val();
+	customerContactform.customerId.value = $('#customerId').val();
+
 	$("#customerContactform").submit();
 }
 

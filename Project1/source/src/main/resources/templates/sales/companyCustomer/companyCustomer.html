@@ -8,10 +8,12 @@
 
 		<form id="companyCustomerform" name="companyCustomerform"
 			th:action="@{/sales/companyCustomer/export}" method="get">
-			<input type="hidden" name="province" /> <input type="hidden"
-				name="city" /> <input type="hidden" name="area" /> <input
-				type="hidden" name="customerName" /> <input type="hidden"
-				name="customerId" /> <input type="hidden" name="customerSales" />
+			<input type="hidden" name="province" /> 
+			<input type="hidden" name="city" /> 
+			<input type="hidden" name="area" /> 
+			<input type="hidden" name="customerName" /> 
+			<input type="hidden" name="customerId" /> 
+			<input type="hidden" name="customerSales" />
 			<input type="hidden" name="customerLevel" />
 		</form>
 
@@ -250,11 +252,11 @@
 							type="button" class="btn  btn-danger" onclick="exportData()">
 							<i class="fa fa-cloud-download" aria-hidden="true"></i>导出
 						</button>
-						<a shiro:hasPermission="sales:salesProject:batchRemove"
+						<button shiro:hasPermission="sales:salesProject:batchRemove"
 							type="button" class="btn  btn-primary" onclick=""> <i
 							class="glyphicon glyphicon-th icon-th" aria-hidden="true"></i>列表显示项配置
-						</a>
-
+						</button>
+<!-- 						<a href="http://127.0.0.1:8020/HelloHBuilder/请款申请表.xlsx" download="xlsx">模板下载</a> -->
 					</div>
 				</div>
 				<table id="exampleTable" data-mobile-responsive="true">

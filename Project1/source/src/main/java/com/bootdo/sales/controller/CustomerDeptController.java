@@ -28,6 +28,7 @@ import com.bootdo.sales.service.CompanyCustomerService;
 import com.bootdo.sales.service.CustomerDeptService;
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
@@ -187,6 +188,16 @@ public class CustomerDeptController extends BaseController {
 	public R remove(@RequestParam("ids[]") String[] customerDeptIds) {
 		customerDeptService.batchRemove(customerDeptIds);
 		return R.ok();
+	}
+	
+	@ResponseBody
+	@GetMapping("/listDic")
+	public List<DictDO> listDic() {
+		// 查询列表数据
+		Map<String, Object> map = new HashMap<>(16);
+		map.put("type", "");
+		List<DictDO> dictList = customerDeptService.listDic();
+		return dictList;
 	}
 
 }

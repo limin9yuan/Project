@@ -1,5 +1,6 @@
 package com.bootdo.sales.dao;
 
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.sales.domain.CustomerDeptDO;
 
@@ -31,6 +32,7 @@ public interface CustomerDeptDao {
 	int remove(String Customer_Dept_ID);
 	
 	int batchRemove(String[] customerDeptIds);
+	List<DictDO> listDic();
 	Tree<DeptDO> getTree();
 	Long[] listParentDept();
 	List<CustomerDeptDO> customerList(Map<String,Object> map);

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.sales.dao.CustomerJobDao;
 import com.bootdo.sales.domain.CustomerJobDO;
 import com.bootdo.sales.service.CustomerJobService;
@@ -50,6 +51,12 @@ public class CustomerJobServiceImpl implements CustomerJobService {
 	@Override
 	public int batchRemove(String[] customerJobIds){
 		return customerJobDao.batchRemove(customerJobIds);
+	}
+
+	@Override
+	public List<DictDO> listDic() {
+		// TODO Auto-generated method stub
+		return customerJobDao.listDic();
 	}
 	
 }

@@ -20,6 +20,7 @@ import com.bootdo.sales.domain.CustomerChildCompanyDo;
 import com.bootdo.sales.domain.CustomerJobDO;
 import com.bootdo.sales.service.CustomerJobService;
 import com.bootdo.common.controller.BaseController;
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -130,4 +131,13 @@ public class CustomerJobController extends BaseController{
 		return R.ok();
 	}
 
+	@ResponseBody
+	@GetMapping("/listDic")
+	public List<DictDO> listDic() {
+		// 查询列表数据
+		Map<String, Object> map = new HashMap<>(16);
+		map.put("type", "");
+		List<DictDO> dictList = customerJobService.listDic();
+		return dictList;
+	}
 }

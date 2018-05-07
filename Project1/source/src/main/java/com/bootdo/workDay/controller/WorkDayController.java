@@ -1,5 +1,6 @@
 package com.bootdo.workDay.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,12 +8,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.bootdo.workDay.domain.WorkDayDO;
 import com.bootdo.workDay.service.WorkDayService;
@@ -76,6 +72,12 @@ public class WorkDayController {
 		return "/workDay/add";
 	}
 
+	@GetMapping("/pickYear")
+	@RequiresPermissions("workDay:workDay:addWorkDay")
+	String pickYear(){
+		return "/workDay/pickYear";
+	}
+
 	@GetMapping("/edit/{holidayId}")
 	@RequiresPermissions("workDay:workDay:edit")
 	String edit(@PathVariable("holidayId") Integer id,Model model){
@@ -92,18 +94,6 @@ public class WorkDayController {
 		return "/workDay/editOfficeDay";
 	}
 
-	/**
-	 * 生成工作日
-	 */
-	@ResponseBody
-	@PostMapping("/holiday")
-	@RequiresPermissions("workDay:workDay:holiday")
-	public R workDay( WorkDayDO day){
-		if(workDayService.holiday(day)>0){
-			return R.ok();
-		}
-		return R.error();
-	}
 	
 	/**
 	 * 保存
@@ -111,8 +101,8 @@ public class WorkDayController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("workDay:workDay:add")
-	public R save( WorkDayDO day){
-		if(workDayService.save(day)>0){
+	public R saveHoliday( WorkDayDO day){
+		if(workDayService.saveHoliday(day)>0){
 			return R.ok();
 		}
 		return R.error();
@@ -126,6 +116,21 @@ public class WorkDayController {
 	@RequiresPermissions("workDay:workDay:addOfficeDay")
 	public R saveOfficeDay( WorkDayDO day){
 		if(workDayService.saveOfficeDay(day)>0){
+			return R.ok();
+		}
+		return R.error();
+	}
+
+	/**
+	 * 保存
+	 */
+	@ResponseBody
+	@RequestMapping("/saveWorkDay/{pickYear}")
+	@RequiresPermissions("workDay:workDay:addWorkDay")
+	public R saveWorkDay(@PathVariable("pickYear") String pickYear){
+		WorkDayDO day =new WorkDayDO();
+		day.setCurrentYear(pickYear);
+		if(workDayService.removeWorkDay(pickYear)>0 && workDayService.saveWorkDay(day)>0){
 			return R.ok();
 		}
 		return R.error();
@@ -188,6 +193,19 @@ public class WorkDayController {
 		}
 		return R.error();
 	}
+
+//	/**
+//	 * 删除
+//	 */
+//	@PostMapping( "/removeWorkDay")
+//	@ResponseBody
+//	@RequiresPermissions("workDay:workDay:addWorkDay")
+//	public R removeWorkDay( Integer id){
+//		if(workDayService.removeWorkDay(id)>0){
+//			return R.ok();
+//		}
+//		return R.error();
+//	}
 
 	/**
 	 * 删除

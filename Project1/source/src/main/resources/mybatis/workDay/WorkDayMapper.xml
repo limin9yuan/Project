@@ -75,15 +75,18 @@
 		</where>
 	</select>
 
-	<insert id="holiday" parameterType="com.bootdo.workDay.domain.WorkDayDO" useGeneratedKeys="true" keyProperty="holidayId">
-		insert into work_day(Work_Day)
-		select rep_date from obj_date a
+	<insert id="saveWorkDay" parameterType="com.bootdo.workDay.domain.WorkDayDO" useGeneratedKeys="true" keyProperty="workId">
+		insert into work_day(Work_Day, Work_Year)
+		select rep_date, Rep_Year from obj_date a
 		where not EXISTS(select * from holiday where a.rep_date &gt; Start_Day and a.rep_date &lt; End_Day)
 		and DAYOFWEEK(rep_date)!=1 and DAYOFWEEK(rep_date)!=7
 		and rep_year= #{currentYear}
+		UNION ALL
+		SELECT Office_Day, SUBSTR(Office_Day,1,4)
+		FROM office_day
 	</insert>
 
-	<insert id="save" parameterType="com.bootdo.workDay.domain.WorkDayDO" useGeneratedKeys="true" keyProperty="holidayId">
+	<insert id="saveHoliday" parameterType="com.bootdo.workDay.domain.WorkDayDO" useGeneratedKeys="true" keyProperty="holidayId">
 		insert into holiday
 		(
 			`Holiday_Name`,
@@ -143,6 +146,10 @@
 
 	<delete id="removeOfficeDay">
 		delete from office_day where Office_Id = #{value}
+	</delete>
+
+	<delete id="removeWorkDay" parameterType="com.bootdo.workDay.domain.WorkDayDO">
+		delete from work_day where Work_Year = #{currentYear}
 	</delete>
 
 	<delete id="batchRemoveOfficeDay">
