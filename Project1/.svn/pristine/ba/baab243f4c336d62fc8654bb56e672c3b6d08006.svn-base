@@ -87,6 +87,7 @@ function getMainAndCopyPerson_ajax() {
 								" onclick='deleteSendPerson(\"" + (result[i].employeeId + 1) +"\" )'>" +
 								result[i].person +"</div>";
 					$('#sendPerson').html(mainPerson);
+					alert(mainPerson);
 
 				}
 				if (result[i].mainPerson == 0) {
