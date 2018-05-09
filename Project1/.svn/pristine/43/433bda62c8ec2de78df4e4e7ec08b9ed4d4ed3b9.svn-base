@@ -717,7 +717,7 @@
 																</div>
 																 -->
 													</div>
-													<table id="exampleDeptTable" data-mobile-responsive="true"></table>
+													<table id="DeptTable" data-mobile-responsive="true"></table>
 												</div>
 											</div>
 										</div>
