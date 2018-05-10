@@ -133,8 +133,10 @@ public class SalesProjectController extends BaseController {
 	public R save( SalesProjectDO salesProject){
 		salesProject.setProjectCreator(getUserId());
 		salesProject.setProjectOperator(getUserId());
-		salesProjectService.save(salesProject);
 		String projectIds = salesProjectService.getProjectId(salesProject);
+		salesProject.setProjectId(projectIds);
+		salesProjectService.save(salesProject);
+
 		if (!projectIds.equals("")) {
 			MainCopyPersonDO mcp = new MainCopyPersonDO();
 			String mainPersonId = salesProject.getMainPersonId();
@@ -177,7 +179,47 @@ public class SalesProjectController extends BaseController {
 	@RequiresPermissions("sales:salesProject:edit")
 	public R update( SalesProjectDO salesProject){
 		salesProject.setProjectOperator(getUserId());
+		String projectIds = salesProject.getProjectId();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		params.put("tId",projectIds);
+		params.put("tableName","pre_sales_project");
 		salesProjectService.update(salesProject);
+		mainCopyPersonService.remove(params);
+		if (!projectIds.equals("")) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = salesProject.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(salesProject.getProjectId());
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("pre_sales_project");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+			String copyPersonId = salesProject.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				int result = 0;
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(salesProject.getProjectId());
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("pre_sales_project");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+		}
 		return R.ok();
 	}	
 	/**

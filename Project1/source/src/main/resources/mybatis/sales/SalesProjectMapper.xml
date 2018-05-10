@@ -133,10 +133,7 @@
 		)
 		values
 		(
-			(select case when bid is null then CONCAT(#{projectBusiness},'001')
-			        else bid end v from (select max(project_id)+1 bid
-								         from pre_sales_project
-								         where project_business=#{projectBusiness}) a),
+			#{projectId},
 			#{projectBusiness}, 
 			(select Customer_ID from sales_business where business_id=#{projectBusiness}),
 			#{projectName}, 
