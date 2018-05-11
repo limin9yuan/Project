@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+					    <!-- tab标签 -->
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active"><a href="#basic" data-toggle="tab">基本信息</a></li>
+							<li><a href="#payment" data-toggle="tab">付款信息</a></li>
+							<li><a href="#Receivables" data-toggle="tab">收款信息</a></li>
+							<li><a href="#plan" data-toggle="tab">回款计划</a></li>
+						</ul>
+						<!-- 基本信息 -->
+						<form class="form-horizontal m-t" id="signupForm">
+						<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade in active" id="basic">
+						<!--  <input id="recordId" name="recordId" type="hidden">-->
+						<input id="recordId" name="recordId" th:value="${recordId}" class="form-control" type="text" type="hidden">
+						    <div class="form-group">
+								<label class="col-sm-3 control-label">申请人姓名：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								<select disabled="disabled" data-placeholder="请选择" name="recordName" id="recordName"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+								</select>
+								</div>
+								<label class="col-sm-3 control-label">合同名称：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input disabled="disabled" id="contractName" name="contractName" class="form-control" type="text">
+								</div>
+								</div>
+						   <div class="form-group">
+								<label class="col-sm-3 control-label">建设单位：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input disabled="disabled" id="recordBulidCompany" name="recordBulidCompany" class="form-control" type="text">
+								</div>
+								<label class="col-sm-3 control-label">销售负责人：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								<select disabled="disabled" data-placeholder="请选择" name="recordSales" id="recordSales"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+								</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">增补总金额：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input disabled="disabled" id="recordTotalPrice" name="recordTotalPrice" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">增补内容描述：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<textarea disabled="disabled" id="recordDescription" name="recordDescription" class="form-control" rows="3"></textarea>
+								</div>
+								<label class="col-sm-3 control-label">增补原因：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<textarea disabled="disabled" id="recordReason" name="recordReason" class="form-control" rows="3"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">提交评审时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="recordCommitTime">
+							            <input disabled="disabled" class="form-control" type="text" name="recordCommitTime">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>
+								<label class="col-sm-3 control-label">预计开发票时间：<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+								    <div class="input-group date" id="preInvoiceDate">
+							            <input disabled="disabled" class="form-control" type="text" name="preInvoiceDate">
+							            <span class="input-group-addon">
+							               <span class="glyphicon glyphicon-calendar"></span>
+							            </span>
+							        </div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">关联合同编号及名称：</label>
+								<div class="col-sm-9">
+									<select disabled="disabled" data-placeholder="请选择" name="recordRelatedContractId" id="recordRelatedContractId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+								</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">正文附件：</label>
+								<div class="col-sm-3">
+								<div class="file-manager">
+									<button disabled="disabled" type="button" class="layui-btn" id="test1"
+													style="width: 100%;">
+									<i class="fa fa-cloud"></i>上传文件
+									</button>
+								    <input disabled="disabled" id="recordAttachment" name="contractAttachment" type="hidden">
+								</div>
+								</div>
+							</div>
+						    <div class="form-group">
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-8">
+									<textarea disabled="disabled" id="recordRemarks" name="recordRemarks" class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+						</div>
+
+						<!-- 付款信息 -->
+								<div class="tab-pane fade" id="payment">
+									<div class="ibox">
+										<div class="ibox-body">
+											<table id="payableTable" data-mobile-responsive="true">
+											</table>
+										</div>
+									</div>
+								</div>
+								<!-- 收款信息 -->
+								<div class="tab-pane fade" id="Receivables">
+									<div class="ibox">
+										<div class="ibox-body">
+											<table id="receivableTable" data-mobile-responsive="true">
+											</table>
+										</div>
+									</div>
+								</div>
+								<!-- 回款计划 -->
+								<div class="tab-pane fade" id="plan">
+									<div class="ibox">
+										<div class="ibox-body">
+											<table id="planTable" data-mobile-responsive="true">
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">主送人：</label>
+								<div class="col-sm-8">
+									<input id="mainPersonId" name="mainPersonId" type="hidden">
+									<input id="isMainPerson" name="isMainPerson" type="hidden">
+									<div style="float: left;" id="sendPerson"></div>
+									<div style="float: left;">
+										<button disabled="disabled"
+											type="button" class="btn btn-danger btn-xs"
+											id="sendPersonBtn" var="sendPersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addSendPerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">抄送人：</label>
+								<div class="col-sm-8">
+									<input id="copyPersonId" name="copyPersonId" type="hidden">
+									<input id="isCopyPerson" name="isCopyPerson" type="hidden">
+									<div style="float: left;" id="receivePerson"></div>
+									<div style="float: left;">
+										<button disabled="disabled" type="button" class="btn btn-danger btn-xs"
+											id="receivePersonBtn" var="receivePersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addRecivePerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+						    <div class="form-group">
+								<div class="col-sm-4 col-sm-offset-8">
+									<button type="button" class="btn btn-primary" id="lastBtn" disabled="true" onclick="lastStep('myTab',5,'lastBtn','nextBtn')">上一步</button>
+									<button type="button" class="btn btn-primary" id="nextBtn" onclick="nextStepThis('myTab',5,'lastBtn','nextBtn')">下一步</button>
+									<button type="submit" class="btn btn-primary">提交</button>
+									<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
+								</div>
+						   </div>
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/contract/additionalRecords/view.js"></script>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/contract/additionalRecords/payable.js"></script>
+	<script type="text/javascript" src="/js/appjs/contract/additionalRecords/receivable.js"></script>
+	<script type="text/javascript" src="/js/appjs/contract/additionalRecords/plan.js"></script>
+	<script type="text/javascript" src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
+</body>
+</html>

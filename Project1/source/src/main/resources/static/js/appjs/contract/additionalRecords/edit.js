@@ -1,28 +1,29 @@
 var prefixadditionalRecords = "/contract/additionalRecords"
 //var result;
 $().ready(function() {
-	$('#myTab a[href="#basic"]').on('shown.bs.tab', function(e){		
+	$('#myTab a[href="#basic"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",true);
 		 $('#nextBtn').attr("disabled",false);
 	 });
-	 $('#myTab a[href="#payment"]').on('shown.bs.tab', function(e){		
+	 $('#myTab a[href="#payment"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	
+		 $('#nextBtn').attr("disabled",false);
 		 loadPayable();
 	 });
-	 $('#myTab a[href="#Receivables"]').on('shown.bs.tab', function(e){		
+	 $('#myTab a[href="#Receivables"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	
+		 $('#nextBtn').attr("disabled",false);
 		 loadReceivable();
 	 });
-	 $('#myTab a[href="#plan"]').on('shown.bs.tab', function(e){		
+	 $('#myTab a[href="#plan"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
-		 $('#nextBtn').attr("disabled",false);	
+		 $('#nextBtn').attr("disabled",false);
 		 loadPlan();
 	 });
 	validateRule();
 	datetimepicker();
 	additionalRecordsMapper_edit();
+	getMainAndCopyPerson_ajax();
 });
 
 $.validator.setDefaults({
@@ -30,6 +31,55 @@ $.validator.setDefaults({
 		update();
 	}
 });
+function getMainAndCopyPerson_ajax() {
+	var tmpUrl = '/common/MainCopyPerson/getMainAndCopyPerson_ajax/' + $("#recordId").val();
+	var mainPerson="";
+	var copyPerson="";
+	var isMainPerson;
+	$.ajax({
+		url : tmpUrl,
+		type : "get",
+		data : {
+			// 'projectId' : $("#projectId").val(),
+		},
+		success : function(data) {
+			result = data.mainAndCopyPerson;
+			var mainPersonIds = "";
+			var copyPersonIds = "";
+			for (var i = 0; i < result.length; i++) {
+				if (result[i].mainPerson == 1) {
+					mainPerson = mainPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_1") +
+								" onclick='deleteMainPerson(\"" + (result[i].employeeId + "_1") +"\" )'>" +
+								result[i].person +"</div>";
+					$('#sendPerson').html(mainPerson);
+					if (mainPersonIds == "") {
+						mainPersonIds = result[i].employeeId
+					}else {
+						mainPersonIds = mainPersonIds + ","+result[i].employeeId;
+					}
+
+					$('#mainPersonId').val(mainPersonIds);
+
+				}
+				if (result[i].mainPerson == 0) {
+					copyPerson = copyPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_2") +
+								" onclick='deleteCopyPerson(\"" + (result[i].employeeId + "_2") +"\" )'>" +
+								result[i].person +"</div>";
+					$('#receivePerson').html(copyPerson);
+					if (copyPersonIds == "") {
+						copyPersonIds = result[i].employeeId
+					}else {
+						copyPersonIds = copyPersonIds + ","+result[i].employeeId;
+					}
+
+					$('#copyPersonId').val(copyPersonIds);
+
+
+				}
+			}
+		}
+	});
+}
 function update() {
 	$.ajax({
 		cache : true,
@@ -133,19 +183,19 @@ function validateRule() {
 			},
 			contractDraftPerson : {
 				required : icon + "请选择合同拟定人"
-			}	
+			}
 		}
 	})
 }
 function datetimepicker() {
-	 $('#recordCommitTime').datetimepicker({  
-	        format: 'YYYY-MM-DD',  
-	        locale: moment.locale('zh-cn')  
-	    });  
-	 $('#preInvoiceDate').datetimepicker({  
-	        format: 'YYYY-MM-DD',  
-	        locale: moment.locale('zh-cn')  
-	    }); 
+	 $('#recordCommitTime').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+	 $('#preInvoiceDate').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
 }
 //修改——显示数据绑定
 function additionalRecordsMapper_edit(){

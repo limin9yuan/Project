@@ -68,20 +68,20 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.recordId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+										var f = '<a class="btn btn-success btn-sm" '+s_view_h+' href="#" title="备用"  mce_href="#" onclick="view(\''
 												+ row.recordId
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+												+ '\')"><i class="fa fa-search"></i></a> ';
+										return e + d + f;
 									}
 								},{
-									field : 'contractRecordName', 
-									title : '申请人姓名' 
+									field : 'contractRecordName',
+									title : '申请人姓名'
 								},{
-									field : 'contractName', 
-									title : '合同名称' 
+									field : 'contractName',
+									title : '合同名称'
 								},{
-									field : 'contractId', 
-									title : '合同编号' 
+									field : 'contractId',
+									title : '合同编号'
 								},{
 									field : 'contractType',
 									title : '合同类型'
@@ -89,86 +89,18 @@ function load() {
 									field : 'contractCategory',
 									title : '合同种类'
 								},{
-									field : 'recordTotalPrice', 
-									title : '增补总金额' 
+									field : 'recordTotalPrice',
+									title : '增补总金额'
 								},{
-									field : 'recordSalesName', 
-									title : '销售负责人' 
+									field : 'recordSalesName',
+									title : '销售负责人'
 								},{
-									field : 'recordCommitTime', 
-									title : '提交评审时间' 
+									field : 'recordCommitTime',
+									title : '提交评审时间'
 								},{
-									field : 'recordApprovalStatus', 
-									title : '合同审批状态' 
-								}/*,{
-									field : 'customerName', 
-									title : '客户名称' 
-								},{
-									field : 'businessName', 
-									title : '业务名称' 
-								},{
-									field : 'projectName', 
-									title : '项目名称' 
-								}/*,{
-									field : 'recordName', 
-									title : '申请人姓名' 
-								},
-																{
-									field : 'recordBulidCompany', 
-									title : '建设单位' 
-								},
-																
-																{
-									field : 'recordDescription', 
-									title : '增补内容描述' 
-								},
-																{
-									field : 'recordReason', 
-									title : '增补原因' 
-								},
-																
-																{
-									field : 'recordAttachment', 
-									title : '正文附件' 
-								},
-																{
-									field : 'recordRelatedContractId', 
-									title : '关联合同编号' 
-								},
-																{
-									field : 'recordHardwareEquipmentList', 
-									title : '硬件设备明细表' 
-								},
-																{
-									field : 'recordSoftwareFunctionList', 
-									title : '软件功能列表' 
-								},
-																{
-									field : 'recordRemarks', 
-									title : '备注' 
-								},
-																
-																{
-									field : 'recordOperator', 
-									title : '创建人' 
-								},
-																
-																{
-									field : 'projectId', 
-									title : '' 
-								},
-																{
-									field : 'contractName', 
-									title : '' 
-								},
-																{
-									field : 'preInvoiceDate', 
-									title : '' 
-								},
-								{
-									field : 'recordId', 
-									title : '合同增补记录编号' 
-								},*/
+									field : 'recordApprovalStatus',
+									title : '合同审批状态'
+								}
 																]
 					});
 	// 页面导入按钮点击事件
@@ -209,6 +141,16 @@ function edit(id) {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
 		content : prefix + '/edit/' + id // iframe的url
+	});
+}
+function view(id) {
+	parent.layer.open({
+		type : 2,
+		title : '编辑',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '950px', '95%' ],
+		content : prefix + '/view/' + id // iframe的url
 	});
 }
 function remove(id) {

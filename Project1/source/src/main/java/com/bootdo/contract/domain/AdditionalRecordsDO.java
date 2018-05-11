@@ -75,6 +75,10 @@ public class AdditionalRecordsDO implements Serializable {
 	private String contractCategory;
 	//申请人姓名名称
 	private String contractRecordName;
+	//主送人id
+	private String mainPersonId;
+	//抄送人id
+	private String copyPersonId;
 	
 	//**********************流程相关属性****************************
 	//流程任务ID
@@ -85,6 +89,22 @@ public class AdditionalRecordsDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
+
+	public String getMainPersonId() {
+		return mainPersonId;
+	}
+
+	public void setMainPersonId(String mainPersonId) {
+		this.mainPersonId = mainPersonId;
+	}
+
+	public String getCopyPersonId() {
+		return copyPersonId;
+	}
+
+	public void setCopyPersonId(String copyPersonId) {
+		this.copyPersonId = copyPersonId;
+	}
 
 	public String getTaskComment() {
 		return taskComment;

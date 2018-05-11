@@ -8,7 +8,7 @@
 	<form id="additionalRecordsform" name="additionalRecordsform"
 			th:action="@{/contract/additionalRecords/export}" method="get">
 			<input type="hidden" name="customerId" />
-			<input type="hidden" name="businessId" /> 
+			<input type="hidden" name="businessId" />
 			<input type="hidden" name="projectId" />
 		</form>
 	<div class="row">
@@ -79,7 +79,7 @@
 						</div>
 						<div class="columns pull-right col-md-1 nopadding" style="padding-top: 10px">
 							    <button class="btn btn-danger" onclick="reLoad()">我的合同</button>
-						</div>		
+						</div>
 					</div>
 					<table id="exampleTable" data-mobile-responsive="true">
 					</table>
@@ -88,7 +88,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 导入按钮弹出框 -->
 	<div name="additionalRecords_windows" class="modal fade"
 		tabindex="-1" data-width="50%">
@@ -116,7 +116,7 @@
 			name="tab_excelinsertOkbtn">
 			<i class="glyphicon glyphicon-saved"></i>&nbsp;导入
 		</button>
-		<button type="button" class="btn default btn-sm" data-dismiss="modal" 
+		<button type="button" class="btn default btn-sm" data-dismiss="modal"
 		   name="tab_excelinsertQuitbtn">
 			<i class="glyphicon glyphicon-remove"></i>&nbsp;取消
 		</button>
@@ -128,7 +128,7 @@
 			<script type="text/javascript">
 				var s_edit_h = 'hidden';
 				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
+				var s_view_h = 'hidden';
 			</script>
 		</div>
 		<div shiro:hasPermission="contract:additionalRecords:edit">
@@ -143,7 +143,7 @@
 		</div>
 		<div shiro:hasPermission="contract:additionalRecords:resetPwd">
 			<script type="text/javascript">
-				var s_resetPwd_h = '';
+				var s_view_h = '';
 			</script>
 		</div>
 	</div>

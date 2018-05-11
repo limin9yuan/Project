@@ -62,8 +62,8 @@ public class ContractController extends BaseController {
    TaskService taskService;
 	@Autowired
    HistoryService historyService;
-    @Autowired
-    private MainCopyPersonService mainCopyPersonService;
+	@Autowired
+   private MainCopyPersonService mainCopyPersonService;
 
 	@GetMapping()
 	@RequiresPermissions("contract:contract:contract")
