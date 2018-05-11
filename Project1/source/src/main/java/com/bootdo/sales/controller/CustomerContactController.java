@@ -164,7 +164,7 @@ public class CustomerContactController extends BaseController {
 
 			}
 			R r = R.ok();
-			r.put("contactIds", contactIds);
+			r.put("contactId", contactIds);
 			return r;
 		}
 		return R.error();

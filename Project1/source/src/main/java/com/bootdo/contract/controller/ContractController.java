@@ -10,7 +10,9 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bootdo.activiti.utils.ActivitiUtils;
+import com.bootdo.common.domain.MainCopyPersonDO;
 import com.bootdo.common.domain.MainDO;
+import com.bootdo.common.service.MainCopyPersonService;
 import com.bootdo.common.utils.*;
 import javafx.concurrent.Task;
 import org.activiti.engine.HistoryService;
@@ -60,6 +62,8 @@ public class ContractController extends BaseController {
    TaskService taskService;
 	@Autowired
    HistoryService historyService;
+    @Autowired
+    private MainCopyPersonService mainCopyPersonService;
 
 	@GetMapping()
 	@RequiresPermissions("contract:contract:contract")
@@ -107,6 +111,13 @@ public class ContractController extends BaseController {
 		return "contract/contract/edit";
 	}
 
+    @GetMapping("/view/{contractId}")
+    @RequiresPermissions("contract:contract:view")
+    String view(@PathVariable("contractId") String contractId, Model model) {
+        model.addAttribute("contractId", contractId);
+        return "contract/contract/view";
+    }
+
 	/**
 	 * 保存
 	 */
@@ -115,9 +126,41 @@ public class ContractController extends BaseController {
 	@RequiresPermissions("contract:contract:add")
 	public R save(ContractDO contract) {
 		contract.setContractOperator(Long.toString(getUserId()));
-		if (contractService.save(contract) > 0) {
-			return R.ok();
-		}
+		int contractIds = contractService.save(contract);
+       if (contractIds > 0) {
+           MainCopyPersonDO mcp = new MainCopyPersonDO();
+           String mainPersonId = contract.getMainPersonId();
+           if (!"".equals(mainPersonId)) {
+               String mainPersonIdArray[] = mainPersonId.split(",");
+               for (int i = 0; i < mainPersonIdArray.length; i++) {
+                   mcp.setTId(contract.getContractId());
+                   mcp.setMainPerson(1);
+                   mcp.setEmployeeId(mainPersonIdArray[i]);
+                   mcp.setOperator(getUserId());
+                   mcp.setTableName("contract");
+                   mainCopyPersonService.save(mcp);
+
+               }
+           }
+
+           String copyPersonId = contract.getCopyPersonId();
+           if (!"".equals(copyPersonId)) {
+               String copyPersonIdArray[] = copyPersonId.split(",");
+               for (int i = 0; i < copyPersonIdArray.length; i++) {
+                   mcp.setTId(contract.getContractId());
+                   mcp.setMainPerson(0);
+                   mcp.setEmployeeId(copyPersonIdArray[i]);
+                   mcp.setOperator(getUserId());
+                   mcp.setTableName("contract");
+                   mainCopyPersonService.save(mcp);
+               }
+
+
+           }
+           R r = R.ok();
+           r.put("contractId", contractIds);
+           return r;
+       }
 		return R.error();
 	}
 
@@ -128,8 +171,48 @@ public class ContractController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("contract:contract:edit")
 	public R update(ContractDO contract) {
-		contract.setContractOperator(Long.toString(getUserId()));
-		contractService.update(contract);
+       contract.setContractOperator(Long.toString(getUserId()));
+       String contractIds = contract.getContractId();
+       Map<String, Object> params = new HashMap<String, Object>();
+       params.put("offset",1);
+       params.put("limit",2);
+       params.put("tId",contractIds);
+       params.put("tableName","contract");
+       contractService.update(contract);
+       mainCopyPersonService.remove(params);
+       if (!contractIds.equals("")) {
+           MainCopyPersonDO mcp = new MainCopyPersonDO();
+           String mainPersonId = contract.getMainPersonId();
+           if (!"".equals(mainPersonId)) {
+               String mainPersonIdArray[] = mainPersonId.split(",");
+
+               for (int i = 0; i < mainPersonIdArray.length; i++) {
+                   mcp.setTId(contract.getContractId());
+                   mcp.setMainPerson(1);
+                   mcp.setEmployeeId(mainPersonIdArray[i]);
+                   mcp.setOperator(getUserId());
+                   mcp.setTableName("contract");
+                   mainCopyPersonService.save(mcp);
+
+               }
+           }
+
+           String copyPersonId = contract.getCopyPersonId();
+           if (!"".equals(copyPersonId)) {
+               String copyPersonIdArray[] = copyPersonId.split(",");
+               int result = 0;
+               for (int i = 0; i < copyPersonIdArray.length; i++) {
+                   mcp.setTId(contract.getContractId());
+                   mcp.setMainPerson(0);
+                   mcp.setEmployeeId(copyPersonIdArray[i]);
+                   mcp.setOperator(getUserId());
+                   mcp.setTableName("contract");
+                   mainCopyPersonService.save(mcp);
+
+               }
+           }
+
+       }
 		return R.ok();
 	}
 

@@ -119,7 +119,7 @@ public class ContractServiceImpl implements ContractService {
 		contractDao.update(contract);
 
 
-		return ret;
+		return Integer.parseInt(contractId);
 	}
 
 	/**

@@ -111,7 +111,7 @@
 		<script type="text/javascript">
 				var s_edit_h = 'hidden';
 				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
+				var s_view_h = 'hidden';
 			</script>
 	</div>
 	<div shiro:hasPermission="contract:contract:edit">
@@ -124,9 +124,9 @@
 				var s_remove_h = '';
 			</script>
 	</div>
-	<div shiro:hasPermission="contract:contract:resetPwd">
+	<div shiro:hasPermission="contract:contract:view">
 		<script type="text/javascript">
-				var s_resetPwd_h = '';
+				var s_view_h = '';
 			</script>
 	</div>
 	<div th:include="include :: footer"></div>

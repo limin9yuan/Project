@@ -91,7 +91,26 @@ public class ContractDO implements Serializable {
 	private String processInstanceId;
 	//流程审批时间
 	private Date contractApprovalTime;
+    //主送人id
+    private String mainPersonId;
+    //抄送人id
+    private String copyPersonId;
 
+    public String getMainPersonId() {
+        return mainPersonId;
+    }
+
+    public void setMainPersonId(String mainPersonId) {
+        this.mainPersonId = mainPersonId;
+    }
+
+    public String getCopyPersonId() {
+        return copyPersonId;
+    }
+
+    public void setCopyPersonId(String copyPersonId) {
+        this.copyPersonId = copyPersonId;
+    }
 
     public Date getContractApprovalTime() {
 		return contractApprovalTime;
