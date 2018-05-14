@@ -1,6 +1,7 @@
 $().ready(function() {
-	loadCrmData("/inner/innerOrgEmployee/listDic","employeeCenter");
+	loadDic("employee_center","employeeCenter");
 	loadCrmData("/inner/orgJob/listDic","jobId");
+	loadDic("inner_employee_level","employeeLevel");
 	datetimepicker();
 	validateRule();
 });

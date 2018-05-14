@@ -181,7 +181,7 @@ public class InnerOrgEmployeeServiceImpl implements InnerOrgEmployeeService {
 						} else if (j == 7) {
 							innerOrgEmployeeDO.setEmployeeCenter(cellvalue);
 						} else if (j == 8) {
-							innerOrgEmployeeDO.setEmployeeJoinDate(new Date());
+							innerOrgEmployeeDO.setEmployeeJoinDate(String.valueOf(new Date()));
 						} else if (j == 9) {
 							innerOrgEmployeeDO.setEmployeeSalaryHour(new BigDecimal(cellvalue));
 						} else if (j == 10) {

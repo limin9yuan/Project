@@ -200,19 +200,22 @@ function innerOrgEmployee_edit(){
 			$("input[name='employeeId']").val(result.employeeId);
 			$("input[name='employeeQq']").val(result.employeeQq);
 			$("input[name='employeeRemarks']").val(result.employeeRemarks);
+			$("input[name='employeeLevel']").val(result.employeeLevel);
 			$("input[name='employeeSalaryHour']").val(result.employeeSalaryHour);
 			$("input[name='employeePhoneNumber']").val(result.employeePhoneNumber);
 			$("input[name='employeeInnerPhoneNumber']").val(result.employeeInnerPhoneNumber);
+			$("input[name='employeeJoinDate']").val(result.employeeJoinDate);
+			$("input[name='employeeCenter']").val(result.employeeCenter);
 			$("input[name='innerUserId']").val(result.innerUserId);
 			$("input[name='employeeDept']").val(result.employeeDept);
 			$("textarea[name='employeeRemarks']").val(result.employeeRemarks);
 			$("select[name='jobId']").val(result.jobId);
 			$("select[name='jobId']").trigger("chosen:updated");
 			$(":radio[name='employeeStatus'][value='" + result.employeeStatus + "']").prop("checked", "checked");
-			loadDicValue("/inner/orgJob/listDic","jobId",result.jobId);
-			loadDicValue("/inner_org_job_rank","jobRank",result.jobRank);
-
-			
+			loadCrmDataValue("/inner/orgJob/listDic","jobId",result.jobId);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","employeeCenter",result.employeeCenter);
+			loadDicValue("inner_employee_level","employeeLevel",result.employeeLevel);
+			loadDicValue("employee_center","employeeCenter",result.employeeCenter);
 		}
 	});
 }

@@ -7,20 +7,20 @@
 		select a.`Employee_ID`,a.`Dept_ID`,`Job_ID`,`Inner_User_ID`,`User_Role_ID`,`Module_ID`,
 		`Employee_Name`,`Employee_Dept`,`Employee_Center`,
 		`Employee_Join_Date`,`Employee_Salary_Hour`,`Employee_Status`,`Employee_Phone_Number`,
-		`Employee_Inner_Phone_Number`,`Employee_QQ`,`Employee_Remarks`,
+		`Employee_Inner_Phone_Number`,`Employee_QQ`,`Employee_Remarks`,`Employee_Level`,
 		b.name Employee_Operator_Name,`Employee_Operate_Time`,
 		s.role_name as userRoleName,b.name as employeeOperatorName
 		from inner_org_employee a
 		left JOIN sys_user b ON a.Employee_Operator=b.user_id
 		left join sys_role s on a.User_Role_ID = s.role_id
-		where Employee_ID = #{value}
+		where a.Employee_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.inner.domain.InnerOrgEmployeeDO">
 		select a.`Employee_ID`,a.`Dept_ID`,c.Job_Name as `Job_ID`,`Inner_User_ID`,`User_Role_ID`,`Module_ID`,
 		`Employee_Name`,`Employee_Dept`,`Employee_Center`,
 		`Employee_Join_Date`,`Employee_Salary_Hour`,`Employee_Status`,`Employee_Phone_Number`,
-		`Employee_Inner_Phone_Number`,`Employee_QQ`,`Employee_Remarks`,
+		`Employee_Inner_Phone_Number`,`Employee_QQ`,`Employee_Remarks`,`Employee_Level`,
 		b.name Employee_Operator_Name,`Employee_Operate_Time`,
 		s.role_name as userRoleName,b.name as employeeOperatorName
 		from inner_org_employee a
@@ -43,7 +43,7 @@
 		  		  <if test="employeeRemarks != null and employeeRemarks != ''"> and Employee_Remarks = #{employeeRemarks} </if>
 		  		  <if test="employeeOperateTime != null and employeeOperateTime != ''"> and Employee_Operate_Time = #{employeeOperateTime} </if>
 		  		  
-		  		  <if test="employeeId != null and employeeId != ''"> and Employee_ID = #{employeeId} </if>
+		  		  <if test="employeeId != null and employeeId != ''"> and a.`Employee_ID` = #{employeeId} </if>
 		  		  <if test="employeeName != null and employeeName != ''"> and Employee_Name like #{employeeName} </if>
 		  		  <if test="employeeDept != null and employeeDept != ''"> and Employee_Dept like #{employeeDept} </if>
 		  		  <if test="employeeOperatorName != null and employeeOperatorName != ''"> and b.name like #{employeeOperatorName} </if>
@@ -53,7 +53,7 @@
                 order by ${sort} ${order}
             </when>
 			<otherwise>
-                order by Employee_ID desc
+                order by a.Employee_ID desc
 			</otherwise>
         </choose>
 		<if test="offset != null and limit != null">
@@ -108,7 +108,8 @@
 			`Employee_QQ`, 
 			`Employee_Remarks`, 
 			`Employee_Operator`, 
-			`Employee_Operate_Time`
+			`Employee_Operate_Time`,
+			`Employee_Level`
 		)
 		values
 		(
@@ -129,7 +130,8 @@
 			#{employeeQq}, 
 			#{employeeRemarks}, 
 			#{employeeOperator}, 
-			#{employeeOperateTime}
+			#{employeeOperateTime},
+			#{employeeLevel}
 		)
 	</insert>
 	 
@@ -152,6 +154,7 @@
 			<if test="employeeQq != null">`Employee_QQ` = #{employeeQq}, </if>
 			<if test="employeeRemarks != null">`Employee_Remarks` = #{employeeRemarks}, </if>
 			<if test="employeeOperator != null">`Employee_Operator` = #{employeeOperator}, </if>
+			<if test="employeeLevel != null">`Employee_Level` = #{employeeLevel}, </if>
 			<if test="employeeOperateTime != null">`Employee_Operate_Time` = #{employeeOperateTime}</if>
 		</set>
 		where Employee_ID = #{employeeId}

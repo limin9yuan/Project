@@ -37,7 +37,7 @@ public class InnerOrgEmployeeDO implements Serializable {
 	//所属中心
 	private String employeeCenter;
 	//入职时间
-	private Date employeeJoinDate;
+	private String employeeJoinDate;
 	//时薪
 	private BigDecimal employeeSalaryHour;
 	//员工状态
@@ -199,13 +199,13 @@ public class InnerOrgEmployeeDO implements Serializable {
 	/**
 	 * 设置：入职时间
 	 */
-	public void setEmployeeJoinDate(Date employeeJoinDate) {
+	public void setEmployeeJoinDate(String employeeJoinDate) {
 		this.employeeJoinDate = employeeJoinDate;
 	}
 	/**
 	 * 获取：入职时间
 	 */
-	public Date getEmployeeJoinDate() {
+	public String getEmployeeJoinDate() {
 		return employeeJoinDate;
 	}
 	/**
