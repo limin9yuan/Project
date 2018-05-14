@@ -80,6 +80,7 @@ public class SalesProjectController extends BaseController {
 	@RequiresPermissions("sales:salesProject:salesProject")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		params.put("projectOperator", (Long.toString(getUserId())));
         Query query = new Query(params);
 		List<SalesProjectDO> salesProjectList = salesProjectService.list(query);
 		int total = salesProjectService.count(query);

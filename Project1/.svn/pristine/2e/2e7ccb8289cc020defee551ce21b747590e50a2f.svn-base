@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.sales.dao.BusinessDao">
+
+	<select id="get" resultType="com.bootdo.sales.domain.BusinessDO">
+		select `Business_ID`,`Customer_ID`,`Contact_ID`,`Business_Name`,`Business_Category`,`Business_Status`,`Business_Sales`,`Business_Old_ID`,`Business_Description`,`Business_Remarks`,`Business_Operator`,`Business_Operate_Time` from sales_business where Business_ID = #{value}
+	</select>
+
+	<select id="getBusinessId" resultType="String">
+		select case when bid is null then CONCAT(#{customerId},'001')
+			  	else bid end v from (select max(business_id)+1 bid
+			  						  from sales_business where customer_id=#{customerId}) a
+	</select>
+
+	<select id="list" resultType="com.bootdo.sales.domain.BusinessDO">
+		select DISTINCT a.`Business_ID`,
+		a.`Customer_ID`,b.`Customer_Name`,
+		a.`Contact_ID`,c.`Contact_Name`,
+		u.name as `Business_Creator_Name`
+		,`Business_Name`,`Business_Category`,`Business_Status`,Business_Sales,`Business_Old_ID`
+		,`Business_Description`,`Business_Remarks`,Business_Operator,a.`Business_Operate_Time`,a.`Business_Create_Time`
+		,i.Employee_Name as businessSalesName
+		from sales_business a 
+		left join sales_company_customer b on a.`Customer_ID`=b.`Customer_ID`
+		left join sales_customer_contact c on a.`Contact_ID`=c.`Contact_ID`
+		left join sys_user u on a.Business_Sales = u.user_id
+		left join inner_org_employee i on a.Business_Sales = i.Employee_ID
+        <where>
+        		  <if test="businessOperator != null and businessOperator !=''">and a.Business_Operator=#{businessOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Business_Operator)</if>
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  
+		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID = #{customerId} </if>
+		  		  
+		  		  <if test="contactId != null and contactId != ''"> and Contact_ID = #{contactId} </if>
+		  		  <if test="businessCategory != null and businessCategory != ''"> and Business_Category = #{businessCategory} </if>
+		  		  <if test="businessStatus != null and businessStatus != ''"> and Business_Status = #{businessStatus} </if>
+		  		  <if test="businessOldId != null and businessOldId != ''"> and Business_Old_ID = #{businessOldId} </if>
+		  		  <if test="businessDescription != null and businessDescription != ''"> and Business_Description = #{businessDescription} </if>
+		  		  <if test="businessRemarks != null and businessRemarks != ''"> and Business_Remarks = #{businessRemarks} </if>
+		  		  <if test="businessOperateTime != null and businessOperateTime != ''"> and Business_Operate_Time = #{businessOperateTime} </if>
+		  		  <if test="businessCreateTime != null and businessCreateTime != ''"> and Business_Create_Time = #{businessCreateTime} </if>
+		  		  
+		  		  <if test="businessName != null and businessName != ''"> and Business_ID = #{businessName} </if>
+		  		  <if test="businessSales != null and businessSales != ''"> and Business_Sales = #{businessSales} </if>
+		  		  <if test="province != null and province != ''"> and Customer_Province = #{province} </if>
+		  		  <if test="city != null and city != ''"> and Customer_City = #{city} </if>
+		  		  <if test="area != null and area != ''"> and Customer_County = #{area} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Business_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(DISTINCT a.Business_ID) 
+		from sales_business a 
+		left join sales_company_customer b on a.`Customer_ID`=b.`Customer_ID`
+		left join sales_customer_contact c on a.`Contact_ID`=c.`Contact_ID`
+		left join sys_user u on a.Business_Sales = u.user_id
+		left join inner_org_employee i on a.Business_Sales = i.Employee_ID
+		  <where>  
+		  			<if test="businessOperator != null and businessOperator !=''">and a.Business_Operator=#{businessOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Business_Operator)</if>
+		  
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  
+		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID = #{customerId} </if>
+		  		  
+		  		  <if test="contactId != null and contactId != ''"> and Contact_ID = #{contactId} </if>
+		  		  <if test="businessCategory != null and businessCategory != ''"> and Business_Category = #{businessCategory} </if>
+		  		  <if test="businessStatus != null and businessStatus != ''"> and Business_Status = #{businessStatus} </if>
+		  		  <if test="businessOldId != null and businessOldId != ''"> and Business_Old_ID = #{businessOldId} </if>
+		  		  <if test="businessDescription != null and businessDescription != ''"> and Business_Description = #{businessDescription} </if>
+		  		  <if test="businessRemarks != null and businessRemarks != ''"> and Business_Remarks = #{businessRemarks} </if>
+		  		  <if test="businessOperateTime != null and businessOperateTime != ''"> and Business_Operate_Time = #{businessOperateTime} </if>
+		  		  <if test="businessCreateTime != null and businessCreateTime != ''"> and Business_Create_Time = #{businessCreateTime} </if>
+		  		  
+		  		  <if test="businessName != null and businessName != ''"> and Business_ID = #{businessName} </if>
+		  		  <if test="businessSales != null and businessSales != ''"> and Business_Sales = #{businessSales} </if>
+		  		  <if test="province != null and province != ''"> and Customer_Province = #{province} </if>
+		  		  <if test="city != null and city != ''"> and Customer_City = #{city} </if>
+		  		  <if test="area != null and area != ''"> and Customer_County = #{area} </if>
+		  </where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.sales.domain.BusinessDO" useGeneratedKeys="true" keyProperty="businessId">
+		insert into sales_business
+		(
+			`Business_ID`, 
+			`Customer_ID`, 
+			`Contact_ID`, 
+			`Business_Name`, 
+			`Business_Category`, 
+			`Business_Status`, 
+			`Business_Sales`, 
+			`Business_Old_ID`, 
+			`Business_Description`, 
+			`Business_Remarks`, 
+			`Business_Operator`, 
+			`Business_Create_Time`, 
+			`Business_Operate_Time`
+		)
+		values
+		(
+			#{businessId},
+			#{customerId}, 
+			#{contactId}, 
+			#{businessName}, 
+			#{businessCategory}, 
+			#{businessStatus}, 
+			#{businessSales}, 
+			#{businessOldId}, 
+			#{businessDescription}, 
+			#{businessRemarks}, 
+			#{businessOperator}, 
+			now(),
+			now()
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.sales.domain.BusinessDO">
+		update sales_business 
+		<set>
+			<if test="customerId != null">`Customer_ID` = #{customerId}, </if>
+			<if test="contactId != null">`Contact_ID` = #{contactId}, </if>
+			<if test="businessName != null">`Business_Name` = #{businessName}, </if>
+			<if test="businessCategory != null">`Business_Category` = #{businessCategory}, </if>
+			<if test="businessStatus != null">`Business_Status` = #{businessStatus}, </if>
+			<if test="businessSales != null">`Business_Sales` = #{businessSales}, </if>
+			<if test="businessOldId != null">`Business_Old_ID` = #{businessOldId}, </if>
+			<if test="businessDescription != null">`Business_Description` = #{businessDescription}, </if>
+			<if test="businessRemarks != null">`Business_Remarks` = #{businessRemarks}, </if>
+			<if test="businessOperator != null">`Business_Operator` = #{businessOperator}, </if>
+			<if test="businessOperateTime != null">`Business_Operate_Time` = #{businessOperateTime}</if>
+		</set>
+		where Business_ID = #{businessId}
+	</update>
+	
+	<delete id="remove">
+		delete from sales_business where Business_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sales_business where Business_ID in 
+		<foreach item="businessId" collection="array" open="(" separator="," close=")">
+			#{businessId}
+		</foreach>
+	</delete>
+	
+	<select id="getMaxBusinessId" resultType="String">
+		select max(business_id) from sales_business
+	</select>
+	<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
+		select `Business_ID` value,concat(`Business_ID`,' ',`Business_Name`) name
+		from sales_business 
+	</select>
+</mapper>

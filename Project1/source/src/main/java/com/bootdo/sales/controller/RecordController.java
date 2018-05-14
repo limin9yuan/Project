@@ -63,6 +63,7 @@ public class RecordController extends BaseController {
 	@RequiresPermissions("sales:record:record")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		params.put("recordOperator", (Long.toString(getUserId())));
 		if (params.get("recordExecutor") != null && !"".equals(params.get("recordExecutor"))) {
 			params.put("recordExecutor", "%" + (String) params.get("recordExecutor") + "%");
 		}
@@ -119,6 +120,7 @@ public class RecordController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("sales:record:add")
 	public R save( RecordDO record){
+		record.setRecordOperator(getUserId());
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}

@@ -26,7 +26,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.payment.domain.InvoiceDO">
-		select `Invoice_ID`,a.`Contract_ID`,a.`Business_ID`,`Invoice_Number`,`Invoice_Price`,`Invoice_Type`,`Invoice_Content`,`Invoice_Date`,
+		select DISTINCT `Invoice_ID`,a.`Contract_ID`,a.`Business_ID`,`Invoice_Number`,`Invoice_Price`,`Invoice_Type`,`Invoice_Content`,`Invoice_Date`,
 		`Invoice_Person`, b.Employee_Name as `Invoice_Person_Name`,
 		`Invoice_Receiver_Time`,
 		`Invoice_Receiver`,c.Employee_Name as `Invoice_Receiver_Name`,
@@ -44,6 +44,8 @@
         left join development_project e on d.`Project_ID`=e.`Project_ID`
         left join inner_org_employee f on f.`Employee_ID`=e.`Project_Owner`
         <where>  
+        		 <if test="invoiceOperator != null and invoiceOperator != ''"> and  a.Invoice_Operator=#{invoiceOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Invoice_Operator and Table_Name='invoice')
+																				or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{invoiceOperator}) </if>
 		  		  <if test="invoiceId != null and invoiceId != ''"> and Invoice_ID = #{invoiceId} </if>
 		  		  <if test="contractId != null and contractId != ''"> and a.Contract_ID = #{contractId} </if>
 		  		  <if test="businessId != null and businessId != ''"> and a.Business_ID = #{businessId} </if>
@@ -58,7 +60,6 @@
 		  		  <if test="invoiceAttachment != null and invoiceAttachment != ''"> and Invoice_Attachment = #{invoiceAttachment} </if>
 		  		  <if test="invoiceContractStatus != null and invoiceContractStatus != ''"> and Invoice_Contract_Status = #{invoiceContractStatus} </if>
 		  		  <if test="invoiceRemarks != null and invoiceRemarks != ''"> and Invoice_Remarks = #{invoiceRemarks} </if>
-		  		  <if test="invoiceOperator != null and invoiceOperator != ''"> and Invoice_Operator = #{invoiceOperator} </if>
 		  		  <if test="invoiceOperateTime != null and invoiceOperateTime != ''"> and Invoice_Operate_Time = #{invoiceOperateTime} </if>
 		  		  <if test="invoiceCompany != null and invoiceCompany != ''"> and Invoice_Company = #{invoiceCompany} </if>
 		  		  
@@ -79,7 +80,7 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) 
+		select count(DISTINCT `Invoice_ID`) 
         from invoice a
 		left join inner_org_employee b on a.`Invoice_Person`=b.`Employee_ID`
 		left join inner_org_employee c on a.`Invoice_Receiver`=c.`Employee_ID`
@@ -87,6 +88,8 @@
         left join development_project e on d.`Project_ID`=e.`Project_ID`
         left join inner_org_employee f on f.`Employee_ID`=e.`Project_Owner`
 		  <where>  
+		  <if test="invoiceOperator != null and invoiceOperator != ''"> and  a.Invoice_Operator=#{invoiceOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Invoice_Operator and Table_Name='invoice')
+																				or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{invoiceOperator}) </if>
 		  		  <if test="invoiceId != null and invoiceId != ''"> and Invoice_ID = #{invoiceId} </if>
 		  		  <if test="contractId != null and contractId != ''"> and a.Contract_ID = #{contractId} </if>
 		  		  <if test="businessId != null and businessId != ''"> and a.Business_ID = #{businessId} </if>
@@ -101,7 +104,6 @@
 		  		  <if test="invoiceAttachment != null and invoiceAttachment != ''"> and Invoice_Attachment = #{invoiceAttachment} </if>
 		  		  <if test="invoiceContractStatus != null and invoiceContractStatus != ''"> and Invoice_Contract_Status = #{invoiceContractStatus} </if>
 		  		  <if test="invoiceRemarks != null and invoiceRemarks != ''"> and Invoice_Remarks = #{invoiceRemarks} </if>
-		  		  <if test="invoiceOperator != null and invoiceOperator != ''"> and Invoice_Operator = #{invoiceOperator} </if>
 		  		  <if test="invoiceOperateTime != null and invoiceOperateTime != ''"> and Invoice_Operate_Time = #{invoiceOperateTime} </if>
 		  		  <if test="invoiceCompany != null and invoiceCompany != ''"> and Invoice_Company = #{invoiceCompany} </if>
 		  		  

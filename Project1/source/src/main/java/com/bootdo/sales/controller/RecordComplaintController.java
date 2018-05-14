@@ -69,6 +69,8 @@ public class RecordComplaintController extends BaseController {
 	@RequiresPermissions("sales:recordComplaint:recordComplaint")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		params.put("complaintRecorder", (getUserId()));
+		
 		if (params.get("deliveryContent") != null && params.get("deliveryContent") != "") {
 			params.put("deliveryContent", "%" + params.get("deliveryContent") + "%");
 		}

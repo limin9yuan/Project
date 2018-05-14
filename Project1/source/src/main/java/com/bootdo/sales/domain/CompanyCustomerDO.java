@@ -203,6 +203,81 @@ public class CompanyCustomerDO implements Serializable {
 	private Long customerDeptId;
 	//上级部门
 	private Long customerDeptParentDept;
+	
+	
+	//主送人抄送人ID
+	private Integer maincopyId;
+	//主送人抄送人员工ID
+	private Integer employeeId;
+	//是否主送
+	private Integer mainPerson;
+	//主送人抄送人操作人
+	private Integer operator;
+	//主送人抄送人操作时间
+	private Date operateTime;
+	
+	
+	
+	/*
+	 * 主送人抄送人ID
+	 */
+	public Integer getMaincopyId() {
+		return maincopyId;
+	}
+	/*
+	 * 主送人抄送人ID
+	 */
+	public void setMaincopyId(Integer maincopyId) {
+		this.maincopyId = maincopyId;
+	}
+	/*
+	 * 主送人抄送人员工ID
+	 */
+	public Integer getEmployeeId() {
+		return employeeId;
+	}
+	/*
+	 * 主送人抄送人员工ID
+	 */
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
+	}
+	/*
+	 * 是否主送
+	 */
+	public Integer getMainPerson() {
+		return mainPerson;
+	}
+	/*
+	 * 是否主送
+	 */
+	public void setMainPerson(Integer mainPerson) {
+		this.mainPerson = mainPerson;
+	}
+	/*
+	 * 主送人抄送人操作人
+	 */
+	public Integer getOperator() {
+		return operator;
+	}
+	/*
+	 * 主送人抄送人操作人
+	 */
+	public void setOperator(Integer operator) {
+		this.operator = operator;
+	}
+	/*
+	 * 主送人抄送人操作时间
+	 */
+	public Date getOperateTime() {
+		return operateTime;
+	}
+	/*
+	 * 主送人抄送人操作时间
+	 */
+	public void setOperateTime(Date operateTime) {
+		this.operateTime = operateTime;
+	}
 
 	public Long getCustomerDeptParentDept() {
 		return customerDeptParentDept;

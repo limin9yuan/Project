@@ -11,7 +11,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.payment.domain.PaidDO">
-		select `Paid_ID`,
+		select DISTINCT `Paid_ID`,
 		a.`Contract_ID`,d.`Employee_Name` as `Project_Owner_Name`,c.`Project_Name` as `Paid_Project_Name`,
 		`Purchase_ID`,`Contract__D`,`Paid_Time`,`Paid_Price`,`Paid_Account_Number`,`Paid_Type`,
 		CASE WHEN `Paid_Status` = '0' THEN '未开始'
@@ -25,6 +25,8 @@
         left join development_project c on b.`Project_ID`=c.`Project_ID`
         left join inner_org_employee d on d.`Employee_ID`=c.`Project_Owner`
         <where>  
+        			<if test="paidOperator != null and paidOperator != ''"> and a.Paid_Operator=#{paidOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Paid_Operator and Table_Name='payment_paid')
+																			or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{paidOperator}) </if>
 		  		  <if test="paidId != null and paidId != ''"> and Paid_ID = #{paidId} </if>
 		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
 		  		  <if test="purchaseId != null and purchaseId != ''"> and Purchase_ID = #{purchaseId} </if>
@@ -35,7 +37,6 @@
 		  		  <if test="paidType != null and paidType != ''"> and Paid_Type = #{paidType} </if>
 		  		  <if test="paidStatus != null and paidStatus != ''"> and Paid_Status = #{paidStatus} </if>
 		  		  <if test="paidRemarks != null and paidRemarks != ''"> and Paid_Remarks = #{paidRemarks} </if>
-		  		  <if test="paidOperator != null and paidOperator != ''"> and Paid_Operator = #{paidOperator} </if>
 		  		  <if test="paidOperateTime != null and paidOperateTime != ''"> and Paid_Operate_Time = #{paidOperateTime} </if> 
 		  		  <if test="paidAccountPrice != null and paidAccountPrice != ''"> and Paid_Account_Price = #{paidAccountPrice} </if> 
 		  		  <if test="paidmentType != null and paidmentType != ''"> and Paid_Ment_Type = #{paidmentType} </if> 
@@ -57,12 +58,14 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) 
+		select count(DISTINCT `Paid_ID`) 
         from payment_paid a
 		left join contract b on a.`Contract_ID`=b.`Contract_ID`
         left join development_project c on b.`Project_ID`=c.`Project_ID`
         left join inner_org_employee d on d.`Employee_ID`=c.`Project_Owner`
 		 <where>  
+				 <if test="paidOperator != null and paidOperator != ''"> and a.Paid_Operator=#{paidOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Paid_Operator and Table_Name='payment_paid')
+																			or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{paidOperator}) </if>
 		  		  <if test="paidId != null and paidId != ''"> and Paid_ID = #{paidId} </if>
 		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
 		  		  <if test="purchaseId != null and purchaseId != ''"> and Purchase_ID = #{purchaseId} </if>
@@ -73,7 +76,6 @@
 		  		  <if test="paidType != null and paidType != ''"> and Paid_Type = #{paidType} </if>
 		  		  <if test="paidStatus != null and paidStatus != ''"> and Paid_Status = #{paidStatus} </if>
 		  		  <if test="paidRemarks != null and paidRemarks != ''"> and Paid_Remarks = #{paidRemarks} </if>
-		  		  <if test="paidOperator != null and paidOperator != ''"> and Paid_Operator = #{paidOperator} </if>
 		  		  <if test="paidOperateTime != null and paidOperateTime != ''"> and Paid_Operate_Time = #{paidOperateTime} </if> 
 		  		  <if test="paidAccountPrice != null and paidAccountPrice != ''"> and Paid_Account_Price = #{paidAccountPrice} </if> 
 		  		  <if test="paidmentType != null and paidmentType != ''"> and Paid_Ment_Type = #{paidmentType} </if> 

@@ -14,18 +14,19 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.RecordComplaintDO">
-		select `Complaint_ID`,a.`Project_ID`,a.`Customer_ID`,`Complaint_Product`,`Complaint_Name`,`Complaint_Date`,`Complaint_Company`
+		select DISTINCT 																																								
+		a.`Complaint_ID`,a.`Project_ID`,a.`Customer_ID`,`Complaint_Product`,`Complaint_Name`,`Complaint_Date`,`Complaint_Company`        
 		,`Complaint_Feedback_Type`,`Complaint_Problem`,`Complaint_Attachment`,`Complaint_Attachment_Customer`,`Complaint_Problem_Remarks`
-		,`Complaint_After_Sale_Type`,`Complaint_Problem_Description`,`Complaint_Operator`,`Complaint_Executor`,`Complaint_Result`
-		,`Complaint_After_Sale_Remarks`,`Complaint_Phone_Number`,`Complaint_Mailbox`,`Complaint_Record_Time`
-		,`Complaint_Create_Time`,c.name Complaint_Recorder_Name,b.Service_Feedback_Type,b.Service_Feedback_Info,c.name as complaintRecorderName
-		,e.Customer_Name,d.Project_Name
-		from sales_record_complaint a
-		left join sales_record_service b on a.Customer_ID=b.Custormer_ID
-		left join sys_user c on a.Complaint_Recorder=c.user_id
-		left join development_project d on a.Project_ID=d.Project_ID
-		left join sales_company_customer e on a.Customer_ID = e.Customer_ID
-        <where>  
+		,`Complaint_After_Sale_Type`,`Complaint_Problem_Description`,`Complaint_Operator`,`Complaint_Executor`,`Complaint_Result`        
+		,`Complaint_After_Sale_Remarks`,`Complaint_Phone_Number`,`Complaint_Mailbox`,`Complaint_Record_Time`                             
+		,`Complaint_Create_Time`,c.name Complaint_Recorder_Name,c.name as complaintRecorderName                                          
+		,e.Customer_Name,d.Project_Name                                                                                                  
+		from sales_record_complaint a																																		
+		left join sys_user c on a.Complaint_Recorder=c.user_id                                                                           
+		left join development_project d on a.Project_ID=d.Project_ID                                                                     
+		left join sales_company_customer e on a.Customer_ID = e.Customer_ID                                                              
+        <where>  	
+        		  <if test="complaintRecorder !=null and complaintRecorder !=''"> and a.Complaint_Recorder='1' or exists (select 1 from main_and_copy_person ma where Employee_ID = a.Complaint_Recorder and Table_Name='sales_record_complaint')</if>
 		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
 		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
@@ -46,7 +47,6 @@
 		  		  <if test="complaintAfterSaleRemarks != null and complaintAfterSaleRemarks != ''"> and Complaint_After_Sale_Remarks = #{complaintAfterSaleRemarks} </if>
 		  		  <if test="complaintPhoneNumber != null and complaintPhoneNumber != ''"> and Complaint_Phone_Number = #{complaintPhoneNumber} </if>
 		  		  <if test="complaintMailbox != null and complaintMailbox != ''"> and Complaint_Mailbox = #{complaintMailbox} </if>
-		  		  <if test="complaintRecorder != null and complaintRecorder != ''"> and c.name = #{complaintRecorder} </if>
 		  		  <if test="complaintRecordTime != null and complaintRecordTime != ''"> and Complaint_Record_Time = #{complaintRecordTime} </if>
 		  		  <if test="complaintCreateTime != null and complaintCreateTime != ''"> and Complaint_Create_Time = #{complaintCreateTime} </if>
 			      <if test="project != null and project != ''"> and a.Project_ID = #{project} </if>
@@ -75,12 +75,13 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from sales_record_complaint a
-		left join sales_record_service b on a.Customer_ID=b.Custormer_ID
-		left join sys_user c on a.Complaint_Recorder=c.user_id
-		left join development_project d on a.Project_ID=d.Project_ID
-		left join sales_company_customer e on a.Customer_ID = e.Customer_ID
+		select count(DISTINCT a.`Complaint_ID`) 
+		from sales_record_complaint a
+		left join sys_user c on a.Complaint_Recorder=c.user_id                                                                           
+		left join development_project d on a.Project_ID=d.Project_ID                                                                     
+		left join sales_company_customer e on a.Customer_ID = e.Customer_ID     
 		 <where>  
+		 		  <if test="complaintRecorder !=null and complaintRecorder !=''"> and a.Complaint_Recorder='1' or exists (select 1 from main_and_copy_person ma where Employee_ID = a.Complaint_Recorder and Table_Name='sales_record_complaint')</if>
 		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
 		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
@@ -101,7 +102,6 @@
 		  		  <if test="complaintAfterSaleRemarks != null and complaintAfterSaleRemarks != ''"> and Complaint_After_Sale_Remarks = #{complaintAfterSaleRemarks} </if>
 		  		  <if test="complaintPhoneNumber != null and complaintPhoneNumber != ''"> and Complaint_Phone_Number = #{complaintPhoneNumber} </if>
 		  		  <if test="complaintMailbox != null and complaintMailbox != ''"> and Complaint_Mailbox = #{complaintMailbox} </if>
-		  		  <if test="complaintRecorder != null and complaintRecorder != ''"> and c.name = #{complaintRecorder} </if>
 		  		  <if test="complaintRecordTime != null and complaintRecordTime != ''"> and Complaint_Record_Time = #{complaintRecordTime} </if>
 		  		  <if test="complaintCreateTime != null and complaintCreateTime != ''"> and Complaint_Create_Time = #{complaintCreateTime} </if>
 		  		</where>

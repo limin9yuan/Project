@@ -98,6 +98,44 @@
 		where Expenses_ID = #{expensesId}
 	</update>
 	
+	<update id="updateLaborSoftware" parameterType="com.bootdo.budget.domain.BudgetDO">
+        update project_budget c inner join  
+       (select c.Budget_ID,SUM(Labor_Total_Cost) as Budget_Labor_Cost,
+        Budget_Service_Revenue*6 as Budget_Tax,
+		Budget_Service_Revenue-Budget_Service_Revenue*6 as Budget_Service_Revenue_Net,
+		Budget_Service_Revenue*6+SUM(Labor_Total_Cost)+SUM(Expenses_Total_Price)+SUM(Purchase_Total_Price) as Budget_Cost,
+		Budget_Service_Revenue-(Budget_Service_Revenue*6+SUM(Labor_Total_Cost)+SUM(Expenses_Total_Price)+SUM(Purchase_Total_Price)) as Budget_Profit,
+		Budget_Service_Revenue-Budget_Service_Revenue*Budget_Profit_Rate as Budget_Total_Cost
+		from project_budget a
+		left join budget_labor b on a.`Budget_ID`=b.`Budget_ID`
+        left join budget_expenses c on a.`Budget_ID`=c.`Budget_ID`
+        left join budget_purchase d on a.`Budget_ID`=d.`Budget_ID`
+		where a.Budget_ID = #{value}) d
+       set c.Budget_Labor_Cost =  d.Budget_Labor_Cost,
+       c.Budget_Tax =  d.Budget_Tax,
+       c.Budget_Service_Revenue_Net =  d.Budget_Service_Revenue_Net,
+       c.Budget_Cost =  d.Budget_Cost,
+       c.Budget_Profit =  d.Budget_Profit,
+       c.Budget_Total_Cost =  d.Budget_Total_Cost
+       where c.Budget_ID=d.Budget_ID
+	</update>
+	
+	<update id="updateOldProject" parameterType="com.bootdo.budget.domain.BudgetDO">
+		update project_budget c inner join  
+       (select c.Budget_ID,SUM(Labor_Total_Cost) as Budget_Labor_Cost,
+        SUM(Labor_Total_Cost)+SUM(Expenses_Total_Price)+SUM(Purchase_Total_Price) as Budget_Cost,
+		Budget_Service_Revenue-Budget_Service_Revenue*Budget_Profit_Rate as Budget_Total_Cost
+		from project_budget a
+		left join budget_labor b on a.`Budget_ID`=b.`Budget_ID`
+        left join budget_expenses c on a.`Budget_ID`=c.`Budget_ID`
+        left join budget_purchase d on a.`Budget_ID`=d.`Budget_ID`
+		where a.Budget_ID = #{value}) d
+       set c.Budget_Labor_Cost =  d.Budget_Labor_Cost,
+       c.Budget_Cost =  d.Budget_Cost,
+       c.Budget_Total_Cost =  d.Budget_Total_Cost
+       where c.Budget_ID=d.Budget_ID
+	</update>
+	
 	<delete id="remove">
 		delete from budget_expenses where Expenses_ID = #{value}
 	</delete>

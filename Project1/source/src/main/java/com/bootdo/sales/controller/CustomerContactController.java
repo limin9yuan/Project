@@ -71,6 +71,7 @@ public class CustomerContactController extends BaseController {
 	@RequiresPermissions("sales:customerContact:customerContact")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
+		params.put("contactOperator", (Long.toString(getUserId())));
 		Query query = new Query(params);
 		List<CustomerContactDO> customerContactList = customerContactService.list(query);
 		int total = customerContactService.count(query);

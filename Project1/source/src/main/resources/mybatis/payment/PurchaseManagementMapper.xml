@@ -12,7 +12,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.payment.domain.PurchaseManagementDO">
-		select `Purchase_ID`,
+		select DISTINCT `Purchase_ID`,
 		`Approval_Purchase_ID`,
 		`Purchase_Person`,b.`Employee_Name` as `Purchase_Person_Name`,
 		`Purchase_TIme`,`Purchase_Delivery_Time`,`Purchase_Delivery_Place`,`Purchase_Consignee`,`Purchase_Phone_Number`,`Purchase_Name`,`Purchase_Brand`,`Purchase_Mode`,`Purchase_Config`,`Purchase_Unit`,`Purchase_Unit_Price`,`Purchase_Number`,`Purchase_Total_Price`,
@@ -26,12 +26,14 @@
 		`Purchase_Remarks`,
 		`Purchase_Operator`,c.name as Purchase_Operator_Name,
 		`Purchase_Operate_Time`,
-		a.`Project_ID`,d.`Project_Name` as `Project_Name`   
+		a.`Project_ID`,d.`Project_Name` as `Project_Name`,Purchase_Operator as purchaseOperators
 		from purchase a
         left join development_project d on a.`Project_ID`=d.`Project_ID`
         left join inner_org_employee b on a.`Purchase_Person`=b.`Employee_ID`
         left join sys_user c on a.`Purchase_Operator`=c.`user_id`
         <where>  
+        			 <if test="purchaseOperators !=null and purchaseOperators !=''" > and a.Purchase_Operator=#{purchaseOperators}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Purchase_Operator and Table_Name='purchase')
+		or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{purchaseOperators} )</if>
 		  		  <if test="purchaseId != null and purchaseId != ''"> and Purchase_ID = #{purchaseId} </if>
 		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
 		  		  <if test="approvalPurchaseId != null and approvalPurchaseId != ''"> and Approval_Purchase_ID = #{approvalPurchaseId} </if>
@@ -71,12 +73,14 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*)
+		select count(DISTINCT `Purchase_ID`)
         from purchase a
         left join development_project d on a.`Project_ID`=d.`Project_ID`
         left join inner_org_employee b on a.`Purchase_Person`=b.`Employee_ID`
         left join sys_user c on a.`Purchase_Operator`=c.`user_id`
 		 <where>  
+		 			<if test="purchaseOperators !=null and purchaseOperators !=''" > and a.Purchase_Operator=#{purchaseOperators}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Purchase_Operator and Table_Name='purchase')
+		or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{purchaseOperators} )</if>
 		  		  <if test="purchaseId != null and purchaseId != ''"> and Purchase_ID = #{purchaseId} </if>
 		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
 		  		  <if test="approvalPurchaseId != null and approvalPurchaseId != ''"> and Approval_Purchase_ID = #{approvalPurchaseId} </if>

@@ -56,6 +56,8 @@ public class TravelController extends BaseController {
 	@RequiresPermissions("contract:travel:travel")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		params.put("travelOperator", (Long.toString(getUserId())));
+		params.put("Identification", (getIdentification()));
         Query query = new Query(params);
 		List<TravelDO> travelList = travelService.list(query);
 		int total = travelService.count(query);

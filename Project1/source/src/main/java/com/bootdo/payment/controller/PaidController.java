@@ -62,6 +62,8 @@ public class PaidController extends BaseController {
 	@RequiresPermissions("payment:paid:paid")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		params.put("Identification", (getIdentification()));
+		params.put("paidOperator", (getUserId()));
 				if (params.get("projectOwner") != null && !"".equals(params.get("projectOwner"))) {
 					params.put("projectOwner", "%" + (String) params.get("projectOwner") + "%");
 				}	

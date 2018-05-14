@@ -19,7 +19,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.RecordServiceDO">
-		select `Service_ID`,a.`Project_ID`,`Custormer_ID`,`Service_Product`,`Service_Name`,
+		select DISTINCT `Service_ID`,a.`Project_ID`,`Custormer_ID`,`Service_Product`,`Service_Name`,
 		`Service_Problem_Time`,`Service_Dept`,`Service_Feedback_Type`,`Service_Feedback_Info`,
 		`Service_Attachment`,`Service_Attachment_To_Customer`,`Service_Problem_Remarks`,
 		`Service_Type`,`Service_Problem_Deascription`,`Service_Operator`,`Service_Procedure`,
@@ -31,6 +31,7 @@
 		left join sales_company_customer c on a.Custormer_ID = c.Customer_ID
 		left join development_project d on a.Project_ID = d.Project_ID
         <where>  
+        		  <if test="serviceRecorder !=null and serviceRecorder !=''">and a.Service_Recorder=#{serviceRecorder} or exists (select 1 from main_and_copy_person ma where Employee_ID = a.Service_Recorder and Table_Name='sales_record_service')</if>
 		  		  <if test="serviceId != null and serviceId != ''"> and Service_ID = #{serviceId} </if>
 		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
 		  		  <if test="custormerId != null and custormerId != ''"> and Custormer_ID = #{custormerId} </if>
@@ -51,7 +52,6 @@
 		  		  <if test="serviceAfterSaleRemarks != null and serviceAfterSaleRemarks != ''"> and Service_After_Sale_Remarks = #{serviceAfterSaleRemarks} </if>
 		  		  <if test="servicePhoneNumber != null and servicePhoneNumber != ''"> and Service_Phone_Number = #{servicePhoneNumber} </if>
 		  		  <if test="serviceMailbox != null and serviceMailbox != ''"> and Service_Mailbox = #{serviceMailbox} </if>
-		  		  <if test="serviceRecorder != null and serviceRecorder != ''"> and Service_Recorder = #{serviceRecorder} </if>
 		  		  <if test="serviceRecordTime != null and serviceRecordTime != ''"> and Service_Record_Time = #{serviceRecordTime} </if>
 		  		  <if test="serviceCreateTime != null and serviceCreateTime != ''"> and Service_Create_Time = #{serviceCreateTime} </if>
 			      <if test="project != null and project != ''"> and a.Project_ID = #{project}</if>
@@ -78,11 +78,12 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from sales_record_service a
+		select count(DISTINCT Service_ID) from sales_record_service a
 		left join sys_user b ON a.Service_Recorder = b.user_id
 		left join sales_company_customer c on a.Custormer_ID = c.Customer_ID
 		left join development_project d on a.Project_ID = d.Project_ID
 		 <where>  
+		 		  <if test="serviceRecorder !=null and serviceRecorder !=''">and a.Service_Recorder=#{serviceRecorder} or exists (select 1 from main_and_copy_person ma where Employee_ID = a.Service_Recorder and Table_Name='sales_record_service')</if>
 		  		  <if test="serviceId != null and serviceId != ''"> and Service_ID = #{serviceId} </if>
 		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
 		  		  <if test="custormerId != null and custormerId != ''"> and Custormer_ID = #{custormerId} </if>
@@ -103,7 +104,6 @@
 		  		  <if test="serviceAfterSaleRemarks != null and serviceAfterSaleRemarks != ''"> and Service_After_Sale_Remarks = #{serviceAfterSaleRemarks} </if>
 		  		  <if test="servicePhoneNumber != null and servicePhoneNumber != ''"> and Service_Phone_Number = #{servicePhoneNumber} </if>
 		  		  <if test="serviceMailbox != null and serviceMailbox != ''"> and Service_Mailbox = #{serviceMailbox} </if>
-		  		  <if test="serviceRecorder != null and serviceRecorder != ''"> and Service_Recorder = #{serviceRecorder} </if>
 		  		  <if test="serviceRecordTime != null and serviceRecordTime != ''"> and Service_Record_Time = #{serviceRecordTime} </if>
 		  		  <if test="serviceCreateTime != null and serviceCreateTime != ''"> and Service_Create_Time = #{serviceCreateTime} </if>
 		  		</where>

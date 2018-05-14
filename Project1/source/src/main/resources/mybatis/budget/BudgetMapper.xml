@@ -41,12 +41,106 @@
 	</select>
 
     <select id="getProjectId" resultType="com.bootdo.project.domain.ProjectDO">
-		select Project_Description from development_project
+		select Project_Description 
+		from development_project
 		where Project_ID = #{value}
 	</select>
 	
+	<select id="getBudgetServiceRevenue" resultType="com.bootdo.project.domain.ProjectDO">
+		select SUM(Contract_Total_Price) as Budget_Service_Revenue
+		from development_project a
+		left join contract b on a.`Project_ID`=b.`Project_ID`
+		where a.Project_ID = #{value}
+	</select>
+	
+	<select id="getTotal" resultType="com.bootdo.budget.domain.BudgetDO">
+		select Budget_Labor_Cost,Budget_Travel_Cost,Budget_Purchase_Cost
+		from project_budget
+		where Budget_ID = #{value}
+	</select>
+	
+	<select id="setOldProject" resultType="com.bootdo.budget.domain.BudgetDO">
+		select
+		IFNULL(Budget_Labor_Cost,0)+ IFNULL(Budget_Travel_Cost,0)+ IFNULL(Budget_Purchase_Cost,0) as Budget_Cost,
+		Budget_Service_Revenue-Budget_Service_Revenue*Budget_Profit_Rate as Budget_Total_Cost
+		from project_budget
+		where Budget_ID = #{value}
+	</select>
+	
+	<select id="setSoftware" resultType="com.bootdo.budget.domain.BudgetDO">
+		select 
+		Budget_Service_Revenue*6 as Budget_Tax,
+		Budget_Service_Revenue-Budget_Service_Revenue*6 as Budget_Service_Revenue_Net,
+		Budget_Service_Revenue*6+ IFNULL(Budget_Labor_Cost,0)+ IFNULL(Budget_Travel_Cost,0)+ IFNULL(Budget_Purchase_Cost,0) as Budget_Cost,
+		Budget_Service_Revenue-(Budget_Service_Revenue*6+ IFNULL(Budget_Labor_Cost,0)+ IFNULL(Budget_Travel_Cost,0)+ IFNULL(Budget_Purchase_Cost,0)) as Budget_Profit,
+		Budget_Service_Revenue-Budget_Service_Revenue*Budget_Profit_Rate as Budget_Total_Cost
+		from project_budget
+		where Budget_ID = #{value}
+	</select>
+	
+	<select id="setBlender" resultType="com.bootdo.budget.domain.BudgetDO">
+		select 
+		(Budget_Service_Revenue-IFNULL(Budget_Purchase_Cost,0))*17 as Budget_Tax,
+		Budget_Service_Revenue-IFNULL(Budget_Purchase_Cost,0)-(Budget_Service_Revenue-IFNULL(Budget_Purchase_Cost,0))*17-IFNULL(Budget_Labor_Cost,0)-IFNULL(Budget_Travel_Cost,0) as Budget_Service_Revenue_Net,
+		Budget_Service_Revenue*6+ IFNULL(Budget_Labor_Cost,0)+ IFNULL(Budget_Travel_Cost,0)+ IFNULL(Budget_Purchase_Cost,0) as Budget_Cost,
+		Budget_Service_Revenue-Budget_Service_Revenue*Budget_Profit_Rate as Budget_Total_Cost
+		from project_budget
+		where Budget_ID = #{value}
+	</select>
+	
+	<update id="updateBudgetLaborCost" parameterType="com.bootdo.budget.domain.BudgetDO">
+        update project_budget c inner join  
+       (select a.Budget_ID,IFNULL(SUM(Labor_Total_Cost),0) as Budget_Labor_Cost
+		from project_budget a
+		left join budget_labor b on a.`Budget_ID`=b.`Budget_ID`
+		where a.Budget_ID = #{budgetId}) d
+       set c.Budget_Labor_Cost =  d.Budget_Labor_Cost
+       where c.Budget_ID=d.Budget_ID
+	</update>
+	
+	<update id="updateBudgetTravelCost" parameterType="com.bootdo.budget.domain.BudgetDO">		
+		update project_budget c inner join  
+       (select a.Budget_ID,IFNULL(SUM(Expenses_Total_Price),0) as Budget_Travel_Cost
+		from project_budget a
+		left join budget_expenses b on a.`Budget_ID`=b.`Budget_ID`
+		where a.Budget_ID = #{budgetId}) d
+       set c.Budget_Travel_Cost =  d.Budget_Travel_Cost
+       where c.Budget_ID=d.Budget_ID
+	</update>
+	
+	<update id="updateBudgetPurchaseCost" parameterType="com.bootdo.budget.domain.BudgetDO">	
+		update project_budget c inner join  
+       (select a.Budget_ID,IFNULL(SUM(Purchase_Total_Price),0) as Budget_Purchase_Cost
+		from project_budget a
+		left join budget_purchase b on a.`Budget_ID`=b.`Budget_ID`
+		where a.Budget_ID = #{budgetId}) d
+       set c.Budget_Purchase_Cost =  d.Budget_Purchase_Cost
+       where c.Budget_ID=d.Budget_ID
+	</update>
+	
+	<update id="updateSoftware" parameterType="com.bootdo.budget.domain.BudgetDO">
+        update project_budget
+        set Budget_Cost=Budget_Service_Revenue*6+ IFNULL(Budget_Labor_Cost,0)+ IFNULL(Budget_Travel_Cost,0)+ IFNULL(Budget_Purchase_Cost,0),
+        Budget_Profit=Budget_Service_Revenue-(Budget_Service_Revenue*6+IFNULL(Budget_Labor_Cost,0)+IFNULL(Budget_Travel_Cost,0)+IFNULL(Budget_Purchase_Cost,0))
+		where Budget_ID = #{budgetId}
+	</update>
+	
+	<update id="updateOldProject" parameterType="com.bootdo.budget.domain.BudgetDO">
+		update project_budget
+        set Budget_Cost=Budget_Service_Revenue*6+ IFNULL(Budget_Labor_Cost,0)+ IFNULL(Budget_Travel_Cost,0)+ IFNULL(Budget_Purchase_Cost,0)
+		where Budget_ID = #{budgetId}
+	</update>
+	
+	<update id="updateBlender" parameterType="com.bootdo.budget.domain.BudgetDO">
+		update project_budget
+        set Budget_Tax=(Budget_Service_Revenue-IFNULL(Budget_Purchase_Cost,0))*17,
+        Budget_Service_Revenue_Net=Budget_Service_Revenue-IFNULL(Budget_Purchase_Cost,0)-(Budget_Service_Revenue-IFNULL(Budget_Purchase_Cost,0))*17-IFNULL(Budget_Labor_Cost,0)-IFNULL(Budget_Travel_Cost,0),
+        Budget_Cost=Budget_Service_Revenue*6+ IFNULL(Budget_Labor_Cost,0)+ IFNULL(Budget_Travel_Cost,0)+ IFNULL(Budget_Purchase_Cost,0),
+		where Budget_ID = #{budgetId}
+	</update>
+	
 	<select id="list" resultType="com.bootdo.budget.domain.BudgetDO">
-		select `Budget_ID`,
+		select DISTINCT `Budget_ID`,
 		a.`Customer_ID`,d.`Customer_Name`as `Customer_Name`,
 		`Business_ID`,
 		a.`Project_ID`,b.`Project_Name` as `Project_Name`,
@@ -68,6 +162,8 @@
 		left join sys_user f on a.`Budget_Operator`=f.`user_id`
 		left join inner_org_employee g on a.`Project_Supervisor`=g.`Employee_ID`
         <where>  
+        			<if test="budgetOperator != null and budgetOperator != ''"> and a.Budget_Operator=#{budgetOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Budget_Operator and Table_Name='project_budget')
+        																		or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{budgetOperator})</if>
 		  		  <if test="budgetId != null and budgetId != ''"> and Budget_ID = #{budgetId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
 		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
@@ -83,7 +179,7 @@
 		  		  <if test="budgetTravelCost != null and budgetTravelCost != ''"> and Budget_Travel_Cost = #{budgetTravelCost} </if>
 		  		  <if test="budgetCost != null and budgetCost != ''"> and Budget_Cost = #{budgetCost} </if>
 		  		  <if test="budgetProfit != null and budgetProfit != ''"> and Budget_Profit = #{budgetProfit} </if>
-		  		  <if test="budgetOperator != null and budgetOperator != ''"> and Budget_Operator = #{budgetOperator} </if>
+		  		  
 		  		  <if test="deptId != null and deptId != ''"> and Dept_ID = #{deptId} </if>
 		  		  <if test="responsibleCenter != null and responsibleCenter != ''"> and Responsible_Center = #{responsibleCenter} </if>
 		  		  <if test="projectSupervisor != null and projectSupervisor != ''"> and Project_Supervisor = #{projectSupervisor} </if>
@@ -109,7 +205,7 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*)
+		select count(DISTINCT `Budget_ID`)
 		from project_budget a
 		left join development_project b on a.`Project_ID`=b.`Project_ID`
 		left join inner_org_employee h on h.`Employee_ID`=b.`Project_Owner`
@@ -119,6 +215,8 @@
 		left join sys_user f on a.`Budget_Operator`=f.`user_id`
 		left join inner_org_employee g on a.`Project_Supervisor`=g.`Employee_ID`
 		 <where>  
+		 			<if test="budgetOperator != null and budgetOperator != ''"> and a.Budget_Operator=#{budgetOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Budget_Operator and Table_Name='project_budget')
+        																		or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{budgetOperator})</if>
 		  		  <if test="budgetId != null and budgetId != ''"> and Budget_ID = #{budgetId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
 		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
@@ -134,7 +232,6 @@
 		  		  <if test="budgetTravelCost != null and budgetTravelCost != ''"> and Budget_Travel_Cost = #{budgetTravelCost} </if>
 		  		  <if test="budgetCost != null and budgetCost != ''"> and Budget_Cost = #{budgetCost} </if>
 		  		  <if test="budgetProfit != null and budgetProfit != ''"> and Budget_Profit = #{budgetProfit} </if>
-		  		  <if test="budgetOperator != null and budgetOperator != ''"> and Budget_Operator = #{budgetOperator} </if>
 		  		  <if test="deptId != null and deptId != ''"> and Dept_ID = #{deptId} </if>
 		  		  <if test="responsibleCenter != null and responsibleCenter != ''"> and Responsible_Center = #{responsibleCenter} </if>
 		  		  <if test="projectSupervisor != null and projectSupervisor != ''"> and Project_Supervisor = #{projectSupervisor} </if>

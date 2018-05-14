@@ -211,6 +211,8 @@ function innerOrgEmployee_edit(){
 			$(":radio[name='employeeStatus'][value='" + result.employeeStatus + "']").prop("checked", "checked");
 			loadDicValue("/inner/orgJob/listDic","jobId",result.jobId);
 			loadDicValue("/inner_org_job_rank","jobRank",result.jobRank);
+
+			
 		}
 	});
 }

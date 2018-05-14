@@ -4,6 +4,8 @@ $().ready(function() {
 	$('#myTab a[href="#budgetInfo"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",true);
 		 $('#nextBtn').attr("disabled",false);
+		 setTotal();
+		 getType();
 	 });
 	 $('#myTab a[href="#labor"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
@@ -31,6 +33,13 @@ $().ready(function() {
 
 	//获取项目描述
 	$("#projectId").bind("change", getProjectId);
+	
+	setTotal();
+	//setOldProject();
+	//setSoftware();
+    $("#projectGategory").bind("change", getType);
+	//getType();
+	
 });
 
 $.validator.setDefaults({
@@ -52,6 +61,134 @@ function getProjectId(){
 		}
 	});
 }
+
+function setTotal(){
+	$.ajax({
+		url : '/budget/budget/getTotal/' + $("#budgetId").val(),
+		type : "get",
+		data : {
+			'budgetId' : $("#budgetId").val()
+		},
+		success : function(data) {
+			var result = data.budget;
+			$("input[name='budgetLaborCost']").val(result.budgetLaborCost);
+			$("input[name='budgetTravelCost']").val(result.budgetTravelCost);
+			$("input[name='budgetPurchaseCost']").val(result.budgetPurchaseCost);
+		}
+	});
+}
+
+function setOldProject(){
+	$.ajax({
+		url : '/budget/budget/setOldProject/' + $("#budgetId").val(),
+		type : "get",
+		data : {
+			'budgetId' : $("#budgetId").val()
+		},
+		success : function(data) {
+			var result = data.budget;
+			$("input[name='budgetCost']").val(result.budgetCost);
+			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+		}
+	});
+}
+
+function setSoftware(){
+	$.ajax({
+		url : '/budget/budget/setSoftware/' + $("#budgetId").val(),
+		type : "get",
+		data : {
+			'budgetId' : $("#budgetId").val()
+		},
+		success : function(data) {
+			var result = data.budget;
+			$("input[name='budgetTax']").val(result.budgetTax);
+			$("input[name='budgetServiceRevenueNet']").val(result.budgetServiceRevenueNet);
+			$("input[name='budgetCost']").val(result.budgetCost);
+			$("input[name='budgetProfit']").val(result.budgetProfit);
+			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+		}
+	});
+}
+
+function setBlender(){
+	$.ajax({
+		url : '/budget/budget/setBlender/' + $("#budgetId").val(),
+		type : "get",
+		data : {
+			'budgetId' : $("#budgetId").val()
+		},
+		success : function(data) {
+			var result = data.budget;
+			$("input[name='budgetTax']").val(result.budgetTax);
+			$("input[name='budgetServiceRevenueNet']").val(result.budgetServiceRevenueNet);
+			$("input[name='budgetCost']").val(result.budgetCost);
+			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+		}
+	});
+}
+
+
+function getType(){
+	//项目类别
+	var projectGategory=$("#projectGategory").val();
+	//人工成本
+	var budgetLaborCost=$("#budgetLaborCost").val();
+	//差旅成本
+	var budgetTravelCost=$("#budgetTravelCost").val();
+	//采购成本
+	var budgetPurchaseCost=$("#budgetPurchaseCost").val();
+	//计划利润率
+	var budgetProfitRate=$("#budgetProfitRate").val();
+	//服务收入（合同额）
+	var budgetServiceRevenue=$("#budgetServiceRevenue").val();
+	//税金
+	//var budgetTax=$("#budgetTax").val();
+	//服务净收入
+	//var budgetServiceRevenueNet=$("#budgetServiceRevenueNet").val();
+	//费用和支出（含税）
+	//var budgetCost=$("#budgetCost").val();
+	//利润
+	//var budgetProfit=$("#budgetProfit").val();
+	if(projectGategory=="老项目"){
+		 setOldProject();
+		 var budgetServiceRevenueNet=$("#budgetServiceRevenueNet").val('');
+		 var budgetTax=$("#budgetTax").val('');
+		 var budgetTotalCost= $("#budgetTotalCost").val('');
+		 var budgetCost=$("#budgetCost").val();
+		 /*if(Number(budgetTotalCost)-Number(budgetCost)>0){
+			 var budgetConformance= $("#budgetConformance").val('是');	 
+		 }
+		 else if(Number(budgetTotalCost)-Number(budgetCost)<0){
+			 var budgetConformance= $("#budgetConformance").val('否');	 
+		 }*/
+		//费用和支出（含税）
+		//var budgetCost= (Number(budgetLaborCost)+Number(budgetTravelCost)+Number(budgetPurchaseCost)).toFixed(4); 
+	   // $("#budgetCost").val(budgetCost);
+	    //计划成本总额
+	   // var budgetTotalCost= (Number(budgetServiceRevenue)-Number(budgetServiceRevenue)*budgetProfitRate).toFixed(4); 
+	   // $("#budgetTotalCost").val(budgetTotalCost);
+	}
+	if(projectGategory=="软件项目技术开发类"){
+		setSoftware();
+		/*if(budgetTotalCost>budgetCost){
+			 var budgetConformance= $("#budgetConformance").val('是');	 
+		}
+		else if(budgetTotalCost<budgetCost){
+			 var budgetConformance= $("#budgetConformance").val('否');	 
+		}*/
+	}
+	if(projectGategory=="硬件类"){
+		setBlender();
+	}
+	if(projectGategory=="软硬件混合项目软件为主"){
+		setBlender();
+	}
+	if(projectGategory=="软硬件混合项目硬件为主"){
+		setBlender();
+	}
+	
+};
 function update() {
 	$.ajax({
 		cache : true,
@@ -287,7 +424,7 @@ function budgetMapper_edit(){
 			loadCrmDataValue("/system/sysDept/listDic","deptId",result.deptId);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectSupervisor",result.projectSupervisor);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectOwner",result.projectOwner);
-			loadCrmDataValue("/sales/salesProject/listAllDic","projectId",result.projectId);
+			loadCrmDataValue("/project/project/listDic","projectId",result.projectId);
 			loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
 			loadCrmDataValue("/sales/business/listDic","businessId",result.businessId);
 			loadCrmDataValue("/contract/contract/listDic","contractId",result.contractId);

@@ -63,6 +63,8 @@ public class InvoiceController extends BaseController {
 	@RequiresPermissions("payment:invoice:invoice")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		params.put("invoiceOperator", (getUserId()));
+		params.put("Identification", (getIdentification()));
 		if (params.get("projectOwner") != null && !"".equals(params.get("projectOwner"))) {
 			params.put("projectOwner", "%" + (String) params.get("projectOwner") + "%");
 		}

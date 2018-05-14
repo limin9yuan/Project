@@ -49,6 +49,8 @@ public class PurchaseManagementController extends BaseController {
 	@RequiresPermissions("payment:purchaseManagement:purchaseManagement")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		params.put("purchaseOperators", (getUserId()));
+		params.put("Identification", (getIdentification()));
 		if (params.get("purchaseOperator") != null && !"".equals(params.get("purchaseOperator"))) {
 			params.put("purchaseOperator", "%" + (String) params.get("purchaseOperator") + "%");
 		}

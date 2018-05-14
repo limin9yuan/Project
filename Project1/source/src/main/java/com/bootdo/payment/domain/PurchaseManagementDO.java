@@ -73,7 +73,14 @@ public class PurchaseManagementDO implements Serializable {
 	
 	//申请人员名称
 	private String purchaseOperatorName;
-
+	private Integer purchaseOperators;
+	
+	public Integer getPurchaseOperators() {
+		return purchaseOperators;
+	}
+	public void setPurchaseOperators(Integer purchaseOperators) {
+		this.purchaseOperators = purchaseOperators;
+	}
 	/**
 	 * 设置：采购编号
 	 */

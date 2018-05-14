@@ -11,13 +11,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.budget.domain.LaborDO;
+import com.bootdo.budget.service.BudgetService;
 import com.bootdo.budget.service.LaborService;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
@@ -38,6 +38,9 @@ import com.bootdo.inner.domain.InnerOrgEmployeeDO;
 public class LaborController extends BaseController {
 	@Autowired
 	private LaborService laborService;
+	@Autowired
+	private BudgetService budgetService;
+	//private BudgetDO budget;
 	
 	@GetMapping()
 	@RequiresPermissions("budget:budget:budget")
@@ -83,13 +86,40 @@ public class LaborController extends BaseController {
 	
 	/**
 	 * 保存
+	 * @param laborId 
 	 */
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("budget:budget:add")
-	public R save( LaborDO labor){
+	public R save( LaborDO labor) {
 		labor.setLaborOperator(getUserId());
 		if(laborService.save(labor)>0){
+			BudgetDO budget= budgetService.get(labor.getBudgetId());
+			String budgetId= budget.getBudgetId();
+			System.out.println(budgetId);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateSoftware(budgetId);	
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
 			return R.ok();
 		}
 		return R.error();
@@ -100,10 +130,40 @@ public class LaborController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("budget:budget:edit")
-	public R update( LaborDO labor){
+	public R update( LaborDO labor,String laborId){
 		labor.setLaborOperator(getUserId());
-		laborService.update(labor);
-		return R.ok();
+		//laborService.update(labor);
+		LaborDO labor2= laborService.get(laborId);
+		BudgetDO budget= budgetService.get(labor2.getBudgetId());
+		String budgetId=budget.getBudgetId();
+		if(laborService.update(labor)>0){
+			System.out.println(budgetId);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateSoftware(budgetId);	
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
@@ -112,9 +172,37 @@ public class LaborController extends BaseController {
 	@PostMapping( "/remove")
 	@ResponseBody
 	@RequiresPermissions("budget:budget:remove")
-	public R remove( String laborId){
+	public R remove(String laborId){
+		LaborDO labor2= laborService.get(laborId);
+		BudgetDO budget= budgetService.get(labor2.getBudgetId());
+		String budgetId=budget.getBudgetId();
+		System.out.println(budgetId);
 		if(laborService.remove(laborId)>0){
-		return R.ok();
+			System.out.println(budgetId);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateSoftware(budgetId);	
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -126,8 +214,38 @@ public class LaborController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("budget:budget:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] laborIds){
-		laborService.batchRemove(laborIds);
+		LaborDO labor2=laborService.get(laborIds[0]);
+		BudgetDO budget= budgetService.get(labor2.getBudgetId()); 
+		String budgetId=budget.getBudgetId();
+		System.out.println(budgetId);
+		if(laborService.batchRemove(laborIds)>0){
+			System.out.println(budget);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateSoftware(budgetId);	
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetLaborCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
 		return R.ok();
+		}
+		return R.error();
 	}
 
 	@RequestMapping("/getEmployeeLevelSalary/{employeeId}")

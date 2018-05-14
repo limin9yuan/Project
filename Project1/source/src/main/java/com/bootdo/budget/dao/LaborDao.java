@@ -1,6 +1,7 @@
 package com.bootdo.budget.dao;
 
 
+import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.budget.domain.LaborDO;
 import com.bootdo.inner.domain.InnerOrgEmployeeDO;
 
@@ -33,4 +34,9 @@ public interface LaborDao {
 	int batchRemove(String[] laborIds);
 
 	InnerOrgEmployeeDO getEmployeeLevelSalary(String employeeId);
+
+	int updateLaborSoftware(String budgetId);
+
+	int updateOldProject(String budgetId);
+
 }

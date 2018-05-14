@@ -11,7 +11,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.RecordDO">
-		select `Record_ID`,
+		select DISTINCT `Record_ID`,
 		a.`Customer_ID`,b.`Customer_Name` as `Record_Customer_Name`,
 		a.`Business_ID`,c.`Business_Name` as `Record_Business_Name`,
 		`Record_Name`,`Record_Phase`,`Record_Sale_Opportunity`,`Record_Expense_Category`,`Record_Expense_Actual`,
@@ -28,6 +28,7 @@
 		left join inner_org_employee d on a.`Record_Executor`=d.`Employee_ID`
 		left join sys_user f on a.`Record_Creator`=f.`user_id`
         <where>  
+        		  <if test="recordOperator !=null and recordOperator !=''"> and a.Record_Operator=#{recordOperator} or exists (select 1 from main_and_copy_person ma where Employee_ID = a.Record_Operator and Table_Name='sales_record')</if>
 		  		  <if test="recordId != null and recordId != ''"> and Record_ID = #{recordId} </if>
 		  		  <if test="recordName != null and recordName != ''"> and Record_Name = #{recordName} </if>
 		  		  <if test="recordPhase != null and recordPhase != ''"> and Record_Phase = #{recordPhase} </if>
@@ -39,7 +40,6 @@
 		  		  <if test="recordExecuteStatus != null and recordExecuteStatus != ''"> and Record_Execute_Status = #{recordExecuteStatus} </if>
 		  		  <if test="recordAttachment != null and recordAttachment != ''"> and Record_Attachment = #{recordAttachment} </if>
 		  		  <if test="recordRemarks != null and recordRemarks != ''"> and Record_Remarks = #{recordRemarks} </if>
-		  		  <if test="recordOperator != null and recordOperator != ''"> and Record_Operator = #{recordOperator} </if>
 		  		  <if test="recordOperateTime != null and recordOperateTime != ''"> and Record_Operate_Time = #{recordOperateTime} </if>
 		  		  <if test="recordCreator != null and recordCreator != ''"> and Record_Creator = #{recordCreator} </if>
 		  		  <if test="recordCreateTime != null and recordCreateTime != ''"> and Record_Create_Time = #{recordCreateTime} </if>
@@ -63,7 +63,7 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) 
+		select count(DISTINCT a.Record_ID) 
 		from sales_record a
 		left join
         development_project e on a.`Project_ID`=e.`Project_ID`
@@ -72,6 +72,7 @@
 		left join inner_org_employee d on a.`Record_Executor`=d.`Employee_ID`
 		left join sys_user f on a.`Record_Creator`=f.`user_id`
 		<where>  
+		 		  <if test="recordOperator !=null and recordOperator !=''"> and a.Record_Operator=#{recordOperator} or exists (select 1 from main_and_copy_person ma where Employee_ID = a.Record_Operator and Table_Name='sales_record')</if>
 		  		  <if test="recordId != null and recordId != ''"> and Record_ID = #{recordId} </if>
 		  		  <if test="recordName != null and recordName != ''"> and Record_Name = #{recordName} </if>
 		  		  <if test="recordPhase != null and recordPhase != ''"> and Record_Phase = #{recordPhase} </if>
@@ -83,7 +84,6 @@
 		  		  <if test="recordExecuteStatus != null and recordExecuteStatus != ''"> and Record_Execute_Status = #{recordExecuteStatus} </if>
 		  		  <if test="recordAttachment != null and recordAttachment != ''"> and Record_Attachment = #{recordAttachment} </if>
 		  		  <if test="recordRemarks != null and recordRemarks != ''"> and Record_Remarks = #{recordRemarks} </if>
-		  		  <if test="recordOperator != null and recordOperator != ''"> and Record_Operator = #{recordOperator} </if>
 		  		  <if test="recordOperateTime != null and recordOperateTime != ''"> and Record_Operate_Time = #{recordOperateTime} </if>
 		  		  <if test="recordCreator != null and recordCreator != ''"> and Record_Creator = #{recordCreator} </if>
 		  		  <if test="recordCreateTime != null and recordCreateTime != ''"> and Record_Create_Time = #{recordCreateTime} </if>

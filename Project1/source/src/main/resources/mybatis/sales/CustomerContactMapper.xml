@@ -4,8 +4,7 @@
 <mapper namespace="com.bootdo.sales.dao.CustomerContactDao">
 
 	<select id="get" resultType="com.bootdo.sales.domain.CustomerContactDO">
-		select
-		`Contact_ID`,`Contact_Name`,`Contact_Sex`,`Contact_Salutation`,`Contact_BirthDay`,`Contact_Title`,
+		select `Contact_ID`,`Contact_Name`,`Contact_Sex`,`Contact_Salutation`,`Contact_BirthDay`,`Contact_Title`,
 		`Contact_Responsibility`,`Contact_Role`,a.`Customer_ID`,`Contact_Dept`,`Contact_Job`,`Contact_Marital_Status`,
 		`Contact_Age`,`Contact_Family_Status`,`Contact_Graduate_Institutions`,`Contact_Skill`,
 		`Contact_Years_Working`,`Contact_Experience`,`Contact_Previous_Company`,
@@ -23,7 +22,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.CustomerContactDO">
-		SELECT
+		SELECT DISTINCT
 		a.`Contact_ID`,`Contact_Name`,
 		CASE `Contact_Sex` WHEN '1' THEN '男' ELSE '女' END AS Contact_Sex,
 		`Contact_Salutation`,`Contact_Title`,`Contact_Responsibility`,`Contact_Role`,
@@ -44,7 +43,7 @@
 		left join inner_org_employee q on a.Contact_Sales=q.Employee_ID
 
 		<where>
-
+			<if test="contactOperator !=null and contactOperator !=''"> and a.Contact_Operator=#{contactOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Contact_Operator and Table_Name='sales_customer_contact')</if>
 			<if test="province != null and province != ''"> and c.Customer_Province = #{province} </if>
 			<if test="city != null and city != ''"> and c.Customer_City = #{city} </if>
 			<if test="area != null and area != ''"> and c.Customer_County = #{area} </if>
@@ -77,14 +76,16 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*)
+		select count(DISTINCT a.Contact_ID)
 		from sales_customer_contact a
-		left join sys_user u on a.Contact_Operator = u.user_id
-		left join sales_company_customer c on a.Customer_ID=c.Customer_ID
+		LEFT JOIN sys_user u ON a.Contact_Operator = u.user_id
+		LEFT JOIN sales_company_customer c ON a.Customer_ID=c.Customer_ID
 		LEFT JOIN sales_business b on a.Contact_ID=b.Contact_ID
 		LEFT JOIN development_project p on a.Customer_ID=p.Customer_ID
+		left join inner_org_employee m on a.Contact_Owner=m.Employee_ID 
+		left join inner_org_employee q on a.Contact_Sales=q.Employee_ID
 		<where>
-
+			<if test="contactOperator !=null and contactOperator !=''"> and a.Contact_Operator=#{contactOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Contact_Operator and Table_Name='sales_customer_contact')</if>
 			<if test="province != null and province != ''"> and c.Customer_Province = #{province} </if>
 			<if test="city != null and city != ''"> and c.Customer_City = #{city} </if>
 			<if test="area != null and area != ''"> and c.Customer_County = #{area} </if>

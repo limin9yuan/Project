@@ -98,6 +98,21 @@ public class BudgetDO implements Serializable {
 	//流程实例ID
 	private String processInstanceId;
 
+	//管理层标识
+	private Integer Identification;
+	/*
+	 * 管理层标识
+	 */
+	public Integer getIdentification() {
+		return Identification;
+	}
+	/*
+	 * 管理层标识
+	 */
+	public void setIdentification(Integer identification) {
+		Identification = identification;
+	}
+
 	public String getTaskComment() {
 		return taskComment;
 	}

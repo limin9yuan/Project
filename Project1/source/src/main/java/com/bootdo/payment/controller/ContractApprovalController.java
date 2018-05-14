@@ -61,6 +61,8 @@ public class ContractApprovalController extends BaseController {
 	@RequiresPermissions("payment:contractApproval:contractApproval")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
+		params.put("contractOperator", (getUserId()));
+		params.put("Identification", (getIdentification()));
 		if (params.get("contractName") != null && !"".equals(params.get("contractName"))) {
 			params.put("contractName", "%" + (String) params.get("contractName") + "%");
 		}

@@ -56,9 +56,22 @@ public class PaidDO implements Serializable {
 	
 	//付款类型
 	private int paidmentType;
+	//管理层标识
+	private Integer Identification;
 	
 	
-
+	/*
+	 * 管理层标识
+	 */
+	public Integer getIdentification() {
+		return Identification;
+	}
+	/*
+	 * 管理层标识
+	 */
+	public void setIdentification(Integer identification) {
+		Identification = identification;
+	}
 	/**
 	 * 设置：付款信息编号
 	 */

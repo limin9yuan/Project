@@ -196,7 +196,7 @@ public class ContractApprovalImpl implements ContractApprovalService {
 						} else if (j == 16) {
 							contractApprovalDO.setContractRemarks(cellvalue);
 						} else if (j == 17) {
-							contractApprovalDO.setContractApprovalStatus(new Integer(cellvalue));
+							contractApprovalDO.setContractApprovalStatus(cellvalue);
 						} 
 					} // --->遍历列
 					contractApprovalDO.setContractId(Long.valueOf(i));
@@ -391,8 +391,8 @@ public class ContractApprovalImpl implements ContractApprovalService {
 								// 审批状态
 								String ContractApprovalStatus = "";
 								if (report.getContractApprovalStatus() != null) {
-									Integer getContractApprovalStatus = report.getContractApprovalStatus();
-									ContractApprovalStatus = sdf.format(getContractApprovalStatus);
+//									Integer getContractApprovalStatus = report.getContractApprovalStatus();
+									ContractApprovalStatus = report.getContractApprovalStatus();
 								}
 								hssfRow.createCell(22).setCellValue(ContractApprovalStatus);
 								// 操作人

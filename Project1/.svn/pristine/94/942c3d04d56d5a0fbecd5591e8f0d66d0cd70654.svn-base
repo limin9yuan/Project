@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.sales.dao.BugCategoryDao">
+
+	<select id="get" resultType="com.bootdo.sales.domain.BugCategoryDO">
+		select `BUG_ID`,`Complaint_ID`,`Service_ID`,`Product_ID`,`Module_ID`,`Feedback_ID`,`Bug_Remarks`,`Bug_Recorder`,`Bug_Record_Time`,`Bug_Creator`,`Bug_Create_Time`,`Else_Category`,`Bug_Category_Type` from sales_bug_category where BUG_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.sales.domain.BugCategoryDO">
+		select DISTINCT `BUG_ID`,`Complaint_ID`,`Service_ID`,
+		a.`Product_ID`,b.`Product_Name` as `BUG_Product_Name`,
+		a.`Module_ID`,c.`Module_Name` as `BUG_Module_Name`,c.`Module_Name` as `BUG_Category`,
+		`Feedback_ID`,`Bug_Remarks`,
+		`Bug_Recorder`,e.`name`as `Bug_Recorder_Name`,
+		`Bug_Record_Time`,
+		`Bug_Creator`,d.`name`,
+		`Bug_Create_Time`,a.`Else_Category`,`Bug_Category_Type` 
+		from sales_bug_category a
+		left join sales_product_category b on a.`Product_ID`=b.`Product_ID`
+		left join sales_module_category c on a.`Module_ID`=c.`Module_ID`
+		left join sys_user d on a.`Bug_Creator`=d.`user_id`
+		left join sys_user e on a.`Bug_Recorder`=e.`user_id`
+        <where>  
+        		  <if test="bugRecorder !=null and bugRecorder !=''"> and a.Bug_Recorder=#{bugRecorder}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Bug_Recorder and Table_Name='sales_bug_category')</if>
+		  		  <if test="bugId != null and bugId != ''"> and BUG_ID = #{bugId} </if>
+		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
+		  		  <if test="serviceId != null and serviceId != ''"> and Service_ID = #{serviceId} </if>
+		  		  <if test="productId != null and productId != ''"> and Product_ID = #{productId} </if>
+		  		  <if test="moduleId != null and moduleId != ''"> and Module_ID = #{moduleId} </if>
+		  		  <if test="feedbackId != null and feedbackId != ''"> and Feedback_ID = #{feedbackId} </if>
+		  		  <if test="bugRemarks != null and bugRemarks != ''"> and Bug_Remarks = #{bugRemarks} </if>
+		  		  <if test="bugRecordTime != null and bugRecordTime != ''"> and Bug_Record_Time = #{bugRecordTime} </if>
+		  		  <if test="bugCreator != null and bugCreator != ''"> and Bug_Creator = #{bugCreator} </if>
+		  		  <if test="bugCreateTime != null and bugCreateTime != ''"> and Bug_Create_Time = #{bugCreateTime} </if>
+		  		  <if test="elseCategory != null and elseCategory != ''"> and Else_Category = #{elseCategory} </if>
+		  		  <if test="bugCategoryType != null and bugCategoryType != ''"> and Bug_Category_Type = #{bugCategoryType} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by BUG_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(DISTINCT a.BUG_ID) 
+        from sales_bug_category a
+		left join sales_product_category b on a.`Product_ID`=b.`Product_ID`
+		left join sales_module_category c on a.`Module_ID`=c.`Module_ID`
+		left join sys_user d on a.`Bug_Creator`=d.`user_id`
+		left join sys_user e on a.`Bug_Recorder`=e.`user_id`
+		  <where>  
+		  <if test="bugRecorder !=null and bugRecorder !=''"> and a.Bug_Recorder=#{bugRecorder}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Bug_Recorder and Table_Name='sales_bug_category')</if>
+		  		  <if test="bugId != null and bugId != ''"> and BUG_ID = #{bugId} </if>
+		  		  <if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
+		  		  <if test="serviceId != null and serviceId != ''"> and Service_ID = #{serviceId} </if>
+		  		  <if test="productId != null and productId != ''"> and Product_ID = #{productId} </if>
+		  		  <if test="moduleId != null and moduleId != ''"> and Module_ID = #{moduleId} </if>
+		  		  <if test="feedbackId != null and feedbackId != ''"> and Feedback_ID = #{feedbackId} </if>
+		  		  <if test="bugRemarks != null and bugRemarks != ''"> and Bug_Remarks = #{bugRemarks} </if>
+		  		  <if test="bugRecordTime != null and bugRecordTime != ''"> and Bug_Record_Time = #{bugRecordTime} </if>
+		  		  <if test="bugCreator != null and bugCreator != ''"> and Bug_Creator = #{bugCreator} </if>
+		  		  <if test="bugCreateTime != null and bugCreateTime != ''"> and Bug_Create_Time = #{bugCreateTime} </if>
+		  		  <if test="elseCategory != null and elseCategory != ''"> and Else_Category = #{elseCategory} </if>
+		  		  <if test="bugCategoryType != null and bugCategoryType != ''"> and Bug_Category_Type = #{bugCategoryType} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.sales.domain.BugCategoryDO">
+		insert into sales_bug_category
+		(
+			`BUG_ID`, 
+			`Complaint_ID`, 
+			`Service_ID`, 
+			`Product_ID`, 
+			`Module_ID`, 
+			`Feedback_ID`, 
+			`Bug_Remarks`, 
+			`Bug_Recorder`,
+			`Bug_Creator`, 
+			`Bug_Create_Time`,
+			`Else_Category`,
+			`Bug_Category_Type`
+		)
+		values
+		(
+			#{bugId}, 
+			#{complaintId}, 
+			#{serviceId}, 
+			#{productId}, 
+			#{moduleId}, 
+			#{feedbackId}, 
+			#{bugRemarks},
+			#{bugRecorder},  
+			#{bugCreator}, 
+			#{bugCreateTime},
+			#{elseCategory},
+			#{bugCategoryType}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.sales.domain.BugCategoryDO">
+		update sales_bug_category 
+		<set>
+			<if test="complaintId != null">`Complaint_ID` = #{complaintId}, </if>
+			<if test="serviceId != null">`Service_ID` = #{serviceId}, </if>
+			<if test="productId != null">`Product_ID` = #{productId}, </if>
+			<if test="moduleId != null">`Module_ID` = #{moduleId}, </if>
+			<if test="feedbackId != null">`Feedback_ID` = #{feedbackId}, </if>
+			<if test="bugRemarks != null">`Bug_Remarks` = #{bugRemarks}, </if>
+			<if test="bugRecorder != null">`Bug_Recorder` = #{bugRecorder}, </if>
+			<if test="bugRecordTime != null">`Bug_Record_Time` = #{bugRecordTime}, </if>
+			<if test="elseCategory != null">`Else_Category` = #{elseCategory},</if>
+			<if test="bugCategoryType != null">`Bug_Category_Type` = #{bugCategoryType}</if>
+		</set>
+		where BUG_ID = #{bugId}
+	</update>
+	
+	<delete id="remove">
+		delete from sales_bug_category where BUG_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from sales_bug_category where BUG_ID in 
+		<foreach item="bugId" collection="array" open="(" separator="," close=")">
+			#{bugId}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -34,4 +34,9 @@ public interface LaborService {
 	
 	InnerOrgEmployeeDO getEmployeeLevelSalary(String employeeId);
 
+	int updateLaborSoftware(String budgetId); 
+	
+	int updateOldProject(String budgetId);
+
+
 }

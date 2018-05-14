@@ -58,5 +58,14 @@ public class LaborServiceImpl implements LaborService {
 	public 	InnerOrgEmployeeDO getEmployeeLevelSalary(String employeeId){
 		return laborDao.getEmployeeLevelSalary(employeeId);
 	}
-	
+
+	@Override
+	public int updateLaborSoftware(String budgetId) {
+		return laborDao.updateLaborSoftware(budgetId);
+	}
+
+	@Override
+	public int updateOldProject(String budgetId) {
+		return laborDao.updateOldProject(budgetId);
+	}
 }

@@ -11,9 +11,10 @@
 
 	<select id="list" resultType="com.bootdo.system.domain.UserDO">
 		select
-		`user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`
+		`user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,Identification
 		from sys_user
 		<where>
+			<if test="Identification !=null and Identification !=''"> and Identification=#{Identification}</if>
 			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 			<if test="username != null and username != ''"> and username = #{username} </if>
 			<if test="name != null and name != ''"> and name = #{name} </if>
@@ -42,6 +43,7 @@
 	<select id="count" resultType="int">
 		select count(*) from sys_user
 		<where>
+		<if test="Identification !=null and Identification !=''"> and Identification=#{Identification}</if>
 			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 			<if test="username != null and username != ''"> and username = #{username} </if>
 			<if test="name != null and name != ''"> and name = #{name} </if>
@@ -69,7 +71,8 @@
 		`status`,
 		`user_id_create`,
 		`gmt_create`,
-		`gmt_modified`
+		`gmt_modified`,
+		Identification
 		)
 		values
 		(
@@ -82,7 +85,8 @@
 		#{status},
 		#{userIdCreate},
 		#{gmtCreate},
-		#{gmtModified}
+		#{gmtModified},
+		#{Identification}
 		)
 	</insert>
 
@@ -98,7 +102,8 @@
 			<if test="status != null">`status` = #{status}, </if>
 			<if test="userIdCreate != null">`user_id_create` = #{userIdCreate}, </if>
 			<if test="gmtCreate != null">`gmt_create` = #{gmtCreate}, </if>
-			<if test="gmtModified != null">`gmt_modified` = #{gmtModified}</if>
+			<if test="gmtModified != null">`gmt_modified` = #{gmtModified},</if>
+			<if test="Identification !=null">Identification=#{Identification}</if>
 		</set>
 		where user_id = #{userId}
 	</update>

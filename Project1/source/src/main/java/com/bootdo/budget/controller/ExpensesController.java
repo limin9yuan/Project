@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.budget.domain.ExpensesDO;
 import com.bootdo.budget.domain.LaborDO;
+import com.bootdo.budget.service.BudgetService;
 import com.bootdo.budget.service.ExpensesService;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
@@ -37,6 +39,8 @@ import com.bootdo.common.utils.R;
 public class ExpensesController extends BaseController {
 	@Autowired
 	private ExpensesService expensesService;
+	@Autowired
+	private BudgetService budgetService;
 	
 	@GetMapping()
 	@RequiresPermissions("budget:budget:budget")
@@ -87,7 +91,34 @@ public class ExpensesController extends BaseController {
 	@RequiresPermissions("budget:budget:add")
 	public R save( ExpensesDO expenses){
 		expenses.setExpensesOperator(getUserId());
+		
 		if(expensesService.save(expenses)>0){
+			BudgetDO budget= budgetService.get(expenses.getBudgetId());
+			String budgetId= budget.getBudgetId();
+			System.out.println(budgetId);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetTravelCost(budgetId);	
+				budgetService.updateSoftware(budgetId);	
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);	
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
 			return R.ok();
 		}
 		return R.error();
@@ -98,9 +129,39 @@ public class ExpensesController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("budget:budget:edit")
-	public R update( ExpensesDO expenses){
-		expensesService.update(expenses);
-		return R.ok();
+	public R update( ExpensesDO expenses,String expensesId){
+		//expensesService.update(expenses);
+		ExpensesDO expenses2= expensesService.get(expensesId);
+		BudgetDO budget= budgetService.get(expenses2.getBudgetId());
+		String budgetId=budget.getBudgetId();
+		if(expensesService.update(expenses)>0){
+			System.out.println(budgetId);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetTravelCost(budgetId);	
+				budgetService.updateSoftware(budgetId);		
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);	
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
@@ -110,8 +171,36 @@ public class ExpensesController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("budget:budget:remove")
 	public R remove( String expensesId){
+	    ExpensesDO expenses2= expensesService.get(expensesId);
+		BudgetDO budget= budgetService.get(expenses2.getBudgetId());
+		String budgetId=budget.getBudgetId();
+		System.out.println(budgetId);
 		if(expensesService.remove(expensesId)>0){
-		return R.ok();
+			System.out.println(budgetId);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetTravelCost(budgetId);	
+				budgetService.updateSoftware(budgetId);
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);	
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -123,8 +212,39 @@ public class ExpensesController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("budget:budget:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] expensesIds){
-		expensesService.batchRemove(expensesIds);
+		//expensesService.batchRemove(expensesIds);
+		ExpensesDO expenses2=expensesService.get(expensesIds[0]);
+		BudgetDO budget= budgetService.get(expenses2.getBudgetId()); 
+		String budgetId=budget.getBudgetId();
+		System.out.println(budgetId);
+		if(expensesService.batchRemove(expensesIds)>0){
+			System.out.println(budget);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetTravelCost(budgetId);	
+				budgetService.updateSoftware(budgetId);
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);	
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetTravelCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
 		return R.ok();
+		}
+		return R.error();
 	}
 	
 }

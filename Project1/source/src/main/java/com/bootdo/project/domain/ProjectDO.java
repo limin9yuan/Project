@@ -1,6 +1,7 @@
 package com.bootdo.project.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 
@@ -95,6 +96,9 @@ public class ProjectDO implements Serializable {
   	private String projectOperatorName;  	
     //创建人名称
   	private String projectCreatorName;
+  	
+  //服务收入
+  	private BigDecimal budgetServiceRevenue;
 
 	//主送人id
 	private String mainPersonId;
@@ -535,5 +539,11 @@ public class ProjectDO implements Serializable {
 
 	public void setEmployeeName(String employeeName) {
 		this.employeeName = employeeName;
+	}
+	public BigDecimal getBudgetServiceRevenue() {
+		return budgetServiceRevenue;
+	}
+	public void setBudgetServiceRevenue(BigDecimal budgetServiceRevenue) {
+		this.budgetServiceRevenue = budgetServiceRevenue;
 	}
 }

@@ -14,7 +14,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.BusinessDO">
-		select a.`Business_ID`,
+		select DISTINCT a.`Business_ID`,
 		a.`Customer_ID`,b.`Customer_Name`,
 		a.`Contact_ID`,c.`Contact_Name`,
 		u.name as `Business_Creator_Name`
@@ -27,6 +27,7 @@
 		left join sys_user u on a.Business_Sales = u.user_id
 		left join inner_org_employee i on a.Business_Sales = i.Employee_ID
         <where>
+        		  <if test="businessOperator != null and businessOperator !=''">and a.Business_Operator=#{businessOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Business_Operator)</if>
 		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
 		  		  
 		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID = #{customerId} </if>
@@ -37,7 +38,6 @@
 		  		  <if test="businessOldId != null and businessOldId != ''"> and Business_Old_ID = #{businessOldId} </if>
 		  		  <if test="businessDescription != null and businessDescription != ''"> and Business_Description = #{businessDescription} </if>
 		  		  <if test="businessRemarks != null and businessRemarks != ''"> and Business_Remarks = #{businessRemarks} </if>
-		  		  <if test="businessOperator != null and businessOperator != ''"> and Business_Operator = #{businessOperator} </if>
 		  		  <if test="businessOperateTime != null and businessOperateTime != ''"> and Business_Operate_Time = #{businessOperateTime} </if>
 		  		  <if test="businessCreateTime != null and businessCreateTime != ''"> and Business_Create_Time = #{businessCreateTime} </if>
 		  		  
@@ -61,12 +61,15 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from sales_business a 
+		select count(DISTINCT a.Business_ID) 
+		from sales_business a 
 		left join sales_company_customer b on a.`Customer_ID`=b.`Customer_ID`
 		left join sales_customer_contact c on a.`Contact_ID`=c.`Contact_ID`
 		left join sys_user u on a.Business_Sales = u.user_id
 		left join inner_org_employee i on a.Business_Sales = i.Employee_ID
 		  <where>  
+		  			<if test="businessOperator != null and businessOperator !=''">and a.Business_Operator=#{businessOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Business_Operator)</if>
+		  
 		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
 		  		  
 		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID = #{customerId} </if>
@@ -77,7 +80,6 @@
 		  		  <if test="businessOldId != null and businessOldId != ''"> and Business_Old_ID = #{businessOldId} </if>
 		  		  <if test="businessDescription != null and businessDescription != ''"> and Business_Description = #{businessDescription} </if>
 		  		  <if test="businessRemarks != null and businessRemarks != ''"> and Business_Remarks = #{businessRemarks} </if>
-		  		  <if test="businessOperator != null and businessOperator != ''"> and Business_Operator = #{businessOperator} </if>
 		  		  <if test="businessOperateTime != null and businessOperateTime != ''"> and Business_Operate_Time = #{businessOperateTime} </if>
 		  		  <if test="businessCreateTime != null and businessCreateTime != ''"> and Business_Create_Time = #{businessCreateTime} </if>
 		  		  

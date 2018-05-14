@@ -11,7 +11,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.payment.domain.ReceivedDO">
-		select
+		select DISTINCT
 		`Received_ID`,a.`Contract_ID`,a.`Business_ID`,`Received_Time`,`Received_Price`,
 		`Received_Card_Number`,`Received_Type`,
 		CASE WHEN `Received_Contract_Status` = '0' THEN '未开始'
@@ -26,6 +26,8 @@
         left join development_project c on b.`Project_ID`=c.`Project_ID`
         left join inner_org_employee d on d.`Employee_ID`=c.`Project_Owner`
 		<where>
+			<if test="receivedOperator != null and receivedOperator != ''"> and a.Received_Operator=#{receivedOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Received_Operator and Table_Name='payment_received') 
+																			or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{receivedOperator} )</if>
 			<if test="receivedId != null and receivedId != ''"> and Received_ID = #{receivedId} </if>
 			<if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
 			<if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
@@ -35,7 +37,6 @@
 			<if test="receivedType != null and receivedType != ''"> and Received_Type = #{receivedType} </if>
 			<if test="receivedContractStatus != null and receivedContractStatus != ''"> and Received_Contract_Status = #{receivedContractStatus}</if>
 			<if test="receivedRemarks != null and receivedRemarks != ''"> and Received_Remarks = #{receivedRemarks} </if>
-			<if test="receivedOperator != null and receivedOperator != ''"> and Received_Operator = #{receivedOperator} </if>
 			<if test="receivedOperateTime != null and receivedOperateTime != ''"> and Received_Operate_Time = #{receivedOperateTime} </if>
 			<if test="receivableId != null and receivableId != ''"> and Receivable_ID = #{receivableId} </if>
 			<if test="receivablePrice != null and receivablePrice != ''"> and Receivable_Price = #{receivablePrice}</if>
@@ -63,12 +64,14 @@
 	</select>
 
 	<select id="count" resultType="int">
-		select count(*)
+		select count(DISTINCT `Received_ID`)
         from payment_received a
 		left join contract b on a.`Contract_ID`=b.`Contract_ID`
         left join development_project c on b.`Project_ID`=c.`Project_ID`
         left join inner_org_employee d on d.`Employee_ID`=c.`Project_Owner`
 		<where>
+			<if test="receivedOperator != null and receivedOperator != ''"> and a.Received_Operator=#{receivedOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Received_Operator and Table_Name='payment_received') 
+																			or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{receivedOperator} )</if>
 			<if test="receivedId != null and receivedId != ''"> and Received_ID = #{receivedId} </if>
 			<if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
 			<if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
@@ -78,7 +81,6 @@
 			<if test="receivedType != null and receivedType != ''"> and Received_Type = #{receivedType} </if>
 			<if test="receivedContractStatus != null and receivedContractStatus != ''"> and Received_Contract_Status = #{receivedContractStatus}</if>
 			<if test="receivedRemarks != null and receivedRemarks != ''"> and Received_Remarks = #{receivedRemarks} </if>
-			<if test="receivedOperator != null and receivedOperator != ''"> and Received_Operator = #{receivedOperator} </if>
 			<if test="receivedOperateTime != null and receivedOperateTime != ''"> and Received_Operate_Time = #{receivedOperateTime} </if>
 			<if test="receivableId != null and receivableId != ''"> and Receivable_ID = #{receivableId} </if>
 			<if test="receivablePrice != null and receivablePrice != ''"> and Receivable_Price = #{receivablePrice}</if>

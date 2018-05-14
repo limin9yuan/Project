@@ -23,7 +23,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.payment.domain.ProjectExpenditureDO">
-		select a.Project_ID,a.Customer_ID,Collection_ID,
+		select DISTINCT a.Project_ID,a.Customer_ID,Collection_ID,
 		a.Project_Name,a.Project_Sales,a.Project_Begin_Date,
 		a.Project_End_Date,Project_Owner,
 		a.Project_Manager,Project_Development_Begin_Date,
@@ -39,7 +39,9 @@
 		left join project_budget b on a.Project_ID = b.Project_ID
 		left join pre_sales_project g on a.Project_Related_ID = g.Project_ID
 		left join sales_business h on g.Project_Business = h.Business_ID
-        <where>
+        <where>		
+        		  <if test="projectOperator !=null and projectOperator !=''">and a.Project_Operator=#{projectOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Project_Operator and Table_Name='development_project')
+																						or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{projectOperator} )</if>
 		  		  <if test="projectName != null and projectName != ''"> and a.Project_ID = #{projectName} </if>
 		  		  <if test="projectManager != null and projectManager != ''"> and a.Project_Manager like #{projectManager} </if>
 		  		  <if test="projectSales != null and projectSales != ''"> and a.Project_Sales = #{projectSales} </if>
@@ -62,12 +64,14 @@
 	</select>
 	
  	<select id="count" resultType="int">
-		select count(*) from development_project a
+		select count(DISTINCT a.Project_ID) from development_project a
 		left join sales_company_customer s on a.Customer_ID = s.Customer_ID
 		left join project_project_dept p on a.Project_ID = p.Project_ID
 		left join inner_org_dept i on p.Dept_ID = i.Dept_ID
 		left join sys_user u on a.Project_Operator = u.user_id
 		 <where>
+		 		<if test="projectOperator !=null and projectOperator !=''">and a.Project_Operator=#{projectOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Project_Operator and Table_Name='development_project')
+																						or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{projectOperator} )</if>
 		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
 		  		  <if test="collectionId != null and collectionId != ''"> and Collection_ID = #{collectionId} </if>
@@ -86,7 +90,6 @@
 		  		  <if test="projectOperateTime != null and projectOperateTime != ''"> and Project_Operate_Time = #{projectOperateTime} </if>
 		  		  
 		  		  <if test="projectManager != null and projectManager != ''"> and Project_Manager like #{projectManager} </if>
-		  		  <if test="projectOperator != null and projectOperator != ''"> and u.name = #{projectOperator} </if>
 		  		  <if test="businessId != null and businessId != ''"> and h.Business_ID = #{businessId} </if>
 		  		</where>
 	</select>

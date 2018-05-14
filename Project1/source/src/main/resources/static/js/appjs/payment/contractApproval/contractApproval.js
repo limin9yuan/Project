@@ -69,33 +69,42 @@ function load() {
 										return e + d ;
 									}
 								}, {
+									align : 'center',
 									field : 'contractName',
 									title : '合同名称'
 								}, {
+									align : 'center',
 									field : 'contractId',
 									title : '合同编号'
 								}, {
+									align : 'center',
 									field : 'contractType',
 									title : '合同类型'
 								}, {
+									align : 'center',
 									field : 'contractCategory',
 									title : '合同种类'
 								}, {
+									align : 'center',
 									field : 'contractTotalPrice',
 									title : '合同总金额'
 								},{
+									align : 'center',
 									field : 'contractSalesName',
 									title : '销售负责人'
 								}, {
+									align : 'center',
 									field : 'contractCommitTime',
 									title : '提交评审时间'
 								}, {
+									align : 'center',
 									field : 'contractApprovalStatus',
 									title : '合同审批状态'
-								},{
-									field : '', 
-									title : '详细信息' 
 								}
+//								,{
+//									field : '', 
+//									title : '详细信息' 
+//								}
 											 ]
 					});
 // 导入弹出层

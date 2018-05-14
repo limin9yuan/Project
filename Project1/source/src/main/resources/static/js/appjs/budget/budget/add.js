@@ -6,7 +6,7 @@ $().ready(function() {
 	loadCrmData("/system/sysDept/listDic","deptId");
 	loadCrmData("/inner/innerOrgEmployee/listDic","projectSupervisor");
 	loadCrmData("/inner/innerOrgEmployee/listDic","projectOwner");
-	loadCrmData("/sales/salesProject/listAllDic","projectId");
+	loadCrmData("/project/project/listDic","projectId");
 	loadCrmData("/sales/companyCustomer/listDic","customerId");
 	loadCrmData("/sales/business/listDic","businessId");
 	loadCrmData("/contract/contract/listDic","contractId");
@@ -39,6 +39,11 @@ $().ready(function() {
 
 	//获取项目描述
 	$("#projectId").bind("change", getProjectId);
+	//获取服务收入（合同额）
+	$("#projectId").bind("change", getBudgetServiceRevenue);
+	//获取项目计划利润率
+	//$("#projectGategory").bind("change", getType);
+	
 });
 
 $.validator.setDefaults({
@@ -56,6 +61,20 @@ function getProjectId(){
 		success : function(data) {
 			var result = data.project;
 			$("textarea[name='projectDescription']").val(result.projectDescription);
+		}
+	});
+}
+
+function getBudgetServiceRevenue(){
+	$.ajax({
+		url : '/budget/budget/getBudgetServiceRevenue/' + $("#projectId").val(),
+		type : "get",
+		data : {
+			'projectId' : $("#projectId").val()
+		},
+		success : function(data) {
+			var result = data.project;
+			$("input[name='budgetServiceRevenue']").val(result.budgetServiceRevenue);
 		}
 	});
 }
@@ -85,6 +104,8 @@ function save() {
 	});
 
 }
+
+
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
@@ -114,7 +135,7 @@ function validateRule() {
 			},
 			businessId: {
 				required : true
-			},
+			},/*
 			budgetAccountReceivable: {
 				required : true,
 				maxlength:20
@@ -162,7 +183,7 @@ function validateRule() {
 			budgetProfit: {
 				required : true,
 				maxlength:20
-			},
+			},*/
 			province: {
 				required : true
 			},
@@ -198,7 +219,7 @@ function validateRule() {
 			businessId : {
 				required : icon + "请选择业务名称"
 			},
-			budgetAccountReceivable : {
+			/*budgetAccountReceivable : {
 				required : icon + "请选择应收账款总额",
 				maxlength:icon + "字符长度不能大于20"
 			},
@@ -245,7 +266,7 @@ function validateRule() {
 			budgetProfit : {
 				required : icon + "请选择利润",
 				maxlength:icon + "字符长度不能大于20"
-			},
+			},*/
 			province : {
 				required : icon + "请选择省"
 			},
@@ -273,3 +294,35 @@ function nextStepThis(tabId,totalStep,lastBtn,nextBtn){
 
 	}
 }
+
+function getType(){
+	//项目类别
+	var projectGategory=$("#projectGategory").val();
+	//人工成本
+	var budgetLaborCost=$("#budgetLaborCost").val();
+	//差旅成本
+	var budgetTravelCost=$("#budgetTravelCost").val();
+	//采购成本
+	var budgetPurchaseCost=$("#budgetPurchaseCost").val();
+	if(projectGategory=="老项目"){
+		//计划利润率
+		var budgetProfitRate=$("#budgetProfitRate").val(50);
+	}
+	if(projectGategory=="软件项目技术开发类"){
+		//计划利润率
+		var budgetProfitRate=$("#budgetProfitRate").val(50);
+	}
+	if(projectGategory=="软硬件混合项目软件为主"){
+		//计划利润率
+		var budgetProfitRate=$("#budgetProfitRate").val(40);
+	}
+	if(projectGategory=="软硬件混合项目硬件为主"){
+		//计划利润率
+		var budgetProfitRate=$("#budgetProfitRate").val(35);
+	}
+	if(projectGategory=="硬件类"){
+		//计划利润率
+		var budgetProfitRate=$("#budgetProfitRate").val(25);
+	}
+	
+};

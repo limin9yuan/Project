@@ -61,7 +61,7 @@ public class ContractApprovalDO implements Serializable {
 	//附件
 	private String contractAttachment;
 	//审批状态
-	private Integer contractApprovalStatus;
+	private String contractApprovalStatus;
 	//操作人
 	private String contractOperator;
 	//操作时间
@@ -70,9 +70,22 @@ public class ContractApprovalDO implements Serializable {
 	private String projectId;
 	// 销售负责人姓名
 	private String contractSalesName;
+	//管理层标识
+	private Integer Identification;
 	
 	
-	
+	/*
+	 * 管理层标识
+	 */
+	public Integer getIdentification() {
+		return Identification;
+	}
+	/*
+	 * 管理层标识
+	 */
+	public void setIdentification(Integer identification) {
+		Identification = identification;
+	}
 	public String getContractSalesName() {
 		return contractSalesName;
 	}
@@ -352,13 +365,13 @@ public class ContractApprovalDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setContractApprovalStatus(Integer contractApprovalStatus) {
+	public void setContractApprovalStatus(String contractApprovalStatus) {
 		this.contractApprovalStatus = contractApprovalStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public Integer getContractApprovalStatus() {
+	public String getContractApprovalStatus() {
 		return contractApprovalStatus;
 	}
 	/**

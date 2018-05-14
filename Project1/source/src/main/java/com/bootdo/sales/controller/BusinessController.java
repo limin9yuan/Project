@@ -66,6 +66,7 @@ public class BusinessController extends BaseController {
 	@RequiresPermissions("sales:business:business")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
+		params.put("businessOperator", (Long.toString(getUserId())));
 		Query query = new Query(params);
 		List<BusinessDO> businessList = businessService.list(query);
 		int total = businessService.count(query);

@@ -73,7 +73,11 @@ public class ContractDO implements Serializable {
 	
 	//收款合计金额
 	private BigDecimal contractReceivablePrice;
-
+	
+	
+	//服务收入（合同额）
+	private BigDecimal budgetServiceRevenue;
+	
 	//**********************流程相关属性****************************
 	//流程任务ID
 	private String taskId;
@@ -91,6 +95,21 @@ public class ContractDO implements Serializable {
 	private String processInstanceId;
 	//流程审批时间
 	private Date contractApprovalTime;
+	//管理层标识
+	private String Identification;
+	
+	/*
+	 * 管理层标识
+	 */
+    public String getIdentification() {
+		return Identification;
+	}
+    /*
+	 * 管理层标识
+	 */
+	public void setIdentification(String identification) {
+		Identification = identification;
+	}
     //主送人id
     private String mainPersonId;
     //抄送人id
@@ -498,6 +517,14 @@ public class ContractDO implements Serializable {
 
 	public void setContractReceivablePrice(BigDecimal contractReceivablePrice) {
 		this.contractReceivablePrice = contractReceivablePrice;
+	}
+
+	public BigDecimal getBudgetServiceRevenue() {
+		return budgetServiceRevenue;
+	}
+
+	public void setBudgetServiceRevenue(BigDecimal budgetServiceRevenue) {
+		this.budgetServiceRevenue = budgetServiceRevenue;
 	}
 	
 }

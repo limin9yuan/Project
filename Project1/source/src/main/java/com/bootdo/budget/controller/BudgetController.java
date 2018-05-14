@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.contract.domain.ContractDO;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -95,6 +96,8 @@ public class BudgetController extends BaseController {
 	@RequiresPermissions("budget:budget:budget")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		params.put("budgetOperator", (getUserId()));
+		params.put("Identification", (getIdentification()));
 				if (params.get("projectOwner") != null && !"".equals(params.get("projectOwner"))) {
 					params.put("projectOwner", "%" + (String) params.get("projectOwner") + "%");
 				}
@@ -110,10 +113,57 @@ public class BudgetController extends BaseController {
 	String add(){
 	    return "budget/budget/add";
 	}
+	
+	@RequestMapping("/getTotal/{budgetId}")
+	@ResponseBody
+	Map<String, Object> getTotal(@PathVariable("budgetId") String budgetId) {
+		BudgetDO budget = budgetService.getTotal(budgetId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		//System.out.println(budget.getContractReceivablePrice());
+		returnData.put("budget", budget);
+		return returnData;
+	}
+	
+	@RequestMapping("/setSoftware/{budgetId}")
+	@ResponseBody
+	Map<String, Object> setSoftware(@PathVariable("budgetId") String budgetId) {
+		BudgetDO budget = budgetService.setSoftware(budgetId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		//System.out.println(budget.getContractReceivablePrice());
+		returnData.put("budget", budget);
+		return returnData;
+	}
+	
+	@RequestMapping("/setOldProject/{budgetId}")
+	@ResponseBody
+	Map<String, Object> setOldProject(@PathVariable("budgetId") String budgetId) {
+		BudgetDO budget = budgetService.setOldProject(budgetId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		//System.out.println(budget.getContractReceivablePrice());
+		returnData.put("budget", budget);
+		return returnData;
+	}
+	
+	@RequestMapping("/setBlender/{budgetId}")
+	@ResponseBody
+	Map<String, Object> setBlender(@PathVariable("budgetId") String budgetId) {
+		BudgetDO budget = budgetService.setBlender(budgetId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		//System.out.println(budget.getContractReceivablePrice());
+		returnData.put("budget", budget);
+		return returnData;
+	}
+	
 	@RequestMapping("/edit_ajax/{budgetId}")
 	@ResponseBody
 	Map<String, Object> edit_ajax(@PathVariable("budgetId") String budgetId) {
 		BudgetDO budget = budgetService.get(budgetId);
+		/*if(budget.getProjectGategory()=="老项目"){
+			budgetService.setOldProject(budgetId);
+		}
+		if(budget.getProjectGategory()=="软件项目（技术开发类）"){
+			budgetService.setSoftware(budgetId);		
+		}*/
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		returnData.put("budget", budget);
 		return returnData;
@@ -190,6 +240,28 @@ public class BudgetController extends BaseController {
 		returnData.put("project", project);
 		return returnData;
 	}
+	
+	@RequestMapping("/getBudgetServiceRevenue/{projectId}")
+	@ResponseBody
+	Map<String, Object> getBudgetServiceRevenue(@PathVariable("projectId") String projectId) {
+		ProjectDO project = budgetService.getBudgetServiceRevenue(projectId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("project", project);
+		return returnData;
+	}
+	
+	
+/*	
+	
+	@RequestMapping("/getBudgetLaborCost/{budgetId}")
+	@ResponseBody
+	Map<String, Object> getBudgetLaborCost(@PathVariable("budgetId") String budgetId) {
+		//BudgetDO budget = budgetService.getBudgetLaborCost(budgetId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		//System.out.println(budget.getContractReceivablePrice());
+		//returnData.put("budget", budget);
+		return returnData;
+	}*/
 	/**
 	 * 导出
 	 */

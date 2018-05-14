@@ -32,8 +32,22 @@ public class UserDO implements Serializable {
     private Date gmtModified;
     //角色
     private List<Long> roleIds;
+    //管理层标识
+    private Integer Identification;
+    /*
+     * 管理层标识
+     */
+    public Integer getIdentification() {
+		return Identification;
+	}
+    /*
+     * 管理层标识
+     */
+	public void setIdentification(Integer identification) {
+		Identification = identification;
+	}
 
-    /**
+	/**
      * 设置：
      */
     public void setUserId(Long userId) {

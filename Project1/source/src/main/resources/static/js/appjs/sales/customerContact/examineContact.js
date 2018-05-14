@@ -24,20 +24,20 @@ $().ready(
 						loadCrmDataValue("/sales/companyCustomer/listDic","customerId", result.customerId);// 客户编号
 						loadCrmDataValue("/sales/customerDept/listDic", "contactDept",result.contactDept);// 部门
 						 loadCrmDataValue("/sales/customerJob/listDic", "contactJob",result.contactJob);// 岗位
-						if (address == null) {
-							address = new addressResolve({
-								proId : 'province',
-								cityId : 'city',
-								areaId : 'area',
-								customerId : 'customerId'
-							}, {
-								proId : result.province,
-								cityId : 'city',
-								areaId : 'area',
-								customerId : 'customerId'
-							});
-							address.init();
-						}
+//						if (address == null) {
+//							address = new addressResolve({
+//								proId : 'province',
+//								cityId : 'city',
+//								areaId : 'area',
+//								customerId : 'customerId'
+//							}, {
+//								proId : result.province,
+//								cityId : 'city',
+//								areaId : 'area',
+//								customerId : 'customerId'
+//							});
+//							address.init();
+//						}
 						// loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
 					});
 			$('#myTab a[href="#userDefine"]').on('shown.bs.tab', function(e) {

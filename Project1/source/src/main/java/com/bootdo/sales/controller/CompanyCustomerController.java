@@ -119,8 +119,9 @@ public class CompanyCustomerController extends BaseController {
 	@GetMapping("/list")
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
 	public PageUtils list(@RequestParam Map<String, Object> params, Model model) {
+//		companyCustomer.setCurrentUser((Long.toString(getUserId())));
 		// 查询列表数据
-
+		params.put("customerOperator", (Long.toString(getUserId())));
 		Query query = new Query(params);
 		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.list(query);
 		int total = companyCustomerService.count(query);

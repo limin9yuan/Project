@@ -16,9 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bootdo.budget.domain.BudgetDO;
 import com.bootdo.budget.domain.BudgetPurchaseDO;
 import com.bootdo.budget.domain.ExpensesDO;
+import com.bootdo.budget.domain.LaborDO;
 import com.bootdo.budget.service.BudgetPurchaseService;
+import com.bootdo.budget.service.BudgetService;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
@@ -37,6 +40,8 @@ import com.bootdo.common.utils.R;
 public class BudgetPurchaseController extends BaseController {
 	@Autowired
 	private BudgetPurchaseService budgetPurchaseService;
+	@Autowired
+	private BudgetService budgetService;
 	
 	@GetMapping()
 	@RequiresPermissions("budget:budget:budget")
@@ -90,7 +95,34 @@ public class BudgetPurchaseController extends BaseController {
 	@RequiresPermissions("budget:budget:add")
 	public R save( BudgetPurchaseDO purchase){
 		purchase.setPurchaseOperator(getUserId());
+
 		if(budgetPurchaseService.save(purchase)>0){
+			BudgetDO budget= budgetService.get(purchase.getBudgetId());
+			String budgetId= budget.getBudgetId();
+			System.out.println(budgetId);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateSoftware(budgetId);	
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
 			return R.ok();
 		}
 		return R.error();
@@ -101,10 +133,40 @@ public class BudgetPurchaseController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("budget:budget:edit")
-	public R update( BudgetPurchaseDO purchase){
+	public R update( BudgetPurchaseDO purchase,String purchaseId){
 		purchase.setPurchaseOperator(getUserId());
-		budgetPurchaseService.update(purchase);
-		return R.ok();
+		//budgetPurchaseService.update(purchase);
+		BudgetPurchaseDO purchase2= budgetPurchaseService.get(purchaseId);
+		BudgetDO budget= budgetService.get(purchase2.getBudgetId());
+		String budgetId=budget.getBudgetId();
+		if(budgetPurchaseService.update(purchase)>0){
+			System.out.println(budgetId);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateSoftware(budgetId);	
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			return R.ok();
+		}
+		return R.error();
 	}
 	
 	/**
@@ -114,8 +176,37 @@ public class BudgetPurchaseController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("budget:budget:remove")
 	public R remove( String purchaseId){
+
+		BudgetPurchaseDO purchase2= budgetPurchaseService.get(purchaseId);
+		BudgetDO budget= budgetService.get(purchase2.getBudgetId());
+		String budgetId=budget.getBudgetId();
+		System.out.println(budgetId);
 		if(budgetPurchaseService.remove(purchaseId)>0){
-		return R.ok();
+			System.out.println(budgetId);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateSoftware(budgetId);	
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -127,8 +218,39 @@ public class BudgetPurchaseController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("budget:budget:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] purchaseIds){
-		budgetPurchaseService.batchRemove(purchaseIds);
+		//budgetPurchaseService.batchRemove(purchaseIds);
+		BudgetPurchaseDO purchase2=budgetPurchaseService.get(purchaseIds[0]);
+		BudgetDO budget= budgetService.get(purchase2.getBudgetId()); 
+		String budgetId=budget.getBudgetId();
+		System.out.println(budgetId);
+		if(budgetPurchaseService.batchRemove(purchaseIds)>0){
+			System.out.println(budget);
+			if("软件项目技术开发类".equals(budget.getProjectGategory().toString())){
+				//BigDecimal budgetLaborCost =budget.getBudgetLaborCost().add(labor.getLaborTotalCost());
+				//budget.setBudgetCost(budgetLaborCost);
+				//budgetService.update(budget);
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateSoftware(budgetId);	
+			}
+			if("老项目".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateOldProject(budgetId);	
+			}
+			if("硬件类".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目软件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
+			if("软硬件混合项目硬件为主".equals(budget.getProjectGategory().toString())){
+				budgetService.updateBudgetPurchaseCost(budgetId);
+				budgetService.updateBlender(budgetId);	
+			}
 		return R.ok();
+		}
+		return R.error();
 	}
 	
 }

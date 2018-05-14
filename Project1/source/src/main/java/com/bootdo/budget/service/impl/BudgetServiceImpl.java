@@ -4,6 +4,7 @@ import com.bootdo.activiti.config.ActivitiConstant;
 import com.bootdo.activiti.service.impl.ActTaskServiceImpl;
 import com.bootdo.contract.domain.ContractDO;
 import com.bootdo.inner.domain.InnerOrgEmployeeDO;
+
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -122,6 +123,62 @@ public class BudgetServiceImpl implements BudgetService {
 	public ProjectDO getProjectId(String projectId) {
 		return budgetDao.getProjectId(projectId);
 	}	
+	
+	@Override
+	public BudgetDO getTotal(String budgetId) {
+		return budgetDao.getTotal(budgetId);
+	}
+	
+	@Override
+	public BudgetDO setOldProject(String budgetId) {
+		return budgetDao.setOldProject(budgetId);
+	}
+	
+	@Override
+	public ProjectDO getBudgetServiceRevenue(String projectId) {
+		return budgetDao.getBudgetServiceRevenue(projectId);
+	}
+	
+	@Override
+	public int updateBudgetLaborCost(String budgetId) {
+		return budgetDao.updateBudgetLaborCost(budgetId);
+	}
+	
+	@Override
+	public int updateBudgetTravelCost(String budgetId) {
+		return budgetDao.updateBudgetTravelCost(budgetId);
+	}
+	
+	@Override
+	public int updateBudgetPurchaseCost(String budgetId) {
+		return budgetDao.updateBudgetPurchaseCost(budgetId);
+	}
+	
+	@Override
+	public BudgetDO setSoftware(String budgetId) {
+		return budgetDao.setSoftware(budgetId);
+	}
+	
+	@Override
+	public BudgetDO setBlender(String budgetId) {
+		return budgetDao.setBlender(budgetId);
+	}
+	
+	@Override
+	public int updateSoftware(String budgetId) {
+		return budgetDao.updateSoftware(budgetId);
+	}
+	
+	@Override
+	public int updateOldProject(String budgetId) {
+		return budgetDao.updateOldProject(budgetId);
+	}
+	
+	@Override
+	public int updateBlender(String budgetId) {
+		return budgetDao.updateBlender(budgetId);
+	}
+
 	/**
 	 * 导出Excel写入文件方法
 	 */
@@ -332,5 +389,8 @@ public class BudgetServiceImpl implements BudgetService {
 		/*for (int i = 0; i < returnDate.size(); i++) {
 		}*/
 	}
+
+	
+	
 }
 

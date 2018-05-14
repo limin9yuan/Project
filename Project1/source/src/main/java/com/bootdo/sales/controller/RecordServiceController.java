@@ -85,6 +85,7 @@ public class RecordServiceController extends BaseController {
 	@RequiresPermissions("sales:recordService:recordService")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
+		params.put("serviceRecorder", getUserId());
 		if (params.get("deliveryContent") != null && params.get("deliveryContent") != "") {
 			params.put("deliveryContent", "%" + params.get("deliveryContent") + "%");
 		}

@@ -51,6 +51,7 @@ public class BugCategoryController extends BaseController {
 	@RequiresPermissions("sales:bugCategory:bugCategory")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
+		params.put("bugRecorder", (getUserId()));
         Query query = new Query(params);
 		List<BugCategoryDO> bugCategoryList = bugCategoryService.list(query);
 		int total = bugCategoryService.count(query);

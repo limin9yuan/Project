@@ -42,6 +42,7 @@
 		left join sys_user f on a.`Project_Operator`=f.`user_id`
 		left join sales_company_customer g on a.`Customer_ID`=g.`Customer_ID`
         <where>  
+        		  <if test="projectOperator !=null and projectOperator !=''">and a.Project_Operator=#{projectOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Project_Operator and Table_Name='pre_sales_project')</if>
 		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
 		  		  <if test="projectBusiness != null and projectBusiness != ''"> and Project_Business = #{projectBusiness} </if>
 		  		  <if test="projectCreator != null and projectCreator != ''"> and Project_Creator = #{projectCreator} </if>
@@ -55,7 +56,6 @@
 		  		  <if test="projectOldId != null and projectOldId != ''"> and Project_Old_ID = #{projectOldId} </if>
 		  		  <if test="projectRemarks != null and projectRemarks != ''"> and Project_Remarks = #{projectRemarks} </if>
 		  		  <if test="projectCreateTime != null and projectCreateTime != ''"> and Project_Create_Time = #{projectCreateTime} </if>
-		  		  <if test="projectOperator != null and projectOperator != ''"> and Project_Operator = #{projectOperator} </if>
 		  		  <if test="projectOperateTime != null and projectOperateTime != ''"> and Project_Operate_Time = #{projectOperateTime} </if>
 		  		  
 		  		  <if test="province != null and province != ''"> and g.Customer_Province = #{province} </if>
@@ -87,6 +87,7 @@
 		left join sys_user f on a.`Project_Operator`=f.`user_id`
 		left join sales_company_customer g on a.`Customer_ID`=g.`Customer_ID`
 		<where>  
+				  <if test="projectOperator !=null and projectOperator !=''">and a.Project_Operator=#{projectOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Project_Operator and Table_Name='pre_sales_project')</if>
 		  		  <if test="projectId != null and projectId != ''"> and Project_ID = #{projectId} </if>
 		  		  <if test="projectBusiness != null and projectBusiness != ''"> and Project_Business = #{projectBusiness} </if>
 		  		  <if test="projectCreator != null and projectCreator != ''"> and Project_Creator = #{projectCreator} </if>
@@ -100,7 +101,6 @@
 		  		  <if test="projectOldId != null and projectOldId != ''"> and Project_Old_ID = #{projectOldId} </if>
 		  		  <if test="projectRemarks != null and projectRemarks != ''"> and Project_Remarks = #{projectRemarks} </if>
 		  		  <if test="projectCreateTime != null and projectCreateTime != ''"> and Project_Create_Time = #{projectCreateTime} </if>
-		  		  <if test="projectOperator != null and projectOperator != ''"> and Project_Operator = #{projectOperator} </if>
 		  		  <if test="projectOperateTime != null and projectOperateTime != ''"> and Project_Operate_Time = #{projectOperateTime} </if>
 		  		  
 		  		  <if test="province != null and province != ''"> and g.Customer_Province = #{province} </if>

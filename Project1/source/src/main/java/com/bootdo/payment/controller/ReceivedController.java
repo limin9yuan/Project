@@ -61,6 +61,8 @@ public class ReceivedController extends BaseController {
 	@RequiresPermissions("payment:received:received")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
+		params.put("receivedOperator", (getUserId()));
+		params.put("Identification", (getIdentification()));
 		if (params.get("saleManager") != null && params.get("saleManager") != "") {
 			params.put("saleManager", "%" + params.get("saleManager") + "%");
 		}

@@ -63,9 +63,22 @@ public class ReceivedDO implements Serializable {
 	private String receivableDate;
 	//收款延迟时间
 	private Integer receiptDelayTime;
+	//管理层标识
+	private Integer Identification;
 	
 	
-	
+	/*
+	 * 管理层标识
+	 */
+	public Integer getIdentification() {
+		return Identification;
+	}
+	/*
+	 * 管理层标识
+	 */
+	public void setIdentification(Integer identification) {
+		Identification = identification;
+	}
 	public String getCustomerId() {
 		return customerId;
 	}

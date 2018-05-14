@@ -1,5 +1,5 @@
 var prefix = "/budget/budget"
-var prefixlabor = "/budget/labor"
+var prefixLabor = "/budget/labor"
 
 
 function loadLabor() {
@@ -7,7 +7,7 @@ function loadLabor() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefixlabor + "/list", // 服务器数据的加载地址
+						url : prefixLabor + "/list", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -110,7 +110,7 @@ function addLabor() {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '900px', '95%' ],
 		//content : prefix + '/add' // iframe的url
-		content : prefixlabor + '/add/'+$('#budgetId').val() // iframe的url
+		content : prefixLabor + '/add/'+$('#budgetId').val() // iframe的url
 	});
 }
 function editLabor(id) {
@@ -120,7 +120,7 @@ function editLabor(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '900px', '95%' ],
-		content : prefixlabor + '/edit/' + id // iframe的url
+		content : prefixLabor + '/edit/' + id // iframe的url
 	});
 }
 function removeLabor(id) {
@@ -128,7 +128,7 @@ function removeLabor(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefixlabor+"/remove",
+			url : prefixLabor+"/remove",
 			type : "post",
 			data : {
 				'laborId' : id
@@ -167,7 +167,7 @@ function batchRemoveLabor() {
 			data : {
 				"ids" : ids
 			},
-			url : prefixlabor + '/batchRemove',
+			url : prefixLabor + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
