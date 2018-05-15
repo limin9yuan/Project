@@ -43,7 +43,7 @@ public class AdditionalRecordsDO implements Serializable {
 	//备注
 	private String recordRemarks;
 	//审批状态
-	private String recordApprovalStatus;
+	private Integer recordApprovalStatus;
 	//创建人
 	private Long recordOperator; 
 	//创建人姓名
@@ -89,16 +89,6 @@ public class AdditionalRecordsDO implements Serializable {
 	private String taskComment;
 	//流程实例ID
 	private String processInstanceId;
-	//流程审批时间
-	private Date recordApprovalTime;
-
-	public Date getRecordApprovalTime() {
-		return recordApprovalTime;
-	}
-
-	public void setRecordApprovalTime(Date recordApprovalTime) {
-		this.recordApprovalTime = recordApprovalTime;
-	}
 
 	public String getMainPersonId() {
 		return mainPersonId;
@@ -324,13 +314,13 @@ public class AdditionalRecordsDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setRecordApprovalStatus(String recordApprovalStatus) {
+	public void setRecordApprovalStatus(Integer recordApprovalStatus) {
 		this.recordApprovalStatus = recordApprovalStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public String getRecordApprovalStatus() {
+	public Integer getRecordApprovalStatus() {
 		return recordApprovalStatus;
 	}
 	/**

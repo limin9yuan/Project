@@ -74,18 +74,6 @@ function load() {
 										return e + d + f;
 									}
 								},{
-									align : 'center',
-									formatter : function(value, row, index) {
-										if (row.recordApprovalStatus != null) {
-											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
-											+ row.processInstanceId
-											+ '\')">'
-											+ row.recordApprovalStatus + '</a> ';
-											return a;
-										}
-									},
-									title : '合同审批状态'
-								},{
 									field : 'contractRecordName',
 									title : '申请人姓名'
 								},{
@@ -109,6 +97,9 @@ function load() {
 								},{
 									field : 'recordCommitTime',
 									title : '提交评审时间'
+								},{
+									field : 'recordApprovalStatus',
+									title : '合同审批状态'
 								}
 																]
 					});
@@ -128,16 +119,6 @@ function load() {
     $("div[name='additionalRecords_window'] button[name='tab_excelinsertQuitbtn']").click(function () {
         $("div[name='additionalRecords_window']").modal('hide')
     })
-}
-function taskTrace(processInstanceId){
-	layer.open({
-		type : 2,
-		title : '流程跟踪',
-		maxmin : true,
-		shadeClose : false,
-		area : [ '95%', '95%'],
-		content : '/activiti/task/taskTrace/'+processInstanceId
-	});
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');

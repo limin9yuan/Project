@@ -15,7 +15,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.project.domain.ProjectDO">
-		select DISTINCT a.`Project_ID`,
+		select a.`Project_ID`,
 		a.`Customer_ID`,g.`Customer_Name`as `Customer_Name`,
 		`Collection_ID`,a.`Project_Name`,
 		`Project_Related_ID`,
@@ -37,7 +37,7 @@
 		left join sys_user f on a.`Project_Creator`=f.`user_id`
 		left join sales_company_customer g on a.`Customer_ID`=g.`Customer_ID`
 		left join sys_dept h on a.`Dept_ID`=h.`dept_id`
-		left join sys_user i on a.`Project_Operator`=i.`user_id`
+		left join sys_user i on a.`Project_Operator`=i.`user_id`		
 		<where>  
 			<if test="projectId != null and projectId != ''"> and a.Project_ID LIKE #{projectId}</if>
 			<if test="customerId != null and customerId != ''"> and a.Customer_ID LIKE #{customerId}</if>
@@ -57,11 +57,7 @@
 			<if test="projectDescription != null and projectDescription != ''"> and Project_Description = #{projectDescription} </if>
 			<if test="projectOldId != null and projectOldId != ''"> and Project_Old_ID = #{projectOldId} </if>
 			<if test="projectRemarks != null and projectRemarks != ''"> and Project_Remarks = #{projectRemarks} </if>
-			<if test="userId != null and userId != ''"> and (a.Project_Operator = #{userId}
-														OR EXISTS(SELECT 1 FROM main_and_copy_person j
-														LEFT JOIN inner_org_employee k on j.employee_id = k.employee_id
-														WHERE k.Inner_User_ID = #{userName} and j.table_name = #{tableName} AND j.t_id = a.Project_ID)
-														OR EXISTS(SELECT 1 from sys_user WHERE user_id = #{userId} and Identification = '1')) </if>
+			<if test="projectOperator != null and projectOperator != ''"> and Project_Operator = #{projectOperator} </if>
 			<if test="projectOperateTime != null and projectOperateTime != ''"> and Project_Operate_Time = #{projectOperateTime} </if>
 			<if test="projectCreator != null and projectCreator != ''"> and Project_Creator = #{projectCreator} </if>
 			<if test="projectCreateTime != null and projectCreateTime != ''"> and Project_Create_Time = #{projectCreateTime} </if>

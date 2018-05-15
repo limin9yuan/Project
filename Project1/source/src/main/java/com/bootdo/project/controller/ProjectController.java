@@ -78,9 +78,6 @@ public class ProjectController extends BaseController {
 	@GetMapping("/list")
 	@RequiresPermissions("project:project:project")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
-		params.put("userId", getUserId());
-		params.put("userName", getUsername());
-		params.put("tableName", "development_project");
 		// 查询列表数据
 		if (params.get("projectId") != null && !"".equals(params.get("projectId"))) {
 			params.put("projectId", "%" + (String) params.get("projectId") + "%");

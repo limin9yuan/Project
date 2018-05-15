@@ -81,13 +81,6 @@ public class AdditionalRecordsServiceImpl implements AdditionalRecordsService {
 		vars.put("taskAction",  additionalRecords.getTaskAction() );
 		actTaskService.complete(additionalRecords.getTaskId(),additionalRecords.getProcessInstanceId(),
 				additionalRecords.getTaskComment(),"",vars);
-		//判断流程是否结束
-		if (actTaskService.isProcessInstanceFinish(additionalRecords.getProcessInstanceId())){
-			additionalRecords.setRecordApprovalStatus("1");
-			additionalRecords.setRecordApprovalTime(new Date());
-		}else {
-			additionalRecords.setRecordApprovalStatus("0");
-		}
 
 		return additionalRecordsDao.update(additionalRecords);
 	}
@@ -232,7 +225,7 @@ public class AdditionalRecordsServiceImpl implements AdditionalRecordsService {
 						} else if (j == 8) {
 							additionalRecordsDO.setRecordRemarks(cellvalue);
 						} else if (j == 9) {
-							additionalRecordsDO.setRecordApprovalStatus("j");
+							additionalRecordsDO.setRecordApprovalStatus(j);
 						} else if (j == 10) {
 							additionalRecordsDO.setRecordCommitTime(cellvalue);
 						} else if (j == 11) {
@@ -372,7 +365,7 @@ public class AdditionalRecordsServiceImpl implements AdditionalRecordsService {
 					// 审批状态
 					String recordApprovalStatus = "";
 					if (report.getRecordApprovalStatus() != null) {
-						String recordApprovalStatus1 = report.getRecordApprovalStatus();
+						Integer recordApprovalStatus1 = report.getRecordApprovalStatus();
 						recordApprovalStatus = String.valueOf(recordApprovalStatus1);
 					}
 					hssfRow.createCell(10).setCellValue(recordApprovalStatus);

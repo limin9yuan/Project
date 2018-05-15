@@ -51,7 +51,7 @@ function load(deptId) {
 					},
 					{
 						field : 'userId', // 列字段名
-						title : '用户Id' // 列标题
+						title : '序号' // 列标题
 					},
 					{
 						field : 'name',
