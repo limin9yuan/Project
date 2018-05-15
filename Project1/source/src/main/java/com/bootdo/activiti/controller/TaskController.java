@@ -7,6 +7,7 @@ import com.bootdo.activiti.vo.TaskVO;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.R;
 import com.bootdo.common.utils.ShiroUtils;
+import com.bootdo.contract.domain.TravelDO;
 import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.service.UserService;
 
@@ -21,6 +22,8 @@ import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.task.Task;
+import org.activiti.engine.task.TaskQuery;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -252,6 +255,77 @@ public class TaskController {
     	model.addAttribute("processInstanceId", pProcessInstanceId);
         return new ModelAndView("act/task/taskTrace");
     }
-
+    //变更处理人
+    @GetMapping("/changeAssigned")
+    ModelAndView changeAssigned(){
+        return new ModelAndView("act/task/changeAssigned");
+    }
+    
+   //变更处理人
+    @GetMapping("/changeAssignedList")
+    PageUtils changeAssignedList(int offset, int limit){
+    	HistoricProcessInstanceQuery finishedQuery;
+    	//未完流程
+    	/*
+    	finishedQuery = historyService.createHistoricProcessInstanceQuery()
+        			.unfinished().includeProcessVariables().orderByProcessInstanceEndTime().desc();
+    	*/
+    	// 
+    	TaskQuery taskQuery= taskService.createTaskQuery();//.includeProcessVariables().orderByTaskCreateTime().desc().listPage(offset, limit);
+   
+        List<TaskVO> taskVOS =  new ArrayList<>();
+        int count = (int) taskQuery.count();
+        List<Task> tasks=  taskQuery.includeProcessVariables().orderByTaskCreateTime().desc().listPage(offset, limit);
+        
+        for(Task instance : tasks){
+            TaskVO taskVO = new TaskVO(instance);
+         // 获取流程定义
+            ProcessDefinitionEntity processDefinition = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)
+                    .getDeployedProcessDefinition(instance.getProcessDefinitionId());
+            taskVO.setProcessName(processDefinition.getName());
+            
+        	
+        	HistoricProcessInstance historicProcessInstance = historyService.createHistoricProcessInstanceQuery()
+                    .processInstanceId(instance.getProcessInstanceId()).singleResult();
+            if(historicProcessInstance!=null){
+            	UserDO user=userService.getByUsername(historicProcessInstance.getStartUserId());
+            	taskVO.setStartUserName(user.getName());
+            	taskVO.setStartDate(historicProcessInstance.getStartTime());
+            }
+            if(taskVO.getAssignee()!=null&&!taskVO.getAssignee().equals("")){
+            	UserDO user=userService.getByUsername(taskVO.getAssignee());
+            	taskVO.setAssigneeName(user.getName());
+            }else{
+            	taskVO.setAssigneeName("未签收");
+            }
+        	
+        	Map<String,Object> varIns=instance.getProcessVariables();
+        	if(varIns!=null&&varIns.get("title")!=null){
+        		taskVO.setTitle(varIns.get("title").toString());
+        	}
+            taskVOS.add(taskVO);
+        }
+        
+        PageUtils pageUtils = new PageUtils(taskVOS, count);
+        return pageUtils;
+    }
+    //变更处理人目录树选择
+    @GetMapping("/userTree/{taskId}")
+    ModelAndView userTree(@PathVariable("taskId") String taskId,Model model){
+    	model.addAttribute("taskId", taskId);
+        return new ModelAndView("act/task/userTree");
+    }
+    
+    //变更处理人提交
+   	@ResponseBody
+   	@RequestMapping("/changeAssignedUpdate/{taskId}/{userId}")
+   	public R changeAssignedUpdate(@PathVariable("taskId") String taskId,@PathVariable("userId") String userId){
+   		try{
+	   		actTaskService.changeAssigned(taskId, userId);;
+	   		return R.ok();
+   		}catch(Exception e){
+    		return R.error();
+    	}
+   	}
 
 }

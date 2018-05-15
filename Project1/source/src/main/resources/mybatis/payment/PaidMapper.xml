@@ -28,7 +28,7 @@
 			      <if test="userId != null and userId != ''"> and (a.Paid_Operator=#{userId}
 								or exists (select 1 from main_and_copy_person e
 								LEFT JOIN inner_org_employee f on e.Employee_ID = f.Employee_ID
-								where f.Inner_User_ID = #{userName} and e.T_ID = a.Paid_ID and Table_Name=#{tableName})
+								where f.Inner_User_ID = #{userName} and e.T_ID = a.Paid_ID and e.Table_Name=#{tableName})
 								or exists (select 1 from sys_user  where Identification='1' and user_id=#{userId}))</if>
 		  		  <if test="paidId != null and paidId != ''"> and Paid_ID = #{paidId} </if>
 		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>

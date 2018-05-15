@@ -62,74 +62,74 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.invoiceId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+										var f = '<a class="btn btn-success btn-sm" '+s_view_h+' href="#" title="备用"  mce_href="#" onclick="view(\''
 												+ row.invoiceId
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+												+ '\')"><i class="fa fa-search"></i></a> ';
+										return e + d +f;
 									}
 								},{
-									field : 'invoiceId', 
-									title : '发票序号' 
+									field : 'invoiceId',
+									title : '发票序号'
 								},{
-									field : 'invoiceCompany', 
-									title : '开票公司' 
+									field : 'invoiceCompany',
+									title : '开票公司'
 								},{
-									field : 'invoiceNumber', 
-									title : '发票号码' 
+									field : 'invoiceNumber',
+									title : '发票号码'
 								},{
-									field : 'invoicePrice', 
-									title : '发票金额' 
+									field : 'invoicePrice',
+									title : '发票金额'
 								},{
-									field : 'invoiceType', 
-									title : '发票类型' 
+									field : 'invoiceType',
+									title : '发票类型'
 								},{
-									field : 'invoiceContent', 
-									title : '发票内容' 
+									field : 'invoiceContent',
+									title : '发票内容'
 								},{
-									field : 'invoiceDate', 
-									title : '开票日期' 
+									field : 'invoiceDate',
+									title : '开票日期'
 								},{
-									field : 'invoicePersonName', 
-									title : '开票人' 
+									field : 'invoicePersonName',
+									title : '开票人'
 								},{
-									field : 'invoiceReceiverTime', 
-									title : '领取日期' 
+									field : 'invoiceReceiverTime',
+									title : '领取日期'
 								},{
-									field : 'invoiceReceiverName', 
-									title : '发票领取人' 
+									field : 'invoiceReceiverName',
+									title : '发票领取人'
 								},{
-									field : 'invoiceContractStatus', 
-									title : '合同状态' 
+									field : 'invoiceContractStatus',
+									title : '合同状态'
 								},{
-									field : 'invoiceAttachment', 
-									title : '附件' 
+									field : 'invoiceAttachment',
+									title : '附件'
 								}/*,{
-									field : 'projectOwnerName', 
-									title : '项目经理' 
+									field : 'projectOwnerName',
+									title : '项目经理'
 								},{
-									field : 'invoiceProjectName', 
-									title : '项目名称' 
+									field : 'invoiceProjectName',
+									title : '项目名称'
 								}/*,
 																{
-									field : 'contractId', 
-									title : '合同编号' 
+									field : 'contractId',
+									title : '合同编号'
 								},
 																{
-									field : 'businessId', 
-									title : '业务编号' 
+									field : 'businessId',
+									title : '业务编号'
 								},
-																
+
 																{
-									field : 'invoiceRemarks', 
-									title : '备注' 
-								},
-																{
-									field : 'invoiceOperator', 
-									title : '操作人' 
+									field : 'invoiceRemarks',
+									title : '备注'
 								},
 																{
-									field : 'invoiceOperateTime', 
-									title : '操作时间' 
+									field : 'invoiceOperator',
+									title : '操作人'
+								},
+																{
+									field : 'invoiceOperateTime',
+									title : '操作时间'
 								},*/
 																 ]
 					});
@@ -155,6 +155,16 @@ function edit(id) {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
 		content : prefix + '/edit/' + id // iframe的url
+	});
+}
+function view(id) {
+	parent.layer.open({
+		type : 2,
+		title : '编辑',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '95%', '95%' ],
+		content : prefix + '/view/' + id // iframe的url
 	});
 }
 function remove(id) {
@@ -216,8 +226,8 @@ function batchRemove() {
 	});
 }
 function datetimepicker() {
-	 $('#invoiceDate').datetimepicker({  
-	        format: 'YYYY-MM-DD ',  
-	        locale: moment.locale('zh-cn')  
-	    }); 
+	 $('#invoiceDate').datetimepicker({
+	        format: 'YYYY-MM-DD ',
+	        locale: moment.locale('zh-cn')
+	    });
 }

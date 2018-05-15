@@ -23,7 +23,7 @@ $().ready(function() {
     });
 	validateRule();
 	datetimepicker();
-	
+
 	$("#contractId").bind("change", setContractId);
 });
 
@@ -44,7 +44,7 @@ function setContractId(){
 			$("input[name='contractTotalPrice']").val(result.contractTotalPrice);
 			$("input[name='contractInvoiceType']").val(result.contractInvoiceType);
 			$("input[name='contractInvoiceTime']").val(result.contractInvoiceTime);
-			$("input[name='contractReceivablePrice']").val(result.contractReceivablePrice); 
+			$("input[name='contractReceivablePrice']").val(result.contractReceivablePrice);
 		}
 	});
 }
@@ -65,6 +65,9 @@ function save() {
 		},
 		success : function(data) {
 			if (data.code == 0) {
+				if (data.invoiceId > 0) {
+					$('#invoiceIds').val(data.invoiceId);
+				}
 				parent.layer.msg("操作成功");
 				parent.reLoad();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
@@ -147,12 +150,12 @@ function validateRule() {
 	})
 }
 function datetimepicker() {
-	 $('#invoiceDate').datetimepicker({  
-	        format: 'YYYY-MM-DD',  
-	        locale: moment.locale('zh-cn')  
-	    });  
-	 $('#invoiceReceiverTime').datetimepicker({  
-	        format: 'YYYY-MM-DD',  
-	        locale: moment.locale('zh-cn')  
-	    }); 
+	 $('#invoiceDate').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+	 $('#invoiceReceiverTime').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
 }

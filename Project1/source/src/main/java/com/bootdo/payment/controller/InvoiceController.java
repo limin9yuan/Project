@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.common.domain.MainCopyPersonDO;
+import com.bootdo.common.service.MainCopyPersonService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,8 @@ public class InvoiceController extends BaseController {
 	private FileService sysFileService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
+	@Autowired
+	private MainCopyPersonService mainCopyPersonService;
 	
 	@GetMapping()
 	@RequiresPermissions("payment:invoice:invoice")
@@ -62,6 +66,9 @@ public class InvoiceController extends BaseController {
 	@GetMapping("/list")
 	@RequiresPermissions("payment:invoice:invoice")
 	public PageUtils list(@RequestParam Map<String, Object> params){
+		params.put("userId", getUserId());
+		params.put("userName", getUsername());
+		params.put("tableName", "invoice");
 		//查询列表数据
 		params.put("invoiceOperator", (getUserId()));
 		params.put("Identification", (getIdentification()));
@@ -93,7 +100,15 @@ public class InvoiceController extends BaseController {
 	String edit(@PathVariable("invoiceId") String invoiceId,Model model){
 		//InvoiceDO invoice = invoiceService.get(invoiceId);
 		model.addAttribute("invoiceId", invoiceId);
-	    return "payment/invoice/edit";
+		return "payment/invoice/edit";
+	}
+
+	@GetMapping("/view/{invoiceId}")
+	@RequiresPermissions("payment:invoice:edit")
+	String view(@PathVariable("invoiceId") String invoiceId,Model model){
+		//InvoiceDO invoice = invoiceService.get(invoiceId);
+		model.addAttribute("invoiceId", invoiceId);
+		return "payment/invoice/view";
 	}
 	
 	/**
@@ -104,8 +119,43 @@ public class InvoiceController extends BaseController {
 	@RequiresPermissions("payment:invoice:add")
 	public R save( InvoiceDO invoice){
 		invoice.setInvoiceOperator(getUserId());
-		if(invoiceService.save(invoice)>0){
-			return R.ok();
+		if (invoice.getInvoiceReceiverTime().equals("")){
+			invoice.setInvoiceReceiverTime(null);
+		}
+		int invoiceIds = invoiceService.save(invoice);
+		if (invoiceIds > 0) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = invoice.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(invoice.getInvoiceId());
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("invoice");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+			String copyPersonId = invoice.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(invoice.getInvoiceId());
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("invoice");
+					mainCopyPersonService.save(mcp);
+				}
+
+
+			}
+			R r = R.ok();
+			r.put("invoiceId", invoiceIds);
+			return r;
 		}
 		return R.error();
 	}
@@ -116,8 +166,50 @@ public class InvoiceController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("payment:invoice:edit")
 	public R update( InvoiceDO invoice){
+		if (invoice.getInvoiceReceiverTime().equals("")){
+			invoice.setInvoiceReceiverTime(null);
+		}
 		invoice.setInvoiceOperator(getUserId());
+		String invoiceIds = invoice.getInvoiceId();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		params.put("tId",invoiceIds);
+		params.put("tableName","invoice");
 		invoiceService.update(invoice);
+		mainCopyPersonService.remove(params);
+		if (!invoiceIds.equals("")) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = invoice.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(invoiceIds);
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("invoice");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+			String copyPersonId = invoice.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(invoiceIds);
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("invoice");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+		}
 		return R.ok();
 	}
 	

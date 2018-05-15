@@ -33,7 +33,7 @@
 								</div>
 							</div>
 							<!-- <div class="form-group">
-								
+
 							</div> -->
 							<div class="text-right form-group">
 								<div class="columns pull-right col-md-2">
@@ -68,7 +68,7 @@
 			<script type="text/javascript">
 				var s_edit_h = 'hidden';
 				var s_remove_h = 'hidden';
-				var s_resetPwd_h = 'hidden';
+				var s_view_h = 'hidden';
 			</script>
 		</div>
 		<div shiro:hasPermission="payment:invoice:edit">
@@ -81,9 +81,9 @@
 				var s_remove_h = '';
 			</script>
 		</div>
-		<div shiro:hasPermission="payment:invoice:resetPwd">
+		<div shiro:hasPermission="payment:invoice:view">
 			<script type="text/javascript">
-				var s_resetPwd_h = '';
+				var s_view_h = '';
 			</script>
 		</div>
 	</div>

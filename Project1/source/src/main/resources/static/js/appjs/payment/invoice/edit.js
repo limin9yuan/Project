@@ -22,9 +22,58 @@ $().ready(function() {
 	validateRule();
 	datetimepicker();
 	invoiceMapper_edit();
-	
+	getMainAndCopyPerson_ajax();
 	$("#contractId").bind("change", setContractId);
 });
+function getMainAndCopyPerson_ajax() {
+	var tmpUrl = '/common/MainCopyPerson/getMainAndCopyPerson_ajax/' + $("#invoiceId").val()+"/invoice";
+	var mainPerson="";
+	var copyPerson="";
+	var isMainPerson;
+	$.ajax({
+		url : tmpUrl,
+		type : "get",
+		data : {
+			// 'projectId' : $("#projectId").val(),
+		},
+		success : function(data) {
+			result = data.mainAndCopyPerson;
+			var mainPersonIds = "";
+			var copyPersonIds = "";
+			for (var i = 0; i < result.length; i++) {
+				if (result[i].mainPerson == 1) {
+					mainPerson = mainPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_1") +
+								" onclick='deleteMainPerson(\"" + (result[i].employeeId + "_1") +"\" )'>" +
+								result[i].person +"</div>";
+					$('#sendPerson').html(mainPerson);
+					if (mainPersonIds == "") {
+						mainPersonIds = result[i].employeeId
+					}else {
+						mainPersonIds = mainPersonIds + ","+result[i].employeeId;
+					}
+
+					$('#mainPersonId').val(mainPersonIds);
+
+				}
+				if (result[i].mainPerson == 0) {
+					copyPerson = copyPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_2") +
+								" onclick='deleteCopyPerson(\"" + (result[i].employeeId + "_2") +"\" )'>" +
+								result[i].person +"</div>";
+					$('#receivePerson').html(copyPerson);
+					if (copyPersonIds == "") {
+						copyPersonIds = result[i].employeeId
+					}else {
+						copyPersonIds = copyPersonIds + ","+result[i].employeeId;
+					}
+
+					$('#copyPersonId').val(copyPersonIds);
+
+
+				}
+			}
+		}
+	});
+}
 
 function setContractId(){
 	$.ajax({
@@ -146,14 +195,14 @@ function validateRule() {
 	})
 }
 function datetimepicker() {
-	 $('#invoiceDate').datetimepicker({  
-	        format: 'YYYY-MM-DD',  
-	        locale: moment.locale('zh-cn')  
-	    });  
-	 $('#invoiceReceiverTime').datetimepicker({  
-	        format: 'YYYY-MM-DD',  
-	        locale: moment.locale('zh-cn')  
-	    }); 
+	 $('#invoiceDate').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+	 $('#invoiceReceiverTime').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
 }
 //修改——显示数据绑定
 function invoiceMapper_edit(){
@@ -176,7 +225,7 @@ function invoiceMapper_edit(){
 			$(":radio[name='invoiceContractStatus'][value='" + result.invoiceContractStatus + "']").prop("checked", "checked");
 			$("input[name='invoiceAttachment']").val(result.invoiceAttachment);
 			$("textarea[name='invoiceRemarks']").val(result.invoiceRemarks);
-			
+
 			$("input[name='businessId']").val(result.businessId);
 			$("input[name='customerId']").val(result.customerId);
 			$("input[name='projectId']").val(result.projectId);
@@ -187,7 +236,7 @@ function invoiceMapper_edit(){
 			$("input[name='contractReceivablePrice']").val(result.contractReceivablePrice);
 			loadCrmDataValue("/contract/contract/listDic","contractId",result.contractId);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoicePerson",result.invoicePerson);
-			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoiceReceiver",result.invoiceReceiver);			
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoiceReceiver",result.invoiceReceiver);
 		}
 	});
 }

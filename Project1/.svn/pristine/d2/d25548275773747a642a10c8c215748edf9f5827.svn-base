@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<form class="form-horizontal m-t" id="signupForm">
+				<input id="taskId" name=taskId th:value="${taskId}"  type="hidden">
+			</form>			
+			<div class="col-sm-12">
+				<div class="ibox-content">
+					<div id="jsTree"></div>
+				</div>
+				<div class="modal-footer">	
+				<div class="form-group ">
+					<div class="col-sm-12 col-sm-offset-12">
+						<button type="submit" onclick="update()" class="btn btn-primary"><i class="fa fa-check"></i>提交</button>
+					</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			getTreeData()
+		});
+		function getTreeData() {
+			$.ajax({
+				type : "GET",
+				url : "/sys/user/treeAccount",
+				success : function(tree) {
+					loadTree(tree);
+				}
+			});
+		}
+		function loadTree(tree) {
+			$('#jsTree').jstree({
+				'core' : {
+					'data' : tree
+				},
+				//"plugins" : [ "checkbox" ]
+			});
+			$('#jsTree').jstree().open_all();
+		}
+		function update(){
+			var userNames,userIds,accounts;
+			var ref = $('#jsTree').jstree(true); // 获得整个树
+			
+			accounts=ref.get_bottom_selected();
+			if(accounts.length==0)
+			{
+				layer.msg("请选择处理人");
+				return;
+			}
+			var taskId= $('#taskId').val();
+			var account=accounts[0];
+			$.ajax({
+				cache : true,
+				type : "POST",
+				url : "/activiti/task/changeAssignedUpdate/"+taskId+"/"+account,
+				data : {},// 你的formid
+				async : false,
+				error : function(request) {
+					parent.layer.alert("Connection error");
+				},
+				success : function(data) {
+					if (data.code == 0) {
+						parent.layer.msg("变更成功");
+						parent.reLoad();
+		
+					} else {
+						parent.layer.alert(data.msg)
+					}
+					var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+					parent.layer.close(index);
+		
+				}
+			});
+			//console.log(ref.get_selected());
+			//console.log(ref.get_bottom_selected());
+			
+		}
+	</script>
+</body>
+</html>

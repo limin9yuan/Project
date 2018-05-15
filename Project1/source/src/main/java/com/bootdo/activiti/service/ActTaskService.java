@@ -22,4 +22,6 @@ public interface ActTaskService {
     InputStream tracePhoto(String processInstanceId);
     
     List<ActivitiDO> traceTaskData(String pProcessInstanceId);
+    
+    void changeAssigned(String taskId, String userId);
 }

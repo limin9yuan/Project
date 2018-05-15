@@ -98,6 +98,7 @@ public class ActTaskServiceImpl implements ActTaskService {
 
         // 提交任务
         taskService.complete(taskId, vars);
+        
     }
 
     @Override
@@ -115,6 +116,8 @@ public class ActTaskServiceImpl implements ActTaskService {
 //        vars.put("title","");
         
         taskService.complete(taskId, vars);
+        
+      
     }
 
     /**
@@ -364,6 +367,15 @@ public class ActTaskServiceImpl implements ActTaskService {
     		return false;
     	}
     }
+    /**
+     * 变更处理人
+     * @param taskId
+     * @param userId
+     * @return
+     */
+    public void changeAssigned(String taskId, String userId) {
+        taskService.setAssignee(taskId, userId);
+    }
     
     //************************************** 通用函数 ***********************************************
     
@@ -414,6 +426,8 @@ public class ActTaskServiceImpl implements ActTaskService {
         HistoricProcessInstanceQuery finishedQuery = historyService.createHistoricProcessInstanceQuery().finished();
         return finishedQuery;
     }
+    
+    
 
 }
 

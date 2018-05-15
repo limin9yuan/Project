@@ -77,6 +77,26 @@ public class InvoiceDO implements Serializable {
 	private String contractInvoiceType;
 	//预计开具发票时间
 	private String contractInvoiceTime;
+	//主送人id
+	private String mainPersonId;
+	//抄送人id
+	private String copyPersonId;
+
+	public String getMainPersonId() {
+		return mainPersonId;
+	}
+
+	public void setMainPersonId(String mainPersonId) {
+		this.mainPersonId = mainPersonId;
+	}
+
+	public String getCopyPersonId() {
+		return copyPersonId;
+	}
+
+	public void setCopyPersonId(String copyPersonId) {
+		this.copyPersonId = copyPersonId;
+	}
 
 	/**
 	 * 设置：发票序号

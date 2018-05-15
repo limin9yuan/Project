@@ -202,6 +202,45 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
+	public Tree<DeptDO> getTreeAccount() {
+		List<Tree<DeptDO>> trees = new ArrayList<Tree<DeptDO>>();
+		List<DeptDO> depts = deptMapper.list(new HashMap<String, Object>(16));
+		Long[] pDepts = deptMapper.listParentDept();
+		Long[] uDepts = userMapper.listAllDept();
+		Long[] allDepts = (Long[]) ArrayUtils.addAll(pDepts, uDepts);
+		for (DeptDO dept : depts) {
+			if (!ArrayUtils.contains(allDepts, dept.getDeptId())) {
+				continue;
+			}
+			Tree<DeptDO> tree = new Tree<DeptDO>();
+			tree.setId(dept.getDeptId().toString());
+			tree.setParentId(dept.getParentId().toString());
+			tree.setText(dept.getName());
+			Map<String, Object> state = new HashMap<>(16);
+			state.put("opened", true);
+			state.put("mType", "dept");
+			tree.setState(state);
+			trees.add(tree);
+		}
+		List<UserDO> users = userMapper.list(new HashMap<String, Object>(16));
+		for (UserDO user : users) {
+			Tree<DeptDO> tree = new Tree<DeptDO>();
+			tree.setId(user.getUsername());
+			tree.setParentId(user.getDeptId().toString());
+			tree.setText(user.getName());
+			Map<String, Object> state = new HashMap<>(16);
+			state.put("opened", true);
+			state.put("mType", "user");
+			tree.setState(state);
+			trees.add(tree);
+		}
+		// 默认顶级菜单为０，根据数据库实际情况调整
+		Tree<DeptDO> t = BuildTree.build(trees);
+		return t;
+	}
+	
+	
+	@Override
 	public List<DictDO> listDic() {
 		return userMapper.listDic();
 	}

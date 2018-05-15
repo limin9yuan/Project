@@ -35,6 +35,8 @@ public interface UserService {
 	int resetPwd(UserDO user);
 
 	Tree<DeptDO> getTree();
+	
+	Tree<DeptDO> getTreeAccount();
 
 	public List<DictDO> listDic();
 	

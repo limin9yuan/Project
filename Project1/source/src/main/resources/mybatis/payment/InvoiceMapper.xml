@@ -33,20 +33,23 @@
 		f.`Employee_Name` as `Project_Owner_Name`,e.`Project_Name` as `Invoice_Project_Name`,
 		`Invoice_Attachment`,
 		CASE WHEN `Invoice_Contract_Status` = '0' THEN '未开始'
-		WHEN `Invoice_Contract_Status` = '1' THEN '交付中' 
-		WHEN `Invoice_Contract_Status` = '2' THEN '已完成' 
+		WHEN `Invoice_Contract_Status` = '1' THEN '交付中'
+		WHEN `Invoice_Contract_Status` = '2' THEN '已完成'
 		END AS `Invoice_Contract_Status`,
-		`Invoice_Remarks`,`Invoice_Operator`,`Invoice_Operate_Time`,`Invoice_Company` 
+		`Invoice_Remarks`,`Invoice_Operator`,`Invoice_Operate_Time`,`Invoice_Company`
 		from invoice a
 		left join inner_org_employee b on a.`Invoice_Person`=b.`Employee_ID`
 		left join inner_org_employee c on a.`Invoice_Receiver`=c.`Employee_ID`
 		left join contract d on a.`Contract_ID`=d.`Contract_ID`
-        left join development_project e on d.`Project_ID`=e.`Project_ID`
-        left join inner_org_employee f on f.`Employee_ID`=e.`Project_Owner`
+		left join development_project e on d.`Project_ID`=e.`Project_ID`
+		left join inner_org_employee f on f.`Employee_ID`=e.`Project_Owner`
         <where>  
-        		 <if test="invoiceOperator != null and invoiceOperator != ''"> and  a.Invoice_Operator=#{invoiceOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Invoice_Operator and Table_Name='invoice')
-																				or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{invoiceOperator}) </if>
-		  		  <if test="invoiceId != null and invoiceId != ''"> and Invoice_ID = #{invoiceId} </if>
+        		 <if test="invoiceOperator != null and invoiceOperator != ''"> and (a.Invoice_Operator=#{userId}
+					or exists (select 1 from main_and_copy_person g
+					LEFT JOIN inner_org_employee h on g.Employee_ID = h.Employee_ID
+					where h.Inner_User_ID = #{userName} and g.T_ID = a.Invoice_ID and g.Table_Name=#{tableName})
+					 or exists (select 1 from sys_user  where Identification='1' and user_id=#{userId}))</if>
+			      <if test="invoiceId != null and invoiceId != ''">and Invoice_ID = #{invoiceId} </if>
 		  		  <if test="contractId != null and contractId != ''"> and a.Contract_ID = #{contractId} </if>
 		  		  <if test="businessId != null and businessId != ''"> and a.Business_ID = #{businessId} </if>
 		  		  <if test="invoiceNumber != null and invoiceNumber != ''"> and Invoice_Number = #{invoiceNumber} </if>
@@ -112,7 +115,7 @@
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.payment.domain.InvoiceDO">
+	<insert id="save" parameterType="com.bootdo.payment.domain.InvoiceDO" useGeneratedKeys="true" keyProperty="invoiceId">
 		insert into invoice
 		(
 			`Invoice_ID`, 

@@ -39,7 +39,15 @@ public class TaskVO  {
     private Date startDate; // 发起日期
     private Date endDate; // 结束日期
     private String processStatus; //流程状态
+    private  String assigneeName; //当前处理人姓名
     
+    
+    public String getAssigneeName() {
+        return assigneeName;
+    }
+    public void setAssigneeName(String assigneeName) {
+        this.assigneeName = assigneeName;
+    }
     
     public String getProcessStatus() {
         return processStatus;
