@@ -13,14 +13,14 @@
 						    <div class="form-group">
 								<label class="col-sm-3 control-label">项目名称：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-								    <select data-placeholder="请选择" name="projectId" id="projectId"
+								    <select disabled="disabled" data-placeholder="请选择" name="projectId" id="projectId"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 									</select>
 								</div>
 								<label class="col-sm-3 control-label">采购人：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-								    <select data-placeholder="请选择" name="purchasePerson" id="purchasePerson"
+								    <select disabled="disabled" data-placeholder="请选择" name="purchasePerson" id="purchasePerson"
 									    class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 									</select>
@@ -30,7 +30,7 @@
 								<label class="col-sm-3 control-label">采购时间：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 								    <div class="input-group date" id="purchaseTime">
-							            <input class="form-control" type="text" name="purchaseTime">
+							            <input disabled="disabled" class="form-control" type="text" name="purchaseTime">
 							            <span class="input-group-addon">
 							               <span class="glyphicon glyphicon-calendar"></span>
 							            </span>
@@ -39,7 +39,7 @@
 								<label class="col-sm-3 control-label">交货时间：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 								    <div class="input-group date" id="purchaseDeliveryTime">
-							            <input class="form-control" type="text" name="purchaseDeliveryTime">
+							            <input disabled="disabled" class="form-control" type="text" name="purchaseDeliveryTime">
 							            <span class="input-group-addon">
 							               <span class="glyphicon glyphicon-calendar"></span>
 							            </span>
@@ -49,67 +49,67 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label">交货地点：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseDeliveryPlace" name="purchaseDeliveryPlace"
+									<input disabled="disabled" id="purchaseDeliveryPlace" name="purchaseDeliveryPlace"
 								    class="form-control" type="text">
 								</div>
 								<label class="col-sm-3 control-label">收货人：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseConsignee" name="purchaseConsignee"
+									<input disabled="disabled" id="purchaseConsignee" name="purchaseConsignee"
 									class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">联系电话：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchasePhoneNumber" name="purchasePhoneNumber"
+									<input disabled="disabled" id="purchasePhoneNumber" name="purchasePhoneNumber"
 									class="form-control" type="text">
 								</div>
 								<label class="col-sm-3 control-label">物品名称：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseName" name="purchaseName"
+									<input disabled="disabled" id="purchaseName" name="purchaseName"
 									class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">品牌：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseBrand" name="purchaseBrand"
+									<input disabled="disabled" id="purchaseBrand" name="purchaseBrand"
 									 class="form-control" type="text">
 								</div>
 								<label class="col-sm-3 control-label">型号：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseMode" name="purchaseMode"
+									<input disabled="disabled" disabled="disabled" id="purchaseMode" name="purchaseMode"
 									 class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">规格/配置：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseConfig" name="purchaseConfig"
+									<input disabled="disabled" id="purchaseConfig" name="purchaseConfig"
 									 class="form-control" type="text">
 								</div>
 								<label class="col-sm-3 control-label">单位：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseUnit" name="purchaseUnit"
+									<input disabled="disabled" id="purchaseUnit" name="purchaseUnit"
 									class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">单价：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseUnitPrice" name="purchaseUnitPrice"
+									<input disabled="disabled" id="purchaseUnitPrice" name="purchaseUnitPrice"
 									 class="form-control" type="text">
 								</div>
 								<label class="col-sm-3 control-label">数量：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseNumber" name="purchaseNumber"
+									<input disabled="disabled" id="purchaseNumber" name="purchaseNumber"
 									 class="form-control" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">总计：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseTotalPrice" name="purchaseTotalPrice"
+									<input disabled="disabled" id="purchaseTotalPrice" name="purchaseTotalPrice"
 									class="form-control" type="text">
 								</div>
 							</div>
@@ -117,22 +117,22 @@
 								<label class="col-sm-3 control-label">订货情况：<span class="mustin">*</span></label>
 								<div class="col-sm-9">
 								    <label class="radio-inline">
-									    <input type="radio" name="purchaseOrderStatus" value="0" /> 未签合同
+									    <input disabled="disabled" type="radio" name="purchaseOrderStatus" value="0" /> 未签合同
 									</label>
 									<label class="radio-inline">
-									    <input type="radio" name="purchaseOrderStatus" value="1" /> 已签合同
+									    <input disabled="disabled" type="radio" name="purchaseOrderStatus" value="1" /> 已签合同
 									</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">已付款：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchasePaid" name="purchasePaid"
+									<input disabled="disabled" id="purchasePaid" name="purchasePaid"
 									 class="form-control" type="text">
 								</div>
 								<label class="col-sm-3 control-label">未付款：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input id="purchaseNotPaid" name="purchaseNotPaid"
+									<input disabled="disabled" id="purchaseNotPaid" name="purchaseNotPaid"
 									 class="form-control" type="text">
 								</div>
 							</div>
@@ -140,17 +140,17 @@
 								<label class="col-sm-3 control-label">发货情况：<span class="mustin">*</span></label>
 								<div class="col-sm-9">
 								    <label  class="radio-inline">
-									    <input type="radio" name="purchaseFulfilmentStatus" value="0" /> 未发货
+									    <input disabled="disabled" type="radio" name="purchaseFulfilmentStatus" value="0" /> 未发货
 									</label>
 									<label  class="radio-inline">
-									    <input type="radio" name="purchaseFulfilmentStatus" value="1" /> 已发货
+									    <input disabled="disabled" type="radio" name="purchaseFulfilmentStatus" value="1" /> 已发货
 									</label>
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-3 control-label">备注：</label>
 								<div class="col-sm-9">
-									<textarea id="purchaseRemarks" name="purchaseRemarks"
+									<textarea disabled="disabled" id="purchaseRemarks" name="purchaseRemarks"
 									 class="form-control" rows="5"></textarea>
 								</div>
 							</div>
@@ -161,7 +161,7 @@
 									<input id="isMainPerson" name="isMainPerson" type="hidden">
 									<div style="float: left;" id="sendPerson"></div>
 									<div style="float: left;">
-										<button
+										<button disabled="disabled"
 											type="button" class="btn btn-danger btn-xs"
 											id="sendPersonBtn" var="sendPersonBtn"
 											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
@@ -178,7 +178,7 @@
 									<input id="isCopyPerson" name="isCopyPerson" type="hidden">
 									<div style="float: left;" id="receivePerson"></div>
 									<div style="float: left;">
-										<button type="button" class="btn btn-danger btn-xs"
+										<button disabled="disabled" type="button" class="btn btn-danger btn-xs"
 											id="receivePersonBtn" var="receivePersonBtn"
 											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
 											onclick="addRecivePerson()">
@@ -202,7 +202,7 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/payment/purchaseManagement/edit.js"></script>
+	<script type="text/javascript" src="/js/appjs/payment/purchaseManagement/view.js"></script>
 	<script type="text/javascript" src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
 </body>
 </html>
