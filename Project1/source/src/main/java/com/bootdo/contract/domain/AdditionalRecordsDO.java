@@ -43,7 +43,7 @@ public class AdditionalRecordsDO implements Serializable {
 	//备注
 	private String recordRemarks;
 	//审批状态
-	private Integer recordApprovalStatus;
+	private String recordApprovalStatus;
 	//创建人
 	private Long recordOperator; 
 	//创建人姓名
@@ -314,13 +314,13 @@ public class AdditionalRecordsDO implements Serializable {
 	/**
 	 * 设置：审批状态
 	 */
-	public void setRecordApprovalStatus(Integer recordApprovalStatus) {
+	public void setRecordApprovalStatus(String recordApprovalStatus) {
 		this.recordApprovalStatus = recordApprovalStatus;
 	}
 	/**
 	 * 获取：审批状态
 	 */
-	public Integer getRecordApprovalStatus() {
+	public String getRecordApprovalStatus() {
 		return recordApprovalStatus;
 	}
 	/**

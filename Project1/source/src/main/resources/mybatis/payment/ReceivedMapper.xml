@@ -15,19 +15,22 @@
 		`Received_ID`,a.`Contract_ID`,a.`Business_ID`,`Received_Time`,`Received_Price`,
 		`Received_Card_Number`,`Received_Type`,
 		CASE WHEN `Received_Contract_Status` = '0' THEN '未开始'
-		WHEN `Received_Contract_Status` = '1' THEN '交付中' 
-		WHEN `Received_Contract_Status` = '2' THEN '已完成' 
+		WHEN `Received_Contract_Status` = '1' THEN '交付中'
+		WHEN `Received_Contract_Status` = '2' THEN '已完成'
 		END AS `Received_Contract_Status`,
 		`Received_Remarks`,
 		`Received_Operator`,`Received_Operate_Time`,
 		`Receivable_ID`,`Receivable_Price`,`Receivable_Date`,`Receipt_Delay_Time`,`Reimbursement_Rate`
 		from payment_received a
 		left join contract b on a.`Contract_ID`=b.`Contract_ID`
-        left join development_project c on b.`Project_ID`=c.`Project_ID`
-        left join inner_org_employee d on d.`Employee_ID`=c.`Project_Owner`
+		left join development_project c on b.`Project_ID`=c.`Project_ID`
+		left join inner_org_employee d on d.`Employee_ID`=c.`Project_Owner`
 		<where>
-			<if test="receivedOperator != null and receivedOperator != ''"> and a.Received_Operator=#{receivedOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Received_Operator and Table_Name='payment_received') 
-																			or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{receivedOperator} )</if>
+			<if test="userId != null and userId != ''"> and (a.Received_Operator=#{userId}
+				or exists (select 1 from main_and_copy_person e
+				LEFT JOIN inner_org_employee f on e.Employee_ID = f.Employee_ID
+				where f.Inner_User_ID = #{userName} and e.T_ID = a.Received_ID and e.Table_Name=#{tableName})
+				or exists (select 1 from sys_user  where Identification='1' and user_id=#{userId}))</if>
 			<if test="receivedId != null and receivedId != ''"> and Received_ID = #{receivedId} </if>
 			<if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
 			<if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
@@ -153,9 +156,10 @@
 		from accounts_receivable
 	</select>
 <!-- 	*************************************************************************************************** -->
-	<insert id="save" parameterType="com.bootdo.payment.domain.ReceivedDO">
+	<insert id="save" parameterType="com.bootdo.payment.domain.ReceivedDO" useGeneratedKeys="true" keyProperty="receivedId">
 		insert into payment_received
 		(
+		`Received_ID`,
 		`Contract_ID`,
 		`Business_ID`,
 		`Received_Time`,
@@ -174,6 +178,7 @@
 		)
 		values
 		(
+		#{receivedId},
 		#{contractId},
 		#{businessId},
 		#{receivedTime},

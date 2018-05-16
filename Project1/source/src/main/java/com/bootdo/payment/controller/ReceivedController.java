@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.common.domain.MainCopyPersonDO;
+import com.bootdo.common.service.MainCopyPersonService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +45,8 @@ public class ReceivedController extends BaseController {
 	private ReceivedService receivedService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
+	@Autowired
+	private MainCopyPersonService mainCopyPersonService;
 
 	@GetMapping()
 	@RequiresPermissions("payment:received:received")
@@ -60,6 +64,9 @@ public class ReceivedController extends BaseController {
 	@GetMapping("/list")
 	@RequiresPermissions("payment:received:received")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
+		params.put("userId", getUserId());
+		params.put("userName", getUsername());
+		params.put("tableName", "payment_received");
 		// 查询列表数据
 		params.put("receivedOperator", (getUserId()));
 		params.put("Identification", (getIdentification()));
@@ -105,6 +112,13 @@ public class ReceivedController extends BaseController {
 		return "payment/received/edit";
 	}
 
+	@GetMapping("/view/{receivedId}")
+	@RequiresPermissions("payment:received:edit")
+	String view(@PathVariable("receivedId") String receivedId, Model model) {
+		model.addAttribute("receivedId", receivedId);
+		return "payment/received/view";
+	}
+
 	/**
 	 * 保存
 	 */
@@ -113,10 +127,45 @@ public class ReceivedController extends BaseController {
 	@RequiresPermissions("payment:received:add")
 	public R save(ReceivedDO received) {
 		received.setReceivedOperator(getUserId());
-
-		if (receivedService.save(received) > 0) {
-			return R.ok();
+		if (received.getReceivableDate().equals("")){
+			received.setReceivableDate(null);
 		}
+		int receivedIds = receivedService.save(received);
+		if (receivedIds > 0) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = received.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(received.getReceivedId());
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("payment_received");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+			String copyPersonId = received.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(received.getReceivedId());
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("payment_received");
+					mainCopyPersonService.save(mcp);
+				}
+
+
+			}
+			R r = R.ok();
+			r.put("receivedId", receivedIds);
+			return r;
+		}
+
 		return R.error();
 	}
 
@@ -128,7 +177,50 @@ public class ReceivedController extends BaseController {
 	@RequiresPermissions("payment:received:edit")
 	public R update(ReceivedDO received) {
 		received.setReceivedOperator(getUserId());
+		received.setReceivedOperator(getUserId());
+		if (received.getReceivableDate().equals("")){
+			received.setReceivableDate(null);
+		}
+		String receivedIds = received.getReceivedId();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		params.put("tId",receivedIds);
+		params.put("tableName","payment_received");
 		receivedService.update(received);
+		mainCopyPersonService.remove(params);
+		if (!receivedIds.equals("")) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = received.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(receivedIds);
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("payment_received");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+			String copyPersonId = received.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(receivedIds);
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("payment_received");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+		}
 		return R.ok();
 	}
 

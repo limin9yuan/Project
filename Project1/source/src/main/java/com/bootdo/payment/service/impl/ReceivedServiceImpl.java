@@ -54,7 +54,9 @@ public class ReceivedServiceImpl implements ReceivedService {
 	
 	@Override
 	public int save(ReceivedDO received){
-		return receivedDao.save(received);
+		receivedDao.save(received);
+		String receivedId = received.getReceivedId();
+		return Integer.parseInt(receivedId);
 	}
 	
 	@Override

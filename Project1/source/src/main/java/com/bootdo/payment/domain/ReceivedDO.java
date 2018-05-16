@@ -65,8 +65,27 @@ public class ReceivedDO implements Serializable {
 	private Integer receiptDelayTime;
 	//管理层标识
 	private Integer Identification;
-	
-	
+	//主送人id
+	private String mainPersonId;
+	//抄送人id
+	private String copyPersonId;
+
+	public String getMainPersonId() {
+		return mainPersonId;
+	}
+
+	public void setMainPersonId(String mainPersonId) {
+		this.mainPersonId = mainPersonId;
+	}
+
+	public String getCopyPersonId() {
+		return copyPersonId;
+	}
+
+	public void setCopyPersonId(String copyPersonId) {
+		this.copyPersonId = copyPersonId;
+	}
+
 	/*
 	 * 管理层标识
 	 */

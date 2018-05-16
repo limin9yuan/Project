@@ -16,11 +16,11 @@
 									<input id="labelId" name="labelId" type="hidden">
 									<div style="float: left;" id="labelName"></div>
 									<input id=receivableId name="receivableId" class="form-control" type="text"
-										style="cursor: pointer;" 
+										style="cursor: pointer;"
 										readonly="readonly" placeholder=""><!--onclick="addReceivable()"  -->
 								</div>
 								<div class="col-sm-1" style="float: left;">
-									<button type="button" class="btn btn-primary" data-toggle="button">
+									<button onclick="addReceivable()" type="button" class="btn btn-primary" data-toggle="button">
 									<i class="fa fa-search" aria-hidden="true"></i>
 									</button>
 								</div>
@@ -90,16 +90,16 @@
 										class="form-control" type="text">
 								</div>
 							</div>
-							<div class="form-group">	
+							<div class="form-group">
 								<label class="col-sm-2 control-label">合同状态：<span class="mustin">*</span></label>
 								<div class="col-sm-9">
-									<label class="radio-inline"> 
+									<label class="radio-inline">
 									    <input type="radio" name="receivedContractStatus" value="0" /> 未开始
-									</label> 
-									<label class="radio-inline"> 
+									</label>
+									<label class="radio-inline">
 									    <input type="radio" name="receivedContractStatus" value="1" /> 交付中
 									</label>
-									<label class="radio-inline"> 
+									<label class="radio-inline">
 									    <input type="radio" name="receivedContractStatus" value="2" /> 已完成
 									</label>
 								</div>
@@ -146,10 +146,10 @@
 						</div>
 						 <div class="form-group">
 								 <div class="columns pull-right col-md-2">
+									 <button type="submit" class="btn btn-primary columns" >提交</button>
+
 										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
-								   </div>
-								   <div class="columns pull-right col-md-2">
-										<button type="submit" class="btn btn-primary columns" >提交</button>
+
 								</div>
 							</div>
 						</form>

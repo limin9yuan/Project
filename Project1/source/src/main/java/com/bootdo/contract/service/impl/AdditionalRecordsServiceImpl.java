@@ -225,7 +225,7 @@ public class AdditionalRecordsServiceImpl implements AdditionalRecordsService {
 						} else if (j == 8) {
 							additionalRecordsDO.setRecordRemarks(cellvalue);
 						} else if (j == 9) {
-							additionalRecordsDO.setRecordApprovalStatus(j);
+							additionalRecordsDO.setRecordApprovalStatus(String.valueOf(j));
 						} else if (j == 10) {
 							additionalRecordsDO.setRecordCommitTime(cellvalue);
 						} else if (j == 11) {
@@ -365,7 +365,7 @@ public class AdditionalRecordsServiceImpl implements AdditionalRecordsService {
 					// 审批状态
 					String recordApprovalStatus = "";
 					if (report.getRecordApprovalStatus() != null) {
-						Integer recordApprovalStatus1 = report.getRecordApprovalStatus();
+						String recordApprovalStatus1 = report.getRecordApprovalStatus();
 						recordApprovalStatus = String.valueOf(recordApprovalStatus1);
 					}
 					hssfRow.createCell(10).setCellValue(recordApprovalStatus);

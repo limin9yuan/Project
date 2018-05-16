@@ -1,15 +1,15 @@
 $().ready(function() {
 	validateRule();
 	datetimepicker();
-	$('#receivablePrice').bind('input propertychange', function() { 
+	$('#receivablePrice').bind('input propertychange', function() {
 		changeRate();
     });
-	 $('#receivedPrice').bind('input propertychange', function() { 
+	 $('#receivedPrice').bind('input propertychange', function() {
 		changeRate();
-    }); 
+    });
 	 $("#receiptDelayTime").bind("change",getDays);
 
-	 
+
 });
 
 $.validator.setDefaults({
@@ -29,6 +29,9 @@ function save() {
 		},
 		success : function(data) {
 			if (data.code == 0) {
+				if (data.receivedId > 0) {
+					$('#receivedIds').val(data.receivedId);
+				}
 				parent.layer.msg("操作成功");
 				parent.reLoad();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
@@ -106,14 +109,14 @@ function datetimepicker() {
     });
 }
 
-function changeRate(){		   
+function changeRate(){
     var receivablePrice=$("#receivablePrice").val();
     var receivedPrice=$("#receivedPrice").val();
     if( isNaN(receivablePrice) || isNaN(receivedPrice)){
     	return;
     }
-    var rate= (Number(receivedPrice)/Number(receivablePrice)*100).toFixed(2); 
-    $("#reimbursementRate").val(rate);   
+    var rate= (Number(receivedPrice)/Number(receivablePrice)*100).toFixed(2);
+    $("#reimbursementRate").val(rate);
 }
 
 //银行卡号验证
@@ -129,7 +132,7 @@ jQuery.validator.addMethod("checkCardNumber", function (value, element) {
 //bankno为银行卡号 banknoInfo为显示提示信息的DIV或其他控件
 function luhmCheck(receivedCardNumber) {
 	var lastNum = receivedCardNumber.substr(receivedCardNumber.length - 1, 1);//取出最后一位（与luhm进行比较）
-	
+
 	var first15Num = receivedCardNumber.substr(0, receivedCardNumber.length - 1);//前15或18位
 	var newArr = new Array();
 	for (var i = first15Num.length - 1; i > -1; i--) { //前15或18位倒序存进数组
@@ -137,7 +140,7 @@ function luhmCheck(receivedCardNumber) {
 	}
 	var arrJiShu = new Array(); //奇数位*2的积 <9
 	var arrJiShu2 = new Array(); //奇数位*2的积 >9
-	
+
 	var arrOuShu = new Array(); //偶数位数组
 	for (var j = 0; j < newArr.length; j++) {
 	if ((j + 1) % 2 == 1) {//奇数位
@@ -149,14 +152,14 @@ function luhmCheck(receivedCardNumber) {
 	else //偶数位
 	arrOuShu.push(newArr[j]);
 	}
-	
+
 	var jishu_child1 = new Array();//奇数位*2 >9 的分割之后的数组个位数
 	var jishu_child2 = new Array();//奇数位*2 >9 的分割之后的数组十位数
 	for (var h = 0; h < arrJiShu2.length; h++) {
 	jishu_child1.push(parseInt(arrJiShu2[h]) % 10);
 	jishu_child2.push(parseInt(arrJiShu2[h]) / 10);
 	}
-	
+
 	var sumJiShu = 0; //奇数位*2 < 9 的数组之和
 	var sumOuShu = 0; //偶数位数组之和
 	var sumJiShuChild1 = 0; //奇数位*2 >9 的分割之后的数组个位数之和
@@ -165,22 +168,22 @@ function luhmCheck(receivedCardNumber) {
 	for (var m = 0; m < arrJiShu.length; m++) {
 	sumJiShu = sumJiShu + parseInt(arrJiShu[m]);
 	}
-	
+
 	for (var n = 0; n < arrOuShu.length; n++) {
 	sumOuShu = sumOuShu + parseInt(arrOuShu[n]);
 	}
-	
+
 	for (var p = 0; p < jishu_child1.length; p++) {
 	sumJiShuChild1 = sumJiShuChild1 + parseInt(jishu_child1[p]);
 	sumJiShuChild2 = sumJiShuChild2 + parseInt(jishu_child2[p]);
 	}
 	//计算总和
 	sumTotal = parseInt(sumJiShu) + parseInt(sumOuShu) + parseInt(sumJiShuChild1) + parseInt(sumJiShuChild2);
-	
+
 	//计算Luhm值
 	var k = parseInt(sumTotal) % 10 == 0 ? 10 : parseInt(sumTotal) % 10;
 	var luhm = 10 - k;
-	
+
 	if (lastNum == luhm && lastNum.length != 0) {
 	//$("#banknoInfo").html("验证通过");
 	return true;
@@ -244,13 +247,13 @@ function getDays() {
     }
 	//var daysDifference = DateDiff(strStartTime, endTime);
 	//alert(daysDifference);
-	//$("#receiptDelayTime").val(daysDifference);   
+	//$("#receiptDelayTime").val(daysDifference);
 }
 
 //计算两个日期天数差的函数，通用
 /*function DateDiff(startDate, endDate) {//startDate和endDate是2004-10-18格式
 	var aDate, oDate1, oDate2, iDays;
-	
+
 	aDate = startDate.split("-");
     oDate1 = new Date(startDate[1] + '-' + startDate[2] + '-' + startDate[0]);  //转换为10-18-2004格式
     aDate = endDate.split("-");
@@ -258,7 +261,7 @@ function getDays() {
     iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24); //把相差的毫秒数转换为天数
     return iDays;  //返回相差天数
 }*/
-function DateDiff(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式  
+function DateDiff(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式
     var dateSpan,
         tempDate,
         iDays;
@@ -270,4 +273,3 @@ function DateDiff(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式
     //alert(iDays);
     return iDays
 }
-

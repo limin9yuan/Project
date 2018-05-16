@@ -3,11 +3,12 @@ $().ready(function() {
 	validateRule();
 	datetimepicker();
 	received_ajax();
-	
-	$('#receivablePrice').bind('input propertychange', function() { 
+	getMainAndCopyPerson_ajax();
+
+	$('#receivablePrice').bind('input propertychange', function() {
 		changeRate();
     });
-	 $('#receivedPrice').bind('input propertychange', function() { 
+	 $('#receivedPrice').bind('input propertychange', function() {
 		 changeRate();
     });
 	 $("#receiptDelayTime").bind("change",getDays);
@@ -18,6 +19,55 @@ $.validator.setDefaults({
 		update();
 	}
 });
+function getMainAndCopyPerson_ajax() {
+	var tmpUrl = '/common/MainCopyPerson/getMainAndCopyPerson_ajax/' + $("#receivedId").val()+"/payment_received";
+	var mainPerson="";
+	var copyPerson="";
+	var isMainPerson;
+	$.ajax({
+		url : tmpUrl,
+		type : "get",
+		data : {
+			// 'projectId' : $("#projectId").val(),
+		},
+		success : function(data) {
+			result = data.mainAndCopyPerson;
+			var mainPersonIds = "";
+			var copyPersonIds = "";
+			for (var i = 0; i < result.length; i++) {
+				if (result[i].mainPerson == 1) {
+					mainPerson = mainPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_1") +
+								" onclick='deleteMainPerson(\"" + (result[i].employeeId + "_1") +"\" )'>" +
+								result[i].person +"</div>";
+					$('#sendPerson').html(mainPerson);
+					if (mainPersonIds == "") {
+						mainPersonIds = result[i].employeeId
+					}else {
+						mainPersonIds = mainPersonIds + ","+result[i].employeeId;
+					}
+
+					$('#mainPersonId').val(mainPersonIds);
+
+				}
+				if (result[i].mainPerson == 0) {
+					copyPerson = copyPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_2") +
+								" onclick='deleteCopyPerson(\"" + (result[i].employeeId + "_2") +"\" )'>" +
+								result[i].person +"</div>";
+					$('#receivePerson').html(copyPerson);
+					if (copyPersonIds == "") {
+						copyPersonIds = result[i].employeeId
+					}else {
+						copyPersonIds = copyPersonIds + ","+result[i].employeeId;
+					}
+
+					$('#copyPersonId').val(copyPersonIds);
+
+
+				}
+			}
+		}
+	});
+}
 function update() {
 	//alert($('#receivedTime').data('date'))
 	$.ajax({
@@ -124,7 +174,7 @@ function received_ajax(){
 			$("input[name='receivableDate']").val(result.receivableDate);
 			$("input[name='receiptDelayTime']").val(result.receiptDelayTime);
 			$("input[name='reimbursementRate']").val(result.reimbursementRate);
-			
+
 			$(":radio[name='receivedContractStatus'][value='" + result.receivedContractStatus + "']").prop("checked", "checked");
  			$("input[name='receivedPrice']").val(result.receivedPrice);
  			$("input[name='receivedCardNumber']").val(result.receivedCardNumber);
@@ -136,14 +186,14 @@ function received_ajax(){
 }
 
 
-function changeRate(){		   
+function changeRate(){
     var receivablePrice=$("#receivablePrice").val();
     var receivedPrice=$("#receivedPrice").val();
     if( isNaN(receivablePrice) || isNaN(receivedPrice)){
     	return;
     }
-    var rate= (Number(receivedPrice)/Number(receivablePrice)*100).toFixed(2); 
-    $("#reimbursementRate").val(rate);   
+    var rate= (Number(receivedPrice)/Number(receivablePrice)*100).toFixed(2);
+    $("#reimbursementRate").val(rate);
 }
 
 //银行卡号验证
@@ -159,7 +209,7 @@ jQuery.validator.addMethod("checkCardNumber", function (value, element) {
 //bankno为银行卡号 banknoInfo为显示提示信息的DIV或其他控件
 function luhmCheck(receivedCardNumber) {
 	var lastNum = receivedCardNumber.substr(receivedCardNumber.length - 1, 1);//取出最后一位（与luhm进行比较）
-	
+
 	var first15Num = receivedCardNumber.substr(0, receivedCardNumber.length - 1);//前15或18位
 	var newArr = new Array();
 	for (var i = first15Num.length - 1; i > -1; i--) { //前15或18位倒序存进数组
@@ -167,7 +217,7 @@ function luhmCheck(receivedCardNumber) {
 	}
 	var arrJiShu = new Array(); //奇数位*2的积 <9
 	var arrJiShu2 = new Array(); //奇数位*2的积 >9
-	
+
 	var arrOuShu = new Array(); //偶数位数组
 	for (var j = 0; j < newArr.length; j++) {
 	if ((j + 1) % 2 == 1) {//奇数位
@@ -179,14 +229,14 @@ function luhmCheck(receivedCardNumber) {
 	else //偶数位
 	arrOuShu.push(newArr[j]);
 	}
-	
+
 	var jishu_child1 = new Array();//奇数位*2 >9 的分割之后的数组个位数
 	var jishu_child2 = new Array();//奇数位*2 >9 的分割之后的数组十位数
 	for (var h = 0; h < arrJiShu2.length; h++) {
 	jishu_child1.push(parseInt(arrJiShu2[h]) % 10);
 	jishu_child2.push(parseInt(arrJiShu2[h]) / 10);
 	}
-	
+
 	var sumJiShu = 0; //奇数位*2 < 9 的数组之和
 	var sumOuShu = 0; //偶数位数组之和
 	var sumJiShuChild1 = 0; //奇数位*2 >9 的分割之后的数组个位数之和
@@ -195,22 +245,22 @@ function luhmCheck(receivedCardNumber) {
 	for (var m = 0; m < arrJiShu.length; m++) {
 	sumJiShu = sumJiShu + parseInt(arrJiShu[m]);
 	}
-	
+
 	for (var n = 0; n < arrOuShu.length; n++) {
 	sumOuShu = sumOuShu + parseInt(arrOuShu[n]);
 	}
-	
+
 	for (var p = 0; p < jishu_child1.length; p++) {
 	sumJiShuChild1 = sumJiShuChild1 + parseInt(jishu_child1[p]);
 	sumJiShuChild2 = sumJiShuChild2 + parseInt(jishu_child2[p]);
 	}
 	//计算总和
 	sumTotal = parseInt(sumJiShu) + parseInt(sumOuShu) + parseInt(sumJiShuChild1) + parseInt(sumJiShuChild2);
-	
+
 	//计算Luhm值
 	var k = parseInt(sumTotal) % 10 == 0 ? 10 : parseInt(sumTotal) % 10;
 	var luhm = 10 - k;
-	
+
 	if (lastNum == luhm && lastNum.length != 0) {
 	//$("#banknoInfo").html("验证通过");
 	return true;
@@ -275,10 +325,10 @@ function getDays() {
     }
 	//var daysDifference = DateDiff(strStartTime, endTime);
 	//alert(daysDifference);
-	//$("#receiptDelayTime").val(daysDifference);   
+	//$("#receiptDelayTime").val(daysDifference);
 }
 
-function DateDiff(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式  
+function DateDiff(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式
     var dateSpan,
         tempDate,
         iDays;
@@ -290,4 +340,3 @@ function DateDiff(sDate1, sDate2) {    //sDate1和sDate2是2006-12-18格式
     //alert(iDays);
     return iDays
 }
-
