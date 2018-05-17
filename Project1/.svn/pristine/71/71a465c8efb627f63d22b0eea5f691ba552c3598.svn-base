@@ -9,9 +9,9 @@ $().ready(function() {
 		 $('#nextBtn').attr("disabled",false);
 	 });
 	$('#myTab a[href="#serviceAA"]').on('shown.bs.tab', function(e) {
+ 		loadDicValue("sales_record_type","serviceType",result.serviceType);
 		 $('#lastBtn').attr("disabled",false);
 		 $('#nextBtn').attr("disabled",false);
-	 		loadDicValue("sales_record_complaint_Complaint_After_Sale_Type","serviceType",result.serviceType);
 	 });
 	 $('#myTab a[href="#information"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
@@ -64,7 +64,7 @@ function getMainAndCopyPerson_ajax() {
 			for (var i = 0; i < result.length; i++) {
 				if (result[i].mainPerson == 1) {
 					mainPerson = mainPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_1") +
-								" onclick='deleteMainPerson(\"" + (result[i].employeeId + "_1") +"\" )'>" +
+								" onclick='delete(\"" + (result[i].employeeId + "_1") +"\" )'>" +
 								result[i].person +"</div>";
 					$('#sendPerson').html(mainPerson);
 					if (mainPersonIds == "") {
@@ -78,7 +78,7 @@ function getMainAndCopyPerson_ajax() {
 				}
 				if (result[i].mainPerson == 0) {
 					copyPerson = copyPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_2") +
-								" onclick='deleteCopyPerson(\"" + (result[i].employeeId + "_2") +"\" )'>" +
+								" onclick='delete(\"" + (result[i].employeeId + "_2") +"\" )'>" +
 								result[i].person +"</div>";
 					$('#receivePerson').html(copyPerson);
 					if (copyPersonIds == "") {

@@ -4,10 +4,7 @@
 <mapper namespace="com.bootdo.sales.dao.BugCategoryDao">
 
 	<select id="get" resultType="com.bootdo.sales.domain.BugCategoryDO">
-		select `BUG_ID`,`Complaint_ID`,`Service_ID`,`Product_ID`,`Module_ID`,
-		`Feedback_ID`,`Bug_Remarks`,`Bug_Recorder`,`Bug_Record_Time`,`Bug_Creator`,
-		`Bug_Create_Time`,`Else_Category`,`Bug_Category_Type`,Bug_Category_Type,Bug_Category
-		from sales_bug_category where BUG_ID = #{value}
+		select `BUG_ID`,`Complaint_ID`,`Service_ID`,`Product_ID`,`Module_ID`,`Feedback_ID`,`Bug_Remarks`,`Bug_Recorder`,`Bug_Record_Time`,`Bug_Creator`,`Bug_Create_Time`,`Else_Category`,`Bug_Category_Type` from sales_bug_category where BUG_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.BugCategoryDO">
@@ -96,8 +93,7 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{bugRecorder} AND Identificati
 			`Else_Category`,
 			`Bug_Category_Type`,
 			Bug_New_Type,
-			Bug_New_Type_Info,
-			Bug_Category
+			Bug_New_Type_Info
 		)
 		values
 		(
@@ -114,8 +110,7 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{bugRecorder} AND Identificati
 			#{elseCategory},
 			#{bugCategoryType}
 			#{bugNewType},
-			#{bugNewTypeInfo},
-			#{bugCategory}
+			#{bugNewTypeInfo}
 		)
 	</insert>
 	 
@@ -133,9 +128,7 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{bugRecorder} AND Identificati
 			<if test="elseCategory != null">`Else_Category` = #{elseCategory},</if>
 			<if test="bugCategoryType != null">`Bug_Category_Type` = #{bugCategoryType},</if>
 			<if test="bugNewType != null">`Bug_New_Type` = #{bugNewType},</if>
-			<if test="bugNewTypeInfo != null">`Bug_New_Type_Info` = #{bugNewTypeInfo},</if>
-			<if test="bugCategory != null">`Bug_Category` = #{bugCategory}</if>
-
+			<if test="bugNewTypeInfo != null">`Bug_New_Type_Info` = #{bugNewTypeInfo}</if>
 		</set>
 		where BUG_ID = #{bugId}
 	</update>

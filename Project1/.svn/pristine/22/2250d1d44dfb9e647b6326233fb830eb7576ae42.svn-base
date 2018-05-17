@@ -28,7 +28,7 @@ function getMainAndCopyPerson_ajax() {
 			for (var i = 0; i < result.length; i++) {
 				if (result[i].mainPerson == 1) {
 					mainPerson = mainPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_1") +
-								" onclick='deleteMainPerson(\"" + (result[i].employeeId + "_1") +"\" )'>" +
+								" onclick='delete(\"" + (result[i].employeeId + "_1") +"\" )'>" +
 								result[i].person +"</div>";
 					$('#sendPerson').html(mainPerson);
 					if (mainPersonIds == "") {
@@ -42,7 +42,7 @@ function getMainAndCopyPerson_ajax() {
 				}
 				if (result[i].mainPerson == 0) {
 					copyPerson = copyPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_2") +
-								" onclick='deleteCopyPerson(\"" + (result[i].employeeId + "_2") +"\" )'>" +
+								" onclick='delete(\"" + (result[i].employeeId + "_2") +"\" )'>" +
 								result[i].person +"</div>";
 					$('#receivePerson').html(copyPerson);
 					if (copyPersonIds == "") {
@@ -139,14 +139,12 @@ function bugCategoryMapper_edit(){
 			$("input[name='bugId']").val(result.bugId);
 			$("input[name='elseCategory']").val(result.elseCategory);
 			$("textarea[name='requirementDescription']").val(result.requirementDescription);
-			$("textarea[name='bugRemarks']").val(result.bugRemarks);
+			$("textarea[name='bugRemarks']").val(result.bugRemarks);		
 			loadDicValue("sales_categoryType","bugCategoryType",result.bugCategoryType);
 			loadDicValue("sales_newCategory","bugNewType",result.bugNewType);
-
 			loadCrmDataValue("/project/moduleCategory/listDic","bugCategory",result.bugCategory);
 			loadCrmDataValue("/project/productCategory/listDic","productId",result.productId);
 			loadCrmDataValue("/project/moduleCategory/listDic","moduleId",result.moduleId);
-			alert(result.bugNewType);
 		}
 	});
 }

@@ -59,15 +59,13 @@ public class BugCategoryDO implements Serializable {
 	private String bugNewType;
 	//新建分类内容
 	private String bugNewTypeInfo;
-
+	
 	public String getBugNewType() {
 		return bugNewType;
 	}
-
 	public void setBugNewType(String bugNewType) {
 		this.bugNewType = bugNewType;
 	}
-
 	public String getBugNewTypeInfo() {
 		return bugNewTypeInfo;
 	}
