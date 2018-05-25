@@ -9,12 +9,13 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-							<input id="travelId" name="travelId" th:value="${travelId}" type="hidden">
+							<input id="travelId" name="travelId"
+								th:value="${travelId}" type="hidden">
 							<div class="form-group">
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>企业客户编号：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="customerId"
+									<select data-placeholder="请选择" name="customerId" disabled="disabled"
 										id="customerId" class="form-control chosen-select"
 										tabindex="2" style="width: 100%">
 										<option value="">请选择</option>
@@ -23,7 +24,7 @@
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>业务编号：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="businessId"
+									<select data-placeholder="请选择" name="businessId" disabled="disabled"
 										id="businessId" class="form-control chosen-select"
 										tabindex="2" style="width: 100%">
 										<option value="">请选择</option>
@@ -35,7 +36,7 @@
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>项目编号：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="projectId" id="projectId"
+									<select data-placeholder="请选择" name="projectId" id="projectId" disabled="disabled"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 										<option value="">请选择</option>
@@ -44,7 +45,7 @@
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>出差人姓名：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="travelName"
+									<select data-placeholder="请选择" name="travelName" disabled="disabled"
 										id="travelName" class="form-control chosen-select"
 										tabindex="2" style="width: 100%">
 										<option value="">请选择</option>
@@ -55,13 +56,13 @@
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>出发地：</label>
 								<div class="col-sm-4">
-									<input id="travelPlaceIssue" name="travelPlaceIssue"
+									<input id="travelPlaceIssue" name="travelPlaceIssue" readonly="readonly"
 										class="form-control" type="text">
 								</div>
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>目的地：</label>
 								<div class="col-sm-4">
-									<input id="travelPlaceEnded" name="travelPlaceEnded"
+									<input id="travelPlaceEnded" name="travelPlaceEnded" readonly="readonly"
 										class="form-control" type="text">
 								</div>
 							</div>
@@ -69,7 +70,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">同行人：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="travelPartner"
+									<select data-placeholder="请选择" name="travelPartner" disabled="disabled"
 										id="travelPartner" class="form-control chosen-select"
 										tabindex="2" style="width: 100%">
 										<option value="">请选择</option>
@@ -79,7 +80,7 @@
 									class="mustin">*&nbsp;</span>拟出差时间：</label>
 								<div class="col-sm-4">
 									<div class="input-group date" id="travelDepartureDate">
-										<input class="form-control" type="text"
+										<input class="form-control" type="text" readonly="readonly"
 											name="travelDepartureDate"> <span
 											class="input-group-addon"> <span
 											class="glyphicon glyphicon-calendar"></span>
@@ -93,7 +94,7 @@
 									class="mustin">*&nbsp;</span>拟返程时间：</label>
 								<div class="col-sm-4">
 									<div class="input-group date" id="travelReturnDate">
-										<input class="form-control" type="text"
+										<input class="form-control" type="text" readonly="readonly"
 											name="travelReturnDate"> <span
 											class="input-group-addon"> <span
 											class="glyphicon glyphicon-calendar"></span>
@@ -103,7 +104,7 @@
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>预计费用类别：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="travelPlanCostType"
+									<select data-placeholder="请选择" name="travelPlanCostType" disabled="disabled"
 										id="travelPlanCostType" class="form-control chosen-select"
 										tabindex="2" style="width: 100%">
 										<option value="">请选择</option>
@@ -114,7 +115,7 @@
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>预计交通方式：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="travelVisitMode"
+									<select data-placeholder="请选择" name="travelVisitMode" disabled="disabled"
 										id="travelVisitMode" class="form-control chosen-select"
 										tabindex="2" style="width: 100%">
 										<option value="">请选择</option>
@@ -132,9 +133,9 @@
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>实际完成结果：</label>
 								<div class="col-sm-4">
-									<label class="radio-inline"> <input type="radio"
+									<label class="radio-inline"> <input type="radio" disabled="true"
 										name="travelActualPerformance" value="1" /> 完成
-									</label> <label class="radio-inline"> <input type="radio"
+									</label> <label class="radio-inline"> <input type="radio" disabled="true"
 										name="travelActualPerformance" value="0" checked="checked" />
 										未完成
 									</label>
@@ -187,7 +188,7 @@
 									<input id="isMainPerson" name="isMainPerson" type="hidden">
 									<div style="float: left;" id="sendPerson"></div>
 									<div style="float: left;">
-										<button type="button" class="btn btn-danger btn-xs"
+										<button type="button" class="btn btn-danger btn-xs" disabled="true"
 											id="sendPersonBtn" var="sendPersonBtn"
 											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
 											onclick="addSendPerson()">
@@ -203,7 +204,7 @@
 									<input id="isCopyPerson" name="isCopyPerson" type="hidden">
 									<div style="float: left;" id="receivePerson"></div>
 									<div style="float: left;">
-										<button type="button" class="btn btn-danger btn-xs"
+										<button type="button" class="btn btn-danger btn-xs" disabled="true"
 											id="receivePersonBtn" var="receivePersonBtn"
 											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
 											onclick="addRecivePerson()">
@@ -226,7 +227,7 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/contract/travel/edit.js"></script>
+	<script type="text/javascript" src="/js/appjs/contract/travel/examineTravel.js"></script>
 	<script type="text/javascript" src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
 </body>
 </html>

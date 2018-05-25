@@ -10,7 +10,7 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 							<input id="expensesTravelId" name="expensesTravelId"
-								th:value="${expensesTravel.expensesTravelId}" type="hidden">
+								th:value="${expensesTravelId}" type="hidden">
 							<div class="form-group">
 
 
@@ -37,7 +37,7 @@
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>企业客户编号：</label>
 											<div class="col-sm-4">
-												<select data-placeholder="请选择" name="customerId"
+												<select data-placeholder="请选择" name="customerId" disabled="disabled"
 													id="customerId" class="form-control chosen-select"
 													tabindex="2" style="width: 100%">
 													<option value="">请选择</option>
@@ -46,7 +46,7 @@
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>业务编号：</label>
 											<div class="col-sm-4">
-												<select data-placeholder="请选择" name="businessId"
+												<select data-placeholder="请选择" name="businessId" disabled="disabled"
 													id="businessId" class="form-control chosen-select"
 													tabindex="2" style="width: 100%">
 													<option value="">请选择</option>
@@ -57,7 +57,7 @@
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>项目编号：</label>
 											<div class="col-sm-4">
-												<select data-placeholder="请选择" name="projectId"
+												<select data-placeholder="请选择" name="projectId" disabled="disabled"
 													id="projectId" class="form-control chosen-select"
 													tabindex="2" style="width: 100%">
 													<option value="">请选择</option>
@@ -66,7 +66,7 @@
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>申请人姓名：</label>
 											<div class="col-sm-4">
-												<select data-placeholder="请选择" name="expensesTravelName"
+												<select data-placeholder="请选择" name="expensesTravelName" disabled="disabled"
 													id="expensesTravelName" class="form-control chosen-select"
 													tabindex="2" style="width: 100%">
 													<option value="">请选择</option>
@@ -78,7 +78,7 @@
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>关联出差申请人姓名：</label>
 											<div class="col-sm-4">
-												<select data-placeholder="请选择" name="expensesTravelTid"
+												<select data-placeholder="请选择" name="expensesTravelTid" disabled="disabled"
 													id="expensesTravelTid" class="form-control chosen-select"
 													tabindex="2" style="width: 100%">
 													<option value="">请选择</option>
@@ -87,7 +87,7 @@
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>关联请款申请人姓名：</label>
 											<div class="col-sm-4">
-												<select data-placeholder="请选择" name="expensesTravelPayid"
+												<select data-placeholder="请选择" name="expensesTravelPayid" disabled="disabled"
 													id="expensesTravelPayid" class="form-control chosen-select"
 													tabindex="2" style="width: 100%">
 													<option value="">请选择</option>
@@ -106,12 +106,12 @@
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>出差任务：</label>
 											<div class="col-sm-4">
-												<input id="expensesTravelTask" name="expensesTravelTask"
+												<input id="expensesTravelTask" name="expensesTravelTask" readonly="readonly"
 													class="form-control" type="text">
 											</div>
 											<label class="col-sm-2 control-label">出差补助：</label>
 											<div class="col-sm-4">
-												<input id="expensesTravelAllowance"
+												<input id="expensesTravelAllowance" readonly="readonly"
 													name="expensesTravelAllowance" class="form-control"
 													type="text">
 											</div>
@@ -121,12 +121,12 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">其他费用类型：</label>
 											<div class="col-sm-4">
-												<input id="expensesTravelType" name="expensesTravelType"
+												<input id="expensesTravelType" name="expensesTravelType" readonly="readonly"
 													class="form-control" type="text">
 											</div>
 											<label class="col-sm-2 control-label">其他费用金额：</label>
 											<div class="col-sm-4">
-												<input id="expensesTravelPrice" name="expensesTravelPrice"
+												<input id="expensesTravelPrice" name="expensesTravelPrice" readonly="readonly"
 													class="form-control" type="text">
 											</div>
 										</div>
@@ -136,14 +136,14 @@
 												class="mustin">*&nbsp;</span>预借金额：</label>
 											<div class="col-sm-4">
 												<input id="expensesTravelPayPrice"
-													name="expensesTravelPayPrice" class="form-control"
+													name="expensesTravelPayPrice" class="form-control" readonly="readonly"
 													type="text">
 											</div>
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>结算方式：</label>
 											<div class="col-sm-4">
 												<select data-placeholder="请选择" name="expensesTravelPayMode"
-													id="expensesTravelPayMode"
+													id="expensesTravelPayMode" disabled="disabled"
 													class="form-control chosen-select" tabindex="2"
 													style="width: 100%">
 													<option value="">请选择</option>
@@ -154,14 +154,14 @@
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>收款人银行：</label>
 											<div class="col-sm-4">
-												<input id="expensesTravelBank" name="expensesTravelBank"
+												<input id="expensesTravelBank" name="expensesTravelBank" readonly="readonly"
 													class="form-control" type="text">
 											</div>
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>卡号：</label>
 											<div class="col-sm-4">
 												<input id="expensesTravelCardNum"
-													name="expensesTravelCardNum" class="form-control"
+													name="expensesTravelCardNum" class="form-control" readonly="readonly"
 													type="text">
 											</div>
 										</div>
@@ -180,7 +180,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">备注：</label>
 											<div class="col-sm-10">
-												<textarea id="expensesTravelRemarks"
+												<textarea id="expensesTravelRemarks" readonly="readonly"
 													name="expensesTravelRemarks" class="form-control" rows="3"></textarea>
 											</div>
 										</div>
@@ -208,7 +208,7 @@
 									<div style="float: left;" id="sendPerson"></div>
 									<div style="float: left;">
 										<button type="button" class="btn btn-danger btn-xs"
-											id="sendPersonBtn" var="sendPersonBtn"
+											id="sendPersonBtn" var="sendPersonBtn" disabled="true"
 											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
 											onclick="addSendPerson()">
 											<span class="glyphicon glyphicon-plus"></span>
@@ -223,7 +223,7 @@
 									<input id="isCopyPerson" name="isCopyPerson" type="hidden">
 									<div style="float: left;" id="receivePerson"></div>
 									<div style="float: left;">
-										<button type="button" class="btn btn-danger btn-xs"
+										<button type="button" class="btn btn-danger btn-xs" disabled="true"
 											id="receivePersonBtn" var="receivePersonBtn"
 											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
 											onclick="addRecivePerson()">
@@ -253,7 +253,7 @@
 	</div>
 	<div th:include="include::footer"></div>
 	<script type="text/javascript"
-		src="/js/appjs/approval/expensesTravel/edit.js"></script>
+		src="/js/appjs/approval/expensesTravel/examineExpensesTravel.js"></script>
 		<script type="text/javascript"
 		src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
 </body>

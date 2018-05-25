@@ -9,13 +9,13 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-						<input id="payoutId" name="payoutId" th:value="${payout.payoutId}"  type="hidden">
+						<input id="payoutId" name="payoutId" th:value="${payoutId}"  type="hidden">
 
 							<div class="form-group">
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>企业客户编号：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="customerId" id="customerId"
+									<select data-placeholder="请选择" name="customerId" id="customerId" disabled="disabled"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 										<option value="">请选择</option>
@@ -24,7 +24,7 @@
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>业务编号：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="businessId" id="businessId"
+									<select data-placeholder="请选择" name="businessId" id="businessId" disabled="disabled"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 										<option value="">请选择</option>
@@ -36,7 +36,7 @@
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>项目编号：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="projectId" id="projectId"
+									<select data-placeholder="请选择" name="projectId" id="projectId" disabled="disabled"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 										<option value="">请选择</option>
@@ -45,7 +45,7 @@
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>申请人姓名：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="payoutPerson" id="payoutPerson"
+									<select data-placeholder="请选择" name="payoutPerson" id="payoutPerson" disabled="disabled"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 										<option value="">请选择</option>
@@ -56,19 +56,19 @@
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>请款用途：</label>
 								<div class="col-sm-4">
-									<input id="payoutUseage" name="payoutUseage" class="form-control" type="text">
+									<input id="payoutUseage" name="payoutUseage" class="form-control" readonly="readonly" type="text"> 
 								</div>
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>请款金额：</label>
 								<div class="col-sm-4">
-									<input id="payoutPrice" name="payoutPrice" class="form-control" type="text">
+									<input id="payoutPrice" name="payoutPrice" class="form-control" readonly="readonly" type="text">
 								</div>
 							</div>
 														<div class="form-group">
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>结算方式：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="payoutMeans" id="payoutMeans"
+									<select data-placeholder="请选择" name="payoutMeans" id="payoutMeans" disabled="disabled"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 										<option value="">请选择</option>
@@ -77,19 +77,19 @@
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>收款人银行：</label>
 								<div class="col-sm-4">
-									<input id="payoutBeneficiaryBank" name="payoutBeneficiaryBank" class="form-control" type="text">
+									<input id="payoutBeneficiaryBank" name="payoutBeneficiaryBank" readonly="readonly" class="form-control" type="text">
 								</div>
 							</div>
 														<div class="form-group">
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>银行卡号：</label>
 								<div class="col-sm-4">
-									<input id="payoutCardNumber" name="payoutCardNumber" class="form-control" type="text">
+									<input id="payoutCardNumber" name="payoutCardNumber" readonly="readonly" class="form-control" type="text">
 								</div>
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>关联出差申请人姓名：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="payoutRelatedContractId" id="payoutRelatedContractId"
+									<select data-placeholder="请选择" name="payoutRelatedContractId" disabled="disabled" id="payoutRelatedContractId"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 										<option value="">请选择</option>
@@ -110,7 +110,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">备注：</label>
 								<div class="col-sm-10">
-									<textarea id="payoutRemarks" name="payoutRemarks" class="form-control" rows="3"></textarea>
+									<textarea id="payoutRemarks" name="payoutRemarks" readonly="readonly" class="form-control" rows="3"></textarea>
 								</div>
 							</div>
 				<!-- 								<div class="form-group">
@@ -158,7 +158,7 @@
 									<div style="float: left;" id="sendPerson"></div>
 									<div style="float: left;">
 										<button type="button" class="btn btn-danger btn-xs"
-											id="sendPersonBtn" var="sendPersonBtn"
+											id="sendPersonBtn" var="sendPersonBtn" disabled="true"
 											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
 											onclick="addSendPerson()">
 											<span class="glyphicon glyphicon-plus"></span>
@@ -174,7 +174,7 @@
 									<div style="float: left;" id="receivePerson"></div>
 									<div style="float: left;">
 										<button type="button" class="btn btn-danger btn-xs"
-											id="receivePersonBtn" var="receivePersonBtn"
+											id="receivePersonBtn" var="receivePersonBtn" disabled="true"
 											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
 											onclick="addRecivePerson()">
 											<span class="glyphicon glyphicon-plus"></span>
@@ -184,7 +184,7 @@
 							</div>
 							<div class="form-group">
 								<div class="col-sm-4 col-sm-offset-8">
-									<button type="submit" class="btn btn-primary">提交</button>
+<!-- 									<button type="submit" class="btn btn-primary">提交</button> -->
 									<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
 								</div>
 							</div>
@@ -195,7 +195,7 @@
 	</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/contract/payout/edit.js">
+	<script type="text/javascript" src="/js/appjs/contract/payout/examinePayout.js">
 	</script>
 	<script type="text/javascript"
 		src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
