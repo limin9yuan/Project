@@ -45,15 +45,13 @@
 		(
 			`Field_Name`, 
 			`Belong_Category`, 
-			`Content`, 
-			`Table_Name`
+			`Content`
 		)
 		values
 		(
 			#{fieldName}, 
 			#{belongCategory}, 
-			#{content}, 
-			#{tableName}
+			#{content}
 		)
 	</insert>
 	 

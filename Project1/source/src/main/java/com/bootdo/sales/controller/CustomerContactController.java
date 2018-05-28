@@ -84,7 +84,7 @@ public class CustomerContactController extends BaseController {
 		PageUtils pageUtils = new PageUtils(customerContactList, total);
 		return pageUtils;
 	}
-
+	/*****自定义字段相关*******/
 	@ResponseBody
 	@GetMapping("/listField")
 	@RequiresPermissions("sales:customerContact:customerContact")
@@ -95,6 +95,21 @@ public class CustomerContactController extends BaseController {
 		int total = fieldService.count(query);
 		PageUtils pageUtils = new PageUtils(fieldList, total);
 		return pageUtils;
+	}
+	@GetMapping("/addField")
+	@RequiresPermissions("sales:customerContact:addField")
+	String addField() {
+		return "common/customField/add";
+	}
+	@ResponseBody
+	@PostMapping("/saveField")
+	@RequiresPermissions("sales:customerContact:addField")
+	public R saveField( FieldDO field){
+		field.setTableName("sales_customer_contact");
+		if(fieldService.save(field)>0){
+			return R.ok();
+		}
+		return R.error();
 	}
 
 
