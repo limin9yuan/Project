@@ -162,7 +162,7 @@
 									</div>
 								</div>
 
-								<!-- 								联系方式 -->
+								<!--联系方式 -->
 								<div class="tab-pane fade" id="linkInfo">
 									<div class="form-group">
 										<label class="col-sm-2 control-label">邮件地址：</label>
@@ -210,7 +210,7 @@
 										</div>
 									</div>
 								</div>
-								<!-- 								所在单位 -->
+								<!--所在单位 -->
 								<div class="tab-pane fade" id="workUnit">
 
 									<div class="form-group">
@@ -277,7 +277,7 @@
 										</div>
 									</div>
 								</div>
-								<!-- 								纪念日和爱好 -->
+								<!--纪念日和爱好 -->
 								<div class="tab-pane fade" id="specialDay">
 									<div class="form-group">
 										<label class="col-sm-2 control-label">纪念日类别：</label>
@@ -307,7 +307,44 @@
 										</div>
 									</div>
 								</div>
-								<div class="tab-pane fade" id="userDefine"></div>
+								<div class="tab-pane fade" id="userDefine">
+									<div class="ibox">
+										<div class="ibox-body">
+											<div class="fixed-table-toolbar">
+												<div class="columns pull-left">
+													<button shiro:hasPermission="contract:contract:addContractDelivery"
+														type="button" class="btn  btn-primary"
+														onclick="addContractDelivery()">
+														<i class="fa fa-plus" aria-hidden="true"></i>添加
+													</button>
+													<button shiro:hasPermission="contract:contract:batchRemoveContractDelivery"
+														type="button" class="btn  btn-danger"
+														onclick="batchRemoveContractDelivery()">
+														<i class="fa fa-trash" aria-hidden="true"></i>批量删除
+													</button>
+												</div>
+											</div>
+											<table id="listCustomField" data-mobile-responsive="true"> </table>
+										</div>
+										<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+										<div>
+											<script type="text/javascript">
+												var s_edit_h = 'hidden';
+												var s_remove_h = 'hidden';
+											</script>
+										</div>
+										<div shiro:hasPermission="contract:contract:editContractDelivery">
+											<script type="text/javascript">
+												s_edit_h = '';
+											</script>
+										</div>
+										<div shiro:hasPermission="contract:contract:contractDeliveryRemove">
+											<script type="text/javascript">
+												var s_remove_h = '';
+											</script>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">主送人：</label>

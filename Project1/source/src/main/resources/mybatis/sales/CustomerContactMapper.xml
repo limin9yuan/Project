@@ -21,6 +21,28 @@
 		where Contact_ID = #{value}
 	</select>
 
+	<select id="listCustomField" resultType="com.bootdo.sales.domain.CustomerContactDO">
+		select `id`,`Field_Name`,`Belong_Category`,`Content`,`Table_Name` from custom_field
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="fieldName != null and fieldName != ''"> and Field_Name = #{fieldName} </if>
+			<if test="belongCategory != null and belongCategory != ''"> and Belong_Category = #{belongCategory} </if>
+			<if test="content != null and content != ''"> and Content = #{content} </if>
+			<if test="tableName != null and tableName != ''"> and Table_Name = #{tableName} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
 	<select id="list" resultType="com.bootdo.sales.domain.CustomerContactDO">
 		SELECT DISTINCT
 		a.`Contact_ID`,`Contact_Name`,
@@ -76,6 +98,17 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{contactOperator} AND Identifi
 		<if test="offset != null and limit != null">
 			limit #{offset}, #{limit}
 		</if>
+	</select>
+
+	<select id="countCustomField" resultType="int">
+		select count(*) from custom_field
+		<where>
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="fieldName != null and fieldName != ''"> and Field_Name = #{fieldName} </if>
+			<if test="belongCategory != null and belongCategory != ''"> and Belong_Category = #{belongCategory} </if>
+			<if test="content != null and content != ''"> and Content = #{content} </if>
+			<if test="tableName != null and tableName != ''"> and Table_Name = #{tableName} </if>
+		</where>
 	</select>
 
 	<select id="count" resultType="int">

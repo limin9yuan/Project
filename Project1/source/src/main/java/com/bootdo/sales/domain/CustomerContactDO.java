@@ -112,6 +112,7 @@ public class CustomerContactDO implements Serializable {
 	//抄送人id
 	private String copyPersonId;
 
+
 	public String getMainPersonId() {
 		return mainPersonId;
 	}

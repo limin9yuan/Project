@@ -13,6 +13,8 @@ import java.util.Map;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bootdo.common.domain.FieldDO;
+import com.bootdo.common.service.FieldService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,8 @@ public class CustomerContactController extends BaseController {
 	private BootdoConfig bootdoConfig;
 	@Autowired
 	private MainCopyPersonService mainCopyPersonService;
+	@Autowired
+	private FieldService fieldService;
 
 	@GetMapping()
 	@RequiresPermissions("sales:customerContact:customerContact")
@@ -80,6 +84,19 @@ public class CustomerContactController extends BaseController {
 		PageUtils pageUtils = new PageUtils(customerContactList, total);
 		return pageUtils;
 	}
+
+	@ResponseBody
+	@GetMapping("/listField")
+	@RequiresPermissions("sales:customerContact:customerContact")
+	public PageUtils listField(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<FieldDO> fieldList = fieldService.list(query);
+		int total = fieldService.count(query);
+		PageUtils pageUtils = new PageUtils(fieldList, total);
+		return pageUtils;
+	}
+
 
 	@GetMapping("/add")
 	@RequiresPermissions("sales:customerContact:add")

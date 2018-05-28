@@ -23,9 +23,9 @@ public interface CustomerContactService {
 	CustomerContactDO get(String contactId);
 	
 	List<CustomerContactDO> list(Map<String, Object> map);
-	
+
 	int count(Map<String, Object> map);
-	
+
 	int save(CustomerContactDO customerContact);
 	
 	int update(CustomerContactDO customerContact);

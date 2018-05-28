@@ -21,9 +21,13 @@ public interface CustomerContactDao {
 	CustomerContactDO get(String contactId);
 	
 	List<CustomerContactDO> list(Map<String,Object> map);
-	
+
+	List<CustomerContactDO> listCustomField(Map<String,Object> map);
+
 	int count(Map<String,Object> map);
-	
+
+	int countCustomField(Map<String, Object> map);
+
 	int save(CustomerContactDO customerContact);
 	
 	int saveMain(MainCopyPersonDO mainCopyPerson);

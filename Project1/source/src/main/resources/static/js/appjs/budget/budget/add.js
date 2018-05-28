@@ -109,6 +109,7 @@ function setOldProject(){
 			var result = data.budget;
 			$("input[name='budgetCost']").val(result.budgetCost);
 			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+			$("input[name='budgetConformance']").val(result.budgetConformance);
 		}
 	});
 }
@@ -127,6 +128,7 @@ function setSoftware(){
 			$("input[name='budgetCost']").val(result.budgetCost);
 			$("input[name='budgetProfit']").val(result.budgetProfit);
 			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+			$("input[name='budgetConformance']").val(result.budgetConformance);
 		}
 	});
 }
@@ -144,6 +146,7 @@ function setBlender(){
 			$("input[name='budgetServiceRevenueNet']").val(result.budgetServiceRevenueNet);
 			$("input[name='budgetCost']").val(result.budgetCost);
 			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+			$("input[name='budgetConformance']").val(result.budgetConformance);
 		}
 	});
 }
@@ -394,10 +397,10 @@ function getType(){
 		//利润
 		$("#budgetProfit").val('');
 		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
+		if(budgetTotalCost-budgetCost>0){
 			$("#budgetConformance").val("是");
 		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
+		if(budgetTotalCost-budgetCost<0){
 			$("#budgetConformance").val("否");
 		}
 	}
@@ -420,10 +423,10 @@ function getType(){
 		var budgetProfit= (Number(budgetServiceRevenue)-Number(budgetCost)).toFixed(4); 
 		$("#budgetProfit").val(budgetProfit);
 		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
+		if(budgetTotalCost-budgetCost>0){
 			$("#budgetConformance").val("是");
 		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
+		if(budgetTotalCost-budgetCost<0){
 			$("#budgetConformance").val("否");
 		}
 	}
@@ -445,10 +448,10 @@ function getType(){
 		//利润
 		$("#budgetProfit").val('');
 		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
+		if(budgetTotalCost-budgetCost>0){
 			$("#budgetConformance").val("是");
 		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
+		if(budgetTotalCost-budgetCost<0){
 			$("#budgetConformance").val("否");
 		}
 	}
@@ -467,10 +470,10 @@ function getType(){
 		//利润
 		$("#budgetProfit").val('');
 		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
+		if(budgetTotalCost-budgetCost>0){
 			$("#budgetConformance").val("是");
 		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
+		if(budgetTotalCost-budgetCost<0){
 			$("#budgetConformance").val("否");
 		}
 	}
@@ -489,10 +492,10 @@ function getType(){
 		//利润
 		$("#budgetProfit").val('');
 		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
+		if(budgetTotalCost-budgetCost>0){
 			$("#budgetConformance").val("是");
 		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
+		if(budgetTotalCost-budgetCost<0){
 			$("#budgetConformance").val("否");
 		}
 	}
@@ -513,140 +516,23 @@ function setType(){
 	//服务收入（合同额）
 	var budgetServiceRevenue=$("#budgetServiceRevenue").val();
 	if(projectGategory=="老项目"){
-		//计划利润率
-		$("#budgetProfitRate").val('');
-		var budgetProfitRate=$("#budgetProfitRate").val();
-		//税金
-		$("#budgetTax").val('');
-		//服务净收入
-		$("#budgetServiceRevenueNet").val('');
-		//计划成本总额
-		//var budgetTotalCost= (Number(budgetServiceRevenue)-Number(budgetServiceRevenue)*budgetProfitRate).toFixed(4); 
-		$("#budgetTotalCost").val('');
-		//费用和支出
-		var budgetCost=(Number(budgetLaborCost)+Number(budgetTravelCost)+Number(budgetPurchaseCost)).toFixed(4); 
-		$("#budgetCost").val(budgetCost);
-		//利润
-		$("#budgetProfit").val('');
-		
 		 setOldProject();
-		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
-			$("#budgetConformance").val("是");
-		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
-			$("#budgetConformance").val("否");
-		} 
-		 
+		 var budgetServiceRevenueNet=$("#budgetServiceRevenueNet").val('');
+		 var budgetTax=$("#budgetTax").val('');
+		 var budgetTotalCost= $("#budgetTotalCost").val('');
+		 var budgetCost=$("#budgetCost").val();
 	}
 	if(projectGategory=="软件项目技术开发类"){
-		//计划利润率
-		var budgetProfitRate=$("#budgetProfitRate").val(0.5);
-		//税金
-		var budgetTax= (Number(budgetServiceRevenue)*0.06).toFixed(4); 
-		$("#budgetTax").val(budgetTax);
-		//服务净收入
-		var budgetServiceRevenueNet= (Number(budgetServiceRevenue)-Number(budgetTax)).toFixed(4); 
-		$("#budgetServiceRevenueNet").val(budgetServiceRevenueNet);
-		//计划成本总额
-		var budgetTotalCost= (Number(budgetServiceRevenue)-Number(budgetServiceRevenue)*0.5).toFixed(4); 
-		$("#budgetTotalCost").val(budgetTotalCost);
-		//费用和支出
-		var budgetCost=(Number(budgetTax)+Number(budgetLaborCost)+Number(budgetTravelCost)+Number(budgetPurchaseCost)).toFixed(4); 
-		$("#budgetCost").val(budgetCost);
-		//利润
-		var budgetProfit= (Number(budgetServiceRevenue)-Number(budgetCost)).toFixed(4); 
-		$("#budgetProfit").val(budgetProfit);
-		
 		setSoftware();
-		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
-			$("#budgetConformance").val("是");
-		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
-			$("#budgetConformance").val("否");
-		}
 	}
 	if(projectGategory=="硬件类"){
-		//计划利润率
-		var budgetProfitRate=$("#budgetProfitRate").val(0.4);
-		//税金
-		var budgetTax= ((Number(budgetServiceRevenue)-Number(budgetPurchaseCost))*0.17).toFixed(4); 
-		$("#budgetTax").val(budgetTax);
-		//服务净收入
-		var budgetServiceRevenueNet= (Number(budgetServiceRevenue)-Number(budgetTax)-Number(budgetLaborCost)-Number(budgetTravelCost)-Number(budgetPurchaseCost)).toFixed(4); 
-		$("#budgetServiceRevenueNet").val(budgetServiceRevenueNet);
-		//计划成本总额
-		var budgetTotalCost= (Number(budgetServiceRevenue)-Number(budgetServiceRevenue)*0.4).toFixed(4); 
-		$("#budgetTotalCost").val(budgetTotalCost);
-		//费用和支出
-		var budgetCost=(Number(budgetTax)+Number(budgetLaborCost)+Number(budgetTravelCost)+Number(budgetPurchaseCost)).toFixed(4); 
-		$("#budgetCost").val(budgetCost);
-		//利润
-		$("#budgetProfit").val('');
-		
 		setBlender();
-		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
-			$("#budgetConformance").val("是");
-		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
-			$("#budgetConformance").val("否");
-		}
 	}
 	if(projectGategory=="软硬件混合项目软件为主"){
-		//计划利润率
-		var budgetProfitRate=$("#budgetProfitRate").val(0.4);
-		//税金
-		var budgetTax= ((Number(budgetServiceRevenue)-Number(budgetPurchaseCost))*0.17).toFixed(4); 
-		$("#budgetTax").val(budgetTax);
-		//服务净收入
-		var budgetServiceRevenueNet= (Number(budgetServiceRevenue)-Number(budgetTax)-Number(budgetLaborCost)-Number(budgetTravelCost)-Number(budgetPurchaseCost)).toFixed(4); 
-		$("#budgetServiceRevenueNet").val(budgetServiceRevenueNet);
-		//计划成本总额
-		var budgetTotalCost= (Number(budgetServiceRevenue)-Number(budgetServiceRevenue)*0.4).toFixed(4); 
-		$("#budgetTotalCost").val(budgetTotalCost);
-		//费用和支出
-		var budgetCost=(Number(budgetTax)+Number(budgetLaborCost)+Number(budgetTravelCost)+Number(budgetPurchaseCost)).toFixed(4); 
-		$("#budgetCost").val(budgetCost);
-		//利润
-		$("#budgetProfit").val('');
-		
 		setBlender();
-		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
-			$("#budgetConformance").val("是");
-		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
-			$("#budgetConformance").val("否");
-		}
 	}
 	if(projectGategory=="软硬件混合项目硬件为主"){
-		//计划利润率
-		var budgetProfitRate=$("#budgetProfitRate").val(0.4);
-		//税金
-		var budgetTax= ((Number(budgetServiceRevenue)-Number(budgetPurchaseCost))*0.17).toFixed(4); 
-		$("#budgetTax").val(budgetTax);
-		//服务净收入
-		var budgetServiceRevenueNet= (Number(budgetServiceRevenue)-Number(budgetTax)-Number(budgetLaborCost)-Number(budgetTravelCost)-Number(budgetPurchaseCost)).toFixed(4); 
-		$("#budgetServiceRevenueNet").val(budgetServiceRevenueNet);
-		//计划成本总额
-		var budgetTotalCost= (Number(budgetServiceRevenue)-Number(budgetServiceRevenue)*0.4).toFixed(4); 
-		$("#budgetTotalCost").val(budgetTotalCost);
-		//费用和支出
-		var budgetCost=(Number(budgetTax)+Number(budgetLaborCost)+Number(budgetTravelCost)+Number(budgetPurchaseCost)).toFixed(4); 
-		$("#budgetCost").val(budgetCost);
-		//利润
-		$("#budgetProfit").val('');
-		
 		setBlender();
-		//计划是否合规
-		if(budgetTotalCost.compareTo(budgetCost)==1){
-			$("#budgetConformance").val("是");
-		}
-		if(budgetTotalCost.compareTo(budgetCost)==-1){
-			$("#budgetConformance").val("否");
-		}
 	}
 	
 };

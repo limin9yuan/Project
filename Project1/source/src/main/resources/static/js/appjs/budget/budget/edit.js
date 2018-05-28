@@ -89,6 +89,7 @@ function setOldProject(){
 			var result = data.budget;
 			$("input[name='budgetCost']").val(result.budgetCost);
 			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+			$("input[name='budgetConformance']").val(result.budgetConformance);
 		}
 	});
 }
@@ -107,6 +108,7 @@ function setSoftware(){
 			$("input[name='budgetCost']").val(result.budgetCost);
 			$("input[name='budgetProfit']").val(result.budgetProfit);
 			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+			$("input[name='budgetConformance']").val(result.budgetConformance);
 		}
 	});
 }
@@ -124,6 +126,7 @@ function setBlender(){
 			$("input[name='budgetServiceRevenueNet']").val(result.budgetServiceRevenueNet);
 			$("input[name='budgetCost']").val(result.budgetCost);
 			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+			$("input[name='budgetConformance']").val(result.budgetConformance);
 		}
 	});
 }
