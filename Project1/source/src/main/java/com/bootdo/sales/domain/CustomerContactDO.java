@@ -1,5 +1,7 @@
 package com.bootdo.sales.domain;
 
+import com.bootdo.common.utils.R;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -111,7 +113,6 @@ public class CustomerContactDO implements Serializable {
 	private String mainPersonId;
 	//抄送人id
 	private String copyPersonId;
-
 
 	public String getMainPersonId() {
 		return mainPersonId;

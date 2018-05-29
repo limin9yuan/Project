@@ -1,5 +1,6 @@
 $().ready(function() {
 	validateRule();
+	// alert($("#contactIds", window.parent.document).val());
 });
 
 $.validator.setDefaults({
@@ -8,6 +9,15 @@ $.validator.setDefaults({
 	}
 });
 function save() {
+
+	var tmpContactId = $("#contactId", window.parent.document).val() == undefined ?
+	$("#contactIds", window.parent.document).val() : $("#contactId", window.parent.document).val()
+	if (tmpContactId ==-1) {
+		parent.layer.msg("请先保存基本信息");
+		return;
+	}
+	$('#contactId').val(tmpContactId);
+	alert($('#contactId').val());
 	$.ajax({
 		cache : true,
 		type : "POST",

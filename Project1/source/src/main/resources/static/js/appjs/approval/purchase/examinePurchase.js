@@ -1,4 +1,4 @@
-var prefix = "/approval/purchase"
+var prefixPurchaseApprovalStatus = "/approval/purchase"
 $(function() {
 	loadPurchaseApprovalStatus();
 	loadCrmData("/project/project/listDic","projectId","全部");
@@ -10,7 +10,7 @@ function loadPurchaseApprovalStatus() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/listPurchaseApprovalStatus", // 服务器数据的加载地址
+						url : prefixPurchaseApprovalStatus + "/listPurchaseApprovalStatus", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -191,7 +191,7 @@ function examinePurchaseApprovalStatus() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '90%', '90%' ],
-		content : prefix +'/exaiminePurchase'
+		content : prefixPurchaseApprovalStatus +'/exaiminePurchase'
 	});
 }
 function add() {
@@ -201,7 +201,7 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
-		content : prefix + '/add' // iframe的url
+		content : prefixPurchaseApprovalStatus + '/add' // iframe的url
 	});
 }
 function edit(id) {
@@ -211,7 +211,7 @@ function edit(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : prefixPurchaseApprovalStatus + '/edit/' + id // iframe的url
 	});
 }
 function view(id) {
@@ -221,7 +221,7 @@ function view(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],
-		content : prefix + '/view/' + id // iframe的url
+		content : prefixPurchaseApprovalStatus + '/view/' + id // iframe的url
 	});
 }
 function remove(id) {
@@ -229,7 +229,7 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/remove",
+			url : prefixPurchaseApprovalStatus+"/remove",
 			type : "post",
 			data : {
 				'purchaseId' : id
@@ -268,7 +268,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : prefixPurchaseApprovalStatus + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);

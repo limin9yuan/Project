@@ -36,11 +36,12 @@ $(function() {
 						// showRefresh : true,
 						// showToggle : true,
 						// showColumns : true,
+						cache: false,
 						iconSize : 'outline',
 						toolbar : '#exampleToolbar',
 						sortable : true, // 是否启用排序
 						sortOrder : "desc",// 排序方式
-						sortName:'customerOperateTime',// 排序字段
+						sortName:'customerCreateTime',// 排序字段
 						striped : true, // 设置为true会有隔行变色效果
 						dataType : "json", // 服务器返回的数据类型
 						pagination : true, // 设置为true会在底部显示分页条
@@ -54,7 +55,7 @@ $(function() {
 						 search : false, // 是否显示搜索框
 						showColumns : true, // 是否显示内容下拉框（选择显示的列）
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
-													// "server"
+						idField: "id",				// "server"
 						queryParams : function(params) {
 							return {
 								// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
@@ -131,6 +132,7 @@ $(function() {
 									title : '组织机构'
 								},
 								{
+									sortable:true,
 									align : 'center',
 									field : 'customerCreateTime',
 									title : '创建时间',
@@ -144,6 +146,7 @@ $(function() {
 										}
 									},
 //									field : 'customerOperateTime',
+									
 									title : '修改时间'
 								},
 								{

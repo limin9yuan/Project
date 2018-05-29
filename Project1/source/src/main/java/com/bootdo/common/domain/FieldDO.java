@@ -25,6 +25,15 @@ public class FieldDO implements Serializable {
 	private String content;
 	//表名
 	private String tableName;
+	private String t_id;
+
+	public String getT_id() {
+		return t_id;
+	}
+
+	public void setT_id(String t_id) {
+		this.t_id = t_id;
+	}
 
 	/**
 	 * 设置：主键

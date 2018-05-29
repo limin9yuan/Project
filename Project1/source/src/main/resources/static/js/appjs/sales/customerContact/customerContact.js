@@ -193,12 +193,12 @@ function add() {
 	});
 }
 function addContact() {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '950px', '95%' ],
+		area : [ '95%', '95%' ],
 		content : prefixContact + '/add'
 	});
 }

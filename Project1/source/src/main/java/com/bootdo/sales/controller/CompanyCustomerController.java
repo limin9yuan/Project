@@ -372,6 +372,10 @@ public class CompanyCustomerController extends BaseController {
 		params.put("offset", 0);
 		params.put("limit", 2);
 		Query query = new Query(params);
+		Map<String, Object> paramsContact = new HashMap<String, Object>();
+		paramsContact.put("offset", 0);
+		paramsContact.put("limit", 5);
+		Query queryContact = new Query(paramsContact);
 		// 业务信息
 		List<BusinessDO> businessList = businessService.list(query);
 		model.addAttribute("businessList", businessList);
@@ -382,7 +386,7 @@ public class CompanyCustomerController extends BaseController {
 		List<ContractDO> contractList = contractService.list(query);
 		model.addAttribute("contractList", contractList);
 		// 联系人信息
-		List<CustomerContactDO> lianxiList = customerContactService.list(query);
+		List<CustomerContactDO> lianxiList = customerContactService.list(queryContact);
 		model.addAttribute("lianxiList", lianxiList);
 		// 详情页应收信息回款计划Receivable_Price字段求和
 		List<ReceivableDO> price = receivableService.sumReceivablePrice(query);

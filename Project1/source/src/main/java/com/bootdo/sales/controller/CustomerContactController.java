@@ -104,9 +104,12 @@ public class CustomerContactController extends BaseController {
 	@ResponseBody
 	@PostMapping("/saveField")
 	@RequiresPermissions("sales:customerContact:addField")
-	public R saveField( FieldDO field){
-		field.setTableName("sales_customer_contact");
-		if(fieldService.save(field)>0){
+	public R saveField( FieldDO field,CustomerContactDO customerContact){
+		String contactIds = customerContact.getContactId();
+		if (!contactIds.equals("")){
+			field.setT_id(String.valueOf(contactIds));
+			field.setTableName("sales_customer_contact");
+			fieldService.save(field);
 			return R.ok();
 		}
 		return R.error();

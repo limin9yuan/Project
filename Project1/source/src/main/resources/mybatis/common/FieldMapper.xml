@@ -4,18 +4,19 @@
 <mapper namespace="com.bootdo.common.dao.FieldDao">
 
 	<select id="get" resultType="com.bootdo.common.domain.FieldDO">
-		select `id`,`Field_Name`,`Belong_Category`,`Content`,`Table_Name` from custom_field where id = #{value}
+		select `id`,`Field_Name`,`Belong_Category`,`Content`,`Table_Name`,`T_id` from custom_field where id = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.common.domain.FieldDO">
-		select `id`,`Field_Name`,`Belong_Category`,`Content`,`Table_Name` from custom_field
+		select `id`,`Field_Name`,`Belong_Category`,`Content`,`Table_Name`,`T_id` from custom_field
         <where>  
 		  		  <if test="id != null and id != ''"> and id = #{id} </if>
 		  		  <if test="fieldName != null and fieldName != ''"> and Field_Name = #{fieldName} </if>
 		  		  <if test="belongCategory != null and belongCategory != ''"> and Belong_Category = #{belongCategory} </if>
 		  		  <if test="content != null and content != ''"> and Content = #{content} </if>
-		  		  <if test="tableName != null and tableName != ''"> and Table_Name = #{tableName} </if>
-		  		</where>
+		  		  <if test="tableName != null and tableName != ''"> and `Table_Name` = #{tableName} </if>
+				  <if test="t_id != null and t_id != ''"> and T_id = #{t_id} </if>
+		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -36,8 +37,9 @@
 		  		  <if test="fieldName != null and fieldName != ''"> and Field_Name = #{fieldName} </if>
 		  		  <if test="belongCategory != null and belongCategory != ''"> and Belong_Category = #{belongCategory} </if>
 		  		  <if test="content != null and content != ''"> and Content = #{content} </if>
-		  		  <if test="tableName != null and tableName != ''"> and Table_Name = #{tableName} </if>
-		  		</where>
+		  		  <if test="tableName != null and tableName != ''"> and `Table_Name` = #{tableName} </if>
+			 <if test="t_id != null and t_id != ''"> and T_id = #{t_id} </if>
+		 </where>
 	</select>
 	 
 	<insert id="save" parameterType="com.bootdo.common.domain.FieldDO" useGeneratedKeys="true" keyProperty="id">
@@ -45,13 +47,17 @@
 		(
 			`Field_Name`, 
 			`Belong_Category`, 
-			`Content`
+			`Content`,
+			`Table_Name`,
+			`T_id`
 		)
 		values
 		(
 			#{fieldName}, 
 			#{belongCategory}, 
-			#{content}
+			#{content},
+			#{tableName},
+			#{t_id}
 		)
 	</insert>
 	 
@@ -62,6 +68,7 @@
 			<if test="belongCategory != null">`Belong_Category` = #{belongCategory}, </if>
 			<if test="content != null">`Content` = #{content}, </if>
 			<if test="tableName != null">`Table_Name` = #{tableName}</if>
+			<if test="t_id != null and t_id != ''"> and T_id = #{t_id} </if>
 		</set>
 		where id = #{id}
 	</update>

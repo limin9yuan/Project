@@ -124,7 +124,7 @@ function loadField() {
 					});
 }
 function addField() {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -134,7 +134,7 @@ function addField() {
 	});
 }
 function editField(id) {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
@@ -200,6 +200,7 @@ function batchRemoveField() {
 }
 
 function save() {
+
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -215,9 +216,9 @@ function save() {
  					$('#contactIds').val(data.contactId);
  				}
 				parent.layer.msg("操作成功");
-				// parent.reLoad();
-//				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-//				parent.layer.close(index);
+				//  parent.reLoad();
+				// var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				// parent.layer.close(index);
 			} else {
 				parent.layer.alert(data.msg)
 			}
