@@ -89,6 +89,7 @@ public class CustomerContactController extends BaseController {
 	@GetMapping("/listField")
 	@RequiresPermissions("sales:customerContact:customerContact")
 	public PageUtils listField(@RequestParam Map<String, Object> params){
+		params.put("tableName","sales_customer_contact");
 		//查询列表数据
 		Query query = new Query(params);
 		List<FieldDO> fieldList = fieldService.list(query);
@@ -99,7 +100,7 @@ public class CustomerContactController extends BaseController {
 	@GetMapping("/addField")
 	@RequiresPermissions("sales:customerContact:addField")
 	String addField() {
-		return "common/customField/add";
+		return "common/customField/addContactField";
 	}
 	@ResponseBody
 	@PostMapping("/saveField")
@@ -120,7 +121,7 @@ public class CustomerContactController extends BaseController {
     String editField(@PathVariable("id") Integer id,Model model){
         FieldDO field = fieldService.get(id);
         model.addAttribute("field", field);
-        return "common/customField/edit";
+        return "common/customField/editContactField";
     }
 	@ResponseBody
 	@GetMapping("/editField_ajax/{id}")

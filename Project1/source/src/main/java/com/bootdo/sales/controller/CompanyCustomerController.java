@@ -13,8 +13,8 @@ import java.util.Map;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bootdo.common.domain.MainCopyPersonDO;
-import com.bootdo.common.domain.Tree;
+import com.bootdo.common.domain.*;
+import com.bootdo.common.service.FieldService;
 import com.bootdo.common.service.MainCopyPersonService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -41,8 +41,6 @@ import com.bootdo.approval.domain.PurchaseDO;
 import com.bootdo.approval.service.PurchaseService;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.DictDO;
-import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.FileType;
 import com.bootdo.common.utils.FileUtil;
@@ -91,6 +89,85 @@ public class CompanyCustomerController extends BaseController {
 	private ReceivedService receivedService;
 	@Autowired
 	private PurchaseService purchaseService;
+	@Autowired
+	private FieldService fieldService;
+
+	/*****自定义字段相关*******/
+	@ResponseBody
+	@GetMapping("/listField")
+	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+	public PageUtils listField(@RequestParam Map<String, Object> params){
+		params.put("tableName","sales_company_customer");
+		//查询列表数据
+		Query query = new Query(params);
+		List<FieldDO> fieldList = fieldService.list(query);
+		int total = fieldService.count(query);
+		PageUtils pageUtils = new PageUtils(fieldList, total);
+		return pageUtils;
+	}
+	@GetMapping("/addField")
+	@RequiresPermissions("sales:companyCustomer:addField")
+	String addField() {
+		return "common/customField/addCompanyField";
+	}
+	@ResponseBody
+	@PostMapping("/saveField")
+	@RequiresPermissions("sales:companyCustomer:addField")
+	public R saveField( FieldDO field,CompanyCustomerDO companyCustomer){
+		String customerIds = companyCustomer.getCustomerId();
+		if (!customerIds.equals("")){
+			field.setT_id(String.valueOf(customerIds));
+			field.setTableName("sales_company_customer");
+			fieldService.save(field);
+			return R.ok();
+		}
+		return R.error();
+	}
+
+	@GetMapping("/editField/{id}")
+	@RequiresPermissions("sales:companyCustomer:editField")
+	String editField(@PathVariable("id") Integer id,Model model){
+		FieldDO field = fieldService.get(id);
+		model.addAttribute("field", field);
+		return "common/customField/editCompanyField";
+	}
+	@ResponseBody
+	@GetMapping("/editField_ajax/{id}")
+	@RequiresPermissions("sales:companyCustomer:editField")
+	Map<String, Object> editField_ajax(@PathVariable("id") Integer id){
+		FieldDO field = fieldService.get(id);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("fieldList", field);
+
+		return returnData;
+
+	}
+
+	@ResponseBody
+	@RequestMapping("/updateField")
+	@RequiresPermissions("sales:companyCustomer:editField")
+	public R update( FieldDO field){
+		fieldService.update(field);
+		return R.ok();
+	}
+
+	@PostMapping( "/removeField")
+	@ResponseBody
+	@RequiresPermissions("sales:companyCustomer:removeField")
+	public R remove( Integer id){
+		if(fieldService.remove(id)>0){
+			return R.ok();
+		}
+		return R.error();
+	}
+
+	@PostMapping( "/batchRemoveField")
+	@ResponseBody
+	@RequiresPermissions("sales:companyCustomer:batchRemoveField")
+	public R remove(@RequestParam("ids[]") Integer[] ids){
+		fieldService.batchRemove(ids);
+		return R.ok();
+	}
 	@GetMapping()
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
 	String CompanyCustomer(Model model) {

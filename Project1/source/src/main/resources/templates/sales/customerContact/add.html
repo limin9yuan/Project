@@ -20,7 +20,7 @@
 
 
 						<form class="form-horizontal m-t" id="signupForm">
-							<input id="contactIds" name="contactIds" class="form-control" type="text" value="-1">
+							<input id="contactIds" name="contactIds" class="form-control" type="hidden" value="-1">
 							<div id="myTabContent" class="tab-content">
 								<div class="tab-pane fade in active" id="baseInfo">
 									<div class="form-group">
@@ -338,7 +338,7 @@
 												s_edit_h = '';
 											</script>
 										</div>
-										<div shiro:hasPermission="contract:contract:contractDeliveryRemove">
+										<div shiro:hasPermission="sales:companyCustomer:removeField">
 											<script type="text/javascript">
 												var s_remove_h = '';
 											</script>
