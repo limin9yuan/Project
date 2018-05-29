@@ -28,11 +28,11 @@ function save() {
  					$('#businessIds').val(data.businessId);
  				}
 				parent.layer.msg("操作成功");
-				var iframeWin = window[parent.document.find('iframe')[0]['name']]
-				alert(iframeWin)
-// 				parent.reLoad();
-// 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-// 				parent.layer.close(index);
+//				var iframeWin = window[parent.document.find('iframe')[0]['name']]
+//				alert(iframeWin)
+ 				parent.reLoad();
+ 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+ 				parent.layer.close(index);
 
 			} else {
 				parent.layer.alert(data.msg)

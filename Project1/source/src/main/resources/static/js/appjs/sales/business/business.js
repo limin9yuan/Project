@@ -140,7 +140,7 @@ function examine(id) {
 	});
 }
 function add() {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -150,7 +150,7 @@ function add() {
 	});
 }
 function addBusiness() {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -160,7 +160,7 @@ function addBusiness() {
 	});
 }
 function edit(id) {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,

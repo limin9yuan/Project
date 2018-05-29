@@ -9,7 +9,7 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-						<input id="customerId" name="customerId"  type="hidden">
+						<input class="form-control" th:value="${customerId}" name="customerId"  type="hidden" >
 							<div class="form-group">
 								<label class="col-sm-2 control-label"><span
 											class="mustin">*&nbsp;</span>子公司名称：</label>
@@ -18,7 +18,6 @@
 										class="form-control" type="text">
 								</div>
 							</div>
-							
 							<div class="form-group">
 								<label class="col-sm-2 control-label">备注：</label>
 								<div class="col-sm-8">

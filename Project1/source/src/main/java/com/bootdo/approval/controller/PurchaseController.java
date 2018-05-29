@@ -72,6 +72,30 @@ public class PurchaseController extends BaseController {
 		return pageUtils;
 	}
 	
+	@GetMapping("/exaiminePurchase")
+	@RequiresPermissions("approval:purchase:purchase")
+	String exaiminePurchase(){
+	    return "approval/purchase/examinePurchase";
+	}
+	//审批后金额列表
+	@ResponseBody
+	@GetMapping("/listPurchaseApprovalStatus")
+	@RequiresPermissions("approval:purchase:purchase")
+	public PageUtils listPurchaseApprovalStatus(@RequestParam Map<String, Object> params){
+		params.put("userId", getUserId());
+		params.put("userName", getUsername());
+		params.put("tableName", "approval_purchase");
+		//查询列表数据
+		if (params.get("purchaseOperator") != null && !"".equals(params.get("purchaseOperator"))) {
+			params.put("purchaseOperator", "%" + (String) params.get("purchaseOperator") + "%");
+		}
+        Query query = new Query(params);
+		List<PurchaseDO> purchaseList = purchaseService.listPurchaseApprovalStatus(query);
+		int total = purchaseService.countPurchaseApprovalStatus(query);
+		PageUtils pageUtils = new PageUtils(purchaseList, total);
+		return pageUtils;
+	}
+	
 	@GetMapping("/add")
 	@RequiresPermissions("approval:purchase:add")
 	String add(){

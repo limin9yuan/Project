@@ -43,12 +43,12 @@
 		case when (select count(Project_id)
 				   from development_project
 				   where  Customer_ID=a.Customer_ID)>1 then '详细信息' else p.`Project_Name` end Project_Name,
-		case when (select count(Customer_Dept_ID)
-				   from sales_customer_dept
-				   where Customer_ID=a.Customer_ID)>1 then 1 else 0 end customer_dept_Many,
-		case when (select count(Customer_Dept_ID)
-				   from sales_customer_dept
-				   where  Customer_ID=a.Customer_ID)>1 then '查看' else ss.`Customer_Dept_Name` end Customer_Dept_Name,	
+<!-- 		case when (select count(Customer_Dept_ID) -->
+<!-- 				   from sales_customer_dept -->
+<!-- 				   where Customer_ID=a.Customer_ID)>1 then 1 else 0 end customer_dept_Many, -->
+<!-- 		case when (select count(Customer_Dept_ID) -->
+<!-- 				   from sales_customer_dept -->
+<!-- 				   where  Customer_ID=a.Customer_ID)>1 then '查看' else ss.`Customer_Dept_Name` end Customer_Dept_Name,	 -->
 		`Customer_Simple_Name`,
 		m.Employee_Name as Customer_Owner,
 		q.Employee_Name as `Customer_Sales`,
@@ -71,7 +71,7 @@
 
 		`Customer_Operate_Time`,`Opponent_Company`,`Opponent_Project_Type`,`Opponent_Product_Type`,
 		`Opponent_Product_Price`,a.Customer_Level,f.Contact_Name,g.Business_Name,p.Project_Name,
-		s.name AS Customer_Operator,a. Customer_Create_Time,ss.Customer_Dept_Name
+		s.name AS Customer_Operator,a. Customer_Create_Time
 		
 		from sales_company_customer a
 		left join sys_dict d on d.type='sales_customer_credit_Rank' and d.value=a.Customer_Credit_Rank
@@ -91,15 +91,15 @@
 			where case when #{projectName} !='' then  project_Name else  #{projectName} end like #{projectName}
 		group by Customer_ID having count(Project_ID)=1) 
 		 p on a.Customer_ID=p.Customer_ID
-		  left join 
-		(	select Customer_ID,Customer_Dept_Name from  sales_customer_dept 
-			where case when #{customerDeptName} !='' then  Customer_Dept_Name else  #{customerDeptName} end like #{customerDeptName}
-		group by Customer_ID having count(Customer_Dept_ID)=1) ss on a.Customer_ID=ss.Customer_ID 
+<!-- 		  left join  -->
+<!-- 		(	select Customer_ID,Customer_Dept_Name from  sales_customer_dept  -->
+<!-- 			where case when #{customerDeptName} !='' then  Customer_Dept_Name else  #{customerDeptName} end like #{customerDeptName} -->
+<!-- 		group by Customer_ID having count(Customer_Dept_ID)=1) ss on a.Customer_ID=ss.Customer_ID  -->
 		 
 		left join inner_org_employee m on a.Customer_Owner=m.Employee_ID 
 		left join inner_org_employee q on a.Customer_Sales=q.Employee_ID
 		left join sys_user s on a.Customer_Operator=s.user_id
-<!-- 		left join sales_customer_dept de on a.Customer_ID=de.Customer_ID -->
+		left join sales_customer_dept de on a.Customer_ID=de.Customer_ID
 		LEFT JOIN main_and_copy_person ma on a.Customer_ID=ma.T_ID
 	
         <where>   
@@ -190,29 +190,40 @@
 	<select id="newCustomer" resultType="com.bootdo.sales.domain.CompanyCustomerDO">
 		select *
 		from sales_company_customer a
-		where a.Customer_ID!='' and a.Customer_Old_ID='' and a.Customer_Old_ID is not null
-<!-- 		<if test="offset != null and limit != null"> -->
-<!-- 			limit #{offset}, #{limit} -->
-<!-- 		</if> -->
+		where a.Customer_Old_ID='' and a.Customer_Old_ID is not null
+		
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
 <!-- 	新客户数量 -->
 	<select id="countNewCustomer" resultType="int">
 		SELECT count(*)
 		FROM sales_company_customer a
-		where a.Customer_ID!='' and a.Customer_Old_ID='' and a.Customer_Old_ID is not null
+		where a.Customer_Old_ID='' and a.Customer_Old_ID is not null
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
 <!--****************************************************************************************************** -->
 <!-- 	旧客户 -->
 	<select id="oldCustomer" resultType="com.bootdo.sales.domain.CompanyCustomerDO">
 		select *
 		from sales_company_customer a
-		where a.Customer_ID!='' and a.Customer_Old_ID!=''  
+		where a.Customer_Old_ID!='' 
+		
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
 <!-- 	旧客户数量 -->
 	<select id="countOldCustomer" resultType="int">
 		select count(*)
 		from sales_company_customer a
-		where a.Customer_ID!='' and a.Customer_Old_ID!=''  
+		where a.Customer_Old_ID!='' 
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
 	</select>
 <!--****************************************************************************************************** -->	
 	 <select id="listHot" resultType="com.bootdo.sales.domain.CompanyCustomerDO">

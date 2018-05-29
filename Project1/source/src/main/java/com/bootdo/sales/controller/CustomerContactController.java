@@ -112,6 +112,51 @@ public class CustomerContactController extends BaseController {
 		return R.error();
 	}
 
+    @GetMapping("/editField/{id}")
+    @RequiresPermissions("sales:customerContact:editField")
+    String editField(@PathVariable("id") Integer id,Model model){
+        FieldDO field = fieldService.get(id);
+        model.addAttribute("field", field);
+        return "common/customField/edit";
+    }
+	@ResponseBody
+	@GetMapping("/editField_ajax/{id}")
+	@RequiresPermissions("sales:customerContact:editField")
+	Map<String, Object> editField_ajax(@PathVariable("id") Integer id){
+		FieldDO field = fieldService.get(id);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("fieldList", field);
+
+		return returnData;
+
+	}
+
+	@ResponseBody
+	@RequestMapping("/updateField")
+	@RequiresPermissions("sales:customerContact:editField")
+	public R update( FieldDO field){
+		fieldService.update(field);
+		return R.ok();
+	}
+
+	@PostMapping( "/removeField")
+	@ResponseBody
+	@RequiresPermissions("sales:customerContact:removeField")
+	public R remove( Integer id){
+		if(fieldService.remove(id)>0){
+			return R.ok();
+		}
+		return R.error();
+	}
+
+	@PostMapping( "/batchRemoveField")
+	@ResponseBody
+	@RequiresPermissions("sales:customerContact:batchRemoveField")
+	public R remove(@RequestParam("ids[]") Integer[] ids){
+		fieldService.batchRemove(ids);
+		return R.ok();
+	}
+
 
 	@GetMapping("/add")
 	@RequiresPermissions("sales:customerContact:add")
@@ -141,7 +186,7 @@ public class CustomerContactController extends BaseController {
 	@RequestMapping("/edit_ajax/{contactId}")
 	@RequiresPermissions("sales:customerContact:edit")
 	@ResponseBody
-	Map<String, Object> edit_ajax(@PathVariable("contactId") String contactId, Model model) {
+	Map<String, Object> edit_ajax(@PathVariable("contactId") String contactId) {
 		CustomerContactDO customerContact = customerContactService.get(contactId);
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		returnData.put("customerContact", customerContact);

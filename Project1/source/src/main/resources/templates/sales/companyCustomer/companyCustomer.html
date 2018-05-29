@@ -8,12 +8,10 @@
 
 		<form id="companyCustomerform" name="companyCustomerform"
 			th:action="@{/sales/companyCustomer/export}" method="get">
-			<input type="hidden" name="province" /> 
-			<input type="hidden" name="city" /> 
-			<input type="hidden" name="area" /> 
-			<input type="hidden" name="customerName" /> 
-			<input type="hidden" name="customerId" /> 
-			<input type="hidden" name="customerSales" />
+			<input type="hidden" name="province" /> <input type="hidden"
+				name="city" /> <input type="hidden" name="area" /> <input
+				type="hidden" name="customerName" /> <input type="hidden"
+				name="customerId" /> <input type="hidden" name="customerSales" />
 			<input type="hidden" name="customerLevel" />
 		</form>
 
@@ -87,7 +85,8 @@
 										<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已回款企业数目</th>
 									</tr>
 									<tr th:each="bo, iterStat : ${receivedDO}">
-										<td align="center"><a href="#" onclick="examineReimbursementEnterprise()"
+										<td align="center"><a href="#"
+											onclick="examineReimbursementEnterprise()"
 											th:text="${bo.reimbursementNumber}"></a></td>
 									</tr>
 									<tr th:each="bo, iterStat : ${receivedDO}">
@@ -101,10 +100,13 @@
 										<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未回款企业数目</th>
 									</tr>
 									<tr th:each="bo, iterStat : ${moneyNumber}">
-										<td align="center"><a href="#" onclick="examineNonPaymentEnterprise()" th:text="${bo.number}"></a></td>
+										<td align="center"><a href="#"
+											onclick="examineNonPaymentEnterprise()"
+											th:text="${bo.number}"></a></td>
 									</tr>
 									<tr th:each="bo, iterStat : ${moneyNumber}">
-										<td align="center" valign="middle" th:text="${'总计'+bo.money}+'元'"></td>
+										<td align="center" valign="middle"
+											th:text="${'总计'+bo.money}+'元'"></td>
 									</tr>
 								</table>
 
@@ -115,36 +117,38 @@
 						<li style="float: left; list-style-type: none; margin: 10px">
 							<div class="ibox-title">
 								<h4>本月计划回款</h4>
-								<div class="ibox-content" style="width: 360px; height: 165px;">
-									<table class="table-hover table-bordered"
-										style="width: 160px; height: 90px; float: left;">
-										<tr style="text-align: center;">
-											<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;本月计划回款客户数目</th>
-										</tr>
-										<tr th:each="bo, iterStat : ${planCunstomerNumber}">
-											<td align="center"><a href="#" onclick="examineNumberPlannedReturns()"
-												th:text="${bo.planNumber}"></a></td>
-										</tr>
-										<tr th:each="bo, iterStat : ${planCunstomerNumber}">
-											<td align="center" valign="middle"
-												th:text="${'总计'+bo.planMoney}+元"></td>
-										</tr>
-									</table>
-									<table class="table-hover table-bordered"
-										style="width: 160px; height: 90px; float: left;">
-										<tr style="text-align: center;">
-											<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实际回款客户数目</th>
-										</tr>
-										<tr th:each="bo, iterStat : ${receivedDO}">
-											<td align="center"><a href="#" onclick="examineReimbursementEnterprise()"
-												th:text="${bo.reimbursementNumber}"></a></td>
-										</tr>
-										<tr th:each="bo, iterStat : ${receivedDO}">
-											<td align="center" valign="middle"
-												th:text="${'总计'+bo.sumReceivedPrice}+元"></td>
-										</tr>
-									</table>
-								</div>
+							</div>
+							<div class="ibox-content" style="width: 360px; height: 165px;">
+								<table class="table-hover table-bordered"
+									style="width: 160px; height: 90px; float: left;">
+									<tr style="text-align: center;">
+										<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;本月计划回款客户数目</th>
+									</tr>
+									<tr th:each="bo, iterStat : ${planCunstomerNumber}">
+										<td align="center"><a href="#"
+											onclick="examineNumberPlannedReturns()"
+											th:text="${bo.planNumber}"></a></td>
+									</tr>
+									<tr th:each="bo, iterStat : ${planCunstomerNumber}">
+										<td align="center" valign="middle"
+											th:text="${'总计'+bo.planMoney}+元"></td>
+									</tr>
+								</table>
+								<table class="table-hover table-bordered"
+									style="width: 160px; height: 90px; float: left;">
+									<tr style="text-align: center;">
+										<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实际回款客户数目</th>
+									</tr>
+									<tr th:each="bo, iterStat : ${receivedDO}">
+										<td align="center"><a href="#"
+											onclick="examineReimbursementEnterprise()"
+											th:text="${bo.reimbursementNumber}"></a></td>
+									</tr>
+									<tr th:each="bo, iterStat : ${receivedDO}">
+										<td align="center" valign="middle"
+											th:text="${'总计'+bo.sumReceivedPrice}+元"></td>
+									</tr>
+								</table>
 							</div>
 						</li>
 					</ol>
@@ -225,8 +229,8 @@
 							<button class="btn  btn-primary" onclick="reLoad()" type="button">
 								<i class="fa fa-search" aria-hidden="true"></i>查询
 							</button>
-							<button type="button" class="btn btn-primary"
-								onclick="resetPwd()" type="reset">重置</button>
+							<button type="reset" class="btn btn-primary">
+								<i class="fa fa-reset" aria-hidden="true"></i>重置</button>
 						</div>
 					</form>
 				</div>
@@ -251,7 +255,7 @@
 							type="button" class="btn  btn-danger" onclick="exportData()">
 							<i class="fa fa-cloud-download" aria-hidden="true"></i>导出
 						</button>
-<!-- 						<a href="http://127.0.0.1:8020/HelloHBuilder/请款申请表.xlsx" download="xlsx">模板下载</a> -->
+						<!-- 						<a href="http://127.0.0.1:8020/HelloHBuilder/请款申请表.xlsx" download="xlsx">模板下载</a> -->
 					</div>
 				</div>
 				<table id="exampleTable" data-mobile-responsive="true">
@@ -323,7 +327,8 @@
 	<script type="text/javascript"
 		src="/js/appjs/sales/companyCustomer/companyCustomer.js"></script>
 	<script type="text/javascript" src="/js/province.js"></script>
-	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/examineHotCustomers/newCustomerMore.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/sales/companyCustomer/examineHotCustomers/newCustomerMore.js"></script>
 	<!-- 	<script type="text/javascript" -->
 	<!-- 		src="/js/appjs/sales/companyCustomer/customerHot.js"></script> -->
 </body>

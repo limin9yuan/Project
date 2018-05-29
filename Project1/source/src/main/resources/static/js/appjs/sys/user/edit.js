@@ -1,6 +1,8 @@
+var prefix = "/sys/user"
 // 以下为官方示例
 $().ready(function() {
 	validateRule();
+	customerContactMapper_edit();
 	// $("#signupForm").validate();
 });
 
@@ -126,3 +128,4 @@ function loadDept( deptId,deptName){
 	$("#deptId").val(deptId);
 	$("#deptName").val(deptName);
 }
+

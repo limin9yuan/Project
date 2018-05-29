@@ -97,4 +97,19 @@ public class PurchaseServiceImpl implements PurchaseService {
 		return purchaseDao.batchRemove(purchaseIds);
 	}
 
+	@Override
+	public List<PurchaseDO> purchaseApprovalStatus(Map<String, Object> map) {
+		return purchaseDao.purchaseApprovalStatus(map);
+	}
+
+	@Override
+	public List<PurchaseDO> listPurchaseApprovalStatus(Map<String, Object> map) {
+		return purchaseDao.listPurchaseApprovalStatus(map);
+	}
+
+	@Override
+	public int countPurchaseApprovalStatus(Map<String, Object> map) {
+		return purchaseDao.countPurchaseApprovalStatus(map);
+	}
+
 }

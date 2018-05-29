@@ -98,7 +98,7 @@
 										<td align="center" th:text="${iterStat.count}"></td>
 										<td align="center" th:text="${bo.projectId}"></td>
 										<td align="center" th:text="${bo.projectName}"></td>
-										<td align="center" th:text="${bo.projectManager}"></td>
+										<td align="center" th:text="${bo.projectOwnerName}"></td>
 									</tr>
 									<div class="columns pull-right">
 										<button shiro:hasPermission="project:project:add"
@@ -150,7 +150,15 @@
 								<h3>费用信息</h3>
 							</div>
 							<div class="fixed-table-toolbar">
-								<table id="feiYongTable" data-mobile-responsive="true"></table>
+								<div class="ibox-content">
+									<table style="height: 100px;">
+										<tr style="text-align: center;">
+										</tr>
+										<tr th:each="bo, iterStat : ${purchaseApprovalStatus}"  >
+											<td align="center" ><h3 style="padding-left: 100px">已审批费用总额：<a href="#" th:text="${bo.totalprice}" onclick="examinePurchaseApprovalStatus()"></a></h3></td>
+										</tr>
+									</table>
+								</div>
 							</div>
 						</li>
 						<li>
@@ -1185,8 +1193,9 @@
 										<input id="isMainPerson" name="isMainPerson" type="hidden">
 										<div style="float: left;" id="sendPerson"></div>
 										<div style="float: left;">
-											<button disabled="disabled" type="button" class="btn btn-danger btn-xs"
-												id="sendPersonBtn" var="sendPersonBtn"
+											<button disabled="disabled" type="button"
+												class="btn btn-danger btn-xs" id="sendPersonBtn"
+												var="sendPersonBtn"
 												style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
 												onclick="addSendPerson()">
 												<span class="glyphicon glyphicon-plus"></span>
@@ -1201,8 +1210,9 @@
 										<input id="isCopyPerson" name="isCopyPerson" type="hidden">
 										<div style="float: left;" id="receivePerson"></div>
 										<div style="float: left;">
-											<button disabled="disabled" type="button" class="btn btn-danger btn-xs"
-												id="receivePersonBtn" var="receivePersonBtn"
+											<button disabled="disabled" type="button"
+												class="btn btn-danger btn-xs" id="receivePersonBtn"
+												var="receivePersonBtn"
 												style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
 												onclick="addRecivePerson()">
 												<span class="glyphicon glyphicon-plus"></span>
@@ -1269,5 +1279,6 @@
 
 	<script type="text/javascript"
 		src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
+		<script type="text/javascript" src="/js/appjs/approval/purchase/examinePurchase.js"></script>
 </body>
 </html>

@@ -120,16 +120,14 @@ $(function() {
 								{
 									align : 'center',
 									formatter : function(value, row, index) {
-										if (row.customerDeptName != null) {
-											var a = '<a href="#" mce_href="#"  onclick="detailedInformationT(\''
+										if (row.customerId != null) {
+											var d = '<a href="#" mce_href="#"  onclick="detailedInformationT(\''
 												+ row.customerId
-												+ '\')">'
-												+ row.customerDeptName+'</a> ';
-											return a;
+												+ '\')">查看</a> ';
+											return d;
 										}
 									},
-
-									// field : 'contactName',
+									// field : 'customerDeptName',
 									title : '组织机构'
 								},
 								{
@@ -179,8 +177,7 @@ $(function() {
 											var b = '<a href="#" mce_href="#"  onclick="examineB(\''
 													+ row.customerId
 													+ '\')">'
-													+ row.businessName
-													+ '</a> ';
+													+ row.businessName + '</a> ';
 											return b;
 										}
 									},
@@ -384,7 +381,7 @@ function examineP(id) {
 }
 
 function add() {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
@@ -394,7 +391,7 @@ function add() {
 	});
 } 
 function edit(id) {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,

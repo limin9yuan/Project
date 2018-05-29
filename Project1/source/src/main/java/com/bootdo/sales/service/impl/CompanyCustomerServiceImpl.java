@@ -74,6 +74,9 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 		if (map.get("contactName") != null && !"".equals(map.get("contactName"))) {
 			map.put("contactName", "%" +map.get("contactName") + "%");
 		}
+		if (map.get("customerDeptName") != null && !"".equals(map.get("customerDeptName"))) {
+			map.put("customerDeptName", "%" +map.get("customerDeptName") + "%");
+		}
 		return companyCustomerDao.list(map);
 	}
 

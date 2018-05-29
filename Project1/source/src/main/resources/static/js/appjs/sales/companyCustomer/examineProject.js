@@ -45,8 +45,6 @@ function loadProject() {
 		// 返回false将会终止请求
 
 		columns : [ {
-			checkbox : true
-		}, {
 			align : 'center',
 			field : 'customerId',
 			title : '企业客户ID'

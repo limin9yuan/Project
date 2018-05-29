@@ -110,7 +110,7 @@ function addChild() {
 		content : childPrefix + '/add/'+$('#customerId').val() // iframe的url
 	});
 }
-function editChild() {
+function editChild(id) {
 	layer.open({
 		type : 2,
 		title : '编辑',

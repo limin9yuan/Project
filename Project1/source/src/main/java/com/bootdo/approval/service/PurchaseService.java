@@ -18,7 +18,13 @@ public interface PurchaseService {
 
 	PurchaseDO get(String purchaseId);
 	
+	List<PurchaseDO> purchaseApprovalStatus(Map<String, Object> map);
+	
+	List<PurchaseDO> listPurchaseApprovalStatus(Map<String, Object> map);
+	
 	List<PurchaseDO> list(Map<String, Object> map);
+	
+	int countPurchaseApprovalStatus(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
 	

@@ -86,6 +86,15 @@ public class PurchaseDO implements Serializable {
 	private String processInstanceId;
 	//流程审批时间
 	private Date purchaseApprovalTime;
+//	审批总金额
+	private String totalprice;
+	public String getTotalprice() {
+		return totalprice;
+	}
+
+	public void setTotalprice(String totalprice) {
+		this.totalprice = totalprice;
+	}
 
 	public String getMainPersonId() {
 		return mainPersonId;

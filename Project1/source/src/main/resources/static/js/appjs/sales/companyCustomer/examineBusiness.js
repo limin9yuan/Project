@@ -47,9 +47,6 @@ function businessName() {
 						// 返回false将会终止请求
 						columns : [
 													{
-									checkbox : true
-								},
-													{
 									align : 'center',
 									field : 'businessId', 
 									title : '业务编号' 

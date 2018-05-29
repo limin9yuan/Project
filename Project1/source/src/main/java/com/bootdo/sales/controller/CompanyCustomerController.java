@@ -37,6 +37,8 @@ import com.bootdo.sales.service.BusinessService;
 import com.bootdo.sales.service.CompanyCustomerService;
 import com.bootdo.sales.service.CustomerContactService;
 import com.alibaba.druid.sql.visitor.functions.Length;
+import com.bootdo.approval.domain.PurchaseDO;
+import com.bootdo.approval.service.PurchaseService;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.DictDO;
@@ -87,12 +89,13 @@ public class CompanyCustomerController extends BaseController {
 	private ReceivableService receivableService;
 	@Autowired
 	private ReceivedService receivedService;
-
+	@Autowired
+	private PurchaseService purchaseService;
 	@GetMapping()
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
 	String CompanyCustomer(Model model) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("offset", 1);
+		params.put("offset", 0);
 		params.put("limit", 2);
 		Query query = new Query(params);
 		// *****************热点客户、本月回款情况、本月计划回款*********************************
@@ -247,12 +250,14 @@ public class CompanyCustomerController extends BaseController {
 		return "/sales/companyCustomer/examineHotCustomers/newCustomerMore";
 	}
 
-	// 新客户要更多信息列表
+	// 新客户更多信息列表
 	@ResponseBody
 	@GetMapping("/listNewCustomerMore")
 	@RequiresPermissions("sales:companyCustomer:newCustomerMore")
 	public PageUtils listNewCustomerMore(@RequestParam Map<String, Object> params, Model model) {
 		// 查询新客户列表数据
+		params.put("offset", 0);
+		params.put("limit", 10);
 		Query query = new Query(params);
 		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.newCustomer(query);
 		int total = companyCustomerService.countNewCustomer(query);
@@ -260,7 +265,7 @@ public class CompanyCustomerController extends BaseController {
 		return pageUtils;
 	}
 
-	// 旧客户要更多信息页面
+	// 旧客户更多信息页面
 	@GetMapping("/oldCustomerMore")
 	@RequiresPermissions("sales:companyCustomer:oldCustomerMore")
 	String oldCustomerMore() {
@@ -273,7 +278,7 @@ public class CompanyCustomerController extends BaseController {
 	@RequiresPermissions("sales:companyCustomer:oldCustomerMore")
 	public PageUtils listOldCustomerMore(@RequestParam Map<String, Object> params, Model model) {
 		// 查询新客户列表数据
-		params.put("offset", 1);
+		params.put("offset", 0);
 		params.put("limit", 10);
 		Query query = new Query(params);
 		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.oldCustomer(query);
@@ -364,7 +369,7 @@ public class CompanyCustomerController extends BaseController {
 		model.addAttribute("customerId", customerId);
 		// 查询列表数据
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("offset", 1);
+		params.put("offset", 0);
 		params.put("limit", 2);
 		Query query = new Query(params);
 		// 业务信息
@@ -388,6 +393,9 @@ public class CompanyCustomerController extends BaseController {
 		// 详情页应收信息回款率
 		List<ReceivedDO> reimbursementRate = receivedService.reimbursementRate(query);
 		model.addAttribute("reimbursementRate", reimbursementRate);
+//		审批总金额
+		List<PurchaseDO> purchaseApprovalStatus=purchaseService.purchaseApprovalStatus(query);
+		model.addAttribute("purchaseApprovalStatus", purchaseApprovalStatus);
 		return "sales/companyCustomer/examineCompanyCustomer";
 	}
 
@@ -428,49 +436,6 @@ public class CompanyCustomerController extends BaseController {
 	}
 
 	// **************************END****************************************************************************************
-	// /**
-	// * 保存
-	// */
-	// @ResponseBody
-	// @PostMapping("/save")
-	// @RequiresPermissions("sales:companyCustomer:add")
-	// public R save( CompanyCustomerDO companyCustomer){
-	// companyCustomer.setCustomerOperator(Long.toString(getUserId()));
-	// if(companyCustomerService.save(companyCustomer)>0){
-	// MainCopyPersonDO mcp = new MainCopyPersonDO();
-	// String mainPersonId = companyCustomer.getMainPersonId();
-	// String mainPersonIdArray[] = mainPersonId.split(",");
-	// String copyPersonId = companyCustomer.getCopyPersonId();
-	// String copyPersonIdArray[] = copyPersonId.split(",");
-	// int result=0;
-	// for(int i=0;i<mainPersonIdArray.length;i++){
-	// mcp.setCustomerId(companyCustomer.getCustomerId());
-	// mcp.setMainPerson(1);
-	// mcp.setEmployeeId(Integer.parseInt(mainPersonIdArray[i]));
-	// mcp.setOperator(getUserId());
-	// result=mainCopyPersonService.save(mcp);
-	//
-	// }
-	// for (int i=0;i<copyPersonIdArray.length;i++){
-	// mcp.setCustomerId(companyCustomer.getCopyPersonId());
-	// mcp.setMainPerson(0);
-	// mcp.setEmployeeId(Integer.parseInt(copyPersonIdArray[i]));
-	// mcp.setOperator(getUserId());
-	// result=mainCopyPersonService.save(mcp);
-	// }
-	// if(result>0){
-	// return R.ok();
-	// }
-	//
-	// int customerIds=companyCustomerService.save(companyCustomer);
-	// if(customerIds>0){
-	// R r = R.ok();
-	// r.put("customerId", customerIds);
-	// return r;
-	// }
-	//
-	// return R.error();
-	// }
 	/**
 	 * 修改
 	 */
@@ -631,10 +596,10 @@ public class CompanyCustomerController extends BaseController {
 
 		// String administrative1=request.getParameter(administrative);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date data;
-		Date date;
-		String endtime = null;
-		String starttime = null;
+//		Date data;
+//		Date date;
+//		String endtime = null;
+//		String starttime = null;
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("province", province);

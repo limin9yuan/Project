@@ -44,11 +44,11 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.CustomerContactDO">
-		SELECT DISTINCT
+		SELECT 
 		a.`Contact_ID`,`Contact_Name`,
 		CASE `Contact_Sex` WHEN '1' THEN '男' ELSE '女' END AS Contact_Sex,
 		`Contact_Salutation`,`Contact_Title`,`Contact_Responsibility`,`Contact_Role`,
-		a.Customer_ID,`Contact_Dept`,`Contact_Job`, 
+		a.Customer_ID,d.Customer_Dept_Name as `Contact_Dept`,`Contact_Job`, 
 		CASE `Contact_Marital_Status` WHEN '1' THEN '已婚' ELSE '未婚' END AS Contact_Marital_Status,
 		`Contact_Age`,`Contact_Family_Status`,`Contact_Graduate_Institutions`,
 		`Contact_Skill`,`Contact_Years_Working`,`Contact_Experience`,`Contact_Previous_Company`,`Contact_Superiors`,`Contact_Status`,`Contact_Introduction`,
@@ -63,7 +63,7 @@
 		LEFT JOIN development_project p on a.Customer_ID=p.Customer_ID
 		left join inner_org_employee m on a.Contact_Owner=m.Employee_ID 
 		left join inner_org_employee q on a.Contact_Sales=q.Employee_ID
-
+		left join sales_customer_dept d on a.Customer_ID=d.Customer_ID
 		<where>
 			<if test="contactOperator !=null and contactOperator !=''"> and ( a.Contact_Operator = #{contactOperator}
 OR EXISTS( SELECT 1 FROM main_and_copy_person f LEFT JOIN inner_org_employee g ON f.Employee_ID = g.Employee_ID WHERE g.Inner_User_ID = #{userName} AND f.Table_Name = 'sales_customer_contact' AND f.T_ID =a.Contact_ID) 

@@ -411,26 +411,6 @@ function Contract_ajax(){
 		},
 		success : function(data) {
 			result = data.contract;
- 			// $("select[name='customerId']").val(result.customerId);
- 			// $("Select[name='customerId']").trigger("chosen:updated");
- 			// $("select[name='businessId']").val(result.businessId);
- 			// $("Select[name='businessId']").trigger("chosen:updated");
- 			// $("select[name='contractApplicantName']").val(result.contractApplicantName);
- 			// $("select[name='contractApplicantName']").trigger("chosen:updated");
- 			// $("select[name='contractApplicant']").val(result.contractApplicant);
- 			// $("select[name='contractApplicant']").trigger("chosen:updated");
- 			// $("select[name='projectId']").val(result.projectId);
- 			// $("select[name='projectId']").trigger("chosen:updated");
- 			// $("select[name='contractType']").val(result.contractType);
- 			// $("select[name='contractType']").trigger("chosen:updated");
- 			// $("select[name='contractCategory']").val(result.contractCategory);
- 			// $("select[name='contractCategory']").trigger("chosen:updated");
- 			// $("select[name='contractInvoiceType']").val(result.contractInvoiceType);
- 			// $("select[name='contractInvoiceType']").trigger("chosen:updated");
- 			// $("select[name='contractRelatedId']").val(result.contractId);
- 			// $("select[name='contractRelatedId']").trigger("chosen:updated");
- 			// $("select[name='contractSales']").val(result.contractSales);
- 			// $("select[name='contractSales']").trigger("chosen:updated");
  			$("input[name='contractName']").val(result.contractName);
  			$("input[name='contractBuildCompany']").val(result.contractBuildCompany);
  			$("input[name='contractTotalPrice']").val(result.contractTotalPrice);

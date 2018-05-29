@@ -47,9 +47,6 @@ function contactName() {
 						// 返回false将会终止请求
 						columns : [
 													{
-									checkbox : true
-								},
-													{
 									align : 'center',
 									field : 'contactName', 
 									title : '联系人姓名' 

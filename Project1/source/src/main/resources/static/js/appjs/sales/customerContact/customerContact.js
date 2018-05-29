@@ -183,12 +183,12 @@ function examine(id) {
 	});
 }
 function add() {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '950px', '95%' ],
+		area : [ '95%', '95%' ],
 		content : prefixContact + '/add'
 	});
 }
@@ -203,12 +203,12 @@ function addContact() {
 	});
 }
 function edit(id) {
-	parent.layer.open({
+	layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '950px', '95%' ],
+		area : [ '95%', '95%' ],
 		content : prefixContact + '/edit/' + id // iframe的url
 	});
 }
@@ -250,7 +250,7 @@ function loadTree(tree){
 		},
 		"plugins":["search"]
 	});
-	$('#jstree').jstree().open_all();
+//	$('#jstree').jstree().open_all();
 }
 $('#jstree').on("changed.jstree",function(e,data){
 	if (data.selected==-1) {
