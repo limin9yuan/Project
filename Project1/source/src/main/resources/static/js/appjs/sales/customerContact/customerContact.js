@@ -37,6 +37,7 @@ function load() {
 						pageSize : 10, // 如果设置了分页，每页数据条数
 						pageNumber : 1, // 如果设置了分布，首页页码
 						search : false, // 是否显示搜索框
+						 showRefresh:true,					// 显示刷新按钮
 						showColumns : true, // 是否显示内容下拉框（选择显示的列）
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
 													// "server"

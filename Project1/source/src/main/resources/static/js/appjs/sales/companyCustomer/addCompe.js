@@ -1,7 +1,6 @@
 $().ready(function() {
 	loadDic("sales_customer_product","complaintProductCategory");
 	loadDic("sales_project_gategory","complaintProjectType");
-	loadCrmData("/sales/companyCustomer/listDic", "customerId");
 	layui.use('upload', function () {
         var upload = layui.upload;
         //执行实例

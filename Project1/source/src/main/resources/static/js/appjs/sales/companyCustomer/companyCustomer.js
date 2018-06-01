@@ -5,7 +5,7 @@ var prefixContact = "/sales/customerContact"
 var profixBusiness = "/sales/business"
 // 项目信息
 var prefixProject = "/project/project"
-//组织机构	
+// 组织机构
 var prefixDept= "/sales/customerDept"
 $(function() {
 	var address = new addressResolve({
@@ -19,48 +19,54 @@ $(function() {
 	
  load(customerId);
  getTreeData();
-//	load();
+// load();
 
 	loadDic("sales_customer_level", "customerLevel");// 客户级别
 	loadCrmData("/inner/innerOrgEmployee/listDic", "customerSales");
 });
-
-//function load() {
+           
+// function load() {
  function load(customerId) {
 	console.log("数据加载");
 	$('#exampleTable')
 			.bootstrapTable(
 					{
-						method : 'get', // 服务器数据的请求方式 get or post
-						url : prefix + "/list", // 服务器数据的加载地址
-						// showRefresh : true,
+						method : 'get', 					// 服务器数据的请求方式 get or post
+						url : prefix + "/list", 			// 服务器数据的加载地址
+						 showRefresh : true,
 						// showToggle : true,
-						// showColumns : true,
-						cache: false,
-						iconSize : 'outline',
+						 showColumns : true,
 						toolbar : '#exampleToolbar',
-						sortable : true, // 是否启用排序
-						sortOrder : "desc",// 排序方式
-						sortName:'customerCreateTime',// 排序字段
-						striped : true, // 设置为true会有隔行变色效果
-						dataType : "json", // 服务器返回的数据类型
-						pagination : true, // 设置为true会在底部显示分页条
-						// queryParamsType : "limit",
-						// //设置为limit则会发送符合RESTFull格式的参数
-						singleSelect : false, // 设置为true将禁止多选
+						cache: false,						//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+						pagination : true,                   // 设置为true会在底部显示分页条
+						sortable : true, 					 // 是否启用排序
+						sortOrder : "asc",// 排序方式
+						sidePagination : "server", 			// 设置在哪里进行分页，可选值为"client" 或者
+						pageSize : 10, 						// 如果设置了分页，每页数据条数
+						pageNumber : 1, 					// 如果设置了分布，首页页码
+//						queryParamsType : 'limit',		//默认值为 'limit' ,在默认情况下 传给服务端的参数为：offset,limit,sort
+															// 设置为 '' 在这种情况下传给服务器的参数为：pageSize,pageNumber
+//						iconSize : 'outline',
+//						 showToggle: true,				 //是否显示详细视图和列表视图的切换按钮
+//						sortName:'customerId',		 // 排序字段
+						striped : true, 					 // 设置为true会有隔行变色效果
+						dataType : "json",					 // 服务器返回的数据类型
+						// 									 //设置为limit则会发送符合RESTFull格式的参数
+						singleSelect : false, 				 // 设置为true将禁止多选
 						// contentType : "application/x-www-form-urlencoded",
-						// //发送到服务器的数据编码类型
-						pageSize : 10, // 如果设置了分页，每页数据条数
-						pageNumber : 1, // 如果设置了分布，首页页码
-						 search : false, // 是否显示搜索框
-						showColumns : true, // 是否显示内容下拉框（选择显示的列）
-						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
-						idField: "id",				// "server"
+						// 									//发送到服务器的数据编码类型
+						 search : false, 					// 是否显示搜索框
+						 showRefresh:true,					// 显示刷新按钮
+//						 uniqueId: "id",	
+						showColumns : true, 				// 是否显示内容下拉框（选择显示的列）
+						searchOnEnterKey: true,
 						queryParams : function(params) {
 							return {
 								// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit : params.limit,
 								offset : params.offset,
+								sort : params.sort,//排序
+		                        sortOrder : params.order,//排序字段
 								province : $('#province').val(),
 								city : $('#city').val(),
 								area : $('#area').val(),
@@ -122,7 +128,7 @@ $(function() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										if (row.customerId != null) {
-											var d = '<a href="#" mce_href="#"  onclick="detailedInformationT(\''
+											var d = '<a href="#" mce_href="#	"  onclick="detailedInformationT(\''
 												+ row.customerId
 												+ '\')">查看</a> ';
 											return d;
@@ -132,20 +138,22 @@ $(function() {
 									title : '组织机构'
 								},
 								{
-									sortable:true,
+									
 									align : 'center',
 									field : 'customerCreateTime',
-									title : '创建时间',
+									valign: "middle",
+//									sortable: true,
+									title : '创建时间&nbsp;<span class="glyphicon glyphicon-align-right" type="button"></span>'
 								},
 								{
 									align : 'center',
-									formatter : function(value, row, index) {
-										if (row.customerOperateTime != null) {
-											var a = '<span>'+row.customerOperateTime+'</span>';
-											return a;
-										}
-									},
-//									field : 'customerOperateTime',
+									// formatter : function(value, row, index) {
+									// if (row.customerOperateTime != null) {
+									// var a = '<span>'+row.customerOperateTime+'</span>';
+									// return a;
+									// }
+									// },
+									field : 'customerOperateTime',
 									
 									title : '修改时间'
 								},
@@ -252,7 +260,9 @@ $(function() {
 									title : '操作人'
 								}, ]
 					});
+
 	// 页面导入按钮点击事件
+		
 	$("button[name=excelinsertbtn]").click(function() {
 		layer.open({
 			type : 2,
@@ -269,7 +279,7 @@ $(function() {
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
-//组织机构图
+// 组织机构图
 function detailedInformationT(id){
 	layer.open({
 		type : 2,
@@ -280,7 +290,7 @@ function detailedInformationT(id){
 		content : prefixDept + '/detailedInformation/'+ id // iframe的url
 	})
 }
-//--查看详情页
+// --查看详情页
 
 function examineCompanyCustomer(id) {
 	parent.layer.open({
@@ -292,7 +302,7 @@ function examineCompanyCustomer(id) {
 		content : prefix + '/examine/' + id
 	});
 }
-//---更多新客户信息
+// ---更多新客户信息
 function newCustomerMore() {
 	parent.layer.open({
 		type : 2,
@@ -303,7 +313,7 @@ function newCustomerMore() {
 		content : prefix + '/newCustomerMore' 
 	});
 }
-//---更多旧客户信息
+// ---更多旧客户信息
 function oldCustomerMore() {
 	parent.layer.open({
 		type : 2,
@@ -314,7 +324,7 @@ function oldCustomerMore() {
 		content : prefix + '/oldCustomerMore' 
 	});
 }
-//已回款企业详情
+// 已回款企业详情
 function examineReimbursementEnterprise() {
 	parent.layer.open({
 		type : 2,
@@ -325,7 +335,7 @@ function examineReimbursementEnterprise() {
 		content : prefix + '/examineReimbursementEnterprise' 
 	});
 }
-//未回款企业详情
+// 未回款企业详情
 function examineNonPaymentEnterprise() {
 	parent.layer.open({
 		type : 2,
@@ -336,7 +346,7 @@ function examineNonPaymentEnterprise() {
 		content : prefix + '/examineNonPaymentEnterprise' 
 	});
 }
-//本月计划回款客户详情
+// 本月计划回款客户详情
 function examineNumberPlannedReturns() {
 	parent.layer.open({
 		type : 2,
@@ -403,7 +413,7 @@ function edit(id) {
 		content : prefix + '/edit/' + id // iframe的url
 	});
 }
-//详情修改
+// 详情修改
 function examineCustomerEdit(id) {
 	parent.layer.open({
 		type : 2,
@@ -458,7 +468,7 @@ function examineRemove(id) {
 	})
 }
 
-//---更多业务信息
+// ---更多业务信息
 function examineBusiness() {
 	parent.layer.open({
 		type : 2,
@@ -469,7 +479,7 @@ function examineBusiness() {
 		content : prefix + '/examineBusiness' 
 	});
 }
-//---更多项目信息
+// ---更多项目信息
 function examineProject() {
 	parent.layer.open({
 		type : 2,
@@ -480,7 +490,7 @@ function examineProject() {
 		content : prefix + '/examineProject' 
 	});
 }
-//---更多合同信息
+// ---更多合同信息
 function examineContract() {
 	parent.layer.open({
 		type : 2,
@@ -491,7 +501,7 @@ function examineContract() {
 		content : prefix + '/examineContract' 
 	});
 }
-//---合同信息添加
+// ---合同信息添加
 function addContract() {
 	parent.layer.open({
 		type : 2,
@@ -502,7 +512,7 @@ function addContract() {
 		content : '/contract/contract/add' // iframe的url
 	});
 }
-//---更多联系人信息
+// ---更多联系人信息
 function examineContact() {
 	parent.layer.open({
 		type : 2,
@@ -602,3 +612,4 @@ function batchRemove() {
 
 	});
 }
+

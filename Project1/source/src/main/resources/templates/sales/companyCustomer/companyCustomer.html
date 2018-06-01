@@ -3,6 +3,12 @@
 
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
+<style type="text/css">
+    th{
+        text-align:center;/** 设置水平方向居中 */
+        vertical-align:middle/** 设置垂直方向居中 */
+    }
+</style>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
 
@@ -15,9 +21,9 @@
 			<input type="hidden" name="customerLevel" />
 		</form>
 
-		<div class="row" style="border-radius: 10px; margin-left: 15px">
+		<div class="row" style="border-radius: 10px; ">
 			<!--*************************************************** 左侧树节点 *************************************************** -->
-			<div style="float: left; width: 20%; padding-top: 10px"
+			<div style="float: left;  padding-top: 10px"
 				class="col-sm-3">
 				<div class="ibox ibox-body">
 					<div class="ibox-title">
@@ -34,30 +40,30 @@
 				<div class="ibox ibox-body" style="padding-top: 1px">
 					<ol style="list-style-type: none; padding: 0px">
 						<!--***********************************热点客户*************************************************** -->
-						<li style="float: left; list-style-type: none; margin: 10px">
+						<li style="float: left; list-style-type: none; margin: 5px;width: 32%;height: 30%">
 							<div class="ibox-title">
 								<h4 style="float: left;">热点客户</h4>
 								<button
 									shiro:hasPermission="sales:companyCustomer:oldCustomerMore"
 									type="button" class="btn  btn-success btn-sm"
 									onclick="oldCustomerMore()"
-									style="width: 85px; height: 34px; float: right;">
-									<i class="fa fa-search" aria-hidden="true"></i>旧客户更多
+									style="width: 29%; height: 34px; float: right;">
+									<i class="fa fa-search" aria-hidden="true"></i>旧客户
 								</button>
 								<button
 									shiro:hasPermission="sales:companyCustomer:newCustomerMore"
 									type="button" class="btn  btn-success btn-sm"
 									onclick="newCustomerMore()"
-									style="width: 85px; height: 34px; float: right; margin-right: 5px">
-									<i class="fa fa-search" aria-hidden="true"></i>新客户更多
+									style="width: 29%; height: 34px; float: right; margin-right: 5px">
+									<i class="fa fa-search" aria-hidden="true"></i>新客户
 								</button>
-								<div class="ibox-content" style="width: 360px; height: 165px">
+								<div class="ibox-content" style="width: 100%; height: 165px">
 									<table
-										style="width: 320px; height: 128px; border: 1px solid #E7EAEC"
+										style="width: 100%; height: 128px; border: 1px solid #E7EAEC"
 										class="table-hover table-bordered">
 										<tr th:each="bo, iterStat : ${newCustomer}">
 											<td align="center" valign="middle"><span class="STYLE1">新客户</span></td>
-											<td width="211" align="center" valign="middle"><a
+											<td width="50%" align="center" valign="middle"><a
 												href="#"
 												th:onclick="'javascript:examineCompanyCustomer(\''+${bo.customerId}+'\');'"
 												th:text="${bo.customerName}"></a></td>
@@ -74,15 +80,15 @@
 							</div>
 						</li>
 						<!--*************************************************** 本月回款情况 *************************************************** -->
-						<li style="float: left; list-style-type: none; margin: 10px">
+						<li style="float: left; list-style-type: none; margin: 5px;width: 32%;height: 30%" >
 							<div class="ibox-title">
 								<h4>本月回款情况</h4>
 							</div>
-							<div class="ibox-content" style="width: 360px; height: 165px;">
+							<div class="ibox-content" style="width: 100%; height: 165px;">
 								<table class="table-hover table-bordered"
-									style="width: 160px; height: 90px; float: left;">
+									style="width: 50%; height: 90px; float: left;">
 									<tr style="text-align: center;">
-										<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已回款企业数目</th>
+										<th style="background-color: #EAEAEA">已回款企业数目</th>
 									</tr>
 									<tr th:each="bo, iterStat : ${receivedDO}">
 										<td align="center"><a href="#"
@@ -95,9 +101,9 @@
 									</tr>
 								</table>
 								<table class="table-hover table-bordered"
-									style="width: 160px; height: 90px; float: left;">
+									style="width: 50%; height: 90px; float: left;">
 									<tr style="text-align: center;">
-										<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;未回款企业数目</th>
+										<th style="background-color: #EAEAEA">未回款企业数目</th>
 									</tr>
 									<tr th:each="bo, iterStat : ${moneyNumber}">
 										<td align="center"><a href="#"
@@ -114,15 +120,15 @@
 
 						</li>
 						<!--*************************************************** 本月计划回款 *************************************************** -->
-						<li style="float: left; list-style-type: none; margin: 10px">
+						<li style="float: left; list-style-type: none; margin: 5px;width: 32%;height: 30%">
 							<div class="ibox-title">
 								<h4>本月计划回款</h4>
 							</div>
-							<div class="ibox-content" style="width: 360px; height: 165px;">
+							<div class="ibox-content" style="width: 100%; height: 165px;">
 								<table class="table-hover table-bordered"
-									style="width: 160px; height: 90px; float: left;">
+									style="width: 50%; height: 90px; float: left;">
 									<tr style="text-align: center;">
-										<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;本月计划回款客户数目</th>
+										<th style="background-color: #EAEAEA">本月计划回款客户数目</th>
 									</tr>
 									<tr th:each="bo, iterStat : ${planCunstomerNumber}">
 										<td align="center"><a href="#"
@@ -135,9 +141,9 @@
 									</tr>
 								</table>
 								<table class="table-hover table-bordered"
-									style="width: 160px; height: 90px; float: left;">
+									style="width: 50%; height: 90px; float: left;">
 									<tr style="text-align: center;">
-										<th style="background-color: #EAEAEA">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;实际回款客户数目</th>
+										<th style="background-color: #EAEAEA">实际回款客户数目</th>
 									</tr>
 									<tr th:each="bo, iterStat : ${receivedDO}">
 										<td align="center"><a href="#"
@@ -258,7 +264,7 @@
 						<!-- 						<a href="http://127.0.0.1:8020/HelloHBuilder/请款申请表.xlsx" download="xlsx">模板下载</a> -->
 					</div>
 				</div>
-				<table id="exampleTable" data-mobile-responsive="true">
+				<table id="exampleTable" data-mobile-responsive="true" >
 				</table>
 			</div>
 		</div>

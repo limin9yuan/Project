@@ -24,9 +24,10 @@ public interface TimesheetService {
 
 	TimesheetDO get(String timesheetId);
 	List<TimesheetDO> list(Map<String, Object> map);
+	List<TimesheetDO> listcount(Map<String, Object> map);
 	List<TimesheetDO> approvelist(Map<String, Object> map);
 	int count(Map<String, Object> map);
-	
+	int listcountnum(Map<String, Object> map);
 	int save(TimesheetDO timesheet);
 	int save1(TimesheetDO timesheet);
 	public String getnewtimesheetId(TimesheetDO timesheet);

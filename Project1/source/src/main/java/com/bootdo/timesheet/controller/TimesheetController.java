@@ -256,6 +256,28 @@ public class TimesheetController extends BaseController {
 		return "timesheet/timesheet/approvetimesheet";
 	}
 
+
+
+	@GetMapping("/count")
+	@RequiresPermissions("timesheet:timesheet:count")
+	String count(Model model){
+		return "timesheet/timesheet/count";
+	}
+
+	@ResponseBody
+	@GetMapping("/listcount")
+	@RequiresPermissions("timesheet:timesheet:count")
+	public PageUtils listcount(@RequestParam Map<String, Object> params){
+
+//		查询列表数据
+		params.put("uerId",getUserId());
+		Query query = new Query(params);
+		List<TimesheetDO> timesheetList = timesheetService.listcount(query);
+		int total = timesheetService.listcountnum(query);
+		PageUtils pageUtils = new PageUtils(timesheetList, total);
+		return pageUtils;
+	}
+
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("timesheet:timesheet:timesheet")
@@ -598,9 +620,12 @@ public class TimesheetController extends BaseController {
 	@GetMapping("/getlist/{timeMin}")
 	@ResponseBody
 	Map<String, Object> getlist(@PathVariable("timeMin") String timeMin) {
+		Date da1 = new Date();
+		if (timeMin != null && !"".equals(timeMin)){
 
-			Date da1 = new Date();
-			da1 = java.sql.Date.valueOf(timeMin);
+		da1 = java.sql.Date.valueOf(timeMin);}
+
+
 		SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM-dd");
 		String[] weekDays = {"星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"};
 		Calendar cal = Calendar.getInstance();
@@ -608,93 +633,94 @@ public class TimesheetController extends BaseController {
 		int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
 		if (w < 0)
 			w = 0;
-		String week1=weekDays[w];
+		String week1 = weekDays[w];
 
-			cal.add(cal.DATE, +1);
-			Date date = new Date();
-			date = cal.getTime();
-			String date2 = simdf.format(date);
-			java.sql.Date dat2 = java.sql.Date.valueOf(date2);
+		cal.add(cal.DATE, +1);
+		Date date = new Date();
+		date = cal.getTime();
+		String date2 = simdf.format(date);
+		java.sql.Date dat2 = java.sql.Date.valueOf(date2);
 		cal.setTime(dat2);
-		 w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+		w = cal.get(Calendar.DAY_OF_WEEK) - 1;
 		if (w < 0)
 			w = 0;
-		String week2=weekDays[w];
-			cal.add(cal.DATE, +1);
-			date = cal.getTime();
-			String date3 = simdf.format(date);
-			java.sql.Date dat3 = java.sql.Date.valueOf(date3);
+		String week2 = weekDays[w];
+		cal.add(cal.DATE, +1);
+		date = cal.getTime();
+		String date3 = simdf.format(date);
+		java.sql.Date dat3 = java.sql.Date.valueOf(date3);
 		cal.setTime(dat3);
 		w = cal.get(Calendar.DAY_OF_WEEK) - 1;
 		if (w < 0)
 			w = 0;
-		String week3=weekDays[w];
-			cal.add(cal.DATE, +1);
-			date = cal.getTime();
-			String date4 = simdf.format(date);
-			java.sql.Date dat4 = java.sql.Date.valueOf(date4);
+		String week3 = weekDays[w];
+		cal.add(cal.DATE, +1);
+		date = cal.getTime();
+		String date4 = simdf.format(date);
+		java.sql.Date dat4 = java.sql.Date.valueOf(date4);
 
 		cal.setTime(dat4);
 		w = cal.get(Calendar.DAY_OF_WEEK) - 1;
 		if (w < 0)
 			w = 0;
-		String week4=weekDays[w];
+		String week4 = weekDays[w];
 
-			cal.add(cal.DATE, +1);
-			date = cal.getTime();
-			String date5 = simdf.format(date);
-			java.sql.Date dat5 = java.sql.Date.valueOf(date5);
+		cal.add(cal.DATE, +1);
+		date = cal.getTime();
+		String date5 = simdf.format(date);
+		java.sql.Date dat5 = java.sql.Date.valueOf(date5);
 
 		cal.setTime(dat5);
 		w = cal.get(Calendar.DAY_OF_WEEK) - 1;
 		if (w < 0)
 			w = 0;
-		String week5=weekDays[w];
+		String week5 = weekDays[w];
 
-			cal.add(cal.DATE, +1);
-			date = cal.getTime();
-			String date6 = simdf.format(date);
-			java.sql.Date dat6 = java.sql.Date.valueOf(date6);
+		cal.add(cal.DATE, +1);
+		date = cal.getTime();
+		String date6 = simdf.format(date);
+		java.sql.Date dat6 = java.sql.Date.valueOf(date6);
 
 		cal.setTime(dat6);
 		w = cal.get(Calendar.DAY_OF_WEEK) - 1;
 		if (w < 0)
 			w = 0;
-		String week6=weekDays[w];
+		String week6 = weekDays[w];
 
-			cal.add(cal.DATE, +1);
-			date = cal.getTime();
-			String date7 = simdf.format(date);
-			java.sql.Date dat7 = java.sql.Date.valueOf(date7);
+		cal.add(cal.DATE, +1);
+		date = cal.getTime();
+		String date7 = simdf.format(date);
+		java.sql.Date dat7 = java.sql.Date.valueOf(date7);
 
 		cal.setTime(dat7);
 		w = cal.get(Calendar.DAY_OF_WEEK) - 1;
 		if (w < 0)
 			w = 0;
-		String week7=weekDays[w];
+		String week7 = weekDays[w];
 
 
 			Map<String, Object> returnData = new HashMap<String, Object>();
 
-			returnData.put("date11", da1+week1);
-			returnData.put("dat2", dat2+week2);
-			returnData.put("dat3", dat3+week3);
-			returnData.put("dat4", dat4+week4);
-			returnData.put("dat5", dat5+week5);
-			returnData.put("dat6", dat6+week6);
-			returnData.put("dat7", dat7+week7);
+			returnData.put("date11", da1 + week1);
+			returnData.put("dat2", dat2 + week2);
+			returnData.put("dat3", dat3 + week3);
+			returnData.put("dat4", dat4 + week4);
+			returnData.put("dat5", dat5 + week5);
+			returnData.put("dat6", dat6 + week6);
+			returnData.put("dat7", dat7 + week7);
 
-			returnData.put("pd1",da1);
-		 	returnData.put("pd2",dat2);
-			returnData.put("pd3",dat3);
-			returnData.put("pd4",dat4);
-			returnData.put("pd5",dat5);
-			returnData.put("pd6",dat6);
-			returnData.put("pd7",dat7);
+			returnData.put("pd1", da1);
+			returnData.put("pd2", dat2);
+			returnData.put("pd3", dat3);
+			returnData.put("pd4", dat4);
+			returnData.put("pd5", dat5);
+			returnData.put("pd6", dat6);
+			returnData.put("pd7", dat7);
 
 
 			return returnData;
-		}
+
+	}
 
 
 	@GetMapping("/add")
@@ -1024,12 +1050,14 @@ public class TimesheetController extends BaseController {
 	 */
 
 	@ResponseBody
-	@PostMapping("/save1")
-	@RequiresPermissions("timesheet:timesheet:add1")
-	public R save1( TimesheetDO timesheet){
+	@PostMapping("/savetimesheet")
+	@RequiresPermissions("timesheet:timesheet:addtimesheet")
+	public R savetimesheet( TimesheetDO timesheet){
 //添加当前用户
 		timesheet.setEmployeeId(getUserId());
-
+//添加当前用户姓名
+		String inner = innerOrgEmployeeService.getname(Long.toString(getUserId()));
+		timesheet.setTimesheetName(inner);
 //添加当前天日期
 		SimpleDateFormat simdf = new SimpleDateFormat("yyyy-MM-dd");//日期方法
 		Calendar cal = Calendar.getInstance();
@@ -1046,11 +1074,11 @@ public class TimesheetController extends BaseController {
 	}
 
 
-	@GetMapping("/add1")
-	@RequiresPermissions("timesheet:timesheet:add1")
-	String add1(){
+	@GetMapping("/addtimesheet")
+	@RequiresPermissions("timesheet:timesheet:addtimesheet")
+	String addtimesheet(){
 
-		return "timesheet/timesheet/add1";
+		return "timesheet/timesheet/addtimesheet";
 	}
 	/**
 	 * 修改

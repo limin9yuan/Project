@@ -42,7 +42,12 @@ import com.bootdo.sales.domain.RecordServiceDO;
 public class InnerOrgEmployeeServiceImpl implements InnerOrgEmployeeService {
 	@Autowired
 	private InnerOrgEmployeeDao innerOrgEmployeeDao;
-
+	@Override
+	public String  getname(String employeeId) {
+		InnerOrgEmployeeDO innername= innerOrgEmployeeDao.get(employeeId);
+		String ret=innername.getEmployeeName();
+		return ret;
+	}
 	@Override
 	public InnerOrgEmployeeDO get(String employeeId) {
 		return innerOrgEmployeeDao.get(employeeId);

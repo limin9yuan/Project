@@ -118,7 +118,8 @@ function loadField() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: params.limit,
-								offset:params.offset
+								offset:params.offset,
+								t_id: $('#customerIds').val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -308,9 +309,7 @@ function validateRule() {
 				required:true
 			},
 			customerPhoneNum:{
-				required:true,
-				digits:true,
-				rangelength:[5,11]
+				required:true
 			},
 			customerLeader:{
 				required:true
@@ -318,18 +317,18 @@ function validateRule() {
 //			生产信息
 			customerPaymentRate:{
 				required:true,
-				digits:true,
-				range:[0,100]
+				number:true,
+				range:[0.1,1]
 			},
 			customerHeatingShare:{
 				required:true,
-				digits:true,
-				range:[0,100]
+				number:true,
+				range:[0.1,1]
 			},
 			customerComplaintRate:{
 				required:true,
-				digits:true,
-				range:[0,100]
+				number:true,
+				range:[0.1,1]
 			},
 			customerHeatingArea:{
 				max:99999999999999
@@ -424,9 +423,7 @@ function validateRule() {
 				required:icon+"企业地址不能为空！"
 			},
 			customerPhoneNum:{
-				required:icon +"电话号码不能为空！",
-				digits:icon +"请输入数字！",
-				rangelength:icon +"请输入有效的电话号码！"
+				required:icon +"电话号码不能为空！"
 			},
 			customerLeader:{
 				required:icon +"企业负责人不能为空！"
@@ -434,18 +431,18 @@ function validateRule() {
 //			生产信息
 			customerPaymentRate:{
 				required:icon +"收费收缴率不能为空！",
-				digits:icon +"收费收缴率必须为数字！",
-				range:icon +"收费收缴率只能在0-100之间！"
+				number:icon +"收费收缴率必须小数！",
+				range:$.validator.format("请输入0.1到1之间的数值！")
 			},
 			customerHeatingShare:{
 				required:icon +"企业占全市热化率不能为空！",
-				digits:icon +"企业占全市热化率必须为数字！",
-				range:icon +"企业占全市热化率只能在0-100之间！"
+				number:icon +"企业占全市热率必须小数！",
+				range:$.validator.format("请输入0.1到1之间的数值！")
 			},
 			customerComplaintRate:{
 				required:icon +"投诉率不能为空！",
-				digits:icon +"投诉率必须为数字！",
-				range:icon +"投诉率只能在0-100之间！"
+				number:icon +"投诉率必须小数！",
+				range:$.validator.format("请输入0.1到1之间的数值！")
 			},
 			customerEmpNumber:{
 				max:icon+"员工数量不能大于7位数（9999999）！",

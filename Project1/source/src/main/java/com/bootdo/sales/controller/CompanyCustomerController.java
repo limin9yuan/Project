@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,7 +56,7 @@ import com.bootdo.payment.domain.ReceivedDO;
 import com.bootdo.payment.service.ReceivedService;
 import com.bootdo.project.domain.ProjectDO;
 import com.bootdo.project.service.ProjectService;
-
+import org.apache.commons.lang.StringUtils;
 /**
  * 企业客户信息表
  * 
@@ -66,7 +67,7 @@ import com.bootdo.project.service.ProjectService;
 
 @Controller
 @RequestMapping("/sales/companyCustomer")
-public class CompanyCustomerController extends BaseController {
+public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseController {
 	@Autowired
 	private CompanyCustomerService companyCustomerService;
 	@Autowired
@@ -92,30 +93,35 @@ public class CompanyCustomerController extends BaseController {
 	@Autowired
 	private FieldService fieldService;
 
-	/*****自定义字段相关*******/
+	/***** 自定义字段相关 *******/
 	@ResponseBody
 	@GetMapping("/listField")
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+
 	public PageUtils listField(@RequestParam Map<String, Object> params){
 		params.put("tableName","sales_company_customer");
+		params.put("t_id",params.get("t_id"));
 		//查询列表数据
+
 		Query query = new Query(params);
 		List<FieldDO> fieldList = fieldService.list(query);
 		int total = fieldService.count(query);
 		PageUtils pageUtils = new PageUtils(fieldList, total);
 		return pageUtils;
 	}
+
 	@GetMapping("/addField")
 	@RequiresPermissions("sales:companyCustomer:addField")
 	String addField() {
 		return "common/customField/addCompanyField";
 	}
+
 	@ResponseBody
 	@PostMapping("/saveField")
 	@RequiresPermissions("sales:companyCustomer:addField")
-	public R saveField( FieldDO field,CompanyCustomerDO companyCustomer){
+	public R saveField(FieldDO field, CompanyCustomerDO companyCustomer) {
 		String customerIds = companyCustomer.getCustomerId();
-		if (!customerIds.equals("")){
+		if (!customerIds.equals("")) {
 			field.setT_id(String.valueOf(customerIds));
 			field.setTableName("sales_company_customer");
 			fieldService.save(field);
@@ -126,15 +132,16 @@ public class CompanyCustomerController extends BaseController {
 
 	@GetMapping("/editField/{id}")
 	@RequiresPermissions("sales:companyCustomer:editField")
-	String editField(@PathVariable("id") Integer id,Model model){
+	String editField(@PathVariable("id") Integer id, Model model) {
 		FieldDO field = fieldService.get(id);
 		model.addAttribute("field", field);
 		return "common/customField/editCompanyField";
 	}
+
 	@ResponseBody
 	@GetMapping("/editField_ajax/{id}")
 	@RequiresPermissions("sales:companyCustomer:editField")
-	Map<String, Object> editField_ajax(@PathVariable("id") Integer id){
+	Map<String, Object> editField_ajax(@PathVariable("id") Integer id) {
 		FieldDO field = fieldService.get(id);
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		returnData.put("fieldList", field);
@@ -146,28 +153,29 @@ public class CompanyCustomerController extends BaseController {
 	@ResponseBody
 	@RequestMapping("/updateField")
 	@RequiresPermissions("sales:companyCustomer:editField")
-	public R update( FieldDO field){
+	public R update(FieldDO field) {
 		fieldService.update(field);
 		return R.ok();
 	}
 
-	@PostMapping( "/removeField")
+	@PostMapping("/removeField")
 	@ResponseBody
 	@RequiresPermissions("sales:companyCustomer:removeField")
-	public R remove( Integer id){
-		if(fieldService.remove(id)>0){
+	public R remove(Integer id) {
+		if (fieldService.remove(id) > 0) {
 			return R.ok();
 		}
 		return R.error();
 	}
 
-	@PostMapping( "/batchRemoveField")
+	@PostMapping("/batchRemoveField")
 	@ResponseBody
 	@RequiresPermissions("sales:companyCustomer:batchRemoveField")
-	public R remove(@RequestParam("ids[]") Integer[] ids){
+	public R remove(@RequestParam("ids[]") Integer[] ids) {
 		fieldService.batchRemove(ids);
 		return R.ok();
 	}
+
 	@GetMapping()
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
 	String CompanyCustomer(Model model) {
@@ -199,7 +207,7 @@ public class CompanyCustomerController extends BaseController {
 	@GetMapping("/list")
 	@RequiresPermissions("sales:companyCustomer:companyCustomer")
 	public PageUtils list(@RequestParam Map<String, Object> params, Model model) {
-//		companyCustomer.setCurrentUser((Long.toString(getUserId())));
+		// companyCustomer.setCurrentUser((Long.toString(getUserId())));
 		// 查询列表数据
 		params.put("customerOperator", (Long.toString(getUserId())));
 		params.put("Identification", (getIdentification()));
@@ -355,8 +363,8 @@ public class CompanyCustomerController extends BaseController {
 	@RequiresPermissions("sales:companyCustomer:oldCustomerMore")
 	public PageUtils listOldCustomerMore(@RequestParam Map<String, Object> params, Model model) {
 		// 查询新客户列表数据
-		params.put("offset", 0);
-		params.put("limit", 10);
+//		params.put("offset", 0);
+//		params.put("limit", 10);
 		Query query = new Query(params);
 		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.oldCustomer(query);
 		int total = companyCustomerService.countOldCustomer(query);
@@ -474,8 +482,8 @@ public class CompanyCustomerController extends BaseController {
 		// 详情页应收信息回款率
 		List<ReceivedDO> reimbursementRate = receivedService.reimbursementRate(query);
 		model.addAttribute("reimbursementRate", reimbursementRate);
-//		审批总金额
-		List<PurchaseDO> purchaseApprovalStatus=purchaseService.purchaseApprovalStatus(query);
+		// 审批总金额
+		List<PurchaseDO> purchaseApprovalStatus = purchaseService.purchaseApprovalStatus(query);
 		model.addAttribute("purchaseApprovalStatus", purchaseApprovalStatus);
 		return "sales/companyCustomer/examineCompanyCustomer";
 	}
@@ -526,10 +534,10 @@ public class CompanyCustomerController extends BaseController {
 	public R update(CompanyCustomerDO companyCustomer) {
 		String customerIds = companyCustomer.getCustomerId();
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("offset",1);
-		params.put("limit",2);
-		params.put("tId",customerIds);
-		params.put("tableName","sales_company_customer");
+		params.put("offset", 1);
+		params.put("limit", 2);
+		params.put("tId", customerIds);
+		params.put("tableName", "sales_company_customer");
 		companyCustomerService.update(companyCustomer);
 		mainCopyPersonService.remove(params);
 		if (!customerIds.equals("")) {
@@ -575,10 +583,10 @@ public class CompanyCustomerController extends BaseController {
 	@RequiresPermissions("sales:companyCustomer:batchRemove")
 	public R remove(String customerId) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("offset",1);
-		params.put("limit",2);
-		params.put("tId",customerId);
-		params.put("tableName","sales_company_customer");
+		params.put("offset", 1);
+		params.put("limit", 2);
+		params.put("tId", customerId);
+		params.put("tableName", "sales_company_customer");
 		if (companyCustomerService.remove(customerId) > 0) {
 			mainCopyPersonService.remove(params);
 			return R.ok();
@@ -677,10 +685,10 @@ public class CompanyCustomerController extends BaseController {
 
 		// String administrative1=request.getParameter(administrative);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		Date data;
-//		Date date;
-//		String endtime = null;
-//		String starttime = null;
+		// Date data;
+		// Date date;
+		// String endtime = null;
+		// String starttime = null;
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("province", province);
@@ -712,4 +720,10 @@ public class CompanyCustomerController extends BaseController {
 			}
 		}
 	}
+
+
+
+
+	
+
 }

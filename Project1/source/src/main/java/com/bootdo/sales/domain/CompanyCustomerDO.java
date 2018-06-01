@@ -216,8 +216,16 @@ public class CompanyCustomerDO implements Serializable {
 	//主送人抄送人操作时间
 	private Date operateTime;
 	
+	private String Para;
 	
 	
+	
+	public String getPara() {
+		return Para;
+	}
+	public void setPara(String para) {
+		Para = para;
+	}
 	/*
 	 * 主送人抄送人ID
 	 */

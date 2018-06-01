@@ -14,6 +14,7 @@
 
 	</select>
 
+
 	<select id="get" resultType="com.bootdo.timesheet.domain.TimesheetDO">
 		select `TimeSheet_ID`,`Project_ID`,`Employee_ID`,`TimeSheet_Name`,
 		`TimeSheet_Project_Cagegory`,`TimeSheet_Date`,`TimeSheet_PM`,
@@ -167,6 +168,54 @@
 		</if>
 	</select>
 
+
+	<select id="listcount" resultType="com.bootdo.timesheet.domain.TimesheetDO">
+
+		select TimeSheet_Name,TimeSheet_PM,TimeSheet_Normal,TimeSheet_Overtime,TimeSheet_Assignment_ID,
+		Assignment_Task_Name,Assignment_Begin_Time,Assignment_Task_Finish_Time,Assignment_Task_Performance,j.`Employee_Name` as `Assignment_Principal_Name`,k.`Employee_Name` as `Assignment_Recipient_Name`,
+		c.Employee_Dept,c.Employee_Salary_Hour,
+		Project_Name,
+		Labor_Total_Hour_Num,Labor_Begin_Time,Labor_End_Time,
+		sum(TimeSheet_Normal+TimeSheet_Overtime) as timesheetall
+		from timesheet a
+		left join  approval_assignment b
+		on a.TimeSheet_Assignment_ID=b.Assignment_ID
+		left join inner_org_employee c
+		on a.Employee_ID=c.Employee_ID
+		left join development_project d
+		on a.Project_ID=d.Project_ID
+		left join budget_labor e
+		on a.Employee_ID=e.Employee_ID
+		left join inner_org_employee j on b.`Assignment_Principal`=j.`Employee_ID`
+		left join inner_org_employee k on b.`Assignment_Recipient`=k.`Employee_ID`
+
+		<where>
+
+		    <if test="project != null and project != ''"> and a.Project_ID = #{project}</if>
+			<if test="timesheetName != null and timesheetName != ''"> and TimeSheet_Name = #{timesheetName}</if>
+			<if test="assignmentPrincipal != null and assignmentPrincipal != ''"> and j.`Employee_Name` LIKE #{assignmentPrincipal} </if>
+			<if test="assignmentRecipient != null and assignmentRecipient != ''"> and k.`Employee_Name` LIKE #{assignmentRecipient} </if>
+			<if test="employeeDept != null and employeeDept != ''"> and c.Employee_Dept = #{employeeDept} </if>
+			<if test="timeMin != null and timeMin != ''"> and Assignment_Begin_Time &gt;  #{timeMin} </if>
+			<if test="timeMax != null and timeMax != ''"> and  Assignment_Task_Finish_Time &lt; #{timeMax} </if>
+			<if test="timesheetPm != null and timesheetPm != ''"> and  TimeSheet_PM = #{timesheetPm} </if>
+         </where>
+		group by a.TimeSheet_Assignment_ID,a.Employee_ID,a.Project_ID
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by a.TimeSheet_Assignment_ID desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+
+
 	<select id="approvelist" resultType="com.bootdo.timesheet.domain.TimesheetDO">
 
 
@@ -310,7 +359,26 @@
 		</if>
 	</select>
 
-
+	<select id="listcountnum" resultType="int">
+		select count(*) from(select TimeSheet_Name,TimeSheet_PM,TimeSheet_Normal,TimeSheet_Overtime,TimeSheet_Assignment_ID,
+		Assignment_Task_Name,Assignment_Begin_Time,Assignment_Task_Finish_Time,Assignment_Task_Performance,j.`Employee_Name` as `Assignment_Principal_Name`,k.`Employee_Name` as `Assignment_Recipient_Name`,
+		c.Employee_Dept,c.Employee_Salary_Hour,
+		Project_Name,
+		Labor_Total_Hour_Num,Labor_Begin_Time,Labor_End_Time,
+		sum(TimeSheet_Normal+TimeSheet_Overtime) as timesheetall
+		from timesheet a
+		left join  approval_assignment b
+		on a.TimeSheet_Assignment_ID=b.Assignment_ID
+		left join inner_org_employee c
+		on a.Employee_ID=c.Employee_ID
+		left join development_project d
+		on a.Project_ID=d.Project_ID
+		left join budget_labor e
+		on a.Employee_ID=e.Employee_ID
+		left join inner_org_employee j on b.`Assignment_Principal`=j.`Employee_ID`
+		left join inner_org_employee k on b.`Assignment_Recipient`=k.`Employee_ID`
+		group by a.TimeSheet_Assignment_ID,a.Employee_ID,a.Project_ID)a
+	</select>
  	<select id="count" resultType="int">
 		select count(*) from (select Project_ID from
 		(select b.Project_Name,c.Business_Name,a.Project_ID,
@@ -475,7 +543,7 @@
 
 
 	<select id="listDic" resultType="com.bootdo.timesheet.domain.TimesheetDO">
-		select Project_ID value,concat(Project_ID,' ',TimeSheet_PM) name from timesheet
+		select TimeSheet_Name value,concat(TimeSheet_Name) name from timesheet
 	</select>
 
 	<update id="update" parameterType="com.bootdo.timesheet.domain.TimesheetDO">

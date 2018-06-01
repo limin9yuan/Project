@@ -15,6 +15,7 @@ function loadDept() {
 			expandAll : false, // 是否全部展开
 			// toolbar : '#exampleToolbar',
 			
+			
 			columns : [
 				{
 					title : '编号',

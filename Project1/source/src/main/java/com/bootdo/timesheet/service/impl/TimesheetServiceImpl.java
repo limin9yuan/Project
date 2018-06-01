@@ -40,6 +40,9 @@ public class TimesheetServiceImpl implements TimesheetService {
     public List<TimesheetDO> list(Map<String, Object> map) {
         return timesheetDao.list(map);
     }
+    public List<TimesheetDO> listcount(Map<String, Object> map) {
+        return timesheetDao.listcount(map);
+    }
 
     @Override
     public List<TimesheetDO> approvelist(Map<String, Object> map) {
@@ -50,7 +53,9 @@ public class TimesheetServiceImpl implements TimesheetService {
     public int count(Map<String, Object> map) {
         return timesheetDao.count(map);
     }
-
+    public int listcountnum(Map<String, Object> map) {
+        return timesheetDao.listcountnum(map);
+    }
     //添加不在任务工时表里的数据
     @Override
     public int save(TimesheetDO timeSheet) {

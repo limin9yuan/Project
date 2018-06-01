@@ -28,7 +28,7 @@ public interface InnerOrgEmployeeService {
 	int update(InnerOrgEmployeeDO innerOrgEmployee);
 	
 	int remove(String employeeId);
-	
+	String  getname(String employeeId);
 	int batchRemove(String[] employeeIds);
 	
 	List<DictDO> listDic();
@@ -36,6 +36,6 @@ public interface InnerOrgEmployeeService {
 	Map<String, Object> dataImport(File file,long userid);
 	
 	List<InnerOrgEmployeeDO> getQuery(Map<String, Object> params);
-	
+
 	public void export(String[] titles, ServletOutputStream out, List<InnerOrgEmployeeDO> list);
 }
