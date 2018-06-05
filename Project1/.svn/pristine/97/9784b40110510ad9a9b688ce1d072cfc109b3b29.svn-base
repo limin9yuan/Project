@@ -2,24 +2,6 @@ var prefix = "/timesheet/timesheet"
 
 $().ready(function() {
 
-	loadCrmData("/sales/companyCustomer/listDic","customerId");
-	loadCrmData("/sales/business/listDic","businessId");
-	loadCrmData("/project/project/listDic","projectId");
-	loadCrmData("/inner/orgJob/listDic","jobId");
-
-	loadCrmData("/inner/innerOrgEmployee/listDic","customerId");
-
-	loadCrmData("/inner/innerOrgEmployee/listDic","assignmentPerson");
-	loadCrmData("/inner/innerOrgEmployee/listDic","assignmentPrincipal");
-	loadCrmData("/inner/innerOrgEmployee/listDic","assignmentRecipient");
-	loadCrmData("/system/sysDept/listDic","deptId");
-	loadCrmDataValue ("/system/sysDept/listDic","assignmentDept");
-	loadCrmData("/system/sysDept/listDic","assignmentRecipientDept");
-		loadCrmData("/project/project/listDic","projectId");
-
-		//获取项目类型经理和编号
-$("#projectId").bind("change",getProjectId);
-
 datetimepicker();
 	validateRule();
 });
@@ -45,13 +27,15 @@ alert($('#timesheetPm').val());
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/timesheet/timesheet/save1",
+		url : "/timesheet/timesheet/addtimesheet",
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
 		},
 		success : function(data) {
+
+
 			if (data.code == 0) {
 				parent.layer.msg("操作成功");
 				parent.reLoad();

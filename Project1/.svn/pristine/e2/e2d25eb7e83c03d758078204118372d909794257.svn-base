@@ -166,8 +166,8 @@
 		left join sys_user f on a.`Budget_Operator`=f.`user_id`
 		left join inner_org_employee g on a.`Project_Supervisor`=g.`Employee_ID`
         <where>  
-        			<if test="budgetOperator != null and budgetOperator != ''"> and (a.Budget_Operator=#{budgetOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Budget_Operator and Table_Name='project_budget')
-        																		or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{budgetOperator}))</if>
+        			<if test="budgetOperator != null and budgetOperator != ''"> and a.Budget_Operator=#{budgetOperator}  or exists (select 1 from main_and_copy_person where Employee_ID = a.Budget_Operator and Table_Name='project_budget')
+        																		or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{budgetOperator})</if>
 		  		  <if test="budgetId != null and budgetId != ''"> and Budget_ID = #{budgetId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
 		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>

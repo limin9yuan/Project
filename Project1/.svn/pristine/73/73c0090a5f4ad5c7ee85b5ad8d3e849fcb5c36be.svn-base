@@ -13,8 +13,9 @@
 
 
 
-
-
+                        <input id="projectId" type="hidden" name="projectId" th:value="${ProjectId}"/>
+                        <input id="timesheetProjectCagegory" type="hidden" name="timesheetProjectCagegory" th:value="${timesheetProjectCagegory}"/>
+                        <input id="timesheetPm" type="hidden" name="timesheetPm" th:value="${timesheetPm}"/>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">工作内容：<span class="mustin">*</span></label>
                             <div class="col-sm-9">
@@ -63,7 +64,7 @@
     </div>
 </div>
 <div th:include="include::footer"></div>
-<script type="text/javascript" src="/js/appjs/timesheet/timesheet/add1.js">
+<script type="text/javascript" src="/js/appjs/timesheet/timesheet/addtimesheet.js">
 </script>
 </body>
 </html>

@@ -227,8 +227,12 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 		}
 		// 排序字段
 		String sortnames = request.getParameter("sortName");
-		params.put("sort", sortnames);
+		//判断传来的customerCreateTime 如果是则给他Customer_Create_Time 不加判断则传customerCreateTime，在sql中报错
+		if(sortnames.equals("customerCreateTime")) {
+			params.put("sort", "Customer_Create_Time");
+		};
 		
+//		System.out.println(sortnames);
 		Query query = new Query(params);
 		List<CompanyCustomerDO> companyCustomerList = companyCustomerService.listDesc(query);
 		int total = companyCustomerService.count(query);
