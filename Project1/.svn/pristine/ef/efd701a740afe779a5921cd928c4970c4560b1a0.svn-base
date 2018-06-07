@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.project.dao.ProjectProcessDao">
+
+	<select id="get" resultType="com.bootdo.project.domain.ProjectProcessDO">
+		select `Id`,`Project_Id`,`Finish_Payment`,`Finish_Percent`,`Finish_Date`,`Operator`,`Operate_Date` from project_process where Id = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.project.domain.ProjectProcessDO">
+		select `Id`,`Project_Id`,`Finish_Payment`,`Finish_Percent`,`Finish_Date`,`Operator`,`Operate_Date` from project_process
+        <where>  
+		  		  <if test="id != null and id != ''"> and Id = #{id} </if>
+		  		  <if test="projectId != null and projectId != ''"> and Project_Id = #{projectId} </if>
+		  		  <if test="finishPayment != null and finishPayment != ''"> and Finish_Payment = #{finishPayment} </if>
+		  		  <if test="finishPercent != null and finishPercent != ''"> and Finish_Percent = #{finishPercent} </if>
+		  		  <if test="finishDate != null and finishDate != ''"> and Finish_Date = #{finishDate} </if>
+		  		  <if test="operator != null and operator != ''"> and Operator = #{operator} </if>
+		  		  <if test="operateDate != null and operateDate != ''"> and Operate_Date = #{operateDate} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Id desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from project_process
+		 <where>  
+		  		  <if test="id != null and id != ''"> and Id = #{id} </if>
+		  		  <if test="projectId != null and projectId != ''"> and Project_Id = #{projectId} </if>
+		  		  <if test="finishPayment != null and finishPayment != ''"> and Finish_Payment = #{finishPayment} </if>
+		  		  <if test="finishPercent != null and finishPercent != ''"> and Finish_Percent = #{finishPercent} </if>
+		  		  <if test="finishDate != null and finishDate != ''"> and Finish_Date = #{finishDate} </if>
+		  		  <if test="operator != null and operator != ''"> and Operator = #{operator} </if>
+		  		  <if test="operateDate != null and operateDate != ''"> and Operate_Date = #{operateDate} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.project.domain.ProjectProcessDO" useGeneratedKeys="true" keyProperty="id">
+		insert into project_process
+		(
+			`Project_Id`, 
+			`Finish_Payment`, 
+			`Finish_Percent`, 
+			`Finish_Date`, 
+			`Operator`, 
+			`Operate_Date`
+		)
+		values
+		(
+			#{projectId}, 
+			#{finishPayment}, 
+			#{finishPercent}, 
+			#{finishDate}, 
+			#{operator}, 
+			#{operateDate}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.project.domain.ProjectProcessDO">
+		update project_process 
+		<set>
+			<if test="projectId != null">`Project_Id` = #{projectId}, </if>
+			<if test="finishPayment != null">`Finish_Payment` = #{finishPayment}, </if>
+			<if test="finishPercent != null">`Finish_Percent` = #{finishPercent}, </if>
+			<if test="finishDate != null">`Finish_Date` = #{finishDate}, </if>
+			<if test="operator != null">`Operator` = #{operator}, </if>
+			<if test="operateDate != null">`Operate_Date` = #{operateDate}</if>
+		</set>
+		where Id = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from project_process where Id = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from project_process where Id in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>

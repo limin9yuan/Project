@@ -13,11 +13,11 @@
 						<!-- tab标签 -->
 						<ul id="myTab" class="nav nav-tabs">
 							<li class="active"><a href="#detailed_information" data-toggle="tab">项目信息</a></li>
-							<li><a href="#labor_cost" data-toggle="tab">人工成本</a></li>
-							<li><a href="#details_of_reimbursement" data-toggle="tab">报销详情</a></li>
-							<li><a href="#details_of_procurement" data-toggle="tab">采购详情</a></li>
-							<li><a href="#details_of_the_return" data-toggle="tab">回款详情</a></li>
-							<li><a href="#summary_of_income_and_expenditure" data-toggle="tab">收支情况汇总</a></li>
+							<li><a href="#laborCost" data-toggle="tab">人工成本</a></li>
+							<li><a href="#detailsOfReimbursement" data-toggle="tab">报销详情</a></li>
+							<li><a href="#detailsOfProcurement" data-toggle="tab">采购详情</a></li>
+							<li><a href="#detailsOfTheReturn" data-toggle="tab">回款详情</a></li>
+							<li><a href="#summaryOfIncomeAndExpenditure" data-toggle="tab">收支情况汇总</a></li>
 						</ul>
 <!--项目信息-->
 						<form class="form-horizontal m-t" id="signupForm">
@@ -25,7 +25,7 @@
 								<div class="tab-pane fade in active" id="detailed_information">
 									<input id="paramProjectId" name="paramProjectId"
 										th:value="${projectId}" class="form-control" type="text"
-										type="text">
+										type="hidden">
 									<div class="form-group">
 										<label class="col-sm-2 control-label">客户名称：</label>
 										<div class="col-sm-4">
@@ -152,16 +152,16 @@
 									</div>
 								</div>
 <!-- 人工成本 -->
-								<div class="tab-pane fade" id="labor_cost">
+								<div class="tab-pane fade" id="laborCost">
 									<div class="ibox">
 										<div class="ibox-body">
 											<div class="fixed-table-toolbar"></div>
-											<table id="exampleTable" data-mobile-responsive="true"></table>
+											<table id="laborCostTable" data-mobile-responsive="true"></table>
 										</div>
 									</div>
 								</div>
 <!-- 报销信息 -->
-								<div class="tab-pane fade" id="details_of_reimbursement">
+								<div class="tab-pane fade" id="detailsOfReimbursement">
 									<div class="ibox">
 										<div class="ibox-body">
 											<div class="fixed-table-toolbar"></div>
@@ -170,7 +170,7 @@
 									</div>
 								</div>
 <!-- 采购详情 -->
-								<div class="tab-pane fade" id="details_of_procurement">
+								<div class="tab-pane fade" id="detailsOfProcurement">
 									<div class="ibox">
 										<div class="ibox-body">
 											<div class="fixed-table-toolbar"></div>
@@ -179,7 +179,7 @@
 									</div>
 								</div>
 <!-- 回款信息 -->
-								<div class="tab-pane fade" id="details_of_the_return">
+								<div class="tab-pane fade" id="detailsOfTheReturn">
 									<div class="ibox">
 										<div class="ibox-body">
 											<div class="fixed-table-toolbar"></div>
@@ -188,8 +188,7 @@
 									</div>
 								</div>
 <!-- 收支详情总汇 -->
-								<div class="tab-pane fade"
-									id="summary_of_income_and_expenditure">
+								<div class="tab-pane fade" id="summaryOfIncomeAndExpenditure">
 									<div class="ibox">
 										<div class="ibox-body">
 											<div class="fixed-table-toolbar"></div>
@@ -204,8 +203,6 @@
 									<button type="button" id="lastBtn" disabled class="btn btn-primary" onclick="lastStep('myTab',6,'lastBtn','nextBtn')">上一页</button>
 									&nbsp;
 									<button type="button" id="nextBtn" class="btn btn-primary" onclick="nextStep('myTab',6,'lastBtn','nextBtn')">下一页</button>
-									<!-- &nbsp;
-									<button type="submit" class="btn btn-primary">提交</button> -->
 									&nbsp;
 									<button type="button" class="btn btn-primary" onclick="closeWin()">取消</button>
 								</div>

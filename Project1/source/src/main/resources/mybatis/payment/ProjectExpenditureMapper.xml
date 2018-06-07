@@ -33,6 +33,7 @@
 					left join timesheet b  on a.work_day = b.TimeSheet_Date
 					where b.Project_ID=#{projectId} group by b.Employee_ID ) c on a.Employee_ID = c.Employee_ID
 		where Project_ID = #{projectId}
+		group by  Project_ID, a.Employee_ID, TimeSheet_Name, b.Employee_Level, b.Employee_Salary_Hour
 	</select>
 
 	<select id="countLaborCost" resultType="int">
