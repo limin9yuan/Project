@@ -24,9 +24,9 @@ public class ProjectProcessDO implements Serializable {
 	//完成百分比
 	private String finishPercent;
 	//完成时间
-	private Date finishDate;
+	private String finishDate;
 	//操作人
-	private String operator;
+	private Long operator;
 	//操作时间
 	private Date operateDate;
 
@@ -81,25 +81,25 @@ public class ProjectProcessDO implements Serializable {
 	/**
 	 * 设置：完成时间
 	 */
-	public void setFinishDate(Date finishDate) {
+	public void setFinishDate(String finishDate) {
 		this.finishDate = finishDate;
 	}
 	/**
 	 * 获取：完成时间
 	 */
-	public Date getFinishDate() {
+	public String getFinishDate() {
 		return finishDate;
 	}
 	/**
 	 * 设置：操作人
 	 */
-	public void setOperator(String operator) {
+	public void setOperator(Long operator) {
 		this.operator = operator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public String getOperator() {
+	public Long getOperator() {
 		return operator;
 	}
 	/**

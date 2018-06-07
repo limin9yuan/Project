@@ -1,8 +1,11 @@
 package com.bootdo.project.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.common.controller.BaseController;
+import com.bootdo.project.domain.ProjectDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,6 +23,7 @@ import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
 
+
 /**
  * 
  * 
@@ -30,19 +34,19 @@ import com.bootdo.common.utils.R;
  
 @Controller
 @RequestMapping("/project/process")
-public class ProjectProcessController {
+public class ProjectProcessController extends BaseController {
 	@Autowired
 	private ProjectProcessService projectProcessService;
 	
 	@GetMapping()
 	@RequiresPermissions("project:process")
 	String Process(){
-	    return "/project/process";
+	    return "/project/projectProcess/projectProcess";
 	}
 	
 	@ResponseBody
 	@GetMapping("/list")
-	@RequiresPermissions("system:process:process")
+	@RequiresPermissions("project:process:process")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
@@ -53,17 +57,26 @@ public class ProjectProcessController {
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("system:process:add")
+	@RequiresPermissions("project:process:add")
 	String add(){
-	    return "system/process/add";
+	    return "project/projectProcess/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("system:process:edit")
+	@RequiresPermissions("project:process:edit")
 	String edit(@PathVariable("id") Integer id,Model model){
 		ProjectProcessDO process = projectProcessService.get(id);
 		model.addAttribute("process", process);
-	    return "system/process/edit";
+	    return "project/projectProcess/edit";
+	}
+
+	@RequestMapping("/edit_ajax/{id}")
+	@ResponseBody
+	Map<String, Object> edit_ajax(@PathVariable("id") Integer id) {
+		ProjectProcessDO process = projectProcessService.get(id);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("process", process);
+		return returnData;
 	}
 	
 	/**
@@ -71,8 +84,9 @@ public class ProjectProcessController {
 	 */
 	@ResponseBody
 	@PostMapping("/save")
-	@RequiresPermissions("system:process:add")
+	@RequiresPermissions("project:process:add")
 	public R save( ProjectProcessDO process){
+		process.setOperator(getUserId());
 		if(projectProcessService.save(process)>0){
 			return R.ok();
 		}
@@ -83,8 +97,9 @@ public class ProjectProcessController {
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("system:process:edit")
+	@RequiresPermissions("project:process:edit")
 	public R update( ProjectProcessDO process){
+		process.setOperator(getUserId());
 		projectProcessService.update(process);
 		return R.ok();
 	}
@@ -94,7 +109,7 @@ public class ProjectProcessController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("system:process:remove")
+	@RequiresPermissions("project:process:remove")
 	public R remove( Integer id){
 		if(projectProcessService.remove(id)>0){
 		return R.ok();
@@ -107,7 +122,7 @@ public class ProjectProcessController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("system:process:batchRemove")
+	@RequiresPermissions("project:process:batchRemove")
 	public R remove(@RequestParam("ids[]") Integer[] ids){
 		projectProcessService.batchRemove(ids);
 		return R.ok();

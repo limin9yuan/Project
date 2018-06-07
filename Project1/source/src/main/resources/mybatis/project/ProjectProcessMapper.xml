@@ -51,8 +51,7 @@
 			`Finish_Payment`, 
 			`Finish_Percent`, 
 			`Finish_Date`, 
-			`Operator`, 
-			`Operate_Date`
+			`Operator`
 		)
 		values
 		(
@@ -60,8 +59,7 @@
 			#{finishPayment}, 
 			#{finishPercent}, 
 			#{finishDate}, 
-			#{operator}, 
-			#{operateDate}
+			#{operator}
 		)
 	</insert>
 	 
