@@ -2,26 +2,29 @@ var prefixCompanyCustomer="/sales/companyCustomer";
 var address = null;
 var result = null;
 $().ready(function() {
-			$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
-				if (address == null) {
-					address = new addressResolve({
-						proId : 'province',
-						cityId : 'city',
-						areaId : 'area'
-					}, {
-						proId : result.province,
-						cityId : 'city',
-						areaId : 'arae'
-					});
-					address.init();
-				}
-
-			});
+//			$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
+//				if (address == null) {
+//					address = new addressResolve({
+//						proId : 'province',
+//						cityId : 'city',
+//						areaId : 'area'
+//					}, {
+//						proId : result.province,
+//						cityId : 'city',
+//						areaId : 'arae'
+//					});
+//					address.init();
+//				}
+//
+//			});
 
 	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e){
 		 if($("#customerHotRank option").length==0){
 
 			 loadDicValue("sales_customer_hot_Rank","customerHotRank",result.customerHotRank);//热度s
+		 }
+		 if($("#customerHotClassif option").length==0){
+
 			 loadDicValue("sales_Customer_Hot_Classif","customerHotClassif",result.customerHotClassif);//热点客户分类
 		 }
 	 });
@@ -55,10 +58,10 @@ $().ready(function() {
 //            size: 1000,
 //            accept: 'file',
 //            done: function (r) {
-//            	//alert(r.filename);
+//            	alert(r.filename);
 //            	$("#serviceattachment").val(r.filename);
-//                //layer.msg(r.msg);
-//                //app.getdata();
+//                layer.msg(r.msg);
+//                app.getdata();
 //            },
 //            error: function (r) {
 //                layer.msg(r.msg);
@@ -94,6 +97,7 @@ function loadField() {
 						//search : true, // 是否显示搜索框
 						showColumns : false, // 是否显示内容下拉框（选择显示的列）
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+						showRefresh:true,					// 显示刷新按钮
 						queryParams : function(params) {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对

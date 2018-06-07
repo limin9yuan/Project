@@ -73,8 +73,6 @@ function load() {
 						// 返回false将会终止请求
 						columns : [
 								{
-									checkbox : true
-								},{
 									title : '操作',
 									field : 'id',
 									align : 'center',

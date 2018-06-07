@@ -2,10 +2,6 @@ var prefix = "/approval/expensesTravel"
 
 $().ready(function() {
 
-	$('#myTab a[href="#cost"]').on('shown.bs.tab', function(e) {
-		
-			 loadDicValue("contract_payout_Means", "expensesTravelPayMode",result.expensesTravelPayMode);
-	});
 	expensesTravel_edit();
 	validateRule();
 	getMainAndCopyPerson_ajax();
@@ -229,7 +225,7 @@ function expensesTravel_edit() {
 		},
 		success : function(data) {
 			result = data.expensesTravel;
-
+			$("input[name='expensesTravelPayMode']").val(result.expensesTravelPayMode);
 			//企业客户编号--下拉框
 			loadCrmDataValue("/sales/companyCustomer/listDic", "customerId",result.customerId);
 			//业务编号--下拉框

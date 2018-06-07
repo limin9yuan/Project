@@ -73,6 +73,20 @@ public class ProjectExpenditureController extends BaseController {
 		PageUtils pageUtils = new PageUtils(projectExpenditureList, total);
 		return pageUtils;
 	}
+
+	@ResponseBody
+	@GetMapping("/listLaborCost")
+	@RequiresPermissions("payment:projectExpenditure:projectExpenditure")
+	public PageUtils listLaborCost(@RequestParam Map<String, Object> params) {
+		// 查询列表数据
+		params.put("projectId", params.get("projectId"));
+
+		Query query = new Query(params);
+		List<ProjectExpenditureDO> laborCostList = projectExpenditureService.listLaborCost(query);
+		int total = projectExpenditureService.countLaborCost(query);
+		PageUtils pageUtils = new PageUtils(laborCostList, total);
+		return pageUtils;
+	}
 	
 	@ResponseBody
 	@GetMapping("/listDic")

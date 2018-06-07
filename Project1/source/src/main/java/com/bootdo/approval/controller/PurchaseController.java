@@ -61,6 +61,7 @@ public class PurchaseController extends BaseController {
 		params.put("userId", getUserId());
 		params.put("userName", getUsername());
 		params.put("tableName", "approval_purchase");
+		params.put("projectId", params.get("projectId"));
 		//查询列表数据
 		if (params.get("purchaseOperator") != null && !"".equals(params.get("purchaseOperator"))) {
 			params.put("purchaseOperator", "%" + (String) params.get("purchaseOperator") + "%");

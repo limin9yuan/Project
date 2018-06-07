@@ -24,7 +24,11 @@ public interface ProjectExpenditureDao {
 
 	List<ProjectExpenditureDO> list(Map<String, Object> map);
 
+	List<ProjectExpenditureDO> listLaborCost(Map<String, Object> map);
+
 	int count(Map<String, Object> map);
+
+	int countLaborCost(Map<String, Object> map);
 
 	int save(ProjectExpenditureDO projectExpenditure);
 

@@ -46,6 +46,16 @@ public class ProjectExpenditureImpl implements ProjectExpenditureService {
 	public ProjectExpenditureDO get(String projectId){
 		return projectExpenditureDao.get(projectId);
 	}
+
+	@Override
+	public List<ProjectExpenditureDO> listLaborCost(Map<String, Object> map){
+		return projectExpenditureDao.listLaborCost(map);
+	}
+
+	@Override
+	public int count(Map<String, Object> map){
+		return projectExpenditureDao.count(map);
+	}
 	
 	@Override
 	public List<ProjectExpenditureDO> list(Map<String, Object> map){
@@ -53,8 +63,8 @@ public class ProjectExpenditureImpl implements ProjectExpenditureService {
 	}
 	
 	@Override
-	public int count(Map<String, Object> map){
-		return projectExpenditureDao.count(map);
+	public int countLaborCost(Map<String, Object> map){
+		return projectExpenditureDao.countLaborCost(map);
 	}
 	
 	@Override

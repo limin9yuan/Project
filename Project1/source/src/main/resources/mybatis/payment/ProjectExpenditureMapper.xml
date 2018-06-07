@@ -21,6 +21,31 @@
 		where a.Project_ID = #{value}
 	</select>
 
+	<select id="listLaborCost" resultType="com.bootdo.payment.domain.ProjectExpenditureDO">
+		SELECT Project_ID, a.Employee_ID, TimeSheet_Name, b.Employee_Level, b.Employee_Salary_Hour, MIN(TimeSheet_Date) as startDate, MAX(TimeSheet_Date) as endDate,
+			 (MAX(TimeSheet_Date) -MIN(TimeSheet_Date)) as totalDay,
+				(sum(IFNULL(TimeSheet_Normal,0)+IFNULL(TimeSheet_Overtime,0))/sum(work_hours)) as workPercent,sum(IFNULL(TimeSheet_Normal,0)+IFNULL(TimeSheet_Overtime,0))as totalWorkTime,
+				(sum(IFNULL(TimeSheet_Normal,0)+IFNULL(TimeSheet_Overtime,0))*b.Employee_Salary_Hour) as laborCost
+		FROM timesheet a
+		LEFT JOIN inner_org_employee b on a.Employee_ID = b.Employee_ID
+		LEFT JOIN (SELECT b.Employee_ID,count(Work_Id)*8 work_hours
+					from Work_Day a
+					left join timesheet b  on a.work_day = b.TimeSheet_Date
+					where b.Project_ID=#{projectId} group by b.Employee_ID ) c on a.Employee_ID = c.Employee_ID
+		where Project_ID = #{projectId}
+	</select>
+
+	<select id="countLaborCost" resultType="int">
+		SELECT count(DISTINCT a.Project_ID)
+		FROM timesheet a
+		LEFT JOIN inner_org_employee b on a.Employee_ID = b.Employee_ID
+		LEFT JOIN (SELECT b.Employee_ID,count(Work_Id)*8 work_hours
+								from Work_Day a
+								left join timesheet b  on a.work_day = b.TimeSheet_Date
+								where b.Project_ID=#{projectId} group by b.Employee_ID ) c on a.Employee_ID = c.Employee_ID
+		WHERE a.Project_ID=#{projectId}
+	</select>
+
 	<select id="list" resultType="com.bootdo.payment.domain.ProjectExpenditureDO">
 		select DISTINCT a.Project_ID,a.Customer_ID,Collection_ID,
 		a.Project_Name,a.Project_Sales,a.Project_Begin_Date,

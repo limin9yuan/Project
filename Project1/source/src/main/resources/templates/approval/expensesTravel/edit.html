@@ -17,9 +17,11 @@
 
 								<!-- tab标签 -->
 								<ul id="myTab" class="nav nav-tabs">
-									<li class="active"><a href="#baseInfo" data-toggle="tab">基本信息</a>
+									<li class="active"><a href="#baseInfo" data-toggle="tab"><span
+									class="mustin">*&nbsp;</span>基本信息</a>
 									</li>
-									<li><a href="#cost" data-toggle="tab">费用情况</a></li>
+									<li><a href="#cost" data-toggle="tab"><span
+									class="mustin">*&nbsp;</span>费用情况</a></li>
 
 								</ul>
 
@@ -94,6 +96,18 @@
 												</select>
 											</div>
 										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label"><span
+												class="mustin">*&nbsp;</span>结算方式：</label>
+											<div class="col-sm-4">
+												<select data-placeholder="请选择" name="expensesTravelPayMode"
+													id="expensesTravelPayMode"
+													class="form-control chosen-select" tabindex="2"
+													style="width: 100%">
+													<option value="">请选择</option>
+												</select>
+											</div>
+										</div>
 									</div>
 
 
@@ -140,23 +154,14 @@
 													type="text">
 											</div>
 											<label class="col-sm-2 control-label"><span
-												class="mustin">*&nbsp;</span>结算方式：</label>
-											<div class="col-sm-4">
-												<select data-placeholder="请选择" name="expensesTravelPayMode"
-													id="expensesTravelPayMode"
-													class="form-control chosen-select" tabindex="2"
-													style="width: 100%">
-													<option value="">请选择</option>
-												</select>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>收款人银行：</label>
 											<div class="col-sm-4">
 												<input id="expensesTravelBank" name="expensesTravelBank"
 													class="form-control" type="text">
 											</div>
+										</div>
+										<div class="form-group">
+											
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>卡号：</label>
 											<div class="col-sm-4">
@@ -244,7 +249,7 @@
 										onclick="closeWin()">取消</button>
 								</div>
 							</div>
-					</div>
+<!-- 					</div> -->
 					</form>
 				</div>
 			</div>

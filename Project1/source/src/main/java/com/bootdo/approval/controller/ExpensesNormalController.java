@@ -68,6 +68,7 @@ public class ExpensesNormalController extends BaseController {
 		params.put("expensesNormalOperator", (getUserId()));
 		params.put("userName", (getUsername()));
 		params.put("Identification", (getIdentification()));
+		params.put("projectId", params.get("projectId"));
 		if (params.get("expensesNormalName") != null && params.get("expensesNormalName") != "") {
 			params.put("expensesNormalName", "%" + params.get("expensesNormalName") + "%");
 		}

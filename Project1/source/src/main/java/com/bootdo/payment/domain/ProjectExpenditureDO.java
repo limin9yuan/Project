@@ -63,9 +63,107 @@ public class ProjectExpenditureDO implements Serializable {
 	private String responsibleCenter;
 	// 业务名称
 	private String businessId;
-	
-	
-	
+	/*************人工成本**************/
+	//
+	private String employeeID;
+	//
+	private String timeSheetName;
+	//
+	private String employeeLevel;
+	//
+	private String employeeSalaryHour;
+	//
+	private String startDate;
+	//
+	private String endDate;
+	//
+	private String totalDay;
+	//
+	private String workPercent;
+	//
+	private String totalWorkTime;
+	//
+	private String laborCost;
+
+	public String getLaborCost() {
+		return laborCost;
+	}
+
+	public void setLaborCost(String laborCost) {
+		this.laborCost = laborCost;
+	}
+
+	public String getTotalWorkTime() {
+		return totalWorkTime;
+	}
+
+	public void setTotalWorkTime(String totalWorkTime) {
+		this.totalWorkTime = totalWorkTime;
+	}
+
+	public String getWorkPercent() {
+		return workPercent;
+	}
+
+	public void setWorkPercent(String workPercent) {
+		this.workPercent = workPercent;
+	}
+
+	public String getTotalDay() {
+		return totalDay;
+	}
+
+	public void setTotalDay(String totalDay) {
+		this.totalDay = totalDay;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEmployeeSalaryHour() {
+		return employeeSalaryHour;
+	}
+
+	public void setEmployeeSalaryHour(String employeeSalaryHour) {
+		this.employeeSalaryHour = employeeSalaryHour;
+	}
+
+	public String getEmployeeLevel() {
+		return employeeLevel;
+	}
+
+	public void setEmployeeLevel(String employeeLevel) {
+		this.employeeLevel = employeeLevel;
+	}
+
+	public String getTimeSheetName() {
+		return timeSheetName;
+	}
+
+	public void setTimeSheetName(String timeSheetName) {
+		this.timeSheetName = timeSheetName;
+	}
+
+	public String getEmployeeID() {
+		return employeeID;
+	}
+
+	public void setEmployeeID(String employeeID) {
+		this.employeeID = employeeID;
+	}
 
 	public String getBusinessId() {
 		return businessId;
