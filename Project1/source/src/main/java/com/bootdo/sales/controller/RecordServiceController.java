@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.bootdo.sales.domain.CompanyCustomerDO;
 import com.bootdo.sales.domain.RecordServiceDO;
 import com.bootdo.sales.service.RecordServiceService;
 
@@ -55,6 +56,7 @@ public class RecordServiceController extends BaseController {
 	private BootdoConfig bootdoConfig;
 	@Autowired
 	private MainCopyPersonService mainCopyPersonService;
+
 	@GetMapping()
 	@RequiresPermissions("sales:recordService:recordService")
 	String RecordService() {
@@ -118,7 +120,7 @@ public class RecordServiceController extends BaseController {
 		returnData.put("service", service);
 		return returnData;
 	}
-	
+
 	@GetMapping("/edit/{serviceId}")
 	@RequiresPermissions("sales:recordService:edit")
 	String edit(@PathVariable("serviceId") String serviceId, Model model) {
@@ -134,9 +136,9 @@ public class RecordServiceController extends BaseController {
 	@RequiresPermissions("sales:recordService:add")
 	public R save(RecordServiceDO recordService) {
 		recordService.setServiceRecorder(getUserId());
-		int serviceIds=recordServiceService.save(recordService);
-		if (serviceIds>0) {
-			MainCopyPersonDO mcp =new MainCopyPersonDO();
+		int serviceIds = recordServiceService.save(recordService);
+		if (serviceIds > 0) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
 			String mainPersonId = recordService.getMainPersonId();
 			if (!"".equals(mainPersonId)) {
 				String mainPersonIdArray[] = mainPersonId.split(",");
@@ -150,7 +152,7 @@ public class RecordServiceController extends BaseController {
 
 				}
 			}
-			String copyPersonId =recordService.getCopyPersonId();
+			String copyPersonId = recordService.getCopyPersonId();
 			if (!"".equals(copyPersonId)) {
 				String copyPersonIdArray[] = copyPersonId.split(",");
 				for (int i = 0; i < copyPersonIdArray.length; i++) {
@@ -162,7 +164,6 @@ public class RecordServiceController extends BaseController {
 					mainCopyPersonService.save(mcp);
 				}
 
-
 			}
 			R r = R.ok();
 			r.put("serviceId", serviceIds);
@@ -170,6 +171,7 @@ public class RecordServiceController extends BaseController {
 		}
 		return R.error();
 	}
+
 	/**
 	 * 查看信息
 	 */
@@ -179,6 +181,7 @@ public class RecordServiceController extends BaseController {
 		model.addAttribute("serviceId", serviceId);
 		return "/sales/recordService/examineRecordService";
 	}
+
 	/**
 	 * 修改
 	 */
@@ -186,12 +189,12 @@ public class RecordServiceController extends BaseController {
 	@RequestMapping("/update")
 	@RequiresPermissions("sales:recordService:edit")
 	public R update(RecordServiceDO recordService) {
-		String serviceIds =recordService.getServiceId();
+		String serviceIds = recordService.getServiceId();
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("offset",1);
-		params.put("limit",2);
-		params.put("tId",serviceIds);
-		params.put("tableName","sales_record_service");
+		params.put("offset", 1);
+		params.put("limit", 2);
+		params.put("tId", serviceIds);
+		params.put("tableName", "sales_record_service");
 		recordService.setServiceRecorder(getUserId());
 		recordServiceService.update(recordService);
 		mainCopyPersonService.remove(params);
@@ -230,7 +233,16 @@ public class RecordServiceController extends BaseController {
 		}
 		return R.ok();
 	}
-
+	/**
+	 * 执行删除文件的时候同时删除Customer_Attachment字段下的附件ID
+	 */
+//	@ResponseBody
+//	@RequestMapping("/updateRecordAttachment")
+//	@RequiresPermissions("sales:recordService:edit")
+//	public R updateRecordAttachment(RecordServiceDO recordService) {
+//		recordServiceService.updateRecordAttachment(recordService);
+//		return R.ok();
+//	}
 	/**
 	 * 删除
 	 */
@@ -239,10 +251,10 @@ public class RecordServiceController extends BaseController {
 	@RequiresPermissions("sales:recordService:remove")
 	public R remove(String serviceId) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("offset",1);
-		params.put("limit",2);
-		params.put("tId",serviceId);
-		params.put("tableName","sales_record_service");
+		params.put("offset", 1);
+		params.put("limit", 2);
+		params.put("tId", serviceId);
+		params.put("tableName", "sales_record_service");
 		if (recordServiceService.remove(serviceId) > 0) {
 			mainCopyPersonService.remove(params);
 			return R.ok();
@@ -283,6 +295,22 @@ public class RecordServiceController extends BaseController {
 		return dictList;
 	}
 
+	// 根据ID查看附件列表
+	@ResponseBody
+	@GetMapping("/listRecordAttachment")
+	@RequiresPermissions("common:sysFile:sysFile")
+	public PageUtils listRecordAttachment(@RequestParam("recordId") String recordId, @RequestParam Map<String, Object> params) {
+		// String aa=request.getParameter("customerId");
+		params.put("recordId", recordId);
+		System.out.println(recordId);
+		// 查询列表数据
+		Query query = new Query(params);
+		List<FileDO> sysFileList = sysFileService.listRecordAttachment(query);
+		int total = sysFileService.countRecordAttachment(query);
+		PageUtils pageUtils = new PageUtils(sysFileList, total);
+		return pageUtils;
+	}
+
 	/**
 	 * 上传文件
 	 * 
@@ -294,17 +322,23 @@ public class RecordServiceController extends BaseController {
 	@PostMapping("/upload")
 	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 		String fileName = file.getOriginalFilename();
-//		fileName = FileUtil.renameToUUID(fileName);
+		// fileName = FileUtil.renameToUUID(fileName);
 		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date(),fileName);
 		try {
 			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
 		} catch (Exception e) {
 			return R.error();
 		}
-		if (sysFileService.save(sysFile) > 0) {
-			return R.ok().put("fileName", sysFile.getUrl());
+		int ids = sysFileService.save(sysFile);
+		System.out.println(ids);
+		if (ids > 0) {
+			R r = R.ok();
+			r.put("recordAttachment", ids);
+			r.put("fileName", sysFile.getUrl());
+			return r;
+//			return R.ok().put("fileName", sysFile.getUrl());
 		}
-		return null;
+		return R.error();
 	}
 
 	/**
@@ -314,7 +348,7 @@ public class RecordServiceController extends BaseController {
 	@PostMapping("/dataImport")
 	R upload2(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 		String fileName = file.getOriginalFilename();
-		fileName = FileUtil.renameToUUID(fileName);
+		// fileName = FileUtil.renameToUUID(fileName);
 		File datafile = null;
 		try {
 			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);

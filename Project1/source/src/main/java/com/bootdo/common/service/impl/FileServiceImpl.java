@@ -18,7 +18,7 @@ public class FileServiceImpl implements FileService {
 	private FileDao sysFileMapper;
 	
 	@Override
-	public FileDO get(Long id){
+	public FileDO get(String id){
 		return sysFileMapper.get(id);
 	}
 	
@@ -34,7 +34,9 @@ public class FileServiceImpl implements FileService {
 	
 	@Override
 	public int save(FileDO sysFile){
-		return sysFileMapper.save(sysFile);
+		int red=sysFileMapper.save(sysFile);
+		String id=sysFile.getId();
+		return Integer.parseInt(id);
 	}
 	
 	@Override
@@ -43,13 +45,37 @@ public class FileServiceImpl implements FileService {
 	}
 	
 	@Override
-	public int remove(Long id){
+	public int remove(String id){
 		return sysFileMapper.remove(id);
 	}
 	
 	@Override
 	public int batchRemove(Long[] ids){
 		return sysFileMapper.batchRemove(ids);
+	}
+
+	@Override
+	public List<FileDO> listId(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sysFileMapper.listId(map);
+	}
+
+	@Override
+	public int countId(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sysFileMapper.countId(map);
+	}
+
+	@Override
+	public List<FileDO> listRecordAttachment(Map<String, Object> map) {
+		// TODO 附件iD查看列表
+		return sysFileMapper.listRecordAttachment(map);
+	}
+
+	@Override
+	public int countRecordAttachment(Map<String, Object> map) {
+		// TODO 附件iD查看列表
+		return sysFileMapper.countRecordAttachment(map);
 	}
 	
 }

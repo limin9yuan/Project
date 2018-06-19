@@ -867,6 +867,12 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 		return companyCustomerDao.countOldCustomer(map);
 	}
 
+	@Override
+	public int updateCustomerAttachment(CompanyCustomerDO companyCustomer) {
+		// TODO Auto-generated method stub
+		return companyCustomerDao.updateCustomerAttachment(companyCustomer);
+	}
+
 	
 
 }

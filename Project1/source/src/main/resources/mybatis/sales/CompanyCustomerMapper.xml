@@ -451,7 +451,10 @@
 		</set>
 		where Customer_ID = #{customerId}
 	</update>
-	
+	<update id="updateCustomerAttachment" parameterType="com.bootdo.sales.domain.CompanyCustomerDO">
+		UPDATE sales_company_customer
+ 		SET Customer_Attachment =REPLACE(Customer_Attachment,#{id},'')
+	</update>
 	<delete id="remove">
 		delete from sales_company_customer where Customer_ID = #{value}
 	</delete>

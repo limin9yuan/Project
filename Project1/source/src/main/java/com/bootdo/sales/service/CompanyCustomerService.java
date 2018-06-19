@@ -41,6 +41,8 @@ public interface CompanyCustomerService {
 
 	int update(CompanyCustomerDO companyCustomer);
 
+	int updateCustomerAttachment(CompanyCustomerDO companyCustomer);
+	
 	int remove(String customerId);
 
 	int batchRemove(String[] customerIds);

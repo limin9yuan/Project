@@ -120,6 +120,11 @@ public class PayoutController extends BaseController {
 		return pageUtils;
 	}
 
+	@GetMapping("/relateTravel")
+	String relateTravel(){
+		return "/contract/payout/relateTravel";
+	}
+
 	@GetMapping("/add")
 	@RequiresPermissions("contract:payout:add")
 	String add() {

@@ -84,12 +84,12 @@
 		  		</where>
 	</select>
 	 	 <select id="sumReceivablePrice" resultType="com.bootdo.contract.domain.ReceivableDO">
-	 select sum(Receivable_Price) AS price from accounts_receivable
+	 select IFNULL(sum(Receivable_Price),0) AS price from accounts_receivable
 	 </select>
 	 <select id="planCunstomerNumber" resultType="com.bootdo.contract.domain.ReceivableDO">
 <!-- 	 	/*本月计划回款客户数目*/                                                    -->
 		select count(Receivable_ID) as planNumber ,          
-		sum(Receivable_Price) as planMoney          
+			IFNULL(sum(Receivable_Price),0) as planMoney          
 		from accounts_receivable       
 	 </select>
 <!-- 	 ************************************************************************************ -->

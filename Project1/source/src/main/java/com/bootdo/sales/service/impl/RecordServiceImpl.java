@@ -11,13 +11,11 @@ import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,13 +24,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.inner.domain.InnerOrgEmployeeDO;
 import com.bootdo.sales.dao.RecordDao;
 import com.bootdo.sales.domain.RecordDO;
-import com.bootdo.sales.domain.RecordServiceDO;
-import com.bootdo.sales.domain.SalesProjectDO;
 import com.bootdo.sales.service.RecordService;
-import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 
 @Service
 public class RecordServiceImpl implements RecordService {
@@ -220,5 +214,12 @@ public class RecordServiceImpl implements RecordService {
 		}
 		return result;
 	}
+
+	@Override
+	public int updateRecordAttachment(RecordDO record) {
+		// TODO Auto-generated method stub
+		return recordDao.updateRecordAttachment(record);
+	}
+
 }
 	

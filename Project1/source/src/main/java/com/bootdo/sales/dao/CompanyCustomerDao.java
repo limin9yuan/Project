@@ -36,6 +36,8 @@ public interface CompanyCustomerDao {
 	
 	int update(CompanyCustomerDO companyCustomer);
 	
+	int updateCustomerAttachment(CompanyCustomerDO companyCustomer);
+	
 	int remove(String Customer_ID);
 	
 	int batchRemove(String[] customerIds);

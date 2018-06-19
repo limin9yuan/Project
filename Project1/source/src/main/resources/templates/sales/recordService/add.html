@@ -11,16 +11,16 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<ul id="myTab" class="nav nav-tabs">
-							<li class="active"><a href="#baseInfo" data-toggle="tab">基本信息</a></li>
-							<li><a href="#service" data-toggle="tab">售后服务</a></li>
-							<li><a href="#information" data-toggle="tab">联系方式</a></li>
+							<li class="active"><a href="#baseInfo" data-toggle="tab"><span class="mustin">*&nbsp;</span>基本信息</a></li>
+							<li><a href="#service" data-toggle="tab"><span class="mustin">*&nbsp;</span>售后服务</a></li>
+							<li><a href="#information" data-toggle="tab"><span class="mustin">*&nbsp;</span>联系方式</a></li>
 						</ul>
 						<form class="form-horizontal m-t" id="signupForm">
 						<input id="serviceIds" name="serviceIds" class="form-control" type="hidden" value="-1">
 							<div id="myTabContent" class="tab-content">
 								<div class="tab-pane fade in active" id="baseInfo">
 									<div class="form-group">
-										<label class="col-sm-2 control-label">问题出现时间：<span class="mustin">*</span></label>
+										<label class="col-sm-2 control-label">问题出现时间：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<div class="input-group date" id="serviceProblemTime">
 												<input class="form-control" type="text"
@@ -30,19 +30,19 @@
 												</span>
 											</div>
 										</div>
-										<label class="col-sm-2 control-label">反馈人姓名：<span class="mustin">*</span></label>
+										<label class="col-sm-2 control-label">反馈人姓名：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<input id="serviceName" name="serviceName"
 												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">所在单位：<span class="mustin">*</span></label>
+										<label class="col-sm-2 control-label">所在单位：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<input id="serviceDept" name="serviceDept"
 												class="form-control" type="text">
 										</div>
-										<label class="col-sm-2 control-label">客户姓名：<span class="mustin">*</span></label>
+										<label class="col-sm-2 control-label">客户姓名：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="custormerId"
 												id="custormerId" class="form-control chosen-select"
@@ -52,7 +52,7 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">项目名称：<span class="mustin">*</span></label>
+										<label class="col-sm-2 control-label">项目名称：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="projectId"
 												id="projectId" class="form-control chosen-select"
@@ -60,14 +60,14 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-										<label class="col-sm-2 control-label">使用产品：<span class="mustin">*</span></label>
+										<label class="col-sm-2 control-label">使用产品：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<input id="serviceProduct" name="serviceProduct"
 												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">反馈方式：<span class="mustin">*</span></label>
+										<label class="col-sm-2 control-label">反馈方式：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="serviceFeedbackType"
 												id="serviceFeedbackType" class="form-control chosen-select"
@@ -75,7 +75,7 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-										<label class="col-sm-2 control-label">反馈内容：<span class="mustin">*</span></label>
+										<label class="col-sm-2 control-label">反馈内容：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<input id="serviceFeedbackInfo" name="serviceFeedbackInfo"
 												class="form-control" type="text">
@@ -100,7 +100,7 @@
 
 								<div class="tab-pane fade" id="service">
 									<div class="form-group">
-										<label class="col-sm-2 control-label">服务类型：<span class="mustin">*</label>
+										<label class="col-sm-2 control-label">服务类型：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="serviceType"
 												id="serviceType" class="form-control chosen-select"
@@ -108,7 +108,7 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
-										<label class="col-sm-2 control-label">问题描述：<span class="mustin">*</label>
+										<label class="col-sm-2 control-label">问题描述：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<input id="serviceProblemDeascription"
 												name="serviceProblemDeascription" class="form-control"
@@ -116,12 +116,12 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">处理过程：<span class="mustin">*</label>
+										<label class="col-sm-2 control-label">处理过程：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<input id="serviceProcedure" name="serviceProcedure"
 												class="form-control" type="text">
 										</div>
-										<label class="col-sm-2 control-label">处理结果：<span class="mustin">*</label>
+										<label class="col-sm-2 control-label">处理结果：<span class="mustion">*</span></label>
 										<div class="col-sm-4">
 											<input id="serviceResult" name="serviceResult"
 												class="form-control" type="text">
@@ -146,7 +146,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">电话：<span class="mustin">*</label>
+											<label class="col-sm-2 control-label">电话：<span class="mustion">*</span></label>
 											<div class="col-sm-4">
 												<textarea id="servicePhoneNumber" name="servicePhoneNumber"
 													class="form-control" rows="1"></textarea>
@@ -157,9 +157,9 @@
 										<label class="col-sm-2 control-label">附件：</label>
 										<div class="col-sm-4">
 											<div class="file-manager">
-												<button type="button" class="layui-btn" id="test1"
+												<button type="button" class="layui-btn btn btn-danger" id="test1"
 													style="width: 100%;">
-													<i class="fa fa-cloud"></i>上传文件
+													<i class="glyphicon glyphicon-cloud-upload"></i>上传文件
 												</button>
 												<input id="serviceAttachment" name="serviceAttachment"
 													type="hidden">

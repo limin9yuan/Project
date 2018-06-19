@@ -24,14 +24,14 @@ $().ready(function() {
         //执行实例
         var uploadInst = upload.render({
             elem: '#test1', //绑定元素
-            url: '/sales/recordService/upload2', //上传接口
+            url: '/sales/recordService/upload', //上传接口
             size: 1000,
             accept: 'file',
             done: function (r) {
             	//alert(r.fileName);
             	$("#serviceAttachment").val(r.fileName);
-                //layer.msg(r.msg);
-                //app.getData();
+                layer.msg(r.msg);
+                app.getData();
             },
             error: function (r) {
                 layer.msg(r.msg);

@@ -3,7 +3,6 @@ $().ready(function() {
 	loadCrmData("/sales/companyCustomer/listDic", "customerId");
 	loadCrmData("/sales/salesProject/listAllDic", "projectId");
 	loadCrmData("/inner/innerOrgEmployee/listDic", "payoutPerson");
-	loadCrmData("/contract/travel/listDic", "payoutRelatedContractId");
 	loadDic("contract_payout_Means", "payoutMeans");
 	validateRule();
 });
@@ -14,6 +13,16 @@ $.validator.setDefaults({
 		save();
 	}
 });
+function relateTravel() {
+	layer.open({
+		type : 2,
+		title : '关联出差',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '95%', '95%' ],
+		content :'/contract/payout/relateTravel' // iframe的url
+	});
+}
 function save() {
 	$.ajax({
 		cache : true,

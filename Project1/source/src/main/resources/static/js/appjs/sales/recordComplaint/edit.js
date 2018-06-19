@@ -30,8 +30,8 @@ $().ready(function() {
 			done : function(r) {
 				// alert(r.fileName);
 				$("#complaintAttachment").val(r.fileName);
-				// layer.msg(r.msg);
-				// app.getData();
+				 layer.msg(r.msg);
+				 app.getData();
 			},
 			error : function(r) {
 				layer.msg(r.msg);

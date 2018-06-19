@@ -1,6 +1,7 @@
 package com.bootdo.sales.service;
 
 import com.bootdo.common.domain.DictDO;
+import com.bootdo.sales.domain.RecordDO;
 import com.bootdo.sales.domain.RecordServiceDO;
 
 import java.io.File;

@@ -4,6 +4,8 @@ import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.service.FileService;
 import com.bootdo.common.utils.*;
+import com.bootdo.sales.domain.CompanyCustomerDO;
+
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -75,7 +77,7 @@ public class FileController extends BaseController {
 		PageUtils pageUtils = new PageUtils(sysFileList, total);
 		return pageUtils;
 	}
-
+	
 	@GetMapping("/add")
 	// @RequiresPermissions("common:bComments")
 	String add() {
@@ -83,8 +85,8 @@ public class FileController extends BaseController {
 	}
 
 	@GetMapping("/edit")
-	// @RequiresPermissions("common:bComments")
-	String edit(Long id, Model model) {
+	 @RequiresPermissions("common:bComments")
+	String edit(@RequestParam("id")String id, Model model) {
 		FileDO sysFile = sysFileService.get(id);
 		model.addAttribute("sysFile", sysFile);
 		return "common/sysFile/edit";
@@ -95,7 +97,7 @@ public class FileController extends BaseController {
 	 */
 	@RequestMapping("/info/{id}")
 	@RequiresPermissions("common:info")
-	public R info(@PathVariable("id") Long id) {
+	public R info(@PathVariable("id") String id) {
 		FileDO sysFile = sysFileService.get(id);
 		return R.ok().put("sysFile", sysFile);
 	}
@@ -130,12 +132,12 @@ public class FileController extends BaseController {
 	@PostMapping("/remove")
 	@ResponseBody
 	// @RequiresPermissions("common:remove")
-	public R remove(Long id, HttpServletRequest request) {
+	public R remove(String id, HttpServletRequest request) {
 		if ("test".equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
 		String fileName = bootdoConfig.getUploadPath() + sysFileService.get(id).getUrl().replace("/files/", "");
-		if (sysFileService.remove(id) > 0) {
+		if (sysFileService.remove(id) >0) {
 			boolean b = FileUtil.deleteFile(fileName);
 			if (!b) {
 				return R.error("数据库记录删除成功，文件删除失败");
@@ -162,38 +164,49 @@ public class FileController extends BaseController {
 
 	@ResponseBody
 	@PostMapping("/upload")
-	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+	R upload(@RequestParam("file") MultipartFile files, HttpServletRequest request,CompanyCustomerDO companyCustomer) {
 		if ("test".equals(getUsername())) {
 			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
 		}
-		String fileName = file.getOriginalFilename();// 文件路径
-		System.out.println(fileName);
-//		fileName = FileUtil.renameToUUID(fileName);
-		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date(), fileName);
-		try {
-			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
-		} catch (Exception e) {
-			return R.error();
-		}
-
-		if (sysFileService.save(sysFile) > 0) {
-			return R.ok().put("fileName", sysFile.getUrl());
-		}
+			String fileName = files.getOriginalFilename();// 文件路径
+			System.out.println(fileName);
+			// fileName = FileUtil.renameToUUID(fileName);
+			FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date(), fileName);
+			try {
+				FileUtil.uploadFile(files.getBytes(), bootdoConfig.getUploadPath(), fileName);
+			} catch (Exception e) {
+				return R.error();
+			}
+			int ids = sysFileService.save(sysFile);
+			System.out.println(ids);
+			if (ids > 0) {
+				R r = R.ok();
+				r.put("customerAttachment", ids);
+				r.put("fileName", sysFile.getUrl());
+				return r;
+//				return R.ok().put("fileName", sysFile.getUrl());
+			}
+			
+			
 		return R.error();
 	}
 
 	// 根据文件名称下载相关代码
 	@RequestMapping("/download")
 	@ResponseBody
-	public String download(HttpServletRequest request, HttpServletResponse response,@RequestParam("fileName") String fileName,Model model) {
-//		model.addAttribute("fileName", fileName);
+	public String download(HttpServletRequest request, HttpServletResponse response,
+			@RequestParam("fileName") String fileName, Model model) {
+		// model.addAttribute("fileName", fileName);
 		// String fileName = request.getParameter("name");
 		if (fileName != null) {
 			// 当前是从该工程的C:/var/uploaded_files/下获取文件(该目录可以在下面一行代码配置)
 			// 绝对路径可行，不知道上一行的相对路径怎么设置。
 			String realPath = "C:/var/uploaded_files/";
+			String chars = "abcdefghijklmnopqrstuvwxyz";
 			File file = new File(realPath, fileName);
 			if (file.exists()) {
+				
+				
 				response.setContentType("application/force-download");// 设置强制下载不打开
 				response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);// 设置文件名
 				byte[] buffer = new byte[1024];
@@ -207,7 +220,7 @@ public class FileController extends BaseController {
 
 					File FilePath = new File(pathname);
 					FilePath.mkdirs();
-					File file2 = new File(FilePath, fileName);
+					File file2 = new File(FilePath,chars.charAt((int)(Math.random() * 26))+"+"+ fileName);
 
 					file2.createNewFile();
 					OutputStream os = new FileOutputStream(file2);

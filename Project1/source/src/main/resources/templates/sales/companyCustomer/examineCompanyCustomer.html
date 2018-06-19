@@ -60,17 +60,17 @@ input {
 										<td width="159" align="center" valign="middle"><span
 											class="STYLE1">回款计划</span></td>
 										<td width="211" align="center" valign="middle"
-											th:text="${bo.price}+元"></td>
+											th:text="${bo.price}  +元"></td>
 									</tr>
 									<tr th:each="bo, iterStat : ${receivedDO}">
 										<td align="center" valign="middle"><span class="STYLE1">实际回款</span></td>
 										<td align="center" valign="middle"
-											th:text="${bo.sumReceivedPrice}+元"></td>
+											th:if="${bo.sumReceivedPrice} ? 'null' +元">0元</td>
 									</tr>
 									<tr th:each="bo, iterStat : ${reimbursementRate}">
 										<td align="center" valign="middle"><span class="STYLE1">回款率</span></td>
 										<td align="center" valign="middle"
-											th:text="${bo.reimbursementRate}+'%'"></td>
+											th:text="${bo.reimbursementRate} +'%'"></td>
 									</tr>
 								</table>
 							</div>
@@ -552,7 +552,7 @@ input {
 												<i class="glyphicon glyphicon-cloud-download"></i>下载全部附件
 											</button>
 											&nbsp;<span style="color: #000000">共</span><input
-												id="fileSizeString"
+												id="fileSizeString" readonly="readonly"
 												style="border: none; width: 20%; background-color: #FFFFFF;">
 										</div>
 									</div>
@@ -560,22 +560,22 @@ input {
 									<div class="form-group" id="app" >
 									<label class="col-sm-2 control-label"></label>
 										<div class="col-sm-10 animated fadeInRight">
-											<div class="row"  style="border-radius: 1px;">
+											<div class="row">
 												<div class="col-sm-12">
 													<div class="file-box" v-for="row in rows" >
 														<div class="file">
 <!-- 															<a > <span class="corner"></span> -->
 																<div class="image" >
-																	<img alt="image" class="img-responsive" :src="row.url">
+																	<img alt="文件" class="img-responsive" :src="row.url">
 																</div>
 																<div class="file-name">
 																	<br /> <small>{{row.fileName}}</small>
-																</div> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+																</div> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
 																<button class="btn btn-warning btn-xs "
-																	@click="downloadOneFile(row.fileName)" type="button">下载</button>&nbsp;
-																&nbsp; &nbsp; &nbsp;
-																<button class="btn btn-danger btn-xs"
-																	@click="removeFile(row.id)" type="button">删除</button>
+																	@click="downloadOneFile(row.fileName)" type="button">下载</button>
+<!-- 																	&nbsp; &nbsp; &nbsp; &nbsp; -->
+<!-- 																<button class="btn btn-danger btn-xs" -->
+<!-- 																	@click="removeFile(row.id)" type="button">删除</button> -->
 <!-- 															</a> -->
 														</div>
 													</div>
@@ -1284,7 +1284,7 @@ input {
 	<script src="/js/vue.min.js"></script>
 	<script type="text/javascript">
 	//************* 文件下载级显示 *********************************************************		
-	 var app = new Vue({
+	 	 var app = new Vue({
 	        el: '#app',
 	        data: {
 	            limit: 4,
@@ -1293,18 +1293,21 @@ input {
 	            file: '',
 	            type: '',
 	            rows: '',
+	            customerId:$("#customerId").val(),
 	        },
 	        methods: {
 	            getData: function () {
-	                $.getJSON("/common/sysFile/list", {
-	                    limit: this.limit,
+	                $.getJSON("/sales/companyCustomer/listId", {
+	                	limit: this.limit,
 	                    offset: this.offset,
-	                    type: this.type
+	                    type: this.type,
+	                    customerId:this.customerId
 	                }, function (r) {
 	                    app.total = r.total;
 	                    app.rows = r.rows;
 	                    app.page();
 	                });
+	            	
 	            },
 	            page: function () {
 	                var options = {
@@ -1355,7 +1358,9 @@ input {
 	                            }
 	                        }
 	                    });
+	                    updateCustomerAttachment(id);
 	                })
+	                
 	            }
 	        },
 	        created: function () {
@@ -1373,13 +1378,32 @@ input {
 	                'fileName': fileName
 	            },
 	            success: function (data) {
-	            	parent.layer.msg("文件下载成功！已保存在您的卓面！");
+	            	parent.layer.msg("已保存在您的卓面！");
 	            },
 	            error: function (msg) {
 	            	parent.layer.msg("文件下载失败!请联系管理员！");
 	            }
 	        });
 	}
+	    function updateCustomerAttachment(id){
+	    	var ids=id+',';//将得到的id加上逗号组合传给mapper里面的id去修改字段下的值
+// 	    	alert(ids)
+	    	$.ajax({
+                url: "/sales/companyCustomer/updateCustomerAttachment",
+                type: "post",
+                data: {
+                    'id': ids
+                },
+                success: function (r) {
+                    if (r.code == 0) {
+                        layer.msg(r.msg);
+                        app.getData();
+                    } else {
+                        layer.msg(r.msg);
+                    }
+                }
+            });
+	    }
 //********************** END *************************************	
 	</script>
 </body>

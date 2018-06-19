@@ -42,7 +42,42 @@
 				#{fileName}</if>
 		</where>
 	</select>
-
+<!-- 	//根据ID查看附件列表企业客户信息 -->
+	<select id="listId" resultType="com.bootdo.common.domain.FileDO">
+		select `id`,`type`,`url`,`create_date`,file_Name from sys_file
+		<where>
+			FIND_IN_SET(id,(select w.Customer_Attachment from sales_company_customer w where w.Customer_ID=#{customerId}))
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="url != null and url != ''"> and url = #{url} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="fileName != null and fileName !=''"> and file_Name =
+				#{fileName}</if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="countId" resultType="int">
+		select count(*) from sys_file
+		<where>
+		FIND_IN_SET(id,(select w.Customer_Attachment from sales_company_customer w where w.Customer_ID=#{customerId}))
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="url != null and url != ''"> and url = #{url} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="fileName != null and fileName !=''"> and file_Name =
+				#{fileName}</if>
+		</where>
+	</select>
 	<insert id="save" parameterType="com.bootdo.common.domain.FileDO"
 		useGeneratedKeys="true" keyProperty="id">
 		insert into sys_file
@@ -74,7 +109,7 @@
 	</update>
 
 	<delete id="remove">
-		delete from sys_file where id = #{value}
+		delete from sys_file where id = #{value};
 	</delete>
 
 	<delete id="batchRemove">
@@ -95,4 +130,42 @@
 				#{fileName}</if>
 		</where>
 	</select>
+	
+	<!-- 	//根据ID查看附件列表行动管理-->
+	<select id="listRecordAttachment" resultType="com.bootdo.common.domain.FileDO">
+		select `id`,`type`,`url`,`create_date`,file_Name from sys_file
+		<where>
+			FIND_IN_SET(id,(select w.Record_Attachment from sales_record w where w.Record_ID=#{recordId}))
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="url != null and url != ''"> and url = #{url} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="fileName != null and fileName !=''"> and file_Name =
+				#{fileName}</if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="countRecordAttachment" resultType="int">
+		select count(*) from sys_file
+		<where>
+		FIND_IN_SET(id,(select w.Record_Attachment from sales_record w where w.Record_ID=#{recordId}))
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="url != null and url != ''"> and url = #{url} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="fileName != null and fileName !=''"> and file_Name =
+				#{fileName}</if>
+		</where>
+	</select>
+	
 </mapper>

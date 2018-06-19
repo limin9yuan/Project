@@ -5,21 +5,28 @@ $().ready(function() {
         //执行实例
         var uploadInst = upload.render({
             elem: '#test1', //绑定元素
-            url: '/common/sysFile/upload', //上传接口
+            url: '/sales/record/upload', //上传接口
             size: 1000,
             accept: 'file',
             done: function (r) {
-            	//alert(r.fileName);
-            	$("#recordAttachment").val(r.fileName);
-                //layer.msg(r.msg);
-                //app.getData();
+            	 if (r.code == 0) {
+      				if (r.recordAttachment > 0) {
+      					$('#ids').val(r.recordAttachment);
+      					$('#recordAttachment').val(r.recordAttachment+','+document.getElementById("recordAttachment").value);
+      				}
+      				$("#serviceAttachment").val(r.fileName);
+      				parent.layer.msg(r.msg);
+//     				 app.getData();
+
+      			} else {
+      				parent.layer.msg(r.msg)
+      			}
             },
             error: function (r) {
                 layer.msg(r.msg);
             }
         });
     });
-
 	validateRule();
 	datetimepicker();
 	recordMapper_edit();
@@ -148,6 +155,7 @@ function recordMapper_edit(){
 		},
 		success : function(data) {
 			var result = data.record;
+			$("input[name='recordAttachment']").val(result.recordAttachment);
 			$("input[name='recordId']").val(result.recordId);
 			$("input[name='recordName']").val(result.recordName);
 			$("input[name='recordBeginDate']").val(result.recordBeginDate);
@@ -166,3 +174,41 @@ function recordMapper_edit(){
 		}
 	});
 }
+
+//*********************** 文件下载及相关 ************************************
+//文件大小
+function getFileSize() {
+	console.log("文件大小数据加载");
+	$.ajax({
+		type : "Post",
+		url : "/sales/companyCustomer/getFileSize",
+		data : {},
+		async : false,
+		success : function(data) {
+			// 将后台传来的fileSizeString文件代销传给html页面的fileSizeString
+			$("#fileSizeString").val(data);
+		},
+		error : function(msg) {
+			parent.layer.msg("文件总大小计算错误！");
+		}
+	});
+}
+//下载全部附件
+function download() {
+	console.log("下载全部附件");
+	$.ajax({
+		type : "Post",
+		url : "/sales/companyCustomer/compressedFile",
+		data : {},
+		success : function(data) {
+			parent.layer.msg("附件下载成功！已保存在您的卓面！");
+			// alert("success");
+		},
+		error : function(msg) {
+			parent.layer.msg("附件下载失败!请联系管理员！");
+			// alert(msg);
+		}
+	});
+}
+
+//*************************** END *************************************=======

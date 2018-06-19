@@ -25,6 +25,8 @@ public interface RecordService {
 	
 	int update(RecordDO record);
 	
+	int updateRecordAttachment(RecordDO record);
+	
 	int remove(String recordId);
 	
 	int batchRemove(String[] recordIds);

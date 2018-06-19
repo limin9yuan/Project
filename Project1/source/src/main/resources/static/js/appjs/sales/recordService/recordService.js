@@ -41,6 +41,7 @@ function load() {
 						pageNumber : 1, // 如果设置了分布，首页页码
 						search : false, // 是否显示搜索框
 						showColumns : true, // 是否显示内容下拉框（选择显示的列）
+						showRefresh:true,					// 显示刷新按钮
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
 						queryParams : function(params) {
 							return {
@@ -137,7 +138,7 @@ function examine(id) {
 		title : '查看客服记录信息',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '95%', '95%' ],
+		area : [ '75%', '95%' ],
 		content : prefix + '/examine/' + id
 	});
 }

@@ -102,14 +102,14 @@
 	<!-- 实际回款/本月回款情况 -->
 	<select id="sumReceivedPrice" resultType="com.bootdo.payment.domain.ReceivedDO">
 		select
-		sum(Received_Price) as sumReceivedPrice ,count(Received_ID)as
+		IFNULL(sum(Received_Price),0) as sumReceivedPrice ,count(Received_ID)as
 		reimbursementNumber from payment_received
 		where Received_Price!='' and Received_Price is not null
 	</select>
 	<!-- 回款率 -->
 	<select id="reimbursementRate" resultType="com.bootdo.payment.domain.ReceivedDO">
-		select sum(Received_Price)
-		/(select sum(Receivable_Price) from accounts_receivable)*100  as
+		select IFNULL(sum(Received_Price)
+		/(select sum(Receivable_Price) from accounts_receivable)*100,'0')  as
 		reimbursementRate
 		from payment_received
 	</select>
@@ -152,7 +152,7 @@
 	<!-- 未回款企业数目 -->
 	<select id="moneyNumber" resultType="com.bootdo.payment.domain.ReceivedDO">
 		select IF(count(Receivable_ID)-(select count(Received_ID) from payment_received) &lt;=0,0,count(Receivable_ID)-(select count(Received_ID) from payment_received) )as number,
-		IF(sum(Receivable_Price)-(select sum(Received_Price) from payment_received) &lt;=0,0,sum(Receivable_Price)-(select sum(Received_Price) from payment_received)) as money 
+			IFNULL(IF(sum(Receivable_Price)-(select sum(Received_Price) from payment_received) &lt;=0,0,sum(Receivable_Price)-(select sum(Received_Price) from payment_received)),0) as money
 		from accounts_receivable
 	</select>
 <!-- 	*************************************************************************************************** -->

@@ -1,6 +1,7 @@
 package com.bootdo.sales.dao;
 
 import com.bootdo.sales.domain.RecordDO;
+import com.bootdo.sales.domain.RecordServiceDO;
 
 import java.util.List;
 import java.util.Map;
@@ -19,12 +20,14 @@ public interface RecordDao {
 	RecordDO get(String recordId);
 	
 	List<RecordDO> list(Map<String,Object> map);
-	
+
 	int count(Map<String,Object> map);
 	
 	int save(RecordDO record);
 	
 	int update(RecordDO record);
+	
+	int updateRecordAttachment(RecordDO record);
 	
 	int remove(String Record_ID);
 	

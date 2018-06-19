@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bootdo.sales.domain.RecordDO;
+import com.bootdo.sales.domain.RecordServiceDO;
 import com.bootdo.sales.domain.SalesProjectDO;
 import com.bootdo.sales.service.RecordService;
 import com.bootdo.common.config.BootdoConfig;
@@ -148,7 +149,16 @@ public class RecordController extends BaseController {
 		recordService.update(record);
 		return R.ok();
 	}
-	
+	/**
+	 * 执行删除文件的时候同时删除Customer_Attachment字段下的附件ID
+	 */
+	@ResponseBody
+	@RequestMapping("/updateRecordAttachment")
+	@RequiresPermissions("sales:recordService:edit")
+	public R updateRecordAttachment(RecordDO record) {
+		recordService.updateRecordAttachment(record);
+		return R.ok();
+	}
 	/**
 	 * 删除
 	 */
@@ -172,6 +182,22 @@ public class RecordController extends BaseController {
 		recordService.batchRemove(recordIds);
 		return R.ok();
 	}
+	
+	// 根据ID查看附件列表
+		@ResponseBody
+		@GetMapping("/listRecordAttachment")
+		@RequiresPermissions("common:sysFile:sysFile")
+		public PageUtils listRecordAttachment(@RequestParam("recordId") String recordId, @RequestParam Map<String, Object> params) {
+			// String aa=request.getParameter("customerId");
+			params.put("recordId", recordId);
+			System.out.println(recordId);
+			// 查询列表数据
+			Query query = new Query(params);
+			List<FileDO> sysFileList = sysFileService.listRecordAttachment(query);
+			int total = sysFileService.countRecordAttachment(query);
+			PageUtils pageUtils = new PageUtils(sysFileList, total);
+			return pageUtils;
+		}
 	/**
 	 * 上传文件
 	 * @param file
@@ -189,10 +215,16 @@ public class RecordController extends BaseController {
 		} catch (Exception e) {
 			return R.error();
 		}
-		if (sysFileService.save(sysFile) > 0) {
-			return R.ok().put("fileName", sysFile.getUrl());
+		int ids = sysFileService.save(sysFile);
+		System.out.println(ids);
+		if (ids > 0) {
+			R r = R.ok();
+			r.put("recordAttachment", ids);
+			r.put("fileName", sysFile.getUrl());
+			return r;
+//			return R.ok().put("fileName", sysFile.getUrl());
 		}
-		return null;
+		return R.error();
 	}
 	
 	/**

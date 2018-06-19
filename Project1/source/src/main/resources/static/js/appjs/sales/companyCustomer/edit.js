@@ -47,21 +47,28 @@ $().ready(function() {
 		loadDept();
 	});
 
-
-
+	
 	layui.use('upload', function () {
         var upload = layui.upload;
-        //执行实例
+        //执行实例 
         var uploadinst = upload.render({
             elem: '#test1', //绑定元素
             url: '/sales/companyCustomer/upload', //上传接口
             size: 1000,
             accept: 'file',
             done: function (r) {
-//            	alert(r.filename);
-            	$("#serviceattachment").val(r.filename);
-                layer.msg(r.msg);
-                app.getdata();
+           if (r.code == 0) {
+ 				if (r.customerAttachment > 0) {
+ 					$('#ids').val(r.customerAttachment);
+ 					$('#customerAttachment').val(r.customerAttachment+','+document.getElementById("customerAttachment").value);
+ 				}
+ 				$("#serviceAttachment").val(r.fileName);
+ 				parent.layer.msg(r.msg);
+//				 app.getData();
+
+ 			} else {
+ 				parent.layer.msg(r.msg)
+ 			}
             },
             error: function (r) {
                 layer.msg(r.msg);
@@ -472,8 +479,8 @@ function companyCustomer_edit(){
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic", "customerOwner",result.customerOwner);//客户所有者
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic", "customerSales",result.customerSales);//销售负责人
 
-
-
+			$("input[name='id']").val(result.customerAttachment);//附件ID
+			$("input[name='customerAttachment']").val(result.customerAttachment);//附件ID
 			$("input[name='customerId']").val(result.customerId);//
 
 			$("input[name='customerName']").val(result.customerName);//业务名称//

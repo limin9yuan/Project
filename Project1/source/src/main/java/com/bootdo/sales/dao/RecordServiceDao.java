@@ -1,6 +1,7 @@
 package com.bootdo.sales.dao;
 
 import com.bootdo.common.domain.DictDO;
+import com.bootdo.sales.domain.RecordDO;
 import com.bootdo.sales.domain.RecordServiceDO;
 
 import java.util.List;
@@ -26,6 +27,7 @@ public interface RecordServiceDao {
 	int save(RecordServiceDO recordService);
 	
 	int update(RecordServiceDO recordService);
+	
 	
 	int remove(String Service_ID);
 	

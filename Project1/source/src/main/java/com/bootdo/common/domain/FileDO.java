@@ -14,7 +14,7 @@ public class FileDO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     //
-    private Long id;
+    private String id;
     // 文件类型
     private Integer type;
     // URL地址
@@ -23,6 +23,18 @@ public class FileDO implements Serializable {
     private Date createDate;
     //文件名称
     private String fileName;
+    
+    private String customerId;
+    
+	public String getCustomerId() {
+		return customerId;
+	}
+
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
 
 	public FileDO() {
         super();
@@ -52,14 +64,14 @@ public class FileDO implements Serializable {
     /**
      * 设置：
      */
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
     /**
      * 获取：
      */
-    public Long getId() {
+    public String getId() {
         return id;
     }
 

@@ -11,7 +11,7 @@
 						<form class="form-horizontal m-t" id="signupForm">
 
 
-<input id="payoutIds" name="payoutIds" class="form-control" type="hidden" value="-1">
+							<input id="payoutIds" name="payoutIds" class="form-control" type="hidden" value="-1">
 							<div class="form-group">
 								<label class="col-sm-2 control-label"><span
 									class="mustin">*&nbsp;</span>企业客户编号：</label>
@@ -92,14 +92,13 @@
 										class="form-control" type="text">
 								</div>
 								<label class="col-sm-2 control-label"><span
-									class="mustin">*&nbsp;</span>关联出差申请人姓名：</label>
+									class="mustin">*&nbsp;</span>出差编号：</label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="payoutRelatedContractId"
-										id="payoutRelatedContractId"
-										class="form-control chosen-select" tabindex="2"
+									<input data-placeholder="请选择" name="payoutRelatedTravelId"
+										id="payoutRelatedTravelId"
+										class="form-control chosen-select" readonly="readonly" onclick="relateTravel()"
 										style="width: 100%">
-										<option value="">请选择</option>
-									</select>
+									</input>
 								</div>
 							</div>
 							<!-- <div class="form-group">
@@ -203,9 +202,8 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/contract/payout/add.js">
-
-	</script>
+	<script type="text/javascript" src="/js/appjs/contract/payout/add.js"></script>
+	<script type="text/javascript" src="/js/appjs/contract/payout/relateTravel.js"></script>
 	<script type="text/javascript" src="/js/common.js"></script>
 	<script type="text/javascript"
 		src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>

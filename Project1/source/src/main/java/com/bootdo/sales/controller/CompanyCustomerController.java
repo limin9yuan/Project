@@ -1,19 +1,9 @@
 package com.bootdo.sales.controller;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URLEncoder;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,10 +15,8 @@ import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.bootdo.common.domain.*;
 import com.bootdo.common.service.FieldService;
@@ -497,7 +485,8 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 		model.addAttribute("lianxiList", lianxiList);
 		// 详情页应收信息回款计划Receivable_Price字段求和
 		List<ReceivableDO> price = receivableService.sumReceivablePrice(query);
-		model.addAttribute("price", price);
+			model.addAttribute("price", price);
+		
 		// 详情页应收信息实际回款
 		List<ReceivedDO> receivedDO = receivedService.sumReceivedPrice(query);
 		model.addAttribute("receivedDO", receivedDO);
@@ -592,8 +581,19 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 
 				}
 			}
+			
 
 		}
+		return R.ok();
+	}
+	/**
+	 * 执行删除文件的时候同时删除Customer_Attachment字段下的附件ID
+	 */
+	@ResponseBody
+	@RequestMapping("/updateCustomerAttachment")
+	@RequiresPermissions("sales:companyCustomer:edit")
+	public R updateCustomerAttachment(CompanyCustomerDO companyCustomer) {
+		companyCustomerService.updateCustomerAttachment(companyCustomer);
 		return R.ok();
 	}
 
@@ -647,6 +647,21 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 		return dictList;
 	}
 
+	
+	//根据ID查看附件列表
+		@ResponseBody
+		@GetMapping("/listId")
+		@RequiresPermissions("common:sysFile:sysFile")
+		public PageUtils listId(@RequestParam("customerId")String customerId,@RequestParam Map<String, Object> params) {
+//			String aa=request.getParameter("customerId");
+			params.put("customerId", customerId);
+			// 查询列表数据
+			Query query = new Query(params);
+			List<FileDO> sysFileList = sysFileService.listId(query);
+			int total = sysFileService.countId(query);
+			PageUtils pageUtils = new PageUtils(sysFileList, total);
+			return pageUtils;
+		}
 	/**
 	 * 上传文件
 	 * 
@@ -665,10 +680,16 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 		} catch (Exception e) {
 			return R.error();
 		}
-		if (sysFileService.save(sysFile) > 0) {
-			return R.ok().put("fileName", sysFile.getUrl());
+		int ids = sysFileService.save(sysFile);
+		System.out.println(ids);
+		if (ids > 0) {
+			R r = R.ok();
+			r.put("customerAttachment", ids);
+			r.put("fileName", sysFile.getUrl());
+			return r;
+//			return R.ok().put("fileName", sysFile.getUrl());
 		}
-		return null;
+		return R.error();
 	}
 
 	@ResponseBody

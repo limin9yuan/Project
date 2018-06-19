@@ -31,6 +31,8 @@
 							<!-- 				<form class="form-horizontal m-t" id="signupForm"> -->
 							<div id="myTabContent" class="tab-content" style="padding-top: 20px">
 								<input id="customerIds" name="customerIds" class="form-control" type="hidden"value="-1">
+								<input id="ids" name="ids" class="form-control" type="hidden" value="-1">
+								
 								<div class="tab-pane fade in active" id="baseInfo">
 									<div class="form-group">
 										<label class="col-sm-2 control-label"><span
@@ -225,12 +227,12 @@
 										<label class="col-sm-2 control-label">附件：</label>
 										<div class="col-sm-4">
 											<div class="file-manager">
-												<button type="button" class="layui-btn btn btn-danger" id="test1"
+												<button type="button"   class="layui-btn btn btn-danger" id="test1"
 													style="width: 100%;">
 													<i class="glyphicon glyphicon-cloud-upload"></i>上传文件
 												</button>
-												<input id="customerAttachment" name="customerAttachment"
-													type="hidden">
+												<input class="form-control" th:value="${customerAttachment}" 
+												id="customerAttachment" name="customerAttachment"  type="text" >
 											</div>
 										</div>
 									</div>

@@ -1,11 +1,30 @@
 var prefix = "/payment/contractApproval"
-$(function() {
+	$().ready(function() {
+		
 				loadCrmData("/contract/contract/listDic","contractId");
 				loadCrmData("/project/project/listDic","projectId");
 				loadCrmData("/sys/user/listDic","contractApplicantName");
-	load();
+				load();
+				
+				layui.use('upload', function () {
+			        var upload = layui.upload;
+			        //执行实例
+			        var uploadInst = upload.render({
+			            elem: '#test1', //绑定元素
+			            url: '/payment/contractApproval/upload', //上传接口
+			            size: 1000,
+			            accept: 'file',
+			            done: function (r) {
+			                layer.msg(r.msg);
+			                app.getData();
+			            },
+			            error: function (r) {
+			                layer.msg(r.msg);
+			            }
+			        });
+			    });
+				
 });
-
 function load() {
 
 	$('#exampleTable').bootstrapTable(
@@ -212,5 +231,23 @@ function batchRemove() {
 		});
 	}, function() {
 
+	});
+}
+
+//下载全部附件
+function download() {
+	console.log("下载全部附件");
+	$.ajax({
+		type : "Post",
+		url : "/sales/companyCustomer/compressedFile",
+		data : {},
+		success : function(data) {
+			parent.layer.msg("附件下载成功！已保存在您的卓面！");
+			// alert("success");
+		},
+		error : function(msg) {
+			parent.layer.msg("附件下载失败!请联系管理员！");
+			// alert(msg);
+		}
 	});
 }

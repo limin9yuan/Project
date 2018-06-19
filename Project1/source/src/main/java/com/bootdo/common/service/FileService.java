@@ -16,17 +16,25 @@ import java.util.Map;
 
 public interface FileService {
 	
-	FileDO get(Long id);
+	FileDO get(String id);
 	
 	List<FileDO> list(Map<String, Object> map);
 	
+	List<FileDO> listId(Map<String,Object> map);
+	
+	int countId(Map<String,Object> map);
+	
 	int count(Map<String, Object> map);
+	
+	List<FileDO> listRecordAttachment(Map<String,Object> map);
+	
+	int countRecordAttachment(Map<String,Object> map);
 	
 	int save(FileDO sysFile);
 	
 	int update(FileDO sysFile);
 	
-	int remove(Long id);
+	int remove(String id);
 	
 	int batchRemove(Long[] ids);
 }

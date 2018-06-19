@@ -33,7 +33,7 @@ public class ReceivableDO implements Serializable {
 	//操作时间
 	private Date receivableOperateTime;
 	//计划回款
-	private String price;
+	private Integer price;
 	//回款率
 	private String reimbursementRate;
 	//本月计划回款客户数目
@@ -93,10 +93,10 @@ public class ReceivableDO implements Serializable {
 	/**
 	 * 收款计划金额
 	 */
-	public String getPrice() {
+	public Integer getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(Integer price) {
 		this.price = price;
 	}
 	/**

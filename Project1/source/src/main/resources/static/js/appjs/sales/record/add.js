@@ -6,22 +6,28 @@ $().ready(function() {
 	loadCrmData("/sales/companyCustomer/listDic","customerId");
 	loadCrmData("/inner/innerOrgEmployee/listDic","recordExecutor");
 	loadCrmData("/project/project/listDic","projectId");
+	
+	
 	layui.use('upload', function () {
         var upload = layui.upload;
         //执行实例
         var uploadInst = upload.render({
             elem: '#test1', //绑定元素
-            url: '/common/sysFile/upload', //上传接口
+            url: '/sales/record/upload', //上传接口
             size: 1000,
             accept: 'file',
             done: function (r) {
-            	//alert(r.fileName);
-            	$("#recordAttachment").val(r.fileName);
-                //layer.msg(r.msg);
-                //app.getData();
-            },
-            error: function (r) {
+            	if (r.code == 0) {
+	 				if (r.recordAttachment > 0) {
+	 					$('#ids').val(r.recordAttachment);
+	 					$('#recordAttachment').val(r.recordAttachment+','+document.getElementById("recordAttachment").value);
+	 				}
+            	$("#serviceAttachment").val(r.fileName);
                 layer.msg(r.msg);
+                app.getData();
+            }else {
+ 				parent.layer.alert(r.msg)
+            }
             }
         });
     });

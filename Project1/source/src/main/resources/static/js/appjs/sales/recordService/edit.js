@@ -26,7 +26,7 @@ $().ready(function() {
             size: 1000,
             accept: 'file',
             done: function (r) {
-            	alert(r.fileName);
+//            	alert(r.fileName);
             	$("#serviceAttachment").val(r.fileName);
                 //layer.msg(r.msg);
                 //app.getData();

@@ -3,9 +3,6 @@
 
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
-<!-- <link
-	href="http://toy.linuxtoy.org//2013/12/18/css/bootstrap-sortable.css"
-	rel="stylesheet" media="screen"> -->
 <style type="text/css">
 th {
 	text-align: center; /** 设置水平方向居中 */
@@ -106,7 +103,7 @@ th {
 									</tr>
 									<tr th:each="bo, iterStat : ${receivedDO}">
 										<td align="center" valign="middle"
-											th:text="${'总计'+bo.sumReceivedPrice}+元"></td>
+											th:text="${'总计'+bo.sumReceivedPrice} +元"> </td>
 									</tr>
 								</table>
 								<table class="table-hover table-bordered"
@@ -121,7 +118,7 @@ th {
 									</tr>
 									<tr th:each="bo, iterStat : ${moneyNumber}">
 										<td align="center" valign="middle"
-											th:text="${'总计'+bo.money}+'元'"></td>
+											th:text="${'总计'+bo.money} +'元'"></td>
 									</tr>
 								</table>
 

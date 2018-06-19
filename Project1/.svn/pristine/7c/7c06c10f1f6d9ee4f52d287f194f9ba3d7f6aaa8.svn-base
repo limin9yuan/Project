@@ -1,0 +1,196 @@
+$().ready(function() {
+	loadCrmData("/project/project/listDic","projectId");
+	loadCrmData("/sales/companyCustomer/listDic","custormerId");
+	loadDic("sales_record_service_Service_Feedback_Type","serviceFeedbackType");
+	validateRule();
+	datetimepicker();
+// ————上一页 下一页
+	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e){
+		 $('#lastBtn').attr("disabled",true);
+		 $('#nextBtn').attr("disabled",false);
+	 });
+	$('#myTab a[href="#service"]').on('shown.bs.tab', function(e) {
+ 		loadDic("sales_record_complaint_Complaint_After_Sale_Type","serviceType");
+		 $('#lastBtn').attr("disabled",false);
+		 $('#nextBtn').attr("disabled",false);
+	 });
+	 $('#myTab a[href="#information"]').on('shown.bs.tab', function(e){
+		 $('#lastBtn').attr("disabled",false);
+		 $('#nextBtn').attr("disabled",true);
+	 });
+// ————上传
+	layui.use('upload', function () {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#test1', //绑定元素
+            url: '/sales/recordService/upload', //上传接口
+            size: 1000,
+            accept: 'file',
+            done: function (r) {
+            	//alert(r.fileName);
+            	$("#serviceAttachment").val(r.fileName);
+                layer.msg(r.msg);
+                app.getData();
+            },
+            error: function (r) {
+                layer.msg(r.msg);
+            }
+        });
+    });
+});
+$.validator.setDefaults({
+	submitHandler : function() {
+		save();
+	}
+});
+function save() {
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/sales/recordService/save",
+		data : $('#signupForm').serialize(),// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				if (data.serviceId > 0) {
+ 					$('#serviceIds').val(data.serviceId);
+ 				}
+				parent.layer.msg("操作成功");
+				closeParenWindow();
+				
+			} else {
+				parent.layer.alert(data.msg)
+			}
+		}
+	});
+}
+function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#signupForm").validate({
+		ignore: ":hidden:not(select)",
+			rules : {
+				serviceProblemTime : {
+					required : true
+				},
+				serviceName : {
+					required : true,
+					rangelength:[1,6]
+				},
+				serviceDept : {
+					required : true,
+					rangelength:[1,50]
+				},
+				customerId : {
+					required : true
+				},
+				projectId : {
+					required : true
+				},
+				serviceProduct : {
+					required : true,
+					rangelength:[1,50]
+				},
+				serviceFeedbackType : {
+					required : true,
+					rangelength:[1,10]
+				},
+				serviceFeedbackInfo : {
+					required : true,
+					rangelength:[1,500]
+				},
+				serviceType : {
+					required: true,
+					rangelength:[1,10]
+				},
+				serviceProblemDeascription : {
+					required: true,
+					rangelength:[1,500]
+				},
+				serviceProcedure : {
+					required: true,
+					rangelength:[1,500]
+				},
+				serviceResult : {
+					required: true,
+					rangelength:[1,10]
+				},
+				servicePhoneNumber : {
+					required: true,
+					rangelength:[1,20]
+				},
+				serviceProblemRemarks : {
+					rangelength:[1,200]
+				},
+				serviceAfterSaleRemarks : {
+					rangelength:[1,200]
+				}
+			},
+			messages : {
+				serviceProblemTime : {
+					required : icon + "问题出现时间不能为空"
+				},
+				serviceName : {
+					required : icon + "反馈人姓名不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 6 之间的字符串"
+				},
+				serviceDept : {
+					required : icon + "所在单位不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 50 之间的字符串"
+				},
+				customerId : {
+					required : icon + "客户名称不能为空"
+				},
+				projectId : {
+					required : icon + "项目名称不能为空"
+				},
+				serviceProduct : {
+					required : icon + "使用产品不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 50 之间的字符串"
+				},
+				serviceFeedbackType : {
+					required : icon + "反馈方式不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 10 之间的字符串"
+				},
+				serviceFeedbackInfo : {
+					required : icon + "反馈内容不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 500 之间的字符串"
+				},
+				serviceType : {
+					required : icon + "服务类型不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 10 之间的字符串"
+				},
+				serviceProblemDeascription : {
+					required : icon + "问题描述不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 500 之间的字符串"
+				},
+				serviceProcedure : {
+					required : icon + "处理过程不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 500 之间的字符串"
+				},
+				serviceResult : {
+					required : icon + "处理结果不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 10 之间的字符串"
+				},
+				servicePhoneNumber : {
+					required : icon + "电话不能为空",
+					rangelength: icon + "请输入一个长度介于 1 和 20 之间的字符串"
+				},
+				serviceProblemRemarks : {
+					rangelength: icon + "请输入一个长度介于 1 和 200 之间的字符串"
+				},
+				serviceAfterSaleRemarks : {
+					rangelength: icon + "请输入一个长度介于 1 和 200 之间的字符串"
+				}
+			}
+	})
+}
+function datetimepicker() {
+	$('#serviceProblemTime').datetimepicker({
+		format : 'YYYY-MM-DD',
+		locale : moment.locale('zh-cn')
+	});
+}

@@ -166,7 +166,10 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{recordOperator} AND Identific
 		</set>
 		where Record_ID = #{recordId}
 	</update>
-	
+	<update id="updateRecordAttachment" parameterType="com.bootdo.sales.domain.RecordDO">
+		UPDATE sales_record
+ 		SET Record_Attachment =REPLACE(Record_Attachment,#{id},'')
+	</update>
 	<delete id="remove">
 		delete from sales_record where Record_ID = #{value}
 	</delete>
