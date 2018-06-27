@@ -85,16 +85,25 @@ function load() {
 											return e ;
 										}
 										if (row.contractApprovalStatus == 1) {
-											var a = '<a class="btn btn-success btn-sm '+s_view_h+'" href="#" mce_href="#"  onclick="taskTrace(\''
-											+ row.processInstanceId
-											+ '\')"><i class="fa fa-search"></i></a> ';
-											return a;
+											var f = '<a class="btn btn-success btn-sm '+s_view_h+'" href="#" title="备用"  mce_href="#" onclick="view(\''
+													+ row.contractId
+													+ '\')"><i class="fa fa-search"></i></a> ';
+											return f;
 										}
 
 									}
 								},
 								{
 									align : 'center',
+									formatter : function(value, row, index) {
+										if (row.contractApprovalStatus != null) {
+											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
+											+ row.processInstanceId
+											+ '\')">'
+											+ row.contractApprovalStatusText + '</a> ';
+											return a;
+										}
+									},
 									field : 'contractApprovalStatusText',
 									title : '合同审批状态'
 								},
@@ -151,6 +160,16 @@ function taskTrace(processInstanceId){
 		content : '/activiti/task/taskTrace/'+processInstanceId
 	});
 }
+function view(id) {
+	parent.layer.open({
+		type : 2,
+		title : '编辑',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '95%', '95%' ],
+		content : '/contract/contract/view/' + id // iframe的url
+	});
+}
 
 // 导出
 function exportData(){
@@ -164,14 +183,14 @@ function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
 
-function add() {
+function approval() {
 	parent.layer.open({
 		type : 2,
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],
-		content : prefix + '/add' // iframe的url
+		content : prefix + '/approval' // iframe的url
 	});
 }
 

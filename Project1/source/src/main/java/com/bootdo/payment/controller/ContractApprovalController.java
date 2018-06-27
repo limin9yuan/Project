@@ -98,10 +98,10 @@ public class ContractApprovalController extends BaseController {
 		return dictList;
 	}
 	
-	@GetMapping("/add")
-	@RequiresPermissions("payment:contractApproval:add")
+	@GetMapping("/approval")
+	@RequiresPermissions("payment:contractApproval:approval")
 	String add() {
-		return "payment/contractApproval/add";
+		return "payment/contractApproval/approval";
 	}
 
 	@GetMapping("/import")

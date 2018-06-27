@@ -60,13 +60,10 @@
 				</form>
 				<div class="fixed-table-toolbar">
 					<div class="columns pull-left">
-						<button shiro:hasPermission="payment:contractApproval:add"
-							type="button" class="btn  btn-primary" onclick="add()">
-							<i class="fa fa-plus" aria-hidden="true"></i>新增
-						</button>
-						<button shiro:hasPermission="payment:contractApproval:batchRemove"
-							type="button" class="btn  btn-primary" onclick="batchRemove()">
-							<i class="fa fa-trash" aria-hidden="true"></i>批量删除
+
+						<button shiro:hasPermission="payment:contractApproval:approval"
+							type="button" class="btn  btn-primary" onclick="approval()">
+							<i class="fa" aria-hidden="true"></i>批量审批
 						</button>
 						<button shiro:hasPermission="payment:contractApproval:dataImport"
 							type="button" class=" btn btn-danger" name="excelinsertbtn">
@@ -76,11 +73,6 @@
 							type="button" class="btn  btn-primary" onclick="exportData()">
 							<i class="fa fa-trash" aria-hidden="true"></i>导出
 						</button>
-						<a shiro:hasPermission="payment:contractApproval:batchRemove"
-							type="button" class="btn btn-primary" onclick=""> <i
-							class="fa" aria-hidden="true"></i>批量审批
-						</a>
-
 					</div>
 					<div class="columns pull-left" style="padding-left: 5px">
 						<div class="file-manager">
