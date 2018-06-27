@@ -548,7 +548,7 @@ input {
 										<div class="col-sm-4">
 											<button
 												shiro:hasPermission="sales:companyCustomer:companyCustomer"
-												onclick="download()" type="button" class="btn btn-danger ">
+												onclick="window.open('/sales/companyCustomer/downLoadZipFile?id='+$('#customerAttachment').val())" type="button" class="btn btn-danger ">
 												<i class="glyphicon glyphicon-cloud-download"></i>下载全部附件
 											</button>
 											&nbsp;<span style="color: #000000">共</span><input
@@ -576,7 +576,7 @@ input {
 																	<br /> <small>{{row.fileName}}</small>
 																</div> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
 																<button class="btn btn-warning btn-xs "
-																	@click="downloadOneFile(row.fileName)" type="button">下载</button>
+																	@click="window.open('/sales/companyCustomer/down?fileName='+row.fileName)" type="button">下载</button>
 <!-- 																	&nbsp; &nbsp; &nbsp; &nbsp; -->
 <!-- 																<button class="btn btn-danger btn-xs" -->
 <!-- 																	@click="removeFile(row.id)" type="button">删除</button> -->
@@ -1371,24 +1371,6 @@ input {
 	            this.getData();
 	        }
 	    });
-	    //文件下载
-	function downloadOneFile(fileName){
-	    	console.log("下载");
-	    	$.ajax({
-	    		async : false, 
-	            type: "post",
-	            url: "/common/sysFile/download",
-	            data: {
-	                'fileName': fileName
-	            },
-	            success: function (data) {
-	            	parent.layer.msg("已保存在您的卓面！");
-	            },
-	            error: function (msg) {
-	            	parent.layer.msg("文件下载失败!请联系管理员！");
-	            }
-	        });
-	}
 	    function updateCustomerAttachment(id){
 	    	var ids=id+',';//将得到的id加上逗号组合传给mapper里面的id去修改字段下的值
 // 	    	alert(ids)

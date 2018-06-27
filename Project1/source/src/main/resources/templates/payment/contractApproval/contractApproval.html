@@ -13,13 +13,13 @@
 </head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
-		<!-- 
+		<!--
 		<form id="contractApprovalForm" name="contractApprovalForm" th:action="@{/payment/contractApproval/export}" method="get">
-			<input type="hidden" name="contractName" /> 
+			<input type="hidden" name="contractName" />
 			<input type="hidden" name="contractId" />
-			<input type="hidden" name="projectId" /> 
-			<input type="hidden" name="contractApplicantName" /> 
-		</form> 
+			<input type="hidden" name="projectId" />
+			<input type="hidden" name="contractApplicantName" />
+		</form>
 		-->
 		<div class="col-sm-12">
 			<div class="ibox float-e-margins">
@@ -86,7 +86,7 @@
 						<div class="file-manager">
 							<button type="button" class="layui-btn btn btn-danger"  id="test1"
 								style="width: 100%;" >
-								<i class="glyphicon glyphicon-cloud-upload" ></i>上传附件 
+								<i class="glyphicon glyphicon-cloud-upload" ></i>上传附件
 							</button>
 							<input  id="customerAttachment" name="customerAttachment"
 								type="hidden">
@@ -96,7 +96,7 @@
 						<button
 							shiro:hasPermission="sales:companyCustomer:companyCustomer"
 							onclick="download()" type="button" class="btn btn-primary ">
-							<i class="glyphicon glyphicon-cloud-download"></i>下载全部附件 
+							<i class="glyphicon glyphicon-cloud-download"></i>下载全部附件
 						</button>
 					</div>
 					<div class="columns pull-right">
@@ -123,9 +123,9 @@
 			s_edit_h = '';
 		</script>
 	</div>
-	<div shiro:hasPermission="payment:contractApproval:remove">
+	<div shiro:hasPermission="payment:contractApproval:view">
 		<script type="text/javascript">
-			var s_remove_h = '';
+			var s_view_h = '';
 		</script>
 	</div>
 	<div shiro:hasPermission="payment:contractApproval:resetPwd">

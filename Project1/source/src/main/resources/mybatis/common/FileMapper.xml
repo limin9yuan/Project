@@ -47,11 +47,10 @@
 		where FIND_IN_SET(id,#{id})
 	</select>
 	<select id="listIdCustomer" resultType="com.bootdo.common.domain.FileDO" >
-		select file_Name from sys_file
-		<where>
-			<foreach item="id" collection="array" open="FIND_IN_SET(id," separator=","  close="#{id})">
-			</foreach>
-		</where>
+		select file_Name,url from sys_file  where id in
+		<foreach item="id" collection="array" open="(" separator=","
+										close=")">#{id}
+		</foreach>
 		
 <!-- 		where FIND_IN_SET(id,#{id}) -->
 	</select>

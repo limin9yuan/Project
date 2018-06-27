@@ -62,6 +62,8 @@ public class ContractApprovalDO implements Serializable {
 	private String contractAttachment;
 	//审批状态
 	private String contractApprovalStatus;
+	//
+	private String contractApprovalStatusText;
 	//操作人
 	private String contractOperator;
 	//操作时间
@@ -72,8 +74,56 @@ public class ContractApprovalDO implements Serializable {
 	private String contractSalesName;
 	//管理层标识
 	private Integer Identification;
-	
-	
+	//
+	private String pdId;
+	//
+	private String taskId;
+	//
+	private String Id;
+	//
+	//流程实例ID
+	private String processInstanceId;
+
+	public String getProcessInstanceId() {
+		return processInstanceId;
+	}
+
+	public void setProcessInstanceId(String processInstanceId) {
+		this.processInstanceId = processInstanceId;
+	}
+
+	public String getContractApprovalStatusText() {
+		return contractApprovalStatusText;
+	}
+
+	public void setContractApprovalStatusText(String contractApprovalStatusText) {
+		this.contractApprovalStatusText = contractApprovalStatusText;
+	}
+
+	public String getPdId() {
+		return pdId;
+	}
+
+	public void setPdId(String pdId) {
+		this.pdId = pdId;
+	}
+
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
+	public String getId() {
+		return Id;
+	}
+
+	public void setId(String id) {
+		Id = id;
+	}
+
 	/*
 	 * 管理层标识
 	 */

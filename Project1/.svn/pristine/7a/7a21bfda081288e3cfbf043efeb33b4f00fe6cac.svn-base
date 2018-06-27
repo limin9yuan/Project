@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.payment.dao.ContractApprovalDao">
+	<select id="get" resultType="com.bootdo.payment.domain.ContractApprovalDO">
+		 select `Contract_ID`,`Customer_ID`,`Business_ID`,`Contract_Name`,`Contract_Applicant_Name`,
+		`Contract_Build_Company`,`Contract_Type`,`Contract_Category`,`Contract_Total_Price`,
+		`Contract_Dept`,`Contract_Applicant`,`Contract_Draft_Person`,`Contract_Sales`,
+		`Contract_Commit_Time`,`Contract_Related_ID`,`Contract_Invoice_Type`,`Contract_Invoice_Time`,
+		`Contract_Hardware_List`,`Contract_Software_List`,`Contract_Project_Management`,
+		`Contract_Remarks`,`Contract_Attachment`,`Contract_Approval_Status`,`Contract_Operator`,
+		`Contract_Operate_Time` from contract where Contract_ID = #{value} 
+	</select>
+
+	<select id="list" resultType="com.bootdo.payment.domain.ContractApprovalDO">
+		select DISTINCT a.`Contract_ID`,a.`Customer_ID`,`Business_ID`,`Contract_Name`,Contract_Applicant_Name,
+		`Contract_Build_Company`,`Contract_Type`,`Contract_Category`,`Contract_Total_Price`,
+		`Contract_Dept`,`Contract_Applicant`,`Contract_Draft_Person`,`Contract_Sales`,`Contract_Commit_Time`,
+		`Contract_Related_ID`,`Contract_Invoice_Type`,`Contract_Invoice_Time`,`Contract_Hardware_List`,
+		`Contract_Software_List`,`Contract_Project_Management`,`Contract_Remarks`,`Contract_Attachment`,
+		CASE `Contract_Approval_Status` WHEN '1' THEN '已审批' ELSE '未审批' END AS contract_Approval_Status_Text,`Contract_Operator`,`Contract_Operate_Time`,a.Project_ID,
+		i.Employee_Name as contractSalesName,s.Identification,Contract_Approval_Status, PROCESS_INSTANCE_ID
+		from contract a
+		left join sys_user s 			on a.Contract_Operator = s.user_id
+		left join development_project p on a.Project_ID = p.Project_ID
+		left join development_project b on a.Project_ID = b.Project_ID
+		left join inner_org_employee i  on a.Contract_Sales = i.Employee_ID
+        <where>
+        		<if test="contractOperator != null and contractOperator != ''"> and (a.Contract_Operator=#{contractOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Contract_Operator and Table_Name='contract')
+        																		or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{contractOperator}))</if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  <if test="contractBuildCompany != null and contractBuildCompany != ''"> and Contract_Build_Company = #{contractBuildCompany} </if>
+		  		  <if test="contractType != null and contractType != ''"> and Contract_Type = #{contractType} </if>
+		  		  <if test="contractCategory != null and contractCategory != ''"> and Contract_Category = #{contractCategory} </if>
+		  		  <if test="contractTotalPrice != null and contractTotalPrice != ''"> and Contract_Total_Price = #{contractTotalPrice} </if>
+		  		  <if test="contractDept != null and contractDept != ''"> and Contract_Dept = #{contractDept} </if>
+		  		  <if test="contractApplicant != null and contractApplicant != ''"> and Contract_Applicant = #{contractApplicant} </if>
+		  		  <if test="contractDraftPerson != null and contractDraftPerson != ''"> and Contract_Draft_Person = #{contractDraftPerson} </if>
+		  		  <if test="contractSales != null and contractSales != ''"> and Contract_Sales = #{contractSales} </if>
+		  		  <if test="contractCommitTime != null and contractCommitTime != ''"> and Contract_Commit_Time = #{contractCommitTime} </if>
+		  		  <if test="contractRelatedId != null and contractRelatedId != ''"> and Contract_Related_ID = #{contractRelatedId} </if>
+		  		  <if test="contractInvoiceType != null and contractInvoiceType != ''"> and Contract_Invoice_Type = #{contractInvoiceType} </if>
+		  		  <if test="contractInvoiceTime != null and contractInvoiceTime != ''"> and Contract_Invoice_Time = #{contractInvoiceTime} </if>
+		  		  <if test="contractHardwareList != null and contractHardwareList != ''"> and Contract_Hardware_List = #{contractHardwareList} </if>
+		  		  <if test="contractSoftwareList != null and contractSoftwareList != ''"> and Contract_Software_List = #{contractSoftwareList} </if>
+		  		  <if test="contractProjectManagement != null and contractProjectManagement != ''"> and Contract_Project_Management = #{contractProjectManagement} </if>
+		  		  <if test="contractRemarks != null and contractRemarks != ''"> and Contract_Remarks = #{contractRemarks} </if>
+		  		  <if test="contractAttachment != null and contractAttachment != ''"> and Contract_Attachment = #{contractAttachment} </if>
+		  		  <if test="contractApprovalStatus != null and contractApprovalStatus != ''"> and Contract_Approval_Status = #{contractApprovalStatus} </if>
+		  		  <if test="contractOperateTime != null and contractOperateTime != ''"> and Contract_Operate_Time = #{contractOperateTime} </if>
+		  		  
+		  		  <if test="contractId != null and contractId != ''"> and a.Contract_ID = #{contractId} </if>
+		  		  <if test="contractName != null and contractName != ''"> and Contract_Name like #{contractName} </if>
+		  		  <if test="projectId != null and projectId != ''"> and p.Project_ID = #{projectId} </if>
+		  		  <if test="contractApplicantName != null and contractApplicantName != ''"> and s.user_id = #{contractApplicantName} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Contract_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(DISTINCT a.Contract_ID) 
+		from contract a
+		left join sys_user s 			on a.Contract_Operator = s.user_id
+		left join development_project p on a.Project_ID = p.Project_ID
+		left join development_project b on a.Project_ID = b.Project_ID
+		left join inner_org_employee i  on a.Contract_Sales = i.Employee_ID
+		 <where>
+		 <if test="contractOperator != null and contractOperator != ''"> and a.Contract_Operator=#{contractOperator}   or exists (select 1 from main_and_copy_person where Employee_ID = a.Contract_Operator and Table_Name='contract') 
+        																		or exists (select 1 from sys_user  where Identification=#{Identification} and user_id=#{contractOperator})</if>
+		  		  <if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+		  		  <if test="businessId != null and businessId != ''"> and Business_ID = #{businessId} </if>
+		  		  <if test="contractBuildCompany != null and contractBuildCompany != ''"> and Contract_Build_Company = #{contractBuildCompany} </if>
+		  		  <if test="contractType != null and contractType != ''"> and Contract_Type = #{contractType} </if>
+		  		  <if test="contractCategory != null and contractCategory != ''"> and Contract_Category = #{contractCategory} </if>
+		  		  <if test="contractTotalPrice != null and contractTotalPrice != ''"> and Contract_Total_Price = #{contractTotalPrice} </if>
+		  		  <if test="contractDept != null and contractDept != ''"> and Contract_Dept = #{contractDept} </if>
+		  		  <if test="contractApplicant != null and contractApplicant != ''"> and Contract_Applicant = #{contractApplicant} </if>
+		  		  <if test="contractDraftPerson != null and contractDraftPerson != ''"> and Contract_Draft_Person = #{contractDraftPerson} </if>
+		  		  <if test="contractSales != null and contractSales != ''"> and Contract_Sales = #{contractSales} </if>
+		  		  <if test="contractCommitTime != null and contractCommitTime != ''"> and Contract_Commit_Time = #{contractCommitTime} </if>
+		  		  <if test="contractRelatedId != null and contractRelatedId != ''"> and Contract_Related_ID = #{contractRelatedId} </if>
+		  		  <if test="contractInvoiceType != null and contractInvoiceType != ''"> and Contract_Invoice_Type = #{contractInvoiceType} </if>
+		  		  <if test="contractInvoiceTime != null and contractInvoiceTime != ''"> and Contract_Invoice_Time = #{contractInvoiceTime} </if>
+		  		  <if test="contractHardwareList != null and contractHardwareList != ''"> and Contract_Hardware_List = #{contractHardwareList} </if>
+		  		  <if test="contractSoftwareList != null and contractSoftwareList != ''"> and Contract_Software_List = #{contractSoftwareList} </if>
+		  		  <if test="contractProjectManagement != null and contractProjectManagement != ''"> and Contract_Project_Management = #{contractProjectManagement} </if>
+		  		  <if test="contractRemarks != null and contractRemarks != ''"> and Contract_Remarks = #{contractRemarks} </if>
+		  		  <if test="contractAttachment != null and contractAttachment != ''"> and Contract_Attachment = #{contractAttachment} </if>
+		  		  <if test="contractApprovalStatus != null and contractApprovalStatus != ''"> and Contract_Approval_Status = #{contractApprovalStatus} </if>
+		  		  <if test="contractOperateTime != null and contractOperateTime != ''"> and Contract_Operate_Time = #{contractOperateTime} </if>
+		  		  
+		  		  <if test="contractId != null and contractId != ''"> and a.Contract_ID = #{contractId} </if>
+		  		  <if test="contractName != null and contractName != ''"> and Contract_Name like #{contractName} </if>
+		  		  <if test="projectId != null and projectId != ''"> and p.Project_ID = #{projectId} </if>
+		  		  <if test="contractApplicantName != null and contractApplicantName != ''"> and s.user_id = #{contractApplicantName} </if>
+		  		</where>
+	</select>
+	<insert id="save" parameterType="com.bootdo.payment.domain.ContractApprovalDO">
+		insert  <!-- ingore --> into contract
+		(
+		 	`Contract_ID`,
+			`Customer_ID`, 
+			`Business_ID`, 
+			`Contract_Name`, 
+			`Contract_Applicant_Name`, 
+			`Contract_Build_Company`, 
+			`Contract_Type`, 
+			`Contract_Category`, 
+			`Contract_Total_Price`, 
+			`Contract_Dept`, 
+			`Contract_Applicant`, 
+			`Contract_Draft_Person`, 
+			`Contract_Sales`, 
+			`Contract_Commit_Time`, 
+			`Contract_Related_ID`, 
+			`Contract_Invoice_Type`, 
+			`Contract_Invoice_Time`, 
+			`Contract_Hardware_List`, 
+			`Contract_Software_List`, 
+			`Contract_Project_Management`, 
+			`Contract_Remarks`, 
+			`Contract_Attachment`, 
+			`Contract_Approval_Status`, 
+			`Contract_Operator`, 
+			`Contract_Operate_Time`
+		)
+		values
+		(
+			#{contractId},
+			#{customerId}, 
+			#{businessId}, 
+			#{contractName}, 
+			#{contractApplicantName}, 
+			#{contractBuildCompany}, 
+			#{contractType}, 
+			#{contractCategory}, 
+			#{contractTotalPrice}, 
+			#{contractDept}, 
+			#{contractApplicant}, 
+			#{contractDraftPerson}, 
+			#{contractSales}, 
+			#{contractCommitTime}, 
+			#{contractRelatedId}, 
+			#{contractInvoiceType}, 
+			#{contractInvoiceTime}, 
+			#{contractHardwareList}, 
+			#{contractSoftwareList}, 
+			#{contractProjectManagement}, 
+			#{contractRemarks}, 
+			#{contractAttachment}, 
+			#{contractApprovalStatus}, 
+			#{contractOperator}, 
+			#{contractOperateTime}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.payment.domain.ContractApprovalDO">
+		update contract 
+		<set>
+			<if test="customerId != null">`Customer_ID` = #{customerId}, </if> 
+			<if test="businessId != null">`Business_ID` = #{businessId}, </if>
+			<if test="contractName != null">`Contract_Name` = #{contractName}, </if>
+			<if test="contractApplicantName != null">`Contract_Applicant_Name` = #{contractApplicantName}, </if>
+			<if test="contractBuildCompany != null">`Contract_Build_Company` = #{contractBuildCompany}, </if>
+			<if test="contractType != null">`Contract_Type` = #{contractType}, </if>
+			<if test="contractCategory != null">`Contract_Category` = #{contractCategory}, </if>
+			<if test="contractTotalPrice != null">`Contract_Total_Price` = #{contractTotalPrice}, </if>
+			<if test="contractDept != null">`Contract_Dept` = #{contractDept}, </if>
+			<if test="contractApplicant != null">`Contract_Applicant` = #{contractApplicant}, </if>
+			<if test="contractDraftPerson != null">`Contract_Draft_Person` = #{contractDraftPerson}, </if>
+			<if test="contractSales != null">`Contract_Sales` = #{contractSales}, </if>
+			<if test="contractCommitTime != null">`Contract_Commit_Time` = #{contractCommitTime}, </if>
+			<if test="contractRelatedId != null">`Contract_Related_ID` = #{contractRelatedId}, </if>
+			<if test="contractInvoiceType != null">`Contract_Invoice_Type` = #{contractInvoiceType}, </if>
+			<if test="contractInvoiceTime != null">`Contract_Invoice_Time` = #{contractInvoiceTime}, </if>
+			<if test="contractHardwareList != null">`Contract_Hardware_List` = #{contractHardwareList}, </if>
+			<if test="contractSoftwareList != null">`Contract_Software_List` = #{contractSoftwareList}, </if>
+			<if test="contractProjectManagement != null">`Contract_Project_Management` = #{contractProjectManagement}, </if>
+			<if test="contractRemarks != null">`Contract_Remarks` = #{contractRemarks}, </if>
+			<if test="contractAttachment != null">`Contract_Attachment` = #{contractAttachment}, </if>
+			<if test="contractApprovalStatus != null">`Contract_Approval_Status` = #{contractApprovalStatus}, </if>
+			<if test="contractOperator != null">`Contract_Operator` = #{contractOperator}, </if>
+			<if test="contractOperateTime != null">`Contract_Operate_Time` = #{contractOperateTime}</if>
+		</set> 
+		where Contract_ID = #{contractId}
+	</update>
+	
+	<delete id="remove">
+		delete from contract where Contract_ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from contract where Contract_ID in 
+		<foreach item="contractId" collection="array" open="(" separator="," close=")">
+			#{contractId}
+		</foreach>
+	</delete>
+	<!-- 合同名称 -->
+	<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
+		select `Contract_ID` value,concat(`Contract_ID`,' ',`Contract_Name`) name
+		from contract
+	</select>
+</mapper>

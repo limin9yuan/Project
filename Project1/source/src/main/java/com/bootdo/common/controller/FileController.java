@@ -7,15 +7,9 @@ import com.bootdo.common.utils.*;
 import com.bootdo.sales.domain.CompanyCustomerDO;
 
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,23 +18,25 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -191,105 +187,4 @@ public class FileController extends BaseController {
 		return R.error();
 	}
 
-	// 根据文件名称下载相关代码
-	@RequestMapping("/download")
-	@ResponseBody
-	public String download(HttpServletRequest request, HttpServletResponse response,
-			@RequestParam("fileName") String fileName, Model model) {
-		// model.addAttribute("fileName", fileName);
-		// String fileName = request.getParameter("name");
-		if (fileName != null) {
-			// 当前是从该工程的C:/var/uploaded_files/下获取文件(该目录可以在下面一行代码配置)
-			// 绝对路径可行，不知道上一行的相对路径怎么设置。
-			String realPath = "C:/var/uploaded_files/";
-			String chars = "abcdefghijklmnopqrstuvwxyz";
-			File file = new File(realPath, fileName);
-			if (file.exists()) {
-
-				response.setContentType("application/force-download");// 设置强制下载不打开
-				response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);// 设置文件名
-				byte[] buffer = new byte[1024];
-				FileInputStream fis = null;
-				BufferedInputStream bis = null;
-				try {
-					fis = new FileInputStream(file);
-					bis = new BufferedInputStream(fis);
-					// OutputStream os = response.getOutputStream();
-					String pathname = "C:\\Users\\Administrator\\Desktop\\"; // 下载到自己设置的对应路径
-
-					File FilePath = new File(pathname);
-					FilePath.mkdirs();
-					File file2 = new File(FilePath, chars.charAt((int) (Math.random() * 26)) + "+" + fileName);
-
-					file2.createNewFile();
-					OutputStream os = new FileOutputStream(file2);
-
-					int i = bis.read(buffer);
-					while (i != -1) {
-						os.write(buffer, 0, i);
-
-						i = bis.read(buffer);
-					}
-
-					System.out.println("下载成功");
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					if (bis != null) {
-						try {
-							bis.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-					if (fis != null) {
-						try {
-							fis.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-				return "下载成功";
-			}
-
-		}
-		return "common/sysFile/file";
-	}
-//	, @RequestParam("id") String[] id
-	@ResponseBody
-	@RequestMapping("downCustomerIdAll")
-	public void downCustomerIdAll(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		String[] id=request.getParameterValues("id");
-//		 String[] id = ids.split(",");
-		for (String string : id) {
-	        System.out.println(string+"/n");
-		}
-//		System.out.println(id);
-		String fileName = sysFileService.listIdCustomer(id);
-		System.out.println(fileName);
-		try {
-			String userAgent = request.getHeader("user-agent").toLowerCase();
-			if (userAgent.contains("msie") || userAgent.contains("like gecko")) {
-				// IE
-				fileName = URLEncoder.encode(fileName, "UTF-8");
-			} else {
-				// 非IE
-				fileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
-			}
-			byte[] fileStream =  sysFileService.downCustomerIdAll(id);
-
-			// 以流的形式下载文件
-			response.setContentType("application/x-msdownload");
-			response.setCharacterEncoding("UTF-8");
-			response.setHeader("Content-Disposition", "attachment; filename=" + fileName);
-			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-			toClient.write(fileStream);
-			toClient.flush();
-			toClient.close();
-
-		} catch (Exception e) {
-		}
-		
-	}
 }

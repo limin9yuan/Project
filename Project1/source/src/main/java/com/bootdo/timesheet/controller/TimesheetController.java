@@ -767,16 +767,17 @@ public class TimesheetController extends BaseController {
 		String formKey="";
 		if ( procDefId != null && !"".equals(procDefId) && taskId != null && !"".equals(taskId))
 		{
-		formKey = actTaskService.getFormKey(procDefId, taskId);//获取流程表单
-		model.addAttribute("taskId", taskId);
-		model.addAttribute("formSrc", formKey+"/"+taskId);
-		model.addAttribute("formSubmit", formKey+"/update");//流程审批处理保存
-		Task task = taskService.createTaskQuery().taskId(taskId).singleResult();//根据任务id查询实例id
-		model.addAttribute("taskName", task.getName());
-		model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
-		model.addAttribute("executionId", task.getExecutionId());
-		model.addAttribute("processInstanceId", task.getProcessInstanceId());
-		return new ModelAndView("act/task/formComm");}
+			formKey = actTaskService.getFormKey(procDefId, taskId);//获取流程表单
+			model.addAttribute("taskId", taskId);
+			model.addAttribute("formSrc", formKey+"/"+taskId);
+			model.addAttribute("formSubmit", formKey+"/update");//流程审批处理保存
+			Task task = taskService.createTaskQuery().taskId(taskId).singleResult();//根据任务id查询实例id
+			model.addAttribute("taskName", task.getName());
+			model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+			model.addAttribute("executionId", task.getExecutionId());
+			model.addAttribute("processInstanceId", task.getProcessInstanceId());
+			return new ModelAndView("act/task/formComm");
+		}
 		return new ModelAndView("act/task/formComm");
 	}
 

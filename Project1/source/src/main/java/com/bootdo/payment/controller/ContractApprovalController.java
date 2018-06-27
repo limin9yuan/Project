@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.activiti.service.ActTaskService;
+import com.bootdo.common.utils.*;
+import org.activiti.engine.task.Task;
+import org.activiti.engine.TaskService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +30,7 @@ import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.service.FileService;
-import com.bootdo.common.utils.FileType;
-import com.bootdo.common.utils.FileUtil;
-import com.bootdo.common.utils.PageUtils;
-import com.bootdo.common.utils.Query;
-import com.bootdo.common.utils.R;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  * 合同审批 
@@ -49,6 +49,10 @@ public class ContractApprovalController extends BaseController {
 	private FileService sysFileService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
+	@Autowired
+	private TaskService taskService;
+	@Autowired
+	private ActTaskService actTaskService;
 
 	@GetMapping()
 	@RequiresPermissions("payment:contractApproval:contractApproval")
@@ -68,6 +72,17 @@ public class ContractApprovalController extends BaseController {
 		}
 		Query query = new Query(params);
 		List<ContractApprovalDO> contractApprovalList = (List<ContractApprovalDO>) contractApprovalService.list(query);
+		Task task = null;
+		for (ContractApprovalDO contractApproval : contractApprovalList){
+			if (contractApproval.getContractApprovalStatus().equals("0")){
+				task = taskService.createTaskQuery().processDefinitionKey("contract").taskAssignee(ShiroUtils.getUser()
+						.getUsername()).processInstanceBusinessKey(contractApproval.getId()).singleResult();
+				if (task != null){
+					contractApproval.setTaskId(task.getId());
+					contractApproval.setPdId(task.getProcessDefinitionId());
+				}
+			}
+		}
 		int total = contractApprovalService.count(query);
 		PageUtils pageUtils = new PageUtils(contractApprovalList, total);
 		return pageUtils;
@@ -95,12 +110,27 @@ public class ContractApprovalController extends BaseController {
 		return "payment/contractApproval/import";
 	}
 
-	@GetMapping("/edit/{contractId}")
+	@GetMapping("/edit/{procDefId}/{taskId}")
 	@RequiresPermissions("payment:contractApproval:edit")
-	String edit(@PathVariable("contractId") String contractId, Model model) {
-		ContractApprovalDO contractApproval = contractApprovalService.get(contractId);
-		model.addAttribute("payment", contractApproval);
-		return "payment/contractApproval/edit";
+	ModelAndView edit(@PathVariable("procDefId") String procDefId,@PathVariable("taskId") String taskId, Model model) {
+//		ContractApprovalDO contractApproval = contractApprovalService.get(contractId);
+//		model.addAttribute("payment", contractApproval);
+//		return "payment/contractApproval/edit";
+		String formKey="";
+		if ( procDefId != null && !"".equals(procDefId) && taskId != null && !"".equals(taskId))
+		{
+			formKey = actTaskService.getFormKey(procDefId, taskId);//获取流程表单
+			model.addAttribute("taskId", taskId);
+			model.addAttribute("formSrc", formKey+"/"+taskId);
+			model.addAttribute("formSubmit", formKey+"/update");//流程审批处理保存
+			Task task = taskService.createTaskQuery().taskId(taskId).singleResult();//根据任务id查询实例id
+			model.addAttribute("taskName", task.getName());
+			model.addAttribute("processDefinitionId", task.getProcessDefinitionId());
+			model.addAttribute("executionId", task.getExecutionId());
+			model.addAttribute("processInstanceId", task.getProcessInstanceId());
+			return new ModelAndView("act/task/formComm");
+		}
+		return new ModelAndView("act/task/formComm");
 	}
 
 	/**

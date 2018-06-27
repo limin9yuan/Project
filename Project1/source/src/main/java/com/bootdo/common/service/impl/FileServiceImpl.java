@@ -78,14 +78,9 @@ public class FileServiceImpl implements FileService {
 		return sysFileMapper.countRecordAttachment(map);
 	}
 
-	@Override
-	public byte[] downCustomerIdAll(String[] id) {
-		// TODO Auto-generated method stub
-		return sysFileMapper.downCustomerIdAll(id);
-	}
 
 	@Override
-	public String listIdCustomer(String[] id) {
+	public List<FileDO> listIdCustomer(String[] id) {
 		// TODO Auto-generated method stub
 		return sysFileMapper.listIdCustomer(id);
 	}

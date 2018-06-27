@@ -39,8 +39,7 @@ public interface FileDao {
 	
 	int batchRemove(Long[] ids);
 	
-	String listIdCustomer(String[] id);
+	List<FileDO> listIdCustomer(String[] id);
 	
-	byte[] downCustomerIdAll(String[] id);
 	
 }

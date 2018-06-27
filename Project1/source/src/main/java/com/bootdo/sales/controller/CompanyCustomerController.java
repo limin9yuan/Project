@@ -1,14 +1,19 @@
 package com.bootdo.sales.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -50,6 +55,7 @@ import com.bootdo.common.utils.FileUtil;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.ZipUtils;
 import com.bootdo.contract.domain.ContractDO;
 import com.bootdo.contract.domain.ReceivableDO;
 import com.bootdo.contract.service.ContractService;
@@ -837,7 +843,87 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
         }
      
     }
-	
+ // 根据文件名称下载相关代码
+ 	@ResponseBody
+ 	@RequestMapping("/down")
+ 	public void download(HttpServletResponse response,@RequestParam("fileName") String fileName) {
+ 		try {
+ 			// path是指欲下载的文件的路径。
+ 			String path = "C:/var/uploaded_files/"+fileName;
+
+ 			File file = new File(path);
+ 			// 取得文件名。
+ 			String filename = file.getName();
+ 			
+ 			// 以流的形式下载文件。
+ 			InputStream fis = new BufferedInputStream(new FileInputStream(path));
+ 			byte[] buffer = new byte[fis.available()];
+ 			fis.read(buffer);
+ 			fis.close();
+ 			// 清空response
+ 			response.reset();
+ 			// 设置response的Header
+ 			// 设置文件名
+ 			
+ 			response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(),"ISO-8859-1"));
+ 			// 设置文件打下
+ 			response.addHeader("Content-Length", "" + file.length());
+ 			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+ 			response.setContentType("application/octet-stream");
+ 			toClient.write(buffer);
+ 			toClient.flush();
+ 			toClient.close();
+ 		} catch (IOException ex) {
+ 			ex.printStackTrace();
+ 		}
+ 	}
+ 	
+ 	
+ 	
+ 	
+ 	  /**
+     * 打包压缩下载文件
+     */
+    @RequestMapping(value = "/downLoadZipFile")
+    @ResponseBody
+    public void downLoadZipFile(HttpServletResponse response,@RequestParam("id")String id) throws IOException{
+    	String[] ids=id.split(",");
+        String zipName = "myfile.zip";
+        List<FileDO> fileList = sysFileService.listIdCustomer(ids);//查询数据库中记录
+        response.setContentType("APPLICATION/OCTET-STREAM");  
+        response.setHeader("Content-Disposition","attachment; filename="+zipName);
+        ZipOutputStream out = new ZipOutputStream(response.getOutputStream());
+        try {
+            for(Iterator<FileDO> it = fileList.iterator();it.hasNext();){
+            	FileDO file = it.next();
+                ZipUtils.doCompress("C:/var/uploaded_files/"+file.getFileName(), out);
+                response.flushBuffer();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            out.close();
+        }
+    }
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
     //全部文件大小
     @ResponseBody
 	@RequestMapping("/getFileSize")

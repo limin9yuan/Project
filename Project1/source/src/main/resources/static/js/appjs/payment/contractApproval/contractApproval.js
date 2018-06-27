@@ -1,11 +1,11 @@
 var prefix = "/payment/contractApproval"
 	$().ready(function() {
-		
+
 				loadCrmData("/contract/contract/listDic","contractId");
 				loadCrmData("/project/project/listDic","projectId");
 				loadCrmData("/sys/user/listDic","contractApplicantName");
 				load();
-				
+
 				layui.use('upload', function () {
 			        var upload = layui.upload;
 			        //执行实例
@@ -23,7 +23,7 @@ var prefix = "/payment/contractApproval"
 			            }
 			        });
 			    });
-				
+
 });
 function load() {
 
@@ -77,18 +77,28 @@ function load() {
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
-										var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-												+ row.contractId
-												+ '\')"><i class="fa fa-edit"></i></a> ';
-										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-												+ row.contractId
-												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-												+ row.contractId
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+										if (row.contractApprovalStatus == 0) {
+											var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+													+ row.pdId
+													+ '\',\''+row.taskId
+													+ '\')"><i class="fa fa-edit"></i></a> ';
+											return e ;
+										}
+										if (row.contractApprovalStatus == 1) {
+											var a = '<a class="btn btn-success btn-sm '+s_view_h+'" href="#" mce_href="#"  onclick="taskTrace(\''
+											+ row.processInstanceId
+											+ '\')"><i class="fa fa-search"></i></a> ';
+											return a;
+										}
+
 									}
-								}, {
+								},
+								{
+									align : 'center',
+									field : 'contractApprovalStatusText',
+									title : '合同审批状态'
+								},
+								{
 									align : 'center',
 									field : 'contractName',
 									title : '合同名称'
@@ -116,15 +126,7 @@ function load() {
 									align : 'center',
 									field : 'contractCommitTime',
 									title : '提交评审时间'
-								}, {
-									align : 'center',
-									field : 'contractApprovalStatus',
-									title : '合同审批状态'
 								}
-//								,{
-//									field : '',
-//									title : '详细信息'
-//								}
 											 ]
 					});
 // 导入弹出层
@@ -138,6 +140,16 @@ function load() {
 					content : prefix + '/import'  // iframe的url
 				});
         });
+}
+function taskTrace(processInstanceId){
+	parent.layer.open({
+		type : 2,
+		title : '流程跟踪',
+		maxmin : true,
+		shadeClose : false,
+		area : [ '95%', '95%'],
+		content : '/activiti/task/taskTrace/'+processInstanceId
+	});
 }
 
 // 导出
@@ -158,19 +170,22 @@ function add() {
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '95%' ],
+		area : [ '95%', '95%' ],
 		content : prefix + '/add' // iframe的url
 	});
 }
 
-function edit(id) {
+function edit(id,pid) {
 	parent.layer.open({
 		type : 2,
 		title : '编辑',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '95%' ],
-		content : prefix + '/edit/' + id // iframe的url
+		area : [ '95%', '95%' ],
+		content : prefix + '/edit/' + id+"/" +pid, // iframe的url
+		end: function () {
+        	reLoad();
+        }
 	});
 }
 

@@ -390,26 +390,14 @@ function download(customerId) {
 //	alert($("#customerAttachment").val())
 	console.log("下载全部附件");
 	
-//	var ids = new Array();
-//	// 遍历所有选择的行数据，取每条数据对应的ID
-//	$.each(function(i, row) {
-//		alert
-//		ids[i] = row['customerAttachment'];
 //	});
 	var str = $("#customerAttachment").val();
-//	var strs= new Array();
-//	 var strs = str.split(",");
-//	 for (i=0;i<strs.length ;i++ )  
-//	 {  
-//		 alert(strs[i]); //分割后的字符输出  
-//	 }
-//	 alert(strs)
 	$.ajax({
 		type : "Post",
 		url : "/common/sysFile/downCustomerIdAll",
 		data : {'id':str},
 		success : function(data) {
-			parent.layer.msg("附件下载成功！已保存在您的卓面！");
+			parent.layer.msg("附件正在下载到您的卓面！");
 			// alert("success");
 		},
 		error : function(data) {
