@@ -16,6 +16,8 @@ import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.bootdo.common.domain.MainCopyPersonDO;
+import com.bootdo.common.service.MainCopyPersonService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +62,8 @@ public class RecordController extends BaseController {
 	private FileService sysFileService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
+	@Autowired
+	private MainCopyPersonService mainCopyPersonService;
 	
 	@GetMapping()
 	@RequiresPermissions("sales:record:record")
@@ -140,8 +144,40 @@ public class RecordController extends BaseController {
 		}
 		record.setRecordCreator(getUserId());
 		record.setRecordOperator(getUserId());
-		if(recordService.save(record)>0){
-			return R.ok();
+		int recordIds = recordService.save(record);
+		if(recordIds>0){
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = record.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(record.getRecordId());
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_record");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+			String copyPersonId = record.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(record.getRecordId());
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_record");
+					mainCopyPersonService.save(mcp);
+				}
+
+
+			}
+			R r = R.ok();
+			r.put("recordId", recordIds);
+			return r;
 		}
 		return R.error();
 	}
@@ -154,7 +190,47 @@ public class RecordController extends BaseController {
 	@RequiresPermissions("sales:record:edit")
 	public R update( RecordDO record){
 		record.setRecordOperator(getUserId());
+		String recordIds = record.getRecordId();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		params.put("tId",recordIds);
+		params.put("tableName","sales_record");
 		recordService.update(record);
+		mainCopyPersonService.remove(params);
+		if (!recordIds.equals("")) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = record.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(record.getRecordId());
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_record");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+			String copyPersonId = record.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				int result = 0;
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(record.getRecordId());
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_record");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+		}
 		return R.ok();
 	}
 	

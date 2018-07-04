@@ -30,6 +30,7 @@ $().ready(function() {
 	validateRule();
 	datetimepicker();
 	recordMapper_edit();
+	getMainAndCopyPerson_ajax();
 });
 
 $.validator.setDefaults({
@@ -37,6 +38,55 @@ $.validator.setDefaults({
 		update();
 	}
 });
+function getMainAndCopyPerson_ajax() {
+	var tmpUrl = '/common/MainCopyPerson/getMainAndCopyPerson_ajax/' + $("#recordId").val()+"/sales_record";
+	var mainPerson="";
+	var copyPerson="";
+	var isMainPerson;
+	$.ajax({
+		url : tmpUrl,
+		type : "get",
+		data : {
+			// 'projectId' : $("#projectId").val(),
+		},
+		success : function(data) {
+			result = data.mainAndCopyPerson;
+			var mainPersonIds = "";
+			var copyPersonIds = "";
+			for (var i = 0; i < result.length; i++) {
+				if (result[i].mainPerson == 1) {
+					mainPerson = mainPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_1") +
+								" onclick='deleteMainPerson(\"" + (result[i].employeeId + "_1") +"\" )'>" +
+								result[i].person +"</div>";
+					$('#sendPerson').html(mainPerson);
+					if (mainPersonIds == "") {
+						mainPersonIds = result[i].employeeId
+					}else {
+						mainPersonIds = mainPersonIds + ","+result[i].employeeId;
+					}
+
+					$('#mainPersonId').val(mainPersonIds);
+
+				}
+				if (result[i].mainPerson == 0) {
+					copyPerson = copyPerson + "<div class='personDiv' id=" + (result[i].employeeId + "_2") +
+								" onclick='deleteCopyPerson(\"" + (result[i].employeeId + "_2") +"\" )'>" +
+								result[i].person +"</div>";
+					$('#receivePerson').html(copyPerson);
+					if (copyPersonIds == "") {
+						copyPersonIds = result[i].employeeId
+					}else {
+						copyPersonIds = copyPersonIds + ","+result[i].employeeId;
+					}
+
+					$('#copyPersonId').val(copyPersonIds);
+
+
+				}
+			}
+		}
+	});
+}
 function update() {
 	$.ajax({
 		cache : true,

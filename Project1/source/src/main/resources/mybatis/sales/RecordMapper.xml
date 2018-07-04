@@ -101,7 +101,7 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{recordOperator} AND Identific
 		  		</where>
 	</select>
 	 
-	<insert id="save" parameterType="com.bootdo.sales.domain.RecordDO">
+	<insert id="save" parameterType="com.bootdo.sales.domain.RecordDO" useGeneratedKeys="true" keyProperty="recordId">
 		insert into sales_record
 		(
 			`Record_ID`, 

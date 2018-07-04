@@ -65,7 +65,27 @@ public class RecordDO implements Serializable {
 	private String recordExecutorName;
 	//执行删除的附件id
 	private String id;
-	
+	//主送人id
+	private String mainPersonId;
+	//抄送人id
+	private String copyPersonId;
+
+	public String getMainPersonId() {
+		return mainPersonId;
+	}
+
+	public void setMainPersonId(String mainPersonId) {
+		this.mainPersonId = mainPersonId;
+	}
+
+	public String getCopyPersonId() {
+		return copyPersonId;
+	}
+
+	public void setCopyPersonId(String copyPersonId) {
+		this.copyPersonId = copyPersonId;
+	}
+
 	public String getId() {
 		return id;
 	}

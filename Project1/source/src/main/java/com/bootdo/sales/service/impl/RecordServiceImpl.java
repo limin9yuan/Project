@@ -52,7 +52,11 @@ public class RecordServiceImpl implements RecordService {
 
 	@Override
 	public int save(RecordDO record) {
-		return recordDao.save(record);
+		recordDao.save(record);
+
+		String recordId = record.getRecordId();
+
+		return Integer.parseInt(recordId);
 	}
 
 	@Override

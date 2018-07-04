@@ -191,6 +191,39 @@ input {
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-2 control-label">主送人：</label>
+								<div class="col-sm-8">
+									<input id="mainPersonId" name="mainPersonId" type="hidden">
+									<input id="isMainPerson" name="isMainPerson" type="hidden">
+									<div style="float: left;" id="sendPerson"></div>
+									<div style="float: left;">
+										<button disabled
+											type="button" class="btn btn-danger btn-xs"
+											id="sendPersonBtn" var="sendPersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addSendPerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">抄送人：</label>
+								<div class="col-sm-8">
+									<input id="copyPersonId" name="copyPersonId" type="hidden">
+									<input id="isCopyPerson" name="isCopyPerson" type="hidden">
+									<div style="float: left;" id="receivePerson"></div>
+									<div style="float: left;">
+										<button disabled type="button" class="btn btn-danger btn-xs"
+											id="receivePersonBtn" var="receivePersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addRecivePerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
 								<div class="form-group">
 									<div class="columns pull-right " style="padding-right: 150px">
 										<button type="button" class="btn btn-danger"
@@ -205,7 +238,7 @@ input {
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/sales/record/edit.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/record/see.js"></script>
 	<script src="/js/layui.js"></script>
 	<script src="/js/vue.min.js"></script>
 	<script src="/js/plugins/layer/layer.min.js"></script>
@@ -221,7 +254,7 @@ input {
 	<script src="/js/plugins/layer/layer.min.js"></script>
 	<script src="/js/vue.min.js"></script>
 	<script type="text/javascript">
-	//************* 文件下载级显示 *********************************************************		
+	//************* 文件下载级显示 *********************************************************
 	 var app = new Vue({
 	        el: '#app',
 	        data: {
@@ -245,7 +278,7 @@ input {
 	                    app.rows = r.rows;
 	                    app.page();
 	                });
-	            	
+
 	            },
 	            page: function () {
 	                var options = {
@@ -297,7 +330,7 @@ input {
 	                        }
 	                    });
 	                })
-	                
+
 	            }
 	        },
 	        created: function () {
@@ -305,7 +338,7 @@ input {
 	        }
 	    });
 
-//********************** END *************************************	
+//********************** END *************************************
 	</script>
 </body>
 </html>
