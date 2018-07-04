@@ -42,6 +42,7 @@ function load() {
 								assignmentTaskName:$('#assignmentTaskName').val(),
 								timeMin:$('#timeMin').data('date'),
 								timeMax:$('#timeMax').data('date'),
+								assigneeName:$("#assigneeName").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};

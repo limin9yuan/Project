@@ -83,6 +83,15 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{expensesNormalOperator} AND I
 			<if
 				test="expensesNormalCreateTime != null and expensesNormalCreateTime != ''"> and Expenses_Normal_Create_Time &gt;= #{expensesNormalCreateTime}
 			</if>
+			<if test="assigneeName != null and assigneeName != ''">
+				and a.PROCESS_INSTANCE_ID IN
+				(
+				Select DISTINCT a.PROC_INST_ID_
+				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				where c.KEY_='expensesNormal'  and b.`name`  like '%${assigneeName}%'
+				)
+			</if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -130,6 +139,15 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{expensesNormalOperator} AND I
 			</if>
 			<if
 				test="expensesNormalCreateTime != null and expensesNormalCreateTime != ''"> and Expenses_Normal_Create_Time &gt;= #{expensesNormalCreateTime}
+			</if>
+			<if test="assigneeName != null and assigneeName != ''">
+				and a.PROCESS_INSTANCE_ID IN
+				(
+				Select DISTINCT a.PROC_INST_ID_
+				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				where c.KEY_='expensesNormal'  and b.`name`  like '%${assigneeName}%'
+				)
 			</if>
 		</where>
 	</select>

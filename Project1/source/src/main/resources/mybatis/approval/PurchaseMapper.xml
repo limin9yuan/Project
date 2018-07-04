@@ -81,6 +81,15 @@
 		  		  <if test="purchaseOperateTime != null and purchaseOperateTime != ''"> and Purchase_Operate_Time = #{purchaseOperateTime} </if>
 		  		  <if test="purchaseCreator != null and purchaseCreator != ''"> and Purchase_Creator = #{purchaseCreator} </if>
 		  		  <if test="purchaseCreateTime != null and purchaseCreateTime != ''"> and Purchase_Create_Time = #{purchaseCreateTime} </if>
+			<if test="assigneeName != null and assigneeName != ''">
+				and a.PROCESS_INSTANCE_ID IN
+				(
+				Select DISTINCT a.PROC_INST_ID_
+				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				where c.KEY_='purchase'  and b.`name`  like '%${assigneeName}%'
+				)
+			</if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -126,6 +135,15 @@
 		  		  <if test="purchaseOperateTime != null and purchaseOperateTime != ''"> and Purchase_Operate_Time = #{purchaseOperateTime} </if>
 		  		  <if test="purchaseCreator != null and purchaseCreator != ''"> and Purchase_Creator = #{purchaseCreator} </if>
 		  		  <if test="purchaseCreateTime != null and purchaseCreateTime != ''"> and Purchase_Create_Time = #{purchaseCreateTime} </if>
+			   <if test="assigneeName != null and assigneeName != ''">
+				   and a.PROCESS_INSTANCE_ID IN
+				   (
+				   Select DISTINCT a.PROC_INST_ID_
+				   from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				   INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				   where c.KEY_='purchase'  and b.`name`  like '%${assigneeName}%'
+				   )
+			   </if>
 		  		</where>
 	</select>
 <!-- 	审批总金额 -->

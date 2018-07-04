@@ -83,6 +83,15 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{payoutOperator} AND Identific
 			<if test="payoutOperateTime != null and payoutOperateTime != ''"> and Payout_Operate_Time &gt;= #{payoutOperateTime} </if>
 			<if test="payoutCreator != null and payoutCreator != ''"> and Payout_Creator = #{payoutCreator} </if>
 			<if test="payoutCreateTime != null and payoutCreateTime != ''"> and Payout_Create_Time &gt;= #{payoutCreateTime} </if>
+			<if test="assigneeName != null and assigneeName != ''">
+				and a.PROCESS_INSTANCE_ID IN
+				(
+				Select DISTINCT a.PROC_INST_ID_
+				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				where c.KEY_='payout'  and b.`name`  like '%${assigneeName}%'
+				)
+			</if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -126,6 +135,15 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{payoutOperator} AND Identific
 			<if test="payoutOperateTime != null and payoutOperateTime != ''"> and Payout_Operate_Time &gt;= #{payoutOperateTime} </if>
 			<if test="payoutCreator != null and payoutCreator != ''"> and Payout_Creator = #{payoutCreator} </if>
 			<if test="payoutCreateTime != null and payoutCreateTime != ''"> and Payout_Create_Time &gt;= #{payoutCreateTime} </if>
+			<if test="assigneeName != null and assigneeName != ''">
+				and a.PROCESS_INSTANCE_ID IN
+				(
+				Select DISTINCT a.PROC_INST_ID_
+				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				where c.KEY_='payout'  and b.`name`  like '%${assigneeName}%'
+				)
+			</if>
 		</where>
 	</select>
 

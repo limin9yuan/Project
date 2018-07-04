@@ -50,7 +50,8 @@ function load() {
 								expensesNormalName:$("#expensesNormalName").val(),
 								projectId:$("#projectId").val(),
 								expensesNormalCreateTime:$("#expensesNormalCreateTime").data('date'),
-								expensesNormalOptTime:$("#expensesNormalOptTime").data('date')
+								expensesNormalOptTime:$("#expensesNormalOptTime").data('date'),
+								assigneeName:$("#assigneeName").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};

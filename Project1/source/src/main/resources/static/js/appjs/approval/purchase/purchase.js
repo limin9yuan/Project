@@ -37,7 +37,8 @@ function load() {
 								offset:params.offset,
 								purchaseOperator:$('#purchaseOperator').val(),
 								projectId:$('#projectId').val(),
-								purchaseDate:$('#purchaseDate').data('date')
+								purchaseDate:$('#purchaseDate').data('date'),
+								assigneeName:$("#assigneeName").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};

@@ -103,6 +103,15 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{expensesTravelOperator} AND I
 			<if
 				test="expensesTravelCreateTime != null and expensesTravelCreateTime != ''"> and Expenses_Travel_Create_Time &gt;= #{expensesTravelCreateTime}
 			</if>
+			<if test="assigneeName != null and assigneeName != ''">
+				and a.PROCESS_INSTANCE_ID IN
+				(
+				Select DISTINCT a.PROC_INST_ID_
+				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				where c.KEY_='expensesTravel'  and b.`name`  like '%${assigneeName}%'
+				)
+			</if>
 		</where>
 		<choose>
 			<when test="sort != null and sort.trim() != ''">
@@ -157,6 +166,15 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{expensesTravelOperator} AND I
 			</if>
 			<if
 				test="expensesTravelCreateTime != null and expensesTravelCreateTime != ''"> and Expenses_Travel_Create_Time &gt;= #{expensesTravelCreateTime}
+			</if>
+			<if test="assigneeName != null and assigneeName != ''">
+				and a.PROCESS_INSTANCE_ID IN
+				(
+				Select DISTINCT a.PROC_INST_ID_
+				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				where c.KEY_='expensesTravel'  and b.`name`  like '%${assigneeName}%'
+				)
 			</if>
 		</where>
 	</select>

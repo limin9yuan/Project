@@ -55,8 +55,8 @@ function load() {
 								projectName:$('#projectName').val(),
 								projectId:$('#projectId').val(),
 								payoutPerson:$('#payoutPerson').val(),
-								payoutId:$('#payoutId').val()
-
+								payoutId:$('#payoutId').val(),
+								assigneeName:$("#assigneeName").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};

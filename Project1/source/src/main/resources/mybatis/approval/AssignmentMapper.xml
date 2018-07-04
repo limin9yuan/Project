@@ -115,6 +115,15 @@
 			      <if test="assignmentTaskName != null and assignmentTaskName != ''"> and Assignment_Task_Name LIKE #{assignmentTaskName} </if>
 			      <if test="timeMin != null and timeMin != ''"> and Assignment_Begin_Time &gt;= #{timeMin}</if>
 			      <if test="timeMax != null and timeMax != ''"> and Assignment_Begin_Time &lt;= #{timeMax}</if>
+			<if test="assigneeName != null and assigneeName != ''">
+				and a.PROCESS_INSTANCE_ID IN
+				(
+				Select DISTINCT a.PROC_INST_ID_
+				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				where c.KEY_='approvalAssignment'  and b.`name`  like '%${assigneeName}%'
+				)
+			</if>
 		  		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -168,6 +177,15 @@
 		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
 		  		  <if test="assignmentTaskName != null and assignmentTaskName != ''"> and Assignment_Task_Name LIKE #{assignmentTaskName} </if>
 		  		  <if test="assignmentBeginTime != null and assignmentBeginTime != ''"> and Assignment_Begin_Time = #{assignmentBeginTime} </if>
+			 <if test="assigneeName != null and assigneeName != ''">
+				 and a.PROCESS_INSTANCE_ID IN
+				 (
+				 Select DISTINCT a.PROC_INST_ID_
+				 from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				 INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				 where c.KEY_='approvalAssignment'  and b.`name`  like '%${assigneeName}%'
+				 )
+			 </if>
 		  		</where>
 	</select>
 	 

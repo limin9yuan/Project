@@ -52,7 +52,8 @@ function load() {
 								expensesTravelName:$("#expensesTravelName").val(),
 								projectId:$("#projectId").val(),
 								expensesTravelCreateTime:$("#expensesTravelCreateTime").data('date'),
-								expensesTravelOptTime:$("#expensesTravelOptTime").data('date')
+								expensesTravelOptTime:$("#expensesTravelOptTime").data('date'),
+								assigneeName:$("#assigneeName").val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
