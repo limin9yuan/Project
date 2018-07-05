@@ -257,7 +257,7 @@ function RecordComplaint_ajax(){
 			$("input[name='complaintName']").val(result.complaintName);
 			$("input[name='complaintProduct']").val(result.complaintProduct);
 			$("textarea[name='complaintProblem']").val(result.complaintProblem);
-			$("input[name='complaintAttachmentCustomer']").val(result.complaintAttachmentCustomer);
+			$("textarea[name='complaintAttachmentCustomer']").val(result.complaintAttachmentCustomer);
 			$("textarea[name='complaintProblemRemarks']").val(result.complaintProblemRemarks);
 			$("input[name='complaintExecutor']").val(result.complaintExecutor);
 			$("input[name='complaintResult']").val(result.complaintResult);

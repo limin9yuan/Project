@@ -465,7 +465,7 @@ function companyCustomer_edit(){
 		},
 		success:function(data){
 			result=data.companyCustomer;
-			
+//			alert(result.customerContactSta)
 			loadDicValue("sales_customer_category","customerCategory",result.customerCategory);//客户类别
 			loadDicValue("sales_customer_product","customerProduct",result.customerProduct);//产品需求
 			loadDicValue("sales_customer_character","customerCharacter",result.customerCharacter);//企业性质

@@ -2,7 +2,6 @@ package com.bootdo.payment.dao;
 
 import com.bootdo.contract.domain.ContractDO;
 import com.bootdo.payment.domain.InvoiceDO;
-import com.bootdo.project.domain.ProjectDO;
 
 import java.util.List;
 import java.util.Map;
@@ -33,4 +32,6 @@ public interface InvoiceDao {
 	int batchRemove(String[] invoiceIds);
 	
 	ContractDO getContractId(String contractId);  
+	
+	int updateInvoiceAttachment(InvoiceDO invoice);
 }

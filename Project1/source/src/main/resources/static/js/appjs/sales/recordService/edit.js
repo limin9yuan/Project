@@ -116,6 +116,7 @@ function update() {
 		success : function(data) {
 			if (data.code == 0) {
 				parent.layer.msg("操作成功");
+//				removeaa();
 				closeParenWindow();
 				
 
@@ -255,7 +256,7 @@ function Service_ajax(){
 			$("input[name='serviceProduct']").val(result.serviceProduct);
 			
 			$("input[name='serviceAttachment']").val(result.serviceAttachment);//附件ID
-			$("input[name='serviceAttachmentToCustomer']").val(result.serviceAttachmentToCustomer);
+			$("textarea[name='serviceAttachmentToCustomer']").val(result.serviceAttachmentToCustomer);
 			$("input[name='serviceProcedure']").val(result.serviceProcedure);
 			$("input[name='serviceResult']").val(result.serviceResult);
 			$("textarea[name='serviceAfterSaleRemarks']").val(result.serviceAfterSaleRemarks);

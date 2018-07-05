@@ -5,7 +5,10 @@ $(function() {
 	loadCrmData("/project/project/listDic","projectId","全部");
 	datetimepicker();
 });
-
+function resetSelect(){
+	$("#projectId").val("");
+	$("#projectId").trigger("chosen:updated"); //回到初始状态
+}
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(

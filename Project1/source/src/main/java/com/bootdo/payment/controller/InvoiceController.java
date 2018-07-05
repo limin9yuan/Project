@@ -1,9 +1,20 @@
 package com.bootdo.payment.controller;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipOutputStream;
+
+import javax.servlet.http.HttpServletResponse;
 
 import com.bootdo.common.domain.MainCopyPersonDO;
 import com.bootdo.common.service.MainCopyPersonService;
@@ -24,6 +35,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.bootdo.payment.domain.InvoiceDO;
 import com.bootdo.payment.service.InvoiceService;
 import com.bootdo.project.domain.ProjectDO;
+import com.bootdo.sales.domain.CompanyCustomerDO;
 import com.bootdo.sales.domain.RequirementCategoryDO;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
@@ -34,6 +46,7 @@ import com.bootdo.common.utils.FileUtil;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.ZipUtils;
 import com.bootdo.contract.domain.ContractDO;
 
 /**
@@ -43,7 +56,7 @@ import com.bootdo.contract.domain.ContractDO;
  * @email 1992lcg@163.com
  * @date 2017-12-05 14:35:41
  */
- 
+
 @Controller
 @RequestMapping("/payment/invoice")
 public class InvoiceController extends BaseController {
@@ -55,38 +68,39 @@ public class InvoiceController extends BaseController {
 	private BootdoConfig bootdoConfig;
 	@Autowired
 	private MainCopyPersonService mainCopyPersonService;
-	
+
 	@GetMapping()
 	@RequiresPermissions("payment:invoice:invoice")
-	String Invoice(){
-	    return "payment/invoice/invoice";
+	String Invoice() {
+		return "payment/invoice/invoice";
 	}
-	
+
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("payment:invoice:invoice")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	public PageUtils list(@RequestParam Map<String, Object> params) {
 		params.put("userId", getUserId());
 		params.put("userName", getUsername());
 		params.put("tableName", "invoice");
-		//查询列表数据
+		// 查询列表数据
 		params.put("invoiceOperator", (getUserId()));
 		params.put("Identification", (getIdentification()));
 		if (params.get("projectOwner") != null && !"".equals(params.get("projectOwner"))) {
 			params.put("projectOwner", "%" + (String) params.get("projectOwner") + "%");
 		}
-        Query query = new Query(params);
+		Query query = new Query(params);
 		List<InvoiceDO> invoiceList = invoiceService.list(query);
 		int total = invoiceService.count(query);
 		PageUtils pageUtils = new PageUtils(invoiceList, total);
 		return pageUtils;
 	}
-	
+
 	@GetMapping("/add")
 	@RequiresPermissions("payment:invoice:add")
-	String add(){
-	    return "payment/invoice/add";
+	String add() {
+		return "payment/invoice/add";
 	}
+
 	@RequestMapping("/edit_ajax/{invoiceId}")
 	@ResponseBody
 	Map<String, Object> edit_ajax(@PathVariable("invoiceId") String invoiceId) {
@@ -95,31 +109,32 @@ public class InvoiceController extends BaseController {
 		returnData.put("invoice", invoice);
 		return returnData;
 	}
+
 	@GetMapping("/edit/{invoiceId}")
 	@RequiresPermissions("payment:invoice:edit")
-	String edit(@PathVariable("invoiceId") String invoiceId,Model model){
-		//InvoiceDO invoice = invoiceService.get(invoiceId);
+	String edit(@PathVariable("invoiceId") String invoiceId, Model model) {
+		// InvoiceDO invoice = invoiceService.get(invoiceId);
 		model.addAttribute("invoiceId", invoiceId);
 		return "payment/invoice/edit";
 	}
 
 	@GetMapping("/view/{invoiceId}")
 	@RequiresPermissions("payment:invoice:edit")
-	String view(@PathVariable("invoiceId") String invoiceId,Model model){
-		//InvoiceDO invoice = invoiceService.get(invoiceId);
+	String view(@PathVariable("invoiceId") String invoiceId, Model model) {
+		// InvoiceDO invoice = invoiceService.get(invoiceId);
 		model.addAttribute("invoiceId", invoiceId);
 		return "payment/invoice/view";
 	}
-	
+
 	/**
 	 * 保存
 	 */
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("payment:invoice:add")
-	public R save( InvoiceDO invoice){
+	public R save(InvoiceDO invoice) {
 		invoice.setInvoiceOperator(getUserId());
-		if (invoice.getInvoiceReceiverTime().equals("")){
+		if (invoice.getInvoiceReceiverTime().equals("")) {
 			invoice.setInvoiceReceiverTime(null);
 		}
 		int invoiceIds = invoiceService.save(invoice);
@@ -151,7 +166,6 @@ public class InvoiceController extends BaseController {
 					mainCopyPersonService.save(mcp);
 				}
 
-
 			}
 			R r = R.ok();
 			r.put("invoiceId", invoiceIds);
@@ -159,23 +173,24 @@ public class InvoiceController extends BaseController {
 		}
 		return R.error();
 	}
+
 	/**
 	 * 修改
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("payment:invoice:edit")
-	public R update( InvoiceDO invoice){
-		if (invoice.getInvoiceReceiverTime().equals("")){
+	public R update(InvoiceDO invoice) {
+		if (invoice.getInvoiceReceiverTime().equals("")) {
 			invoice.setInvoiceReceiverTime(null);
 		}
 		invoice.setInvoiceOperator(getUserId());
 		String invoiceIds = invoice.getInvoiceId();
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("offset",1);
-		params.put("limit",2);
-		params.put("tId",invoiceIds);
-		params.put("tableName","invoice");
+		params.put("offset", 1);
+		params.put("limit", 2);
+		params.put("tId", invoiceIds);
+		params.put("tableName", "invoice");
 		invoiceService.update(invoice);
 		mainCopyPersonService.remove(params);
 		if (!invoiceIds.equals("")) {
@@ -212,31 +227,31 @@ public class InvoiceController extends BaseController {
 		}
 		return R.ok();
 	}
-	
+
 	/**
 	 * 删除
 	 */
-	@PostMapping( "/remove")
+	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("payment:invoice:remove")
-	public R remove( String invoiceId){
-		if(invoiceService.remove(invoiceId)>0){
-		return R.ok();
+	public R remove(String invoiceId) {
+		if (invoiceService.remove(invoiceId) > 0) {
+			return R.ok();
 		}
 		return R.error();
 	}
-	
+
 	/**
 	 * 删除
 	 */
-	@PostMapping( "/batchRemove")
+	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("payment:invoice:batchRemove")
-	public R remove(@RequestParam("ids[]") String[] invoiceIds){
+	public R remove(@RequestParam("ids[]") String[] invoiceIds) {
 		invoiceService.batchRemove(invoiceIds);
 		return R.ok();
 	}
-	
+
 	@RequestMapping("/getContractId/{contractId}")
 	@ResponseBody
 	Map<String, Object> getContractId(@PathVariable("contractId") String contractId) {
@@ -246,8 +261,10 @@ public class InvoiceController extends BaseController {
 		returnData.put("contract", contract);
 		return returnData;
 	}
+
 	/**
 	 * 上传文件
+	 * 
 	 * @param file
 	 * @param request
 	 * @return
@@ -256,16 +273,111 @@ public class InvoiceController extends BaseController {
 	@PostMapping("/upload")
 	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
 		String fileName = file.getOriginalFilename();
-//		fileName = FileUtil.renameToUUID(fileName);
-		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date(),fileName);
+		// fileName = FileUtil.renameToUUID(fileName);
+		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date(), fileName);
 		try {
 			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
 		} catch (Exception e) {
 			return R.error();
 		}
-		if (sysFileService.save(sysFile) > 0) {
-			return R.ok().put("fileName", sysFile.getUrl());
+		int ids = sysFileService.save(sysFile);
+		System.out.println(ids);
+		if (ids > 0) {
+			R r = R.ok();
+			r.put("invoiceAttachment", ids);
+			r.put("fileName", sysFile.getUrl());
+			return r;
+			// return R.ok().put("fileName", sysFile.getUrl());
 		}
 		return null;
 	}
+
+	// *************** 多文件下载级相关
+	// *********************************************************
+	/**
+	 * 执行删除文件的时候同时删除Invoice_Attachment字段下的附件ID
+	 */
+	@ResponseBody
+	@RequestMapping("/updateInvoiceAttachment")
+	@RequiresPermissions("payment:invoice:edit")
+	public R updateInvoiceAttachment(InvoiceDO invoice) {
+		invoiceService.updateInvoiceAttachment(invoice);
+		return R.ok();
+	}
+
+	// 根据ID查看附件列表
+	@ResponseBody
+	@GetMapping("/listId")
+	@RequiresPermissions("common:sysFile:sysFile")
+	public PageUtils listId(@RequestParam("invoiceId") String invoiceId, @RequestParam Map<String, Object> params) {
+		// String aa=request.getParameter("customerId");
+		params.put("invoiceId", invoiceId);
+		// 查询列表数据
+		Query query = new Query(params);
+		List<FileDO> sysFileList = sysFileService.listInvoiceAttachment(query);
+		int total = sysFileService.listInvoiceAttachmentCount(query);
+		PageUtils pageUtils = new PageUtils(sysFileList, total);
+		return pageUtils;
+	}
+
+	// 根据文件名称下载相关代码
+	@ResponseBody
+	@RequestMapping("/down")
+	public void download(HttpServletResponse response, @RequestParam("fileName") String fileName) {
+		try {
+			// path是指欲下载的文件的路径。
+			String path = "C:/var/uploaded_files/" + fileName;
+
+			File file = new File(path);
+			// 取得文件名。
+			String filename = file.getName();
+
+			// 以流的形式下载文件。
+			InputStream fis = new BufferedInputStream(new FileInputStream(path));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			fis.close();
+			// 清空response
+			response.reset();
+			// 设置response的Header
+			// 设置文件名
+			response.addHeader("Content-Disposition",
+					"attachment;filename=" + new String(filename.getBytes(), "ISO-8859-1"));
+			// 设置文件打下
+			response.addHeader("Content-Length", "" + file.length());
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+			response.setContentType("application/octet-stream");
+			toClient.write(buffer);
+			toClient.flush();
+			toClient.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * 打包压缩下载文件
+	 */
+	@RequestMapping(value = "/downLoadZipFile")
+	@ResponseBody
+	public void downLoadZipFile(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
+		String[] ids = id.split(",");
+		String zipName = "downLoadFile.zip";
+		List<FileDO> fileList = sysFileService.downLoadListId(ids);// 查询数据库中记录
+		response.setContentType("APPLICATION/OCTET-STREAM");
+		response.setHeader("Content-Disposition", "attachment; filename=" + zipName);
+		ZipOutputStream out = new ZipOutputStream(response.getOutputStream());
+		try {
+			for (Iterator<FileDO> it = fileList.iterator(); it.hasNext();) {
+				FileDO file = it.next();
+				ZipUtils.doCompress("C:/var/uploaded_files/" + file.getFileName(), out);
+				response.flushBuffer();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
+	}
+
 }

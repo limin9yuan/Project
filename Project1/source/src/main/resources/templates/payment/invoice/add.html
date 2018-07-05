@@ -12,7 +12,7 @@
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
 						<input id="invoiceIds" name="invoiceIds" class="form-control" type="hidden" value="-1">
-
+						<input id="ids" name="ids" type="text" value="-1" class="form-control">
 						    <div class="form-group">
 								<label class="col-sm-3 control-label">合同名称：<span class="mustin">*</span></label>
 								<div class="col-sm-3">
@@ -146,12 +146,12 @@
 								<label class="col-sm-3 control-label">附件：</label>
 								<div class="col-sm-3">
 									<div class="file-manager">
-										<button type="button" class="layui-btn" id="test1"
+										<button type="button" class="layui-btn btn btn-danger" id="test1"
 											style="width: 100%;">
-											<i class="fa fa-cloud"></i>上传文件
+											<i class="glyphicon glyphicon-cloud-upload"></i>上传文件
 										</button>
-										<input id="invoiceAttachment" name="invoiceAttachment"
-											type="hidden">
+										<input id="invoiceAttachment" name="invoiceAttachment" th:value="${invoiceAttachment}" class="form-control"
+											type="text">
 									</div>
 								</div>
 							</div>

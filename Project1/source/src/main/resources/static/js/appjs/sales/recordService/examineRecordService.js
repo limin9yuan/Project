@@ -248,7 +248,7 @@ function Service_ajax(){
 			$("input[name='serviceDept']").val(result.serviceDept);
 			$("textarea[name='serviceFeedbackInfo']").val(result.serviceFeedbackInfo);
 			$("input[name='serviceProduct']").val(result.serviceProduct);
-			$("input[name='serviceAttachmentToCustomer']").val(result.serviceAttachmentToCustomer);
+			$("textarea[name='serviceAttachmentToCustomer']").val(result.serviceAttachmentToCustomer);
 			$("input[name='serviceProcedure']").val(result.serviceProcedure);
 			$("input[name='serviceResult']").val(result.serviceResult);
 			$("textarea[name='serviceAfterSaleRemarks']").val(result.serviceAfterSaleRemarks);

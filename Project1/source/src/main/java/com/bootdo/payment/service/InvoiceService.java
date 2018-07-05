@@ -31,4 +31,5 @@ public interface InvoiceService {
 	int batchRemove(String[] invoiceIds);
 	
 	ContractDO getContractId(String contractId);  
+	int updateInvoiceAttachment(InvoiceDO invoice);
 }

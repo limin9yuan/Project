@@ -16,7 +16,7 @@ $().ready(function() {
                 //app.getData();
             },
             error: function (r) {
-                layer.msg(r.msg);
+                layer.msg("错误");
             }
         });
     });

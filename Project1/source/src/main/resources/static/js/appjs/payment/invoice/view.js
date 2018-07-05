@@ -1,24 +1,24 @@
 var prefixinvoice = "/payment/invoice"
 $().ready(function() {
-	layui.use('upload', function () {
-        var upload = layui.upload;
-        //执行实例
-        var uploadInst = upload.render({
-            elem: '#test1', //绑定元素
-            url: '/common/sysFile/upload', //上传接口
-            size: 1000,
-            accept: 'file',
-            done: function (r) {
-            	alert(r.fileName);
-            	$("#invoiceAttachment").val(r.fileName);
-                //layer.msg(r.msg);
-                //app.getData();
-            },
-            error: function (r) {
-                layer.msg(r.msg);
-            }
-        });
-    });
+//	layui.use('upload', function () {
+//        var upload = layui.upload;
+//        //执行实例
+//        var uploadInst = upload.render({
+//            elem: '#test1', //绑定元素
+//            url: '/common/sysFile/upload', //上传接口
+//            size: 1000,
+//            accept: 'file',
+//            done: function (r) {
+//            	alert(r.fileName);
+//            	$("#invoiceAttachment").val(r.fileName);
+//                //layer.msg(r.msg);
+//                //app.getData();
+//            },
+//            error: function (r) {
+//                layer.msg(r.msg);
+//            }
+//        });
+//    });
 	validateRule();
 	datetimepicker();
 	invoiceMapper_edit();

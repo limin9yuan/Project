@@ -46,7 +46,7 @@ public class CompanyCustomerDO implements Serializable {
 	// 客户状态
 	private String customerStatus;
 	// 客户级别
-	private Long customerLevel;
+	private String customerLevel;
 	// 销售阶段
 	private String customerSalePhase;
 	// 客户内部阶段
@@ -58,7 +58,7 @@ public class CompanyCustomerDO implements Serializable {
 	// 人员规模
 	private Integer customerStaffSize;
 	// 信用等级
-	private Integer customerCreditRank;
+	private String customerCreditRank;
 	// 客户潜力
 	private String customerPotential;
 	// 员工数量
@@ -616,14 +616,14 @@ public class CompanyCustomerDO implements Serializable {
 	/**
 	 * 设置：客户级别
 	 */
-	public void setCustomerLevel(Long customerLevel) {
+	public void setCustomerLevel(String customerLevel) {
 		this.customerLevel = customerLevel;
 	}
 
 	/**
 	 * 获取：客户级别
 	 */
-	public Long getCustomerLevel() {
+	public String getCustomerLevel() {
 		return customerLevel;
 	}
 
@@ -700,14 +700,14 @@ public class CompanyCustomerDO implements Serializable {
 	/**
 	 * 设置：信用等级
 	 */
-	public void setCustomerCreditRank(Integer customerCreditRank) {
+	public void setCustomerCreditRank(String customerCreditRank) {
 		this.customerCreditRank = customerCreditRank;
 	}
 
 	/**
 	 * 获取：信用等级
 	 */
-	public Integer getCustomerCreditRank() {
+	public String getCustomerCreditRank() {
 		return customerCreditRank;
 	}
 

@@ -206,5 +206,9 @@
         left join inner_org_employee f on a.Contract_Sales = f.Employee_ID
 		where a.Contract_ID = #{value}
 	</select>
-
+<!-- 	//		删除附件文件的同时删除表里面附件字段下的附件i -->
+	<update id="updateInvoiceAttachment" parameterType="com.bootdo.contract.domain.ContractDO">
+		UPDATE invoice
+ 		SET Invoice_Attachment =REPLACE(Invoice_Attachment,#{id},'')
+	</update>
 </mapper>

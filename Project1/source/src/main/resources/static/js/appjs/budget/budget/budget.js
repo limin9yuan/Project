@@ -5,7 +5,12 @@ $(function() {
 	loadCrmData("/project/project/listDic","projectId","全部");
 	datetimepicker();
 });
+function resetSelect(){
 
+	$("#projectId").val("");
+	$("#projectId").trigger("chosen:updated"); //回到初始状态
+	
+}
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(
@@ -72,88 +77,88 @@ function load() {
 										return e + d ;
 									}
 								},{
-									field : 'budgetId', 
-									title : '项目预算编号' 
+									field : 'budgetId',
+									title : '项目预算编号'
 								},{
-									field : 'projectId', 
-									title : '项目编号' 
+									field : 'projectId',
+									title : '项目编号'
 								},{
-									field : 'projectName', 
-									title : '项目名称' 
+									field : 'projectName',
+									title : '项目名称'
 								},{
-									field : 'projectOwnerName', 
-									title : '项目经理姓名' 
+									field : 'projectOwnerName',
+									title : '项目经理姓名'
 								},{
-									field : 'budgetOperateTime', 
-									title : '项目预算时间' 
+									field : 'budgetOperateTime',
+									title : '项目预算时间'
 								},{
-									field : 'projectGategory', 
-									title : '项目类别' 
+									field : 'projectGategory',
+									title : '项目类别'
 								},{
-									field : 'deptName', 
-									title : '部门' 
+									field : 'deptName',
+									title : '部门'
 								},{
-									field : 'customerName', 
-									title : '客户名称' 
+									field : 'customerName',
+									title : '客户名称'
 								},{
-									field : 'budgetConformance', 
-									title : '计划是否合规' 
+									field : 'budgetConformance',
+									title : '计划是否合规'
 								},{
-									field : 'budgetServiceRevenue', 
-									title : '服务收入（合同额）' 
+									field : 'budgetServiceRevenue',
+									title : '服务收入（合同额）'
 								},{
-									field : 'budgetProfit', 
-									title : '利润' 
+									field : 'budgetProfit',
+									title : '利润'
 								}/*,
 								{
-									field : 'businessId', 
-									title : '业务编号' 
-								},							
-																{
-									field : 'budgetProfitRate', 
-									title : '项目计划利润率' 
+									field : 'businessId',
+									title : '业务编号'
 								},
 																{
-									field : 'budgetAccountReceivable', 
-									title : '应收账款总额' 
+									field : 'budgetProfitRate',
+									title : '项目计划利润率'
 								},
 																{
-									field : 'budgetTotalCost', 
-									title : '计划成本总额' 
-								},
-																
-																{
-									field : 'budgetTax', 
-									title : '税金' 
+									field : 'budgetAccountReceivable',
+									title : '应收账款总额'
 								},
 																{
-									field : 'budgetServiceRevenueNet', 
-									title : '服务净收入' 
+									field : 'budgetTotalCost',
+									title : '计划成本总额'
+								},
+
+																{
+									field : 'budgetTax',
+									title : '税金'
 								},
 																{
-									field : 'budgetPurchaseCost', 
-									title : '采购成本' 
+									field : 'budgetServiceRevenueNet',
+									title : '服务净收入'
 								},
 																{
-									field : 'budgetLaborCost', 
-									title : '人工成本' 
+									field : 'budgetPurchaseCost',
+									title : '采购成本'
 								},
 																{
-									field : 'budgetTravelCost', 
-									title : '差旅成本' 
+									field : 'budgetLaborCost',
+									title : '人工成本'
 								},
 																{
-									field : 'budgetCost', 
-									title : '费用和支持（含税）' 
-								},
-																
-																{
-									field : 'budgetOperator', 
-									title : '操作人' 
+									field : 'budgetTravelCost',
+									title : '差旅成本'
 								},
 																{
-									field : 'budgetOperateTime', 
-									title : '操作时间' 
+									field : 'budgetCost',
+									title : '费用和支持（含税）'
+								},
+
+																{
+									field : 'budgetOperator',
+									title : '操作人'
+								},
+																{
+									field : 'budgetOperateTime',
+									title : '操作时间'
 								},*/
 																]
 					});
@@ -248,12 +253,12 @@ function batchRemove() {
 	});
 }
 function datetimepicker() {
-	 $('#budgetOperateTimeMin').datetimepicker({  
-	        format: 'YYYY-MM-DD ',  
-	        locale: moment.locale('zh-cn')  
+	 $('#budgetOperateTimeMin').datetimepicker({
+	        format: 'YYYY-MM-DD ',
+	        locale: moment.locale('zh-cn')
 	    });
-	 $('#budgetOperateTimeMax').datetimepicker({  
-	        format: 'YYYY-MM-DD ',  
-	        locale: moment.locale('zh-cn')  
+	 $('#budgetOperateTimeMax').datetimepicker({
+	        format: 'YYYY-MM-DD ',
+	        locale: moment.locale('zh-cn')
 	    });
 }

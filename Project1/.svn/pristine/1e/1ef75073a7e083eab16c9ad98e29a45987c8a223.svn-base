@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+<link href="/css/layui.css" rel="stylesheet">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="shortcut icon" href="favicon.ico">
+<link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+<style type="text/css">
+input {
+	color: transparent;
+	text-shadow: 0 0 0 #000;
+}
+</style>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active"><a href="#baseInfo" data-toggle="tab"><span class="mustin">*&nbsp;</span>基本信息</a></li>
+							<li><a href="#serviceAA" data-toggle="tab"><span class="mustin">*&nbsp;</span>售后服务</a></li>
+							<li><a href="#information" data-toggle="tab"><span class="mustin">*&nbsp;</span>联系方式</a></li>
+						</ul>
+						<form class="form-horizontal m-t" id="signupForm">
+							<div id="myTabContent" class="tab-content">
+							<div class="tab-pane fade in active" id="baseInfo">
+							<input id="serviceId" name="serviceId" class="form-control" type="hidden" th:value="${serviceId}">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">问题出现时间：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<div class="input-group date" id="serviceProblemTime">
+												<input class="form-control" type="text" readonly="readonly"
+													name="serviceProblemTime"> <span
+													class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</div>
+										</div>
+										<label class="col-sm-2 control-label">反馈人姓名：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<input id="serviceName" name="serviceName" readonly="readonly"
+												class="form-control" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">所在单位：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<input id="serviceDept" name="serviceDept" readonly="readonly"
+												class="form-control" type="text">
+										</div>
+										<label class="col-sm-2 control-label">客户姓名：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="custormerId" disabled="disabled"
+												id="custormerId" class="form-control chosen-select"
+												tabindex="2"  style="width: 100%">
+												<option value="">请选择</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">项目名称：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="projectId" disabled="disabled"
+												id="projectId" class="form-control chosen-select"
+												tabindex="2" style="width: 100%">
+												<option value="">请选择</option>
+											</select>
+										</div>
+										<label class="col-sm-2 control-label">使用产品：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<input id="serviceProduct" name="serviceProduct" readonly="readonly"
+												class="form-control" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">反馈方式：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="serviceFeedbackType" disabled="disabled"
+												id="serviceFeedbackType" class="form-control chosen-select"
+												tabindex="2" style="width: 100%">
+												<option value="">请选择</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">发送资料：</label>
+										<div class="col-sm-10">
+											<textarea id="serviceAttachmentToCustomer"
+												name="serviceAttachmentToCustomer" class="form-control"
+												type="text"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										
+										<label class="col-sm-2 control-label">反馈内容：<span class="mustin">*</span></label>
+										<div class="col-sm-10">
+											<textarea id="serviceFeedbackInfo" name="serviceFeedbackInfo" readonly="readonly"
+												class="form-control" type="text"></textarea>
+										</div>
+									</div>
+								</div>
+<!-- 售后服务 -->
+								<div class="tab-pane fade" id="serviceAA">
+									<div class="form-group">
+										<label class="col-sm-2 control-label">服务类型：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<select data-placeholder="请选择" name="serviceType" disabled="disabled"
+												id="serviceType" class="form-control chosen-select"
+												tabindex="2" style="width: 100%">
+												<option value="">请选择</option>
+											</select>
+										</div>
+										<label class="col-sm-2 control-label">处理结果：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<input id="serviceResult" name="serviceResult" readonly="readonly"
+												class="form-control" type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">处理过程：<span class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<input id="serviceProcedure" name="serviceProcedure" readonly="readonly"
+												class="form-control" type="text">
+										</div>
+										
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">备注：</label>
+										<div class="col-sm-10">
+											<textarea id="serviceAfterSaleRemarks" name="serviceAfterSaleRemarks" readonly="readonly"
+												class="form-control" rows="3"></textarea>
+										</div>
+									</div>
+
+								</div>
+<!-- 联系方式 -->
+								<div class="tab-pane fade" id="information">
+									<div class="form-group">
+										<div class="form-group">
+											<label class="col-sm-2 control-label">邮箱：</label>
+											<div class="col-sm-4">
+												<input id="serviceMailbox" name="serviceMailbox" readonly="readonly"
+													class="form-control" type="text">
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label"><span class="mustin">*&nbsp;</span>电话：</label>
+											<div class="col-sm-4">
+												<input id="servicePhoneNumber" name="servicePhoneNumber" readonly="readonly"
+												class="form-control" type="text">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">需求调研附件：</label>
+										<div class="col-sm-4">
+											<button
+												shiro:hasPermission="sales:recordService:recordService"
+												onclick="window.open('/sales/recordService/downLoadZipFile?id='+$('#serviceAttachment').val())" type="button" class="btn btn-danger ">
+												<i class="glyphicon glyphicon-cloud-download"></i>下载全部附件
+											</button>
+<!-- 											&nbsp;<span style="color: #000000">共</span><input readonly="readonly" -->
+<!-- 												id="fileSizeString" -->
+<!-- 												style="border: none; width: 20%; background-color: #FFFFFF;"> -->
+										</div>
+										<input class="form-control" th:value="serviceAttachment"
+													id="serviceAttachment" name="serviceAttachment"
+													type="hidden">
+									</div>
+									<!--***************文件显示*************************** -->
+									<div class="form-group" id="app" >
+									<label class="col-sm-2 control-label"></label>
+										<div class="col-sm-10 animated fadeInRight">
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="file-box" v-for="row in rows" >
+														<div class="file">
+<!-- 															<a > <span class="corner"></span> -->
+																<div class="image" >
+																	<img alt="文件" class="img-responsive" :src="row.url">
+																</div>
+																<div class="file-name">
+																	<br /> <small>{{row.fileName}}</small>
+																</div> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+																<button class="btn btn-warning btn-xs "
+																	@click="window.open('/sales/recordService/down?fileName='+row.fileName)" type="button">下载</button>
+																
+<!-- 																<button class="btn btn-danger btn-xs" -->
+<!-- 																	@click="removeFile(row.id)" type="button">删除</button> -->
+<!-- 															</a> -->
+														</div>
+													</div>
+													<div id="incomeNum"></div>
+												</div>
+											</div>
+											<div>
+												<ul id="page"></ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">主送人：</label>
+								<div class="col-sm-8">
+									<input id="mainPersonId" name="mainPersonId" type="hidden">
+									<input id="isMainPerson" name="isMainPerson" type="hidden">
+									<div style="float: left;" id="sendPerson"></div>
+									<div style="float: left;">
+										<button
+											type="button" class="btn btn-danger btn-xs"
+											id="sendPersonBtn" var="sendPersonBtn" disabled="true"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addSendPerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">抄送人：</label>
+								<div class="col-sm-8">
+									<input id="copyPersonId" name="copyPersonId" type="hidden">
+									<input id="isCopyPerson" name="isCopyPerson" type="hidden">
+									<div style="float: left;" id="receivePerson"></div>
+									<div style="float: left;">
+										<button type="button" class="btn btn-danger btn-xs"
+											id="receivePersonBtn" var="receivePersonBtn" disabled="true"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addRecivePerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4 col-sm-offset-8">
+									<button type="button" id="lastBtn" disabled
+										class="btn btn-primary"
+										onclick="lastStep('myTab',3,'lastBtn','nextBtn')">上一页</button>
+									&nbsp;
+									<button type="button" id="nextBtn" class="btn btn-primary"
+										onclick="nextStep('myTab',3,'lastBtn','nextBtn')">下一页</button>
+									&nbsp;
+									<button type="button" class="btn btn-primary" onclick="closeWin()">取消</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/sales/recordService/examineRecordService.js"></script>
+	<script type="text/javascript" src="/js/common.js"></script>
+	<script type="text/javascript" src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
+		<!-- 全局js -->
+<!-- 	<script src="/js/jquery.min.js?v=2.1.4"></script> -->
+	<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="/js/bootstrap-paginator.min.js"></script>
+
+	<script src="/js/content.js?v=1.0.0"></script>
+	<script src="/js/layui.js"></script>
+	<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script type="text/javascript">
+	//************* 文件下载级显示 *********************************************************		
+	 var app = new Vue({
+	        el: '#app',
+	        data: {
+	            limit: 5,
+	            offset: 0,
+	            total: 0,
+	            file: '',
+	            type: '',
+	            rows: '',
+	            serviceId:$("#serviceId").val(),
+	        },
+	        methods: {
+	            getData: function () {
+	                $.getJSON("/sales/recordService/listRecordServiceId", {
+	                    limit: this.limit,
+	                    offset: this.offset,
+	                    type: this.type,
+	                    serviceId:this.serviceId
+	                }, function (r) {
+	                    app.total = r.total;
+	                    app.rows = r.rows;
+	                    app.page();
+	                });
+	            },
+	            page: function () {
+	                var options = {
+	                    currentPage: app.offset / 5 + 1, //当前页
+	                    totalPages: app.total / (5 + 1) + 1, //总页数
+	                    numberofPages: 4, //显示的页数
+	                    bootstrapMajorVersion: 3,
+	                    alignment: 'center',
+	                    size: 'large',
+	                    shouldShowPage: true,
+	                    itemTexts: function (type, page, current) { //修改显示文字
+	                        switch (type) {
+	                            case "first":
+	                                return "首页";
+	                            case "prev":
+	                                return "上一页";
+	                            case "next":
+	                                return "下一页";
+	                            case "last":
+	                                return "尾页";
+	                            case "page":
+	                                return page;
+	                        }
+	                    },
+	                    onPageClicked: function (event, originalEvent, type, page) {
+	                        app.offset = (page - 1) * 4;
+	                        app.getData();
+	                    }
+	                };
+	                $('#page').bootstrapPaginator(options);
+	            },
+	            removeFile: function (id) {
+	                layer.confirm('确定要删除选中的记录？', {
+	                    btn: ['确定', '取消']
+	                }, function () {
+	                    $.ajax({
+	                        url: "/common/sysFile/remove",
+	                        type: "post",
+	                        data: {
+	                            'id': id
+	                        },
+	                        success: function (r) {
+	                            if (r.code == 0) {
+	                                layer.msg(r.msg);
+	                                app.getData();
+	                            } else {
+	                                layer.msg(r.msg);
+	                            }
+	                        }
+	                    });
+	                })
+	            }
+	        },
+	        created: function () {
+	            this.getData();
+	        }
+	    });
+//********************** END *************************************	
+</script>
+</body>
+</html>

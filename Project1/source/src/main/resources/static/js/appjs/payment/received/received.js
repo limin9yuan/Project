@@ -4,7 +4,11 @@ $(function() {
 	loadreceived();
 	datetimepicker();
 });
-
+function resetSelect(){
+	$("#projectName").val("");
+	$("#projectName").trigger("chosen:updated"); //回到初始状态
+	
+}
 function datetimepicker() {
 	// 开始时间
 	$('#timeMin').datetimepicker({

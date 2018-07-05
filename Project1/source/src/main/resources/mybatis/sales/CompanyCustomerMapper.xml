@@ -24,7 +24,7 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.sales.domain.CompanyCustomerDO">
-		select DISTINCT a.`Customer_ID`,`Customer_Province`,`Customer_City`,`Customer_County`,`Customer_Name`,
+		select DISTINCT a.`Customer_ID`,sp.Province_Name as`Customer_Province`,spc.City_Name as `Customer_City`,sca.Area_Name as `Customer_County`,`Customer_Name`,
 		case when (select count(contact_id)
 				   from sales_customer_contact
 				   where Customer_ID=a.Customer_ID)>1 then 1 else 0 end Customer_Contact_Many,
@@ -70,12 +70,20 @@
 		s.name as customerOwnerName,
 
 		`Customer_Operate_Time`,`Opponent_Company`,`Opponent_Project_Type`,`Opponent_Product_Type`,
-		`Opponent_Product_Price`,a.Customer_Level,f.Contact_Name,g.Business_Name,p.Project_Name,
+		`Opponent_Product_Price`,e.name as Customer_Level,f.Contact_Name,g.Business_Name,p.Project_Name,
 		s.name AS Customer_Operator,a. Customer_Create_Time
 		
 		from sales_company_customer a
+<!-- 		省 -->
+		left join sales_province sp on a.Customer_Province = sp.Province_Id  
+<!-- 		市 -->
+		left join sales_province_city spc on a.Customer_City=spc.City_Id
+<!-- 		区 -->
+		left join sales_city_area sca on a.Customer_County = sca.Area_Id
+<!-- 		信用等级 -->
 		left join sys_dict d on d.type='sales_customer_credit_Rank' and d.value=a.Customer_Credit_Rank
-		left join sys_dict e on e.type='sales_customer_level' and e.value=a.Customer_Level
+<!-- 		客户级别 -->
+		left join sys_dict e on e.type='sales_customer_level' and a.Customer_Level=e.value
 		left join sys_dict chc on chc.type='sales_Customer_Hot_Classif' and chc.value=a.Customer_Hot_Classif
 		left join  
 		(	select Customer_ID,Contact_Name from  sales_customer_contact 
@@ -95,7 +103,7 @@
 <!-- 		(	select Customer_ID,Customer_Dept_Name from  sales_customer_dept  -->
 <!-- 			where case when #{customerDeptName} !='' then  Customer_Dept_Name else  #{customerDeptName} end like #{customerDeptName} -->
 <!-- 		group by Customer_ID having count(Customer_Dept_ID)=1) ss on a.Customer_ID=ss.Customer_ID  -->
-		 
+<!-- 		left join sys_dict dic on a.customer_level=dic.value and dic.type = 'sales_customer_level' -->
 		left join inner_org_employee m on a.Customer_Owner=m.Employee_ID 
 		left join inner_org_employee q on a.Customer_Sales=q.Employee_ID
 		left join sys_user s on a.Customer_Operator=s.user_id
@@ -471,4 +479,147 @@
 		select `Customer_ID` value,concat(`Customer_ID`,' ',`Customer_Name`) name
 		from sales_company_customer
 	</select>
+<!-- 	导入文件模板上传 -->
+	<insert id="saveFile" parameterType="com.bootdo.sales.domain.CompanyCustomerDO" useGeneratedKeys="true" keyProperty="customerId">
+		insert into sales_company_customer
+		(
+			`Customer_ID`, 
+			`Customer_Province`, 
+			`Customer_City`, 
+			`Customer_County`, 
+			`Customer_Name`, 
+			`Customer_Simple_Name`, 
+			`Customer_Owner`, 
+			`Customer_Sales`, 
+			`Customer_Product`, 
+			`Customer_Req_Des`, 
+			`Customer_Attachment`, 
+			`Customer_Category`, 
+			`Customer_Character`, 
+			`Customer_Status`, 
+			`Customer_Level`, 
+			`Customer_Sale_Phase`, 
+			`Customer_Inner_Phase`, 
+			`Customer_Source`, 
+			`Customer_Industry`, 
+			`Customer_Staff_Size`, 
+			`Customer_Credit_Rank`, 
+			`Customer_Potential`, 
+			`Customer_Emp_Number`, 
+			`Customer_Introduction`, 
+			`Customer_Visit_Mode`, 
+			`Customer_Old_ID`, 
+			`Customer_Child_Company`,    
+			 `Customer_Hot`, 
+			`Customer_Hot_Rank`, 
+			`Customer_Hot_Classif`, 
+			`Customer_Volume`, 
+			`Customer_Hot_Desc`, 
+			`Customer_Invoice_Name`, 
+			`Customer_Tax_Number`, 
+			`Customer_Bank`, 
+			`Customer_Account_Num`, 
+			`Customer_Contact_Sta`, 
+			`Customer_Address`, 
+			`Customer_Phone_Num`, 
+			`Customer_Fax`, 
+			`Customer_MailBox`, 
+			`Customer_URL`, 
+			`Customer_Postcode`, 
+			`Customer_Leader`, 
+			`Customer_Job_Title`, 
+			`Customer_Payment_Rate`, 
+			`Customer_Heating_Share`, 
+			`Customer_Complaint_Rate`, 
+			`Customer_Heating_Area`, 
+			`Customer_Heating_Source_Number`, 
+			`Customer_Steam_Area`, 
+			`Customer_Hot_Water_Area`, 
+			`Customer_Own_Heating_Source`, 
+			`Customer_Out_Heating_Source`, 
+			`Customer_Heat_Loss`, 
+			`Customer_Water_Loss`, 
+			`Customer_Electrick_Loss`, 
+			`Customer_Plan_One_Year`, 
+			`Customer_Plan_Tow_Year`, 
+			`Customer_Plan_Three_Year`, 
+			`Customer_Remarks`, 
+			`Customer_Operator`, 
+			`Opponent_Company`, 
+			`Opponent_Project_Type`, 
+			`Opponent_Product_Type`, 
+			`Opponent_Product_Price`,
+		   	 Customer_Create_Time
+		)
+		values
+		(
+			#{customerId},
+			(select  Province_Id from sales_province a where a.Province_Name=#{customerProvince}), 
+			(select  City_Id from sales_province_city a where a.City_Name=#{customerCity}),
+			(select  Area_Id from sales_city_area a where a.Area_Name=#{customerCounty}), 
+			#{customerName}, 
+			#{customerSimpleName}, 
+			(select  Employee_ID from inner_org_employee a where a.Employee_Name=#{customerOwner}), 
+			(select  Employee_ID from inner_org_employee a where a.Employee_Name=#{customerSales}), 
+			#{customerProduct}, 
+			#{customerReqDes}, 
+			#{customerAttachment}, 
+			#{customerCategory}, 
+			#{customerCharacter}, 
+			#{customerStatus}, 
+			(select  value from sys_dict a where a.name=#{customerLevel} and a.type='sales_customer_level'), 
+			#{customerSalePhase}, 
+			#{customerInnerPhase}, 
+			#{customerSource} , 			
+			#{customerIndustry}, 
+			#{customerStaffSize},
+			(select  value from sys_dict a where a.name=#{customerCreditRank} and a.type='sales_customer_credit_Rank'), 
+			(select  value from sys_dict a where a.name=#{customerPotential} and a.type='sales_customer_potential'), 
+			#{customerEmpNumber}, 
+			#{customerIntroduction}, 
+			(select  value from sys_dict a where a.name=#{customerVisitMode} and a.type='sales_customer_visit_Mode'), 
+			#{customerOldId}, 
+			#{customerChildCompany}, 
+			CASE #{customerHot} when '是' then '1' when '否' then '0' ELSE '0' END , 
+			#{customerHotRank}, 
+			(select  value from sys_dict a where a.name=#{customerHotClassif} and a.type='sales_Customer_Hot_Classif'), 
+			#{customerVolume}, 
+			#{customerHotDesc}, 
+			#{customerInvoiceName}, 
+			#{customerTaxNumber}, 
+			#{customerBank}, 
+			#{customerAccountNum}, 
+			#{customerContactSta} , 
+			#{customerAddress}, 
+			#{customerPhoneNum}, 
+			#{customerFax}, 
+			#{customerMailbox}, 
+			#{customerUrl}, 
+			#{customerPostcode}, 
+			#{customerLeader}, 
+			#{customerJobTitle}, 
+			#{customerPaymentRate}, 
+			#{customerHeatingShare}, 
+			#{customerComplaintRate}, 
+			#{customerHeatingArea}, 
+			#{customerHeatingSourceNumber}, 
+			#{customerSteamArea}, 
+			#{customerHotWaterArea}, 
+			#{customerOwnHeatingSource}, 
+			#{customerOutHeatingSource}, 
+			#{customerHeatLoss}, 
+			#{customerWaterLoss}, 
+			#{customerElectrickLoss}, 
+			#{customerPlanOneYear}, 
+			#{customerPlanTowYear}, 
+			#{customerPlanThreeYear}, 
+			#{customerRemarks}, 
+			#{customerOperator}, 
+			#{opponentCompany}, 
+			#{opponentProjectType}, 
+			#{opponentProductType}, 
+			#{opponentProductPrice},
+			now()
+		)
+	</insert>
 </mapper>

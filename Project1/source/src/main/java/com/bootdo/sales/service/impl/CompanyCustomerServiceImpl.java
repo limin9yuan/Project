@@ -60,25 +60,26 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 			map.put("customerName", "%" + map.get("customerName") + "%");
 		}
 		if (map.get("customerId") != null && !"".equals(map.get("customerId"))) {
-			map.put("customerId", "%" +map.get("customerId") + "%");
+			map.put("customerId", "%" + map.get("customerId") + "%");
 		}
 		if (map.get("customerContactName") != null && !"".equals(map.get("customerContactName"))) {
-			map.put("customerContactName","%" + map.get("customerContactName") + "%");
+			map.put("customerContactName", "%" + map.get("customerContactName") + "%");
 		}
 		if (map.get("businessName") != null && !"".equals(map.get("businessName"))) {
-			map.put("businessName", "%" +map.get("businessName") + "%");
+			map.put("businessName", "%" + map.get("businessName") + "%");
 		}
 		if (map.get("projectName") != null && !"".equals(map.get("projectName"))) {
-			map.put("projectName", "%" +map.get("projectName") + "%");
+			map.put("projectName", "%" + map.get("projectName") + "%");
 		}
 		if (map.get("contactName") != null && !"".equals(map.get("contactName"))) {
-			map.put("contactName", "%" +map.get("contactName") + "%");
+			map.put("contactName", "%" + map.get("contactName") + "%");
 		}
 		if (map.get("customerDeptName") != null && !"".equals(map.get("customerDeptName"))) {
-			map.put("customerDeptName", "%" +map.get("customerDeptName") + "%");
+			map.put("customerDeptName", "%" + map.get("customerDeptName") + "%");
 		}
 		return companyCustomerDao.list(map);
 	}
+
 	@Override
 	public int count(Map<String, Object> map) {
 		return companyCustomerDao.count(map);
@@ -86,9 +87,9 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 
 	@Override
 	public int save(CompanyCustomerDO companyCustomer) {
-		int red=companyCustomerDao.save(companyCustomer);
-		String customerId=companyCustomer.getCustomerId();
-//		return companyCustomerDao.save(companyCustomer);
+		int red = companyCustomerDao.save(companyCustomer);
+		String customerId = companyCustomer.getCustomerId();
+		// return companyCustomerDao.save(companyCustomer);
 		return Integer.parseInt(customerId);
 	}
 
@@ -213,111 +214,157 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 							companyCustomerDO.setCustomerProduct(cellvalue);
 						} else if (j == 8) {
 							companyCustomerDO.setCustomerReqDes(cellvalue);
-						} else if (j == 9) {
-							companyCustomerDO.setCustomerAttachment(cellvalue);
-						} else if (j == 10) {
-							companyCustomerDO.setCustomerCategory(cellvalue);
-						} else if (j == 11) {
-							companyCustomerDO.setCustomerCharacter(cellvalue);
-						} else if (j == 12) {
-							companyCustomerDO.setCustomerStatus(cellvalue);
-						} else if (j == 13) {
-							companyCustomerDO.setCustomerLevel(Long.valueOf(cellvalue));
-						} else if (j == 14) {
-							companyCustomerDO.setCustomerSalePhase(cellvalue);
-						} else if (j == 15) {
-							companyCustomerDO.setCustomerInnerPhase(cellvalue);
-						} else if (j == 16) {
-							companyCustomerDO.setCustomerSource(cellvalue);
-						} else if (j == 17) {
-							companyCustomerDO.setCustomerIndustry(cellvalue);
-						} else if (j == 18) {
-							companyCustomerDO.setCustomerStaffSize(Integer.valueOf(cellvalue));
-						} else if (j == 19) {
-							companyCustomerDO.setCustomerCreditRank(Integer.valueOf(cellvalue));
-						} else if (j == 20) {
-							companyCustomerDO.setCustomerPotential(cellvalue);
-						} else if (j == 21) {
-							companyCustomerDO.setCustomerEmpNumber(Integer.valueOf(cellvalue));
-						} else if (j == 22) {
-							companyCustomerDO.setCustomerParent(cellvalue);
-						} else if (j == 23) {
-							companyCustomerDO.setCustomerIntroduction(cellvalue);
-						} else if (j == 24) {
-							companyCustomerDO.setCustomerVisitMode(cellvalue);
-						} else if (j == 25) {
-							companyCustomerDO.setCustomerOldId(cellvalue);
-						} else if (j == 26) {
-							companyCustomerDO.setCustomerChildCompany(cellvalue);
-						} else if (j == 27) {
-							companyCustomerDO.setCustomerHot(String.valueOf(cellvalue));
-						} else if (j == 28) {
-							companyCustomerDO.setCustomerHotRank(cellvalue);
-						} else if (j == 29) {
-							companyCustomerDO.setCustomerHotClassif(cellvalue);
-						} else if (j == 30) {
-							companyCustomerDO.setCustomerVolume(new BigDecimal(cellvalue));
-						} else if (j == 31) {
-							companyCustomerDO.setCustomerHotDesc(cellvalue);
-						} else if (j == 32) {
-							companyCustomerDO.setCustomerInvoiceName(cellvalue);
 						}
-
-						else if (j == 33) {
+						// else if (j == 9) {
+						// companyCustomerDO.setCustomerAttachment(cellvalue);
+						// }
+						else if (j == 9) {
+							companyCustomerDO.setCustomerCategory(cellvalue);
+						} else if (j == 10) {
+							companyCustomerDO.setCustomerCharacter(cellvalue);
+						} else if (j == 11) {
+							companyCustomerDO.setCustomerStatus(cellvalue);
+						} else if (j == 12) {
+							companyCustomerDO.setCustomerLevel(cellvalue);
+						} else if (j == 13) {
+							companyCustomerDO.setCustomerSalePhase(cellvalue);
+						} else if (j == 14) {
+							companyCustomerDO.setCustomerInnerPhase(cellvalue);
+						} else if (j == 15) {
+							companyCustomerDO.setCustomerSource(cellvalue);
+						} else if (j == 16) {
+							companyCustomerDO.setCustomerIndustry(cellvalue);
+						} else if (j == 17) {
+							if (companyCustomerDO.getCustomerStaffSize() == null) {
+//								System.out.println(companyCustomerDO.getCustomerStaffSize());
+								continue;
+							} else {
+								companyCustomerDO.setCustomerStaffSize(Integer.valueOf(cellvalue));
+							}
+						} else if (j == 18) {
+							companyCustomerDO.setCustomerCreditRank(cellvalue);
+						} else if (j == 29) {
+							companyCustomerDO.setCustomerPotential(cellvalue);
+						} else if (j == 20) {
+							if (companyCustomerDO.getCustomerEmpNumber() == null) {
+								continue;
+							} else {
+								companyCustomerDO.setCustomerEmpNumber(Integer.valueOf(cellvalue));
+							}
+						} else if (j == 21) {
+							companyCustomerDO.setCustomerParent(cellvalue);
+						} else if (j == 22) {
+							companyCustomerDO.setCustomerIntroduction(cellvalue);
+						} else if (j == 23) {
+							companyCustomerDO.setCustomerVisitMode(cellvalue);
+						} else if (j == 24) {
+							companyCustomerDO.setCustomerOldId(cellvalue);
+						} else if (j == 25) {
+							companyCustomerDO.setCustomerChildCompany(cellvalue);
+						} else if (j == 26) {
+							companyCustomerDO.setCustomerHot(String.valueOf(cellvalue));
+						} else if (j == 27) {
+							companyCustomerDO.setCustomerHotRank(cellvalue);
+						} else if (j == 28) {
+							companyCustomerDO.setCustomerHotClassif(cellvalue);
+						} else if (j == 29) {
+							companyCustomerDO.setCustomerVolume(new BigDecimal(cellvalue));
+						} else if (j == 30) {
+							companyCustomerDO.setCustomerHotDesc(cellvalue);
+						} else if (j == 31) {
+							companyCustomerDO.setCustomerInvoiceName(cellvalue);
+						} else if (j == 32) {
 							companyCustomerDO.setCustomerTaxNumber(cellvalue);
-						} else if (j == 34) {
+						} else if (j == 33) {
 							companyCustomerDO.setCustomerBank(cellvalue);
-						} else if (j == 35) {
+						} else if (j == 34) {
 							companyCustomerDO.setCustomerAccountNum(cellvalue);
-						} else if (j == 36) {
+						} else if (j == 35) {
 							companyCustomerDO.setCustomerContactSta(cellvalue);
-						} else if (j == 37) {
+						} else if (j == 36) {
 							companyCustomerDO.setCustomerAddress(cellvalue);
-						} else if (j == 38) {
+						} else if (j == 37) {
 							companyCustomerDO.setCustomerPhoneNum(cellvalue);
-						} else if (j == 39) {
+						} else if (j == 38) {
 							companyCustomerDO.setCustomerFax(cellvalue);
-						} else if (j == 40) {
+						} else if (j == 39) {
 							companyCustomerDO.setCustomerMailbox(cellvalue);
-						} else if (j == 41) {
+						} else if (j == 40) {
 							companyCustomerDO.setCustomerUrl(cellvalue);
-						} else if (j == 42) {
+						} else if (j == 41) {
 							companyCustomerDO.setCustomerPostcode(cellvalue);
-						} else if (j == 43) {
+						} else if (j == 42) {
 							companyCustomerDO.setCustomerLeader(cellvalue);
-						} else if (j == 44) {
+						} else if (j == 43) {
 							companyCustomerDO.setCustomerJobTitle(cellvalue);
-						} else if (j == 45) {
+						} else if (j == 44) {
 							companyCustomerDO.setCustomerPaymentRate(new BigDecimal(cellvalue));
-						} else if (j == 46) {
+						} else if (j == 45) {
 							companyCustomerDO.setCustomerHeatingShare(new BigDecimal(cellvalue));
-						} else if (j == 47) {
+						} else if (j == 46) {
 							companyCustomerDO.setCustomerComplaintRate(new BigDecimal(cellvalue));
+						} else if (j == 47) {
+							if (companyCustomerDO.getCustomerSteamArea() == null) {
+								continue;
+							} else {
+								companyCustomerDO.setCustomerHeatingArea(new BigDecimal(cellvalue));
+							}
 						} else if (j == 48) {
-							companyCustomerDO.setCustomerHeatingArea(new BigDecimal(cellvalue));
-						} else if (j == 49) {
+							if (companyCustomerDO.getCustomerHeatingSourceNumber() == null) {
+								continue;
+							} else {
+
+							}
 							companyCustomerDO.setCustomerHeatingSourceNumber(Integer.valueOf(cellvalue));
+						} else if (j == 49) {
+							if (companyCustomerDO.getCustomerSteamArea() == null) {
+								continue;
+							} else {
+								companyCustomerDO.setCustomerSteamArea(new BigDecimal(cellvalue));
+							}
 						} else if (j == 50) {
-							companyCustomerDO.setCustomerSteamArea(new BigDecimal(cellvalue));
+							if (companyCustomerDO.getCustomerHotWaterArea() == null) {
+								continue;
+							} else {
+								companyCustomerDO.setCustomerHotWaterArea(new BigDecimal(cellvalue));
+							}
 						} else if (j == 51) {
-							companyCustomerDO.setCustomerHotWaterArea(new BigDecimal(cellvalue));
+							if (companyCustomerDO.getCustomerOwnHeatingSource() == null) {
+								continue;
+							} else {
+								companyCustomerDO.setCustomerOwnHeatingSource(Integer.valueOf(cellvalue));
+							}
 						} else if (j == 52) {
-							companyCustomerDO.setCustomerOwnHeatingSource(Integer.valueOf(cellvalue));
+							if (companyCustomerDO.getCustomerOutHeatingSource() == null) {
+								continue;
+							} else {
+								companyCustomerDO.setCustomerOutHeatingSource(Integer.valueOf(cellvalue));
+							}
 						} else if (j == 53) {
-							companyCustomerDO.setCustomerOutHeatingSource(Integer.valueOf(cellvalue));
+							if (companyCustomerDO.getCustomerHeatLoss() == null) {
+								continue;
+							} else {
+								companyCustomerDO.setCustomerHeatLoss(new BigDecimal(cellvalue));
+							}
 						} else if (j == 54) {
-							companyCustomerDO.setCustomerHeatLoss(new BigDecimal(cellvalue));
+							if (companyCustomerDO.getCustomerWaterLoss() == null) {
+								continue;
+							} else {
+								companyCustomerDO.setCustomerWaterLoss(new BigDecimal(cellvalue));
+							}
 						} else if (j == 55) {
-							companyCustomerDO.setCustomerWaterLoss(new BigDecimal(cellvalue));
+							if (companyCustomerDO.getCustomerElectrickLoss() == null) {
+								continue;
+							} else {
+								companyCustomerDO.setCustomerElectrickLoss(new BigDecimal(cellvalue));
+							}
 						} else if (j == 56) {
-							companyCustomerDO.setCustomerElectrickLoss(new BigDecimal(cellvalue));
-						} else if (j == 57) {
 							companyCustomerDO.setCustomerPlanOneYear(cellvalue);
-						} else if (j == 58) {
+						} else if (j == 57) {
 							companyCustomerDO.setCustomerPlanTowYear(cellvalue);
-						} else if (j == 59) {
+						} else if (j == 58) {
 							companyCustomerDO.setCustomerPlanThreeYear(cellvalue);
-						} else if (j == 60) {
+						} else if (j == 59) {
 							companyCustomerDO.setCustomerRemarks(cellvalue);
 						}
 
@@ -325,7 +372,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 					companyCustomerDO.setCustomerOperator(Long.toString(userid));
 					companyCustomerDO.setCustomerOperateTime(new Date());
 
-					rtn = companyCustomerDao.save(companyCustomerDO);
+					rtn = companyCustomerDao.saveFile(companyCustomerDO);
 				}
 			}
 		} catch (Exception e) {
@@ -507,8 +554,8 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 					// 信用等级
 					String CustomerCreditRank = "";
 					if (report.getCustomerCreditRank() != null) {
-						Integer CustomerCreditRank1 = report.getCustomerCreditRank();
-						CustomerCreditRank = String.valueOf(CustomerCreditRank1);
+						CustomerCreditRank = report.getCustomerCreditRank();
+						// CustomerCreditRank = String.valueOf(CustomerCreditRank1);
 					}
 					hssfRow.createCell(20).setCellValue(CustomerCreditRank);
 					// 客户潜力
@@ -774,11 +821,11 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 					hssfRow.createCell(61).setCellValue(CustomerRemarks);
 
 					// 操作人
-					String customerOperatorName = "";
-					if (report.getCustomerOperatorName() != null) {
-						customerOperatorName = report.getCustomerOperatorName();
+					String customerOperator = "";
+					if (report.getCustomerOperator() != null) {
+						customerOperator = report.getCustomerOperator();
 					}
-					hssfRow.createCell(62).setCellValue(customerOperatorName);
+					hssfRow.createCell(62).setCellValue(customerOperator);
 					// 操作时间
 					String getCustomerOperateTime = "";
 					if (report.getCustomerOperateTime() != null) {
@@ -827,11 +874,11 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 	@Override
 	public Tree<CompanyCustomerDO> getTree() {
 		List<Tree<CompanyCustomerDO>> trees = new ArrayList<Tree<CompanyCustomerDO>>();
-		List<CompanyCustomerDO> customers = companyCustomerTree.list(new HashMap<String,Object>(16));
+		List<CompanyCustomerDO> customers = companyCustomerTree.list(new HashMap<String, Object>(16));
 		for (CompanyCustomerDO customer : customers) {
 			Tree<CompanyCustomerDO> tree = new Tree<CompanyCustomerDO>();
 			tree.setId(customer.getCustomerId().toString());
-//			tree.setParentId(customer.getCustomerParent());
+			// tree.setParentId(customer.getCustomerParent());
 			tree.setText(customer.getCustomerName());
 			Map<String, Object> state = new HashMap<>(16);
 			state.put("opened", true);
@@ -873,32 +920,12 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 		return companyCustomerDao.updateCustomerAttachment(companyCustomer);
 	}
 
-	
+	@Override
+	public int saveFile(CompanyCustomerDO companyCustomer) {
+		int red = companyCustomerDao.saveFile(companyCustomer);
+		String customerId = companyCustomer.getCustomerId();
+		// return companyCustomerDao.save(companyCustomer);
+		return Integer.parseInt(customerId);
+	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

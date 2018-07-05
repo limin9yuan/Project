@@ -139,6 +139,15 @@ public class FileController extends BaseController {
 		return R.ok();
 	}
 
+	@PostMapping("/removes")
+	@ResponseBody
+//	@RequiresPermissions("common:remove")
+	public R removes(@RequestParam("removeId") String removeId) {
+		sysFileService.removes(removeId);
+		return R.ok();
+	}
+	
+	
 	@ResponseBody
 	@PostMapping("/upload")
 	R upload(@RequestParam("file") MultipartFile files, HttpServletRequest request, CompanyCustomerDO companyCustomer) {

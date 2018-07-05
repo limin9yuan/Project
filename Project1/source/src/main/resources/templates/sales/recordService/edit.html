@@ -83,11 +83,13 @@
 												<option value="">请选择</option>
 											</select>
 										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-sm-2 control-label">发送资料：</label>
-										<div class="col-sm-4">
-											<input id="serviceAttachmentToCustomer"
+										<div class="col-sm-10">
+											<textarea id="serviceAttachmentToCustomer"
 												name="serviceAttachmentToCustomer" class="form-control"
-												type="text">
+												type="text"></textarea>
 										</div>
 									</div>
 									<div class="form-group">
@@ -165,14 +167,14 @@
 											</div>
 										</div>
 									</div>
-									<!--***************文件显示*************************** -->
+									<!--*************** 文件显示  *************************** -->
 									<div class="form-group" id="app">
 										<label class="col-sm-2 control-label"></label>
 										<div class="col-sm-10 animated fadeInRight">
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="file-box" v-for="row in rows">
-														<div class="file">
+														<div class="file" id="fileDiv">
 															<!-- 															<a > <span class="corner"></span> -->
 															<div class="image">
 																<img alt="文件" class="img-responsive" :src="row.url">
@@ -185,7 +187,7 @@
 															<button class="btn btn-warning btn-xs " 
 																@click="window.open('/sales/recordService/down?fileName='+row.fileName)" type="button">下载</button>
 															&nbsp; &nbsp; &nbsp; &nbsp;
-															<button class="btn btn-danger btn-xs"
+															<button class="btn btn-danger btn-xs" id="removeFile"
 																@click="removeFile(row.id)" type="button">删除</button>
 															<!-- 															</a> -->
 														</div>
@@ -200,6 +202,7 @@
 									</div>
 								</div>
 							</div>
+							<input id="removeId" name="removeId" type="hidden" ><!-- 用来记录将要删除的附件id -->
 							<div class="form-group">
 								<label class="col-sm-2 control-label">主送人：</label>
 								<div class="col-sm-8">
@@ -242,7 +245,7 @@
 									<button type="button" id="nextBtn" class="btn btn-primary"
 										onclick="nextStep('myTab',3,'lastBtn','nextBtn')">下一页</button>
 									&nbsp;
-									<button type="submit" class="btn btn-primary">提交</button>
+									<button type="submit" class="btn btn-primary" onclick="removeaa()">提交</button>
 									&nbsp;
 									<button type="button" class="btn btn-primary" onclick="closeWin()">取消</button>
 								</div>
@@ -326,35 +329,91 @@
 	                    }
 	                };
 	                $('#page').bootstrapPaginator(options);
-	            },
-	            removeFile: function (id) {
-	                layer.confirm('确定要删除选中的记录？', {
-	                    btn: ['确定', '取消']
-	                }, function () {
-	                    $.ajax({
-	                        url: "/common/sysFile/remove",
-	                        type: "post",
-	                        data: {
-	                            'id': id
-	                        },
-	                        success: function (r) {
-	                            if (r.code == 0) {
-	                                layer.msg(r.msg);
-	                                app.getData();
-	                            } else {
-	                                layer.msg(r.msg);
-	                            }
-	                        }
-	                    });
-	                    updateAttachment(id);
-	                })
-	                
 	            }
+// 	            ,
+// 	            removeFile: function (id) {
+// 	                layer.confirm('确定要删除选中的记录？', {
+// 	                    btn: ['确定', '取消']
+// 	                }, function () {
+// 	                    $.ajax({
+// 	                        url: "/common/sysFile/remove",
+// 	                        type: "post",
+// 	                        data: {
+// 	                            'id': id
+// 	                        },
+// 	                        success: function (r) {
+// 	                            if (r.code == 0) {
+// 	                                layer.msg(r.msg);
+// 	                                app.getData();
+// 	                            } else {
+// 	                                layer.msg(r.msg);
+// 	                            }
+// 	                        }
+// 	                    });
+// 	                    updateAttachment(id);
+// 	                })
+	                
+// 	            }
 	        },
 	        created: function () {
 	            this.getData();
 	        }
 	    });
+	
+	    //获取要删除的文件id
+	    function removeFile(id){
+	    	var ids=id+",";
+	    	var removeIds=$("#removeId").val(ids+$("#removeId").val());
+	    	 layer.confirm('确定要删除选中的记录？', {
+	                    btn: ['确定', '取消']
+	    	 },
+	    	  function () {
+              $.ajax({
+                  url: "",
+//                   type: "post",
+//                   data: {
+//                       'ids': removeIds
+//                   },
+                  success: function () {
+                 	 var btn1=document.getElementById('removeFile');
+         	    	 var box1=document.getElementById('fileDiv');
+         	    	 box1.style.display='none';//隐藏已选中的删除文件
+                 	    
+                 	 var serviceAtt=$("#serviceAttachment").val();
+//                   	alert(serviceAtt);
+              		//将serviceAttachment字段里面查出来的id加上都好替换为'' 空
+                  	var idss=serviceAtt.replace(ids,'');
+//                   	alert(idss)
+              		//将idss传给serviceAttachment  input
+              			$("#serviceAttachment").val(idss);
+                          layer.msg("已选中要删除的文件！");
+                  }
+              });
+          })
+	    }
+	    	
+	    	 
+//	   点击提交的时候 删除要删除的文件
+	    function removeaa(){
+		 var removeIds=$("#removeId").val();
+		 $.ajax({
+             url: "/common/sysFile/removes",
+             type: "post",
+             data: {
+                 'removeId': removeIds
+             },
+             success: function (r) {
+                 if (r.code == 0) {
+                     layer.msg(r.msg);
+//                      app.getData();
+                 } else {
+                     layer.msg(r.msg);
+                 }
+             }
+         });
+		 updateAttachment();
+	 }
+	
 // 		删除附件文件的同时删除企业客户信息表里面附件字段下的附件id
 	    function updateAttachment(id){
 	    	var ids=id+',';//将得到的id加上逗号组合传给mapper里面的id去修改字段下的值
@@ -369,13 +428,13 @@
                     if (r.code == 0) {
 //                     	alert(id)
 						//将serviceAttachment里面的字段提取出来
-                    	var serviceAtt=$("#serviceAttachment").val();
+//                     	var serviceAtt=$("#serviceAttachment").val();
 //                     	alert(serviceAtt);
 						//将serviceAttachment字段里面查出来的id加上都好替换为'' 空
-                    	var idss=serviceAtt.replace(id+",",'');
+//                     	var idss=serviceAtt.replace(id+",",'');
 //                     	alert(idss)
 						//将idss传给serviceAttachment  input
-                    	$("#serviceAttachment").val(idss);
+//                     	$("#serviceAttachment").val(idss);
                         layer.msg(r.msg);
                         app.getData();
                     } else {

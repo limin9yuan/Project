@@ -10,15 +10,20 @@ $().ready(function() {
             size: 1000,
             accept: 'file',
             done: function (r) {
-            	//alert(r.fileName);
+//            	alert(r.fileName);
             	$("#companyCustomerAttachment").val(r.fileName);
-                //layer.msg(r.msg);
+                layer.msg("操作成功！");
                 //app.getData();
             },
             error: function (r) {
-                layer.msg(r.msg);
+                layer.msg("操作失败！");
             }
         });
     });
   
+});
+$.validator.setDefaults({
+	submitHandler : function() {
+		closeParenWindow();
+	}
 });

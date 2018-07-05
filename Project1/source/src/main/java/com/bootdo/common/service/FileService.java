@@ -62,6 +62,12 @@ public interface FileService {
 	// 客户在线反馈
 	int listOnlineFeedbackAttachmentCount(Map<String, Object> map);
 
+	// 开票管理
+	List<FileDO> listInvoiceAttachment(Map<String, Object> map);
+
+	// 开票管理
+	int listInvoiceAttachmentCount(Map<String, Object> map);
+
 	int save(FileDO sysFile);
 
 	int update(FileDO sysFile);
@@ -72,4 +78,5 @@ public interface FileService {
 
 	List<FileDO> downLoadListId(String[] id);
 
+	int removes(String removeId);
 }

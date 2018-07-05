@@ -145,5 +145,23 @@ public class FileServiceImpl implements FileService {
 		return sysFileMapper.listOnlineFeedbackAttachmentCount(map);
 	}
 
+	@Override
+	public int removes(String removeId) {
+		// TODO Auto-generated method stub
+		return sysFileMapper.removes(removeId);
+	}
+
+	@Override
+	public List<FileDO> listInvoiceAttachment(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sysFileMapper.listInvoiceAttachment(map);
+	}
+
+	@Override
+	public int listInvoiceAttachmentCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sysFileMapper.listInvoiceAttachmentCount(map);
+	}
+
 	
 }

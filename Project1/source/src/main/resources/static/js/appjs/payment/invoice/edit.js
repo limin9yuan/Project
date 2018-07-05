@@ -5,17 +5,20 @@ $().ready(function() {
         //执行实例
         var uploadInst = upload.render({
             elem: '#test1', //绑定元素
-            url: '/common/sysFile/upload', //上传接口
+            url: '/payment/invoice/upload', //上传接口
             size: 1000,
             accept: 'file',
             done: function (r) {
-            	alert(r.fileName);
-            	$("#invoiceAttachment").val(r.fileName);
-                //layer.msg(r.msg);
-                //app.getData();
-            },
-            error: function (r) {
+            	if (r.code == 0) {
+	 				if (r.invoiceAttachment > 0) {
+	 					$('#ids').val(r.invoiceAttachment);
+	 					$('#invoiceAttachment').val(r.invoiceAttachment+','+document.getElementById("invoiceAttachment").value);
+	 				}
                 layer.msg(r.msg);
+                app.getData();
+            }else {
+ 				parent.layer.alert(r.msg)
+            }
             }
         });
     });

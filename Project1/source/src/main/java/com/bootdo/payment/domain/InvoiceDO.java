@@ -81,6 +81,16 @@ public class InvoiceDO implements Serializable {
 	private String mainPersonId;
 	//抄送人id
 	private String copyPersonId;
+	//执行删除附件的id
+	private String id;
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public String getMainPersonId() {
 		return mainPersonId;

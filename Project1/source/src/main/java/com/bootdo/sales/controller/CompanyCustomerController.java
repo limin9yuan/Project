@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,6 +22,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bootdo.common.domain.*;
@@ -342,7 +344,49 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 		}
 		return R.error();
 	}
+	/**
+	 * 保存
+	 */
+	@ResponseBody
+	@PostMapping("/saveFile")
+	@RequiresPermissions("sales:companyCustomer:add")
+	public R saveFile(CompanyCustomerDO companyCustomer) {
+		companyCustomer.setCustomerOperator(Long.toString(getUserId()));
+		int customerIds = companyCustomerService.saveFile(companyCustomer);
+		if (customerIds > 0) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = companyCustomer.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(companyCustomer.getCustomerId());
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_company_customer");
+					mainCopyPersonService.save(mcp);
 
+				}
+			}
+
+			String copyPersonId = companyCustomer.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(companyCustomer.getCustomerId());
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_company_customer");
+					mainCopyPersonService.save(mcp);
+				}
+			}
+			R r = R.ok();
+			r.put("customerId", customerIds);
+			return r;
+		}
+		return R.error();
+	}
 	// *****************************列表页Top热点客户块*******************************************************************************
 	// 新客户要更多信息页面
 	@GetMapping("/newCustomerMore")
@@ -678,7 +722,7 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 		}
 		return R.error();
 	}
-
+//导入
 	@ResponseBody
 	@PostMapping("/importSubmit")
 	@RequiresPermissions("sales:companyCustomer:import")
@@ -696,7 +740,7 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 		long userid = getUserId(); // 用户id
 		companyCustomerService.Import(datafile, userid);
 
-		return null;
+		return R.error();
 	}
 
 	/**
@@ -839,14 +883,42 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
     }
  	
  	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
+ 	//模板下载
+    @ResponseBody
+ 	@RequestMapping("/downloadTemplate")
+    public void download(HttpServletResponse response,HttpServletRequest request) {
+ 		try {
+ 			
+// 			 File files = new File(".\\src\\main\\resources\\downloadTemplate\\企业客户导入摸板.xls");
+// 			System.out.println("getAbsolutePath:"+files.getAbsolutePath());  //getAbsolutePath()会将.认为是一个以.命名的文件
+// 			System.out.println("getCanonicalPath:"+files.getCanonicalPath());//getCanonicalPath()得到的是一个规范路径没有.
+// 			
+
+ 			File file = new File(".\\src\\main\\resources\\downloadTemplate\\企业客户导入摸板.xls");
+ 			// 取得文件名。
+ 			String filename = file.getName();
+ 			
+ 			// 以流的形式下载文件。
+ 			InputStream fis = new BufferedInputStream(new FileInputStream(file.getCanonicalPath()));
+ 			byte[] buffer = new byte[fis.available()];
+ 			fis.read(buffer);
+ 			fis.close();
+ 			// 清空response
+ 			response.reset();
+ 			// 设置response的Header
+ 			// 设置文件名
+ 			response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(),"ISO-8859-1"));
+ 			// 设置文件打下
+ 			response.addHeader("Content-Length", "" + file.length());
+ 			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+ 			response.setContentType("application/octet-stream");
+ 			toClient.write(buffer);
+ 			toClient.flush();
+ 			toClient.close();
+ 		} catch (IOException ex) {
+ 			ex.printStackTrace();
+ 		}
+ 	}
  	
  	
  	

@@ -26,6 +26,18 @@ public class FileDO implements Serializable {
     
     private String customerId;
     
+    private String removeId;
+    
+	public String getRemoveId() {
+		return removeId;
+	}
+
+
+	public void setRemoveId(String removeId) {
+		this.removeId = removeId;
+	}
+
+
 	public String getCustomerId() {
 		return customerId;
 	}

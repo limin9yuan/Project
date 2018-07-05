@@ -39,6 +39,8 @@ public interface CompanyCustomerService {
 
 	int save(CompanyCustomerDO companyCustomer);
 
+	int saveFile(CompanyCustomerDO companyCustomer);
+	
 	int update(CompanyCustomerDO companyCustomer);
 
 	int updateCustomerAttachment(CompanyCustomerDO companyCustomer);

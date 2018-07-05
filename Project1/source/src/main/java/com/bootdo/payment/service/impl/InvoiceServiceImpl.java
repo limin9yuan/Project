@@ -58,6 +58,12 @@ public class InvoiceServiceImpl implements InvoiceService {
 	@Override
 	public ContractDO getContractId(String contractId) {
 		return invoiceDao.getContractId(contractId);
+	}
+
+	@Override
+	public int updateInvoiceAttachment(InvoiceDO invoice) {
+		// TODO Auto-generated method stub
+		return invoiceDao.updateInvoiceAttachment(invoice);
 	}	
 	
 }
