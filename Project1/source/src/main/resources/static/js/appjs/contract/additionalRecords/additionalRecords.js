@@ -11,6 +11,15 @@ $(function() {
 	// 合同种类
 	//loadDic("contract_Contract_Category", "contractCategory","全部");
 });
+function resetSelect(){
+	$("#customerId").val("");
+	$("#customerId").trigger("chosen:updated"); //回到初始状态
+	$("#businessId").val("");
+	$("#businessId").trigger("chosen:updated"); //回到初始状态
+	$("#projectId").val("");
+	$("#projectId").trigger("chosen:updated"); //回到初始状态
+}
+
 
 function load() {
 	$('#exampleTable')

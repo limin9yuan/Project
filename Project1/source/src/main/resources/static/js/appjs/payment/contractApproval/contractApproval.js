@@ -8,6 +8,15 @@ var prefix = "/payment/contractApproval"
 
 
 });
+function resetSelect(){
+
+	$("#contractId").val("");
+	$("#contractId").trigger("chosen:updated"); //回到初始状态
+	$("#projectId").val("");
+	$("#projectId").trigger("chosen:updated"); //回到初始状态
+	$("#contractApplicantName").val("");
+	$("#contractApplicantName").trigger("chosen:updated"); //回到初始状态
+}
 function load() {
 
 	$('#exampleTable').bootstrapTable(

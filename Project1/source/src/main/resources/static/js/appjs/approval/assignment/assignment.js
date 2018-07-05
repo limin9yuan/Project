@@ -2,10 +2,14 @@
 var prefix = "/approval/assignment"
 $(function() {
 	load();
-	loadCrmData("/project/project/listDic","projectName","全部");
+	loadCrmData("/project/project/listDic","projectName");
 	datetimepicker();
 });
+function resetSelect(){
 
+	$("#projectName").val("");
+	$("#projectName").trigger("chosen:updated"); //回到初始状态
+}
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(

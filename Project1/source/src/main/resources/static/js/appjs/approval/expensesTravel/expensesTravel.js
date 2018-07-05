@@ -6,6 +6,10 @@ $(function() {
 	load();
 	datetimepicker();
 });
+function resetSelect(){
+	$("#projectId").val("");
+	$("#projectId").trigger("chosen:updated"); //回到初始状态
+}
 function datetimepicker(){
 	//开始时间(创建时间)
 	$('#expensesTravelCreateTime').datetimepicker({

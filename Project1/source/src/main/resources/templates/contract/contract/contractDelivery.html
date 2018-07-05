@@ -45,8 +45,9 @@
 						<div class="text-right form-group">
 							<div class="columns pull-right col-md-2">
 								<button type="button" class="btn btn-danger" onclick="reLoad()">查询</button>
-								<button type="button" class="btn btn-danger"
-									onclick="resetPwd()">重置</button>
+								<button type="reset" class="btn btn-primary" onclick="resetSelect()">
+									<i class="fa fa-refresh" aria-hidden="true"></i>重置
+								</button>
 							</div>
 						</div>
 					</form>
@@ -55,10 +56,6 @@
 							<!--<button shiro:hasPermission="contract:contract:add" type="button"-->
 								<!--class="btn  btn-primary" onclick="add()">-->
 								<!--<i class="fa fa-plus" aria-hidden="true"></i>新增-->
-							<!--</button>-->
-							<!--<button shiro:hasPermission="contract:contract:batchRemove"-->
-								<!--type="button" class="btn  btn-danger" onclick="batchRemove()">-->
-								<!--<i class="fa fa-trash" aria-hidden="true"></i>批量删除-->
 							<!--</button>-->
 							<button shiro:hasPermission="contract:contract:importContractDelivery"
 								type="button" class="btn  btn-primary" name="excelinsertbtn">

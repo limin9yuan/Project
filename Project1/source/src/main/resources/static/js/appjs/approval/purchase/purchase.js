@@ -1,10 +1,14 @@
 var prefix = "/approval/purchase"
 $(function() {
 	load();
-	loadCrmData("/project/project/listDic","projectId","全部");
+	loadCrmData("/project/project/listDic","projectId");
 	datetimepicker();
 });
+function resetSelect(){
 
+	$("#projectId").val("");
+	$("#projectId").trigger("chosen:updated"); //回到初始状态
+}
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(
