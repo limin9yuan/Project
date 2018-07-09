@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.approval.dao.PurchaseDetailDao">
+
+	<select id="get" resultType="com.bootdo.approval.domain.PurchaseDetailDO">
+		select `Purchase_ID`,`Purchase_Name`,`Purchase_Config`,`Purchase_Brand`,`Purchase_Mode`,`Purchase_Unit`,`Purchase_Number`,`Purchase_Unit_Price`,`Purchase_Total_Price` from approval_purchase_detail where Purchase_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.approval.domain.PurchaseDetailDO">
+		select `Purchase_ID`,`Purchase_Name`,`Purchase_Config`,`Purchase_Brand`,`Purchase_Mode`,`Purchase_Unit`,`Purchase_Number`,`Purchase_Unit_Price`,`Purchase_Total_Price`,`Approval_Purchase_ID` from approval_purchase_detail
+        <where>
+			      <if test="approvalpurchaseId != null and approvalpurchaseId != ''"> and Approval_Purchase_ID = #{approvalpurchaseId} </if>
+		  		  <if test="purchaseId != null and purchaseId != ''"> and Purchase_ID = #{purchaseId} </if>
+		  		  <if test="purchaseName != null and purchaseName != ''"> and Purchase_Name = #{purchaseName} </if>
+		  		  <if test="purchaseConfig != null and purchaseConfig != ''"> and Purchase_Config = #{purchaseConfig} </if>
+		  		  <if test="purchaseBrand != null and purchaseBrand != ''"> and Purchase_Brand = #{purchaseBrand} </if>
+		  		  <if test="purchaseMode != null and purchaseMode != ''"> and Purchase_Mode = #{purchaseMode} </if>
+		  		  <if test="purchaseUnit != null and purchaseUnit != ''"> and Purchase_Unit = #{purchaseUnit} </if>
+		  		  <if test="purchaseNumber != null and purchaseNumber != ''"> and Purchase_Number = #{purchaseNumber} </if>
+		  		  <if test="purchaseUnitPrice != null and purchaseUnitPrice != ''"> and Purchase_Unit_Price = #{purchaseUnitPrice} </if>
+		  		  <if test="purchaseTotalPrice != null and purchaseTotalPrice != ''"> and Purchase_Total_Price = #{purchaseTotalPrice} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by Purchase_ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from approval_purchase_detail
+		 <where>
+			 <if test="approvalpurchaseId != null and approvalpurchaseId != ''"> and Approval_Purchase_ID = #{approvalpurchaseId} </if>
+		  		  <if test="purchaseId != null and purchaseId != ''"> and Purchase_ID = #{purchaseId} </if>
+		  		  <if test="purchaseName != null and purchaseName != ''"> and Purchase_Name = #{purchaseName} </if>
+		  		  <if test="purchaseConfig != null and purchaseConfig != ''"> and Purchase_Config = #{purchaseConfig} </if>
+		  		  <if test="purchaseBrand != null and purchaseBrand != ''"> and Purchase_Brand = #{purchaseBrand} </if>
+		  		  <if test="purchaseMode != null and purchaseMode != ''"> and Purchase_Mode = #{purchaseMode} </if>
+		  		  <if test="purchaseUnit != null and purchaseUnit != ''"> and Purchase_Unit = #{purchaseUnit} </if>
+		  		  <if test="purchaseNumber != null and purchaseNumber != ''"> and Purchase_Number = #{purchaseNumber} </if>
+		  		  <if test="purchaseUnitPrice != null and purchaseUnitPrice != ''"> and Purchase_Unit_Price = #{purchaseUnitPrice} </if>
+		  		  <if test="purchaseTotalPrice != null and purchaseTotalPrice != ''"> and Purchase_Total_Price = #{purchaseTotalPrice} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.approval.domain.PurchaseDetailDO" useGeneratedKeys="true" keyProperty="purchaseId">
+		insert into approval_purchase_detail
+		(
+			`Purchase_Name`, 
+			`Purchase_Config`, 
+			`Purchase_Brand`, 
+			`Purchase_Mode`, 
+			`Purchase_Unit`, 
+			`Purchase_Number`, 
+			`Purchase_Unit_Price`, 
+			`Purchase_Total_Price`
+		)
+		values
+		(
+			#{purchaseName}, 
+			#{purchaseConfig}, 
+			#{purchaseBrand}, 
+			#{purchaseMode}, 
+			#{purchaseUnit}, 
+			#{purchaseNumber}, 
+			#{purchaseUnitPrice}, 
+			#{purchaseTotalPrice}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.approval.domain.PurchaseDetailDO">
+		update approval_purchase_detail 
+		<set>
+			<if test="purchaseName != null">`Purchase_Name` = #{purchaseName}, </if>
+			<if test="purchaseConfig != null">`Purchase_Config` = #{purchaseConfig}, </if>
+			<if test="purchaseBrand != null">`Purchase_Brand` = #{purchaseBrand}, </if>
+			<if test="purchaseMode != null">`Purchase_Mode` = #{purchaseMode}, </if>
+			<if test="purchaseUnit != null">`Purchase_Unit` = #{purchaseUnit}, </if>
+			<if test="purchaseNumber != null">`Purchase_Number` = #{purchaseNumber}, </if>
+			<if test="purchaseUnitPrice != null">`Purchase_Unit_Price` = #{purchaseUnitPrice}, </if>
+			<if test="purchaseTotalPrice != null">`Purchase_Total_Price` = #{purchaseTotalPrice},</if>
+			<if test="approvalpurchaseId != null">`Approval_Purchase_ID` = #{approvalpurchaseId}</if>
+		</set>
+		where Purchase_ID = #{purchaseId}
+	</update>
+	
+	<delete id="remove">
+		delete from approval_purchase_detail where Purchase_ID = #{value}
+	</delete>
+	<delete id="removeapprovalid">
+		delete from approval_purchase_detail where Approval_Purchase_ID =#{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from approval_purchase_detail where Purchase_ID in 
+		<foreach item="purchaseId" collection="array" open="(" separator="," close=")">
+			#{purchaseId}
+		</foreach>
+	</delete>
+
+</mapper>
