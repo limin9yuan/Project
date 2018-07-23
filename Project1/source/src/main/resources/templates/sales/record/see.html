@@ -146,11 +146,8 @@ input {
 										type="button" class="btn btn-danger ">
 										<i class="glyphicon glyphicon-cloud-download"></i>下载全部附件
 									</button>
-									<!-- 									&nbsp;<span style="color: #000000">共</span><input  -->
-									<!-- 										id="fileSizeString" readonly="readonly" -->
-									<!-- 										style="border: none; width: 20%; background-color: #FFFFFF;"> -->
 								</div>
-								<input class="form-control" th:value="recordAttachment"
+								<input class="form-control" th:value="${productAttachment}"
 									id="recordAttachment" name="recordAttachment" type="hidden">
 							</div>
 							<!--***************文件显示*************************** -->

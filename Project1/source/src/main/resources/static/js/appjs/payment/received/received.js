@@ -137,7 +137,7 @@ function loadreceived() {
 					title :'回款信息导入',
 					maxmin : true,
 					shadeClose : false, // 点击遮罩关闭层
-					area : [ '500px', '70%' ],
+					area : [ '25%', '30%' ],
 					content : prefixreceived + '/import'  // iframe的url
 				});
         })

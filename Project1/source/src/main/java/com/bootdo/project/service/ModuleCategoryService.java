@@ -23,6 +23,8 @@ public interface ModuleCategoryService {
 	
 	int save(ModuleCategoryDO moduleCategory);
 	
+	int updatemodedlAttachment(ModuleCategoryDO moduleCategory);
+	
 	int update(ModuleCategoryDO moduleCategory);
 	
 	int remove(String moduleId);

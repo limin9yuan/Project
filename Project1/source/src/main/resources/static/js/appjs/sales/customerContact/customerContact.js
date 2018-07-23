@@ -184,7 +184,7 @@ function load() {
 			title : '导入',
 			maxmin : true,
 			shadeClose : false, // 点击遮罩关闭层
-			area : [ '400px', '55%' ],
+			area : [ '25%', '30%' ],
 			content : prefixContact + '/import' // iframe的url
 		});
 

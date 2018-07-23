@@ -110,5 +110,11 @@
 		select `Product_ID` value,concat(`Product_ID`,' ',`Product_Name`) name
 		from sales_product_category 
 	</select>
+	
+	<update id="updateAttachment" parameterType="com.bootdo.project.domain.ProductCategoryDO">
+		UPDATE
+		sales_product_category
+		SET Product_Attachment =REPLACE(Product_Attachment,#{id},'')
+	</update>
 
 </mapper>

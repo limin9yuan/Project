@@ -26,6 +26,8 @@ public interface ModuleCategoryDao {
 	
 	int save(ModuleCategoryDO moduleCategory);
 	
+	int updatemodedlAttachment(ModuleCategoryDO moduleCategory);
+	
 	int update(ModuleCategoryDO moduleCategory);
 	
 	int remove(String Module_ID);

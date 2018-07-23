@@ -70,7 +70,7 @@ function load() {
                     },
                     {
                         field : 'id',
-                        title : '流程XML',
+                        title : '流程图',
                         formatter:function (value,row,index) {
                             var e = '<a   href="/activiti/process/resource/read/image/'+row.id+'"  title="图片" target="_blank">图片</a> ';
                             return e;
@@ -174,7 +174,7 @@ function batchRemove() {
 		var ids = new Array();
 		// 遍历所有选择的行数据，取每条数据对应的ID
 		$.each(rows, function(i, row) {
-			ids[i] = row['id'];
+			ids[i] = row['deploymentId'];
 		});
 		$.ajax({
 			type : 'POST',

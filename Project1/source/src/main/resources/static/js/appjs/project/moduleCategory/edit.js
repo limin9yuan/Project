@@ -6,14 +6,22 @@ $().ready(function() {
         //执行实例
         var uploadInst = upload.render({
             elem: '#test1', //绑定元素
-            url: '/common/sysFile/upload', //上传接口
+            url: '/project/moduleCategory/upload', //上传接口
             size: 1000,
             accept: 'file',
             done: function (r) {
-            	//alert(r.fileName);
-            	$("#moduleAttachment").val(r.fileName);
-                //layer.msg(r.msg);
-                //app.getData();
+            	if (r.code == 0) {
+       				if (r.moduleAttachment > 0) {
+       					$('#ids').val(r.moduleAttachment);
+       					$('#moduleAttachment').val(r.moduleAttachment+','+document.getElementById("moduleAttachment").value);
+       				}
+//       				$("#serviceAttachment").val(r.fileName);
+       				parent.layer.msg(r.msg);
+//      				 app.getData();
+
+       			} else {
+       				parent.layer.msg(r.msg)
+       			}
             },
             error: function (r) {
                 layer.msg(r.msg);
@@ -42,7 +50,7 @@ function update() {
 		success : function(data) {
 			if (data.code == 0) {
 				parent.layer.msg("操作成功");
-				parent.reLoad();
+				closeParenWindow();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
 

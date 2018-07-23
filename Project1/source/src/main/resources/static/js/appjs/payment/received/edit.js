@@ -109,7 +109,8 @@ function validateRule() {
 				},
 				receivedCardNumber : {
 					required : true,
-					digits:true
+					digits:true,
+					creditcard:true
 				},
 				receivedType : {
 					required : true,
@@ -133,7 +134,7 @@ function validateRule() {
 				},
 				receivedCardNumber : {
 					required : icon + "收款账户不能为空",
-					digits:icon + "请输入数字！"
+					digits : icon + "请输入数字！"
 				},
 				receivedType : {
 					required : icon + "款项类型不能为空",
@@ -169,7 +170,7 @@ function received_ajax(){
 		},
 		success : function(data) {
 			var result = data.received;
-			
+
 //			alert(result.receivablePrice)
 			$("input[name='receivableId']").val(result.receivableId);
  			$("input[name='contractId']").val(result.contractId);

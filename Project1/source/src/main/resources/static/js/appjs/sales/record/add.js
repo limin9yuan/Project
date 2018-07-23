@@ -15,6 +15,8 @@ $().ready(function() {
             elem: '#test1', //绑定元素
             url: '/sales/record/upload', //上传接口
             size: 1000,
+            auto: false,			//不自动上传设置
+            bindAction: '#upFile',	//“上传”按钮的ID
             accept: 'file',
             done: function (r) {
             	if (r.code == 0) {
@@ -24,7 +26,7 @@ $().ready(function() {
 	 				}
 //            	$("#serviceAttachment").val(r.fileName);
                 layer.msg(r.msg);
-                app.getData();
+//                app.getData();
             }else {
  				parent.layer.alert(r.msg)
             }
@@ -99,6 +101,9 @@ function validateRule() {
 			},
 			recordExpenseCategory : {
 				required : true
+			},
+			recordExpenseActual:{
+				number:true
 			}
 		},
 		messages : {
@@ -134,6 +139,9 @@ function validateRule() {
 			},
 			recordExpenseCategory : {
 				required : icon + "请选择费用类型"
+			},
+			recordExpenseActual:{
+				number: icon + "请输入数字！"
 			}
 		}
 	})

@@ -43,15 +43,18 @@ function validateRule() {
 		rules : {
 			paidPrice : {
 				required : true,
-				maxlength:10
+				maxlength:10,
+				number:true
 			},
 			paidAccountPrice : {
 				required : true,
-				maxlength:10
+				maxlength:10,
+				number:true
 			},
 			paidAccountNumber : {
 				required : true,
-				maxlength:25
+				maxlength:25,
+				creditcard:true
 			},
 			paidType : {
 				required : true,

@@ -57,10 +57,10 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.moduleId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+										var f = '<a class="btn btn-success btn-sm" href="#" title="查看"  mce_href="#" onclick="examine(\''
 												+ row.moduleId
-												+ '\')"><i class="fa fa-key"></i></a> ';
-										return e + d ;
+												+ '\')"><i class="fa fa-search"></i></a> ';
+										return 	f+e + d ;
 								     }
 								},{
 									field : 'moduleId', 
@@ -74,10 +74,12 @@ function load() {
 								},{
 									field : 'moduleDescription', 
 									title : '模块描述' 
-								},{
-									field : 'moduleAttachment', 
-									title : '附件' 
-								}/*,
+								}
+//								,{
+//									field : 'moduleAttachment', 
+//									title : '附件' 
+//								}
+								/*,
 																{
 									field : 'moduleRemark', 
 									title : '备注' 
@@ -147,7 +149,15 @@ function remove(id) {
 	})
 }
 
-function resetPwd(id) {
+function examine(id) {
+	parent.layer.open({
+		type : 2,
+		title : '查看',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '75%', '95%' ],
+		content : prefix + '/examine/' + id
+	});
 }
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组

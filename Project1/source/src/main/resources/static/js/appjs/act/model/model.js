@@ -109,6 +109,9 @@ function add() {
 		area : [ '100%', '100%' ],
 		content : prefix + '/add',
         closeBtn: 0, //不显示关闭按钮
+        end: function () {
+        	reLoad();
+        }
 	});
 }
 function remove(id) {

@@ -140,7 +140,7 @@
 		update project_budget
         set Budget_Tax=(Budget_Service_Revenue-IFNULL(Budget_Purchase_Cost,0))*0.17,
         Budget_Service_Revenue_Net=Budget_Service_Revenue-IFNULL(Budget_Purchase_Cost,0)-(Budget_Service_Revenue-IFNULL(Budget_Purchase_Cost,0))*0.17-IFNULL(Budget_Labor_Cost,0)-IFNULL(Budget_Travel_Cost,0),
-        Budget_Cost=Budget_Service_Revenue*0.06+ IFNULL(Budget_Labor_Cost,0)+ IFNULL(Budget_Travel_Cost,0)+ IFNULL(Budget_Purchase_Cost,0),
+        Budget_Cost=Budget_Service_Revenue*0.06+ IFNULL(Budget_Labor_Cost,0)+ IFNULL(Budget_Travel_Cost,0)+ IFNULL(Budget_Purchase_Cost,0)
 		where Budget_ID = #{budgetId}
 	</update>
 	

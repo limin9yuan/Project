@@ -410,4 +410,80 @@
 				#{fileName}</if>
 		</where>
 	</select>
+	
+	<!-- ************************************************************************************	* -->
+	<!-- 	//根据ID查看产品分类附件列表-->
+	<select id="listAttachment" resultType="com.bootdo.common.domain.FileDO">
+		select `id`,`type`,`url`,`create_date`,file_Name from sys_file
+		<where>
+			FIND_IN_SET(id,(select w.Product_Attachment from sales_product_category w where w.Product_ID=#{productId}))
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="url != null and url != ''"> and url = #{url} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="fileName != null and fileName !=''"> and file_Name =
+				#{fileName}</if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="listAttachmentCount" resultType="int">
+		select count(*) from sys_file
+		<where>
+		FIND_IN_SET(id,(select w.Product_Attachment from sales_product_category w where w.Product_ID=#{productId}))
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="url != null and url != ''"> and url = #{url} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="fileName != null and fileName !=''"> and file_Name =
+				#{fileName}</if>
+		</where>
+	</select>
+	
+	<!-- ************************************************************************************	* -->
+	<!-- 	//根据ID查看模块分类附件列表-->
+	<select id="listmodelAttachment" resultType="com.bootdo.common.domain.FileDO">
+		select `id`,`type`,`url`,`create_date`,file_Name from sys_file
+		<where>
+			FIND_IN_SET(id,(select w.Module_Attachment from sales_module_category w where w.Module_ID=#{moduleId}))
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="url != null and url != ''"> and url = #{url} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="fileName != null and fileName !=''"> and file_Name =
+				#{fileName}</if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by id desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	<select id="listmodelAttachmentCount" resultType="int">
+		select count(*) from sys_file
+		<where>
+		FIND_IN_SET(id,(select w.Module_Attachment from sales_module_category w where w.Module_ID=#{moduleId}))
+			<if test="id != null and id != ''"> and id = #{id} </if>
+			<if test="type != null and type != ''"> and type = #{type} </if>
+			<if test="url != null and url != ''"> and url = #{url} </if>
+			<if test="createDate != null and createDate != ''"> and create_date = #{createDate} </if>
+			<if test="fileName != null and fileName !=''"> and file_Name =
+				#{fileName}</if>
+		</where>
+	</select>
 </mapper>

@@ -19,13 +19,14 @@
 		a.`Contact_ID`,c.`Contact_Name`,
 		u.name as `Business_Creator_Name`
 		,`Business_Name`,`Business_Category`,`Business_Status`,Business_Sales,`Business_Old_ID`
-		,`Business_Description`,`Business_Remarks`,u.name as Business_Operator,a.`Business_Operate_Time`,a.`Business_Create_Time`
+		,`Business_Description`,`Business_Remarks`,s.name as Business_Operator,a.`Business_Operate_Time`,a.`Business_Create_Time`
 		,i.Employee_Name as businessSalesName
 		from sales_business a 
 		left join sales_company_customer b on a.`Customer_ID`=b.`Customer_ID`
 		left join sales_customer_contact c on a.`Contact_ID`=c.`Contact_ID`
 		left join sys_user u on a.Business_Sales = u.user_id
 		left join inner_org_employee i on a.Business_Sales = i.Employee_ID
+		left join sys_user s on a.Business_Operator =s.user_id
         <where>
         		  <if test="businessOperator != null and businessOperator !=''">and ( a.Business_Operator = #{businessOperator}
 OR EXISTS( SELECT 1 FROM main_and_copy_person f LEFT JOIN inner_org_employee g ON f.Employee_ID = g.Employee_ID WHERE g.Inner_User_ID = #{userName} AND f.Table_Name = 'sales_business' AND f.T_ID =a.Contact_ID) 
@@ -69,6 +70,7 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{businessOperator} AND Identif
 		left join sales_customer_contact c on a.`Contact_ID`=c.`Contact_ID`
 		left join sys_user u on a.Business_Sales = u.user_id
 		left join inner_org_employee i on a.Business_Sales = i.Employee_ID
+		left join sys_user s on a.Business_Operator =s.user_id
 		  <where>  
 		  			<if test="businessOperator != null and businessOperator !=''">and ( a.Business_Operator = #{businessOperator}
 OR EXISTS( SELECT 1 FROM main_and_copy_person f LEFT JOIN inner_org_employee g ON f.Employee_ID = g.Employee_ID WHERE g.Inner_User_ID = #{userName} AND f.Table_Name = 'sales_business' AND f.T_ID =a.Contact_ID) 

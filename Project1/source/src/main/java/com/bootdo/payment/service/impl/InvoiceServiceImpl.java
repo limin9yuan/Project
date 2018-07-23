@@ -35,10 +35,10 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 	
 	@Override
-	public int save(InvoiceDO invoice){
+	public String save(InvoiceDO invoice){
 		invoiceDao.save(invoice);
 		String invoiceId = invoice.getInvoiceId();
-		return Integer.parseInt(invoiceId);
+		return invoiceId;
 	}
 	
 	@Override

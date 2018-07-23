@@ -23,7 +23,7 @@ $().ready(function() {
       			}
             },
             error: function (r) {
-                layer.msg(r.msg);
+            	parent.layer.msg(r.msg);
             }
         });
     });
@@ -146,6 +146,9 @@ function validateRule() {
 			},
 			recordExpenseCategory : {
 				required : true
+			},
+			recordExpenseActual:{
+				number:true
 			}
 		},
 		messages : {
@@ -181,6 +184,9 @@ function validateRule() {
 			},
 			recordExpenseCategory : {
 				required : icon + "请选择费用类型"
+			},
+			recordExpenseActual:{
+				number:icon + "请输入数字！"
 			}
 		}
 	})

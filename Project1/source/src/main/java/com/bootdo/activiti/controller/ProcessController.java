@@ -46,10 +46,17 @@ public class ProcessController extends BaseController{
     }
 
     @GetMapping("list")
-    PageUtils list(int offset, int limit) {
-        List<ProcessDefinition> processDefinitions = repositoryService.createProcessDefinitionQuery()
-                .listPage(offset, limit);
-        int count = (int) repositoryService.createProcessDefinitionQuery().count();
+    PageUtils list(int offset, int limit,String name) {
+        List<ProcessDefinition> processDefinitions;
+        int count;		
+        if(name!=null&&!name.equals("")){
+	        processDefinitions=repositoryService.createProcessDefinitionQuery().processDefinitionNameLike("%"+name+"%")
+	                .listPage(offset, limit);
+	        count= (int) repositoryService.createProcessDefinitionQuery().processDefinitionNameLike("%"+name+"%").count();
+        }else{
+        	processDefinitions=repositoryService.createProcessDefinitionQuery().listPage(offset, limit);
+	        count= (int) repositoryService.createProcessDefinitionQuery().count();
+        }
         List<Object> list = new ArrayList<>();
         for(ProcessDefinition processDefinition: processDefinitions){
             list.add(new ProcessVO(processDefinition));

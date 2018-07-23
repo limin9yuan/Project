@@ -42,8 +42,7 @@ function load() {
 								offset:params.offset,
 								projectOwner:$('#projectOwner').val(),
 								projectId:$('#projectId').val(),
-								invoiceDate:$('#invoiceDate').data('date')
-					           // name:$('#searchName').val(),
+								invoiceDate:$('#invoiceDate').data('date')					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
 						},

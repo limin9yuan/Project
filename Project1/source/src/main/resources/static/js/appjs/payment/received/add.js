@@ -60,7 +60,8 @@ function validateRule() {
 				},
 				receivedCardNumber : {
 					required : true,
-					digits:true
+					digits:true,
+					creditcard:true
 				},
 				receivedType : {
 					required : true,

@@ -54,10 +54,18 @@ public class ModelController extends BaseController{
     }
 
     @GetMapping("/model/list")
-    PageUtils list(int offset, int limit) {
-        List<Model> list = repositoryService.createModelQuery().listPage(offset
-                , limit);
-        int total = (int) repositoryService.createModelQuery().count();
+    PageUtils list(int offset, int limit,String name) {
+    	List<Model> list;
+    	int total;
+    	if(name!=null&&!name.equals("")){
+    		list = repositoryService.createModelQuery().modelNameLike("%"+name+"%").listPage(offset
+	                , limit);
+	        total = (int) repositoryService.createModelQuery().modelNameLike("%"+name+"%").count();
+    	}else{
+	        list = repositoryService.createModelQuery().listPage(offset
+	                , limit);
+	        total = (int) repositoryService.createModelQuery().count();
+    	}
         PageUtils pageUtil = new PageUtils(list, total);
         return pageUtil;
     }

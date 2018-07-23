@@ -148,7 +148,8 @@ function validateRule() {
 			},
 			invoicePrice : {
 				required : true,
-				maxlength:20
+				maxlength:20,
+				number:true
 			},
 			invoiceType: {
 				required : true,

@@ -68,7 +68,16 @@ public interface FileDao {
 
 	// 开票管理
 	int listInvoiceAttachmentCount(Map<String, Object> map);
-
+	//产品
+	
+	List<FileDO> listAttachment(Map<String, Object> map);
+	
+	int listAttachmentCount(Map<String, Object> map);
+	//模块
+	List<FileDO> listmodelAttachment(Map<String, Object> map);
+	
+	int listmodelAttachmentCount(Map<String, Object> map);
+	
 	int count(Map<String, Object> map);
 
 	int save(FileDO file);

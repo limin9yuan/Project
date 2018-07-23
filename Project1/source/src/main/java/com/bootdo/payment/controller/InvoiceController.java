@@ -137,8 +137,13 @@ public class InvoiceController extends BaseController {
 		if (invoice.getInvoiceReceiverTime().equals("")) {
 			invoice.setInvoiceReceiverTime(null);
 		}
-		int invoiceIds = invoiceService.save(invoice);
-		if (invoiceIds > 0) {
+		String invoiceId = invoice.getInvoiceId();
+		InvoiceDO invoiceCheck = invoiceService.get(invoiceId);
+		if (invoiceCheck != null){
+			return R.error("发票序号已存在，请重新录入");
+		}
+		String invoiceIds = invoiceService.save(invoice);
+		if (!"0".equals(invoiceIds)) {
 			MainCopyPersonDO mcp = new MainCopyPersonDO();
 			String mainPersonId = invoice.getMainPersonId();
 			if (!"".equals(mainPersonId)) {

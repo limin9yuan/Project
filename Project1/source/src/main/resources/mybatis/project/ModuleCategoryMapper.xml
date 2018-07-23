@@ -119,4 +119,9 @@
 		from sales_module_category 
 	</select>
 
+	<update id="updateAttachment" parameterType="com.bootdo.project.domain.ModuleCategoryDO">
+		UPDATE
+		sales_module_category
+		SET Module_Attachment =REPLACE(Module_Attachment,#{id},'')
+	</update>
 </mapper>

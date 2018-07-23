@@ -57,6 +57,12 @@ public class ModuleCategoryServiceImpl implements ModuleCategoryService {
 	public List<DictDO> listDic() {
 		return moduleCategoryDao.listDic();
 	}
+
+	@Override
+	public int updatemodedlAttachment(ModuleCategoryDO moduleCategory) {
+		// TODO Auto-generated method stub
+		return moduleCategoryDao.updatemodedlAttachment(moduleCategory);
+	}
 	
 }
 

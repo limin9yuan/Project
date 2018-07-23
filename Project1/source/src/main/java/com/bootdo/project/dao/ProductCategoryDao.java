@@ -26,6 +26,8 @@ public interface ProductCategoryDao {
 	
 	int save(ProductCategoryDO productCategory);
 	
+	int updateAttachment(ProductCategoryDO productCategory);
+	
 	int update(ProductCategoryDO productCategory);
 	
 	int remove(String Product_ID);

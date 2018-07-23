@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" rel="stylesheet">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+						<!--  <input id="moduleId" name="moduleId" th:value="${moduleCategory.moduleId}"  type="hidden">-->
+						<input id="moduleId" name="moduleId" th:value="${moduleId}" class="form-control" type="hidden">
+						<input id="ids" name="ids" type="hidden">
+							<div class="form-group">
+							    <label class="col-sm-2 control-label">模块名称：<span class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<input id="moduleName" name="moduleName" class="form-control" type="text" readonly="readonly">
+								</div>	
+								<label class="col-sm-2 control-label">产品名称：<span class="mustin">*</span></label>
+								<div class="col-sm-4">
+								    <select data-placeholder="请选择" name="productId" id="productId"	 disabled="disabled"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</select>
+								</div>	
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-2 control-label">模块描述：<span class="mustin">*</span></label>
+								<div class="col-sm-10">
+									<textarea id="moduleDescription" name="moduleDescription" class="form-control" rows="3" readonly="readonly"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">附件：</label>
+								<div class="col-sm-4">
+									<div class="file-manager">
+										<button
+										shiro:hasPermission="project:moduleCategory:moduleCategory"
+										onclick="window.open('/project/moduleCategory/downLoadZipFile?id='+$('#moduleAttachment').val())"
+										type="button" class="btn btn-danger ">
+										<i class="glyphicon glyphicon-cloud-download"></i>下载全部附件
+									</button>
+										<input id="moduleAttachment" name="moduleAttachment" th:value="${moduleAttachment}"
+											type="hidden">
+									</div>
+								</div>
+							</div>
+							<!--***************文件显示*************************** -->
+							<div class="form-group" id="app">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-10 animated fadeInRight">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="file-box" v-for="row in rows">
+												<div class="file" id="fileDiv">
+													<a href="#"> <span class="corner"></span>
+														<div class="image">
+															<img alt="文件" class="img-responsive" :src="row.url">
+														</div>
+														<div class="file-name">
+															<br /> <small>{{row.fileName}}</small> <br /> <small>{{row.createDate}}</small>
+														</div> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+														<button class="btn btn-warning btn-xs "
+															@click="window.open('/project/moduleCategory/down?fileName='+row.fileName)"
+															type="button">下载</button> &nbsp; &nbsp; &nbsp; &nbsp;
+														<button class="btn btn-danger btn-xs" id="removeFile"
+															@click=" removeFile(row.id)" type="button">删除</button>
+													</a>
+												</div>
+											</div>
+											<div id="incomeNum"></div>
+										</div>
+									</div>
+									<div>
+										<ul id="page"></ul>
+									</div>
+									<input id="removeId" name="removeId" type="hidden">
+									<!-- 用来记录将要删除的附件id -->
+
+								</div>
+							</div>
+							<div class="form-group">	
+								<label class="col-sm-2 control-label">备注：</label>
+								<div class="col-sm-10">
+									<textarea id="moduleRemark" name="moduleRemark" class="form-control" rows="5" readonly="readonly"></textarea>
+								</div>
+							</div>
+							<div class="form-group">	
+								   <div class="columns pull-right col-md-2">
+										<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button>
+								   </div>
+							 </div>
+														<!-- <div class="form-group">	
+								<label class="col-sm-3 control-label">操作人：</label>
+								<div class="col-sm-8">
+									<input id="moduleRecorder" name="moduleRecorder" th:value="${moduleCategory.moduleRecorder}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input id="moduleRecordTime" name="moduleRecordTime" th:value="${moduleCategory.moduleRecordTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建人：</label>
+								<div class="col-sm-8">
+									<input id="moduleCreator" name="moduleCreator" th:value="${moduleCategory.moduleCreator}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">	
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="moduleCreateTime" name="moduleCreateTime" th:value="${moduleCategory.moduleCreateTime}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div> -->
+						</form>
+					</div>
+				</div>
+			</div>
+	</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/project/moduleCategory/examine.js">
+	
+
+	<!-- 全局js -->
+	<script src="/js/jquery.min.js?v=2.1.4"></script>
+	<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="/js/bootstrap-paginator.min.js"></script>
+
+	<script src="/js/content.js?v=1.0.0"></script>
+	<script src="/js/layui.js"></script>
+	<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script type="text/javascript">
+	//************* 文件下载级显示 *********************************************************		
+	 var app = new Vue({
+	        el: '#app',
+	        data: {
+	            limit: 10000,
+	            offset: 0,
+	            total: 0,
+	            file: '',
+	            type: '',
+	            rows: '',
+	            moduleId:$("#moduleId").val(),
+	        },
+	        methods: {
+	            getData: function () {
+	                $.getJSON("/project/moduleCategory/listmodleAttachment", {
+	                	limit: this.limit,
+	                    offset: this.offset,
+	                    type: this.type,
+	                    moduleId:this.moduleId
+	                }, function (r) {
+	                    app.total = r.total;
+	                    app.rows = r.rows;
+// 	                    app.page();
+	                });
+	                
+	            },
+	            page: function () {
+	                var options = {
+	                    currentPage: app.offset / 3 + 1, //当前页
+	                    totalPages: app.total / (3 + 1) + 1, //总页数
+	                    numberofPages: 15, //显示的页数
+	                    bootstrapMajorVersion: 3,
+	                    alignment: 'center',
+	                    size: 'large',
+	                    shouldShowPage: true,
+	                    itemTexts: function (type, page, current) { //修改显示文字
+	                        switch (type) {
+	                            case "first":
+	                                return "首页";
+	                            case "prev":
+	                                return "上一页";
+	                            case "next":
+	                                return "下一页";
+	                            case "last":
+	                                return "尾页";
+	                            case "page":
+	                                return page;
+	                        }
+	                    },
+	                    onPageClicked: function (event, originalEvent, type, page) {
+	                        app.offset = (page - 1) * 3;
+	                        app.getData();
+	                    }
+	                };
+	                $('#page').bootstrapPaginator(options);
+	            }
+	        },
+	        created: function () {
+	            this.getData();
+	        }
+	    });
+	   
+	    //获取要删除的文件id
+	    function removeFile(id){
+	    	var ids=id+",";
+	    	var removeIds=$("#removeId").val(ids+$("#removeId").val());
+	    	 layer.confirm('确定要删除选中的记录？', {
+	                    btn: ['确定', '取消']
+	    	 },
+	    	  function () {
+                 $.ajax({
+                     url: "",
+//                      type: "post",
+//                      data: {
+//                          'ids': removeIds
+//                      },
+                     success: function () {
+                    	 var btn1=document.getElementById('removeFile');
+            	    	 var box1=document.getElementById('fileDiv');
+            	    	 box1.style.display='none';//隐藏已选中的删除文件
+                    	    
+                    	 var serviceAtt=$("#moduleAttachment").val();
+//                      	alert(serviceAtt);
+                 		//将moduleAttachment字段里面查出来的id加上都好替换为'' 空
+                     	var idss=serviceAtt.replace(ids,'');
+//                      	alert(idss)
+                 		//将idss传给moduleAttachment  input
+                 			$("#moduleAttachment").val(idss);
+                             layer.msg("已选中要删除的文件！");
+                     }
+                 });
+             })
+	    }
+	    	
+	    	 
+// 	   点击提交的时候 删除要删除的文件
+	    function removeaa(){
+   		 var removeIds=$("#removeId").val();
+   		 $.ajax({
+                url: "/common/sysFile/removes",
+                type: "post",
+                data: {
+                    'removeId': removeIds
+                },
+                success: function (r) {
+                    if (r.code == 0) {
+//                         layer.msg(r.msg);
+//                         app.getData();
+                    } else {
+                        layer.msg(r.msg);
+                    }
+                }
+            });
+   		updateRecordAttachment();
+   	 }
+   	 
+	    function updateRecordAttachment(){
+	    	var ids=$("#removeId").val();
+// 	    	alert(ids)
+	    	$.ajax({
+                url: "/project/moduleCategory/updateRecordAttachment",
+                type: "post",
+                data: {
+                    'id': ids
+                },
+                success: function (r) {
+                    if (r.code == 0) {
+                        layer.msg(r.msg);
+                        app.getData();
+                    } else {
+                        layer.msg(r.msg);
+                    }
+                }
+            });
+	    }
+
+//********************** END *************************************	
+	</script>
+</body>
+</html>

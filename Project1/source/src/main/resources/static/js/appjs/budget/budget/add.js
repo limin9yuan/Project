@@ -216,55 +216,7 @@ function validateRule() {
 			},
 			businessId: {
 				required : true
-			},/*
-			budgetAccountReceivable: {
-				required : true,
-				maxlength:20
 			},
-			budgetTotalCost: {
-				required : true,
-				maxlength:20
-			},
-			budgetProfitRate: {
-				required : true,
-				maxlength:5
-			},
-			budgetConformance: {
-				required : true,
-				maxlength:1
-			},
-			budgetServiceRevenue: {
-				required : true,
-				maxlength:20
-			},
-			budgetTax: {
-				required : true,
-				maxlength:20
-			},
-			budgetServiceRevenueNet: {
-				required : true,
-				maxlength:20
-			},
-			budgetCost: {
-				required : true,
-				maxlength:20
-			},
-			budgetPurchaseCost: {
-				required : true,
-				maxlength:20
-			},
-			budgetLaborCost: {
-				required : true,
-				maxlength:20
-			},
-			budgetTravelCost: {
-				required : true,
-				maxlength:20
-			},
-			budgetProfit: {
-				required : true,
-				maxlength:20
-			},*/
 			province: {
 				required : true
 			},
@@ -273,6 +225,10 @@ function validateRule() {
 			},
 			area: {
 				required : true
+			},
+			budgetProfitRate:{
+				required : true,
+				number:true
 			}
 		},
 		messages : {
@@ -300,54 +256,6 @@ function validateRule() {
 			businessId : {
 				required : icon + "请选择业务名称"
 			},
-			/*budgetAccountReceivable : {
-				required : icon + "请选择应收账款总额",
-				maxlength:icon + "字符长度不能大于20"
-			},
-			budgetTotalCost : {
-				required : icon + "请选择计划成本总额",
-				maxlength:icon + "字符长度不能大于20"
-			},
-			budgetProfitRate : {
-				required : icon + "请选择项目计划利润率",
-				maxlength:icon + "字符长度不能大于5"
-			},
-			budgetConformance : {
-				required : icon + "请选择计划是否合规",
-				maxlength:icon + "字符长度不能大于1"
-			},
-			budgetServiceRevenue : {
-				required : icon + "请选择服务收入（合同额）",
-				maxlength:icon + "字符长度不能大于20"
-			},
-			budgetTax : {
-				required : icon + "请选择税金",
-				maxlength:icon + "字符长度不能大于20"
-			},
-			budgetServiceRevenueNet : {
-				required : icon + "请选择服务净收入",
-				maxlength:icon + "字符长度不能大于20"
-			},
-			budgetCost : {
-				required : icon + "请选择费用和支持（含税）",
-				maxlength:icon + "字符长度不能大于20"
-			},
-			budgetPurchaseCost : {
-				required : icon + "请选择采购成本",
-				maxlength:icon + "字符长度不能大于20"
-			},
-			budgetLaborCost : {
-				required : icon + "请选择人工成本",
-				maxlength:icon + "字符长度不能大于20"
-			},
-			budgetTravelCost : {
-				required : icon + "请选择差旅成本",
-				maxlength:icon + "字符长度不能大于20"
-			},
-			budgetProfit : {
-				required : icon + "请选择利润",
-				maxlength:icon + "字符长度不能大于20"
-			},*/
 			province : {
 				required : icon + "请选择省"
 			},
@@ -356,9 +264,12 @@ function validateRule() {
 			},
 			area : {
 				required : icon + "请选择区"
+			},
+			budgetProfitRate:{
+				required : icon + "项目计划利润率不能为空"
 			}
-		} 
-		
+		}
+
 	})
 }
 

@@ -8,6 +8,8 @@ $().ready(function() {
             elem: '#companyCustomertest', //绑定元素
             url: '/sales/companyCustomer/importSubmit', //上传接口
             size: 1000,
+            auto: false,			//不自动上传设置
+            bindAction: '#upFile',	//“上传”按钮的ID
             accept: 'file',
             done: function (r) {
 //            	alert(r.fileName);

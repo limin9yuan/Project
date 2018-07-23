@@ -22,7 +22,7 @@ public interface InvoiceService {
 	
 	int count(Map<String, Object> map);
 	
-	int save(InvoiceDO invoice);
+	String save(InvoiceDO invoice);
 	
 	int update(InvoiceDO invoice);
 	

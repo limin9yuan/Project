@@ -56,5 +56,11 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 	public List<DictDO> listDic() {
 		return productCategoryDao.listDic();
 	}
+
+	@Override
+	public int updateAttachment(ProductCategoryDO productCategory) {
+		// TODO Auto-generated method stub
+		return productCategoryDao.updateAttachment(productCategory);
+	}
 }
 

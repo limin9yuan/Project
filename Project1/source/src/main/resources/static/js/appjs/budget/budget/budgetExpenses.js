@@ -62,34 +62,34 @@ function loadExpenses() {
 										return e + d ;
 									}
 								},{
-									field : 'expensesType', 
-									title : '报销类型' 
+									field : 'expensesType',
+									title : '报销类型'
 								},{
-									field : 'expensesPlanPrice', 
-									title : '报销金额预估' 
+									field : 'expensesPlanPrice',
+									title : '报销金额预估'
 								},{
-									field : 'expensesPlanDescription', 
-									title : '预估说明' 
+									field : 'expensesPlanDescription',
+									title : '预估说明'
 								},{
-									field : 'expensesCustomerRate', 
-									title : '客户承担' 
+									field : 'expensesCustomerRate',
+									title : '客户承担'
 								},{
-									field : 'expensesProjectRate', 
-									title : '项目组承担' 
+									field : 'expensesProjectRate',
+									title : '项目组承担'
 								},{
-									field : 'expensesTotalPrice', 
-									title : '总计' 
+									field : 'expensesTotalPrice',
+									title : '总计'
 								},{
-									field : 'expensesRemarks', 
-									title : '备注' 
+									field : 'expensesRemarks',
+									title : '备注'
 								}/*,
 																{
-									field : 'expensesOperator', 
-									title : '操作人' 
+									field : 'expensesOperator',
+									title : '操作人'
 								},
 																{
-									field : 'expensesOperateTime', 
-									title : '操作时间' 
+									field : 'expensesOperateTime',
+									title : '操作时间'
 								},*/
 																 ]
 					});
@@ -131,7 +131,7 @@ function removeExpenses(id) {
 			success : function(r) {
 				if (r.code==0) {
 					layer.msg(r.msg);
-					reLoad();
+					reLoadExpenses();
 				}else{
 					layer.msg(r.msg);
 				}
@@ -166,7 +166,7 @@ function batchRemoveExpenses() {
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
-					reLoad();
+					reLoadExpenses();
 				} else {
 					layer.msg(r.msg);
 				}
