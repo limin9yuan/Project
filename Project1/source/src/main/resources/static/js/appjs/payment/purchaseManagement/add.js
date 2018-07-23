@@ -89,26 +89,31 @@ function validateRule() {
 			},
 			purchaseUnitPrice: {
 				required : true,
-				maxlength:10
+				maxlength:10,
+				number:true
 			},
 			purchaseNumber: {
 				required : true,
-				maxlength:10
+				maxlength:10,
+				number:true
 			},
 			purchaseTotalPrice: {
 				required : true,
-				maxlength:10
+				maxlength:10,
+				number:true
 			},
 			purchaseOrderStatus: {
 				required : true
 			},
 			purchasePaid: {
 				required : true,
-				maxlength:10
+				maxlength:10,
+				number:true
 			},
 			purchaseNotPaid: {
 				required : true,
-				maxlength:10
+				maxlength:10,
+				number:true
 			},
 			purchaseFulfilmentStatus: {
 				required : true

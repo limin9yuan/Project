@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header">
+<link href="/css/layui.css" rel="stylesheet">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<link rel="shortcut icon" href="favicon.ico">
+<link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+<link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/style.css?v=4.1.0" rel="stylesheet">
+</head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<!-- <input id="recordId" name="recordId" th:value="${record.recordId}"  type="hidden"> -->
+							<input id="recordId" name="recordId" th:value="${recordId}"
+								class="form-control" type="text" type="hidden"> <input
+								id="ids" name="ids" class="form-control" type="hidden"
+								value="-1">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">客户名称：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-9">
+									<select data-placeholder="请选择" name="customerId"
+										id="customerId" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">业务名称：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-9">
+									<select data-placeholder="请选择" name="businessId"
+										id="businessId" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">项目名称：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-9">
+									<select data-placeholder="请选择" name="projectId" id="projectId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">行动主题：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<input id="recordName" name="recordName" class="form-control"
+										type="text">
+								</div>
+								<label class="col-sm-1 control-label">阶段：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="recordPhase"
+										id="recordPhase" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">执行人：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="recordExecutor"
+										id="recordExecutor" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+								<label class="col-sm-1 control-label">执行状态：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="recordExecuteStatus"
+										id="recordExecuteStatus" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">实际执行开始时间：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<div class="input-group date" id="recordBeginDate">
+										<input class="form-control" type="text" name="recordBeginDate">
+										<span class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+								<label class="col-sm-1 control-label">实际执行结束时间：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<div class="input-group date" id="recordEndDate">
+										<input class="form-control" type="text" name="recordEndDate">
+										<span class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">销售机会：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<input id="recordSaleOpportunity" name="recordSaleOpportunity"
+										class="form-control" type="text">
+								</div>
+								<label class="col-sm-1 control-label">实际费用：</label>
+								<div class="col-sm-4">
+									<input id="recordExpenseActual" name="recordExpenseActual"
+										class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">费用类型：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="recordExpenseCategory"
+										id="recordExpenseCategory" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">附件：</label>
+								<div class="col-sm-4">
+									<div class="file-manager">
+										<button type="button" class="layui-btn btn btn-danger"
+											id="test1" style="width: 100%;">
+											<i class="glyphicon glyphicon-cloud-upload"></i>上传文件
+										</button>
+										<input id="recordAttachment" name="recordAttachment"
+											th:value="${recordAttachment}" type="hidden">
+									</div>
+								</div>
+							</div>
+							<!--***************文件显示*************************** -->
+							<div class="form-group" id="app">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-10 animated fadeInRight">
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="file-box" v-for="row in rows">
+												<div class="file" id="fileDiv">
+												<a href="#"> <span class="corner"></span>
+													<div class="image">
+														<img alt="文件" class="img-responsive" :src="row.url">
+													</div>
+													<div class="file-name">
+														<br /> <small>{{row.fileName}}</small> <br /> <small>{{row.createDate}}</small>
+													</div>
+													&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+													<button class="btn btn-warning btn-xs "
+														@click="window.open('/sales/record/down?fileName='+row.fileName)"
+														type="button">下载</button>
+													&nbsp; &nbsp; &nbsp; &nbsp;
+													<button class="btn btn-danger btn-xs" id="removeFile"
+														@click=" removeFile(row.id)" type="button">删除</button>
+													</a>	
+												</div>
+											</div>
+											<div id="incomeNum"></div>
+										</div>
+									</div>
+									<div>
+										<ul id="page"></ul>
+									</div>
+									<input id="removeId" name="removeId" type="hidden" ><!-- 用来记录将要删除的附件id -->
+							
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">备注：</label>
+								<div class="col-sm-9">
+									<textarea id="recordRemarks" name="recordRemarks"
+										class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">主送人：</label>
+								<div class="col-sm-8">
+									<input id="mainPersonId" name="mainPersonId" type="hidden">
+									<input id="isMainPerson" name="isMainPerson" type="hidden">
+									<div style="float: left;" id="sendPerson"></div>
+									<div style="float: left;">
+										<button type="button" class="btn btn-danger btn-xs"
+											id="sendPersonBtn" var="sendPersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addSendPerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">抄送人：</label>
+								<div class="col-sm-8">
+									<input id="copyPersonId" name="copyPersonId" type="hidden">
+									<input id="isCopyPerson" name="isCopyPerson" type="hidden">
+									<div style="float: left;" id="receivePerson"></div>
+									<div style="float: left;">
+										<button type="button" class="btn btn-danger btn-xs"
+											id="receivePersonBtn" var="receivePersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addRecivePerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="form-group">
+									<div class="columns pull-right " style="padding-right: 150px">
+										<button type="button" class="btn btn-danger"
+											onclick="closeWin()">取消</button>
+									</div>
+									<div class="columns pull-right " style="padding-right: 5px">
+										<button type="submit" class="btn btn-primary columns" onclick="removeaa()">提交</button>
+										
+									</div>
+								</div>
+							</div>
+
+							<!--
+														<div class="form-group">
+								<label class="col-sm-3 control-label">操作人：</label>
+								<div class="col-sm-8">
+									<input id="recordOperator" name="recordOperator" th:value="${record.recordOperator}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input id="recordOperateTime" name="recordOperateTime" th:value="${record.recordOperateTime}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">创建人：</label>
+								<div class="col-sm-8">
+									<input id="recordCreator" name="recordCreator" th:value="${record.recordCreator}" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="recordCreateTime" name="recordCreateTime" th:value="${record.recordCreateTime}" class="form-control" type="text">
+								</div>
+							</div>
+																					<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-3">
+									<button type="submit" class="btn btn-primary">提交</button>
+								</div>
+							</div>-->
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/sales/record/edit.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script type="text/javascript" src="/js/common.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+
+	<!-- 全局js -->
+	<!-- 	<script src="/js/jquery.min.js?v=2.1.4"></script> -->
+	<script src="/js/bootstrap.min.js?v=3.3.6"></script>
+	<script src="/js/bootstrap-paginator.min.js"></script>
+
+	<script src="/js/content.js?v=1.0.0"></script>
+	<script src="/js/layui.js"></script>
+	<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script type="text/javascript">
+	//************* 文件下载级显示 *********************************************************		
+	 var app = new Vue({
+	        el: '#app',
+	        data: {
+	            limit: 10000,
+	            offset: 0,
+	            total: 0,
+	            file: '',
+	            type: '',
+	            rows: '',
+	            recordId:$("#recordId").val(),
+	        },
+	        methods: {
+	            getData: function () {
+	                $.getJSON("/sales/record/listRecordAttachment", {
+	                	limit: this.limit,
+	                    offset: this.offset,
+	                    type: this.type,
+	                    recordId:this.recordId
+	                }, function (r) {
+	                    app.total = r.total;
+	                    app.rows = r.rows;
+// 	                    app.page();
+	                });
+	                
+	            },
+	            page: function () {
+	                var options = {
+	                    currentPage: app.offset / 3 + 1, //当前页
+	                    totalPages: app.total / (3 + 1) + 1, //总页数
+	                    numberofPages: 15, //显示的页数
+	                    bootstrapMajorVersion: 3,
+	                    alignment: 'center',
+	                    size: 'large',
+	                    shouldShowPage: true,
+	                    itemTexts: function (type, page, current) { //修改显示文字
+	                        switch (type) {
+	                            case "first":
+	                                return "首页";
+	                            case "prev":
+	                                return "上一页";
+	                            case "next":
+	                                return "下一页";
+	                            case "last":
+	                                return "尾页";
+	                            case "page":
+	                                return page;
+	                        }
+	                    },
+	                    onPageClicked: function (event, originalEvent, type, page) {
+	                        app.offset = (page - 1) * 3;
+	                        app.getData();
+	                    }
+	                };
+	                $('#page').bootstrapPaginator(options);
+	            }
+// 	            ,
+// 	            removeFile: function (id) {
+// 	                layer.confirm('确定要删除选中的记录？', {
+// 	                    btn: ['确定', '取消']
+// 	                }, function () {
+// 	                    $.ajax({
+// 	                        url: "/common/sysFile/remove",
+// 	                        type: "post",
+// 	                        data: {
+// 	                            'id': id
+// 	                        },
+// 	                        success: function (r) {
+// 	                            if (r.code == 0) {
+// 	                                layer.msg(r.msg);
+// 	                                app.getData();
+// 	                            } else {
+// 	                                layer.msg(r.msg);
+// 	                            }
+// 	                        }
+// 	                    });
+	                    
+// 	                })
+	                
+// 	            }
+	        },
+	        created: function () {
+	            this.getData();
+	        }
+	    });
+	   
+	    //获取要删除的文件id
+	    function removeFile(id){
+	    	var ids=id+",";
+	    	var removeIds=$("#removeId").val(ids+$("#removeId").val());
+	    	 layer.confirm('确定要删除选中的记录？', {
+	                    btn: ['确定', '取消']
+	    	 },
+	    	  function () {
+                 $.ajax({
+                     url: "",
+//                      type: "post",
+//                      data: {
+//                          'ids': removeIds
+//                      },
+                     success: function () {
+                    	 var btn1=document.getElementById('removeFile');
+            	    	 var box1=document.getElementById('fileDiv');
+            	    	 box1.style.display='none';//隐藏已选中的删除文件
+                    	    
+                    	 var serviceAtt=$("#recordAttachment").val();
+//                      	alert(serviceAtt);
+                 		//将recordAttachment字段里面查出来的id加上都好替换为'' 空
+                     	var idss=serviceAtt.replace(ids,'');
+//                      	alert(idss)
+                 		//将idss传给recordAttachment  input
+                 			$("#recordAttachment").val(idss);
+                             layer.msg("已选中要删除的文件！");
+                     }
+                 });
+             })
+	    }
+	    	
+	    	 
+// 	   点击提交的时候 删除要删除的文件
+	    function removeaa(){
+   		 var removeIds=$("#removeId").val();
+   		 $.ajax({
+                url: "/common/sysFile/removes",
+                type: "post",
+                data: {
+                    'removeId': removeIds
+                },
+                success: function (r) {
+                    if (r.code == 0) {
+//                         layer.msg(r.msg);
+//                         app.getData();
+                    } else {
+                        layer.msg(r.msg);
+                    }
+                }
+            });
+   		updateRecordAttachment();
+   	 }
+   	 
+	    function updateRecordAttachment(){
+	    	var ids=$("#removeId").val();
+// 	    	alert(ids)
+	    	$.ajax({
+                url: "/sales/record/updateRecordAttachment",
+                type: "post",
+                data: {
+                    'id': ids
+                },
+                success: function (r) {
+                    if (r.code == 0) {
+//                     	alert(id)
+						//将recordAttachment里面的字段提取出来
+//                     	var serviceAtt=$("#recordAttachment").val();
+//                     	alert(serviceAtt);
+						//将recordAttachment字段里面查出来的id加上都好替换为'' 空
+//                     	var idss=serviceAtt.replace(ids,'');
+//                     	alert(idss)
+						//将idss传给recordAttachment  input
+// 						$("#recordAttachment").val(idss);
+                        layer.msg(r.msg);
+                        app.getData();
+                    } else {
+                        layer.msg(r.msg);
+                    }
+                }
+            });
+	    }
+
+//********************** END *************************************	
+	</script>
+</body>
+</html>

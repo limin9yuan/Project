@@ -148,3 +148,19 @@ function datetimepicker() {
 	        locale: moment.locale('zh-cn')
 	    });
 }
+function readAsDataURL(){  
+    //检验是否为图像文件  
+    var file = document.getElementById("test1").files[0];  
+    if(!/image\/\w+/.test(file.type)){  
+        alert("看清楚，这个需要图片！");  
+        return false;  
+    }  
+    var reader = new FileReader();  
+    //将文件以Data URL形式读入页面  
+    reader.readAsDataURL(file);  
+    reader.onload=function(e){  
+        var result=document.getElementById("result");  
+        //显示文件  
+        result.innerHTML='<img src="' + this.result +'" alt="" />';  
+    }  
+}  

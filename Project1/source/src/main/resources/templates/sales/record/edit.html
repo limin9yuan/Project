@@ -154,7 +154,7 @@
 										<div class="col-sm-12">
 											<div class="file-box" v-for="row in rows">
 												<div class="file" id="fileDiv">
-													<!-- 															<a > <span class="corner"></span> -->
+												<a href="#"> <span class="corner"></span>
 													<div class="image">
 														<img alt="文件" class="img-responsive" :src="row.url">
 													</div>
@@ -168,7 +168,7 @@
 													&nbsp; &nbsp; &nbsp; &nbsp;
 													<button class="btn btn-danger btn-xs" id="removeFile"
 														@click=" removeFile(row.id)" type="button">删除</button>
-														
+													</a>	
 												</div>
 											</div>
 											<div id="incomeNum"></div>

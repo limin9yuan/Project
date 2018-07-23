@@ -82,7 +82,7 @@ function loadreceived() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="removereceived(\''
 												+ row.receivedId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm" '+s_view_h+' href="#" title="备用"  mce_href="#" onclick="view(\''
+										var f = '<a class="btn btn-success btn-sm" '+s_view_h+' href="#" title="查看"  mce_href="#" onclick="view(\''
 												+ row.receivedId
 												+ '\')"><i class="fa fa-search"></i></a> ';
 										return e + d + f ;
@@ -192,7 +192,7 @@ function removereceived(id) {
 			success : function(r) {
 				if (r.code==0) {
 					layer.msg(r.msg);
-					reLoadreceived();
+					reLoad();
 				}else{
 					layer.msg(r.msg);
 				}
@@ -227,7 +227,7 @@ function batchRemovereceived() {
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
-					reLoadreceived();
+					reLoad();
 				} else {
 					layer.msg(r.msg);
 				}

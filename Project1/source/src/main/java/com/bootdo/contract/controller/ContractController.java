@@ -326,7 +326,7 @@ public class ContractController extends BaseController {
 // 			System.out.println("getCanonicalPath:"+files.getCanonicalPath());//getCanonicalPath()得到的是一个规范路径没有.
 // 			
 
- 			File file = new File("./src/main/resources/downloadTemplate/合同起草导入模板.xls");
+ 			File file = new File("./src/main/resources/downloadTemplate/合同起草导入模板.xlsx");
  			// 取得文件名。
  			String filename = file.getName();
  			

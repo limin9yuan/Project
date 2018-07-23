@@ -153,7 +153,7 @@ function load() {
 					title :'合同审批导入',
 					maxmin : true,
 					shadeClose : false, // 点击遮罩关闭层
-					area : [ '500px', '70%' ],
+					area : [ '25%', '25%' ],
 					content : prefix + '/import'  // iframe的url
 				});
         });
