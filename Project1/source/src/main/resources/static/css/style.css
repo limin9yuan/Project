@@ -7375,9 +7375,18 @@ body.skin-3 {
     width:80px;
     height:30px;
     color: #ffffff;
-    /* vertical-align:text-top; */
 }
 .showTable{
     table-layout: fixed;
 }
 .mustin{color:#ff0000;}
+.projectDiv{
+	background-color:#1daef7;
+    float:left;
+    margin-left: 10px;
+    padding-left:10px;
+    padding-top:5px;
+    width:250px;
+    height:30px;
+    color: #ffffff;
+}

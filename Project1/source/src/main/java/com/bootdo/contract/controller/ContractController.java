@@ -81,6 +81,11 @@ public class ContractController extends BaseController {
 		return "contract/contract/contract";
 	}
 
+	@GetMapping("/multiProjects")
+	String mainPerson(){
+		return "contract/contract/multiProjects/multiProjects";
+	}
+
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("contract:contract:contract")

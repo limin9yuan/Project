@@ -1,5 +1,7 @@
 var prefix = "/contract/contract";
 $().ready(function() {
+	// // 项目名称
+	// loadCrmData("/sales/salesProject/listAllDic", "projectId");
 	// 客户名称
 	loadCrmData("/sales/companyCustomer/listDic", "customerId");
 	// 业务名称
@@ -26,6 +28,7 @@ $().ready(function() {
 			validateRule();
 			datetimepicker();
 			loadEditTable();
+			loadSalesProject();
 
 	// 附件
 	layui.use('upload', function() {
@@ -100,7 +103,179 @@ $.validator.setDefaults({
 		save();
 	}
 });
+function loadSalesProject() {
+	$('#salesProject')
+			.bootstrapTable(
+					{
+						method : 'get', // 服务器数据的请求方式 get or post
+						url :"/sales/salesProject/list", // 服务器数据的加载地址
+					//	showRefresh : true,
+					//	showToggle : true,
+					//	showColumns : true,
+						iconSize : 'outline',
+						toolbar : '#exampleToolbar',
+						striped : true, // 设置为true会有隔行变色效果
+						dataType : "json", // 服务器返回的数据类型
+						pagination : true, // 设置为true会在底部显示分页条
+						// queryParamsType : "limit",
+						// //设置为limit则会发送符合RESTFull格式的参数
+						singleSelect : false, // 设置为true将禁止多选
+						// contentType : "application/x-www-form-urlencoded",
+						// //发送到服务器的数据编码类型
 
+						sorStable : true, 					 // 是否启用排序
+						sortOrder : "desc",// 排序方式
+						sortName:"Project_ID",
+
+						pageSize : 10, // 如果设置了分页，每页数据条数
+						pageNumber : 1, // 如果设置了分布，首页页码
+						search : false, // 是否显示搜索框
+						showColumns : true, // 是否显示内容下拉框（选择显示的列）列表配置显示
+						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
+						queryParams : function(params) {
+							//alert($('#province').val()+$('#city').val()+$('#area').val());
+							return {
+								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
+								limit: params.limit,
+								offset:params.offset,
+							};
+						},
+						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
+						// queryParamsType = 'limit' ,返回参数必须包含
+						// limit, offset, search, sort, order 否则, 需要包含:
+						// pageSize, pageNumber, searchText, sortName,
+						// sortOrder.
+						// 返回false将会终止请求
+						columns : [
+								{
+									checkbox : true
+								},
+								                               {
+									width : '130px',
+									field : 'projectName',
+									title : '项目名称'
+								},{
+									sortable : true,
+									width : '130px',
+									field : 'projectCreateTime',
+									title : '首次保存时间'
+								},{
+									sortable : true,
+									width : '130px',
+									field : 'projectOperateTime',
+									title : '最后一次保存时间'
+								},{
+									width : '130px',
+									field : 'projectCreatorName',
+									title : '创建人'
+								},
+								{
+									width : '130px',
+									field:'projectOperator',
+									title:'操作人'
+								},
+								{
+									width : '130px',
+									field : 'projectBusiness',
+									title : '业务编号'
+								},{
+									width : '130px',
+									field : 'projectBusinesName',
+									title : '业务名称'
+								},{
+									width : '130px',
+									field : 'projectSalesName',
+									title : '销售负责人'
+								},{
+									width : '130px',
+									field : 'projectManagerName',
+									title : '售前经理'
+								},{
+									width : '130px',
+									field : 'projectBeginDate',
+									title : '项目开始时间'
+								},{
+									width : '130px',
+									field : 'projectEndDate',
+									title : '项目结束时间'
+								},{
+									width : '130px',
+									field : 'projectGategory',
+									title : '项目类型'
+								},{
+									width : '130px',
+									field : 'projectPhase',
+									title : '项目阶段'
+								}
+																 ]
+					});
+}
+function pickMultiProjects() {
+	var rows = $('#salesProject').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	if (rows.length == 0) {
+		layer.msg("请选择项目");
+		return;
+	}
+    var projectIds="";
+	// var isMainPerson = 1;
+    // 遍历所有选择的行数据，取每条数据对应的ID
+    $.each(rows, function(i, row) {
+        var projectDiv = row['projectId']+"_1";
+		var projectId = $("#projectId",window.parent.document).val();
+		var flag = 0;
+		var arrayIds = projectId.split(",");
+		for (var i = 0; i < arrayIds.length; i++) {
+			if (arrayIds[i] == row['projectId']) {
+					flag = 1;
+					break;
+
+			}
+		}
+		if (flag == 0){
+			if(projectIds==""){
+	            projectIds = row['projectId'];
+	        }else{
+	            projectIds = projectIds+","+row['projectId'];
+	        }
+			// $("#sendPerson",window.parent.document).append("<div class='personDiv' id=" +
+			// sendDiv +" onclick='deleteMainPerson(\"" + sendDiv +"\" )'>"
+			// 						+ row['employeeName'] +"</div>");
+			$("#multiProjects",window.parent.document).append("<div class='projectDiv' id=" +
+			projectDiv +">"+ row['projectId']+" "+ row['projectName']+"<div style='float:right;margin-top:-8px;margin-right:5px'><img id=" +projectDiv +" onclick='deleteMultiProjects(\"" + projectDiv +"\" )' src='../../../img/close.png'></div>"
+									 +"</div>");
+
+		}
+    });
+
+    // //子窗口给父窗口元素赋值
+	if(projectIds!=""){
+		var newProjectId=$("#projectId",window.parent.document).val()==""
+						?projectIds
+						:($("#projectId",window.parent.document).val()+","+projectIds);
+		$("#projectId",window.parent.document).val(newProjectId);
+	}
+    closeWin();
+}
+function deleteMultiProjects(id) {
+    $("#"+id).remove();
+	var MultiProjectIds = $("#projectId").val();
+	var splitId = id.split("_");
+	var deleteId = splitId[0];
+	MultiProjectIds = (","+MultiProjectIds+",").replace(","+deleteId+",",",");
+	var subString = MultiProjectIds.substr(1,MultiProjectIds.length-2);
+
+	$("#projectId").val(subString);
+}
+function addSalesProject(){
+    layer.open({
+        type : 2,
+        title : '增加项目',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '95%', '95%' ],
+        content :'/contract/contract/multiProjects'
+    });
+}
 function aa(){
 	if($("#contractIds").val()==-1){
 		parent.layer.msg("请先保存项目基本信息");

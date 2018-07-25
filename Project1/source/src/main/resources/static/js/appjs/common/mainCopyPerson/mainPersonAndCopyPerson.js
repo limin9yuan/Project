@@ -189,7 +189,6 @@ function deleteMainPerson(id) {
 	var deleteId = splitId[0];
 	mainPersonIds = (","+mainPersonIds+",").replace(","+deleteId+",",",");
 	var subString = mainPersonIds.substr(1,mainPersonIds.length-2);
-	// alert(subString);
 
 	$("#mainPersonId").val(subString);
 }
