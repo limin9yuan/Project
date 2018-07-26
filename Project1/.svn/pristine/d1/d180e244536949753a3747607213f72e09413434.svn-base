@@ -7373,7 +7373,7 @@ body.skin-3 {
 .projectDiv{
 	background-color:#1daef7;
     float:left;
-    margin-right: 10px;
+    margin-left: 10px;
     padding-left:10px;
     padding-top:5px;
     width:230px;
