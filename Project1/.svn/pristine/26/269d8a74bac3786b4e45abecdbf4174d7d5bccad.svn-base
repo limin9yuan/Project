@@ -27,7 +27,7 @@ $().ready(function() {
               		 var index1=upFileName.lastIndexOf(".");
               		 var index2=upFileName.length;
               		 var suffix=upFileName.substring(index1+1,index2);//后缀名
-
+              		 
               	 $("#fileNames").text(file.name);//将获取到的文件名给p标签显示出来
               	//判断是什么格式应对的预览图片
               	 if(suffix=="xls"||suffix=="xlsx"){//判断上传是否是表格
@@ -178,7 +178,7 @@ function validateRule() {
 				required : icon + "请选择费用类型"
 			},
 			recordExpenseActual:{
-				number:icon + "请输入数字！",
+				number: icon + "请输入数字！",
 				max:icon+"输入的数字不能大于8位！"
 			}
 		}
