@@ -8,7 +8,7 @@ $().ready(function() {
 	loadCrmData("/sales/companyCustomer/listDic","customerId");
 	loadCrmData("/inner/innerOrgEmployee/listDic","recordExecutor");
 	loadCrmData("/project/project/listDic","projectId");
-
+	
 	layui.use('upload', function () {
         var upload = layui.upload;
         //执行实例
@@ -20,7 +20,7 @@ $().ready(function() {
             auto: false,			//不自动上传设置
             bindAction: '#uploadFile',	//“上传”按钮的ID
             choose:function(obj){
-//******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************
+//******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************  
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){
                 	var upFileName = file.name;
@@ -45,7 +45,7 @@ $().ready(function() {
            			 //其他文件均显示文件图标
            			 $('#photo').attr('src', "/img/fileImage/fileImage.png"); //图片链接（base64）
            		 }
-              	//*********************	END	**********************************************************
+              	//*********************	END	**********************************************************               	 
                 });
               },
             done: function (r) {
@@ -95,7 +95,7 @@ function save() {
 				parent.layer.alert(data.msg)
 				return false;
 			}
-
+				
 		}
 	});
 
@@ -188,50 +188,49 @@ function datetimepicker() {
 	 $('#recordBeginDate').datetimepicker({
 	        format: 'YYYY-MM-DD',
 	        locale: moment.locale('zh-cn')
-	    }).on('dp.change', function() {
-			$('#recordEndDate').data("DateTimePicker").minDate(new Date($('#recordBeginDate').data('date')));
-		});
+	    });
 	 $('#recordEndDate').datetimepicker({
 	        format: 'YYYY-MM-DD',
 	        locale: moment.locale('zh-cn')
-	    }).on('dp.change', function() {
-			$('#recordBeginDate').data("DateTimePicker").maxDate(new Date($('#recordEndDate').data('date')));
-		});
+	    });
 }
-function readAsDataURL(){
-    //检验是否为图像文件
-    var file = document.getElementById("test1").files[0];
-    if(!/image\/\w+/.test(file.type)){
-        alert("看清楚，这个需要图片！");
-        return false;
-    }
-    var reader = new FileReader();
-    //将文件以Data URL形式读入页面
-    reader.readAsDataURL(file);
-    reader.onload=function(e){
-        var result=document.getElementById("result");
-        //显示文件
-        result.innerHTML='<img src="' + this.result +'" alt="" />';
-    }
-}
+function readAsDataURL(){  
+    //检验是否为图像文件  
+    var file = document.getElementById("test1").files[0];  
+    if(!/image\/\w+/.test(file.type)){  
+        alert("看清楚，这个需要图片！");  
+        return false;  
+    }  
+    var reader = new FileReader();  
+    //将文件以Data URL形式读入页面  
+    reader.readAsDataURL(file);  
+    reader.onload=function(e){  
+        var result=document.getElementById("result");  
+        //显示文件  
+        result.innerHTML='<img src="' + this.result +'" alt="" />';  
+    }  
+}  
 
 //图片预览
 function previewImg(obj) {
-    var img = new Image();
+    var img = new Image();  
     img.src = obj.src;
-    var imgHtml = "<img src='" + obj.src + "' style='width:90% height:90%'/>";
+    var imgHtml = "<img src='" + obj.src + "' style='width:90% height:90%'/>";  
     //弹出层
-    parent.layer.open({
-        type: 1,
+    parent.layer.open({  
+        type: 1,  
         shade: 0.8,
         offset: 'auto',
         area: [90 + '%',90+'%'],
         shadeClose:true,
         scrollbar: false,
-        title: "图片预览", //不显示标题
-        content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
-        cancel: function () {
-            //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
-        }
-    });
+        title: "图片预览", //不显示标题  
+        content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响  
+        cancel: function () {  
+            //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });  
+        }  
+    }); 
 }
+
+	
+	
