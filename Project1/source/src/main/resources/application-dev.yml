@@ -13,11 +13,13 @@ spring:
 
 
 
+#    url: jdbc:mysql://localhost:3306/bootdo?useSSL=false&useUnicode=true&characterEncoding=utf8
 
-    url: jdbc:mysql://192.168.0.110:3306/bootdo?useUnicode=true&characterEncoding=utf8&useSSL=true
+    url: jdbc:mysql://192.168.0.111:3306/bootdo?useUnicode=true&characterEncoding=utf8&useSSL=true
 
     username: root
     password: 123456
+#    password: qwe123!@#
     initialSize: 1
     minIdle: 3
     maxActive: 20
