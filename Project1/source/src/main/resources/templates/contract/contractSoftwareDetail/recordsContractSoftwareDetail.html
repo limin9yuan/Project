@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+		<input id="recordId" name="recordId" th:value="${recordId}" type="hidden">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<table id="recordContractSoftwareDetail" data-mobile-responsive="true">
+					</table>
+					</div>
+				</div>
+				<div class="pull-right">
+				<button  type="button" class="btn btn-primary" onclick="closeWin()">关闭</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/contract/contractSoftwareDetail/recordsContractSoftwareDetail.js"></script>
+</body>
+</html>
