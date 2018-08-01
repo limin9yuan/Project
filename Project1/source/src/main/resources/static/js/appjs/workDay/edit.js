@@ -19,11 +19,19 @@ function datetimepicker() {
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
 	});
-	$('#startWork').datetimepicker({
+	$('#startWorkAM').datetimepicker({
 		format : 'HH:mm',
 		locale : moment.locale('zh-cn')
 	});
-	$('#endWork').datetimepicker({
+	$('#endWorkAM').datetimepicker({
+		format : 'HH:mm',
+		locale : moment.locale('zh-cn')
+	});
+	$('#startWorkPM').datetimepicker({
+		format : 'HH:mm',
+		locale : moment.locale('zh-cn')
+	});
+	$('#endWorkPM').datetimepicker({
 		format : 'HH:mm',
 		locale : moment.locale('zh-cn')
 	});

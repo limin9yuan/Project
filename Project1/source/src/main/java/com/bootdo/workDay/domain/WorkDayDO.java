@@ -34,24 +34,44 @@ public class WorkDayDO implements Serializable {
 
 	private String currentYear;
 	//
-	private String startWork;
+	private String startWorkAM;
 	//
-	private String endWork;
+	private String endWorkAM;
+	//
+	private String startWorkPM;
+	//
+	private String endWorkPM;
 
-	public String getStartWork() {
-		return startWork;
+	public String getStartWorkAM() {
+		return startWorkAM;
 	}
 
-	public void setStartWork(String startWork) {
-		this.startWork = startWork;
+	public void setStartWorkAM(String startWorkAM) {
+		this.startWorkAM = startWorkAM;
 	}
 
-	public String getEndWork() {
-		return endWork;
+	public String getEndWorkAM() {
+		return endWorkAM;
 	}
 
-	public void setEndWork(String endWork) {
-		this.endWork = endWork;
+	public void setEndWorkAM(String endWorkAM) {
+		this.endWorkAM = endWorkAM;
+	}
+
+	public String getStartWorkPM() {
+		return startWorkPM;
+	}
+
+	public void setStartWorkPM(String startWorkPM) {
+		this.startWorkPM = startWorkPM;
+	}
+
+	public String getEndWorkPM() {
+		return endWorkPM;
+	}
+
+	public void setEndWorkPM(String endWorkPM) {
+		this.endWorkPM = endWorkPM;
 	}
 
 	public String getCurrentYear() {

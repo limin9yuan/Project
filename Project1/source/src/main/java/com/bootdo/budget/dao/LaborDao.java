@@ -19,6 +19,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface LaborDao {
 
+	List<LaborDO> calculateLaborHour(Map<String, Object> map);
+
 	LaborDO get(String laborId);
 	
 	List<LaborDO> list(Map<String,Object> map);

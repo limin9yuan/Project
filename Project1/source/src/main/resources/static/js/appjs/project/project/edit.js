@@ -128,6 +128,12 @@ function validateRule() {
 			},
 			ifOutSource: {
 				required : true
+			},
+			projectDevelopmentBeginDate:{
+				required : true
+			},
+			projectDevelopmentEndDate:{
+				required : true
 			}
 		},
 		messages : {
@@ -168,7 +174,14 @@ function validateRule() {
 			},
 			ifOutSource : {
 				required : icon + "请选择是否分包"
+			},
+			projectDevelopmentBeginDate:{
+				required : icon + "项目研发开始时间不能为空"
+			},
+			projectDevelopmentEndDate:{
+				required : icon + "项目研发结束时间不能为空"
 			}
+			
 		}
 	})
 }

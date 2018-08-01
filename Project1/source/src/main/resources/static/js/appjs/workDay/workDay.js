@@ -77,12 +77,20 @@ function load() {
 									field : 'endDay',
 									title : '结束日'
 								},{
-									field : 'startWork',
-									title : '上班时间'
+									field : 'startWorkAM',
+									title : '上午上班时间'
 								},
 																{
-									field : 'endWork',
-									title : '下班时间'
+									field : 'endWorkAM',
+									title : '上午下班时间'
+								}
+								,{
+									field : 'startWorkPM',
+									title : '下午上班时间'
+								},
+																{
+									field : 'endWorkPM',
+									title : '下午下班时间'
 								}
 
 							]
@@ -156,13 +164,22 @@ function loadOfficeDay() {
 									field : 'officeDay',
 									title : '日期'
 								},{
-									field : 'startWork',
-									title : '上班时间'
+									field : 'startWorkAM',
+									title : '上午上班时间'
 								},
 																{
-									field : 'endWork',
-									title : '下班时间'
+									field : 'endWorkAM',
+									title : '上午下班时间'
 								}
+								,{
+									field : 'startWorkPM',
+									title : '下午上班时间'
+								},
+																{
+									field : 'endWorkPM',
+									title : '下午下班时间'
+								}
+
 							]
 					});
 }

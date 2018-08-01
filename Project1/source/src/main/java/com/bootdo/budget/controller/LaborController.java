@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.common.domain.MainCopyPersonDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -282,6 +283,28 @@ public class LaborController extends BaseController {
 		InnerOrgEmployeeDO employee = laborService.getEmployeeLevelSalary(employeeId);
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		returnData.put("employee", employee);
+		return returnData;
+	}
+
+	@RequestMapping("/calculateLaborCost/{startDate}/{endDate}/{startTime}/{endTime}")
+	@ResponseBody
+	Map<String, Object> getMainAndCopyPerson_ajax(@PathVariable("startDate") String startDate,
+																 @PathVariable("endDate") String endDate,
+																 @PathVariable("startTime") String startTime,
+																 @PathVariable("endTime") String endTime) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		params.put("startDate", startDate);
+		params.put("endDate", endDate);
+		params.put("startTime", startTime);
+		params.put("endTime", endTime);
+		Query queryGetMainAndCopyPerson = new Query(params);
+		List<LaborDO> laborHourList = laborService.calculateLaborHour(queryGetMainAndCopyPerson);
+		LaborDO laborDO= laborHourList.get(0);
+		String laborHour = laborDO.getTotalWorkTime();
+		Map<String, Object> returnData = new HashMap<>();
+		returnData.put("laborHour", laborHour);
 		return returnData;
 	}
 }

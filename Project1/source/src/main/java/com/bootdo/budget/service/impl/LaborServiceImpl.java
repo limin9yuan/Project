@@ -19,6 +19,11 @@ import com.bootdo.inner.domain.InnerOrgEmployeeDO;
 public class LaborServiceImpl implements LaborService {
 	@Autowired
 	private LaborDao laborDao;
+
+	@Override
+	public List<LaborDO> calculateLaborHour(Map<String, Object> map){
+		return laborDao.calculateLaborHour(map);
+	}
 	
 	@Override
 	public LaborDO get(String laborId){

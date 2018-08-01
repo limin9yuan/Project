@@ -45,6 +45,56 @@ public class LaborDO implements Serializable {
 	private String employeeLevel;
 	//时薪
 	private BigDecimal employeeSalaryHour;
+	//
+	private String startDate;
+	//
+	private String endDate;
+	//
+	private String startTime;
+	//
+	private String endTime;
+	//
+	private String totalWorkTime;
+
+	public String getTotalWorkTime() {
+		return totalWorkTime;
+	}
+
+	public void setTotalWorkTime(String totalWorkTime) {
+		this.totalWorkTime = totalWorkTime;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
 
 	/**
 	 * 设置：项目人力安排编号

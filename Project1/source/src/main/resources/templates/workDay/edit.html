@@ -43,11 +43,11 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">上班时间：</label>
+								<label class="col-sm-3 control-label">上午上班时间：</label>
 								<div class="col-sm-8">
-									<div class="col-sm-1 input-group date" id="startWork">
-										<input th:value="${holiday.startWork}" class="form-control" type="text"
-					                        name="startWork" style="width:100px"> <span
+									<div class="col-sm-1 input-group date" id="startWorkAM">
+										<input th:value="${holiday.startWorkAM}" class="form-control" type="text"
+					                        name="startWorkAM" style="width:100px"> <span
 					                        class="input-group-addon"> <span
 					                        class="glyphicon glyphicon-calendar"></span>
 					                    </span>
@@ -56,11 +56,37 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-3 control-label">下班时间：</label>
+								<label class="col-sm-3 control-label">上午下班时间：</label>
 								<div class="col-sm-8">
-									<div class="col-sm-1 input-group date" id="endWork">
-										<input th:value="${holiday.endWork}" class="form-control" type="text"
-					                        name="endWork" style="width:100px"> <span
+									<div class="col-sm-1 input-group date" id="endWorkAM">
+										<input th:value="${holiday.endWorkAM}" class="form-control" type="text"
+					                        name="endWorkAM" style="width:100px"> <span
+					                        class="input-group-addon"> <span
+					                        class="glyphicon glyphicon-calendar"></span>
+					                    </span>
+					                    </input>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">下午上班时间：</label>
+								<div class="col-sm-8">
+									<div class="col-sm-1 input-group date" id="startWorkPM">
+										<input th:value="${holiday.startWorkPM}" class="form-control" type="text"
+					                        name="startWorkPM" style="width:100px"> <span
+					                        class="input-group-addon"> <span
+					                        class="glyphicon glyphicon-calendar"></span>
+					                    </span>
+					                    </input>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">下午下班时间：</label>
+								<div class="col-sm-8">
+									<div class="col-sm-1 input-group date" id="endWorkPM">
+										<input th:value="${holiday.endWorkPM}" class="form-control" type="text"
+					                        name="endWorkPM" style="width:100px"> <span
 					                        class="input-group-addon"> <span
 					                        class="glyphicon glyphicon-calendar"></span>
 					                    </span>

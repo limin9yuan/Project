@@ -3,6 +3,143 @@
 
 <mapper namespace="com.bootdo.budget.dao.LaborDao">
 
+	<select id="calculateLaborHour" resultType="com.bootdo.budget.domain.LaborDO">
+		select SUM(a.totalWorkTime) as totalWorkTime from (
+		SELECT Work_Day,
+		SUM(FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2))
+		+SUM(FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)) as totalWorkTime
+		FROM work_day
+		WHERE Work_Day &gt; #{startDate} and Work_Day &lt; #{endDate}
+		UNION
+		SELECT Work_Day, CASE WHEN #{startTime} &lt;= Start_WorkAM
+		then FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2)+
+		FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{startTime} &gt;= Start_WorkAM and #{startTime} &lt;= End_WorkAM
+		then FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{startTime})))/3600,2)+
+		FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{startTime} &gt;= End_WorkAM and #{startTime} &lt;= Start_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{startTime} &gt;= Start_WorkPM and #{startTime} &lt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{startTime})))/3600,2)
+
+		WHEN #{startTime} &gt;= End_WorkPM THEN 0
+		ELSE 0 END
+		FROM work_day
+		WHERE Work_Day = #{startDate} and #{startDate} != #{endDate}
+
+		UNION
+		SELECT Work_Day, CASE WHEN #{endTime} &lt;= Start_WorkAM THEN 0
+		WHEN #{endTime} &gt;= Start_WorkAM and #{endTime} &lt;= End_WorkAM
+		then FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{endTime}))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2)
+
+		WHEN #{endTime} &gt;= End_WorkAM and #{endTime} &lt;= Start_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2)
+
+		WHEN #{endTime} &gt;= Start_WorkPM and #{endTime} &lt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2) +
+		FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{endTime}))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{endTime} &gt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2)+
+		FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		ELSE 0 END
+		FROM work_day
+		WHERE Work_Day = #{endDate} and #{startDate} != #{endDate}
+		UNION
+		SELECT Work_Day, CASE WHEN #{startTime} &lt;= Start_WorkAM and #{endTime} &lt;= Start_WorkAM
+		and #{startTime} &lt;= #{endTime}  then 0
+
+		WHEN #{startTime} &lt;=Start_WorkAM AND #{endTime} &gt;= Start_WorkAM AND #{endTime} &lt;= End_WorkAM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{endTime}))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2)
+
+		WHEN #{startTime} &lt;= Start_WorkAM AND #{endTime} &gt;= End_WorkAM AND #{endTime} &lt;= Start_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2)
+
+		WHEN #{startTime} &lt;= Start_WorkAM AND #{endTime} &gt;= Start_WorkPM AND #{endTime} &lt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2) +
+		FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{endTime}))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{startTime} &lt;= Start_WorkAM AND #{endTime} &gt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkAM)))/3600,2) +
+		FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{startTime} &gt;= Start_WorkAM and #{endTime} &lt;= End_WorkAM and #{startTime} &lt;=#{endTime}
+		then FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{endTime}))-
+		UNIX_TIMESTAMP(CONCAT(	Work_Day,' ',#{startTime})))/3600,2)
+
+		WHEN #{startTime} &gt;= Start_WorkAM and #{startTime} &lt;= End_WorkAM  and
+		#{endTime} &gt;= End_WorkAM and  #{endTime} &lt;= Start_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{startTime})))/3600,2)
+
+		WHEN #{startTime} &gt;= Start_WorkAM and #{startTime} &lt;= End_WorkAM and
+		#{endTime} &gt;= Start_WorkPM and #{endTime} &lt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{startTime})))/3600,2) +
+		FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{endTime}))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{startTime} &gt;= Start_WorkAM and #{startTime} &lt;= End_WorkAM
+		AND #{endTime} &gt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkAM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{startTime})))/3600,2) +
+		FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{startTime} &gt;= End_WorkAM and #{startTime} &lt;= Start_WorkPM and
+		#{endTime} &gt;= End_WorkAM and #{endTime} &lt;= Start_WorkPM and #{startTime} &lt;= #{endTime}  then 0
+
+		WHEN #{startTime} &gt;= End_WorkAM and #{startTime} &lt;= Start_WorkPM AND
+		#{endTime} &gt;= Start_WorkPM and #{endTime} &lt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{endTime}))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{startTime} &gt;= End_WorkAM and #{startTime} &lt;= Start_WorkPM
+		AND #{endTime}  &gt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',Start_WorkPM)))/3600,2)
+
+		WHEN #{startTime} &gt;= Start_WorkPM and #{startTime} &lt;= End_WorkPM
+		and #{startTime} &lt;= #{endTime} and  #{endTime} &gt;= Start_WorkPM and #{endTime} &lt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{endTime}))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{startTime})))/3600,2)
+
+		WHEN #{startTime} &gt;= Start_WorkPM and #{startTime} &lt;= End_WorkPM and
+		#{endTime} &gt;= End_WorkPM
+		THEN FORMAT((UNIX_TIMESTAMP(CONCAT(Work_Day,' ',End_WorkPM))-
+		UNIX_TIMESTAMP(CONCAT(Work_Day,' ',#{startTime})))/3600,2)
+
+		WHEN #{startTime} &gt;= End_WorkPM and #{endTime} &gt;= End_WorkPM and #{startTime} &lt;= #{endTime}  then 0
+		ELSE 0 END
+		FROM work_day
+		WHERE Work_Day = #{startDate} and #{startDate} = #{endDate}) a
+
+	</select>
+
 	<select id="get" resultType="com.bootdo.budget.domain.LaborDO">
 		select `Labor_ID`,`Budget_ID`,a.`Employee_ID`,
 		date_format(Labor_Begin_Time,'%Y-%m-%d %h:%i') `Labor_Begin_Time`,

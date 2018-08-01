@@ -16,6 +16,8 @@ import java.util.Map;
  * @date 2017-12-11 14:43:07
  */
 public interface LaborService {
+
+	List<LaborDO> calculateLaborHour(Map<String, Object> map);
 	
 	LaborDO get(String laborId);
 	

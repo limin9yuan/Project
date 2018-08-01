@@ -62,6 +62,7 @@ function load() {
 									checkbox : true
 								}
 								,{
+									width : '130px',
 									title : '操作',
 									field : 'id',
 									align : 'center',
@@ -78,36 +79,47 @@ function load() {
 										return e + d ;
 									}
 								},{
+									width : '130px',
 									field : 'budgetId',
 									title : '项目预算编号'
 								},{
+									width : '130px',
 									field : 'projectId',
 									title : '项目编号'
 								},{
+									width : '130px',
 									field : 'projectName',
 									title : '项目名称'
 								},{
+									width : '130px',
 									field : 'projectOwnerName',
 									title : '项目经理姓名'
 								},{
+									width : '130px',
 									field : 'budgetOperateTime',
 									title : '项目预算时间'
 								},{
+									width : '130px',
 									field : 'projectGategory',
 									title : '项目类别'
 								},{
+									width : '130px',
 									field : 'deptName',
 									title : '部门'
 								},{
+									width : '130px',
 									field : 'customerName',
 									title : '客户名称'
 								},{
+									width : '130px',
 									field : 'budgetConformance',
 									title : '计划是否合规'
 								},{
+									width : '130px',
 									field : 'budgetServiceRevenue',
 									title : '服务收入（合同额）'
 								},{
+									width : '130px',
 									field : 'budgetProfit',
 									title : '利润'
 								}
