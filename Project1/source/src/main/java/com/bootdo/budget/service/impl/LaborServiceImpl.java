@@ -21,6 +21,11 @@ public class LaborServiceImpl implements LaborService {
 	private LaborDao laborDao;
 
 	@Override
+	public LaborDO getWorkTime(String date){
+		return laborDao.getWorkTime(date);
+	}
+
+	@Override
 	public List<LaborDO> calculateLaborHour(Map<String, Object> map){
 		return laborDao.calculateLaborHour(map);
 	}

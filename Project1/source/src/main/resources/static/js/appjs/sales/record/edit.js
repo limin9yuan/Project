@@ -1,45 +1,53 @@
 var prefixrecord = "/sales/record"
 $().ready(function() {
 	layui.use('upload', function () {
-        var upload = layui.upload;
-        //执行实例
+		 var $ = layui.jquery;
+	        var upload = layui.upload;
+	      // 多文件列表示例
+	  	  var demoListView = $('#demoList');
+        // 执行实例
         var uploadInst = upload.render({
-            elem: '#test1', //绑定元素
-            url: '/sales/record/upload', //上传接口
+            elem: '#test1', // 绑定元素
+            url: '/sales/record/upload', // 上传接口
             size: 1000,
             accept: 'file',
-            auto: false,			//不自动上传设置
-            bindAction: '#uploadFile',	//“上传”按钮的ID
+            multiple: true,
+            auto: false,			// 不自动上传设置
+            bindAction: '#uploadFile',	// “上传”按钮的ID
             multiple: false,
             choose:function(obj){
-//******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************
-                //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
-//                	alert(file.name);
-                	var upFileName = file.name;
-           		 var index1=upFileName.lastIndexOf(".");
-           		 var index2=upFileName.length;
-           		 var suffix=upFileName.substring(index1+1,index2);//后缀名
-           		 
-           		 $("#fileNames").text(file.name);//将获取到的文件名给p标签显示出来
-           		 //判断是什么格式应对的预览图片
-           		 if(suffix=="xls"||suffix=="xlsx"){//判断上传是否是表格
-           			 $('#photo').attr('src', "/img/fileImage/xlsxImage.png"); //图片链接（base64）
-        		 }else if(suffix=="docx"||suffix=="doc"){//判断后缀是否是word文档
-        			 $('#photo').attr('src', "/img/fileImage/docxImage.png"); //图片链接（base64）
-        		 }else if(suffix=="avi"||suffix=="wma"||suffix=="rmvb"||suffix=="rm"||suffix=="flash"||suffix=="mp4"||suffix=="mid"||suffix=="3GP"){
-        			 //判断是否是视频文件
-        			 $('#photo').attr('src', "/img/fileImage/videoImage.jpg"); //图片链接（base64）
-        		 }else if(suffix=="jpg"||suffix=="png"||suffix=="gif"||suffix=="tif"||suffix=="psd"||suffix=="dng"||suffix=="cr2"||suffix=="nef"){
-        			 $('#photo').attr('src', result); //图片链接（base64）
-        		 }else if(suffix=="rar"||suffix=="zip"){
-        			 $('#photo').attr('src', "/img/fileImage/rarImage.jpeg"); //图片链接（base64）
-                 }else{ //其他文件均显示文件图标
-        			 $('#photo').attr('src', "/img/fileImage/fileImage.png"); //图片链接（base64）
-        		 }
-//*********************	END	**********************************************************
-                });
-              },
+// ******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************
+            	var files = this.files = obj.pushFile(); // 将每次选择的文件追加到文件队列
+        	      // 读取本地文件
+        	      obj.preview(function(index, file, result){
+        	        var tr = $(['<tr id="upload-'+ index +'">'
+        	          ,'<td style="text-align: center;">'+file.name+'</td>'
+        	          ,'<td style="text-align: center;">'+ (file.size/1014).toFixed(1) +'kb</td>'
+        	          ,'<td style="text-align: center;">等待上传</td>'
+        	          ,'<td style="text-align: center;">'
+        	            ,'<button class="layui-btn layui-btn-mini demo-reload layui-hide">重传</button>'
+        	            ,'<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
+        	          ,'</td>'
+        	        ,'</tr>'].join(''));
+        	        
+        	        // 单个重传
+        	        tr.find('.demo-reload').on('click', function(){
+        	          obj.upload(index, file);
+        	        });
+        	        
+        	        // 删除
+        	        tr.find('.demo-delete').on('click', function(){
+        	          delete files[index]; // 删除对应的文件
+        	          tr.remove();
+        	          uploadListIns.config.elem.next()[0].value = ''; // 清空
+																		// input
+  																	// file
+  																	// 值，以免删除后出现同名文件不可选
+        	        });
+        	        
+        	        demoListView.append(tr);
+        	      });
+                },
             done: function (r) {
             	 if (r.code == 0) {
 
@@ -47,9 +55,9 @@ $().ready(function() {
       					$('#ids').val(r.recordAttachment);
       					$('#recordAttachment').val(r.recordAttachment+','+document.getElementById("recordAttachment").value);
       				}
-//      				$("#serviceAttachment").val(r.fileName);
-//      				parent.layer.msg(r.msg);
-//     				 app.getData();
+// $("#serviceAttachment").val(r.fileName);
+// parent.layer.msg(r.msg);
+// app.getData();
 
       			} else {
       				parent.layer.msg(r.msg)
@@ -68,7 +76,7 @@ $().ready(function() {
 
 function updateRecordAttachment(){
 	var ids=$("#removeId").val();
-// 	alert(ids)
+// alert(ids)
 	$.ajax({
         url: "/sales/record/updateRecordAttachment",
         type: "post",
@@ -77,15 +85,15 @@ function updateRecordAttachment(){
         },
         success: function (r) {
             if (r.code == 0) {
-//             	alert(id)
-				//将recordAttachment里面的字段提取出来
-//             	var serviceAtt=$("#recordAttachment").val();
-//             	alert(serviceAtt);
-				//将recordAttachment字段里面查出来的id加上都好替换为'' 空
-//             	var idss=serviceAtt.replace(ids,'');
-//             	alert(idss)
-				//将idss传给recordAttachment  input
-//					$("#recordAttachment").val(idss);
+// alert(id)
+				// 将recordAttachment里面的字段提取出来
+// var serviceAtt=$("#recordAttachment").val();
+// alert(serviceAtt);
+				// 将recordAttachment字段里面查出来的id加上都好替换为'' 空
+// var idss=serviceAtt.replace(ids,'');
+// alert(idss)
+				// 将idss传给recordAttachment input
+// $("#recordAttachment").val(idss);
                 layer.msg(r.msg);
                 app.getData();
             } else {
@@ -98,8 +106,8 @@ $.validator.setDefaults({
 	submitHandler : function() {
 		document.getElementById("uploadFile").click();
 		setTimeout('removeaa()', 200);
-		setTimeout('update()', 500);//延迟执行updte()方法5毫秒
-//		update();
+		setTimeout('update()', 500);// 延迟执行updte()方法5毫秒
+// update();
 	}
 });
 function getMainAndCopyPerson_ajax() {
@@ -269,7 +277,7 @@ function datetimepicker() {
 		   $('#recordBeginDate').data("DateTimePicker").maxDate(new Date($('#recordEndDate').data('date')));
 	   });
 }
-//修改——显示数据绑定
+// 修改——显示数据绑定
 function recordMapper_edit(){
 	$.ajax({
 		url : prefixrecord + '/edit_ajax/' + $("#recordId").val(),
@@ -298,8 +306,8 @@ function recordMapper_edit(){
 	});
 }
 
-//*********************** 文件下载及相关 ************************************
-//文件大小
+// *********************** 文件下载及相关 ************************************
+// 文件大小
 function getFileSize() {
 	console.log("文件大小数据加载");
 	$.ajax({
@@ -316,7 +324,7 @@ function getFileSize() {
 		}
 	});
 }
-//下载全部附件
+// 下载全部附件
 function download() {
 	console.log("下载全部附件");
 	$.ajax({
@@ -334,14 +342,14 @@ function download() {
 	});
 }
 
-//*************************** END *************************************=======
+// *************************** END *************************************=======
 
-//图片预览
+// 图片预览
 function previewImg(obj) {
     var img = new Image();
     img.src = obj.src;
     var imgHtml = "<img src='" + obj.src + "' style='width:90% height:90%'/>";
-    //弹出层
+    // 弹出层
     parent.layer.open({
         type: 1,
         shade: 0.8,
@@ -349,10 +357,10 @@ function previewImg(obj) {
         area: [90 + '%',90+'%'],
         shadeClose:true,
         scrollbar: false,
-        title: "图片预览", //不显示标题
-        content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+        title: "图片预览", // 不显示标题
+        content: imgHtml, // 捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
         cancel: function () {
-            //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+            // layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
         }
     });
 }

@@ -177,10 +177,12 @@
 											</button>
 										</div>
 									</div>
-							<!-- 									硬件明细 -->
-									<input id="recordHardwareEquipmentList" name="recordHardwareEquipmentList" type="hidden">
-<!-- 									软件明细 -->
-									<input id="recordSoftwareFunctionList" name="recordSoftwareFunctionList" type="hidden">
+									<!-- 									硬件明细 -->
+									<input id="recordHardwareEquipmentList"
+										name="recordHardwareEquipmentList" type="hidden">
+									<!-- 									软件明细 -->
+									<input id="recordSoftwareFunctionList"
+										name="recordSoftwareFunctionList" type="hidden">
 									<div class="form-group">
 										<label class="col-sm-2 control-label">正文附件：</label>
 										<div class="col-sm-4">
@@ -193,11 +195,35 @@
 													name="recordAttachment" th:value="${recordAttachment}"
 													type="hidden">
 											</div>
-											<p id="fileNames" style="color: #999;padding:0 10px"></p>
-											<div class="file-name col-sm-4">
-												<img class="layui-upload-img" id="photo"
-													style="width: 50%; height: 50%; cursor: pointer"
-													onclick="previewImg(this)">
+<!-- 											<p id="fileNames" style="color: #999; padding: 0 10px"></p> -->
+<!-- 											<div class="file-name col-sm-4"> -->
+<!-- 												<img class="layui-upload-img" id="photo" -->
+<!-- 													style="width: 50%; height: 50%; cursor: pointer" -->
+<!-- 													onclick="previewImg(this)"> -->
+<!-- 											</div> -->
+										</div>
+										<input class="form-control" id="recordAttachment"
+													name="recordAttachment" th:value="${recordAttachment}"
+													type="hidden">
+									</div>
+									<!-- 							文件显示列表 -->
+									<div class="form-group">
+										<label class="col-sm-2 control-label"></label>
+										<div class="col-sm-4">
+											<div class="layui-upload">
+												<div class="layui-upload-list">
+													<table id="sds" class="layui-table">
+														<thead>
+															<tr>
+																<th style="text-align: center;">文件名</th>
+																<th style="text-align: center;">大小</th>
+																<th style="text-align: center;">状态</th>
+																<th style="text-align: center;">操作</th>
+															</tr>
+														</thead>
+														<tbody id="demoList"></tbody>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -415,8 +441,7 @@
 										onclick="lastStep('myTab',5,'lastBtn','nextBtn')">上一步</button>
 									<button type="button" class="btn btn-primary" id="nextBtn"
 										onclick="nextStepThis('myTab',5,'lastBtn','nextBtn')">下一步</button>
-									<button type="submit" class="btn btn-primary"
-										>提交</button>
+									<button type="submit" class="btn btn-primary">提交</button>
 									<button type="button" class="btn btn-danger"
 										onclick="closeWin()">取消</button>
 								</div>

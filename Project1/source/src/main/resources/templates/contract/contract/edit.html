@@ -25,10 +25,10 @@
 						<!-- 基本信息 -->
 						<form class="form-horizontal m-t" id="signupForm">
 							<input id="contractId" name="contractId" class="form-control"
-								type="hidden" th:value="${contractId}"> 
-								<input id="ids" name="ids" class="form-control" type="hidden" value="-1">
-							
-							
+								type="hidden" th:value="${contractId}"> <input id="ids"
+								name="ids" class="form-control" type="hidden" value="-1">
+
+
 							<div id="myTabContent" class="tab-content">
 								<div class="tab-pane fade in active" id="basic">
 									<div class="form-group">
@@ -241,10 +241,11 @@
 										</div>
 									</div>
 									<!-- 							硬件id -->
-							<input id="contractHardwareList" name="contractHardwareList"
-								type="hidden" >
-							<!-- 							软件id -->
-							<input id="contractSoftwareList" name="contractSoftwareList" type="hidden">
+									<input id="contractHardwareList" name="contractHardwareList"
+										type="hidden">
+									<!-- 							软件id -->
+									<input id="contractSoftwareList" name="contractSoftwareList"
+										type="hidden">
 									<div class="form-group">
 										<label class="col-sm-2 control-label">附件：<span
 											class="mustin">*</span></label>
@@ -254,16 +255,17 @@
 													id="test1" style="width: 100%;">
 													<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
 												</button>
-												<input class="form-control" th:value="${contractAttachment}"
-													id="contractAttachment" name="contractAttachment"
-													type="hidden">
+
 											</div>
-											<p id="fileNames" style="color: #999; padding: 0 10px"></p>
-											<div class="file-name col-sm-4">
-												<img class="layui-upload-img" id="photo"
-													style="width: 50%; height: 50%; cursor: pointer"
-													onclick="previewImg(this)">
-											</div>
+											<!-- 											<p id="fileNames" style="color: #999; padding: 0 10px"></p> -->
+											<!-- 											<div class="file-name col-sm-4"> -->
+											<!-- 												<img class="layui-upload-img" id="photo" -->
+											<!-- 													style="width: 50%; height: 50%; cursor: pointer" -->
+											<!-- 													onclick="previewImg(this)"> -->
+											<!-- 											</div> -->
+											<input class="form-control" th:value="${contractAttachment}"
+												id="contractAttachment" name="contractAttachment"
+												type="hidden">
 										</div>
 										<label class="col-sm-2 control-label">关联合同名称：</label>
 										<div class="col-sm-4">
@@ -274,15 +276,35 @@
 											</select>
 										</div>
 									</div>
-
+<!-- 							文件显示列表 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-4">
+									<div class="layui-upload">
+										<div class="layui-upload-list">
+											<table id="sds" class="layui-table">
+												<thead>
+													<tr >
+														<th style="text-align: center;">文件名</th>
+														<th style="text-align: center;">大小</th>
+														<th style="text-align: center;">状态</th>
+														<th style="text-align: center;">操作</th>
+													</tr>
+												</thead>
+												<tbody id="demoList"></tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
 									<!--***************文件显示*************************** -->
-									<div class="form-group" id="app" >
+									<div class="form-group" id="app">
 										<label class="col-sm-2 control-label"></label>
 										<div class="col-sm-10 animated fadeInRight">
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="file-box" v-for="row in rows">
-														<div class="file" id="fileDiv" >
+														<div class="file" id="fileDiv">
 															<span class="corner"></span>
 															<!-- 		xlsx表格 -->
 															<div class="image" v-if="row.suffix==1">

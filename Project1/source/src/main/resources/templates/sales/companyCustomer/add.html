@@ -13,15 +13,20 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
+<!-- 					<input id="customerId" name="customerId" type="hidden" value="-1"> -->
 						<form class="form-horizontal m-t" id="signupForm">
 							<!-- tab标签 -->
 							<ul id="myTab" class="nav nav-tabs">
-								<li class="active"><a href="#baseInfo" data-toggle="tab"><span class="mustin">*&nbsp;</span>基本信息</a></li>
+								<li class="active"><a href="#baseInfo" data-toggle="tab"><span
+										class="mustin">*&nbsp;</span>基本信息</a></li>
 								<li><a href="#Organisation" data-toggle="tab">组织机构</a></li>
-								<li><a href="#Hotspot" data-toggle="tab"><span class="mustin">*&nbsp;</span>热点情况</a></li>
+								<li><a href="#Hotspot" data-toggle="tab"><span
+										class="mustin">*&nbsp;</span>热点情况</a></li>
 								<li><a href="#Rechnungs" data-toggle="tab">开票信息 </a></li>
-								<li><a href="#linkInfo" data-toggle="tab"><span class="mustin">*&nbsp;</span>联系方式</a></li>
-								<li><a href="#Information" data-toggle="tab"><span class="mustin">*&nbsp;</span>生产信息 </a></li>
+								<li><a href="#linkInfo" data-toggle="tab"><span
+										class="mustin">*&nbsp;</span>联系方式</a></li>
+								<li><a href="#Information" data-toggle="tab"><span
+										class="mustin">*&nbsp;</span>生产信息 </a></li>
 								<li><a href="#Energieve" data-toggle="tab">能耗 </a></li>
 								<li><a href="#Zukunft" data-toggle="tab">未来规划 </a></li>
 								<li><a href="#Gegner" data-toggle="tab">竞争对手 </a></li>
@@ -29,10 +34,14 @@
 							</ul>
 							<!-- 客户基本信息 -->
 							<!-- 				<form class="form-horizontal m-t" id="signupForm"> -->
-							<div id="myTabContent" class="tab-content" style="padding-top: 20px">
-								<input id="customerIds" name="customerIds" class="form-control" type="hidden"value="-1">
-								<input id="ids" name="ids" class="form-control" type="hidden" value="-1">
-								
+							<div id="myTabContent" class="tab-content"
+								style="padding-top: 20px">
+								<input id="customerIds" name="customerIds" class="form-control"
+									type="hidden" value="-1"> 
+									
+									<input id="ids" name="ids"
+									class="form-control" type="hidden" value="-1">
+
 								<div class="tab-pane fade in active" id="baseInfo">
 									<div class="form-group">
 										<label class="col-sm-2 control-label"><span
@@ -200,12 +209,12 @@
 									</div>
 
 									<div class="form-group">
-<!-- 										<label class="col-sm-2 control-label"><a -->
-<!-- 											style="color: red;">*&nbsp;</a>上级单位：</label> -->
-<!-- 										<div class="col-sm-4"> -->
-<!-- 											<input id="customerParent" name="customerParent" -->
-<!-- 												class="form-control" type="text"> -->
-<!-- 										</div> -->
+										<!-- 										<label class="col-sm-2 control-label"><a -->
+										<!-- 											style="color: red;">*&nbsp;</a>上级单位：</label> -->
+										<!-- 										<div class="col-sm-4"> -->
+										<!-- 											<input id="customerParent" name="customerParent" -->
+										<!-- 												class="form-control" type="text"> -->
+										<!-- 										</div> -->
 										<label class="col-sm-2 control-label">拜访交通方式：</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="customerVisitMode"
@@ -227,19 +236,42 @@
 										<label class="col-sm-2 control-label">附件：</label>
 										<div class="col-sm-4">
 											<div class="file-manager">
-												<button type="button"   class="layui-btn btn btn-danger" id="test1"
-													style="width: 100%;">
+												<button type="button" class="layui-btn btn btn-danger"
+													id="test1" style="width: 100%;">
 													<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
 												</button>
-												<input class="form-control" th:value="${customerAttachment}" 
-												id="customerAttachment" name="customerAttachment"  type="hidden" >
+												
 											</div>
-											<p id="fileNames" style="color: #999;padding:0 10px"></p>
-											<div class="file-name col-sm-4">
-											<img class="layui-upload-img" id="photo"
-										style="width: 50%; height: 50%; cursor: pointer"
-										onclick="previewImg(this)">
+<!-- 											<p id="fileNames" style="color: #999; padding: 0 10px"></p> -->
+<!-- 											<div class="file-name col-sm-4"> -->
+<!-- 												<img class="layui-upload-img" id="photo" -->
+<!-- 													style="width: 50%; height: 50%; cursor: pointer" -->
+<!-- 													onclick="previewImg(this)"> -->
+<!-- 											</div> -->
 										</div>
+										<input class="form-control" th:value="${customerAttachment}"
+													id="customerAttachment" name="customerAttachment"
+													type="hidden">
+									</div>
+									<!-- 							文件显示列表 -->
+									<div class="form-group">
+										<label class="col-sm-2 control-label"></label>
+										<div class="col-sm-4">
+											<div class="layui-upload">
+												<div class="layui-upload-list">
+													<table id="sds" class="layui-table">
+														<thead>
+															<tr>
+																<th style="text-align: center;">文件名</th>
+																<th style="text-align: center;">大小</th>
+																<th style="text-align: center;">状态</th>
+																<th style="text-align: center;">操作</th>
+															</tr>
+														</thead>
+														<tbody id="demoList"></tbody>
+													</table>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
@@ -251,10 +283,10 @@
 
 									</div>
 									<div class="form-group">
-									<label class="col-sm-2 control-label">需求简要描述：</label>
+										<label class="col-sm-2 control-label">需求简要描述：</label>
 										<div class="col-sm-10">
 											<textarea id="customerReqDes" name="customerReqDes"
-												class="form-control"  rows="3"></textarea>
+												class="form-control" rows="3"></textarea>
 										</div>
 
 									</div>
@@ -389,12 +421,12 @@
 																onclick="addDept(0)">
 																<i class="fa fa-plus" aria-hidden="true"></i>添加
 															</button>
-															<button
-																shiro:hasPermission="sales:customerDept:batchRemove"
-																type="button" class="btn  btn-danger"
-																onclick="batchRemoveDept()">
-																<i class="fa fa-trash" aria-hidden="true"></i>删除
-															</button>
+<!-- 															<button -->
+<!-- 																shiro:hasPermission="sales:customerDept:batchRemove" -->
+<!-- 																type="button" class="btn  btn-danger" -->
+<!-- 																onclick="batchRemoveDept()"> -->
+<!-- 																<i class="fa fa-trash" aria-hidden="true"></i>删除 -->
+<!-- 															</button> -->
 															<button
 																shiro:hasPermission="sales:customerDept:detailed_information"
 																type="button" class="btn btn-success"
@@ -472,7 +504,8 @@
 										</div>
 
 
-										<label class="col-sm-2 control-label"><a style="color: red; font-size: 14px">*&nbsp;</a>热点客户分类：</label>
+										<label class="col-sm-2 control-label"><a
+											style="color: red; font-size: 14px">*&nbsp;</a>热点客户分类：</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="customerHotClassif"
 												id="customerHotClassif" class="form-control chosen-select"
@@ -623,7 +656,7 @@
 										<label class="col-sm-2 control-label"><a
 											style="color: red; font-size: 14px">*&nbsp;</a>企业占全市热化率：</label>
 										<div class="col-sm-4">
-											<input id="customerHeatingShare" name="customerHeatingShare" 
+											<input id="customerHeatingShare" name="customerHeatingShare"
 												class="form-control" type="text">
 										</div>
 									</div>
@@ -775,7 +808,8 @@
 													<div class="fixed-table-toolbar">
 														<div class="columns pull-left">
 															<button shiro:hasPermission="sales:competitor:add"
-																type="button" class="btn  btn-primary" onclick="addCompetitor()">
+																type="button" class="btn  btn-primary"
+																onclick="addCompetitor()">
 																<i class="fa fa-plus" aria-hidden="true"></i>添加
 															</button>
 															<button
@@ -830,19 +864,22 @@
 										<div class="ibox-body">
 											<div class="fixed-table-toolbar">
 												<div class="columns pull-left">
-													<button shiro:hasPermission="sales:customerContact:addField"
+													<button
+														shiro:hasPermission="sales:customerContact:addField"
 														type="button" class="btn  btn-primary"
 														onclick="addField()">
 														<i class="fa fa-plus" aria-hidden="true"></i>添加
 													</button>
-													<button shiro:hasPermission="contract:contract:batchRemoveContractDelivery"
+													<button
+														shiro:hasPermission="contract:contract:batchRemoveContractDelivery"
 														type="button" class="btn  btn-danger"
 														onclick="batchRemoveField()">
 														<i class="fa fa-trash" aria-hidden="true"></i>批量删除
 													</button>
 												</div>
 											</div>
-											<table id="listCustomField" data-mobile-responsive="true"> </table>
+											<table id="listCustomField" data-mobile-responsive="true">
+											</table>
 										</div>
 										<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
 										<div>
@@ -864,73 +901,78 @@
 									</div>
 								</div>
 
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">主送人：</label>
-									<div class="col-sm-8">
-										<input id="mainPersonId" name="mainPersonId" type="hidden">
-										<input id="isMainPerson" name="isMainPerson" type="hidden">
-										<div style="float: left;" id="sendPerson"></div>
-										<div style="float: left;">
-											<button
-												type="button" class="btn btn-danger btn-xs"
-												id="sendPersonBtn" var="sendPersonBtn"
-												style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
-												onclick="addSendPerson()">
-												<span class="glyphicon glyphicon-plus"></span>
-											</button>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">抄送人：</label>
-									<div class="col-sm-8">
-										<input id="copyPersonId" name="copyPersonId" type="hidden">
-										<input id="isCopyPerson" name="isCopyPerson" type="hidden">
-										<div style="float: left;" id="receivePerson"></div>
-										<div style="float: left;">
-											<button type="button" class="btn btn-danger btn-xs"
-												id="receivePersonBtn" var="receivePersonBtn"
-												style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
-												onclick="addRecivePerson()">
-												<span class="glyphicon glyphicon-plus"></span>
-											</button>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-8 col-sm-offset-8">
-										<button type="button" class="btn btn-primary" id="lastBtn"
-											disabled="true"
-											onclick="lastStep('myTab',10,'lastBtn','nextBtn')">上一步</button>
-										<button type="button" class="btn btn-danger" id="nextBtn"
-											onclick="nextStepThis('myTab',10,'lastBtn','nextBtn')">下一步</button>
-										<button type="submit" id="submitButton" class="btn btn-primary" >提交</button>
-										<button type="button" class="btn btn-danger"
-											onclick="closeParenWindow();">取消</button>
-									</div>
-								</div>
-								<button type="button" id="uploadFile" style="display: none">fdafd</button>
-								</form>
 							</div>
-						
+							<div class="form-group">
+								<label class="col-sm-2 control-label">主送人：</label>
+								<div class="col-sm-8">
+									<input id="mainPersonId" name="mainPersonId" type="hidden">
+									<input id="isMainPerson" name="isMainPerson" type="hidden">
+									<div style="float: left;" id="sendPerson"></div>
+									<div style="float: left;">
+										<button type="button" class="btn btn-danger btn-xs"
+											id="sendPersonBtn" var="sendPersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addSendPerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">抄送人：</label>
+								<div class="col-sm-8">
+									<input id="copyPersonId" name="copyPersonId" type="hidden">
+									<input id="isCopyPerson" name="isCopyPerson" type="hidden">
+									<div style="float: left;" id="receivePerson"></div>
+									<div style="float: left;">
+										<button type="button" class="btn btn-danger btn-xs"
+											id="receivePersonBtn" var="receivePersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addRecivePerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-8 col-sm-offset-8">
+									<button type="button" class="btn btn-primary" id="lastBtn"
+										disabled="true"
+										onclick="lastStep('myTab',10,'lastBtn','nextBtn')">上一步</button>
+									<button type="button" class="btn btn-danger" id="nextBtn"
+										onclick="nextStepThis('myTab',10,'lastBtn','nextBtn')">下一步</button>
+									<button type="submit" id="submitButton" class="btn btn-primary">提交</button>
+									<button type="button" class="btn btn-danger"
+										onclick="closeParenWindow();">取消</button>
+								</div>
+							</div>
+							<button type="button" id="uploadFile" style="display: none">fdafd</button>
+						</form>
 					</div>
+
 				</div>
 			</div>
 		</div>
+	</div>
 	<div th:include="include::footer"></div>
 	<script src="/js/layui.js"></script>
 	<script src="/js/vue.min.js"></script>
 	<script src="/js/plugins/layer/layer.min.js"></script>
-	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/customerDept.js"></script>
-	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/customerJob.js"></script>
-	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/add.js"></script>
-	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/competitor.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/sales/companyCustomer/customerDept.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/sales/companyCustomer/customerJob.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/sales/companyCustomer/add.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/sales/companyCustomer/competitor.js"></script>
 	<script type="text/javascript" src="/js/province.js"></script>
-<!-- 			<script type="text/javascript" src="/js/appjs/sales/customerContact/add.js"></script> -->
-<!-- 	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/editChild.js"></script> -->
-<!-- 	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/sendToReceivePerson.js"></script> -->
-	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/customerChild.js"></script>
-	<script type="text/javascript" src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
+	<!-- 			<script type="text/javascript" src="/js/appjs/sales/customerContact/add.js"></script> -->
+	<!-- 	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/editChild.js"></script> -->
+	<!-- 	<script type="text/javascript" src="/js/appjs/sales/companyCustomer/sendToReceivePerson.js"></script> -->
+	<script type="text/javascript"
+		src="/js/appjs/sales/companyCustomer/customerChild.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
 </body>
 </html>

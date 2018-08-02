@@ -6,9 +6,9 @@
 <meta name="keywords" content="">
 <meta name="description" content="">
 <style type="text/css">
-	[v-cloak] {
-    display: none;
- }
+[v-cloak] {
+	display: none;
+}
 </style>
 <link rel="shortcut icon" href="favicon.ico">
 <link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
@@ -145,18 +145,38 @@
 											id="test1" style="width: 100%;">
 											<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
 										</button>
-										<input id="recordAttachment" name="recordAttachment"
-											th:value="${recordAttachment}" type="hidden">
 									</div>
-									<p id="fileNames" style="color: #999; padding: 0 10px"></p>
-									<div class="file-name col-sm-6">
-										<img class="layui-upload-img" id="photo"
-											style="width: 50%; height: 50%; cursor: pointer"
-											onclick="previewImg(this)">
+<!-- 									<p id="fileNames" style="color: #999; padding: 0 10px"></p> -->
+<!-- 									<div class="file-name col-sm-6"> -->
+<!-- 										<img class="layui-upload-img" id="photo" -->
+<!-- 											style="width: 50%; height: 50%; cursor: pointer" -->
+<!-- 											onclick="previewImg(this)"> -->
+<!-- 									</div> -->
+								</div>
+								<input id="recordAttachment" name="recordAttachment"
+											th:value="${recordAttachment}" type="hidden">
+							</div>
+							<!-- 							文件显示列表 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-4">
+									<div class="layui-upload">
+										<div class="layui-upload-list">
+											<table id="sds" class="layui-table">
+												<thead>
+													<tr>
+														<th style="text-align: center;">文件名</th>
+														<th style="text-align: center;">大小</th>
+														<th style="text-align: center;">状态</th>
+														<th style="text-align: center;">操作</th>
+													</tr>
+												</thead>
+												<tbody id="demoList"></tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>
-
 
 							<div class="form-group">
 								<label class="col-sm-2 control-label">备注：</label>

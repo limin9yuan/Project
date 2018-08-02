@@ -1,9 +1,11 @@
 package com.bootdo.budget.controller;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Date;
 
 import com.bootdo.common.domain.MainCopyPersonDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -88,7 +90,7 @@ public class LaborController extends BaseController {
 	
 	/**
 	 * 保存
-	 * @param laborId 
+	 * @param //laborId
 	 */
 	@ResponseBody
 	@PostMapping("/save")
@@ -303,6 +305,20 @@ public class LaborController extends BaseController {
 		List<LaborDO> laborHourList = laborService.calculateLaborHour(queryGetMainAndCopyPerson);
 		LaborDO laborDO= laborHourList.get(0);
 		String laborHour = laborDO.getTotalWorkTime();
+		Map<String, Object> returnData = new HashMap<>();
+		returnData.put("laborHour", laborHour);
+		return returnData;
+	}
+
+	@RequestMapping("/getWorkTime")
+	@ResponseBody
+	Map<String, Object> getWorkTime() {
+		Map<String, Object> params = new HashMap<String, Object>();
+		Date now = new Date();
+		SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+		String dateNowStr = date.format(now);
+
+		LaborDO laborHour = laborService.getWorkTime(dateNowStr);
 		Map<String, Object> returnData = new HashMap<>();
 		returnData.put("laborHour", laborHour);
 		return returnData;

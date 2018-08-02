@@ -55,6 +55,36 @@ public class LaborDO implements Serializable {
 	private String endTime;
 	//
 	private String totalWorkTime;
+	//
+	private String workDay;
+	//
+	private String startWorkAM;
+	//
+	private String endWorkPM;
+
+	public String getStartWorkAM() {
+		return startWorkAM;
+	}
+
+	public void setStartWorkAM(String startWorkAM) {
+		this.startWorkAM = startWorkAM;
+	}
+
+	public String getEndWorkPM() {
+		return endWorkPM;
+	}
+
+	public void setEndWorkPM(String endWorkPM) {
+		this.endWorkPM = endWorkPM;
+	}
+
+	public String getWorkDay() {
+		return workDay;
+	}
+
+	public void setWorkDay(String workDay) {
+		this.workDay = workDay;
+	}
 
 	public String getTotalWorkTime() {
 		return totalWorkTime;

@@ -44,14 +44,35 @@
 											id="test1" style="width: 100%;">
 											<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
 										</button>
-										<input id="moduleAttachment" name="moduleAttachment"
-											th:value="${moduleAttachment}" type="hidden">
+										
 									</div>
-									<p id="fileNames" style="color: #999; padding: 0 10px"></p>
-									<div class="file-name col-sm-8">
-										<img class="layui-upload-img" id="photo"
-											style="width: 50%; height: 50%; cursor: pointer"
-											onclick="previewImg(this)">
+<!-- 									<p id="fileNames" style="color: #999; padding: 0 10px"></p> -->
+<!-- 									<div class="file-name col-sm-8"> -->
+<!-- 										<img class="layui-upload-img" id="photo" -->
+<!-- 											style="width: 50%; height: 50%; cursor: pointer" -->
+<!-- 											onclick="previewImg(this)"> -->
+<!-- 									</div> -->
+								</div>
+								<input id="moduleAttachment" name="moduleAttachment"
+											th:value="${moduleAttachment}" type="hidden">
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-8">
+									<div class="layui-upload">
+										<div class="layui-upload-list">
+											<table id="sds" class="layui-table">
+												<thead>
+													<tr >
+														<th style="text-align: center;">文件名</th>
+														<th style="text-align: center;">大小</th>
+														<th style="text-align: center;">状态</th>
+														<th style="text-align: center;">操作</th>
+													</tr>
+												</thead>
+												<tbody id="demoList"></tbody>
+											</table>
+										</div>
 									</div>
 								</div>
 							</div>

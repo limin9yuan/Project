@@ -18,6 +18,8 @@ import java.util.Map;
 public interface LaborService {
 
 	List<LaborDO> calculateLaborHour(Map<String, Object> map);
+
+	LaborDO getWorkTime(String date);
 	
 	LaborDO get(String laborId);
 	
