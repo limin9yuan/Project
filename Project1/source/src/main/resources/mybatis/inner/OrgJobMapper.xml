@@ -29,7 +29,7 @@
 		  		  
 		  		  <if test="jobId != null and jobId != ''"> and Job_ID = #{jobId} </if>
 		  		  <if test="jobName != null and jobName != ''"> and Job_Name like #{jobName} </if>
-		  		  <if test="jobDept != null and jobDept != ''"> and Job_Dept like #{jobDept} </if>
+		  		  <if test="jobDept != null and jobDept != ''"> and c.`name` like #{jobDept} </if>
 		  		  <if test="jobOperator != null and jobOperator != ''"> and b.name like #{jobOperator} </if>
 		  		</where>
         <choose>
@@ -48,6 +48,7 @@
  	<select id="count" resultType="int">
 		select count(*) from inner_org_job a 
 		left join sys_user b ON a.Job_Operator=b.user_id
+		LEFT JOIN sys_dept c on a.Dept_ID = c.dept_id
 		 <where>  
 		  		  <if test="deptId != null and deptId != ''"> and a.Dept_ID = #{deptId} </if>
 		  		  <if test="jobRank != null and jobRank != ''"> and Job_Rank = #{jobRank} </if>
@@ -58,7 +59,7 @@
 		  		  
 		  		  <if test="jobId != null and jobId != ''"> and Job_ID = #{jobId} </if>
 		  		  <if test="jobName != null and jobName != ''"> and Job_Name like #{jobName} </if>
-		  		  <if test="jobDept != null and jobDept != ''"> and Job_Dept like #{jobDept} </if>
+		  		  <if test="jobDept != null and jobDept != ''"> and c.`name` like #{jobDept} </if>
 		  		  <if test="jobOperator != null and jobOperator != ''"> and b.name like #{jobOperator} </if>
 		  		</where>
 	</select>

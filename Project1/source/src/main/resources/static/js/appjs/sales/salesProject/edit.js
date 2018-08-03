@@ -148,14 +148,12 @@ function datetimepicker() {
 	$('#projectBeginDate').datetimepicker({
 		   format: 'YYYY-MM-DD',
 		   locale: moment.locale('zh-cn'),
-		   defaultDate : new Date()
 	   }).on('dp.change', function() {
 		   $('#projectEndDate').data("DateTimePicker").minDate(new Date($('#projectBeginDate').data('date')));
 	   });
 	$('#projectEndDate').datetimepicker({
 		   format: 'YYYY-MM-DD ',
 		   locale: moment.locale('zh-cn'),
-		   defaultDate : new Date()
 	   }).on('dp.change', function() {
 		   $('#projectBeginDate').data("DateTimePicker").maxDate(new Date($('#projectEndDate').data('date')));
 	   });

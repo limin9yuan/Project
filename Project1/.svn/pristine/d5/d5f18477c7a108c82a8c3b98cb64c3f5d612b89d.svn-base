@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<style type="text/css">
+[v-cloak] {
+	display: none;
+}
+</style>
+<link rel="shortcut icon" href="favicon.ico">
+<link href="/css/font-awesome.css?v=4.4.0" rel="stylesheet">
+<link href="/css/animate.css" rel="stylesheet">
+<link href="/css/style.css?v=4.1.0" rel="stylesheet">
+<link href="/css/layui.css" rel="stylesheet">
+
+
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm"
+							name="signupForm">
+							<input id="ids" name="ids" class="form-control" type="hidden"
+								value="-1">
+							<div class="form-group">
+								<label class="col-sm-2 control-label">客户名称：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-10">
+									<select data-placeholder="请选择" name="customerId"
+										id="customerId" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">业务名称：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-10">
+									<select data-placeholder="请选择" name="businessId"
+										id="businessId" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">项目名称：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-10">
+									<select data-placeholder="请选择" name="projectId" id="projectId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">行动主题：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<input id="recordName" name="recordName" class="form-control"
+										type="text">
+								</div>
+								<label class="col-sm-2 control-label">阶段：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="recordPhase"
+										id="recordPhase" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">执行人：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="recordExecutor"
+										id="recordExecutor" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+								<label class="col-sm-2 control-label">执行状态：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="recordExecuteStatus"
+										id="recordExecuteStatus" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">实际执行开始时间：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<div class="input-group date" id="recordBeginDate">
+										<input class="form-control" type="text" name="recordBeginDate">
+										<span class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+								<label class="col-sm-2 control-label">实际执行结束时间：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<div class="input-group date" id="recordEndDate">
+										<input class="form-control" type="text" name="recordEndDate">
+										<span class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">销售机会：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<input id="recordSaleOpportunity" name="recordSaleOpportunity"
+										class="form-control" type="text">
+								</div>
+								<label class="col-sm-2 control-label">实际费用：</label>
+								<div class="col-sm-4">
+									<input id="recordExpenseActual" name="recordExpenseActual"
+										class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">费用类型：<span
+									class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="recordExpenseCategory"
+										id="recordExpenseCategory" class="form-control chosen-select"
+										tabindex="2" style="width: 100%">
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">附件：</label>
+								<div class="col-sm-4">
+									<div class="file-manager">
+										<button type="button" class="layui-btn btn btn-danger"
+											id="test1" style="width: 100%;">
+											<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
+										</button>
+									</div>
+<!-- 									<p id="fileNames" style="color: #999; padding: 0 10px"></p> -->
+<!-- 									<div class="file-name col-sm-6"> -->
+<!-- 										<img class="layui-upload-img" id="photo" -->
+<!-- 											style="width: 50%; height: 50%; cursor: pointer" -->
+<!-- 											onclick="previewImg(this)"> -->
+<!-- 									</div> -->
+								</div>
+								<input id="recordAttachment" name="recordAttachment"
+											th:value="${recordAttachment}" type="hidden">
+							</div>
+							<!-- 							文件显示列表 -->
+							<div class="form-group">
+								<label class="col-sm-2 control-label"></label>
+								<div class="col-sm-4">
+									<div class="layui-upload">
+										<div class="layui-upload-list">
+											<table id="sds" class="layui-table">
+												<thead>
+													<tr>
+														<th style="text-align: center;">文件名</th>
+														<th style="text-align: center;">大小</th>
+														<th style="text-align: center;">状态</th>
+														<th style="text-align: center;">操作</th>
+													</tr>
+												</thead>
+												<tbody id="demoList"></tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-2 control-label">备注：</label>
+								<div class="col-sm-9">
+									<textarea id="recordRemarks" name="recordRemarks"
+										class="form-control" rows="5"></textarea>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">主送人：</label>
+								<div class="col-sm-8">
+									<input id="mainPersonId" name="mainPersonId" type="hidden">
+									<input id="isMainPerson" name="isMainPerson" type="hidden">
+									<div style="float: left;" id="sendPerson"></div>
+									<div style="float: left;">
+										<button type="button" class="btn btn-danger btn-xs"
+											id="sendPersonBtn" var="sendPersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addSendPerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">抄送人：</label>
+								<div class="col-sm-8">
+									<input id="copyPersonId" name="copyPersonId" type="hidden">
+									<input id="isCopyPerson" name="isCopyPerson" type="hidden">
+									<div style="float: left;" id="receivePerson"></div>
+									<div style="float: left;">
+										<button type="button" class="btn btn-danger btn-xs"
+											id="receivePersonBtn" var="receivePersonBtn"
+											style="border-radius: 100%; margin-top: 5px; margin-left: 10px"
+											onclick="addRecivePerson()">
+											<span class="glyphicon glyphicon-plus"></span>
+										</button>
+									</div>
+								</div>
+							</div>
+
+							<!--
+							<div class="form-group">
+								<label class="col-sm-3 control-label">附件：</label>
+								<div class="col-sm-9">
+									<input id="recordAttachment" name="recordAttachment" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label">备注：</label>
+								<div class="col-sm-9">
+									<input id="recordRemarks" name="recordRemarks" class="form-control" type="text">
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-sm-3 control-label">操作人：</label>
+								<div class="col-sm-8">
+									<input id="recordOperator" name="recordOperator" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">修改时间：</label>
+								<div class="col-sm-8">
+									<input id="recordOperateTime" name="recordOperateTime" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">创建人：</label>
+								<div class="col-sm-8">
+									<input id="recordCreator" name="recordCreator" class="form-control" type="text">
+								</div>
+							</div>
+														<div class="form-group">
+								<label class="col-sm-3 control-label">创建时间：</label>
+								<div class="col-sm-8">
+									<input id="recordCreateTime" name="recordCreateTime" class="form-control" type="text">
+								</div>
+							</div>
+							-->
+							<div class="form-group">
+								<div class="columns pull-right " style="padding-right: 150px">
+									<button type="button" class="btn btn-danger"
+										onclick="closeWin()">取消</button>
+								</div>
+								<div class="columns pull-right " style="padding-right: 5px">
+									<button type="submit" class="btn btn-primary columns">提交</button>
+								</div>
+							</div>
+							<button type="button" id="uploadFile" style="display: none">fdafd</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script type="text/javascript" src="/js/appjs/sales/record/add.js"></script>
+
+	<script type="text/javascript"
+		src="/js/appjs/common/mainCopyPerson/mainPersonAndCopyPerson.js"></script>
+	<script src="/js/bootstrap-paginator.min.js"></script>
+	<script src="/js/content.js?v=1.0.0"></script>
+	<script src="/js/layui.js"></script>
+	<script type="text/javascript" src="/js/common.js"></script>
+	<script src="/js/plugins/clipboard/clipboard.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script type="text/javascript"></script>
+
+</body>
+</html>

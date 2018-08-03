@@ -4,6 +4,7 @@ $(function() {
 	loadCrmData("/sales/companyCustomer/listDic","customerId");
 	load();
 	datetimepicker();
+	validateRule();
 });
 function resetSelect(){
 	$('#timeMin').data('date','');
@@ -13,22 +14,70 @@ function resetSelect(){
 	$("#customerId").val("");
 	$("#customerId").trigger("chosen:updated"); //回到初始状态
 }
-function datetimepicker() {
-	// 开始时间(创建时间)
-	$('#timeMin').datetimepicker({
-		format : 'YYYY-MM-DD',
-		locale : moment.locale('zh-cn'),
-	}).on('dp.change', function() {
-		$('#timeMax').data("DateTimePicker").minDate(new Date($('#timeMin').data('date')));
-	});
+// $.validator.setDefaults({
+// 	submitHandler : function() {
+// 		setTimeout('reLoad()', 500);//延迟执行save()方法2毫秒
+// //		save();
+// 	}
+// });
+$.validator.addMethod("compareDate",function(value,element){
+				var assigntime = $("#start").val();
+                var deadlinetime = $("#end").val();
+                var reg = new RegExp('-','g');
+                assigntime = assigntime.replace(reg,'/');//正则替换
+                deadlinetime = deadlinetime.replace(reg,'/');
+                assigntime = new Date(parseInt(Date.parse(assigntime),10));
+                deadlinetime = new Date(parseInt(Date.parse(deadlinetime),10));
+                if(assigntime>deadlinetime){
+                    return false;
+                }else{
+                    return true;
+                }
+},"<font color='#E47068'>结束日期必须大于开始日期</font>");
 
-	// // 结束时间(最后修改时间)
-	$('#timeMax').datetimepicker({
-		format : 'YYYY-MM-DD',
-		locale : moment.locale('zh-cn')
-	}).on('dp.change', function() {
-		$('#timeMin').data("DateTimePicker").maxDate(new Date($('#timeMax').data('date')));
-	});
+function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#signupForm").validate({
+		ignore: ":hidden:not(select)",
+			rules : {
+				timeMin : {
+					compareDate: true
+				},
+				timeMax : {
+					compareDate: true
+				}
+			},
+			messages : {
+				timeMin : {
+					compareDate : icon + "开始时间不能大于结束时间"
+				},
+				timeMax : {
+					compareDate : icon + "开始时间不能大于结束时间"
+				}
+			}
+	})
+}
+function datetimepicker() {
+		// 开始时间(创建时间)
+		$('#timeMin').datetimepicker({
+			format : 'YYYY-MM-DD',
+			locale : moment.locale('zh-cn'),
+		});
+		// .on('dp.change', function() {
+		// 	$('#timeMax').data("DateTimePicker")
+		// 	.minDate(new Date($('#timeMin').data('date')));
+		// });
+
+		// // 结束时间(最后修改时间)
+		$('#timeMax').datetimepicker({
+			format : 'YYYY-MM-DD',
+			locale : moment.locale('zh-cn')
+		});
+		// .on('dp.change', function() {
+		// 	$('#timeMin').data("DateTimePicker")
+		// 	.maxDate(new Date($('#timeMax').data('date')));
+		// });
+
 }
 
 function load() {
@@ -147,7 +196,6 @@ function load() {
 					});
 }
 function reLoad() {
-	// alert($('#timeMin').data('date'));
 	$('#exampleTable').bootstrapTable('refresh');
 }
 function dataImport() {

@@ -24,7 +24,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">客户名称：<span
 									class="mustin">*</span></label>
-								<div class="col-sm-9">
+								<div class="col-sm-10">
 									<select data-placeholder="请选择" name="customerId"
 										id="customerId" class="form-control chosen-select"
 										tabindex="2" style="width: 100%">
@@ -34,7 +34,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">业务名称：<span
 									class="mustin">*</span></label>
-								<div class="col-sm-9">
+								<div class="col-sm-10">
 									<select data-placeholder="请选择" name="businessId"
 										id="businessId" class="form-control chosen-select"
 										tabindex="2" style="width: 100%">
@@ -44,7 +44,7 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">项目名称：<span
 									class="mustin">*</span></label>
-								<div class="col-sm-9">
+								<div class="col-sm-10">
 									<select data-placeholder="请选择" name="projectId" id="projectId"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
@@ -58,7 +58,7 @@
 									<input id="recordName" name="recordName" class="form-control"
 										type="text">
 								</div>
-								<label class="col-sm-1 control-label">阶段：<span
+								<label class="col-sm-2 control-label">阶段：<span
 									class="mustin">*</span></label>
 								<div class="col-sm-4">
 									<select data-placeholder="请选择" name="recordPhase"
@@ -76,7 +76,7 @@
 										tabindex="2" style="width: 100%">
 									</select>
 								</div>
-								<label class="col-sm-1 control-label">执行状态：<span
+								<label class="col-sm-2 control-label">执行状态：<span
 									class="mustin">*</span></label>
 								<div class="col-sm-4">
 									<select data-placeholder="请选择" name="recordExecuteStatus"
@@ -96,7 +96,7 @@
 										</span>
 									</div>
 								</div>
-								<label class="col-sm-1 control-label">实际执行结束时间：<span
+								<label class="col-sm-2 control-label">实际执行结束时间：<span
 									class="mustin">*</span></label>
 								<div class="col-sm-4">
 									<div class="input-group date" id="recordEndDate">
@@ -115,7 +115,7 @@
 									<input id="recordSaleOpportunity" name="recordSaleOpportunity"
 										class="form-control" type="text">
 								</div>
-								<label class="col-sm-1 control-label">实际费用：</label>
+								<label class="col-sm-2 control-label">实际费用：</label>
 								<div class="col-sm-4">
 									<input id="recordExpenseActual" name="recordExpenseActual"
 										class="form-control" type="text">
@@ -353,7 +353,7 @@
 	<script src="/js/plugins/layer/layer.min.js"></script>
 	<script src="/js/vue.min.js"></script>
 	<script type="text/javascript">
-	//************* 文件下载级显示 *********************************************************		
+	//************* 文件下载级显示 *********************************************************
 	 var app = new Vue({
 	        el: '#app',
 	        data: {
@@ -377,7 +377,7 @@
 	                    app.rows = r.rows;
 // 	                    app.page();
 	                });
-	                
+
 	            },
 	            page: function () {
 	                var options = {
@@ -429,16 +429,16 @@
 // 	                            }
 // 	                        }
 // 	                    });
-	                    
+
 // 	                })
-	                
+
 // 	            }
 	        },
 	        created: function () {
 	            this.getData();
 	        }
 	    });
-	   
+
 	//获取要删除的文件id
 	 function removeFile(id){
 	 	var ids=id+",";
@@ -457,7 +457,7 @@
 	             	 var btn1=document.getElementById('removeFile');
 	     	    	 var box1=document.getElementById('fileDiv');
 	     	    	 box1.style.display='none';//隐藏已选中的删除文件
-	             	    
+
 	             	 var serviceAtt=$("#recordAttachment").val();
 //	               	alert(serviceAtt);
 	          		//将recordAttachment字段里面查出来的id加上都好替换为'' 空
@@ -470,7 +470,7 @@
 	          });
 	      })
 	 }
-	    	
+
 	// 点击提交的时候 删除要删除的文件
 	 function removeaa(){
 	 	 var removeIds=$("#removeId").val();
@@ -519,10 +519,10 @@
 	             }
 	         }
 	     });
-	 } 
+	 }
 
 
-//********************** END *************************************	
+//********************** END *************************************
 	</script>
 </body>
 </html>

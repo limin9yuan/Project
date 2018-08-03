@@ -170,16 +170,42 @@ function validateRule() {
 	})
 }
 function datetimepicker() {
+	var workDay;
+	var startWork;
+	var endWork;
+	$.ajax({
+		url : '/budget/labor/getWorkTime/',
+		type : "get",
+		data : {
+			'employeeId' : $("#employeeId").val()
+		},
+		success : function(data) {
+			var result = data.laborHour;
+			workDay = result.workDay;
+			startWork = result.startWorkAM;
+			endWork = result.endWorkPM;
+			var startTime = workDay + ' ' + startWork.substr(0,5);
+			var endTime = workDay + ' ' + endWork.substr(0,5);
+			$('#startTime').val(startTime);
+			$('#endTime').val(endTime);
+			$('#laborBeginTime').data('date',startTime);
+			$('#laborEndTime').data('date',endTime);
+
+		}
+	});
 	 $('#laborBeginTime').datetimepicker({
 	        format: 'YYYY-MM-DD HH:mm',
 	        locale: moment.locale('zh-cn'),
-			defaultDate : new Date()
-	    });
+
+	    }).on('dp.change', function() {
+			$('#laborEndTime').data("DateTimePicker").minDate(new Date($('#laborBeginTime').data('date')));
+		});
 	 $('#laborEndTime').datetimepicker({
 	        format: 'YYYY-MM-DD HH:mm',
 	        locale: moment.locale('zh-cn'),
-			defaultDate : new Date()
-	    });
+	    }).on('dp.change', function() {
+			$('#laborBeginTime').data("DateTimePicker").maxDate(new Date($('#laborEndTime').data('date')));
+		});
 }
 //修改——显示数据绑定
 function laborMapper_edit(){
