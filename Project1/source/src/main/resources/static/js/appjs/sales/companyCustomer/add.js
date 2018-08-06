@@ -338,7 +338,8 @@ function validateRule() {
 				required:true
 			},
 			customerPhoneNum:{
-				required:true
+				required:true,
+				isMobile:true
 			},
 			customerLeader:{
 				required:true
@@ -465,7 +466,8 @@ function validateRule() {
 				required:icon+"企业地址不能为空！"
 			},
 			customerPhoneNum:{
-				required:icon +"电话号码不能为空！"
+				required:icon +"电话号码不能为空！",
+				isMobile:icon+"请填写正确的手机号码！"
 			},
 			customerLeader:{
 				required:icon +"企业负责人不能为空！"

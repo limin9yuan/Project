@@ -147,8 +147,7 @@ function validateRule() {
 					rangelength:[1,500]
 				},
 				serviceType : {
-					required: true,
-					rangelength:[1,10]
+					required: true
 				},
 				serviceProblemDeascription : {
 					required: true,
@@ -164,13 +163,16 @@ function validateRule() {
 				},
 				servicePhoneNumber : {
 					required: true,
-					rangelength:[1,20]
+					isMobile:true
 				},
 				serviceProblemRemarks : {
 					rangelength:[1,200]
 				},
 				serviceAfterSaleRemarks : {
 					rangelength:[1,200]
+				},
+				serviceMailbox:{
+					email:true
 				}
 			},
 			messages : {
@@ -204,8 +206,7 @@ function validateRule() {
 					rangelength: icon + "请输入一个长度介于 1 和 500 之间的字符串"
 				},
 				serviceType : {
-					required : icon + "服务类型不能为空",
-					rangelength: icon + "请输入一个长度介于 1 和 10 之间的字符串"
+					required : icon + "服务类型不能为空"
 				},
 				serviceProblemDeascription : {
 					required : icon + "问题描述不能为空",
@@ -221,13 +222,16 @@ function validateRule() {
 				},
 				servicePhoneNumber : {
 					required : icon + "电话不能为空",
-					rangelength: icon + "请输入一个长度介于 1 和 20 之间的字符串"
+					isMobile: icon + "请输入正确的手机号码！"
 				},
 				serviceProblemRemarks : {
 					rangelength: icon + "请输入一个长度介于 1 和 200 之间的字符串"
 				},
 				serviceAfterSaleRemarks : {
 					rangelength: icon + "请输入一个长度介于 1 和 200 之间的字符串"
+				},
+				serviceMailbox:{
+					email:icon+"请输入正确的邮箱！"
 				}
 			}
 	})

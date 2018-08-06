@@ -2,21 +2,6 @@ var prefixCompanyCustomer="/sales/companyCustomer";
 var address = null;
 var result = null;
 $().ready(function() {
-//			$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
-//				if (address == null) {
-//					address = new addressResolve({
-//						proId : 'province',
-//						cityId : 'city',
-//						areaId : 'area'
-//					}, {
-//						proId : result.province,
-//						cityId : 'city',
-//						areaId : 'arae'
-//					});
-//					address.init();
-//				}
-//
-//			});
 
 	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e){
 
@@ -336,8 +321,7 @@ function validateRule() {
 			},
 			customerPhoneNum:{
 				required:true,
-				digits:true,
-				rangelength:[5,11]
+				isMobile:true
 			},
 			customerLeader:{
 				required:true
@@ -401,6 +385,9 @@ function validateRule() {
 			},
 			customerUrl:{
 				url:true
+			},
+			customerHotRank:{
+				required:true
 			}
 		},
 		messages : {
@@ -446,8 +433,7 @@ function validateRule() {
 			},
 			customerPhoneNum:{
 				required:icon +"电话号码不能为空！",
-				digits:icon +"请输入数字！",
-				rangelength:icon +"请输入有效的电话号码！"
+				isMobile:icon +"请填写正确的电话号码！"
 			},
 			customerLeader:{
 				required:icon +"企业负责人不能为空！"
@@ -511,6 +497,9 @@ function validateRule() {
 			},
 			customerUrl:{
 				url:icon+"请输入正确的网址"
+			},
+			customerHotRank:{
+				required:icon+"请选择热度！"
 			}
 		}
 	})

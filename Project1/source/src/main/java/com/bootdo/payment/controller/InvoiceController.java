@@ -7,17 +7,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.lang.StringUtils;
 
 import com.bootdo.common.domain.MainCopyPersonDO;
 import com.bootdo.common.service.MainCopyPersonService;
+import com.bootdo.contract.domain.ContractProjectDO;
+import com.bootdo.contract.service.ContractProjectService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +68,8 @@ public class InvoiceController extends BaseController {
 	private BootdoConfig bootdoConfig;
 	@Autowired
 	private MainCopyPersonService mainCopyPersonService;
+	@Autowired
+	private ContractProjectService contractProjectService;
 
 	@GetMapping()
 	@RequiresPermissions("payment:invoice:invoice")
@@ -261,6 +263,17 @@ public class InvoiceController extends BaseController {
 	@ResponseBody
 	Map<String, Object> getContractId(@PathVariable("contractId") String contractId) {
 		ContractDO contract = invoiceService.getContractId(contractId);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		params.put("contractId", contractId);
+		Query queryGetMultiProject = new Query(params);
+		List<ContractProjectDO> getMultiProject = contractProjectService.getMultiProject(queryGetMultiProject);
+		ArrayList<String> projectNames = new ArrayList<>();
+		for (int i = 0; i<getMultiProject.size(); i++){
+			projectNames.add(getMultiProject.get(i).getProjectName());
+		}
+		contract.setProjectId(StringUtils.strip(projectNames.toString(),"[]"));
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		System.out.println(contract.getContractReceivablePrice());
 		returnData.put("contract", contract);

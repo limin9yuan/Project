@@ -216,11 +216,11 @@ function validateRule() {
 					rangelength:[1,200]
 				},
 				complaintMailbox : {
-					rangelength:[1,50]
+					email :true
 				},
 				complaintPhoneNumber : {
 					required: true,
-					rangelength:[1,20]
+					isMobile:true
 				},
 			},
 			messages : {
@@ -269,11 +269,11 @@ function validateRule() {
 					rangelength: icon + "请输入一个长度介于 1 和 200 之间的字符串"
 				},
 				complaintMailbox : {
-					rangelength: icon + "请输入一个长度介于 1 和 50 之间的字符串"
+					email: icon + "请输入正确的邮箱！"
 				},
 				complaintPhoneNumber : {
 					required : icon + "电话不能为空",
-					rangelength: icon + "请输入一个长度介于 1 和 20 之间的字符串"
+					isMobile: icon + "请输入正确的手机号码！"
 				},
 			}
 	})

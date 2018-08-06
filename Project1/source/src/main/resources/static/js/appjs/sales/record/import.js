@@ -16,7 +16,8 @@ $().ready(
 						// alert(r.fileName);
 						$("#recordFile").val(r.fileName);
 						parent.layer.msg(r.msg);
-						freshParenWindow();
+						closeParenWindow();
+//						freshParenWindow();
 					},
 					error : function(r) {
 						parent.layer.msg(r.msg);

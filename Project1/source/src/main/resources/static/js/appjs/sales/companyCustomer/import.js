@@ -15,7 +15,7 @@ $().ready(function() {
 //            	alert(r.fileName);
             	$("#companyCustomerAttachment").val(r.fileName);
             	parent.layer.msg(r.msg);
-                freshParenWindow();
+            	closeParenWindow();
             },
             error: function (r) {
             	parent.layer.msg(r.msg);

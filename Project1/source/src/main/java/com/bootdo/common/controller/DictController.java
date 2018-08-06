@@ -41,6 +41,9 @@ public class DictController extends BaseController {
 	@RequiresPermissions("common:sysDict:sysDict")
 	public PageUtils list(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
+		if(params.get("name")!=null && !"".equals(params.get("name"))){
+			params.put("name","%"+params.get("name")+"%");
+		}
 		Query query = new Query(params);
 		List<DictDO> sysDictList = sysDictService.list(query);
 		int total = sysDictService.count(query);

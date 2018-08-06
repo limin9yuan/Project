@@ -110,9 +110,9 @@ public class ContractProjectController {
 		params.put("limit",2);
 		params.put("contractId", contractId);
 		Query queryGetMultiProject = new Query(params);
-		List<ContractProjectDO> getMainAndCopyPerson = contractProjectService.getMultiProject(queryGetMultiProject);
+		List<ContractProjectDO> getMultiProject = contractProjectService.getMultiProject(queryGetMultiProject);
 		Map<String, Object> returnData = new HashMap<>();
-		returnData.put("multiProject", getMainAndCopyPerson);
+		returnData.put("multiProject", getMultiProject);
 		return returnData;
 	}
 	

@@ -15,7 +15,8 @@ $().ready(function() {
             	//alert(r.fileName);
             	$("#salesProjectFile").val(r.fileName);
                 parent.layer.msg(r.msg);
-                freshParenWindow();
+                closeParenWindow();
+//                freshParenWindow();
                 //app.getData();
             },
             error: function (r) {

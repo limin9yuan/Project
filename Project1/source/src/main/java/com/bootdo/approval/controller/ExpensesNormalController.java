@@ -225,23 +225,23 @@ public class ExpensesNormalController extends BaseController {
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("approval:expensesNormal:batchRemove")
-	public R remove(String expensesNormalId) {
+	public R remove(String expensesNormal) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("offset",1);
 		params.put("limit",2);
-		params.put("tId",expensesNormalId);
+		params.put("tId",expensesNormal);
 		params.put("tableName","sales_customer_contact");
-		ExpensesNormalDO expensesNormal = expensesNormalService.get(expensesNormalId);
-		if (expensesNormal != null && expensesNormal.getProcessInstanceId()!= null){
-			if (expensesNormal.getExpensesNormalStatus().equals("2")){
+		ExpensesNormalDO expensesNormalDO = expensesNormalService.get(expensesNormal);
+		if (expensesNormalDO != null && expensesNormalDO.getProcessInstanceId()!= null){
+			if (expensesNormalDO.getExpensesNormalStatus().equals("2")){
 				return R.error("流程正在审批，不允许删除");
 			}
-			if (expensesNormal.getExpensesNormalStatus().equals("1")) {
+			if (expensesNormalDO.getExpensesNormalStatus().equals("1")) {
 				return R.error("流程已经审批完成，不允许删除");
 			}
-			actTaskService.deleteProcess(expensesNormal.getProcessInstanceId());
+			actTaskService.deleteProcess(expensesNormalDO.getProcessInstanceId());
 		}
-		if (expensesNormalService.remove(expensesNormalId) > 0) {
+		if (expensesNormalService.remove(expensesNormal) > 0) {
 			mainCopyPersonService.remove(params);
 			return R.ok();
 		}

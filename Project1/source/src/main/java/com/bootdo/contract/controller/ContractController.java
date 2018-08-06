@@ -91,7 +91,7 @@ public class ContractController extends BaseController {
 	}
 
 	@GetMapping("/multiProjects")
-	String mainPerson() {
+	String multiProjects() {
 		return "contract/contract/multiProjects/multiProjects";
 	}
 
