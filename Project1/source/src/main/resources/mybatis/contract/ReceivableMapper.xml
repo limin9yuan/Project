@@ -97,10 +97,12 @@
 <!-- 	 ************************************************************************************ -->
 <!-- 	 本月计划回款客户详情 -->
 	<select id="examinePlanCunstomerNumber" resultType="com.bootdo.contract.domain.ReceivableDO">
-		select a.Receivable_Price,a.Receivable_Date,s.Customer_ID,s.Customer_Name
+		select Receivable_ID,a.Contract_ID,Receivable_Date,Receivable_Price,Receivable_Owner,
+		Receivable_Remarks,u.name as Receivable_Operator,Receivable_Operate_Time,s.Customer_Name,s.Customer_ID
 		from accounts_receivable a 
 		left join contract c on a.Contract_ID=c.Contract_ID
 		left join sales_company_customer s on c.Customer_ID=s.Customer_ID
+		left join sys_user u on a.Receivable_Operator=u.user_id
 		where a.Receivable_Price!='' and a.Receivable_Price is not null
 	</select>
 	<select id="countExaminePlanCunstomerNumber" resultType="int">
@@ -108,6 +110,7 @@
 		from accounts_receivable a 
 		left join contract c on a.Contract_ID=c.Contract_ID
 		left join sales_company_customer s on c.Customer_ID=s.Customer_ID
+		left join sys_user u on a.Receivable_Operator=u.user_id
 		where a.Receivable_Price!='' and a.Receivable_Price is not null
 	</select>
 <!-- 	 ************************************************************************************ -->	

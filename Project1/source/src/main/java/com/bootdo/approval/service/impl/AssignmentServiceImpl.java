@@ -60,7 +60,7 @@ public class AssignmentServiceImpl implements AssignmentService {
 			assignment.setAssignmentApprovalStatus("1");
 			assignment.setAssignmentApprovalTime(new Date());
 		}else{
-			assignment.setAssignmentApprovalStatus("0");
+			assignment.setAssignmentApprovalStatus("2");
 		}
 
        return assignmentDao.update(assignment);

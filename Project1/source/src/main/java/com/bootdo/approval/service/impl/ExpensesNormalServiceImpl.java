@@ -113,7 +113,7 @@ public class ExpensesNormalServiceImpl implements ExpensesNormalService {
 			expensesNormal.setExpensesNormalStatus("1");
 			expensesNormal.setExpensesNormalApprovalTime(new Date());
 		}else{
-			expensesNormal.setExpensesNormalStatus("0");
+			expensesNormal.setExpensesNormalStatus("2");
 		}
 
 		return expensesNormalDao.update(expensesNormal);

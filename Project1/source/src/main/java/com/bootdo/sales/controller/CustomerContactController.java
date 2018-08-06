@@ -399,7 +399,13 @@ public class CustomerContactController extends BaseController {
 			@RequestParam(value = "city", required = false) String city,
 			@RequestParam(value = "area", required = false) String area,
 			@RequestParam(value = "customerName", required = false) String customerName,
-			@RequestParam(value = "customerId", required = false) String customerId, HttpServletResponse response,
+			@RequestParam(value = "customerId", required = false) String customerId,
+			@RequestParam(value = "contactName", required = false) String contactName,
+			@RequestParam(value = "businessName", required = false) String businessName,
+			@RequestParam(value = "projectName", required = false) String projectName,
+			@RequestParam(value = "contactSales", required = false) String contactSales,
+			
+			HttpServletResponse response,
 			HttpServletRequest request) throws ParseException {
 
 		// String administrative1=request.getParameter(administrative);
@@ -416,6 +422,10 @@ public class CustomerContactController extends BaseController {
 		params.put("customerName",
 				(customerName != null && !"".equals(customerName)) ? "%" + customerName + "%" : customerName);
 		params.put("customerId", (customerId != null && !"".equals(customerId)) ? customerId + "%" : customerId);
+		params.put("contactName", (contactName!=null && !"".equals(contactName))?contactName+"%":contactName);
+		params.put("businessName", (businessName!=null && !"".equals(businessName))?businessName+"%":businessName);
+		params.put("projectName", (projectName!=null && !"".equals(projectName))?projectName+"%":projectName);
+		params.put("contactSales", (contactSales!=null && !"".equals(contactSales))?contactSales+"%":contactSales);
 		List<CustomerContactDO> list = customerContactService.getQuery(params);
 		if (list.size() > 0) {
 			System.out.println("---------------------list.size------------------->" + list.size());

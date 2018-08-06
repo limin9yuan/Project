@@ -86,7 +86,7 @@ public class AdditionalRecordsServiceImpl implements AdditionalRecordsService {
 			additionalRecords.setRecordApprovalStatus("1");
 			additionalRecords.setRecordApprovalTime(new Date());
 		}else{
-			additionalRecords.setRecordApprovalStatus("0");
+			additionalRecords.setRecordApprovalStatus("2");
 		}
 
 		return additionalRecordsDao.update(additionalRecords);

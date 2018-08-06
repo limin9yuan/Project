@@ -29,7 +29,7 @@ public class ReceivableDO implements Serializable {
 	//备注
 	private String receivableRemarks;
 	//操作人
-	private Long receivableOperator;
+	private String receivableOperator;
 	//操作时间
 	private Date receivableOperateTime;
 	//计划回款
@@ -174,13 +174,13 @@ public class ReceivableDO implements Serializable {
 	/**
 	 * 设置：操作人
 	 */
-	public void setReceivableOperator(Long receivableOperator) {
+	public void setReceivableOperator(String receivableOperator) {
 		this.receivableOperator = receivableOperator;
 	}
 	/**
 	 * 获取：操作人
 	 */
-	public Long getReceivableOperator() {
+	public String getReceivableOperator() {
 		return receivableOperator;
 	}
 	/**

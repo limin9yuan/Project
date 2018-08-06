@@ -10,7 +10,7 @@
 		`Contract_Related_ID`,`Contract_Invoice_Type`,`Contract_Invoice_Time`,`Contract_Hardware_List`,
 		`Contract_Software_List`,`Contract_Project_Management`,`Contract_Remarks`,`Contract_Attachment`,
 		`Contract_Approval_Status`,`Contract_Operator`,`Contract_Operate_Time`,s.name as contractOperatorName,
-		Contract_Applicant_Name
+		Contract_Applicant_Name,PROCESS_INSTANCE_ID
 		from contract a
 		left JOIN sys_user s on a.Contract_Operator = s.user_id
 		left join sales_company_customer c on a.Customer_ID = c.Customer_ID
@@ -498,8 +498,7 @@
 		`Contract_Dept`,`Contract_Applicant`,`Contract_Draft_Person`,`Contract_Sales`,`Contract_Commit_Time`,
 		`Contract_Related_ID`,`Contract_Invoice_Type`,`Contract_Invoice_Time`,`Contract_Hardware_List`,
 		`Contract_Software_List`,`Contract_Project_Management`,`Contract_Remarks`,`Contract_Attachment`,
-		case when `Contract_Approval_Status` = '1' then '已审批'
-			  when `Contract_Approval_Status` = '0' then '未审批' end as Contract_Approval_Status,
+		case `Contract_Approval_Status`when '1' then '已审批' when '2' then '正在审批' else '未审批' END AS Contract_Approval_Status,
 		`Contract_Operator`,`Contract_Operate_Time`,s.name as contractOperatorName,
 		PROCESS_INSTANCE_ID
 		from contract a

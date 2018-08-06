@@ -48,7 +48,8 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 	private CompanyCustomerDao companyCustomerDao;
 	@Autowired
 	private CompanyCustomerDao companyCustomerTree;
-
+	@Autowired
+	private CompanyCustomerService companyCustomerService;
 	@Override
 	public CompanyCustomerDO get(String customerId) {
 		return companyCustomerDao.get(customerId);
@@ -202,6 +203,7 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 							companyCustomerDO.setCustomerCity(cellvalue);
 						} else if (j == 2) {
 							companyCustomerDO.setCustomerCounty(cellvalue);
+							System.out.println("*********************************"+cellvalue);
 						} else if (j == 3) {
 							companyCustomerDO.setCustomerName(cellvalue);
 						} else if (j == 4) {
@@ -373,6 +375,9 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 						}
 
 					} // --->遍历列
+					String customerIds=companyCustomerService.getcustomerIdImport(companyCustomerDO);
+					System.out.println("************************"+customerIds);
+					companyCustomerDO.setCustomerId(customerIds);
 					companyCustomerDO.setCustomerOperator(Long.toString(userid));
 					companyCustomerDO.setCustomerOperateTime(new Date());
 
@@ -932,5 +937,18 @@ public class CompanyCustomerServiceImpl implements CompanyCustomerService {
 		// return companyCustomerDao.save(companyCustomer);
 		return Integer.parseInt(customerId);
 	}
+
+	@Override
+	public String getcustomerId(CompanyCustomerDO customerId) {
+		// TODO Auto-generated method stub
+		return companyCustomerDao.getcustomerId(customerId);
+	}
+
+	@Override
+	public String getcustomerIdImport(CompanyCustomerDO customerId) {
+		// TODO Auto-generated method stub
+		return companyCustomerDao.getcustomerIdImport(customerId);
+	}
+
 
 }

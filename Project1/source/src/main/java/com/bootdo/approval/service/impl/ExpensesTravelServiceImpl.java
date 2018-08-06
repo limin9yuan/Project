@@ -98,7 +98,7 @@ public class ExpensesTravelServiceImpl implements ExpensesTravelService {
 			expensesTravel.setExpensesTravelStatus("1");
 			expensesTravel.setExpensesTravelApprovalTime(new Date());
 		}else{
-			expensesTravel.setExpensesTravelStatus("0");
+			expensesTravel.setExpensesTravelStatus("2");
 		}
 
 		return expensesTravelDao.update(expensesTravel);

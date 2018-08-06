@@ -245,8 +245,7 @@ function validateRule() {
 			},
 			contactPhoneNumber : {
 				required : true,
-				digits : true,
-				rangelength : [ 5, 11 ]
+				isMobile:true
 			},
 			// 工作电话
 			contactWorkPhoneNumber : {
@@ -258,13 +257,9 @@ function validateRule() {
 				digits : true,
 				rangelength : [ 5, 11 ]
 			},
-			// 微信
-			// contactWeixin:{
-			//
-			// },
 			// QQ
 			contactQq : {
-				digits : true
+				isQq : true
 			},
 			// 邮件地址
 			contactMailbox : {
@@ -292,8 +287,7 @@ function validateRule() {
 			},
 			contactPhoneNumber : {
 				required : icon + "请输入手机",
-				digits : icon + "请输入正确的电话号码（数字）！",
-				rangelength : icon + "请输入有效的电话号码、5-11位！！"
+				isMobile : icon + "请输入正确的电话号码！"
 			},
 			// 工作电话
 			contactWorkPhoneNumber : {
@@ -305,14 +299,9 @@ function validateRule() {
 				digits : icon + "请输入正确的电话号码（数字）！",
 				rangelength : icon + "请输入有效的电话号码、5-11位！"
 			},
-
-			// 微信
-			// contactWeixin:{
-			//
-			// },
 			// QQ
 			contactQq : {
-				digits : icon + "QQ必须为数字、整数！",
+				isQq : icon + "请输入有效的QQ号"
 			},
 			// 邮件地址
 			contactMailbox : {

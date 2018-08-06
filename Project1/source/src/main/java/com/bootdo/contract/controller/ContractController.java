@@ -16,12 +16,14 @@ import java.util.zip.ZipOutputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.common.domain.MainCopyPersonDO;
 import com.bootdo.common.domain.MainDO;
 import com.bootdo.common.service.MainCopyPersonService;
 import com.bootdo.common.utils.*;
 import com.bootdo.contract.domain.ContractProjectDO;
+import com.bootdo.contract.domain.PayoutDO;
 import com.bootdo.contract.service.ContractProjectService;
 import com.bootdo.payment.domain.ContractApprovalDO;
 import com.bootdo.timesheet.domain.TimesheetDO;
@@ -79,6 +81,8 @@ public class ContractController extends BaseController {
 	private MainCopyPersonService mainCopyPersonService;
 	@Autowired
 	private ContractProjectService contractProjectService;
+	@Autowired
+	private ActTaskService actTaskService;
 
 	@GetMapping()
 	@RequiresPermissions("contract:contract:contract")
@@ -292,6 +296,16 @@ public class ContractController extends BaseController {
 		params.put("limit", 2);
 		params.put("tId", contractId);
 		params.put("tableName", "contract");
+		ContractDO contract = contractService.get(contractId);
+		if (contract != null && contract.getProcessInstanceId()!= null){
+			if (contract.getContractApprovalStatus().equals("2")){
+				return R.error("流程正在审批，不允许删除");
+			}
+			if (contract.getContractApprovalStatus().equals("1")) {
+				return R.error("流程已经审批完成，不允许删除");
+			}
+			actTaskService.deleteProcess(contract.getProcessInstanceId());
+		}
 		if (contractService.remove(contractId) > 0) {
 			mainCopyPersonService.remove(params);
 			return R.ok();
@@ -306,8 +320,29 @@ public class ContractController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("contract:contract:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] contractIds) {
-		contractService.batchRemove(contractIds);
-		return R.ok();
+		List<String> list = new ArrayList<String>();
+		//级联删除流程相关
+		for(int i=0;i<contractIds.length;i++){
+			ContractDO contract= contractService.get(contractIds[i]);
+			if(contract!=null&&contract.getProcessInstanceId()!=null){
+				if(contract.getContractApprovalStatus().equals("2")){
+					continue;
+					//return R.error("流程正在审批，不允许删除");
+				}else if(contract.getContractApprovalStatus().equals("1")){
+					//return R.error("流程已经审批完成，不允许删除");
+					continue;
+				}
+				actTaskService.deleteProcess(contract.getProcessInstanceId());
+				list.add(contractIds[i]);
+			}
+		}
+
+		contractService.batchRemove(list.toArray(new String[1]));
+		if(list.size()<contractIds.length){
+			return R.ok("有部分流程正在审批或审批完成，不允许删除");
+		}else{
+			return R.ok();
+		}
 	}
 
 	@ResponseBody

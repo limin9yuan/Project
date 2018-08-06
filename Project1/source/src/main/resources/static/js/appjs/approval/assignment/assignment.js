@@ -101,6 +101,7 @@ function load() {
 								{
 									checkbox : true
 								},{
+									width : '130px',
 									title : '操作',
 									field : 'id',
 									align : 'center',
@@ -117,6 +118,7 @@ function load() {
 										return e + d + f ;
 									}
 								},{
+									width : '130px',
 									align : 'center',
 									formatter : function(value, row, index) {
 										if (row.assignmentApprovalStatus != null) {
@@ -130,36 +132,47 @@ function load() {
 									// field : 'assignmentId',
 									title : '审批状态'
 								},{
+									width : '130px',
 									field : 'assignmentId',
 									title : '任务委托编号'
 								},{
+									width : '130px',
 									field : 'projectId',
 									title : '项目编号'
 								},{
+									width : '130px',
 									field : 'projectName',
 									title : '项目名称'
 								},{
+									width : '130px',
 									field : 'assignmentPmName',
 									title : '项目经理'
 								},{
+									width : '130px',
 									field : 'assignmentPersonName',
 									title : '申请人'
 								},{
+									width : '130px',
 									field : 'assignmentTaskName',
 									title : '任务名称'
 								},{
+									width : '130px',
 									field : 'assignmentBeginTime',
 									title : '任务委托时间'
 								},{
+									width : '130px',
 									field : 'assignmentEndTime',
 									title : '要求完成时间'
 								},{
+									width : '130px',
 									field : 'assignmentPrincipalName',
 									title : '委托人'
 								},{
+									width : '130px',
 									field : 'assignmentRecipientName',
 									title : '承接人'
 								},{
+									width : '130px',
 									field : 'assignmentTaskPerformance',
 									title : '任务完成情况'
 								}

@@ -144,8 +144,7 @@ function validateRule() {
 			//卡号
 			expensesTravelCardNum:{
 				required : true,
-				digits:true,
-				max:9999999999999999999999999
+			 	creditcard:true
 			}
 
 		},
@@ -205,8 +204,7 @@ function validateRule() {
 			//卡号
 			expensesTravelCardNum:{
 				required : icon + "请输入卡号！",
-				digits:icon + "请输入合法的数字小数、整数！",
-				max:$.validator.format("卡号不能大于25位数！")
+			 	creditcard:icon+"请输入正确的银行卡号！"
 			}
 		}
 	})

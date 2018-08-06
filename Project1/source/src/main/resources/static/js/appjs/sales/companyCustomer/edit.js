@@ -19,20 +19,14 @@ $().ready(function() {
 //			});
 
 	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e){
-		 if($("#customerHotRank option").length!=1){
 
 			 loadDicValue("sales_customer_hot_Rank","customerHotRank",result.customerHotRank);//热度s
-		 }
-		 if($("#customerHotClassif option").length!=1){
 
 			 loadDicValue("sales_Customer_Hot_Classif","customerHotClassif",result.customerHotClassif);//热点客户分类
-		 }
 	 });
 	$('#myTab a[href="#linkInfo"]').on('shown.bs.tab', function(e){
 
-		 if($("#customerContactSta option").length!=1){
 			 loadDicValue("sales_customer_contact_Sta","customerContactSta",result.customerContactSta);
-		 }
 
 
 	 });
@@ -401,6 +395,12 @@ function validateRule() {
 			},
 			customerElectrickLoss:{
 				number:true
+			},
+			customerPostcode:{
+				isZipCode:true
+			},
+			customerUrl:{
+				url:true
 			}
 		},
 		messages : {
@@ -504,7 +504,13 @@ function validateRule() {
 				number:icon +"请输入数字！"
 			},
 			customerElectrickLoss:{
-				number:icon +"请输入数字！"
+				number:icon +"请输入正确的邮政编码"
+			},
+			customerPostcode:{
+				isZipCode:icon +"请输入正确的邮政编码"
+			},
+			customerUrl:{
+				url:icon+"请输入正确的网址"
 			}
 		}
 	})

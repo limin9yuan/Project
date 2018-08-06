@@ -22,7 +22,11 @@ function resetSelect(){
 	$("#businessSales").val("");
 	$("#businessSales").trigger("chosen:updated"); //回到初始状态
 }
+
+
 function load() {
+	 //清空销毁当前表格
+	 $('#exampleTable').bootstrapTable('destroy');
 	$('#exampleTable').bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post

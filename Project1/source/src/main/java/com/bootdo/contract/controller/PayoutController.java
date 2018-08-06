@@ -1,10 +1,12 @@
 package com.bootdo.contract.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.contract.domain.TravelDO;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -53,6 +55,8 @@ public class PayoutController extends BaseController {
 	ActivitiUtils activitiUtils;
 	@Autowired
 	private MainCopyPersonService mainCopyPersonService;
+	@Autowired
+	private ActTaskService actTaskService;
 
 	/**
 	 * ********************** 审批流程相关 *********************************
@@ -264,6 +268,16 @@ public class PayoutController extends BaseController {
 		params.put("limit",2);
 		params.put("tId",payoutId);
 		params.put("tableName","approval_payout");
+		PayoutDO payout = payoutService.get(payoutId);
+		if (payout != null && payout.getProcessInstanceId()!= null){
+			if (payout.getPayoutApprovalStatus().equals("2")){
+				return R.error("流程正在审批，不允许删除");
+			}
+			if (payout.getPayoutApprovalStatus().equals("1")) {
+				return R.error("流程已经审批完成，不允许删除");
+			}
+			actTaskService.deleteProcess(payout.getProcessInstanceId());
+		}
 		if (payoutService.remove(payoutId) > 0) {
 			mainCopyPersonService.remove(params);
 			return R.ok();
@@ -278,8 +292,29 @@ public class PayoutController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("contract:payout:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] payoutIds) {
-		payoutService.batchRemove(payoutIds);
-		return R.ok();
+		List<String> list = new ArrayList<String>();
+		//级联删除流程相关
+		for(int i=0;i<payoutIds.length;i++){
+			PayoutDO payout= payoutService.get(payoutIds[i]);
+			if(payout!=null&&payout.getProcessInstanceId()!=null){
+				if(payout.getPayoutApprovalStatus().equals("2")){
+					continue;
+					//return R.error("流程正在审批，不允许删除");
+				}else if(payout.getPayoutApprovalStatus().equals("1")){
+					//return R.error("流程已经审批完成，不允许删除");
+					continue;
+				}
+				actTaskService.deleteProcess(payout.getProcessInstanceId());
+				list.add(payoutIds[i]);
+			}
+		}
+
+		payoutService.batchRemove(list.toArray(new String[1]));
+		if(list.size()<payoutIds.length){
+			return R.ok("有部分流程正在审批或审批完成，不允许删除");
+		}else{
+			return R.ok();
+		}
 	}
 
 	@ResponseBody

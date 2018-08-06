@@ -75,7 +75,7 @@
 		left join
 		sys_user s on a.Customer_Dept_Operator=s.user_id
 		<where>
-			<if test="_parameter !=null and _parameter !=''">a.Customer_ID =#{_parameter}</if>
+			<if test="customerId !=null and customerId !=''">a.Customer_ID =#{customerId}</if>
 			<if test="customerDeptId != null and customerDeptId != ''"> and Customer_Dept_ID = #{customerDeptId} </if>
 			<if test="childCompanyId != null and childCompanyId != ''"> and Child_Company_ID = #{childCompanyId} </if>
 			<if test="customerDeptName != null and customerDeptName != ''"> and Customer_Dept_Name = #{customerDeptName} </if>

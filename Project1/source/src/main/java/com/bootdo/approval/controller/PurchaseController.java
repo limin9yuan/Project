@@ -1,14 +1,17 @@
 package com.bootdo.approval.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.approval.domain.PurchaseDetailDO;
 import com.bootdo.approval.service.PurchaseDetailService;
 import com.bootdo.common.domain.MainCopyPersonDO;
 import com.bootdo.common.service.MainCopyPersonService;
+import com.bootdo.contract.domain.PayoutDO;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -54,6 +57,8 @@ public class PurchaseController extends BaseController {
 	private MainCopyPersonService mainCopyPersonService;
 	@Autowired
 	private PurchaseDetailService purchaseDetailService;
+	@Autowired
+	private ActTaskService actTaskService;
 
 	@GetMapping()
 	@RequiresPermissions("approval:purchase:purchase")
@@ -383,7 +388,23 @@ public class PurchaseController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("approval:purchase:remove")
 	public R remove( String purchaseId){
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		params.put("tId",purchaseId);
+		params.put("tableName","approval_purchase");
+		PurchaseDO purchase = purchaseService.get(purchaseId);
+		if (purchase != null && purchase.getProcessInstanceId()!= null){
+			if (purchase.getPurchaseApprovalStatus().equals("2")){
+				return R.error("流程正在审批，不允许删除");
+			}
+			if (purchase.getPurchaseApprovalStatus().equals("1")) {
+				return R.error("流程已经审批完成，不允许删除");
+			}
+			actTaskService.deleteProcess(purchase.getProcessInstanceId());
+		}
 		if(purchaseService.remove(purchaseId)>0){
+			mainCopyPersonService.remove(params);
 		return R.ok();
 		}
 		return R.error();
@@ -396,8 +417,29 @@ public class PurchaseController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("approval:purchase:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] purchaseIds){
-		purchaseService.batchRemove(purchaseIds);
-		return R.ok();
+		List<String> list = new ArrayList<String>();
+		//级联删除流程相关
+		for(int i=0;i<purchaseIds.length;i++){
+			PurchaseDO purchase= purchaseService.get(purchaseIds[i]);
+			if(purchase!=null&&purchase.getProcessInstanceId()!=null){
+				if(purchase.getPurchaseApprovalStatus().equals("2")){
+					continue;
+					//return R.error("流程正在审批，不允许删除");
+				}else if(purchase.getPurchaseApprovalStatus().equals("1")){
+					//return R.error("流程已经审批完成，不允许删除");
+					continue;
+				}
+				actTaskService.deleteProcess(purchase.getProcessInstanceId());
+				list.add(purchaseIds[i]);
+			}
+		}
+
+		purchaseService.batchRemove(list.toArray(new String[1]));
+		if(list.size()<purchaseIds.length){
+			return R.ok("有部分流程正在审批或审批完成，不允许删除");
+		}else{
+			return R.ok();
+		}
 	}
 	/**
 	 * ********************** 审批流程相关  *********************************

@@ -86,11 +86,12 @@ function loadContract() {
 									align : 'center',
 									field : 'contractCommitTime',
 									title : '提交评审时间'
-								},{
-									align : 'center',
-									field : '',
-									title : '详细信息'
 								}
+//								,{
+//									align : 'center',
+//									field : '',
+//									title : '详细信息'
+//								}
 											 ]
 					});
 	

@@ -84,7 +84,7 @@ public class RecordsReceivableController  extends BaseController{
 	@PostMapping("/save")
 	@RequiresPermissions("contract:additionalRecords:add")
 	public R save( ReceivableDO receivable){
-		receivable.setReceivableOperator(getUserId());
+		receivable.setReceivableOperator(Long.toString(getUserId()));
 		if(receivableService.save(receivable)>0){
 			return R.ok();
 		}
@@ -97,7 +97,7 @@ public class RecordsReceivableController  extends BaseController{
 	@RequestMapping("/update")
 	@RequiresPermissions("contract:additionalRecords:edit")
 	public R update( ReceivableDO receivable){
-		receivable.setReceivableOperator(getUserId());
+		receivable.setReceivableOperator(Long.toString(getUserId()));
 		receivableService.update(receivable);
 		return R.ok();
 	}

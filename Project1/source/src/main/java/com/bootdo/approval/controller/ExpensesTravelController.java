@@ -1,12 +1,15 @@
 package com.bootdo.approval.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.approval.domain.ExpensesNormalDO;
+import com.bootdo.contract.domain.PayoutDO;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +55,8 @@ public class ExpensesTravelController extends BaseController {
 	ActivitiUtils activitiUtils;
 	@Autowired
 	private MainCopyPersonService mainCopyPersonService;
+	@Autowired
+	private ActTaskService actTaskService;
 
 	@GetMapping()
 	@RequiresPermissions("approval:expensesTravel:expensesTravel")
@@ -235,6 +240,16 @@ public class ExpensesTravelController extends BaseController {
 		params.put("limit",2);
 		params.put("tId",expensesTravelId);
 		params.put("tableName","approval_expenses__travel");
+		ExpensesTravelDO expensesTravel = expensesTravelService.get(expensesTravelId);
+		if (expensesTravel != null && expensesTravel.getProcessInstanceId()!= null){
+			if (expensesTravel.getExpensesTravelStatus().equals("2")){
+				return R.error("流程正在审批，不允许删除");
+			}
+			if (expensesTravel.getExpensesTravelStatus().equals("1")) {
+				return R.error("流程已经审批完成，不允许删除");
+			}
+			actTaskService.deleteProcess(expensesTravel.getProcessInstanceId());
+		}
 		if (expensesTravelService.remove(expensesTravelId) > 0) {
 			mainCopyPersonService.remove(params);
 			return R.ok();
@@ -249,8 +264,29 @@ public class ExpensesTravelController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("approval:expensesTravel:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] expensesTravelIds) {
-		expensesTravelService.batchRemove(expensesTravelIds);
-		return R.ok();
+		List<String> list = new ArrayList<String>();
+		//级联删除流程相关
+		for(int i=0;i<expensesTravelIds.length;i++){
+			ExpensesTravelDO expensesTravel= expensesTravelService.get(expensesTravelIds[i]);
+			if(expensesTravel!=null&&expensesTravel.getProcessInstanceId()!=null){
+				if(expensesTravel.getExpensesTravelStatus().equals("2")){
+					continue;
+					//return R.error("流程正在审批，不允许删除");
+				}else if(expensesTravel.getExpensesTravelStatus().equals("1")){
+					//return R.error("流程已经审批完成，不允许删除");
+					continue;
+				}
+				actTaskService.deleteProcess(expensesTravel.getProcessInstanceId());
+				list.add(expensesTravelIds[i]);
+			}
+		}
+
+		expensesTravelService.batchRemove(list.toArray(new String[1]));
+		if(list.size()<expensesTravelIds.length){
+			return R.ok("有部分流程正在审批或审批完成，不允许删除");
+		}else{
+			return R.ok();
+		}
 	}
 
 	@ResponseBody

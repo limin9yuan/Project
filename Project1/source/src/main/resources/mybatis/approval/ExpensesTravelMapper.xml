@@ -11,7 +11,7 @@
 		`Expenses_Travel_PayID`,`Expenses_Travel_Pay_Price`,`Expenses_Travel_Pay_Mode`,
 		`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,
 		`Expenses_Travel_Status`,`Expenses_Travel_Operator`,`Expenses_Travel_Opt_Time`,
-		`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`
+		`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`,PROCESS_INSTANCE_ID
 		from approval_expenses__travel where Expenses_Travel_ID = #{value}
 	</select>
 
@@ -52,7 +52,7 @@
 		`Expenses_Travel_Type`,`Expenses_Travel_Price`,j.Employee_Name as `Expenses_Travel_TID`,
 		 m.Employee_Name as `Expenses_Travel_PayID`,`Expenses_Travel_Pay_Price`,`Expenses_Travel_Pay_Mode`,
 		`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,
-		CASE `Expenses_Travel_Status` when '1' then '已审批' ELSE '未审批' END AS Expenses_Travel_Status,`Expenses_Travel_Opt_Time`,
+		CASE `Expenses_Travel_Status` when '1' then '已审批' when '2' then '正在审批' else '未审批' END AS Expenses_Travel_Status,`Expenses_Travel_Opt_Time`,
 		`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`,
 		s.name AS Expenses_Travel_Operator,PROCESS_INSTANCE_ID
 		from approval_expenses__travel a

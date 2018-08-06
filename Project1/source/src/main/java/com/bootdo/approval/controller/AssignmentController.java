@@ -1,12 +1,15 @@
 package com.bootdo.approval.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.common.domain.MainCopyPersonDO;
 import com.bootdo.common.service.MainCopyPersonService;
+import com.bootdo.contract.domain.PayoutDO;
 import com.bootdo.contract.domain.TravelDO;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -45,6 +48,8 @@ public class AssignmentController extends BaseController {
 	ActivitiUtils activitiUtils;
 	@Autowired
 	private MainCopyPersonService mainCopyPersonService;
+	@Autowired
+	private ActTaskService actTaskService;
 	
 	@GetMapping()
 	@RequiresPermissions("approval:assignment:assignment")
@@ -212,8 +217,24 @@ public class AssignmentController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("approval:assignment:remove")
 	public R remove( String assignmentId){
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		params.put("tId",assignmentId);
+		params.put("tableName","approval_assignment");
+		AssignmentDO assignment = assignmentService.get(assignmentId);
+		if (assignment != null && assignment.getProcessInstanceId()!= null){
+			if (assignment.getAssignmentApprovalStatus().equals("2")){
+				return R.error("流程正在审批，不允许删除");
+			}
+			if (assignment.getAssignmentApprovalStatus().equals("1")) {
+				return R.error("流程已经审批完成，不允许删除");
+			}
+			actTaskService.deleteProcess(assignment.getProcessInstanceId());
+		}
 		if(assignmentService.remove(assignmentId)>0){
-		return R.ok();
+			mainCopyPersonService.remove(params);
+			return R.ok();
 		}
 		return R.error();
 	}
@@ -225,8 +246,29 @@ public class AssignmentController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("approval:assignment:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] assignmentIds){
-		assignmentService.batchRemove(assignmentIds);
-		return R.ok();
+		List<String> list = new ArrayList<String>();
+		//级联删除流程相关
+		for(int i=0;i<assignmentIds.length;i++){
+			AssignmentDO assignment = assignmentService.get(assignmentIds[i]);
+			if(assignment!=null&&assignment.getProcessInstanceId()!=null){
+				if(assignment.getAssignmentApprovalStatus().equals("2")){
+					continue;
+					//return R.error("流程正在审批，不允许删除");
+				}else if(assignment.getAssignmentApprovalStatus().equals("1")){
+					//return R.error("流程已经审批完成，不允许删除");
+					continue;
+				}
+				actTaskService.deleteProcess(assignment.getProcessInstanceId());
+				list.add(assignmentIds[i]);
+			}
+		}
+
+		assignmentService.batchRemove(list.toArray(new String[1]));
+		if(list.size()<assignmentIds.length){
+			return R.ok("有部分流程正在审批或审批完成，不允许删除");
+		}else{
+			return R.ok();
+		}
 	}
 
 	/**

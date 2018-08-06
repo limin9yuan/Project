@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -303,7 +304,11 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 	@PostMapping("/save")
 	@RequiresPermissions("sales:companyCustomer:add")
 	public R save(CompanyCustomerDO companyCustomer) {
+		String customerIdss=companyCustomerService.getcustomerId(companyCustomer);
+		System.out.println(customerIdss);
+		companyCustomer.setCustomerId(customerIdss);
 		companyCustomer.setCustomerOperator(Long.toString(getUserId()));
+		
 		int customerIds = companyCustomerService.save(companyCustomer);
 		if (customerIds > 0) {
 			MainCopyPersonDO mcp = new MainCopyPersonDO();

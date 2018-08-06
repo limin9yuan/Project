@@ -201,7 +201,7 @@ function examine(id) {
 		title : '查看联系人信息',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '950px', '95%' ],
+		area : [ '95%', '95%' ],
 		content : prefixContact + '/examine/' + id
 	});
 }
@@ -273,7 +273,7 @@ function loadTree(tree){
 		},
 		"plugins":["search"]
 	});
-//	$('#jstree').jstree().open_all();
+	$('#jstree').jstree().open_all();
 }
 $('#jstree').on("changed.jstree",function(e,data){
 	if (data.selected==-1) {

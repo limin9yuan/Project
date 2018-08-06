@@ -72,9 +72,9 @@ function validateRule() {
 				required : true
 			},
 			payoutPrice : {
-				max:99999999,
 				digits:true,
-				required : true
+				required : true,
+				max:99999999
 			},
 			payoutMeans : {
 				required : true
@@ -83,7 +83,8 @@ function validateRule() {
 				required : true
 			},
 			payoutCardNumber : {
-				required : true
+				required : true,
+			 	creditcard:true
 			},
 			payoutRelatedContractId : {
 				required : true
@@ -107,19 +108,20 @@ function validateRule() {
 				required :icon + "请款用途不能为空！"
 			},
 			payoutPrice : {
-				max:$.validator.format("请款金额不能大于8位数（99999999）！"),
 				digits:icon+"请款金额必须是数字！",
-				required : icon+"请款金额不能为空！"
+				required : icon+"请款金额不能为空！",
+				max:$.validator.format("请款金额不能大于8位数！")
 			},
 			payoutMeans : {
 				required : icon + "结算方式不能为空！"
 			},
 			payoutBeneficiaryBank : {
 				required : icon + "收款人银行不能为空！"
-				
+
 			},
 			payoutCardNumber : {
-				required : icon+"银行卡号不能为空！"
+				required : icon+"银行卡号不能为空！",
+			 	creditcard:icon+"请输入正确的银行卡号"
 			},
 			payoutRelatedContractId : {
 				digits:icon+"关联出差申请编号之能是数字！",
@@ -128,4 +130,3 @@ function validateRule() {
 		}
 	})
 }
-

@@ -9,7 +9,7 @@
 		`Expenses_Normal_Name`,`Expenses_Normal_Reason`,`Expenses_Normal_Price`,
 		`Expenses_Normal_Result`,`Expenses_Normal_RelatedID`,`Expenses_Normal_Rmarks`,
 		`Expenses_Normal_Status`,`Expenses_Normal_Operator`,`Expenses_Normal_Opt_Time`,
-		`Expenses_Normal_Creator`,`Expenses_Normal_Create_Time`
+		`Expenses_Normal_Creator`,`Expenses_Normal_Create_Time`,PROCESS_INSTANCE_ID
 		from approval_expenses_normal
 		where Expenses_Normal = #{value}
 	</select>
@@ -43,7 +43,7 @@
 		select DISTINCT `Expenses_Normal`,a.`Customer_ID`,`Business_ID`,a.`Project_ID`,
 		g.Employee_Name AS`Expenses_Normal_Name`,`Expenses_Normal_Reason`,
 		`Expenses_Normal_Price`,`Expenses_Normal_Result`,k.Employee_Name as `Expenses_Normal_RelatedID`,`Expenses_Normal_Rmarks`,
-		CASE `Expenses_Normal_Status` when '1' then '已审批' ELSE '未审批' END AS Expenses_Normal_Status,
+		CASE `Expenses_Normal_Status` when '1' then '已审批' when '2' then '正在审批' else '未审批' END AS Expenses_Normal_Status,
 		s.name AS`Expenses_Normal_Operator`,`Expenses_Normal_Opt_Time`,
 		`Expenses_Normal_Creator`,`Expenses_Normal_Create_Time`, PROCESS_INSTANCE_ID
 		from approval_expenses_normal a

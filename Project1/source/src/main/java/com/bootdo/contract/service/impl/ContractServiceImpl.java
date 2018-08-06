@@ -142,7 +142,7 @@ public class ContractServiceImpl implements ContractService {
 			contract.setContractApprovalStatus("1");
 			contract.setContractApprovalTime(new Date());
 		} else {
-			contract.setContractApprovalStatus("0");
+			contract.setContractApprovalStatus("2");
 		}
 
 		return contractDao.update(contract);

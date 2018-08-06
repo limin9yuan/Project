@@ -51,18 +51,18 @@ function load() {
 
 								{
 									align : 'center',
-									formatter : function(value, row, index) {
-										if (row.travelApprovalStatus != null) {
-											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
-													+ row.processInstanceId
-													+ '\')">'
-													+ row.travelApprovalStatus
-													+ '</a> ';
-											return a;
-										}
-									},
+//									formatter : function(value, row, index) {
+//										if (row.travelApprovalStatus != null) {
+//											var a = '<a href="#" mce_href="#"  onclick="taskTrace(\''
+//													+ row.processInstanceId
+//													+ '\')">'
+//													+ row.travelApprovalStatus
+//													+ '</a> ';
+//											return a;
+//										}
+//									},
 
-									// field : 'travelApprovalStatus',
+									 field : 'travelApprovalStatus',
 									title : '审批状态'
 								}, {
 									align : 'center',
@@ -148,7 +148,7 @@ function load() {
 function getTravel() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length != 1) {
-		layer.msg("请选择一条合同记录");
+		layer.msg("请选择一条出差记录");
 		return;
 	}
 	// var isCopyPerson = 2;

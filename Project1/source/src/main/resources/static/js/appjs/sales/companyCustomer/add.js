@@ -27,31 +27,27 @@ $().ready(function() {
 		 }
 
 		 });
-
-	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e) {
-		if ($("#customerHotRank option").length == 1) {
-			loadDic("sales_customer_hot_Rank", "customerHotRank");
-		}
-		if($("#customerHotClassif option").length == 1){
-			loadDic("sales_Customer_Hot_Classif","customerHotClassif");
-		}
-
-	});
-	$('#myTab a[href="#linkInfo"]').on('shown.bs.tab', function(e) {
-
-		if ($("#customerContactSta option").length == 1) {
-			loadDic("sales_customer_contact_Sta", "customerContactSta");
-		}
-
-	});
-	$('#myTab a[href="#Gegner"]').on('shown.bs.tab', function(e) {
-		loadCompetitor();
-	});
 	$('#myTab a[href="#Organisation"]').on('shown.bs.tab', function(e) {
 		loadChild();
 		loadJob();
 		loadDept();
 	});
+	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e) {
+			loadDic("sales_customer_hot_Rank", "customerHotRank");
+			loadDic("sales_Customer_Hot_Classif","customerHotClassif");
+
+	});
+	$('#myTab a[href="#linkInfo"]').on('shown.bs.tab', function(e) {
+
+//		if ($("#customerContactSta option").length == 1) {
+			loadDic("sales_customer_contact_Sta", "customerContactSta");
+//		}
+
+	});
+	$('#myTab a[href="#Gegner"]').on('shown.bs.tab', function(e) {
+		loadCompetitor();
+	});
+	
 
 	layui.use('upload', function() {
 		 var $ = layui.jquery;
@@ -282,13 +278,7 @@ function validateRule() {
 	$("#signupForm").validate({
 	ignore: ":hidden:not(select)",
 		rules : {
-			customerProvince : {
-				required : true
-			},
-			customerCity : {
-				required : true
-			},
-			customerCounty : {
+			province : {
 				required : true
 			},
 			customerName : {
@@ -406,17 +396,18 @@ function validateRule() {
 			},
 			customerElectrickLoss:{
 				number:true
+			},
+			customerPostcode:{
+				isZipCode:true
+			},
+			customerUrl:{
+				url:true
 			}
+			
 		},
 		messages : {
-			customerProvince : {
-				required : icon + "请输入省份！"
-			},
-			customerCity : {
-				required : icon + "请输入城市！"
-			},
-			customerCounty : {
-				required : icon + "请输入区县！"
+			province : {
+				required : icon + "请选择行政区划！"
 			},
 			customerName : {
 				required : icon + "请输入企业名称！"
@@ -533,6 +524,12 @@ function validateRule() {
 			},
 			customerElectrickLoss:{
 				number:icon +"请输入数字！"
+			},
+			customerPostcode:{
+				isZipCode:icon +"请输入正确的邮政编码"
+			},
+			customerUrl:{
+				url:icon+"请输入正确的网址"
 			}
 		}
 	})

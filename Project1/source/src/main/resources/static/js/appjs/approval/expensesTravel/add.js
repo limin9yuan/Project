@@ -5,14 +5,7 @@ $().ready(function() {
 	 loadCrmData("/inner/innerOrgEmployee/listDic","expensesTravelName");
 	 loadCrmData("/contract/travel/listDic","expensesTravelTid");
 	 loadCrmData("/contract/payout/listDic","expensesTravelPayid");
-
-	 $('#myTab a[href="#cost"]').on('shown.bs.tab', function(e){
-
-		 if($("#expensesTravelPayMode option").length==1){
-			 loadDic("contract_payout_Means","expensesTravelPayMode");
-		 }
-
-	 });
+	 loadDic("contract_payout_Means","expensesTravelPayMode");
 	validateRule();
 });
 
@@ -109,8 +102,8 @@ function validateRule() {
 			},
 			//卡号
 			expensesTravelCardNum:{
-				digits:true,
-				required : true
+				required : true,
+				creditcard:true
 			}
 
 		},
@@ -169,8 +162,8 @@ function validateRule() {
 			},
 			//卡号
 			expensesTravelCardNum:{
-				digits:icon + "请输入合法的数字小数、整数！",
-				required : icon+"银行卡号不能为空！"
+				required : icon+"银行卡号不能为空！",
+				creditcard:icon+"请输入正确的银行卡号！"
 			}
 		}
 	})

@@ -79,7 +79,7 @@ public class PayoutServiceImpl implements PayoutService {
 			payout.setPayoutApprovalStatus("1");
 			payout.setPayoutApprovalTime(new Date());
 		}else{
-			payout.setPayoutApprovalStatus("0");
+			payout.setPayoutApprovalStatus("2");
 		}
 
 		return payoutDao.update(payout);

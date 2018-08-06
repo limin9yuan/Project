@@ -9,20 +9,21 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-						<input id="expensesTravelIds" name="expensesTravelIds" type="hidden" value="-1">
+							<input id="expensesTravelIds" name="expensesTravelIds"
+								type="hidden" value="-1">
 							<div class="form-group">
 
 
 
 								<!-- tab标签 -->
-								<ul id="myTab" class="nav nav-tabs">
-									<li class="active"><a href="#baseInfo" data-toggle="tab"><span
-									class="mustin">*&nbsp;</span>基本信息</a>
-									</li>
-									<li><a href="#cost" data-toggle="tab"><span
-									class="mustin">*&nbsp;</span>费用情况</a></li>
+								<!-- 								<ul id="myTab" class="nav nav-tabs"> -->
+								<!-- 									<li class="active"><a href="#baseInfo" data-toggle="tab"><span -->
+								<!-- 									class="mustin">*&nbsp;</span>基本信息</a> -->
+								<!-- 									</li> -->
+								<!-- 									<li><a href="#cost" data-toggle="tab"><span -->
+								<!-- 									class="mustin">*&nbsp;</span>费用情况</a></li> -->
 
-								</ul>
+								<!-- 								</ul> -->
 
 
 
@@ -96,51 +97,7 @@
 												</select>
 											</div>
 										</div>
-									</div>
-
-
-									<!-- 热点情况 -->
-
-
-									<div class="tab-pane fade" id="cost">
-
 										<div class="form-group">
-											<label class="col-sm-2 control-label"><span
-												class="mustin">*&nbsp;</span>出差任务：</label>
-											<div class="col-sm-4">
-												<input id="expensesTravelTask" name="expensesTravelTask"
-													class="form-control" type="text">
-											</div>
-											<label class="col-sm-2 control-label">出差补助：</label>
-											<div class="col-sm-4">
-												<input id="expensesTravelAllowance"
-													name="expensesTravelAllowance" class="form-control"
-													type="text">
-											</div>
-										</div>
-
-
-										<div class="form-group">
-											<label class="col-sm-2 control-label">其他费用类型：</label>
-											<div class="col-sm-4">
-												<input id="expensesTravelType" name="expensesTravelType"
-													class="form-control" type="text">
-											</div>
-											<label class="col-sm-2 control-label">其他费用金额：</label>
-											<div class="col-sm-4">
-												<input id="expensesTravelPrice" name="expensesTravelPrice"
-													class="form-control" type="text">
-											</div>
-										</div>
-
-										<div class="form-group">
-											<label class="col-sm-2 control-label"><span
-												class="mustin">*&nbsp;</span>预借金额：</label>
-											<div class="col-sm-4">
-												<input id="expensesTravelPayPrice"
-													name="expensesTravelPayPrice" class="form-control"
-													type="text">
-											</div>
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>结算方式：</label>
 											<div class="col-sm-4">
@@ -151,23 +108,68 @@
 													<option value="">请选择</option>
 												</select>
 											</div>
-										</div>
-										<div class="form-group">
 											<label class="col-sm-2 control-label"><span
-												class="mustin">*&nbsp;</span>收款人银行：</label>
-											<div class="col-sm-4">
-												<input id="expensesTravelBank" name="expensesTravelBank"
-													class="form-control" type="text">
-											</div>
-											<label class="col-sm-2 control-label"><span
-												class="mustin">*&nbsp;</span>卡号：</label>
-											<div class="col-sm-4">
-												<input id="expensesTravelCardNum"
-													name="expensesTravelCardNum" class="form-control"
-													type="text">
-											</div>
+											class="mustin">*&nbsp;</span>出差任务：</label>
+										<div class="col-sm-4">
+											<input id="expensesTravelTask" name="expensesTravelTask"
+												class="form-control" type="text">
 										</div>
-										<!-- <div class="form-group">
+										</div>
+									</div>
+
+
+									<!-- 热点情况 -->
+
+
+
+									<div class="form-group">
+										
+										<label class="col-sm-2 control-label">出差补助：</label>
+										<div class="col-sm-4">
+											<input id="expensesTravelAllowance"
+												name="expensesTravelAllowance" class="form-control"
+												type="text">
+										</div>
+										<label class="col-sm-2 control-label">其他费用类型：</label>
+										<div class="col-sm-4">
+											<input id="expensesTravelType" name="expensesTravelType"
+												class="form-control" type="text">
+										</div>
+										
+									</div>
+
+
+									<div class="form-group">
+										
+										<label class="col-sm-2 control-label">其他费用金额：</label>
+										<div class="col-sm-4">
+											<input id="expensesTravelPrice" name="expensesTravelPrice"
+												class="form-control" type="text">
+										</div>
+										<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>预借金额：</label>
+										<div class="col-sm-4">
+											<input id="expensesTravelPayPrice"
+												name="expensesTravelPayPrice" class="form-control"
+												type="text">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>收款人银行：</label>
+										<div class="col-sm-4">
+											<input id="expensesTravelBank" name="expensesTravelBank"
+												class="form-control" type="text">
+										</div>
+										<label class="col-sm-2 control-label"><span
+											class="mustin">*&nbsp;</span>卡号：</label>
+										<div class="col-sm-4">
+											<input id="expensesTravelCardNum"
+												name="expensesTravelCardNum" class="form-control"
+												type="text">
+										</div>
+									</div>
+									<!-- <div class="form-group">
 											<label class="col-sm-2 control-label"><span
 												class="mustin">*&nbsp;</span>审批状态：</label>
 											<div class="col-sm-4">
@@ -180,27 +182,26 @@
 											</div>
 										</div> -->
 
-										<div class="form-group">
-											<label class="col-sm-2 control-label">备注：</label>
-											<div class="col-sm-10">
-												<textarea id="expensesTravelRemarks"
-													name="expensesTravelRemarks" class="form-control" rows="3"></textarea>
-											</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">备注：</label>
+										<div class="col-sm-10">
+											<textarea id="expensesTravelRemarks"
+												name="expensesTravelRemarks" class="form-control" rows="3"></textarea>
 										</div>
-
-										<!-- 										<div class="form-group"> -->
-										<!-- 											<label class="col-sm-2 control-label">备注：</label> -->
-										<!-- 											<div class="col-sm-4"> -->
-										<!-- 												<input id="expensesTravelRemarks" -->
-										<!-- 													name="expensesTravelRemarks" class="form-control" -->
-										<!-- 													type="text"> -->
-										<!-- 											</div> -->
-										<!-- 											<label class="col-sm-2 control-label">审批状态：</label> -->
-										<!-- 											<div class="col-sm-4"> -->
-										<!-- 												<input id="expensesTravelStatus" name="expensesTravelStatus" -->
-										<!-- 													class="form-control" type="text"> -->
-										<!-- 											</div> -->
 									</div>
+
+									<!-- 										<div class="form-group"> -->
+									<!-- 											<label class="col-sm-2 control-label">备注：</label> -->
+									<!-- 											<div class="col-sm-4"> -->
+									<!-- 												<input id="expensesTravelRemarks" -->
+									<!-- 													name="expensesTravelRemarks" class="form-control" -->
+									<!-- 													type="text"> -->
+									<!-- 											</div> -->
+									<!-- 											<label class="col-sm-2 control-label">审批状态：</label> -->
+									<!-- 											<div class="col-sm-4"> -->
+									<!-- 												<input id="expensesTravelStatus" name="expensesTravelStatus" -->
+									<!-- 													class="form-control" type="text"> -->
+									<!-- 											</div> -->
 
 								</div>
 							</div>
@@ -240,12 +241,7 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<div class="col-sm-5 col-sm-offset-7">
-									<button type="button" class="btn btn-primary" id="lastBtn"
-										disabled="true"
-										onclick="lastStep('myTab',10,'lastBtn','nextBtn')">上一步</button>
-									<button type="button" class="btn btn-primary" id="nextBtn"
-										onclick="nextStepThis('myTab',10,'lastBtn','nextBtn')">下一步</button>
+								<div class="col-sm-11 col-sm-offset-11">
 									<button type="submit" class="btn btn-primary">提交</button>
 									<button type="button" class="btn btn-danger"
 										onclick="closeWin()">取消</button>
@@ -260,7 +256,7 @@
 	<div th:include="include::footer"></div>
 	<script type="text/javascript"
 		src="/js/appjs/approval/expensesTravel/add.js">
-
+		
 	</script>
 	<script type="text/javascript" src="/js/common.js"></script>
 	<script type="text/javascript"

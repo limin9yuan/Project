@@ -9,7 +9,7 @@
 		`Payout_Useage`,`Payout_Price`,`Payout_Means`,`Payout_Beneficiary_Bank`,
 		`Payout_Card_Number`,`Payout_Related_Contract_ID`,`Payout_Result`,
 		`Payout_Remarks`,`Payout_Approval_Status`,`Payout_Operator`,`Payout_Operate_Time`,
-		`Payout_Creator`,`Payout_Create_Time`
+		`Payout_Creator`,`Payout_Create_Time`,PROCESS_INSTANCE_ID
 		from approval_payout where Payout_ID = #{value}
 	</select>
 
@@ -46,7 +46,7 @@
 		`Payout_Means`,`Payout_Beneficiary_Bank`,`Payout_Card_Number`,
 		 j.Employee_Name as `Payout_Related_Contract_ID`,`Payout_Result`,PROCESS_INSTANCE_ID,
 		`Payout_Remarks`,
-		CASE `Payout_Approval_Status` when '1' then '已审批' ELSE '未审批' END AS Payout_Approval_Status,
+		CASE `Payout_Approval_Status` when '1' then '已审批' when '2' then '正在审批' else '未审批' END AS Payout_Approval_Status,
 		`Payout_Operate_Time`,`Payout_Creator`,`Payout_Create_Time`,d.Project_Name,
 		s.name AS Payout_Operator
 

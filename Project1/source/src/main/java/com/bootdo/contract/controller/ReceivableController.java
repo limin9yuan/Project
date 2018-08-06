@@ -111,7 +111,7 @@ public class ReceivableController  extends BaseController{
 	@RequestMapping("/update")
 	@RequiresPermissions("contract:contract:edit")
 	public R update( ReceivableDO receivable){
-		receivable.setReceivableOperator(getUserId());
+		receivable.setReceivableOperator(Long.toString(getUserId()));
 		receivableService.update(receivable);
 		return R.ok();
 	}

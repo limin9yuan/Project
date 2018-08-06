@@ -8,7 +8,7 @@
 		`Record_Sales`,`Record_Attachment`,`Record_Related_Contract_ID`,`Record_Hardware_Equipment_List`,`Record_Software_Function_List`,`Record_Remarks`,`Record_Approval_Status`,`Record_Operator`,
 		date_format(Record_Commit_Time,'%Y-%m-%d') `Record_Commit_Time`,
 		date_format(Pre_Invoice_Date,'%Y-%m-%d') `Pre_Invoice_Date`,
-		`Contract_Name`
+		`Contract_Name`,PROCESS_INSTANCE_ID
 		from contract_additional_records where Record_ID = #{value}
 	</select>
 
@@ -41,8 +41,7 @@
 		g.`Business_Name` as `Business_Name`,
 		c.`Project_Name` as `Project_Name`,
 		`Record_Hardware_Equipment_List`,`Record_Software_Function_List`,`Record_Remarks`,
-		case when `Record_Approval_Status`= '1' then '已审批'
-	    when `Record_Approval_Status`= '0' then '未审批' end as `Record_Approval_Status`,
+		case `Record_Approval_Status`when '1' then '已审批' when '2' then '正在审批' else '未审批' END AS `Record_Approval_Status`,
 		`Record_Operator`,`Record_Commit_Time`,a.`Contract_Name`,`Pre_Invoice_Date` ,
 		u2.name as Record_Operator_Name, a.PROCESS_INSTANCE_ID
 		from contract_additional_records a

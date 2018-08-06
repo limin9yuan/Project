@@ -49,13 +49,38 @@ function loadreceivedNo() {
 								},
 								{
 									align : 'center',
-									field : 'receivedTime',
-									title : '收款时间'
+									field : 'contractId',
+									title : '合同编号'
 								},
 								{
 									align : 'center',
-									field : 'receivedPrice',
-									title : '收款金额'
+									field : 'receivableDate',
+									title : '收款计划时间'
+								},
+								{
+									align : 'center',
+									field : 'receivablePrice',
+									title : '收款计划金额'
+								},
+								{
+									align :'center',
+									field :'receivableOwner',
+									title :'收款负责人'
+								},
+								{
+									align :'center',
+									field :'receivableRemarks',
+									title :'备注'
+								},
+								{
+									align :'center',
+									field :'receivableOperator',
+									title :'操作人'
+								},
+								{
+									align :'center',
+									field :'receivableOperateTime',
+									title :'操作时间'
 								},
 								{
 									title : '操作',

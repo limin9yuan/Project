@@ -69,6 +69,7 @@ function update() {
 		},
 		success : function(data) {
 			if (data.code == 0) {
+				removeSelItems();
 				parent.layer.msg("操作成功");
 				closeParenWindow();
 			} else {

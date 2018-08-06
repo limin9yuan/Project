@@ -166,7 +166,9 @@ public class BusinessController extends BaseController {
 	@PostMapping("/save")
 	@RequiresPermissions("sales:business:add")
 	public R save(BusinessDO business) {
+		business.setBusinessOperator(Long.toString(getUserId()));
 		String businessIds = businessService.getBusinessId(business);
+		System.out.println(businessIds);
 		business.setBusinessId(businessIds);
 		businessService.save(business);
 		if (!businessIds.equals("")) {

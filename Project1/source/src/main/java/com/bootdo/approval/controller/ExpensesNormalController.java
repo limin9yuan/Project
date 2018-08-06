@@ -1,12 +1,15 @@
 package com.bootdo.approval.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.utils.ActivitiUtils;
 import com.bootdo.contract.domain.ContractDO;
+import com.bootdo.contract.domain.PayoutDO;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +55,8 @@ public class ExpensesNormalController extends BaseController {
 	private MainCopyPersonService mainCopyPersonService;
 	@Autowired
 	ActivitiUtils activitiUtils;
+	@Autowired
+	private ActTaskService actTaskService;
 
 
 	@GetMapping()
@@ -220,13 +225,23 @@ public class ExpensesNormalController extends BaseController {
 	@PostMapping("/remove")
 	@ResponseBody
 	@RequiresPermissions("approval:expensesNormal:batchRemove")
-	public R remove(String expensesNormal) {
+	public R remove(String expensesNormalId) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("offset",1);
 		params.put("limit",2);
-		params.put("tId",expensesNormal);
+		params.put("tId",expensesNormalId);
 		params.put("tableName","sales_customer_contact");
-		if (expensesNormalService.remove(expensesNormal) > 0) {
+		ExpensesNormalDO expensesNormal = expensesNormalService.get(expensesNormalId);
+		if (expensesNormal != null && expensesNormal.getProcessInstanceId()!= null){
+			if (expensesNormal.getExpensesNormalStatus().equals("2")){
+				return R.error("流程正在审批，不允许删除");
+			}
+			if (expensesNormal.getExpensesNormalStatus().equals("1")) {
+				return R.error("流程已经审批完成，不允许删除");
+			}
+			actTaskService.deleteProcess(expensesNormal.getProcessInstanceId());
+		}
+		if (expensesNormalService.remove(expensesNormalId) > 0) {
 			mainCopyPersonService.remove(params);
 			return R.ok();
 		}
@@ -239,9 +254,30 @@ public class ExpensesNormalController extends BaseController {
 	@PostMapping("/batchRemove")
 	@ResponseBody
 	@RequiresPermissions("approval:expensesNormal:batchRemove")
-	public R remove(@RequestParam("ids[]") String[] expensesNormals) {
-		expensesNormalService.batchRemove(expensesNormals);
-		return R.ok();
+	public R remove(@RequestParam("ids[]") String[] expensesNormalIds) {
+		List<String> list = new ArrayList<String>();
+		//级联删除流程相关
+		for(int i=0;i<expensesNormalIds.length;i++){
+			ExpensesNormalDO expensesNormal= expensesNormalService.get(expensesNormalIds[i]);
+			if(expensesNormal!=null&&expensesNormal.getProcessInstanceId()!=null){
+				if(expensesNormal.getExpensesNormalStatus().equals("2")){
+					continue;
+					//return R.error("流程正在审批，不允许删除");
+				}else if(expensesNormal.getExpensesNormalStatus().equals("1")){
+					//return R.error("流程已经审批完成，不允许删除");
+					continue;
+				}
+				actTaskService.deleteProcess(expensesNormal.getProcessInstanceId());
+				list.add(expensesNormalIds[i]);
+			}
+		}
+
+		expensesNormalService.batchRemove(list.toArray(new String[1]));
+		if(list.size()<expensesNormalIds.length){
+			return R.ok("有部分流程正在审批或审批完成，不允许删除");
+		}else{
+			return R.ok();
+		}
 	}
 
 	@ResponseBody

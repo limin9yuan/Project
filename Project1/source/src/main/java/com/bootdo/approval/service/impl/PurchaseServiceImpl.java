@@ -80,7 +80,7 @@ public class PurchaseServiceImpl implements PurchaseService {
 			purchase.setPurchaseApprovalStatus("1");
 			purchase.setPurchaseApprovalTime(new Date());
 		}else{
-			purchase.setPurchaseApprovalStatus("0");
+			purchase.setPurchaseApprovalStatus("2");
 		}
 
        return purchaseDao.update(purchase);

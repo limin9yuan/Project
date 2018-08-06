@@ -9,18 +9,16 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.zip.ZipOutputStream;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.common.domain.MainCopyPersonDO;
 import com.bootdo.common.service.MainCopyPersonService;
+import com.bootdo.contract.domain.PayoutDO;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,6 +76,8 @@ public class AdditionalRecordsController extends BaseController {
 	private MainCopyPersonService mainCopyPersonService;
 	@Autowired
 	private ContractHardwareDetailService contractHardwareDetailService;
+	@Autowired
+	private ActTaskService actTaskService;
 	@GetMapping()
 	@RequiresPermissions("contract:additionalRecords:additionalRecords")
 	String AdditionalRecords(){
@@ -242,6 +242,16 @@ public class AdditionalRecordsController extends BaseController {
 		params.put("limit",2);
 		params.put("tId",recordId);
 		params.put("tableName","contract_additional_records");
+		AdditionalRecordsDO additionalRecords = additionalRecordsService.get(recordId);
+		if (additionalRecords != null && additionalRecords.getProcessInstanceId()!= null){
+			if (additionalRecords.getRecordApprovalStatus().equals("2")){
+				return R.error("流程正在审批，不允许删除");
+			}
+			if (additionalRecords.getRecordApprovalStatus().equals("1")) {
+				return R.error("流程已经审批完成，不允许删除");
+			}
+			actTaskService.deleteProcess(additionalRecords.getProcessInstanceId());
+		}
 		if(additionalRecordsService.remove(recordId)>0){
 			mainCopyPersonService.remove(params);
 			return R.ok();
@@ -256,8 +266,29 @@ public class AdditionalRecordsController extends BaseController {
 	@ResponseBody
 	@RequiresPermissions("contract:additionalRecords:batchRemove")
 	public R remove(@RequestParam("ids[]") String[] recordIds){
-		additionalRecordsService.batchRemove(recordIds);
-		return R.ok();
+		List<String> list = new ArrayList<String>();
+		//级联删除流程相关
+		for(int i=0;i<recordIds.length;i++){
+			AdditionalRecordsDO additionalRecords= additionalRecordsService.get(recordIds[i]);
+			if(additionalRecords!=null&&additionalRecords.getProcessInstanceId()!=null){
+				if(additionalRecords.getRecordApprovalStatus().equals("2")){
+					continue;
+					//return R.error("流程正在审批，不允许删除");
+				}else if(additionalRecords.getRecordApprovalStatus().equals("1")){
+					//return R.error("流程已经审批完成，不允许删除");
+					continue;
+				}
+				actTaskService.deleteProcess(additionalRecords.getProcessInstanceId());
+				list.add(recordIds[i]);
+			}
+		}
+
+		additionalRecordsService.batchRemove(list.toArray(new String[1]));
+		if(list.size()<recordIds.length){
+			return R.ok("有部分流程正在审批或审批完成，不允许删除");
+		}else{
+			return R.ok();
+		}
 	}
 	
 	

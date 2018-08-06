@@ -50,12 +50,37 @@ function loadreceived() {
 								{
 									align : 'center',
 									field : 'receivedTime',
-									title : '收款时间'
+									title : '回款时间'
 								},
 								{
 									align : 'center',
 									field : 'receivedPrice',
-									title : '收款金额'
+									title : '回款金额'
+								},
+								{
+									align : 'center',
+									field : 'receivedCardNumber',
+									title : '回款账号'
+								},
+								{
+									align : 'center',
+									field : 'receivedType',
+									title : '款项类型'
+								},
+//								{
+//									align : 'center',
+//									field : 'receivedContractStatus',
+//									title : '合同状态'
+//								},
+								{
+									align : 'center',
+									field : 'receivedRemarks',
+									title : '备注'
+								},
+								{
+									align : 'center',
+									field : 'receivedOperatorName',
+									title : '操作人'
 								},
 								{
 									title : '操作',

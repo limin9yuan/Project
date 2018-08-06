@@ -13,7 +13,7 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
-<!-- 					<input id="customerId" name="customerId" type="hidden" value="-1"> -->
+						<input id="customerId" name="customerId" type="hidden" value="-1">
 						<form class="form-horizontal m-t" id="signupForm">
 							<!-- tab标签 -->
 							<ul id="myTab" class="nav nav-tabs">
@@ -37,9 +37,7 @@
 							<div id="myTabContent" class="tab-content"
 								style="padding-top: 20px">
 								<input id="customerIds" name="customerIds" class="form-control"
-									type="hidden" value="-1"> 
-									
-									<input id="ids" name="ids"
+									type="hidden" value="-1"> <input id="ids" name="ids"
 									class="form-control" type="hidden" value="-1">
 
 								<div class="tab-pane fade in active" id="baseInfo">
@@ -240,18 +238,18 @@
 													id="test1" style="width: 100%;">
 													<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
 												</button>
-												
+
 											</div>
-<!-- 											<p id="fileNames" style="color: #999; padding: 0 10px"></p> -->
-<!-- 											<div class="file-name col-sm-4"> -->
-<!-- 												<img class="layui-upload-img" id="photo" -->
-<!-- 													style="width: 50%; height: 50%; cursor: pointer" -->
-<!-- 													onclick="previewImg(this)"> -->
-<!-- 											</div> -->
+											<!-- 											<p id="fileNames" style="color: #999; padding: 0 10px"></p> -->
+											<!-- 											<div class="file-name col-sm-4"> -->
+											<!-- 												<img class="layui-upload-img" id="photo" -->
+											<!-- 													style="width: 50%; height: 50%; cursor: pointer" -->
+											<!-- 													onclick="previewImg(this)"> -->
+											<!-- 											</div> -->
 										</div>
 										<input class="form-control" th:value="${customerAttachment}"
-													id="customerAttachment" name="customerAttachment"
-													type="hidden">
+											id="customerAttachment" name="customerAttachment"
+											type="hidden">
 									</div>
 									<!-- 							文件显示列表 -->
 									<div class="form-group">
@@ -421,12 +419,12 @@
 																onclick="addDept(0)">
 																<i class="fa fa-plus" aria-hidden="true"></i>添加
 															</button>
-<!-- 															<button -->
-<!-- 																shiro:hasPermission="sales:customerDept:batchRemove" -->
-<!-- 																type="button" class="btn  btn-danger" -->
-<!-- 																onclick="batchRemoveDept()"> -->
-<!-- 																<i class="fa fa-trash" aria-hidden="true"></i>删除 -->
-<!-- 															</button> -->
+															<!-- 															<button -->
+															<!-- 																shiro:hasPermission="sales:customerDept:batchRemove" -->
+															<!-- 																type="button" class="btn  btn-danger" -->
+															<!-- 																onclick="batchRemoveDept()"> -->
+															<!-- 																<i class="fa fa-trash" aria-hidden="true"></i>删除 -->
+															<!-- 															</button> -->
 															<button
 																shiro:hasPermission="sales:customerDept:detailed_information"
 																type="button" class="btn btn-success"

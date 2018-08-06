@@ -83,7 +83,7 @@ public class PlanController  extends BaseController{
 	@PostMapping("/save")
 	@RequiresPermissions("contract:contract:add")
 	public R save( PlanDO plan){
-		plan.setPlanId(getUserId());
+		plan.setPlanOperator(getUserId());
 		if(planService.save(plan)>0){
 			return R.ok();
 		}

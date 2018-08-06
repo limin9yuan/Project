@@ -42,22 +42,47 @@ function plannedReturn() {
 						// 返回false将会终止请求
 						columns : [
 								
-								{
-									align : 'center',
-									field : 'customerName',
-									title : '企业名称'
-								},
-								{
-									align : 'center',
-									field : 'receivableDate',
-									title : '收款计划时间'
-								},
-								{
-									align : 'center',
-									field : 'receivablePrice',
-									title : '收款计划金额'
-								},
-								{
+							{
+								align : 'center',
+								field : 'customerName',
+								title : '企业名称'
+							},
+							{
+								align : 'center',
+								field : 'contractId',
+								title : '合同编号'
+							},
+							{
+								align : 'center',
+								field : 'receivableDate',
+								title : '收款计划时间'
+							},
+							{
+								align : 'center',
+								field : 'receivablePrice',
+								title : '收款计划金额'
+							},
+							{
+								align :'center',
+								field :'receivableOwner',
+								title :'收款负责人'
+							},
+							{
+								align :'center',
+								field :'receivableRemarks',
+								title :'备注'
+							},
+							{
+								align :'center',
+								field :'receivableOperator',
+								title :'操作人'
+							},
+							{
+								align :'center',
+								field :'receivableOperateTime',
+								title :'操作时间'
+							},
+							{
 									title : '操作',
 									field : 'id',
 									align : 'center',

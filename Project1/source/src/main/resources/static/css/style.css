@@ -7365,6 +7365,7 @@ body.skin-3 {
     width:80px;
     height:30px;
     color: #ffffff;
+    margin-top:5px;
 }
 .showTable{
     table-layout: fixed;

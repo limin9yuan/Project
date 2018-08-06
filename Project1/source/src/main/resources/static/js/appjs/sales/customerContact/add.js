@@ -266,13 +266,11 @@ function validateRule() {
 			},
 			contactPhoneNumber : {
 				required : true,
-				digits : true,
-				rangelength : [ 5, 11 ]
+				isMobile:true
 			},
 			// 工作电话
 			contactWorkPhoneNumber : {
-				digits : true,
-				rangelength : [ 5, 11 ]
+				digits : true
 			},
 			// 家庭电话
 			contactFamilyPhoneNumber : {
@@ -281,6 +279,9 @@ function validateRule() {
 			},
 			contactMailbox : {
 				email : true
+			},
+			contactQq:{
+				isQq:true
 			}
 
 		},
@@ -304,27 +305,30 @@ function validateRule() {
 			},
 			contactPhoneNumber : {
 				required : icon + "请输入手机",
-				digits : icon + "请输入正确的电话号码（数字）！",
-				rangelength : icon + "请输入有效的电话号码、5-11位！！"
+				isMobile:icon + "请输入正确的电话号码！",
 			},
 			// 工作电话
 			contactWorkPhoneNumber : {
-				digits : icon + "请输入正确的电话号码（数字）！",
-				rangelength : icon + "请输入有效的电话号码、5-11位！！"
+				digits : icon + "请输入正确的电话号码（数字）！"
 			},
 			// 家庭电话
 			contactFamilyPhoneNumber : {
 				digits : icon + "请输入正确的电话号码（数字）！",
 				rangelength : icon + "请输入有效的电话号码、5-11位！"
-			},
-
-			// 邮件地址
+			},// 邮件地址
 			contactMailbox : {
 				email : icon + "请输入有效的邮件地址！"
+			},
+			contactQq:{
+				isQq : icon + "请输入有效的QQ号"
 			}
 		}
 	})
 }
+
+
+
+ 
 
 function nextStepThis(tabId, totalStep, lastBtn, nextBtn) {
 	nextStep(tabId, totalStep, lastBtn, nextBtn);

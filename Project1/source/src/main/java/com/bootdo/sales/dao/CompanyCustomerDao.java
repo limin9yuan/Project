@@ -21,6 +21,10 @@ public interface CompanyCustomerDao {
 	
 	List<CompanyCustomerDO> list(Map<String,Object> map);
 	
+	String getcustomerId(CompanyCustomerDO customerId); 
+	
+	String getcustomerIdImport(CompanyCustomerDO customerId);
+	
 	//新客户
 	List<CompanyCustomerDO> newCustomer(Map<String, Object> map);
 	//旧客户
