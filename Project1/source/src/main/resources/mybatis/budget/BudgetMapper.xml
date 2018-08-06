@@ -334,13 +334,15 @@
 			<if test="budgetProfit != null">`Budget_Profit` = #{budgetProfit}, </if>
 			<if test="budgetOperator != null">`Budget_Operator` = #{budgetOperator}, </if>
 			<if test="budgetOperateTime != null">`Budget_Operate_Time` = #{budgetOperateTime},</if>
+
 			<if test="deptId != null">`Dept_ID` = #{deptId}, </if>
 			<if test="responsibleCenter != null">`Responsible_Center` = #{responsibleCenter}, </if>
 			<if test="projectSupervisor != null">`Project_Supervisor` = #{projectSupervisor},</if>
 			<if test="projectOwner != null">`project_Owner` = #{projectOwner},</if>
 			<if test="projectGategory != null">`Project_Gategory` = #{projectGategory},</if>
 			<if test="budgetType != null">`Budget_Type` = #{budgetType},</if>
-			<if test="processInstanceId != null">`PROCESS_INSTANCE_ID` = #{processInstanceId}</if>
+			<if test="processInstanceId != null">`PROCESS_INSTANCE_ID` = #{processInstanceId},</if>
+			<if test="budgetApprovalStatus != null">`Budget_Approval_Status` = #{budgetApprovalStatus}</if>
 		</set>
 		where Budget_ID = #{budgetId}
 	</update>

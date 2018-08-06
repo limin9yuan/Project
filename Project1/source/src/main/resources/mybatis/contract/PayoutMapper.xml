@@ -203,8 +203,7 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{payoutOperator} AND Identific
 			<if test="payoutBeneficiaryBank != null">`Payout_Beneficiary_Bank` = #{payoutBeneficiaryBank},
 			</if>
 			<if test="payoutCardNumber != null">`Payout_Card_Number` = #{payoutCardNumber}, </if>
-			<if test="payoutRelatedContractId != null">`Payout_Related_Contract_ID` =
-				#{payoutRelatedContractId}, </if>
+			<if test="payoutRelatedContractId != null">`Payout_Related_Contract_ID` =#{payoutRelatedContractId}, </if>
 			<if test="payoutResult != null">`Payout_Result` = #{payoutResult}, </if>
 			<if test="payoutRemarks != null">`Payout_Remarks` = #{payoutRemarks}, </if>
 			<if test="payoutApprovalStatus != null">`Payout_Approval_Status` = #{payoutApprovalStatus}, </if>
