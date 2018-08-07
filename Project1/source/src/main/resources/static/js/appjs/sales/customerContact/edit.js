@@ -16,9 +16,15 @@ $().ready(function() {
 		 $('#nextBtn').attr("disabled",false);
 	 });
 	 $('#myTab a[href="#workUnit"]').on('shown.bs.tab', function(e){
+		 if ($("#customerId option").length == 0) {
 		 loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);//客户编号
+		 }
+		 if ($("#contactDept option").length == 1) {
 		 loadCrmDataValue("/sales/customerDept/listDic", "contactDept",result.contactDept);// 部门
+		 }
+		 if ($("#contactJob option").length == 1) {
 		 loadCrmDataValue("/sales/customerJob/listDic", "contactJob",result.contactJob);// 岗位
+		 }
 		 $('#lastBtn').attr("disabled",false);
 		 $('#nextBtn').attr("disabled",false);
 			

@@ -30,7 +30,7 @@
 		left join inner_org_job c on a.Job_ID = c.Job_ID
 		LEFT JOIN sys_dept d on a.Dept_ID = d.dept_id
        <where>  
-		  		  <if test="deptId != null and deptId != ''"> and a.Dept_ID = #{deptId} </if>
+		          <if test="deptId != null and deptId != ''"> and find_in_set(d.dept_id, getChildLst(#{deptId})) </if>
 		  		  <if test="jobId != null and jobId != ''"> and Job_ID = #{jobId} </if>
 		  		  <if test="userRoleId != null and userRoleId != ''"> and User_Role_ID = #{userRoleId} </if>
 		  		  <if test="moduleId != null and moduleId != ''"> and Module_ID = #{moduleId} </if>

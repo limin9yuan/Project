@@ -56,7 +56,7 @@ function resetSelect(){
 						pagination : true,                   // 设置为true会在底部显示分页条
 						sorStable : true, 					 // 是否启用排序
 						sortOrder : "desc",// 排序方式
-						sortName:"Customer_ID",
+						sortName:"Customer_Create_Time",
 						sidePagination : "server", 			// 设置在哪里进行分页，可选值为"client" 或者
 						pageSize : 10, 						// 如果设置了分页，每页数据条数
 						sortStable:true,

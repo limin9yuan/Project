@@ -308,7 +308,7 @@ public class RecordServiceController extends BaseController {
 	// 根据ID查看附件列表
 	@ResponseBody
 	@GetMapping("/listRecordAttachment")
-	@RequiresPermissions("common:sysFile:sysFile")
+	@RequiresPermissions("sales:recordService:recordService")
 	public PageUtils listRecordAttachment(@RequestParam("serviceId") String serviceId,
 			@RequestParam Map<String, Object> params) {
 		// String aa=request.getParameter("customerId");

@@ -814,7 +814,7 @@ public class CompanyCustomerController<GuideInfo, IPageModule> extends BaseContr
 	//根据ID查看附件列表
 			@ResponseBody
 			@GetMapping("/listId")
-			@RequiresPermissions("common:sysFile:sysFile")
+			@RequiresPermissions("sales:companyCustomer:companyCustomer")
 			public PageUtils listId(@RequestParam("customerId")String customerId,@RequestParam Map<String, Object> params) {
 //				String aa=request.getParameter("customerId");
 				params.put("customerId", customerId);

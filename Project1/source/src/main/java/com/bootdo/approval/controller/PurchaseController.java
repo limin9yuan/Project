@@ -264,7 +264,7 @@ public class PurchaseController extends BaseController {
 			if (tableadd[i - 4] != "") {
 				purchasedetail.setPurchaseUnit(tableadd[i - 4]);
 			}
-			if (null != tableadd[i - 5] ||tableadd[i - 5] != "") {
+			if (tableadd[i - 5] != null || tableadd[i - 5] != "") {
 				BigDecimal PurchaseNumber = new BigDecimal(tableadd[i - 5]);
 				purchasedetail.setPurchaseNumber(PurchaseNumber);
 			}

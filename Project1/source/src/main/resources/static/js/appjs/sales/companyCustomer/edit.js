@@ -8,15 +8,17 @@ $().ready(function() {
 //	 },5000);
 	
 	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e){
-
+		if ($("#customerHotRank option").length == 0) {
 			 loadDicValue("sales_customer_hot_Rank","customerHotRank",result.customerHotRank);//热度s
-
+		}
+		if ($("#customerHotClassif option").length == 0) {
 			 loadDicValue("sales_Customer_Hot_Classif","customerHotClassif",result.customerHotClassif);//热点客户分类
+		}
 	 });
 	$('#myTab a[href="#linkInfo"]').on('shown.bs.tab', function(e){
-
+		if ($("#customerContactSta option").length == 0) {
 			 loadDicValue("sales_customer_contact_Sta","customerContactSta",result.customerContactSta);
-
+		}
 
 	 });
 	

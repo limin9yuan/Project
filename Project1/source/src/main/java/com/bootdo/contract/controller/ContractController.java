@@ -1362,7 +1362,7 @@ public class ContractController extends BaseController {
 	// 根据ID查看附件列表
 	@ResponseBody
 	@GetMapping("/listId")
-	@RequiresPermissions("common:sysFile:sysFile")
+	@RequiresPermissions("contract:contract:contract")
 	public PageUtils listId(@RequestParam("contractId") String contractId, @RequestParam Map<String, Object> params) {
 		// String aa=request.getParameter("customerId");
 		params.put("contractId", contractId);

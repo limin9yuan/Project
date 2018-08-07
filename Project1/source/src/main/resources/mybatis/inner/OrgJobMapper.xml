@@ -20,7 +20,7 @@
 		left join sys_user b ON a.Job_Operator=b.user_id
 		LEFT JOIN sys_dept c on a.Dept_ID = c.dept_id
         <where>  
-		  		  <if test="deptId != null and deptId != ''"> and a.Dept_ID = #{deptId} </if>
+		  		  <if test="deptId != null and deptId != ''"> and find_in_set(c.dept_id, getChildLst(#{deptId})) </if>
 		  		  <if test="jobRank != null and jobRank != ''"> and Job_Rank = #{jobRank} </if>
 		  		  <if test="jobRankDescription != null and jobRankDescription != ''"> and Job_Rank_Description = #{jobRankDescription} </if>
 		  		  <if test="jobDescrription != null and jobDescrription != ''"> and Job_Descrription = #{jobDescrription} </if>

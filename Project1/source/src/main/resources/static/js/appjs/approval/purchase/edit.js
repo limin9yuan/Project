@@ -364,9 +364,9 @@ $.ajax({
                    }
 //           var i=1;
 //           var da = { pkey: [{ key: "num", value: i}], value: [[{ key: 1, value: "" },{ key: 2, value: i},   { key: 1, value: purchaseName[0] }, { key: 1, value:purchaseConfig[0] }, { key: 1, value: purchaseBrand[0] }, { key: 1, value: purchaseMode[0]}, { key: 1, value: purchaseUnit[0]}, { key: 1, value: purchaseNumber[0]}, { key: 1, value: purchaseUnitPrice[0]}, { key: 1, value: purchaseTotalPrice[0]}]] };
-        var op = { data: da, headerRows: 2 };
+        var op = { data: da, headerRows: 1 };
         $.jtool.loaddata("tabProduct", op);
-        $("#tabProduct").jFixedtable({ colums: [{ name: "num"}], fixedCols: 1, width: "95%", height: "300", headerRows: 1, pkey: ["num"], edit: true });
+        $("#tabProduct").jFixedtable({ colums: [{ name: "num"}], fixedCols: 2, width: "95%", height: "300", headerRows: 1, pkey: ["num"], edit: true });
 
 
 
@@ -395,12 +395,6 @@ for(var l=1;l<purchaseName.length;l++)
 
 
     function del(key) {
-        alert(key.length);
-        for (var i = 0; i < key.length; i++) {
-            var pkey = key[i];
-            for (var j = 0; j < pkey.length; j++) {
-                alert(pkey[j].key + ":" + pkey[j].value);
-            }
-        }
+
         return true;
     }

@@ -1,0 +1,27 @@
+DELIMITER //
+CREATE FUNCTION `getChildLst`(rootId INT)
+
+RETURNS varchar(1000) READS SQL DATA
+
+BEGIN
+  DECLARE sTemp VARCHAR(1000);
+
+  DECLARE sTempChd VARCHAR(1000);
+
+  SET sTemp = '$';
+
+  SET sTempChd =cast(rootId as CHAR);
+
+  WHILE sTempChd is not null DO
+
+    SET sTemp = concat(sTemp,',',sTempChd);
+
+    SELECT group_concat(dept_id) INTO sTempChd FROM sys_dept where FIND_IN_SET(parent_id,sTempChd)>0 and del_flag != -1;
+	
+
+  END WHILE;
+
+  RETURN sTemp;
+
+END  //
+DELIMITER ;

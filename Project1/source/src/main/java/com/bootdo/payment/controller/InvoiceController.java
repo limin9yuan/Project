@@ -326,7 +326,7 @@ public class InvoiceController extends BaseController {
 	// 根据ID查看附件列表
 	@ResponseBody
 	@GetMapping("/listId")
-	@RequiresPermissions("common:sysFile:sysFile")
+	@RequiresPermissions("payment:invoice:invoice")
 	public PageUtils listId(@RequestParam("invoiceId") String invoiceId, @RequestParam Map<String, Object> params) {
 		// String aa=request.getParameter("customerId");
 		params.put("invoiceId", invoiceId);

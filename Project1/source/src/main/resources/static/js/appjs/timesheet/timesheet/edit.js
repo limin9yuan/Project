@@ -39,7 +39,7 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			timesheetContent : {
+			assignmentTaskName : {
 				required : true
 			},
 			timesheetNormal:{
@@ -48,7 +48,7 @@ function validateRule() {
 			}
 		},
 		messages : {
-			timesheetContent : {
+			assignmentTaskName : {
 				required : icon + "请输入工作内容！"
 			},
 			timesheetNormal:{

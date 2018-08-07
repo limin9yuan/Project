@@ -17,7 +17,7 @@ function save() {
 		return;
 	}
 	$('#customerId').val(tmpCustomerId);
-	alert($('#customerId').val());
+//	alert($('#customerId').val());
 	$.ajax({
 		cache : true,
 		type : "POST",

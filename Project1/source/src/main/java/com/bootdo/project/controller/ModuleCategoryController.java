@@ -174,7 +174,7 @@ public class ModuleCategoryController extends BaseController {
 	// 根据ID查看附件列表
 		@ResponseBody
 		@GetMapping("/listmodleAttachment")
-		@RequiresPermissions("common:sysFile:sysFile")
+		@RequiresPermissions("project:moduleCategory:moduleCategory")
 		public PageUtils listmodleAttachment(@RequestParam("moduleId") String moduleId,
 				@RequestParam Map<String, Object> params) {
 			// String aa=request.getParameter("customerId");

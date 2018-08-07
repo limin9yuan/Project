@@ -179,7 +179,7 @@ public class ProductCategoryController extends BaseController {
 	// 根据ID查看附件列表
 		@ResponseBody
 		@GetMapping("/listAttachment")
-		@RequiresPermissions("common:sysFile:sysFile")
+		@RequiresPermissions("project:productCategory:productCategory")
 		public PageUtils listAttachment(@RequestParam("productId") String productId,
 				@RequestParam Map<String, Object> params) {
 			// String aa=request.getParameter("customerId");

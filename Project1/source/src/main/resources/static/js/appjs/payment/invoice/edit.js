@@ -28,12 +28,12 @@ $().ready(function() {
       	            ,'<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
       	          ,'</td>'
       	        ,'</tr>'].join(''));
-      	        
+
       	        // 单个重传
       	        tr.find('.demo-reload').on('click', function(){
       	          obj.upload(index, file);
       	        });
-      	        
+
       	        // 删除
       	        tr.find('.demo-delete').on('click', function(){
       	          delete files[index]; // 删除对应的文件
@@ -42,7 +42,7 @@ $().ready(function() {
 																	// file
 																	// 值，以免删除后出现同名文件不可选
       	        });
-      	        
+
       	        demoListView.append(tr);
       	      });
               },
@@ -284,6 +284,7 @@ function invoiceMapper_edit(){
 			loadCrmDataValue("/contract/contract/listDic","contractId",result.contractId);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoicePerson",result.invoicePerson);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoiceReceiver",result.invoiceReceiver);
+			setContractId();
 		}
 	});
 }

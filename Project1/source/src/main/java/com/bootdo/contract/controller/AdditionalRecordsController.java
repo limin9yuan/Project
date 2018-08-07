@@ -514,7 +514,7 @@ public class AdditionalRecordsController extends BaseController {
 	//根据ID查看附件列表
 			@ResponseBody
 			@GetMapping("/listId")
-			@RequiresPermissions("common:sysFile:sysFile")
+			@RequiresPermissions("contract:additionalRecords:additionalRecords")
 			public PageUtils listId(@RequestParam("recordId")String recordId,@RequestParam Map<String, Object> params) {
 //				String aa=request.getParameter("customerId");
 				params.put("recordId", recordId);

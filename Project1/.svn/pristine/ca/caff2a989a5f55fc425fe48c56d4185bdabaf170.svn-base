@@ -1,0 +1,473 @@
+package com.bootdo.sales.controller;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.zip.ZipOutputStream;
+
+import javax.servlet.http.HttpServletResponse;
+
+import com.bootdo.common.domain.MainCopyPersonDO;
+import com.bootdo.common.service.MainCopyPersonService;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.bootdo.sales.domain.RecordDO;
+import com.bootdo.sales.service.RecordService;
+import com.bootdo.common.config.BootdoConfig;
+import com.bootdo.common.config.Constant;
+import com.bootdo.common.controller.BaseController;
+import com.bootdo.common.domain.FileDO;
+import com.bootdo.common.service.FileService;
+import com.bootdo.common.utils.FileType;
+import com.bootdo.common.utils.FileUtil;
+import com.bootdo.common.utils.PageUtils;
+import com.bootdo.common.utils.Query;
+import com.bootdo.common.utils.R;
+import com.bootdo.common.utils.ZipUtils;
+
+/**
+ * 行动记录信息表
+ * 
+ * @author sjr
+ * @email 1992lcg@163.com
+ * @date 2017-11-24 17:21:10
+ */
+
+@Controller
+@RequestMapping("/sales/record")
+public class RecordController extends BaseController {
+	@Autowired
+	private RecordService recordService;
+	@Autowired
+	private FileService sysFileService;
+	@Autowired
+	private BootdoConfig bootdoConfig;
+	@Autowired
+	private MainCopyPersonService mainCopyPersonService;
+
+	@GetMapping()
+	@RequiresPermissions("sales:record:record")
+	String Record() {
+		return "sales/record/record";
+	}
+
+	@ResponseBody
+	@GetMapping("/list")
+	@RequiresPermissions("sales:record:record")
+	public PageUtils list(@RequestParam Map<String, Object> params) {
+		// 查询列表数据
+		params.put("recordOperator", (Long.toString(getUserId())));
+		params.put("Identification", (getIdentification()));
+		params.put("userName", (getUsername()));
+		if (params.get("recordExecutor") != null && !"".equals(params.get("recordExecutor"))) {
+			params.put("recordExecutor", "%" + (String) params.get("recordExecutor") + "%");
+		}
+		if (params.get("projectId") != null && !"".equals(params.get("projectId"))) {
+			params.put("projectId", (String) params.get("projectId"));
+		}
+		if (params.get("customerId") != null && !"".equals(params.get("customerId"))) {
+			params.put("customerId", (String) params.get("customerId"));
+		}
+		Query query = new Query(params);
+		List<RecordDO> recordList = recordService.list(query);
+		int total = recordService.count(query);
+		PageUtils pageUtils = new PageUtils(recordList, total);
+		return pageUtils;
+	}
+
+	@GetMapping("/add")
+	@RequiresPermissions("sales:record:add")
+	String add() {
+		return "sales/record/add";
+	}
+
+	@GetMapping("/import")
+	@RequiresPermissions("sales:record:uploadExcel")
+	String importFile() {
+		return "sales/record/import";
+	}
+
+	@RequestMapping("/edit_ajax/{recordId}")
+	@ResponseBody
+	Map<String, Object> edit_ajax(@PathVariable("recordId") String recordId) {
+		RecordDO record = recordService.get(recordId);
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("record", record);
+		return returnData;
+	}
+
+	@GetMapping("/edit/{recordId}")
+	@RequiresPermissions("sales:record:edit")
+	String edit(@PathVariable("recordId") String recordId, Model model) {
+		// RecordDO record = recordService.get(recordId);
+		model.addAttribute("recordId", recordId);
+		return "sales/record/edit";
+	}
+
+	/**
+	 * 查看
+	 */
+	@GetMapping("/see/{recordId}")
+	@RequiresPermissions("sales:record:see")
+	String see(@PathVariable("recordId") String recordId, Model model) {
+		model.addAttribute("recordId", recordId);
+		return "sales/record/see";
+	}
+
+	/**
+	 * 保存
+	 */
+	@ResponseBody
+	@PostMapping("/save")
+	@RequiresPermissions("sales:record:add")
+	public R save(RecordDO record) {
+		record.setRecordOperator(getUserId());
+		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
+			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+		}
+		record.setRecordCreator(getUserId());
+		record.setRecordOperator(getUserId());
+		int recordIds = recordService.save(record);
+		if (recordIds > 0) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = record.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(record.getRecordId());
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_record");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+			String copyPersonId = record.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(record.getRecordId());
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_record");
+					mainCopyPersonService.save(mcp);
+				}
+
+			}
+			R r = R.ok();
+			r.put("recordId", recordIds);
+			return r;
+		}
+		return R.error();
+	}
+
+	/**
+	 * 修改
+	 */
+	@ResponseBody
+	@RequestMapping("/update")
+	@RequiresPermissions("sales:record:edit")
+	public R update(RecordDO record) {
+		record.setRecordOperator(getUserId());
+		String recordIds = record.getRecordId();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset", 1);
+		params.put("limit", 2);
+		params.put("tId", recordIds);
+		params.put("tableName", "sales_record");
+		recordService.update(record);
+		mainCopyPersonService.remove(params);
+		if (!recordIds.equals("")) {
+			MainCopyPersonDO mcp = new MainCopyPersonDO();
+			String mainPersonId = record.getMainPersonId();
+			if (!"".equals(mainPersonId)) {
+				String mainPersonIdArray[] = mainPersonId.split(",");
+
+				for (int i = 0; i < mainPersonIdArray.length; i++) {
+					mcp.setTId(record.getRecordId());
+					mcp.setMainPerson(1);
+					mcp.setEmployeeId(mainPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_record");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+			String copyPersonId = record.getCopyPersonId();
+			if (!"".equals(copyPersonId)) {
+				String copyPersonIdArray[] = copyPersonId.split(",");
+				int result = 0;
+				for (int i = 0; i < copyPersonIdArray.length; i++) {
+					mcp.setTId(record.getRecordId());
+					mcp.setMainPerson(0);
+					mcp.setEmployeeId(copyPersonIdArray[i]);
+					mcp.setOperator(getUserId());
+					mcp.setTableName("sales_record");
+					mainCopyPersonService.save(mcp);
+
+				}
+			}
+
+		}
+		return R.ok();
+	}
+
+	/**
+	 * 删除
+	 */
+	@PostMapping("/remove")
+	@ResponseBody
+	@RequiresPermissions("sales:record:remove")
+	public R remove(String recordId) {
+		if (recordService.remove(recordId) > 0) {
+			return R.ok();
+		}
+		return R.error();
+	}
+
+	/**
+	 * 删除
+	 */
+	@PostMapping("/batchRemove")
+	@ResponseBody
+	@RequiresPermissions("sales:record:batchRemove")
+	public R remove(@RequestParam("ids[]") String[] recordIds) {
+		recordService.batchRemove(recordIds);
+		return R.ok();
+	}
+
+	// 根据ID查看附件列表
+	@ResponseBody
+	@RequestMapping("/listRecordAttachment")
+	@RequiresPermissions("sales:record:record")
+	public PageUtils listRecordAttachment(@RequestParam("recordId") String recordId,Model model,
+			@RequestParam Map<String, Object> params) {
+		// String aa=request.getParameter("customerId");
+		params.put("recordId", recordId);
+		System.out.println(recordId);
+		// 查询列表数据
+		Query query = new Query(params);
+		List<FileDO> sysFileList = sysFileService.listRecordAttachment(query);
+		for (int i = 0; i < sysFileList.size(); i++) {
+			FileDO a =sysFileList.get(i);
+			String urlFile=a.getUrl();
+			String suffix=urlFile.substring(urlFile.indexOf(".")+1);
+			if (suffix.equals("xls")||suffix.equals("xlsx")) {
+				a.setSuffix("1");//1代表xlsx表格
+			}else if (suffix.equals("docx")) {
+				a.setSuffix("2");//2代表word文档
+			}else if(suffix.equals("avi")||suffix.equals("wma")||suffix.equals("rmvb")||suffix.equals("rm")||suffix.equals("flash")||suffix.equals("mp4")||suffix.equals("mid")||suffix.equals("3GP")){
+				a.setSuffix("3");//3代表视频文件
+			}else if(suffix.equals("jpg")||suffix.equals("png")||suffix.equals("gif")||suffix.equals("tif")||suffix.equals("psd")||suffix.equals("dng")||suffix.equals("cr2")||suffix.equals("nef")){
+				a.setSuffix("4");//4代表图片
+			}else if(suffix.equals("rar")||suffix.equals("zip")){
+				a.setSuffix("5");//5代表压缩文件
+			}else {
+				a.setSuffix("6");//6除以判断的文件之外的文件
+			}
+//			System.out.println("************************************************");
+//			System.out.println(urlFile.substring(urlFile.indexOf(".")+1));
+//			System.out.println("************************************************");
+		}
+		int total = sysFileService.countRecordAttachment(query);
+		PageUtils pageUtils = new PageUtils(sysFileList, total);
+		return pageUtils;
+	}
+
+	/**
+	 * 上传文件
+	 * 
+	 * @param file
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("/upload")
+	R upload(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+		// String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		// chars.charAt((int)(Math.random() * 52))+
+		String fileName = file.getOriginalFilename();
+		// fileName = FileUtil.renameToUUID(fileName);
+		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date(), fileName);
+		try {
+			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
+		} catch (Exception e) {
+			return R.error();
+		}
+		int ids = sysFileService.save(sysFile);
+		System.out.println(ids);
+		if (ids > 0) {
+			R r = R.ok();
+			r.put("recordAttachment", ids);
+			r.put("fileName", sysFile.getUrl());
+			return r;
+			// return R.ok().put("fileName", sysFile.getUrl());
+		}
+		return R.error();
+	}
+
+	/**
+	 * Excel导入
+	 * 
+	 * @param file
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("/uploadExcel")
+	R uploadExcel(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+		String fileName = file.getOriginalFilename();
+		fileName = FileUtil.renameToUUID(fileName);
+		File datafile = null;
+		try {
+			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
+			datafile = new File(bootdoConfig.getUploadPath() + fileName);
+
+			// log数据保存
+			long userid = getUserId(); // 用户id
+			
+			Map<String, Object> errorMsgs=recordService.uploadExcel(datafile, userid);
+			if ("success".equals(errorMsgs.get("result"))) {
+				return R.ok();
+			} else {
+				return R.error();
+			}
+		} catch (Exception e) {
+			return R.error();
+		}
+	}
+
+	/**
+	 * 执行删除文件的时候同时删除字段下的附件ID
+	 */
+	@ResponseBody
+	@RequestMapping("/updateRecordAttachment")
+	@RequiresPermissions("sales:recordService:edit")
+	public R updateRecordAttachment(RecordDO record) {
+		recordService.updateRecordAttachment(record);
+		return R.ok();
+	}
+
+	// 根据文件名称下载相关代码
+	@ResponseBody
+	@RequestMapping("/down")
+	public void download(HttpServletResponse response, @RequestParam("fileName") String fileName) {
+		try {
+			// path是指欲下载的文件的路径。
+			String path = "C:/var/uploaded_files/" + fileName;
+
+			File file = new File(path);
+			// 取得文件名。
+			String filename = file.getName();
+
+			// 以流的形式下载文件。
+			InputStream fis = new BufferedInputStream(new FileInputStream(path));
+			byte[] buffer = new byte[fis.available()];
+			fis.read(buffer);
+			fis.close();
+			// 清空response
+			response.reset();
+			// 设置response的Header
+			// 设置文件名
+
+			response.addHeader("Content-Disposition",
+					"attachment;filename=" + new String(filename.getBytes(), "ISO-8859-1"));
+			// 设置文件打下
+			response.addHeader("Content-Length", "" + file.length());
+			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+			response.setContentType("application/octet-stream");
+			toClient.write(buffer);
+			toClient.flush();
+			toClient.close();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	/**
+	 * 打包压缩下载文件
+	 */
+	@RequestMapping(value = "/downLoadZipFile")
+	@ResponseBody
+	public void downLoadZipFile(HttpServletResponse response, @RequestParam("id") String id) throws IOException {
+		String[] ids = id.split(",");
+		String zipName = "downLoadFile.zip";
+		List<FileDO> fileList = sysFileService.downLoadListId(ids);// 查询数据库中记录
+		response.setContentType("APPLICATION/OCTET-STREAM");
+		response.setHeader("Content-Disposition", "attachment; filename=" + zipName);
+		ZipOutputStream out = new ZipOutputStream(response.getOutputStream());
+		try {
+			for (Iterator<FileDO> it = fileList.iterator(); it.hasNext();) {
+				FileDO file = it.next();
+				ZipUtils.doCompress("C:/var/uploaded_files/" + file.getFileName(), out);
+				response.flushBuffer();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			out.close();
+		}
+	}
+	
+	//模板下载
+    @ResponseBody
+ 	@RequestMapping("/downloadTemplate")
+    public void download(HttpServletResponse response,HttpServletRequest request) {
+ 		try {
+ 			
+// 			 File files = new File(".\\src\\main\\resources\\downloadTemplate\\企业客户导入摸板.xls");
+// 			System.out.println("getAbsolutePath:"+files.getAbsolutePath());  //getAbsolutePath()会将.认为是一个以.命名的文件
+// 			System.out.println("getCanonicalPath:"+files.getCanonicalPath());//getCanonicalPath()得到的是一个规范路径没有.
+// 			
+
+ 			File file = new File("./src/main/resources/downloadTemplate/行动管理导入模板.xls");
+ 			// 取得文件名。
+ 			String filename = file.getName();
+ 			
+ 			// 以流的形式下载文件。
+ 			InputStream fis = new BufferedInputStream(new FileInputStream(file.getCanonicalPath()));
+ 			byte[] buffer = new byte[fis.available()];
+ 			fis.read(buffer);
+ 			fis.close();
+ 			// 清空response
+ 			response.reset();
+ 			// 设置response的Header
+ 			// 设置文件名
+ 			response.addHeader("Content-Disposition", "attachment;filename=" + new String(filename.getBytes(),"ISO-8859-1"));
+ 			// 设置文件打下
+ 			response.addHeader("Content-Length", "" + file.length());
+ 			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
+ 			response.setContentType("application/octet-stream");
+ 			toClient.write(buffer);
+ 			toClient.flush();
+ 			toClient.close();
+ 		} catch (IOException ex) {
+ 			ex.printStackTrace();
+ 		}
+ 	}
+
+}

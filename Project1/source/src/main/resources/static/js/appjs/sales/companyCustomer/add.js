@@ -33,15 +33,19 @@ $().ready(function() {
 		loadDept();
 	});
 	$('#myTab a[href="#Hotspot"]').on('shown.bs.tab', function(e) {
+		if ($("#customerContactSta option").length != 0) {
 			loadDic("sales_customer_hot_Rank", "customerHotRank");
+		}
+		if ($("#customerHotClassif option").length != 0) {
 			loadDic("sales_Customer_Hot_Classif","customerHotClassif");
+		}
 
 	});
 	$('#myTab a[href="#linkInfo"]').on('shown.bs.tab', function(e) {
 
-//		if ($("#customerContactSta option").length == 1) {
+		if ($("#customerContactSta option").length != 0) {
 			loadDic("sales_customer_contact_Sta", "customerContactSta");
-//		}
+		}
 
 	});
 	$('#myTab a[href="#Gegner"]').on('shown.bs.tab', function(e) {
@@ -57,7 +61,7 @@ $().ready(function() {
 		// 执行实例
 		var uploadInst = upload.render({
 			elem : '#test1', // 绑定元素
-			url : '/common/sysFile/upload', // 上传接口
+			url : '/sales/companyCustomer/upload', // 上传接口
 			size : 1000,
 			accept : 'file',
 			  multiple: true,

@@ -93,18 +93,4 @@
 		select `dept_id` value,concat(`dept_id`,' ',`name`) name
 		from sys_dept
 	</select>
-	<!--<select id="customerList" resultType="com.bootdo.system.domain.DeptDO">-->
-		<!--select Child_Company_ID as dept_id ,-->
-		<!--'' as `parent_id`,-->
-		<!--Child_Company_Name as name from sales_customer_child_company where Customer_ID=#{customerId}-->
-		<!--union all-->
-		<!--select customer_dept_id `dept_id`,-->
-		<!--case when Customer_Dept_Parent_Dept is null or Customer_Dept_Parent_Dept='' then a.Child_Company_ID else Customer_Dept_Parent_Dept end `parent_id`,-->
-		<!--Customer_Dept_Name `name` from-->
-		<!--sales_customer_dept a left join sales_customer_child_company b on a.Child_Company_ID=b.Child_Company_ID-->
-		<!--and b.Customer_ID=#{customerId}-->
-		<!--where a.Custome_ID = #{customerId}-->
-
-
-	<!--</select>-->
 </mapper>
