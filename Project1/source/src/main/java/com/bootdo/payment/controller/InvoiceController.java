@@ -107,6 +107,18 @@ public class InvoiceController extends BaseController {
 	@ResponseBody
 	Map<String, Object> edit_ajax(@PathVariable("invoiceId") String invoiceId) {
 		InvoiceDO invoice = invoiceService.get(invoiceId);
+		String contractId = invoice.getContractId();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("offset",1);
+		params.put("limit",2);
+		params.put("contractId", contractId);
+		Query queryGetMultiProject = new Query(params);
+		List<ContractProjectDO> getMultiProject = contractProjectService.getMultiProject(queryGetMultiProject);
+		ArrayList<String> projectNames = new ArrayList<>();
+		for (int i = 0; i<getMultiProject.size(); i++){
+			projectNames.add(getMultiProject.get(i).getProjectName());
+		}
+		invoice.setProjectId(StringUtils.strip(projectNames.toString(),"[]"));
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		returnData.put("invoice", invoice);
 		return returnData;
@@ -275,7 +287,6 @@ public class InvoiceController extends BaseController {
 		}
 		contract.setProjectId(StringUtils.strip(projectNames.toString(),"[]"));
 		Map<String, Object> returnData = new HashMap<String, Object>();
-		System.out.println(contract.getContractReceivablePrice());
 		returnData.put("contract", contract);
 		return returnData;
 	}

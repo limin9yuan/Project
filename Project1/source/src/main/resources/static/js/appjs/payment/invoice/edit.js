@@ -284,7 +284,6 @@ function invoiceMapper_edit(){
 			loadCrmDataValue("/contract/contract/listDic","contractId",result.contractId);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoicePerson",result.invoicePerson);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","invoiceReceiver",result.invoiceReceiver);
-			setContractId();
 		}
 	});
 }
