@@ -16,8 +16,8 @@ $().ready(function() {
 		$('#lastBtn').attr("disabled",false);
 		$('#nextBtn').attr("disabled",true);
 	});
-	
-	
+
+
 	//_____附件
 	layui.use('upload', function() {
 		var $ = layui.jquery;
@@ -35,7 +35,7 @@ $().ready(function() {
 	        bindAction: '#uploadFile',	//“上传”按钮的ID
 	        multiple: false,
 	        choose:function(obj){
-	//******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************           	
+	//******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************
 	        	var files = this.files = obj.pushFile(); // 将每次选择的文件追加到文件队列
 	      	      // 读取本地文件
 	      	      obj.preview(function(index, file, result){
@@ -48,12 +48,12 @@ $().ready(function() {
 	      	            ,'<button class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
 	      	          ,'</td>'
 	      	        ,'</tr>'].join(''));
-	      	        
+
 	      	        // 单个重传
 	      	        tr.find('.demo-reload').on('click', function(){
 	      	          obj.upload(index, file);
 	      	        });
-	      	        
+
 	      	        // 删除
 	      	        tr.find('.demo-delete').on('click', function(){
 	      	          delete files[index]; // 删除对应的文件
@@ -62,7 +62,7 @@ $().ready(function() {
 																		// file
 																		// 值，以免删除后出现同名文件不可选
 	      	        });
-	      	        
+
 	      	        demoListView.append(tr);
 	      	      });
 	              },
@@ -148,7 +148,7 @@ function loadSalesProject() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url :"/sales/salesProject/list", // 服务器数据的加载地址
+						url :"/sales/salesProject/listAllDic", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -437,7 +437,7 @@ function contractSoftwareDetail(){
 	});
 }
 
-	
+
 
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
@@ -751,21 +751,21 @@ function Contract_ajax(){
 }
 //图片预览
 function previewImg(obj) {
-    var img = new Image();  
+    var img = new Image();
     img.src = obj.src;
-    var imgHtml = "<img src='" + obj.src + "' style='width:90% height:90%'/>";  
+    var imgHtml = "<img src='" + obj.src + "' style='width:90% height:90%'/>";
     //弹出层
-    parent.layer.open({  
-        type: 1,  
+    parent.layer.open({
+        type: 1,
         shade: 0.8,
         offset: 'auto',
         area: [90 + '%',90+'%'],
         shadeClose:true,
         scrollbar: false,
-        title: "图片预览", //不显示标题  
-        content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响  
-        cancel: function () {  
-            //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });  
-        }  
-    }); 
+        title: "图片预览", //不显示标题
+        content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+        cancel: function () {
+            //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+        }
+    });
 }

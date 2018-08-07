@@ -68,12 +68,12 @@ $().ready(function() {
 	        	            ,'<button id="delete" class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
 	        	          ,'</td>'
 	        	        ,'</tr>'].join(''));
-	        	        
+
 	        	        // 单个重传
 	        	        tr.find('.demo-reload').on('click', function(){
 	        	          obj.upload(index, file);
 	        	        });
-	        	        
+
 	        	        // 删除
 	        	        tr.find('.demo-delete').on('click', function(){
 	        	          delete files[index]; // 删除对应的文件
@@ -82,7 +82,7 @@ $().ready(function() {
 	  																	// file
 	  																	// 值，以免删除后出现同名文件不可选
 	        	        });
-	        	        
+
 	        	        demoListView.append(tr);
 	        	      });
 	                },
@@ -196,7 +196,7 @@ function loadSalesProject() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url :"/sales/salesProject/list", // 服务器数据的加载地址
+						url :"/sales/salesProject/listAllDic", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,

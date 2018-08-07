@@ -2,7 +2,7 @@ var prefixContract = "/contract/contract"
 $(function() {
 		loadCrmData("/sales/companyCustomer/listDic", "customerId");
 		loadCrmData("/sales/business/listDic","businessId");
-		loadCrmData("/project/project/listDic","projectId");
+		loadCrmData("/sales/salesProject/listAllDic","projectId");
 	load();
 });
 function resetSelect(){

@@ -504,6 +504,7 @@
 		from contract a
 		left JOIN sys_user s on a.Contract_Operator = s.user_id
 		left join sales_company_customer c on a.Customer_ID = c.Customer_ID
+		LEFT JOIN contract_project d on a.Contract_ID = d.Contract_ID
         <where>  
 		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID = #{customerId} </if>
@@ -535,7 +536,9 @@
 						or EXISTS(SELECT 1 from sys_user
 						WHERE user_id = #{userId} and Identification = '1')) </if>
 		  		  <if test="contractOperateTime != null and contractOperateTime != ''"> and Contract_Operate_Time = #{contractOperateTime} </if>
-		  		</where>
+				<if test="projectId != null and projectId != ''"> and d.Project_ID = #{projectId} </if>
+
+		</where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
                 order by ${sort} ${order}
@@ -553,6 +556,7 @@
 		select count(*) from contract a
 		left JOIN sys_user s on a.Contract_Operator = s.user_id
 		left join sales_company_customer c on a.Customer_ID = c.Customer_ID
+		LEFT JOIN contract_project d on a.Contract_ID = d.Contract_ID
 		 <where>  
 		  		  <if test="contractId != null and contractId != ''"> and Contract_ID = #{contractId} </if>
 		  		  <if test="customerId != null and customerId != ''"> and a.Customer_ID = #{customerId} </if>
@@ -585,7 +589,8 @@
 				 WHERE g.Inner_User_ID = #{userName} and f.Table_Name = #{tableName} and f.t_id=a.Contract_id)
 				 or EXISTS(SELECT 1 from sys_user
 				 WHERE user_id = #{userId} and Identification = '1')) </if>
-		  		</where>
+			 <if test="projectId != null and projectId != ''"> and d.Project_ID = #{projectId} </if>
+		 </where>
 	</select>
 	<insert id="save" parameterType="com.bootdo.contract.domain.ContractDO" useGeneratedKeys="true" keyProperty="contractId">
 		insert into contract
