@@ -128,6 +128,7 @@
 		  		  <if test="purchaseId != null and purchaseId != ''"> and Purchase_ID = #{purchaseId} </if>
 		  		  <if test="projectId != null and projectId != ''"> and a.Project_ID = #{projectId} </if>
 		  		  <if test="purchaseDept != null and purchaseDept != ''"> and Purchase_Dept = #{purchaseDept} </if>
+
 		  		  <if test="purchasePerson != null and purchasePerson != ''"> and Purchase_Person = #{purchasePerson} </if>
 		  		  <if test="purchaseDate != null and purchaseDate != ''"> and Purchase_Date = #{purchaseDate} </if>
 		  		  <if test="purchaseName != null and purchaseName != ''"> and Purchase_Name = #{purchaseName} </if>
@@ -159,6 +160,15 @@
 				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
 				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
 				where c.KEY_='purchase'  and b.`name`  like '%${assigneeName}%'
+				)
+			</if>
+			<if test="purchaseOperator != null and purchaseOperator != ''">
+				and a.PROCESS_INSTANCE_ID IN
+				(
+				Select DISTINCT a.PROC_INST_ID_
+				from act_hi_taskinst a INNER JOIN sys_user b on a.ASSIGNEE_=b.username
+				INNER JOIN act_re_procdef c on a.PROC_DEF_ID_=c.ID_
+				where c.KEY_='purchase'  and b.`name`  like '%${purchaseOperator}%'
 				)
 			</if>
 		  		</where>

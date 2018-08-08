@@ -97,6 +97,14 @@ public class ContractApprovalController extends BaseController {
 					contractApproval.setPdId(task.getProcessDefinitionId());
 				}
 			}
+			if (contractApproval.getContractApprovalStatus().equals("2")){
+				task = taskService.createTaskQuery().processDefinitionKey("contract").taskAssignee(ShiroUtils.getUser()
+						.getUsername()).processInstanceBusinessKey(String.valueOf(contractApproval.getContractId())).singleResult();
+				if (task != null){
+					contractApproval.setTaskId(task.getId());
+					contractApproval.setPdId(task.getProcessDefinitionId());
+				}
+			}
 		}
 		int total = contractApprovalService.count(query);
 		PageUtils pageUtils = new PageUtils(contractApprovalList, total);

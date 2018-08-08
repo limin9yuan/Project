@@ -3,13 +3,14 @@
 
 <mapper namespace="com.bootdo.payment.dao.ContractApprovalDao">
 	<select id="get" resultType="com.bootdo.payment.domain.ContractApprovalDO">
-		 select `Contract_ID`,`Customer_ID`,`Business_ID`,`Contract_Name`,`Contract_Applicant_Name`,
+		select `Contract_ID`,`Customer_ID`,`Business_ID`,`Contract_Name`,`Contract_Applicant_Name`,
 		`Contract_Build_Company`,`Contract_Type`,`Contract_Category`,`Contract_Total_Price`,
 		`Contract_Dept`,`Contract_Applicant`,`Contract_Draft_Person`,`Contract_Sales`,
 		`Contract_Commit_Time`,`Contract_Related_ID`,`Contract_Invoice_Type`,`Contract_Invoice_Time`,
 		`Contract_Hardware_List`,`Contract_Software_List`,`Contract_Project_Management`,
 		`Contract_Remarks`,`Contract_Attachment`,`Contract_Approval_Status`,`Contract_Operator`,
-		`Contract_Operate_Time` from contract where Contract_ID = #{value}
+		`Contract_Operate_Time`,PROCESS_INSTANCE_ID
+		from contract where Contract_ID = #{value}
 	</select>
 
 	<select id="list" resultType="com.bootdo.payment.domain.ContractApprovalDO">
@@ -18,7 +19,7 @@
 		`Contract_Dept`,`Contract_Applicant`,`Contract_Draft_Person`,`Contract_Sales`,`Contract_Commit_Time`,
 		`Contract_Related_ID`,`Contract_Invoice_Type`,`Contract_Invoice_Time`,`Contract_Hardware_List`,
 		`Contract_Software_List`,`Contract_Project_Management`,`Contract_Remarks`,`Contract_Attachment`,
-		CASE `Contract_Approval_Status` WHEN '1' THEN '已审批' ELSE '未审批' END AS contract_Approval_Status_Text,`Contract_Operator`,`Contract_Operate_Time`,a.Project_ID,
+		CASE `Contract_Approval_Status` when '1' then '已审批' when '2' then '正在审批' else '未审批' END AS contract_Approval_Status_Text,`Contract_Operator`,`Contract_Operate_Time`,a.Project_ID,
 		i.Employee_Name as contractSalesName,s.Identification,Contract_Approval_Status, PROCESS_INSTANCE_ID
 		from contract a
 		left join sys_user s 			on a.Contract_Operator = s.user_id

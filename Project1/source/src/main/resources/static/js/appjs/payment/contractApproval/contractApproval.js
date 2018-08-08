@@ -92,8 +92,15 @@ function load() {
 													+ '\')"><i class="fa fa-edit"></i></a> ';
 											return e ;
 										}
+										if (row.contractApprovalStatus == 2) {
+											var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+													+ row.pdId
+													+ '\',\''+row.taskId
+													+ '\')"><i class="fa fa-edit"></i></a> ';
+											return e ;
+										}
 										if (row.contractApprovalStatus == 1) {
-											var f = '<a class="btn btn-success btn-sm '+s_view_h+'" href="#" title="备用"  mce_href="#" onclick="view(\''
+											var f = '<a class="btn btn-success btn-sm '+s_view_h+'" href="#" title="查看"  mce_href="#" onclick="view(\''
 													+ row.contractId
 													+ '\')"><i class="fa fa-search"></i></a> ';
 											return f;
