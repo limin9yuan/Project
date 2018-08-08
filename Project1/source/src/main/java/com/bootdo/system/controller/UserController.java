@@ -44,6 +44,9 @@ public class UserController extends BaseController {
 	@GetMapping("/list")
 	@ResponseBody
 	PageUtils list(@RequestParam Map<String, Object> params) {
+		if (params.get("name") != null && params.get("name") != "") {
+			params.put("name", "%" + params.get("name") + "%");
+		}
 		// 查询列表数据
 		Query query = new Query(params);
 		List<UserDO> sysUserList = userService.list(query);

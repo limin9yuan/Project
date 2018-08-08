@@ -229,6 +229,9 @@ function validateRule() {
 			budgetProfitRate:{
 				required : true,
 				number:true
+			},
+			budgetType:{
+				required : true,
 			}
 		},
 		messages : {
@@ -267,6 +270,9 @@ function validateRule() {
 			},
 			budgetProfitRate:{
 				required : icon + "项目计划利润率不能为空"
+			},
+			budgetType:{
+				required : icon + "预算类别不能为空"
 			}
 		}
 

@@ -66,7 +66,7 @@ function load() {
 										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 												+ row.purchaseId
 												+ '\')"><i class="fa fa-remove"></i></a> ';
-										var f = '<a class="btn btn-success btn-sm"'+s_view_h+' href="#" title="备用"  mce_href="#" onclick="view(\''
+										var f = '<a class="btn btn-success btn-sm"'+s_view_h+' href="#" title="查看"  mce_href="#" onclick="view(\''
 												+ row.purchaseId
 												+ '\')"><i class="fa fa-search"></i></a> ';
 										return e + d +f ;
@@ -128,7 +128,7 @@ function edit(id) {
 function view(id) {
 	parent.layer.open({
 		type : 2,
-		title : '编辑',
+		title : '查看',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],

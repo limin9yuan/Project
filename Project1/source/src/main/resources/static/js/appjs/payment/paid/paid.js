@@ -72,10 +72,7 @@ function load() {
 												+ '\')"><i class="fa fa-search"></i></a> ';
 										return e + d +f;
 									}
-								},/*{
-									field : 'paidId',
-									title : '付款信息编号'
-								},*/{
+								},{
 									field : 'paidTime',
 									title : '付款时间'
 								},{
@@ -93,36 +90,7 @@ function load() {
 								},{
 									field : 'paidStatus',
 									title : '合同状态'
-								}/*,{
-									field : 'projectOwnerName',
-									title : '项目经理'
-								},{
-									field : 'paidProjectName',
-									title : '项目名称'
 								}
-								/*								{
-									field : 'paidRemarks',
-									title : '备注'
-								},
-																{
-									field : 'paidOperator',
-									title : '操作人'
-								},
-																{
-									field : 'paidOperateTime',
-									title : '操作时间'
-								},{
-									field : 'contractId',
-									title : '合同编号2'
-								},
-																{
-									field : 'purchaseId',
-									title : '采购编号'
-								},
-																{
-									field : 'contractD',
-									title : '合同编号'
-								},*/
 																 ]
 					});
 }
@@ -152,7 +120,7 @@ function edit(id) {
 function view(id) {
 	parent.layer.open({
 		type : 2,
-		title : '编辑',
+		title : '查看',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],

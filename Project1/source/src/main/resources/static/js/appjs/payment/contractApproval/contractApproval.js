@@ -86,14 +86,14 @@ function load() {
 									align : 'center',
 									formatter : function(value, row, index) {
 										if (row.contractApprovalStatus == 0) {
-											var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+											var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="审批" onclick="edit(\''
 													+ row.pdId
 													+ '\',\''+row.taskId
 													+ '\')"><i class="fa fa-edit"></i></a> ';
 											return e ;
 										}
 										if (row.contractApprovalStatus == 2) {
-											var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
+											var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="审批" onclick="edit(\''
 													+ row.pdId
 													+ '\',\''+row.taskId
 													+ '\')"><i class="fa fa-edit"></i></a> ';
@@ -194,7 +194,7 @@ function taskTrace(processInstanceId){
 function view(id) {
 	parent.layer.open({
 		type : 2,
-		title : '编辑',
+		title : '查看',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],
@@ -264,7 +264,7 @@ function approval() {
 function edit(id,pid) {
 	parent.layer.open({
 		type : 2,
-		title : '编辑',
+		title : '审批',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '95%', '95%' ],

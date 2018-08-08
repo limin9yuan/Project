@@ -24,7 +24,7 @@
 			<if test="Identification !=null and Identification !=''"> and Identification=#{Identification}</if>
 			<if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 			<if test="username != null and username != ''"> and username = #{username} </if>
-			<if test="name != null and name != ''"> and name = #{name} </if>
+			<if test="name != null and name != ''"> and name like #{name} </if>
 			<if test="password != null and password != ''"> and password = #{password} </if>
 			<if test="deptId != null and deptId != ''"> and find_in_set(dept_id, getChildLst(#{deptId})) </if>
 			<if test="email != null and email != ''"> and email = #{email} </if>
