@@ -101,6 +101,9 @@ function validateRule() {
 			},
 			projectDevelopmentEndDate:{
 				required : true
+			},
+			ContractCenterratio:{
+					number:true
 			}
 		},
 		messages : {

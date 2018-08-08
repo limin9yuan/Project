@@ -131,6 +131,11 @@ public class InnerOrgEmployeeController extends BaseController {
 	@RequiresPermissions("inner:innerOrgEmployee:add")
 	public R save(InnerOrgEmployeeDO innerOrgEmployee) {
 		innerOrgEmployee.setEmployeeOperator(getUserId());
+		String employeeId = innerOrgEmployee.getEmployeeId();
+		InnerOrgEmployeeDO employee = innerOrgEmployeeService.get(employeeId);
+		if (employee != null){
+			return R.error("员工ID已存在");
+		}
 		int employeeIds = innerOrgEmployeeService.save(innerOrgEmployee);
 		if (employeeIds > 0) {
 			R r = R.ok();
