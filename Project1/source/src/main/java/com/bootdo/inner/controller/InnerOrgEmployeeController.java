@@ -134,7 +134,7 @@ public class InnerOrgEmployeeController extends BaseController {
 		String employeeId = innerOrgEmployee.getEmployeeId();
 		InnerOrgEmployeeDO employee = innerOrgEmployeeService.get(employeeId);
 		if (employee != null){
-			return R.error("员工ID已存在");
+			return R.error("员工工号已存在");
 		}
 		int employeeIds = innerOrgEmployeeService.save(innerOrgEmployee);
 		if (employeeIds > 0) {

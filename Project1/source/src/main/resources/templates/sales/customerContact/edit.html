@@ -224,6 +224,10 @@
 										<!-- 												style="width: 32%"> -->
 										<!-- 											</select> -->
 										<!-- 										</div> -->
+										<label class="col-sm-2 control-label">部门：</label>
+										<div class="col-sm-4">
+											<input id="contactDept" name="contactDept" class="form-control" type="text" readonly="readonly" onclick="openDept()">
+										</div>
 										<label class="col-sm-2 control-label">公司名称：<span
 											class="mustin">*</span></label>
 										<div class="col-sm-4">
@@ -232,18 +236,13 @@
 												tabindex="2" style="width: 100%">
 											</select>
 										</div>
-										<label class="col-sm-2 control-label">部门：</label>
-										<div class="col-sm-4">
-											<select data-placeholder="请选择" name="contactDept"
-												id="contactDept" class="form-control chosen-select"
-												tabindex="2" style="width: 100%">
-												<option value="">请选择</option>
-											</select>
-										</div>
 									</div>
 									<div class="form-group">
-
-
+										<label class="col-sm-2 control-label">职务：</label>
+										<div class="col-sm-4">
+											<input id="contactTitle" name="contactTitle"
+												class="form-control" type="text">
+										</div>
 										<label class="col-sm-2 control-label">岗位：</label>
 										<div class="col-sm-4">
 											<select data-placeholder="请选择" name="contactJob"
@@ -251,11 +250,6 @@
 												tabindex="2" style="width: 100%">
 												<option value="">请选择</option>
 											</select>
-										</div>
-										<label class="col-sm-2 control-label">职务：</label>
-										<div class="col-sm-4">
-											<input id="contactTitle" name="contactTitle"
-												class="form-control" type="text">
 										</div>
 									</div>
 									<div class="form-group">

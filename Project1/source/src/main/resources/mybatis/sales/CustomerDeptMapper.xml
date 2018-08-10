@@ -152,7 +152,7 @@
 		#{customerDeptDescription},
 		#{customerDeptRemarks},
 		#{customerDeptOperator},
-		#{customerDeptOperateTime},
+		now(),
 		now()
 		<!-- , -->
 		<!-- #{customerProvince}, -->

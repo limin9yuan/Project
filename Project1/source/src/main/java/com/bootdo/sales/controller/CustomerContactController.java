@@ -34,16 +34,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.bootdo.sales.service.CustomerContactService;
+import com.bootdo.system.domain.DeptDO;
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.domain.MainCopyPersonDO;
+import com.bootdo.common.domain.Tree;
 import com.bootdo.common.service.MainCopyPersonService;
 import com.bootdo.common.utils.FileUtil;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
 import com.bootdo.sales.domain.CustomerContactDO;
+import com.bootdo.sales.domain.CustomerDeptDO;
+import com.bootdo.sales.domain.CustomerJobDO;
 
 /**
  * 联系人信息表
@@ -112,6 +116,20 @@ public class CustomerContactController extends BaseController {
 	String addField() {
 		return "common/customField/addContactField";
 	}
+	
+	@GetMapping("/deptTree")
+	@RequiresPermissions("sales:customerContact:customerContact")
+	String deptTree() {
+		return "sales/customerContact/deptTree";
+	}
+	
+	@GetMapping("/tree")
+	@ResponseBody
+	public Tree<DeptDO> tree() {
+		Tree<DeptDO> tree = new Tree<DeptDO>();
+		tree = customerContactService.getTree();
+		return tree;
+	}
 	@ResponseBody
 	@PostMapping("/saveField")
 	@RequiresPermissions("sales:customerContact:addField")
@@ -153,6 +171,8 @@ public class CustomerContactController extends BaseController {
 		return R.ok();
 	}
 
+	
+	
 	@PostMapping( "/removeField")
 	@ResponseBody
 	@RequiresPermissions("sales:customerContact:removeField")
@@ -355,12 +375,15 @@ public class CustomerContactController extends BaseController {
 	}
 
 	@ResponseBody
-	@GetMapping("/listDic")
-	public List<DictDO> listDic() {
+	@GetMapping("/listDic/{customerId}")
+	public List<DictDO> listDic(@PathVariable("customerId")String customerId,@RequestParam Map<String, Object> params) {
+		System.out.println("********************************************************");
+		System.out.println(customerId);
 		// 查询列表数据
 		Map<String, Object> map = new HashMap<>(16);
 		map.put("type", "");
-		List<DictDO> dictList = customerContactService.listDic();
+		map.put("customerId", customerId);
+		List<DictDO> dictList = customerContactService.listDic(map);
 		return dictList;
 	}
 
@@ -483,4 +506,15 @@ public class CustomerContactController extends BaseController {
  			ex.printStackTrace();
  		}
  	}
+    //
+    @ResponseBody
+	@GetMapping("/listJob")
+	@RequiresPermissions("sales:customerContact:customerContact")
+	public PageUtils listJob(@RequestParam Map<String, Object> params,@RequestParam("customerId")String customerId) {
+    	params.put("customerId", customerId);
+    	Query query=new Query(params);
+    	List<CustomerJobDO> list=customerContactService.listJob(query);
+    	PageUtils pageUtils=new PageUtils(list, 0);
+    	return pageUtils;
+    }
 }

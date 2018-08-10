@@ -21,7 +21,7 @@ function savecustomerDept() {
 	var tmpCustomerId = $("#customerId", window.parent.document).val() == undefined ? 
 			$("#customerIds", window.parent.document).val() : $("#customerId", window.parent.document).val()
 				if (tmpCustomerId ==-1) {
-					parent.layer.msg("请先保存基本信息");
+					parent.layer.msg("请先保存所有带红色*号的信息");
 					return;
 				}
 				$('#customerId').val(tmpCustomerId);

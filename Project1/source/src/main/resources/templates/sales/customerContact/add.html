@@ -231,7 +231,7 @@
 										<label class="col-sm-2 control-label">客户名称：<span
 											class="mustin">*</span></label>
 										<div class="col-sm-4">
-											<select data-placeholder="请选择" name="customerId"
+											<select data-placeholder="请选择" name="customerId" onchange="test()"
 												id="customerId" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 												<option value="">请选择</option>
@@ -241,14 +241,18 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">部门：</label>
 										<div class="col-sm-4">
-											<select data-placeholder="请选择" name="contactDept"
-												id="contactDept" class="form-control chosen-select"
-												tabindex="2" style="width: 100%">
-												<option value="">请选择</option>
-											</select>
+										<input id="contactDept" name="contactDept" class="form-control" type="text" readonly="readonly" onclick="openDept()" placeholder="部门名称">
+<!-- 											<select data-placeholder="请选择" name="contactDept" -->
+<!-- 												id="contactDept" class="form-control chosen-select" -->
+<!-- 												tabindex="2" style="width: 100%"> -->
+												<!-- <option value="">请选择</option> -->
+<!-- 											</select> -->
 										</div>
 										<label class="col-sm-2 control-label">岗位：</label>
 										<div class="col-sm-4">
+<!-- 											<select> -->
+												<!-- <option value="" id="selecss" onclick="listjob()">请选择</option> -->
+<!-- 											</select> -->
 											<select data-placeholder="请选择" name="contactJob"
 												id="contactJob" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">

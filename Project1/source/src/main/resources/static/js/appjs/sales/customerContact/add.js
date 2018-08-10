@@ -25,11 +25,11 @@ $().ready(function() {
 		$('#lastBtn').attr("disabled", false);
 		$('#nextBtn').attr("disabled", false);
 		if ($("#contactDept option").length != 0) {
-			loadCrmData("/sales/customerDept/listDic", "contactDept");// 部门
+			// loadCrmData("/sales/customerDept/listDic", "contactDept");// 部门
 		}
-		if ($("#contactJob option").length != 0) {
-			loadCrmData("/sales/customerJob/listDic", "contactJob");// 岗位
-		}
+		// if ($("#contactJob option").length != 0) {
+		// loadCrmData("/sales/customerJob/listDic", "contactJob");// 岗位
+		// }
 		if ($("#customerId option").length != 0) {
 			loadCrmData("/sales/companyCustomer/listDic", "customerId");// 客户编号
 		}
@@ -48,7 +48,35 @@ $().ready(function() {
 	});
 	validateRule();
 	loadField();
+
 });
+// 打开部门页面
+// var currentFiled = "";
+function openDept() {
+	if ($("#customerId").val() == '' || $("#customerId").val() == null) {
+		parent.layer.msg("请先选择客户名称！");
+		return;
+	} else {
+		// currentFiled=testId;
+		layer.open({
+			type : 2,
+			title : "选择部门",
+			area : [ '300px', '450px' ],
+			content : "/sales/customerContact/deptTree"
+		})
+	}
+}
+
+function test() {
+	$("#contactJob").trigger("chosen:updated");  //初始下拉框
+	loadCrmData("/sales/customerContact/listDic/" + $('#customerId').val(),"contactJob");// 岗位
+}
+$('#contactJob').change(function (){
+	if($('#customerId').val()==''){
+		parent.layer.msg("请先选择客户名称！");
+		return;
+	}
+})
 
 $.validator.setDefaults({
 	submitHandler : function() {
@@ -79,7 +107,7 @@ function loadField() {
 						// search : true, // 是否显示搜索框
 						showColumns : false, // 是否显示内容下拉框（选择显示的列）
 						sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
-													// "server"
+						// "server"
 						queryParams : function(params) {
 							return {
 								// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
@@ -132,6 +160,9 @@ function loadField() {
 								} ]
 					});
 }
+function reLoadCustomField() {
+	$('#listCustomField').bootstrapTable('refresh');
+}
 function addField() {
 	layer.open({
 		type : 2,
@@ -157,7 +188,7 @@ function removeField(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : "/sales/customerContact/removeField",
+			url :"/sales/customerContact/removeField",
 			type : "post",
 			data : {
 				'id' : id
@@ -165,13 +196,47 @@ function removeField(id) {
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
-					reloadParenWindow();
+					reLoadCustomField();
 				} else {
 					layer.msg(r.msg);
 				}
 			}
 		});
 	})
+}
+function batchRemoveField() {
+	var rows = $('#listCustomField').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	if (rows.length == 0) {
+		layer.msg("请选择要删除的数据");
+		return;
+	}
+	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+		btn : [ '确定', '取消' ]
+	// 按钮
+	}, function() {
+		var ids = new Array();
+		// 遍历所有选择的行数据，取每条数据对应的ID
+		$.each(rows, function(i, row) {
+			ids[i] = row['id'];
+		});
+		$.ajax({
+			type : 'POST',
+			data : {
+				"ids" : ids
+			},
+			url : '/sales/customerContact/batchRemoveField',
+			success : function(r) {
+				if (r.code == 0) {
+					layer.msg(r.msg);
+					reLoadCustomField();
+				} else {
+					layer.msg(r.msg);
+				}
+			}
+		});
+	}, function() {
+
+	});
 }
 // 点击提交按钮后刷新列表不关闭窗口
 function reloadParenWindow() {

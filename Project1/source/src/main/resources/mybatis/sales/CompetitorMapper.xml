@@ -96,7 +96,8 @@
 		`Complaint_Attachment`,
 		`Complaint_Remarks`,
 		`Complaint_Operator`,
-		Complaint_Create_Time
+		Complaint_Create_Time,
+		Complaint_Operate_Time
 		)
 		values
 		(
@@ -111,6 +112,7 @@
 		#{complaintAttachment},
 		#{complaintRemarks},
 		#{complaintOperator},
+		now(),
 		now()
 		)
 	</insert>

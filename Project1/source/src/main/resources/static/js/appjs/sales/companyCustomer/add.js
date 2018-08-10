@@ -1,6 +1,6 @@
 var address = null;
 $().ready(function() {
-	
+
 	loadDic("sales_customer_category", "customerCategory");
 	loadDic("sales_customer_product", "customerProduct");
 	loadDic("sales_customer_character", "customerCharacter");
@@ -51,7 +51,7 @@ $().ready(function() {
 	$('#myTab a[href="#Gegner"]').on('shown.bs.tab', function(e) {
 		loadCompetitor();
 	});
-	
+
 
 	layui.use('upload', function() {
 		 var $ = layui.jquery;
@@ -68,7 +68,7 @@ $().ready(function() {
 			auto: false,			//不自动上传设置
             bindAction: '#uploadFile',	//“上传”按钮的ID
             choose:function(obj){
-//******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************  
+//******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************
             	var files = this.files = obj.pushFile(); // 将每次选择的文件追加到文件队列
         	      // 读取本地文件
         	      obj.preview(function(index, file, result){
@@ -81,12 +81,12 @@ $().ready(function() {
         	            ,'<button id="delete" class="layui-btn layui-btn-mini layui-btn-danger demo-delete">删除</button>'
         	          ,'</td>'
         	        ,'</tr>'].join(''));
-        	        
+
         	        // 单个重传
         	        tr.find('.demo-reload').on('click', function(){
         	          obj.upload(index, file);
         	        });
-        	        
+
         	        // 删除
         	        tr.find('.demo-delete').on('click', function(){
         	          delete files[index]; // 删除对应的文件
@@ -95,7 +95,7 @@ $().ready(function() {
   																	// file
   																	// 值，以免删除后出现同名文件不可选
         	        });
-        	        
+
         	        demoListView.append(tr);
         	      });
                 },
@@ -115,7 +115,7 @@ $().ready(function() {
 	 				$('#zhuangtai').html('上传失败！');
 	 			}
 			}
-		
+
 		});
 	});
 	validateRule();
@@ -130,7 +130,7 @@ $().ready(function() {
 	}
 });
 
-	
+
 
 $.validator.setDefaults({
 	submitHandler : function() {
@@ -217,6 +217,9 @@ function loadField() {
 								}]
 					});
 }
+function reLoadCustomField() {
+	$('#listCustomField').bootstrapTable('refresh');
+}
 function addField() {
 	layer.open({
 		type : 2,
@@ -235,6 +238,61 @@ function editField(id) {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '950px', '95%' ],
 		content : '/sales/companyCustomer/editField/' + id // iframe的url
+	});
+}
+function removeField(id) {
+	layer.confirm('确定要删除选中的记录？', {
+		btn : [ '确定', '取消' ]
+	}, function() {
+		$.ajax({
+			url :"/sales/companyCustomer/removeField",
+			type : "post",
+			data : {
+				'id' : id
+			},
+			success : function(r) {
+				if (r.code == 0) {
+					layer.msg(r.msg);
+					reLoadCustomField();
+				} else {
+					layer.msg(r.msg);
+				}
+			}
+		});
+	})
+}
+function batchRemoveField() {
+	var rows = $('#listCustomField').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	if (rows.length == 0) {
+		layer.msg("请选择要删除的数据");
+		return;
+	}
+	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+		btn : [ '确定', '取消' ]
+	// 按钮
+	}, function() {
+		var ids = new Array();
+		// 遍历所有选择的行数据，取每条数据对应的ID
+		$.each(rows, function(i, row) {
+			ids[i] = row['id'];
+		});
+		$.ajax({
+			type : 'POST',
+			data : {
+				"ids" : ids
+			},
+			url : '/sales/companyCustomer/batchRemoveField',
+			success : function(r) {
+				if (r.code == 0) {
+					layer.msg(r.msg);
+					reLoadCustomField();
+				} else {
+					layer.msg(r.msg);
+				}
+			}
+		});
+	}, function() {
+
 	});
 }
  function savecompanyCustomer() {
@@ -320,9 +378,6 @@ function validateRule() {
 			customerInnerPhase : {
 				required : true
 			},
-//			customerParent : {
-//				required : true
-//			},
 				  customerHotClassif : {
 				required : true
 			},
@@ -410,7 +465,7 @@ function validateRule() {
 			customerUrl:{
 				url:true
 			}
-			
+
 		},
 		messages : {
 			province : {
@@ -500,7 +555,7 @@ function validateRule() {
 			customerEmpNumber:{
 				digits:icon+"员工数量必须为数字！",
 				max:icon+"员工数量不能大于7位数！",
-				
+
 			},
 			customerHeatingArea:{
 				max:$.validator.format("请输入不大于 99999999999999在14位之间的数值")
@@ -561,23 +616,21 @@ function nextStepThis(tabId,totalStep,lastBtn,nextBtn){
 }
 //图片预览
 function previewImg(obj) {
-    var img = new Image();  
+    var img = new Image();
     img.src = obj.src;
-    var imgHtml = "<img src='" + obj.src + "' style='width:90% height:90%'/>";  
+    var imgHtml = "<img src='" + obj.src + "' style='width:90% height:90%'/>";
     //弹出层
-    parent.layer.open({  
-        type: 1,  
+    parent.layer.open({
+        type: 1,
         shade: 0.8,
         offset: 'auto',
         area: [90 + '%',90+'%'],
         shadeClose:true,
         scrollbar: false,
-        title: "图片预览", //不显示标题  
-        content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响  
-        cancel: function () {  
-            //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });  
-        }  
-    }); 
+        title: "图片预览", //不显示标题
+        content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+        cancel: function () {
+            //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
+        }
+    });
 }
-
-

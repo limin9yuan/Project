@@ -19,32 +19,14 @@ $().ready(function() {
 		 if ($("#customerId option").length == 0) {
 		 loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);//客户编号
 		 }
-		 if ($("#contactDept option").length == 1) {
-		 loadCrmDataValue("/sales/customerDept/listDic", "contactDept",result.contactDept);// 部门
-		 }
 		 if ($("#contactJob option").length == 1) {
 		 loadCrmDataValue("/sales/customerJob/listDic", "contactJob",result.contactJob);// 岗位
 		 }
 		 $('#lastBtn').attr("disabled",false);
 		 $('#nextBtn').attr("disabled",false);
-			
-		 
-		
-//		 if(address==null){
-//			 address = new addressResolve({
-//				    proId: 'province',
-//				    cityId: 'city',
-//				    areaId: 'area',
-//				    customerId: 'customerId'
-//				  },{
-//					    proId: result.province,
-//					    cityId: 'city',
-//					    areaId: 'area',
-//					    customerId: 'customerId'
-//					  });
-//			 address.init();
-//		 }
-		// loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
+
+
+
 	 });
 	 $('#myTab a[href="#userDefine"]').on('shown.bs.tab', function(e){
 		 $('#lastBtn').attr("disabled",false);
@@ -137,6 +119,9 @@ function loadField() {
 								}]
 					});
 }
+function reLoadCustomField() {
+	$('#listCustomField').bootstrapTable('refresh');
+}
 function addField() {
 	layer.open({
 		type : 2,
@@ -156,6 +141,75 @@ function editField(id) {
 		area : [ '950px', '95%' ],
 		content : '/sales/customerContact/editField/' + id // iframe的url
 	});
+}
+function removeField(id) {
+	layer.confirm('确定要删除选中的记录？', {
+		btn : [ '确定', '取消' ]
+	}, function() {
+		$.ajax({
+			url :"/sales/customerContact/removeField",
+			type : "post",
+			data : {
+				'id' : id
+			},
+			success : function(r) {
+				if (r.code == 0) {
+					layer.msg(r.msg);
+					reLoadCustomField();
+				} else {
+					layer.msg(r.msg);
+				}
+			}
+		});
+	})
+}
+function batchRemoveField() {
+	var rows = $('#listCustomField').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
+	if (rows.length == 0) {
+		layer.msg("请选择要删除的数据");
+		return;
+	}
+	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+		btn : [ '确定', '取消' ]
+	// 按钮
+	}, function() {
+		var ids = new Array();
+		// 遍历所有选择的行数据，取每条数据对应的ID
+		$.each(rows, function(i, row) {
+			ids[i] = row['id'];
+		});
+		$.ajax({
+			type : 'POST',
+			data : {
+				"ids" : ids
+			},
+			url : '/sales/customerContact/batchRemoveField',
+			success : function(r) {
+				if (r.code == 0) {
+					layer.msg(r.msg);
+					reLoadCustomField();
+				} else {
+					layer.msg(r.msg);
+				}
+			}
+		});
+	}, function() {
+
+	});
+}
+
+//打开部门页面
+function openDept(){
+	if ($("#customerId").val() == ''||$("#customerId").val()==null) {
+		parent.layer.msg("请先选择客户名称！");
+		return;
+	}
+		layer.open({
+			type : 2,
+			title : "选择部门",
+			area : [ '300px', '450px' ],
+			content : "/sales/customerContact/deptTree"
+		})
 }
 function getMainAndCopyPerson_ajax() {
 	var tmpUrl = '/common/MainCopyPerson/getMainAndCopyPerson_ajax/' + $("#contactId").val() +"/sales_customer_contact";

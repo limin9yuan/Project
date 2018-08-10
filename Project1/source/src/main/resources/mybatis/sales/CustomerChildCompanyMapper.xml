@@ -68,7 +68,7 @@
 		#{childCompanyName},
 		#{childCompanyRemarks},
 		#{childCompanyOperator},
-		#{childCompanyOperateTime},
+		now(),
 		now()
 		)
 	</insert>

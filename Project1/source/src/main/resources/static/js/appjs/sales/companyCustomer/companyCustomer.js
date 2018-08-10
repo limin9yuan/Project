@@ -202,7 +202,7 @@ function resetSelect(){
 										}
 									},
 									// field : 'businessName',
-									title : '业务信息'
+									title : '业务名称'
 								},
 								{
 
@@ -507,6 +507,39 @@ function examineContract() {
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '70%', '70%' ],
 		content : prefix + '/examineContract'
+	});
+}
+//添加联系人
+function addContact() {
+	parent.layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '90%', '90%' ],
+		content : '/sales/customerContact/add' // iframe的url
+	});
+}
+//添加业务
+function addBusiness() {
+	parent.layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '90%', '90%' ],
+		content : '/sales/business/add' // iframe的url
+	});
+}
+//添加项目
+function addProject() {
+	parent.layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '90%', '90%' ],
+		content : '/project/project/add' // iframe的url
 	});
 }
 // ---合同信息添加

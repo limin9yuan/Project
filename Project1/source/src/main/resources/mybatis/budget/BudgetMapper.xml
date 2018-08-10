@@ -13,7 +13,7 @@
 		`Budget_Service_Revenue_Net`,`Budget_Purchase_Cost`,`Budget_Labor_Cost`,
 		`Budget_Travel_Cost`,`Budget_Cost`,`Budget_Profit`,`Budget_Operator`,
 		`Budget_Operate_Time`,a.`Dept_ID`,`Responsible_Center`,`Project_Supervisor`,a.`Project_Owner`,a.`Project_Gategory`,
-		`Budget_Type`,Budget_Approval_Status,PROCESS_INSTANCE_ID
+		`Budget_Type`,Budget_Approval_Status,PROCESS_INSTANCE_ID,Province,City,Area
 		from project_budget a
 		left join development_project b on a.`Project_ID`=b.`Project_ID`
 		where Budget_ID = #{value}
@@ -281,7 +281,10 @@
 			`Project_Supervisor`,
 			`project_Owner`,
 			`Project_Gategory`,
-			`Budget_Type`
+			`Budget_Type`,
+			 Province,
+			 City,
+			 Area
 			
 		)
 		values
@@ -309,7 +312,10 @@
 			#{projectSupervisor},
 			#{projectOwner},
 			#{projectGategory},
-			#{budgetType}
+			#{budgetType},
+			#{province},
+			#{city},
+			#{area}
 			
 		)
 	</insert>
@@ -342,7 +348,11 @@
 			<if test="projectGategory != null">`Project_Gategory` = #{projectGategory},</if>
 			<if test="budgetType != null">`Budget_Type` = #{budgetType},</if>
 			<if test="processInstanceId != null">`PROCESS_INSTANCE_ID` = #{processInstanceId},</if>
-			<if test="budgetApprovalStatus != null">`Budget_Approval_Status` = #{budgetApprovalStatus}</if>
+			<if test="budgetApprovalStatus != null">`Budget_Approval_Status` = #{budgetApprovalStatus},</if>
+			<if test="province != null">`Province` = #{province},</if>
+			<if test="city != null">`City` = #{city},</if>
+			<if test="area != null">`Area` = #{area}</if>
+
 		</set>
 		where Budget_ID = #{budgetId}
 	</update>

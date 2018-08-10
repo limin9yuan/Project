@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.sales.dao.CompetitorDao">
+
+	<select id="get" resultType="com.bootdo.sales.domain.CompetitorDO">
+		select
+		`Complaint_ID`,`Customer_ID`,`Complaint_Project_Type`,`Complaint_Product_Category`,`Complaint_Product_Name`,`Complaint_Product_Price`,`Complaint_Product_Description`,`Complaint_Company_Name`,`Complaint_Attachment`,`Complaint_Remarks`,`Complaint_Operator`,`Complaint_Operate_Time`,`Complaint_Create_Time`
+		from sales_competitor where Complaint_ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.sales.domain.CompetitorDO">
+		select
+		`Complaint_ID`,`Customer_ID`,`Complaint_Project_Type`,`Complaint_Product_Category`,
+		`Complaint_Product_Name`,`Complaint_Product_Price`,`Complaint_Product_Description`,`Complaint_Company_Name`,`Complaint_Attachment`,`Complaint_Remarks`,
+		s.name AS `Complaint_Operator`,`Complaint_Operate_Time`,`Complaint_Create_Time`
+		from sales_competitor a
+		left join sys_user s on a.Complaint_Operator=s.user_id
+		<where>
+			<if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
+			<if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+			<if test="complaintProjectType != null and complaintProjectType != ''"> and Complaint_Project_Type = #{complaintProjectType}
+			</if>
+			<if
+				test="complaintProductCategory != null and complaintProductCategory != ''"> and Complaint_Product_Category = #{complaintProductCategory}
+			</if>
+			<if test="complaintProductName != null and complaintProductName != ''"> and Complaint_Product_Name = #{complaintProductName}
+			</if>
+			<if test="complaintProductPrice != null and complaintProductPrice != ''"> and Complaint_Product_Price = #{complaintProductPrice}
+			</if>
+			<if
+				test="complaintProductDescription != null and complaintProductDescription != ''"> and Complaint_Product_Description =
+				#{complaintProductDescription} </if>
+			<if test="complaintCompanyName != null and complaintCompanyName != ''"> and Complaint_Company_Name = #{complaintCompanyName}
+			</if>
+			<if test="complaintAttachment != null and complaintAttachment != ''"> and Complaint_Attachment = #{complaintAttachment} </if>
+			<if test="complaintRemarks != null and complaintRemarks != ''"> and Complaint_Remarks = #{complaintRemarks} </if>
+			<if test="complaintOperator != null and complaintOperator != ''"> and Complaint_Operator = #{complaintOperator} </if>
+			<if test="complaintOperateTime != null and complaintOperateTime != ''"> and Complaint_Operate_Time = #{complaintOperateTime}
+			</if>
+			<if test="complaintCreateTime != null and complaintCreateTime != ''"> and Complaint_Create_Time = #{complaintCreateTime} </if>
+		</where>
+		<choose>
+			<when test="sort != null and sort.trim() != ''">
+				order by ${sort} ${order}
+			</when>
+			<otherwise>
+				order by Complaint_ID desc
+			</otherwise>
+		</choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+
+	<select id="count" resultType="int">
+		select count(*) from sales_competitor a 
+		left join sys_user s on a.Complaint_Operator=s.user_id
+		<where>
+			<if test="complaintId != null and complaintId != ''"> and Complaint_ID = #{complaintId} </if>
+			<if test="customerId != null and customerId != ''"> and Customer_ID = #{customerId} </if>
+			<if test="complaintProjectType != null and complaintProjectType != ''"> and Complaint_Project_Type = #{complaintProjectType}
+			</if>
+			<if
+				test="complaintProductCategory != null and complaintProductCategory != ''"> and Complaint_Product_Category = #{complaintProductCategory}
+			</if>
+			<if test="complaintProductName != null and complaintProductName != ''"> and Complaint_Product_Name = #{complaintProductName}
+			</if>
+			<if test="complaintProductPrice != null and complaintProductPrice != ''"> and Complaint_Product_Price = #{complaintProductPrice}
+			</if>
+			<if
+				test="complaintProductDescription != null and complaintProductDescription != ''"> and Complaint_Product_Description =
+				#{complaintProductDescription} </if>
+			<if test="complaintCompanyName != null and complaintCompanyName != ''"> and Complaint_Company_Name = #{complaintCompanyName}
+			</if>
+			<if test="complaintAttachment != null and complaintAttachment != ''"> and Complaint_Attachment = #{complaintAttachment} </if>
+			<if test="complaintRemarks != null and complaintRemarks != ''"> and Complaint_Remarks = #{complaintRemarks} </if>
+			<if test="complaintOperator != null and complaintOperator != ''"> and Complaint_Operator = #{complaintOperator} </if>
+			<if test="complaintOperateTime != null and complaintOperateTime != ''"> and Complaint_Operate_Time = #{complaintOperateTime}
+			</if>
+			<if test="complaintCreateTime != null and complaintCreateTime != ''"> and Complaint_Create_Time = #{complaintCreateTime} </if>
+		</where>
+	</select>
+
+	<insert id="save" parameterType="com.bootdo.sales.domain.CompetitorDO">
+		insert into sales_competitor
+		(
+		`Complaint_ID`,
+		`Customer_ID`,
+		`Complaint_Project_Type`,
+		`Complaint_Product_Category`,
+		`Complaint_Product_Name`,
+		`Complaint_Product_Price`,
+		`Complaint_Product_Description`,
+		`Complaint_Company_Name`,
+		`Complaint_Attachment`,
+		`Complaint_Remarks`,
+		`Complaint_Operator`,
+		Complaint_Create_Time,
+		Complaint_Operate_Time
+		)
+		values
+		(
+		#{complaintId},
+		#{customerId},
+		#{complaintProjectType},
+		#{complaintProductCategory},
+		#{complaintProductName},
+		#{complaintProductPrice},
+		#{complaintProductDescription},
+		#{complaintCompanyName},
+		#{complaintAttachment},
+		#{complaintRemarks},
+		#{complaintOperator},
+		now(),
+		now()
+		)
+	</insert>
+
+	<update id="update" parameterType="com.bootdo.sales.domain.CompetitorDO">
+		update sales_competitor a 
+		<set>
+		 a.Complaint_Operate_Time=now(),
+			<if test="customerId != null">`Customer_ID` = #{customerId}, </if>
+			<if test="complaintProjectType != null">`Complaint_Project_Type` = #{complaintProjectType}, </if>
+			<if test="complaintProductCategory != null">`Complaint_Product_Category` =
+				#{complaintProductCategory}, </if>
+			<if test="complaintProductName != null">`Complaint_Product_Name` = #{complaintProductName}, </if>
+			<if test="complaintProductPrice != null">`Complaint_Product_Price` = #{complaintProductPrice},
+			</if>
+			<if test="complaintProductDescription != null">`Complaint_Product_Description` =
+				#{complaintProductDescription}, </if>
+			<if test="complaintCompanyName != null">`Complaint_Company_Name` = #{complaintCompanyName}, </if>
+			<if test="complaintAttachment != null">`Complaint_Attachment` = #{complaintAttachment}, </if>
+			<if test="complaintRemarks != null">`Complaint_Remarks` = #{complaintRemarks}, </if>
+			<if test="complaintOperator != null">`Complaint_Operator` = #{complaintOperator}, </if>
+			<if test="complaintOperateTime != null">`Complaint_Operate_Time` = #{complaintOperateTime}, </if>
+			<if test="complaintCreateTime != null">`Complaint_Create_Time` = #{complaintCreateTime}</if>
+		</set>
+		where Complaint_ID = #{complaintId}
+	</update>
+
+	<delete id="remove">
+		delete from sales_competitor where Complaint_ID =
+		#{value}
+	</delete>
+
+	<delete id="batchRemove">
+		delete from sales_competitor where Complaint_ID in
+		<foreach item="complaintId" collection="array" open="("
+			separator="," close=")">
+			#{complaintId}
+		</foreach>
+	</delete>
+
+</mapper>

@@ -431,7 +431,8 @@
 		`Opponent_Project_Type`,
 		`Opponent_Product_Type`,
 		`Opponent_Product_Price`,
-		Customer_Create_Time
+		Customer_Create_Time,
+		Customer_Operate_Time
 		)
 		values
 		(
@@ -502,6 +503,7 @@
 		#{opponentProjectType},
 		#{opponentProductType},
 		#{opponentProductPrice},
+		now(),
 		now()
 		)
 	</insert>

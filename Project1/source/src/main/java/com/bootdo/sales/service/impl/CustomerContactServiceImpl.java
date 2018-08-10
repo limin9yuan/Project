@@ -31,26 +31,32 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 
 import com.bootdo.common.dao.MainCopyPersonDao;
 import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.domain.MainCopyPersonDO;
-import com.bootdo.contract.domain.PayoutDO;
-import com.bootdo.inner.domain.InnerOrgEmployeeDO;
+import com.bootdo.common.domain.Tree;
+import com.bootdo.common.utils.BuildTree;
 import com.bootdo.sales.service.CustomerContactService;
+import com.bootdo.system.domain.DeptDO;
 import com.bootdo.sales.dao.CustomerContactDao;
-import com.bootdo.sales.domain.CompanyCustomerDO;
 import com.bootdo.sales.domain.CustomerContactDO;
+import com.bootdo.sales.domain.CustomerDeptDO;
+import com.bootdo.sales.domain.CustomerJobDO;
 
 @Service
 public class CustomerContactServiceImpl implements CustomerContactService {
 	@Autowired
 	private CustomerContactDao customerContactDao;
-
+	@Autowired
+	private CustomerContactDao customerDeptTree;
 	@Override
 	public CustomerContactDO get(String contactId) {
 		return customerContactDao.get(contactId);
 	}
+	@Autowired
+	private HttpServletRequest request;
 	@Autowired
     private MainCopyPersonDao mainCopyPerson;
 	@Override
@@ -107,8 +113,8 @@ public class CustomerContactServiceImpl implements CustomerContactService {
 	}
 
 	@Override
-	public List<DictDO> listDic() {
-		return customerContactDao.listDic();
+	public List<DictDO> listDic(Map<String, Object> params) {
+		return customerContactDao.listDic(params);
 	}
 
 	/**
@@ -652,4 +658,40 @@ public class CustomerContactServiceImpl implements CustomerContactService {
 		// TODO Auto-generated method stub
 		return customerContactDao.saveDownloadTemplate(customerContact);
 	}
+
+	@Override
+	public List<CustomerContactDO> getCustomerDept(Map<String, Object> map) {
+		List<CustomerContactDO> treeDept=customerContactDao.getCustomerDept(map);
+		return treeDept;
+	}
+
+	@Override
+	public Tree<DeptDO> getTree() {
+		String customerIdDept=request.getParameter("customerId");
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("customerId", customerIdDept);
+		List<Tree<DeptDO>> trees = new ArrayList<Tree<DeptDO>>();
+		List<CustomerDeptDO> customerDepts = customerDeptTree.customerList(params);
+		for (CustomerDeptDO customerDept : customerDepts) {
+			Tree<DeptDO> tree = new Tree<DeptDO>();
+			tree.setId(customerDept.getCustomerDeptId().toString());
+			tree.setParentId(customerDept.getCustomerDeptParentDept().toString());
+			tree.setText(customerDept.getCustomerDeptName());
+			Map<String, Object> state = new HashMap<>(16);
+			state.put("opened", true);
+			tree.setState(state);
+			trees.add(tree);
+		}
+		// 默认顶级菜单为０，根据数据库实际情况调整
+		Tree<DeptDO> t = BuildTree.build(trees);
+		return t;
+	}
+
+	@Override
+	public List<CustomerJobDO> listJob(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return customerContactDao.listJob(map);
+	}
+
+
 }

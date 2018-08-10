@@ -86,7 +86,7 @@
 		#{customerJobDescription},
 		#{customerJobRemarks},
 		#{customerJobOperator},
-		#{customerJobOperateTime},
+		now(),
 		now()
 		)
 		
