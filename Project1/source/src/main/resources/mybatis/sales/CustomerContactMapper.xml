@@ -334,13 +334,26 @@
 			#{contactId}
 		</foreach>
 	</delete>
-
 	<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
 		select `Customer_Job_ID`
 		value,concat(`Customer_Job_ID`,' ',`Customer_Job_name`) name
-		from sales_customer__job
-		where Customer_ID=#{customerId}
+		from sales_customer__job a
+		left join sales_company_customer b on a.Customer_ID=b.Customer_ID
+		where a.Customer_ID=#{customerId}
 	</select>
+	<select id="listDicContact" resultType="com.bootdo.common.domain.DictDO">
+		select `Contact_ID`
+		value,concat(`Contact_ID`,' ',`Contact_Name`) name
+		from
+		sales_customer_contact
+	</select>
+	<select id="listDicjob" resultType="com.bootdo.common.domain.DictDO">
+		select `Customer_Job_ID`
+		value,concat(`Customer_Job_ID`,' ',`Customer_Job_name`) name
+		from sales_customer__job a
+		where a.Customer_ID=#{customerId}
+	</select>
+	
 	<insert id="saveMain" parameterType="com.bootdo.common.domain.MainCopyPersonDO">
 		insert into
 		main_and_copy_person

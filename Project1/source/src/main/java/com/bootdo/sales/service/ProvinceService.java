@@ -21,4 +21,11 @@ public interface ProvinceService {
 	List<DictDO> listCityDic(String provinceId);
 	//区列表
 	List<DictDO> listAreaDic(String cityId);
+
+//	ProvinceDO getProvince (String provinceId);
+//
+//	ProvinceDO getCity (String cityId);
+//
+//	ProvinceDO getArea (String areaId);
+
 }

@@ -23,14 +23,9 @@ $().ready(function() {
 		 loadPurchase();
 	 });
 	validateRule();
-	var address = new addressResolve({
-	    proId: 'province',
-	    cityId: 'city',
-	    areaId: 'area'
-	  });
-	address.init();
 	budgetMapper_edit();
 	getMainAndCopyPerson_ajax();
+	// getProvince_ajax();
 
 	//获取项目描述,项目经理，项目类别，客户名称,业务名称
 	$("#projectId").bind("change", getProjectId);
@@ -50,6 +45,65 @@ $.validator.setDefaults({
 		update();
 	}
 });
+//修改——显示数据绑定
+function budgetMapper_edit(){
+	$.ajax({
+		url : prefix + '/edit_ajax/' + $("#budgetId").val(),
+		type : "get",
+		data : {
+			'budgetId' : $("#budgetId").val()
+		},
+		success : function(data) {
+			var result = data.budget;
+			$("input[name='budgetId']").val(result.budgetId);
+			$("input[name='budgetAccountReceivable']").val(result.budgetAccountReceivable);
+			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
+			$("input[name='budgetProfitRate']").val(result.budgetProfitRate);
+			$("input[name='budgetConformance']").val(result.budgetConformance);
+			$("input[name='budgetServiceRevenue']").val(result.budgetServiceRevenue);
+			$("input[name='budgetTax']").val(result.budgetTax);
+			$("input[name='budgetServiceRevenueNet']").val(result.budgetServiceRevenueNet);
+			$("input[name='budgetCost']").val(result.budgetCost);
+			$("input[name='budgetPurchaseCost']").val(result.budgetPurchaseCost);
+			$("input[name='budgetLaborCost']").val(result.budgetLaborCost);
+			$("input[name='budgetTravelCost']").val(result.budgetTravelCost);
+			$("input[name='budgetProfit']").val(result.budgetProfit);
+			$("textarea[name='projectDescription']").val(result.projectDescription);
+			// loadCrmDataValue("/sales/province/getProvince_ajax/","province",result.province);
+			// loadCrmDataValue("/sales/province/getCity_ajax/","city",result.city);
+			// loadCrmDataValue("/sales/province/getArea_ajax/","area",result.area);
+			// getProvince_ajax(result.province);
+			// getCity_ajax(result.city);
+			// getArea_ajax(result.area);
+			// $("select[name='province']").val(result.province);
+			// $("select[name='province']").trigger("chosen:updated");
+			// $("select[name='city']").val(result.city);
+			// $("select[name='city']").trigger("chosen:updated");
+			// $("select[name='area']").val(result.area);
+			// $("select[name='area']").trigger("chosen:updated");
+			loadDicValue("budget_Responsible_Center","responsibleCenter",result.responsibleCenter);
+			loadDicValue("project_project_gategory","projectGategory",result.projectGategory);
+			loadDicValue("budget_project_gategory","budgetType",result.budgetType);
+			loadCrmDataValue("/system/sysDept/listDic","deptId",result.deptId);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectSupervisor",result.projectSupervisor);
+			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectOwner",result.projectOwner);
+			loadCrmDataValue("/project/project/listDic","projectId",result.projectId);
+			loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
+			loadCrmDataValue("/sales/business/listDic","businessId",result.businessId);
+			loadCrmDataValue("/contract/contract/listDic","contractId",result.contractId);
+			var address = new addressResolve({
+			    proId: 'province',
+			    cityId: 'city',
+			    areaId: 'area'
+			  },{
+		    	    proId: result.province,
+		    	    cityId: result.city,
+		    	    areaId: result.area
+		    	  });
+			address.init();
+		}
+	});
+}
 function getMainAndCopyPerson_ajax() {
 	var tmpUrl = '/common/MainCopyPerson/getMainAndCopyPerson_ajax/' + $("#budgetId").val() +"/project_budget";
 	var mainPerson="";
@@ -577,51 +631,6 @@ function validateRule() {
 			}
 		}
 	})
-}
-
-//修改——显示数据绑定
-function budgetMapper_edit(){
-	$.ajax({
-		url : prefix + '/edit_ajax/' + $("#budgetId").val(),
-		type : "get",
-		data : {
-			'budgetId' : $("#budgetId").val()
-		},
-		success : function(data) {
-			var result = data.budget;
-			$("input[name='budgetId']").val(result.budgetId);
-			$("input[name='budgetAccountReceivable']").val(result.budgetAccountReceivable);
-			$("input[name='budgetTotalCost']").val(result.budgetTotalCost);
-			$("input[name='budgetProfitRate']").val(result.budgetProfitRate);
-			$("input[name='budgetConformance']").val(result.budgetConformance);
-			$("input[name='budgetServiceRevenue']").val(result.budgetServiceRevenue);
-			$("input[name='budgetTax']").val(result.budgetTax);
-			$("input[name='budgetServiceRevenueNet']").val(result.budgetServiceRevenueNet);
-			$("input[name='budgetCost']").val(result.budgetCost);
-			$("input[name='budgetPurchaseCost']").val(result.budgetPurchaseCost);
-			$("input[name='budgetLaborCost']").val(result.budgetLaborCost);
-			$("input[name='budgetTravelCost']").val(result.budgetTravelCost);
-			$("input[name='budgetProfit']").val(result.budgetProfit);
-			$("textarea[name='projectDescription']").val(result.projectDescription);
-
-			$("select[name='province']").val(result.province);
-			$("select[name='province']").trigger("chosen:updated");
-			$("select[name='city']").val(result.city);
-			$("select[name='city']").trigger("chosen:updated");
-			$("select[name='area']").val(result.area);
-			$("select[name='area']").trigger("chosen:updated");
-			loadDicValue("budget_Responsible_Center","responsibleCenter",result.responsibleCenter);
-			loadDicValue("project_project_gategory","projectGategory",result.projectGategory);
-			loadDicValue("budget_project_gategory","budgetType",result.budgetType);
-			loadCrmDataValue("/system/sysDept/listDic","deptId",result.deptId);
-			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectSupervisor",result.projectSupervisor);
-			loadCrmDataValue("/inner/innerOrgEmployee/listDic","projectOwner",result.projectOwner);
-			loadCrmDataValue("/project/project/listDic","projectId",result.projectId);
-			loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
-			loadCrmDataValue("/sales/business/listDic","businessId",result.businessId);
-			loadCrmDataValue("/contract/contract/listDic","contractId",result.contractId);
-		}
-	});
 }
 function nextStepThis(tabId,totalStep,lastBtn,nextBtn){
 	nextStep(tabId,totalStep,lastBtn,nextBtn);

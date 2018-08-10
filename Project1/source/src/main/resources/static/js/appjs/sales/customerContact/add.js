@@ -51,13 +51,11 @@ $().ready(function() {
 
 });
 // 打开部门页面
-// var currentFiled = "";
 function openDept() {
 	if ($("#customerId").val() == '' || $("#customerId").val() == null) {
 		parent.layer.msg("请先选择客户名称！");
 		return;
 	} else {
-		// currentFiled=testId;
 		layer.open({
 			type : 2,
 			title : "选择部门",
@@ -66,18 +64,18 @@ function openDept() {
 		})
 	}
 }
-
-function test() {
-	$("#contactJob").trigger("chosen:updated");  //初始下拉框
+//选择客户名称初始岗位****************************************
+$("#customerId").change(function (){
+	$("#contactDept").val("");
 	loadCrmData("/sales/customerContact/listDic/" + $('#customerId').val(),"contactJob");// 岗位
-}
+});		
 $('#contactJob').change(function (){
 	if($('#customerId').val()==''){
 		parent.layer.msg("请先选择客户名称！");
 		return;
 	}
 })
-
+//****************END************************************
 $.validator.setDefaults({
 	submitHandler : function() {
 		save();
@@ -416,3 +414,5 @@ function nextStepThis(tabId, totalStep, lastBtn, nextBtn) {
 	}
 
 }
+
+

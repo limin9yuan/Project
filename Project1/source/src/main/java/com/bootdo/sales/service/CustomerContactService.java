@@ -33,7 +33,6 @@ public interface CustomerContactService {
 	int count(Map<String, Object> map);
 
 	int save(CustomerContactDO customerContact);
-
 	int saveDownloadTemplate(CustomerContactDO customerContact);
 
 	int update(CustomerContactDO customerContact);
@@ -43,7 +42,8 @@ public interface CustomerContactService {
 	int batchRemove(String[] contactIds);
 
 	List<DictDO> listDic(Map<String, Object> params);
-
+	List<DictDO> listDicContact();
+	List<DictDO> listDicjob(Map<String, Object> params);
 	Map<String, Object> Import(File file, long userid);
 
 	List<CustomerContactDO> getQuery(Map<String, Object> params);

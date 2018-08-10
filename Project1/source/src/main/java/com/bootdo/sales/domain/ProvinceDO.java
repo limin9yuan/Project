@@ -19,6 +19,16 @@ public class ProvinceDO implements Serializable {
 	private String provinceId;
 	//
 	private String provinceName;
+	//
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * 设置：

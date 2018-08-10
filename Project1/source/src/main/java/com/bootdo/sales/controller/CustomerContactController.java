@@ -377,8 +377,6 @@ public class CustomerContactController extends BaseController {
 	@ResponseBody
 	@GetMapping("/listDic/{customerId}")
 	public List<DictDO> listDic(@PathVariable("customerId")String customerId,@RequestParam Map<String, Object> params) {
-		System.out.println("********************************************************");
-		System.out.println(customerId);
 		// 查询列表数据
 		Map<String, Object> map = new HashMap<>(16);
 		map.put("type", "");
@@ -386,7 +384,27 @@ public class CustomerContactController extends BaseController {
 		List<DictDO> dictList = customerContactService.listDic(map);
 		return dictList;
 	}
-
+	@ResponseBody
+	@GetMapping("/listDicContact")
+	public List<DictDO> listDic() {
+		// 查询列表数据
+		Map<String, Object> map = new HashMap<>(16);
+		map.put("type", "");
+		List<DictDO> dictList = customerContactService.listDicContact();
+		return dictList;
+	}
+	@ResponseBody
+	@GetMapping("/listDicjob/{customerId}")
+	public List<DictDO> listDicjob(@PathVariable("customerId")String customerId,@RequestParam Map<String, Object> params) {
+		System.out.println("********************************************************");
+		System.out.println(customerId);
+		// 查询列表数据
+		Map<String, Object> map = new HashMap<>(16);
+		map.put("type", "");
+		map.put("customerId", customerId);
+		List<DictDO> dictList = customerContactService.listDicjob(map);
+		return dictList;
+	}
 	@ResponseBody
 	@PostMapping("/importSubmit")
 	@RequiresPermissions("sales:customerContact:import")

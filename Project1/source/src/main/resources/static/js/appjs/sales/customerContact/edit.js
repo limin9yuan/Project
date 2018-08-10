@@ -20,8 +20,9 @@ $().ready(function() {
 		 loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);//客户编号
 		 }
 		 if ($("#contactJob option").length == 1) {
-		 loadCrmDataValue("/sales/customerJob/listDic", "contactJob",result.contactJob);// 岗位
+			 setTimeout('loadJob()', 100);//延迟执行save()方法1毫秒
 		 }
+		 
 		 $('#lastBtn').attr("disabled",false);
 		 $('#nextBtn').attr("disabled",false);
 
@@ -44,6 +45,9 @@ $.validator.setDefaults({
 		update();
 	}
 });
+function loadJob(){
+	loadCrmDataValue("/sales/customerContact/listDicjob/" + $('#customerId').val(), "contactJob",result.contactJob);// 岗位
+}
 function loadField() {
 	$('#listCustomField')
 			.bootstrapTable(
@@ -197,7 +201,18 @@ function batchRemoveField() {
 
 	});
 }
-
+//选择客户名称初始岗位****************************************
+$("#customerId").change(function (){
+	$("#contactDept").val("");
+	loadCrmData("/sales/customerContact/listDic/" + $('#customerId').val(),"contactJob");// 岗位
+});		
+$('#contactJob').change(function (){
+	if($('#customerId').val()==''){
+		parent.layer.msg("请先选择客户名称！");
+		return;
+	}
+})
+//****************END************************************
 //打开部门页面
 function openDept(){
 	if ($("#customerId").val() == ''||$("#customerId").val()==null) {

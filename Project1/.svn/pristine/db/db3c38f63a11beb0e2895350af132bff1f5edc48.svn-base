@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.sales.dao.ProvinceDao">
+
+
+	<select id="listDic" resultType="com.bootdo.common.domain.DictDO">
+		select `Province_Id` value,
+		`Province_Name` name
+		from sales_province
+	</select>
+	
+	<select id="listCityDic" resultType="com.bootdo.common.domain.DictDO">
+		select `City_Id` value,
+		`City_Name` name
+		from sales_province_city where province_Id=#{provinceId}
+	</select>
+	
+	<select id="listAreaDic" resultType="com.bootdo.common.domain.DictDO">
+		select `Area_Id` value,
+		`Area_Name` name
+		from sales_city_area where  city_Id=#{cityId}
+	</select>
+
+	<select id="getProvince" resultType="com.bootdo.sales.domain.ProvinceDO">
+		select
+		`Province_Name` as name
+		from sales_province
+		WHERE Province_Id = #{value}
+	</select>
+
+	<select id="getCity" resultType="com.bootdo.sales.domain.ProvinceDO">
+		select `City_Name` as name
+		from sales_province_city
+		where City_Id =#{value}
+	</select>
+
+	<select id="getArea" resultType="com.bootdo.sales.domain.ProvinceDO">
+		select `Area_Name` as name
+		from sales_city_area
+		where  Area_Id =#{value}
+	</select>
+
+</mapper>

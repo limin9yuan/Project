@@ -1,4 +1,4 @@
-var addressResolve = function (options) {
+var addressResolve = function (options,optionValue) {
   //检测用户传进来的参数是否合法
   if (!isValid(options))
     return this;
@@ -8,7 +8,13 @@ var addressResolve = function (options) {
     cityId: 'divCity',
     areaId: 'divArea'
   };
+  var defalutValue = {
+    proId: '',
+    cityId: '',
+    areaId: ''
+  };
   var opts = $.extend({}, defaluts, options);//使用jQuery.extend 覆盖插件默认参数
+  var optValue = $.extend({}, defalutValue, optionValue);
   var addressInfo = this;
   this.provInfo = $("#" + opts.proId);//省份select对象
   this.cityInfo = $("#" + opts.cityId);//城市select对象
@@ -24,17 +30,26 @@ var addressResolve = function (options) {
 				 proOpts += "<option value='" + item.value + "'>" + item.name + "</option>";
 			 });
 			 addressInfo.provInfo.append(proOpts);
-		     addressInfo.provInfo.chosen(); //初始化chosen
-		     addressInfo.cityInfo.chosen();//初始化chosen
-		     addressInfo.areaInfo.chosen();//初始化chosen
+
+             if (optValue.proId != "") {
+                 addressInfo.provInfo.val(optValue.proId);
+                 addressInfo.selectCity();
+                 addressInfo.provInfo.chosen(); //初始化chosen
+                 addressInfo.provInfo.trigger("change");
+     		    addressInfo.cityInfo.trigger("liszt:updated");
+            }else {
+                addressInfo.provInfo.chosen(); //初始化chosen
+                addressInfo.cityInfo.chosen();//初始化chosen
+                addressInfo.areaInfo.chosen();//初始化chosen
+            }
 		}
 	});
-   
-    
+
+
   };
   /*城市选择绑定方法*/
   this.selectCity = function () {
-	addressInfo.cityInfo.chosen("destroy"); 
+	addressInfo.cityInfo.chosen("destroy");
     addressInfo.cityInfo.empty();
     addressInfo.cityInfo.append("<option value=''>市</option>");
     addressInfo.areaInfo.empty();
@@ -57,17 +72,24 @@ var addressResolve = function (options) {
 		     // }
 		    });
 		    addressInfo.cityInfo.append(cityOpts);
-			//console.log(addressInfo.cityInfo);
-		    addressInfo.cityInfo.chosen(); //初始化chosen
-		    addressInfo.cityInfo.trigger("liszt:updated");
-		    addressInfo.areaInfo.trigger("liszt:updated");
+
+            if (optValue.cityId != "") {
+                addressInfo.cityInfo.val(optValue.cityId);
+                addressInfo.cityInfo.chosen(); //初始化chosen
+                addressInfo.cityInfo.trigger("change");
+               addressInfo.areaInfo.trigger("liszt:updated");
+           }else {
+               addressInfo.cityInfo.chosen(); //初始化chosen
+               addressInfo.cityInfo.trigger("liszt:updated");
+   		       addressInfo.areaInfo.trigger("liszt:updated");
+           }
 		}
 	});
   };
   /*区县选择绑定方法*/
   this.selectArea = function () {
     if (addressInfo.cityInfo.val() == "市") return;
-    addressInfo.areaInfo.chosen("destroy"); 
+    addressInfo.areaInfo.chosen("destroy");
     addressInfo.areaInfo.empty();
     addressInfo.areaInfo.append("<option value=''>区</option>");
     var cityId = addressInfo.cityInfo.val();//获取选择的城市值
@@ -83,12 +105,15 @@ var addressResolve = function (options) {
 		     // }
 		    });
 		    addressInfo.areaInfo.append(areaOpts);
+            if (optValue.areaId != "") {
+                addressInfo.areaInfo.val(optValue.areaId);
+            }
 		    addressInfo.areaInfo.chosen();
 		    addressInfo.areaInfo.trigger("liszt:updated");
 		}
 	});
-    
-    
+
+
   };
   /*对象初始化方法*/
   this.init = function () {

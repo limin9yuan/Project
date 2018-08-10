@@ -168,7 +168,7 @@ function businessMapper_edit(){
 			$("select[name='customerId']").val(result.customerId);
 			$("select[name='customerId']").trigger("chosen:updated");
 			loadCrmDataValue("/sales/companyCustomer/listDic","customerId",result.customerId);
-			loadCrmDataValue("/sales/customerContact/listDic","contactId",result.contactId);
+			loadCrmDataValue("/sales/customerContact/listDicContact","contactId",result.contactId);
 			loadCrmDataValue("/inner/innerOrgEmployee/listDic","businessSales",result.businessSales);
 			loadDicValue("sales_business_status","businessStatus",result.businessStatus);
 			loadDicValue("sales_cusiness_category","businessCategory",result.businessCategory);

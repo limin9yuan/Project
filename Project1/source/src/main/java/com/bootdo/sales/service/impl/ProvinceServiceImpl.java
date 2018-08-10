@@ -1,5 +1,6 @@
 package com.bootdo.sales.service.impl;
 
+import com.bootdo.budget.domain.BudgetDO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,5 +34,22 @@ public class ProvinceServiceImpl implements ProvinceService {
 	public List<DictDO> listAreaDic(String cityId) {
 		return provinceDao.listAreaDic(cityId);
 	}
-	
+
+//	@Override
+//	public ProvinceDO getProvince(String budgetId){
+//		return provinceDao.getProvince(budgetId);
+//	}
+//
+//
+//	@Override
+//	public ProvinceDO getCity(String budgetId){
+//		return provinceDao.getCity(budgetId);
+//	}
+//
+//	@Override
+//	public ProvinceDO getArea(String budgetId){
+//		return provinceDao.getArea(budgetId);
+//	}
+
+
 }

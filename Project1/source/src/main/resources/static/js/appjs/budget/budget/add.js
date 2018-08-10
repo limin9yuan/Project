@@ -38,7 +38,7 @@ $().ready(function() {
 	    proId: 'province',
 	    cityId: 'city',
 	    areaId: 'area'
-	  });
+	});
 	address.init();
 
 	//获取项目描述,项目主管，项目类别，客户名称,业务名称

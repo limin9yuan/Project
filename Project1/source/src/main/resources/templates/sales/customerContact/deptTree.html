@@ -8,9 +8,9 @@
 		<div class="row" >
 			<div class="col-sm-3">
 				<div class="ibox ibox-body">
-					<div class="ibox-title">
-						<h5>海心信息</h5>
-					</div>
+<!-- 					<div class="ibox-title"> -->
+<!-- 						<h5 id="" ></h5> -->
+<!-- 					</div> -->
 					<div class="ibox-content" id="treeDiv">
 						<div id="jstree"></div>
 					</div>
@@ -32,7 +32,7 @@
 	//当前选中节点的文本值
 	console.log(data.instance.get_node(data.selected[0]).text);
 	var value = data.instance.get_node(data.selected[0]).text;
-	parent.window.$("#contactDept").val(value);
+	parent.window.$("#contactDept").val(domId+'  '+value);
 	closeWin();
 	}); 
 // *******************************************************

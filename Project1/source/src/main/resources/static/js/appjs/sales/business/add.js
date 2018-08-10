@@ -1,7 +1,7 @@
 $().ready(function() {
 	loadCrmData("/inner/innerOrgEmployee/listDic","businessSales");
 	loadCrmData("/sales/companyCustomer/listDic","customerId");
-	loadCrmData("/sales/customerContact/listDic","contactId");
+	loadCrmData("/sales/customerContact/listDicContact","contactId");
 	loadDic("sales_business_status","businessStatus");
 	loadDic("sales_cusiness_category","businessCategory");
 	validateRule();

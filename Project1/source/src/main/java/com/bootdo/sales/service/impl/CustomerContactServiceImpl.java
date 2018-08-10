@@ -693,5 +693,18 @@ public class CustomerContactServiceImpl implements CustomerContactService {
 		return customerContactDao.listJob(map);
 	}
 
+	@Override
+	public List<DictDO> listDicContact() {
+		// TODO Auto-generated method stub
+		return customerContactDao.listDicContact();
+	}
+
+	@Override
+	public List<DictDO> listDicjob(Map<String, Object> params) {
+		// TODO Auto-generated method stub
+		return customerContactDao.listDicjob(params);
+	}
+
+
 
 }

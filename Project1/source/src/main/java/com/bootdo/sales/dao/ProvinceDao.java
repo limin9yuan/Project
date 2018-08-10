@@ -2,6 +2,7 @@ package com.bootdo.sales.dao;
 
 import java.util.List;
 
+import com.bootdo.sales.domain.ProvinceDO;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.bootdo.common.domain.DictDO;
@@ -20,4 +21,5 @@ public interface ProvinceDao {
 	List<DictDO> listCityDic(String provinceId);
 	
 	List<DictDO> listAreaDic(String cityId);
+	
 }

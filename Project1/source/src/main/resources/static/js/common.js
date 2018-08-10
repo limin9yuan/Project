@@ -3,7 +3,13 @@ function loadDic(dicName,selId,initValue){
 	$.ajax({
 		url : '/common/sysDict/list/'+dicName,
 		success : function(data) {
-			$("#"+selId).html("");
+			//$("#"+selId).html("");
+			$("#"+selId).chosen({
+				maxHeight : 200
+			});
+			$("#"+selId).empty();
+			$("#"+selId).chosen("destroy");
+			
 			if(initValue==undefined){
 				html += '<option value="">请选择</option>';
 			}else{
@@ -36,7 +42,8 @@ function loadDicValue(dicName,selId,value,initValue){
 	$.ajax({
 		url : '/common/sysDict/list/'+dicName,
 		success : function(data) {
-			$("#"+selId).html("");
+			//$("#"+selId).html("");
+			$("#"+selId).chosen("destroy");
 			if(initValue==undefined){
 				html += '<option value="">请选择</option>';
 			}
@@ -67,7 +74,13 @@ function loadCrmData(url,selId,initValue){
 	$.ajax({
 		url : url,
 		success : function(data) {
-			$("#"+selId).html("");
+			//$("#"+selId).html("");
+			$("#"+selId).chosen({
+				maxHeight : 200
+			});
+			$("#"+selId).empty();
+			$("#"+selId).chosen("destroy");
+			
 			if(initValue==undefined){
 				html += '<option value="">请选择</option>';
 			}else{
@@ -81,6 +94,7 @@ function loadCrmData(url,selId,initValue){
 			$("#"+selId).chosen({
 				maxHeight : 200
 			});
+			$("#"+selId).trigger("liszt:updated");
 			//点击事件
 			$("#"+selId).on('change', function(e, params) {
 				console.log(params.selected);
@@ -94,13 +108,18 @@ function loadCrmData(url,selId,initValue){
 		}
 	});
 }
-
 function loadCrmDataValue(url,selId,value,initValue){
 	var html = "";
 	$.ajax({
 		url : url,
 		success : function(data) {
-			$("#"+selId).html("");
+			//$("#"+selId).html("");
+			$("#"+selId).chosen({
+				maxHeight : 200
+			});
+			$("#"+selId).empty();
+			$("#"+selId).chosen("destroy");
+			
 			if(initValue==undefined){
 				html += '<option value="">请选择</option>';
 			}else{

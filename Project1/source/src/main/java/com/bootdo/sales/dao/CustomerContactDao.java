@@ -41,13 +41,14 @@ public interface CustomerContactDao {
 	int update(CustomerContactDO customerContact);
 	
 	int remove(String Contact_ID);
-	
 	int batchRemove(String[] contactIds);
 	
 	List<CustomerJobDO>listJob(Map<String,Object> map);
 	
 	Tree<DeptDO> getTree();
 	List<DictDO> listDic(Map<String, Object> params);
+	List<DictDO> listDicContact();
+	List<DictDO> listDicjob(Map<String, Object> params);
 	//主送人抄送人
 	List<MainCopyPersonDO> getMainAndCopyPerson(Map<String,Object> map);
 }
