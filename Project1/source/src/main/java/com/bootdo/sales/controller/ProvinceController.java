@@ -60,29 +60,4 @@ public class ProvinceController {
 		return dictList;
 	}
 
-//	@RequestMapping("/getProvince_ajax/{provinceId}")
-//	@ResponseBody
-//	Map<String, Object> getProvince_ajax(@PathVariable("provinceId") String provinceId) {
-//		ProvinceDO province = provinceService.getProvince(provinceId);
-//		Map<String, Object> returnData = new HashMap<String, Object>();
-//		returnData.put("province", province);
-//		return returnData;
-//	}
-//	@RequestMapping("/getCity_ajax/{cityId}")
-//	@ResponseBody
-//	Map<String, Object> getCity_ajax(@PathVariable("cityId") String cityId) {
-//		ProvinceDO city = provinceService.getCity(cityId);
-//		Map<String, Object> returnData = new HashMap<String, Object>();
-//		returnData.put("city", city);
-//		return returnData;
-//	}
-//	@RequestMapping("/getArea_ajax/{areaId}")
-//	@ResponseBody
-//	Map<String, Object> getArea_ajax(@PathVariable("areaId") String areaId) {
-//		ProvinceDO area = provinceService.getArea(areaId);
-//		Map<String, Object> returnData = new HashMap<String, Object>();
-//		returnData.put("area", area);
-//		return returnData;
-//	}
-	
 }

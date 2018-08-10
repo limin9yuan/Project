@@ -35,21 +35,4 @@ public class ProvinceServiceImpl implements ProvinceService {
 		return provinceDao.listAreaDic(cityId);
 	}
 
-//	@Override
-//	public ProvinceDO getProvince(String budgetId){
-//		return provinceDao.getProvince(budgetId);
-//	}
-//
-//
-//	@Override
-//	public ProvinceDO getCity(String budgetId){
-//		return provinceDao.getCity(budgetId);
-//	}
-//
-//	@Override
-//	public ProvinceDO getArea(String budgetId){
-//		return provinceDao.getArea(budgetId);
-//	}
-
-
 }

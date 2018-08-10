@@ -21,5 +21,5 @@ public interface ProvinceDao {
 	List<DictDO> listCityDic(String provinceId);
 	
 	List<DictDO> listAreaDic(String cityId);
-	
+
 }
