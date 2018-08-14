@@ -22,23 +22,4 @@
 		from sales_city_area where  city_Id=#{cityId}
 	</select>
 
-	<!--<select id="getProvince" resultType="com.bootdo.sales.domain.ProvinceDO">-->
-		<!--select-->
-		<!--`Province_Name` as name-->
-		<!--from sales_province-->
-		<!--WHERE Province_Id = #{value}-->
-	<!--</select>-->
-
-	<!--<select id="getCity" resultType="com.bootdo.sales.domain.ProvinceDO">-->
-		<!--select `City_Name` as name-->
-		<!--from sales_province_city-->
-		<!--where City_Id =#{value}-->
-	<!--</select>-->
-
-	<!--<select id="getArea" resultType="com.bootdo.sales.domain.ProvinceDO">-->
-		<!--select `Area_Name` as name-->
-		<!--from sales_city_area-->
-		<!--where  Area_Id =#{value}-->
-	<!--</select>-->
-
 </mapper>
