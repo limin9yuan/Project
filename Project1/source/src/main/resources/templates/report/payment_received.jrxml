@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="payment_received" language="groovy" pageWidth="2000" pageHeight="842" columnWidth="1960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1953ef5a-84df-48fb-a0f6-e7f0dad31aaa">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="677"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select a.Received_ID,a.Contract_ID,b.Contract_Name,a.Business_ID,c.Business_Name,a.Received_Time,a.Received_Price,a.Received_Card_Number,a.Received_Type,a.Received_Contract_Status,a.Received_Remarks,a.Received_Operator,a.Received_Operate_Time
+from  payment_received a
+left join contract b
+on a.Contract_ID=b.Contract_ID
+left join sales_business c
+on a.Business_ID=c.Business_ID
+]]>
+	</queryString>
+	<field name="Received_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[回款信息编号]]></fieldDescription>
+	</field>
+	<field name="Contract_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[合同编号]]></fieldDescription>
+	</field>
+	<field name="Contract_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[合同名称]]></fieldDescription>
+	</field>
+	<field name="Business_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[业务编号]]></fieldDescription>
+	</field>
+	<field name="Business_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[业务名称]]></fieldDescription>
+	</field>
+	<field name="Received_Time" class="java.sql.Date">
+		<fieldDescription><![CDATA[回款时间]]></fieldDescription>
+	</field>
+	<field name="Received_Price" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[回款金额]]></fieldDescription>
+	</field>
+	<field name="Received_Card_Number" class="java.lang.String">
+		<fieldDescription><![CDATA[回款账号]]></fieldDescription>
+	</field>
+	<field name="Received_Type" class="java.lang.String">
+		<fieldDescription><![CDATA[款项类型]]></fieldDescription>
+	</field>
+	<field name="Received_Contract_Status" class="java.lang.String">
+		<fieldDescription><![CDATA[合同状态]]></fieldDescription>
+	</field>
+	<field name="Received_Remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[备注]]></fieldDescription>
+	</field>
+	<field name="Received_Operator" class="java.lang.String">
+		<fieldDescription><![CDATA[操作人]]></fieldDescription>
+	</field>
+	<field name="Received_Operate_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[操作时间]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="172" y="29" width="100" height="20" uuid="8d3f979a-d420-4986-b8da-900dd2fb15f5"/>
+				<text><![CDATA[回款汇总表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="100" height="59" uuid="b1fb609d-5126-48de-a3f0-3f93abfb8bed"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[回款信息编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="2" width="100" height="59" uuid="359f2c9e-4af7-4971-8873-2dea285438b6"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="2" width="100" height="59" uuid="bd87c930-a01d-4dc6-a333-0b197ebf7f30"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="2" width="100" height="59" uuid="46ce73dc-a44a-4b07-b73a-40cddd269614"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[业务编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="2" width="100" height="59" uuid="16522f7d-de5e-404e-ac83-7f69f051ef97"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[业务名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="2" width="100" height="59" uuid="94f1ff0e-a6e0-4b3b-bd2c-b50d8ee98cb3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[回款时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="2" width="100" height="59" uuid="4775cbb2-054d-45c4-b1c5-c0eb79ce9ca6"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[回款金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="2" width="100" height="59" uuid="b7369d99-16d5-4618-9714-af7e761e7f3b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[回款账号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="800" y="2" width="100" height="59" uuid="c799787c-52c6-480b-a3ff-e494117a9729"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[款项类型]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="900" y="2" width="100" height="59" uuid="f237f35f-6050-4bd7-bffb-e63e44c0fb64"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同状态]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1000" y="2" width="100" height="59" uuid="68ed7d97-6452-4313-b27d-a9d2dec87875"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[备注]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1100" y="2" width="100" height="59" uuid="2aa4c062-d9a2-4ea2-8f58-0531fce64a3b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[操作人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1200" y="2" width="100" height="59" uuid="8a0e88c1-9b97-4bfe-babd-2659b94e7c52"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[操作时间]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="61" uuid="c7e1443d-cb96-4a79-84b4-8de3cb167e57"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="61" uuid="e2037c94-9dbd-408a-ba4b-915ba6271afb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="61" uuid="f8e2f315-9571-4925-95d2-d3f5808c44d6"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="61" uuid="d5bcefa6-270a-40c1-87f1-8af9a8400029"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Business_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="61" uuid="b6ba82e0-4a81-424c-9e4c-a26685e4600b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Business_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="100" height="61" uuid="53632a44-7be6-40bc-a7c2-ce3d94f63eea"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_Time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="61" uuid="5ed42d31-e6d3-4c25-91e1-755023c7600a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="700" y="0" width="100" height="61" uuid="dfdaf881-3cac-47ab-9f74-8a5def7a141e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_Card_Number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="800" y="0" width="100" height="61" uuid="3a02a265-eb9e-421c-b4ff-e5895a8d764c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_Type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="900" y="0" width="100" height="61" uuid="034e6321-92f5-455e-9937-fcb9a0fb35ee"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_Contract_Status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1000" y="0" width="100" height="61" uuid="15e3f95a-6d4d-48c7-8d7f-effec8346e07"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_Remarks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1100" y="0" width="100" height="61" uuid="105e3d1e-6616-4901-82c2-985b82301944"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_Operator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1200" y="0" width="100" height="61" uuid="9bcdf445-ad4e-452b-ab42-575139c718cf"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_Operate_Time}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

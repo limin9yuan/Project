@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="projectplan_budget" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="5e06fe25-0fcf-4794-b954-b3229c312454">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Project_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{Project_ID}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from budget_expenses a inner join project_budget b on a.Budget_ID=b.Budget_ID
+where   b.Project_ID=$P{Project_ID}]]>
+	</queryString>
+	<field name="Expenses_Type" class="java.lang.String">
+		<fieldDescription><![CDATA[类型]]></fieldDescription>
+	</field>
+	<field name="Expenses_Plan_Price" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[采购金额预估]]></fieldDescription>
+	</field>
+	<field name="Expenses_Plan_Description" class="java.lang.String">
+		<fieldDescription><![CDATA[预估说明]]></fieldDescription>
+	</field>
+	<field name="Expenses_Customer_Rate" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[客户承担]]></fieldDescription>
+	</field>
+	<field name="Expenses_Project_Rate" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[项目组承担]]></fieldDescription>
+	</field>
+	<field name="Project_ID" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="0" width="100" height="39" uuid="d8428d39-cd9c-4cd7-9f15-658aa16eed9f"/>
+				<text><![CDATA[报销详情]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="61" uuid="e0f3b4b2-3fdd-4568-862d-4bf06e562425"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[报销金额预估]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="116" height="61" uuid="4051dfd0-e0d4-4771-a52d-cc30b89d811e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[预估说明]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="316" y="0" width="110" height="61" uuid="2b47fcbe-64fc-4e83-b7b7-fec30452c603"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[客户承担]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="427" y="0" width="128" height="61" uuid="f5868fb2-0ca3-429a-9663-156d0e3dae25"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[项目组承担]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="61" uuid="b764861b-e548-4352-927a-63206cc3ff85"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[报销类型]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="0" width="100" height="50" uuid="6aade41a-0de8-4c53-9244-c6f0406e7fe9"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Expenses_Type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="0" width="128" height="50" uuid="ef511acb-c6a5-4ffb-b3c8-cd580aaa3c6a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Expenses_Project_Rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="0" width="110" height="50" uuid="c71a8d8f-b60b-4e8c-9fbc-20dc66fc480b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Expenses_Customer_Rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="0" width="116" height="50" uuid="8d6f7dce-61a2-44b7-8ea5-88d9597209ff"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Expenses_Plan_Description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="101" y="0" width="100" height="50" uuid="801ab58c-c794-4ed6-b564-9c6b56b43c74"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Expenses_Plan_Price}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

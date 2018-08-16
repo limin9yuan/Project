@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <form id="creditInfoForm" method="post" action="reportOut">
+        <table>
+            <tr>
+                <td>报表名称 :</td>
+                <td>
+                    <input name="fileName" value="测试">
+                </td>
+            </tr>
+            <tr>
+                <td>报表路径名称 :</td>
+                <td>
+                    <input name="jasperPath" value="statementReport.jasper">
+                </td>
+            </tr>
+            <tr>
+                <td>导出类型 :</td>
+                <td>
+                    <select name="docType"id="sel" >
+                        <option>HTML</option><option>XLS</option>
+                    </select>元
+                </td>
+            </tr>
+            <tr>
+                <td>参数 :</td>
+                <td>
+                    <input name="search_name" value="CaoZ">
+                </td>
+            </tr>
+        </table>
+        <input onclick="sub()" type="submit">
+    </form>
+    <div th:include="include :: footer"></div>
+</div>
+    <script type="text/javascript" src="/js/appjs/ireport/bug.js"></script>
+
+</body>
+</html>

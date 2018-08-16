@@ -1,0 +1,17 @@
+$(function() {
+	load();
+});
+load()
+{
+$.ajax({
+    			url : "/ireport/ireport/report_go",
+    			type : "get",
+    			data : {
+                           bootdo:$('#bootdo2').val(),
+    			},
+    			success : function(data) {
+
+                		}
+
+    		});
+}

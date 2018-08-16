@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Unreceivable" language="groovy" pageWidth="2000" pageHeight="842" columnWidth="1960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e7247672-5b51-4bc3-a385-9bcba40fe045">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="596"/>
+	<property name="ireport.y" value="175"/>
+	<queryString>
+		<![CDATA[select  a.Contract_ID,a.Customer_ID,b.Customer_Name,a.Business_ID,c.Business_Name,a.Contract_Name,a.Contract_Applicant_Name,
+a.Contract_Build_Company,a.Contract_Type,a.Contract_Category,a.Contract_Total_Price,d.Received_Price,(d.Receivable_Price-d.Received_Price) as unreceivable,
+a.Contract_Dept,a.Contract_Applicant,a.Contract_Draft_Person,a.Contract_Sales,a.Contract_Commit_Time,a.Contract_Related_ID,
+a.Contract_Invoice_Type,a.Contract_Invoice_Time,a.Contract_Project_Management,a.Contract_Remarks,a.Contract_Approval_Status,
+a.Contract_Operator,a.Contract_Operate_Time
+from contract a
+left join sales_company_customer b
+on a.Customer_ID=b.Customer_ID
+left join sales_business c
+on a.Business_ID=c.Business_ID
+left join payment_received d
+on a.Contract_ID=d.Contract_ID
+where (d.Receivable_Price-d.Received_Price)>0
+order by a.Contract_ID]]>
+	</queryString>
+	<field name="Contract_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[合同编号]]></fieldDescription>
+	</field>
+	<field name="Customer_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[企业客户编号]]></fieldDescription>
+	</field>
+	<field name="Customer_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[企业名称]]></fieldDescription>
+	</field>
+	<field name="Business_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[业务编号]]></fieldDescription>
+	</field>
+	<field name="Business_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[业务名称]]></fieldDescription>
+	</field>
+	<field name="Contract_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[合同名称]]></fieldDescription>
+	</field>
+	<field name="Contract_Applicant_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[申请人姓名]]></fieldDescription>
+	</field>
+	<field name="Contract_Build_Company" class="java.lang.String">
+		<fieldDescription><![CDATA[建设单位]]></fieldDescription>
+	</field>
+	<field name="Contract_Type" class="java.lang.String">
+		<fieldDescription><![CDATA[合同类型]]></fieldDescription>
+	</field>
+	<field name="Contract_Category" class="java.lang.String">
+		<fieldDescription><![CDATA[合同种类]]></fieldDescription>
+	</field>
+	<field name="Contract_Total_Price" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[合同总金额]]></fieldDescription>
+	</field>
+	<field name="Received_Price" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[回款金额]]></fieldDescription>
+	</field>
+	<field name="unreceivable" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[未收款金额]]></fieldDescription>
+	</field>
+	<field name="Contract_Dept" class="java.lang.String">
+		<fieldDescription><![CDATA[合同发起部门]]></fieldDescription>
+	</field>
+	<field name="Contract_Applicant" class="java.lang.String">
+		<fieldDescription><![CDATA[业务发起人]]></fieldDescription>
+	</field>
+	<field name="Contract_Draft_Person" class="java.lang.String">
+		<fieldDescription><![CDATA[合同拟定人]]></fieldDescription>
+	</field>
+	<field name="Contract_Sales" class="java.lang.String">
+		<fieldDescription><![CDATA[销售负责人]]></fieldDescription>
+	</field>
+	<field name="Contract_Commit_Time" class="java.sql.Date">
+		<fieldDescription><![CDATA[提交评审时间]]></fieldDescription>
+	</field>
+	<field name="Contract_Related_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[关联合同编号]]></fieldDescription>
+	</field>
+	<field name="Contract_Invoice_Type" class="java.lang.String">
+		<fieldDescription><![CDATA[发票类型]]></fieldDescription>
+	</field>
+	<field name="Contract_Invoice_Time" class="java.sql.Date">
+		<fieldDescription><![CDATA[预计开具发票时间]]></fieldDescription>
+	</field>
+	<field name="Contract_Project_Management" class="java.lang.String">
+		<fieldDescription><![CDATA[项目经理]]></fieldDescription>
+	</field>
+	<field name="Contract_Remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[合同信息备注]]></fieldDescription>
+	</field>
+	<field name="Contract_Approval_Status" class="java.lang.Long">
+		<fieldDescription><![CDATA[审批状态]]></fieldDescription>
+	</field>
+	<field name="Contract_Operator" class="java.lang.String">
+		<fieldDescription><![CDATA[操作人]]></fieldDescription>
+	</field>
+	<field name="Contract_Operate_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[操作时间]]></fieldDescription>
+	</field>
+	<variable name="count" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer('1')]]></variableExpression>
+	</variable>
+	<variable name="sum_total" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{Contract_Total_Price}]]></variableExpression>
+	</variable>
+	<variable name="sum_price" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{Received_Price}]]></variableExpression>
+	</variable>
+	<variable name="sumunreceivable" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{unreceivable}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="286" y="46" width="100" height="20" uuid="aafd9876-c8f8-4dad-8792-124c5c12259c"/>
+				<text><![CDATA[未收款明细]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="32" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="153" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="175" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="45" width="50" height="129" uuid="c65d1d1e-84f4-445d-88a2-00d791d4820d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="45" width="100" height="42" uuid="4bac031a-d633-4a55-9602-ed8125c41b98"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="45" width="100" height="42" uuid="a377381b-97a5-453c-9d98-e11cf8b1149f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Customer_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="45" width="100" height="42" uuid="1396b9fd-2e61-4f55-901c-577b21b2adc0"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Customer_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="45" width="100" height="42" uuid="51e53522-6744-4e5c-a7a9-65c5cecb4ff9"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Business_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="45" width="100" height="42" uuid="b883569e-1a46-47ee-bd2b-87530b229dad"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Business_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="550" y="45" width="100" height="42" uuid="aab97151-c496-4243-92d4-850c93d5acc6"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="45" width="100" height="42" uuid="cace4acb-68c3-40c6-a54a-46423bb9e821"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Applicant_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="750" y="45" width="100" height="42" uuid="229b223c-8d4c-419f-83cb-c2a0dc961918"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Build_Company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="850" y="45" width="100" height="42" uuid="bcceacda-a171-4a52-865a-516590ef52b3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="950" y="45" width="100" height="42" uuid="877671b4-4ee6-4edb-b0ee-bd6c646342e2"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Category}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1050" y="45" width="100" height="42" uuid="c7df7013-b650-4042-8529-1cee6d0d5f85"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Total_Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1150" y="45" width="100" height="42" uuid="dd92595f-ca00-4045-92c5-70a68745f5e7"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Received_Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1250" y="45" width="100" height="42" uuid="637716ba-f509-4aa0-97eb-79342882c1ff"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{unreceivable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="132" width="100" height="42" uuid="5d6b0bdf-5510-4a6b-a47b-0a26be9225d2"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Dept}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="132" width="100" height="42" uuid="672a59d7-2d81-48c6-8037-a99931f47d20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Applicant}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="250" y="132" width="100" height="42" uuid="ede9d784-0242-459f-88e0-e43f450bcafe"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Draft_Person}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="132" width="100" height="42" uuid="d0feebbd-92a6-4e9c-9bd3-9a627582b596"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Sales}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="132" width="100" height="42" uuid="3901ffc1-750b-4d24-80c3-512dbd026532"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Commit_Time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="550" y="132" width="100" height="42" uuid="6f737922-6a61-4820-bbfd-ba408e28285b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Related_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="650" y="132" width="100" height="42" uuid="674c0722-05e8-46c3-a98c-f6dc548ee297"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Invoice_Type}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="750" y="132" width="100" height="42" uuid="1fba1782-6bc1-424d-bb80-f9eae951f661"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Invoice_Time}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="850" y="132" width="100" height="42" uuid="7cb60335-b0a5-4c7b-96c3-5352aea75d33"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Project_Management}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="950" y="132" width="100" height="42" uuid="6dfa25c2-9dd3-4759-8803-586c7dfa2c53"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Remarks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1050" y="132" width="100" height="42" uuid="2f81ebb0-9c1e-4124-9943-40030a10cf24"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Approval_Status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1150" y="132" width="100" height="42" uuid="e18582b6-6fdd-4159-8ca1-e5d18a7ca9ea"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Operator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1250" y="132" width="100" height="42" uuid="c1e65720-7eb7-4399-8190-a5bb5b29072d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Contract_Operate_Time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="50" height="45" uuid="7ce5c1f5-2784-423c-a273-d1b6ec97ed62"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[序号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="0" width="100" height="45" uuid="6e93cc2e-c235-4bff-a67d-4559e36ef535"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="0" width="100" height="45" uuid="35a105cb-55e9-4479-be36-927245e0168b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[企业客户编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="0" width="100" height="45" uuid="f8252975-91dc-4189-b528-3bc17bf8faf9"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[企业名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="100" height="45" uuid="5c9a3f1e-5974-425e-9b5b-1f6de20b985d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[业务编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="0" width="100" height="45" uuid="3e3a36e3-e98a-424e-bca8-f435448ac560"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[业务名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="0" width="100" height="45" uuid="d9276dcc-69f8-41c2-a1a7-f64f3c432c1a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="0" width="100" height="45" uuid="73f53613-4412-459c-9b8b-26257b10c680"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[申请人姓名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="750" y="0" width="100" height="45" uuid="6e72d769-ac4a-4542-8928-bc4ac425a174"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[建设单位]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="850" y="0" width="100" height="45" uuid="0586f8ac-b63c-40d4-89ef-07ce1847f608"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同类型]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="950" y="0" width="100" height="45" uuid="67dd8675-833d-4e34-bf8f-a0447108bad5"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同种类]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1050" y="0" width="100" height="45" uuid="178f8ac5-b98f-47f6-96c8-d1da53aeb2de"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同总金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1150" y="0" width="100" height="45" uuid="1ad6dd26-c1dc-4208-b4bf-35318c4640bb"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[回款金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1250" y="0" width="100" height="45" uuid="5519a8d6-22e3-4d76-b0fc-50f98a8f6920"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[未收款金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="50" y="87" width="100" height="45" uuid="962ed3f5-1a40-43ec-a07f-151c364ada26"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同发起部门]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="87" width="100" height="45" uuid="44175555-a15a-4c79-8081-c9d5453824c9"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[业务发起人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="250" y="87" width="100" height="45" uuid="bfee3e87-926d-4307-ad90-2c260814158f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同拟定人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="87" width="100" height="45" uuid="540f6c05-abbd-434d-b2ff-333ad436da0b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[销售负责人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="87" width="100" height="45" uuid="c63ec8ab-b2db-461a-ad5d-a487d17ae4cc"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[提交评审时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="87" width="100" height="45" uuid="154ca3ba-3e63-4b91-849e-fa821375f8db"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[关联合同编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="650" y="87" width="100" height="45" uuid="c003ea7b-6c2f-42e3-a585-af6c37f02d0d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[发票类型]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="750" y="87" width="100" height="45" uuid="3e844f6d-5cf7-4c18-b97f-c7697d6d0259"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[预计开具发票时间]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="850" y="87" width="100" height="45" uuid="afec520b-4eaf-428f-a400-4a858e951e69"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[项目经理]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="950" y="87" width="100" height="45" uuid="8dee86e0-1218-40c1-b04e-71316ca3ba8c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合同信息备注]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1050" y="87" width="100" height="45" uuid="e921254c-4c96-48d6-abdf-69118b930a45"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[审批状态]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1150" y="87" width="100" height="45" uuid="b693320f-7aa4-42cb-85aa-387df7dd2097"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[操作人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1250" y="87" width="100" height="45" uuid="f775226c-7929-47fc-b0fa-52158832e425"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[操作时间]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="1050" y="0" width="40" height="42" uuid="0b71a4ca-e89f-4e49-bad2-bcfd3a6e3b23"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合计]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1090" y="0" width="60" height="42" uuid="a5236332-7780-40d8-ac92-0fe0e1586050"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sum_total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1190" y="0" width="60" height="42" uuid="71131517-acb4-4d69-a201-2a652413f795"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sum_price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1290" y="0" width="60" height="42" uuid="b8bd903f-adeb-4908-9220-a974644c7367"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{sumunreceivable}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1150" y="0" width="40" height="42" uuid="2160c6c0-9c25-40cd-88b2-31205d523261"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合计]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1250" y="0" width="40" height="42" uuid="a3ffc83b-50fc-44bf-b6ee-e6ea7adf4383"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合计]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="1050" height="42" uuid="1d3fdf2e-1cd3-47a4-88f9-38e4b869a185"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

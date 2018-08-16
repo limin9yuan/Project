@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="projectcost" language="groovy" pageWidth="2000" pageHeight="842" columnWidth="1960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e7882acb-bf9f-4fec-b046-96d80412a6bc">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\工作报表\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select *
+from development_project]]>
+	</queryString>
+	<field name="Project_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[项目编号]]></fieldDescription>
+	</field>
+	<field name="Customer_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[企业客户编号]]></fieldDescription>
+	</field>
+	<field name="Collection_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[项目集合编号]]></fieldDescription>
+	</field>
+	<field name="Project_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[项目名称]]></fieldDescription>
+	</field>
+	<field name="Project_Sales" class="java.lang.String">
+		<fieldDescription><![CDATA[销售负责人]]></fieldDescription>
+	</field>
+	<field name="Project_Begin_Date" class="java.sql.Date">
+		<fieldDescription><![CDATA[项目开始时间]]></fieldDescription>
+	</field>
+	<field name="Project_End_Date" class="java.sql.Date">
+		<fieldDescription><![CDATA[项目结束时间]]></fieldDescription>
+	</field>
+	<field name="Project_Owner" class="java.lang.String">
+		<fieldDescription><![CDATA[负责人]]></fieldDescription>
+	</field>
+	<field name="Project_Manager" class="java.lang.String">
+		<fieldDescription><![CDATA[研发经理]]></fieldDescription>
+	</field>
+	<field name="Project_Development_Begin_Date" class="java.sql.Date">
+		<fieldDescription><![CDATA[研发开始时间]]></fieldDescription>
+	</field>
+	<field name="Project_Development_End_Date" class="java.sql.Date">
+		<fieldDescription><![CDATA[研发结束时间]]></fieldDescription>
+	</field>
+	<field name="Project_Gategory" class="java.lang.String">
+		<fieldDescription><![CDATA[项目类型]]></fieldDescription>
+	</field>
+	<field name="Project_Phase" class="java.lang.String">
+		<fieldDescription><![CDATA[项目阶段]]></fieldDescription>
+	</field>
+	<field name="Project_Description" class="java.lang.String">
+		<fieldDescription><![CDATA[项目描述]]></fieldDescription>
+	</field>
+	<field name="Project_Old_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[旧项目编号]]></fieldDescription>
+	</field>
+	<field name="Project_Remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[备注]]></fieldDescription>
+	</field>
+	<field name="Project_Operator" class="java.lang.String">
+		<fieldDescription><![CDATA[操作人]]></fieldDescription>
+	</field>
+	<field name="Project_Operate_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[创建时间]]></fieldDescription>
+	</field>
+	<field name="Fllow_Type" class="java.lang.String">
+		<fieldDescription><![CDATA[流程种类]]></fieldDescription>
+	</field>
+	<field name="If_OutSource" class="java.lang.String">
+		<fieldDescription><![CDATA[是否分包]]></fieldDescription>
+	</field>
+	<field name="Project_Related_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[关联售前项目编号]]></fieldDescription>
+	</field>
+	<field name="Delivery_Status" class="java.lang.String">
+		<fieldDescription><![CDATA[是否签订合同]]></fieldDescription>
+	</field>
+	<field name="Dept_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[部门编号]]></fieldDescription>
+	</field>
+	<field name="Project_Creator" class="java.lang.Long">
+		<fieldDescription><![CDATA[创建人]]></fieldDescription>
+	</field>
+	<field name="Project_Create_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[创建时间]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="1020" y="24" width="100" height="20" uuid="fe39b7e4-4e57-4e8e-befd-3875cadf5cb6"/>
+				<text><![CDATA[项目收支情况]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="40" uuid="fb1d536e-ebaf-4bb7-a194-3c0c65611fb5"/>
+				<text><![CDATA[报告id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="40" width="100" height="40" uuid="7b62c9b7-2d4e-4d71-a04a-3f2251a631d7"/>
+				<text><![CDATA[报告日期]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="80" width="100" height="40" uuid="c4e76287-d317-4f7c-a187-dde5a6a9da32"/>
+				<text><![CDATA[报告日期截止日]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="194" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="12" width="200" height="100" uuid="26ab29bd-dd77-4418-add5-7e91ce5affe6"/>
+				<subreportParameter name="Project_ID">
+					<subreportParameterExpression><![CDATA[$F{Project_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "projectcost_hourly.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="projectplan_project" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="8f338d52-debb-46da-a5f7-d782b3907d21">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Project_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{Project_ID}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select *,g.Employee_Name as Employee_Name ,g.Employee_Salary_Hour,DATE_FORMAT(Labor_Begin_Time,'%m') as month,
+d.Province_Name as Customer_Province1,e.City_Name as Customer_City1,f.Area_Name as Customer_County1
+from budget_labor a
+inner join project_budget b
+ on a.Budget_ID=b.Budget_ID
+left join inner_org_employee g
+on a.Employee_ID=g.Employee_ID
+
+left  join sales_company_customer c
+ on b.Customer_ID=c.Customer_ID
+left  join sales_province d
+ on d.Province_Id=c.Customer_Province
+left join sales_province_city e
+ on e.Province_Id=c.Customer_Province and  e.City_Id=c.Customer_City
+left  join sales_city_area f
+ on f.City_Id=c.Customer_City and f.Area_Id=c.Customer_County
+where b.Project_ID=$P{Project_ID}]]>
+	</queryString>
+	<field name="Project_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[项目编号]]></fieldDescription>
+	</field>
+	<field name="Customer_Province1" class="java.lang.String">
+		<fieldDescription><![CDATA[省份]]></fieldDescription>
+	</field>
+	<field name="Customer_City1" class="java.lang.String">
+		<fieldDescription><![CDATA[城市]]></fieldDescription>
+	</field>
+	<field name="Customer_County1" class="java.lang.String">
+		<fieldDescription><![CDATA[区县]]></fieldDescription>
+	</field>
+	<field name="Employee_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[员工编号]]></fieldDescription>
+	</field>
+	<field name="Employee_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[员工姓名/销售负责人]]></fieldDescription>
+	</field>
+	<field name="Employee_Level" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Employee_Salary_Hour" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[时薪]]></fieldDescription>
+	</field>
+	<field name="month" class="java.lang.String"/>
+	<field name="Labor_Begin_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[投入开始时间]]></fieldDescription>
+	</field>
+	<field name="Labor_End_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[投入结束时间]]></fieldDescription>
+	</field>
+	<field name="Labor_Total_Day_Num" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[合计天数]]></fieldDescription>
+	</field>
+	<field name="Labor_Rate" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[投入百分比]]></fieldDescription>
+	</field>
+	<field name="Labor_Total_Hour_Num" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[合计工时数]]></fieldDescription>
+	</field>
+	<field name="Labor_Total_Cost" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[人工成本合计]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="35" uuid="3bb51ad3-e36f-40d7-9ade-633748c2d4b4"/>
+				<text><![CDATA[项目安排]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="55" height="61" uuid="c82b9f3c-1a49-4dc5-a267-654e2e7a820e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[项目编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="55" y="0" width="116" height="61" uuid="b2ab9542-a45e-4199-b00e-ecddbccb6ddd"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[地区]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="0" width="56" height="61" uuid="1b5843f1-43b0-4b79-a84c-953e93ea458c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[工号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="227" y="0" width="62" height="61" uuid="4963b099-d9fd-45e0-a184-d1b7535f5532"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[姓名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="289" y="0" width="100" height="61" uuid="53717286-bc5c-4eca-8217-0f1ec9aba7fc"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[员工级别]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="389" y="0" width="100" height="61" uuid="56c818c9-f316-4d26-98fa-da584f329010"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[费率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="489" y="0" width="66" height="61" uuid="96e0ffc1-31fa-4276-b75d-ae90d371de0e"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[月份]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="236" splitType="Stretch">
+			<textField isStretchWithOverflow="true">
+				<reportElement x="0" y="0" width="55" height="59" uuid="8627e1e3-1213-44f8-9ff9-0095d2d0311f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Project_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="55" y="0" width="45" height="59" uuid="941fce81-1313-4332-85d7-5d1d2ba23737"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Customer_Province1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="100" y="0" width="36" height="59" uuid="abc9aff6-4eaf-4117-b877-65896282934b"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Customer_City1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="136" y="0" width="35" height="59" uuid="ce4da95f-5f2a-4e53-a2da-8acbf9b0cde4"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Customer_County1}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="171" y="0" width="56" height="59" uuid="d99922b0-acaa-478d-b408-2ec2f1a88079"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Employee_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="227" y="0" width="62" height="59" uuid="ee72cf45-0a26-46b5-a553-09dc8afdc8fa"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Employee_Name}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="289" y="0" width="100" height="59" uuid="ac910d8c-f881-4bf1-9d40-ca0ad04e0d3d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Employee_Level}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="389" y="0" width="100" height="59" uuid="88871c15-d41f-4bba-bfed-f7a1e488a44f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Employee_Salary_Hour}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="489" y="0" width="66" height="59" uuid="a7af44a1-a545-42d7-82b1-3b00f6cadb20"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{month}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="120" width="88" height="59" uuid="c8ed27bd-f5bc-4534-81f5-1fb98b18c080"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Labor_End_Time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="100" y="59" width="88" height="61" uuid="d53ace27-fc82-4786-ab13-91ae30b15089"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[终止]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="120" width="100" height="59" uuid="f3ab2cf4-dd4f-4ca9-95c6-754ab06238d3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Labor_Begin_Time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="59" width="100" height="61" uuid="32af4ad2-dd78-4acc-8f74-86129e3dd29a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[起始]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="188" y="120" width="61" height="59" uuid="466c2b87-0e5c-4d3e-b920-a416aa5b2a9c"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Labor_Total_Day_Num}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="188" y="59" width="61" height="61" uuid="4766bcbb-0d81-49e2-885c-ee5ec3408935"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合计天数]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="249" y="120" width="100" height="59" uuid="a601cd60-5e87-445a-a865-d455657e9b3d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Labor_Rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="349" y="120" width="100" height="59" uuid="0a63198c-4867-41e0-8177-4c1643de1650"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Labor_Total_Hour_Num}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="449" y="120" width="106" height="59" uuid="5da38ece-0d4a-457f-8020-89e1316a774d"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Labor_Total_Cost}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="249" y="59" width="100" height="61" uuid="f43c9456-07ae-48d1-93f7-0d695024984f"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[部分]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="349" y="59" width="100" height="61" uuid="3132c034-1afd-4ffe-81c6-cb6b346ad2b3"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[合计小时数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="449" y="59" width="106" height="61" uuid="b03ca843-869e-4355-ae05-1ead0b682649"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[人工成本合计]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

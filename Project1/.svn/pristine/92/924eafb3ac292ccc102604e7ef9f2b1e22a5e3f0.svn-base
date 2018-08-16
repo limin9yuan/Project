@@ -1,0 +1,1326 @@
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style type="text/css">
+    a {text-decoration: none}
+  </style>
+</head>
+<body text="#000000" link="#000000" alink="#000000" vlink="#000000">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="50%">&nbsp;</td><td align="center">
+
+<a name="JR_PAGE_ANCHOR_0_1"></a>
+<table style="width: 2100px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 60px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 69px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 31px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 69px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 31px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="25"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 47px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="3"><img alt="" src="customer.html_files/px" style="width: 149px; height: 20px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户档案表</span></p></td>
+  <td colspan="20"><img alt="" src="customer.html_files/px" style="width: 1851px; height: 20px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="25"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 128px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td rowspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">序号</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人编号</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">姓名</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">性别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">称谓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">出生日期</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">职务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">负责业务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">角色</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">岗位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">婚否</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">年龄</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">毕业院校</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">专业技能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作年限</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作经验</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">曾供职单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级领导</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">46</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">安抚</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101001</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人状态</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">手机</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">邮箱</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">传真</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭住址</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">微信</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">QQ</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">爱好</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">备注</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">操作人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">修改时间</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">Work_Address</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">创建时间</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">13154889784</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-8 下午5:11</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">省份</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">城市</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">区县</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">助记简称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">产品需求</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求简要描述</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求调研附件</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业性质</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户级别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户内部阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">来源</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">行业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">人员规模</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">信用等级</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110000</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110100</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">测试企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">asfd</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">123</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">收费功能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热力企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">国营</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">潜在客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">正式-二次开拓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">引导</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户潜力</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">员工数量</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">公司简介</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">拜访交通方式</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">旧客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">子公司名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热度</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户分类</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">预期成交金额</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点说明</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">开票名称</span></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">高</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">将要签约</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1231312.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21312322</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="25"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 179px;"/></td>
+</tr>
+</table>
+<br/>
+<br/>
+
+<a name="JR_PAGE_ANCHOR_0_2"></a>
+<table style="width: 2100px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 60px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 116px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td rowspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">序号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">姓名</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">性别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">称谓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">出生日期</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">职务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">负责业务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">角色</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">岗位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">婚否</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">年龄</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">毕业院校</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">专业技能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作年限</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作经验</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">曾供职单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级领导</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">51</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">fasdf</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101001</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">125 &nbsp;测试部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">118</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">手机</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">邮箱</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">传真</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭住址</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">微信</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">QQ</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">爱好</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">备注</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">操作人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">修改时间</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">Work_Address</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">创建时间</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">意向客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">三个月前联系过</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">13125458969</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-9 下午4:48</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-9 下午3:35</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">省份</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">城市</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">区县</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">助记简称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">产品需求</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求简要描述</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求调研附件</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业性质</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户级别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户内部阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">来源</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">行业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">人员规模</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">信用等级</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110000</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110100</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">测试企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">asfd</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">123</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">收费功能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热力企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">国营</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">潜在客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">正式-二次开拓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">引导</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户潜力</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">员工数量</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">公司简介</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">拜访交通方式</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">旧客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">子公司名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热度</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户分类</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">预期成交金额</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点说明</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">开票名称</span></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">高</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">将要签约</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1231312.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21312322</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 258px;"/></td>
+</tr>
+</table>
+<br/>
+<br/>
+
+<a name="JR_PAGE_ANCHOR_0_3"></a>
+<table style="width: 2100px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 60px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 116px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td rowspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">序号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">姓名</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">性别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">称谓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">出生日期</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">职务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">负责业务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">角色</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">岗位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">婚否</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">年龄</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">毕业院校</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">专业技能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作年限</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作经验</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">曾供职单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级领导</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">44</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">李明远</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1987-02-09</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101001</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">125 &nbsp;测试部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">118</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">手机</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">邮箱</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">传真</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭住址</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">微信</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">QQ</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">爱好</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">备注</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">操作人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">修改时间</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">Work_Address</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">创建时间</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">13124115252</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-8 上午11:02</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-8 上午10:15</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">省份</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">城市</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">区县</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">助记简称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">产品需求</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求简要描述</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求调研附件</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业性质</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户级别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户内部阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">来源</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">行业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">人员规模</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">信用等级</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110000</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110100</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">测试企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">asfd</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">123</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">收费功能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热力企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">国营</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">潜在客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">正式-二次开拓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">引导</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户潜力</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">员工数量</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">公司简介</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">拜访交通方式</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">旧客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">子公司名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热度</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户分类</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">预期成交金额</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点说明</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">开票名称</span></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">高</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">将要签约</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1231312.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21312322</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 258px;"/></td>
+</tr>
+</table>
+<br/>
+<br/>
+
+<a name="JR_PAGE_ANCHOR_0_4"></a>
+<table style="width: 2100px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 60px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 116px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td rowspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">序号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">姓名</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">性别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">称谓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">出生日期</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">职务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">负责业务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">角色</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">岗位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">婚否</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">年龄</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">毕业院校</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">专业技能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作年限</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作经验</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">曾供职单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级领导</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">53</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">大鸟2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2018-08-04</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">222</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101001</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">118</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2421</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2121</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">手机</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">邮箱</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">传真</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭住址</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">微信</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">QQ</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">爱好</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">备注</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">操作人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">修改时间</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">Work_Address</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">创建时间</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">潜在客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">近3个月联系过</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">15928328238</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">222212@qq.com</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">22</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">222222</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">22</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">22</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">22122222</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">22</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-10 下午3:05</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-10 下午3:04</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">省份</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">城市</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">区县</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">助记简称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">产品需求</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求简要描述</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求调研附件</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业性质</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户级别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户内部阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">来源</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">行业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">人员规模</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">信用等级</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110000</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110100</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">测试企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">asfd</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">123</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">收费功能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热力企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">国营</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">潜在客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">正式-二次开拓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">引导</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户潜力</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">员工数量</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">公司简介</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">拜访交通方式</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">旧客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">子公司名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热度</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户分类</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">预期成交金额</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点说明</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">开票名称</span></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">高</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">将要签约</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1231312.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21312322</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 258px;"/></td>
+</tr>
+</table>
+<br/>
+<br/>
+
+<a name="JR_PAGE_ANCHOR_0_5"></a>
+<table style="width: 2100px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 60px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 116px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td rowspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">序号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">姓名</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">性别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">称谓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">出生日期</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">职务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">负责业务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">角色</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">岗位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">婚否</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">年龄</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">毕业院校</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">专业技能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作年限</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作经验</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">曾供职单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级领导</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">52</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">大鸟</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">32332</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2018-08-03</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">121</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">111</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">无31</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101001</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">118</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">3</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">12</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">222</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">23</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">858698900-0-</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">手机</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">邮箱</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">传真</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭住址</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">微信</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">QQ</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">爱好</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">备注</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">操作人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">修改时间</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">Work_Address</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">创建时间</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">潜在客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">近3个月联系过</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">15987879899</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">29399@qq.com</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">232</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">272882</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">3432</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">22</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">343</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">23232</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-10 下午3:00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-10 下午2:55</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">省份</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">城市</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">区县</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">助记简称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">产品需求</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求简要描述</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求调研附件</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业性质</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户级别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户内部阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">来源</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">行业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">人员规模</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">信用等级</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110000</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110100</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110101</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">测试企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">asfd</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">123</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">收费功能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热力企业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">国营</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">潜在客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">正式-二次开拓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">引导</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户潜力</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">员工数量</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">公司简介</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">拜访交通方式</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">旧客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">子公司名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热度</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户分类</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">预期成交金额</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点说明</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">开票名称</span></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">高</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">将要签约</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1231312.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">21312322</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 258px;"/></td>
+</tr>
+</table>
+<br/>
+<br/>
+
+<a name="JR_PAGE_ANCHOR_0_6"></a>
+<table style="width: 2100px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 60px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 116px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td rowspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">序号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">姓名</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">性别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">称谓</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">出生日期</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">职务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">负责业务</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">角色</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">岗位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">婚否</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">年龄</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">毕业院校</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">专业技能</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作年限</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作经验</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">曾供职单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级领导</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">45</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">Mingyuan Li</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">110103001</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1987</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系人状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">联系情况</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">手机</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">邮箱</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工作电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭电话</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">传真</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">家庭住址</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">微信</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">QQ</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">纪念日</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">爱好</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">备注</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">操作人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">修改时间</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">Work_Address</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">创建时间</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">13124115252</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="customer.html_files/px" border="0"/></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">18-8-8 上午11:27</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">省份</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">城市</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">区县</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">助记简称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户所有者</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售负责人</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">产品需求</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求简要描述</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">需求调研附件</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户类别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">企业性质</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户状态</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户级别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户内部阶段</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">来源</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">行业</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">人员规模</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">信用等级</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><img alt="" src="customer.html_files/px" style="width: 20px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 56px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户潜力</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">员工数量</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">上级单位</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">公司简介</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">拜访交通方式</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">旧客户编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">子公司名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热度</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点客户分类</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">预期成交金额</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">热点说明</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">开票名称</span></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 56px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="customer.html_files/px" style="width: 80px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="8"><img alt="" src="customer.html_files/px" style="width: 720px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="23"><img alt="" src="customer.html_files/px" style="width: 2100px; height: 258px;"/></td>
+</tr>
+</table>
+
+<![if IE]>
+<script>
+var links = document.querySelectorAll('link.jrWebFont');
+setTimeout(function(){ if (links) { for (var i = 0; i < links.length; i++) { links.item(i).href = links.item(i).href; } } }, 0);
+</script>
+<![endif]>
+</td><td width="50%">&nbsp;</td></tr>
+</table>
+</body>
+</html>

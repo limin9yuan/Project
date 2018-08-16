@@ -1,0 +1,118 @@
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style type="text/css">
+    a {text-decoration: none}
+  </style>
+</head>
+<body text="#000000" link="#000000" alink="#000000" vlink="#000000">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="50%">&nbsp;</td><td align="center">
+
+<a name="JR_PAGE_ANCHOR_0_1"></a>
+<table style="width: 2000px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 20px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 27px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 73px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 27px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 73px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 780px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="16"><img alt="" src="approval_purchase_detail.html_files/px" style="width: 2000px; height: 53px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="2"><img alt="" src="approval_purchase_detail.html_files/px" style="width: 47px; height: 20px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">项目设备采购价格表</span></p></td>
+  <td colspan="12"><img alt="" src="approval_purchase_detail.html_files/px" style="width: 1853px; height: 20px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="16"><img alt="" src="approval_purchase_detail.html_files/px" style="width: 2000px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td colspan="2" style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">序号</span></p></td>
+  <td colspan="2" style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">物品名称</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">品牌</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">型号</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">规格配置</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">单位</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">数量</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">单价(元)</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">实际采购价格</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">已付款</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">未付款</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">备注</span></p></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 780px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td colspan="2" style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td colspan="2" style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">aaa</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">ccc</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1123</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">b</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">123</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">123</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">12.00</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">12.00</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1.00</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1.00</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1</span></p></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 780px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td colspan="2" style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td colspan="2" style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">b42</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">dd</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">321</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">c</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">321</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">366</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">312.00</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">312.00</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2.00</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2.00</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">2</span></p></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 780px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="16"><img alt="" src="approval_purchase_detail.html_files/px" style="width: 2000px; height: 427px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 20px; height: 39px;"/></td>
+  <td colspan="10" style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">合计</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">324</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">3</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">3</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; "><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="approval_purchase_detail.html_files/px" border="0"/></p></td>
+  <td><img alt="" src="approval_purchase_detail.html_files/px" style="width: 780px; height: 39px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="16"><img alt="" src="approval_purchase_detail.html_files/px" style="width: 2000px; height: 59px;"/></td>
+</tr>
+</table>
+
+<![if IE]>
+<script>
+var links = document.querySelectorAll('link.jrWebFont');
+setTimeout(function(){ if (links) { for (var i = 0; i < links.length; i++) { links.item(i).href = links.item(i).href; } } }, 0);
+</script>
+<![endif]>
+</td><td width="50%">&nbsp;</td></tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="projectcost_hourly" language="groovy" pageWidth="2000" pageHeight="802" columnWidth="2000" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="e811dc51-6d3a-4be1-8511-4e983458079b">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Project_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{Project_ID}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select c.Project_ID,c.Project_Name,d.Employee_Name,d.Employee_Level,d.Employee_Salary_Hour,a.Labor_Total_Hour_Num,(d.Employee_Salary_Hour*a.Labor_Total_Hour_Num)as timesheetcost
+from budget_labor a
+left join project_budget b
+on a.Budget_ID=b.Budget_ID
+left join development_project c
+on b.Project_ID=c.Project_ID
+left join inner_org_employee d
+on a.Employee_ID=d.Employee_ID]]>
+	</queryString>
+	<field name="Project_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[项目编号]]></fieldDescription>
+	</field>
+	<field name="Project_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[项目名称]]></fieldDescription>
+	</field>
+	<field name="Employee_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[员工姓名/销售负责人]]></fieldDescription>
+	</field>
+	<field name="Employee_Level" class="java.lang.String">
+		<fieldDescription><![CDATA[员工等级]]></fieldDescription>
+	</field>
+	<field name="Employee_Salary_Hour" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[时薪]]></fieldDescription>
+	</field>
+	<field name="Labor_Total_Hour_Num" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[合计工时数]]></fieldDescription>
+	</field>
+	<field name="timesheetcost" class="java.math.BigDecimal"/>
+	<variable name="sum" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{timesheetcost}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="18" width="100" height="61" uuid="7f6dfd87-dbcc-4545-8ffb-8d3a90e82eae"/>
+				<text><![CDATA[工时统计表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="61" uuid="6a2240d5-6980-4b52-b22c-72e25fc8d701"/>
+				<text><![CDATA[项目编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="61" uuid="306c45c1-f1e6-4a28-8afd-d43a83a64484"/>
+				<text><![CDATA[项目名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="61" uuid="c787a896-d8ed-44a7-87ca-d9735880efce"/>
+				<text><![CDATA[项目人员姓名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="61" uuid="1b6d3e96-4a59-4b51-8b41-bd783fcbf36d"/>
+				<text><![CDATA[人员级别]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="61" uuid="d65b149e-7304-4f4a-b872-c7c302da5c5d"/>
+				<text><![CDATA[工时统计]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="0" width="100" height="61" uuid="4c3b236e-f3c2-4edf-93b9-394c8651e484"/>
+				<text><![CDATA[工时成本]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="100" height="61" uuid="f7006a16-3a5b-47d6-98ed-0616970e674b"/>
+				<text><![CDATA[时薪]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="54" uuid="fc902126-4995-40c8-a693-b04a5f5564ba"/>
+				<textFieldExpression><![CDATA[$F{Project_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="54" uuid="3864abe7-bb0d-40cf-a587-2bdc7c920543"/>
+				<textFieldExpression><![CDATA[$F{Project_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="54" uuid="89843339-48c8-4d90-8f0c-9d26c315a0b9"/>
+				<textFieldExpression><![CDATA[$F{Employee_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="54" uuid="f849fbb5-79fa-47f3-a762-533869e25589"/>
+				<textFieldExpression><![CDATA[$F{Employee_Level}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="100" height="54" uuid="77a89fae-9616-43a8-a180-dad429e7d638"/>
+				<textFieldExpression><![CDATA[$F{Employee_Salary_Hour}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="54" uuid="88a77516-1a0f-4c5c-bc8c-91561017b1eb"/>
+				<textFieldExpression><![CDATA[$F{Labor_Total_Hour_Num}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="54" uuid="a57e0be9-7212-4541-8c9f-3bad43542601"/>
+				<textFieldExpression><![CDATA[$F{timesheetcost}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="45" uuid="40e2b255-fb1e-4abc-a40d-534c65e8dd7a"/>
+				<text><![CDATA[工时总计]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="45" uuid="dc4f1fae-ab97-4a1d-b83f-6159d201437c"/>
+				<textFieldExpression><![CDATA[$V{sum}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

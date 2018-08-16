@@ -1,0 +1,262 @@
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style type="text/css">
+    a {text-decoration: none}
+  </style>
+</head>
+<body text="#000000" link="#000000" alink="#000000" vlink="#000000">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="50%">&nbsp;</td><td align="center">
+
+<a name="JR_PAGE_ANCHOR_0_1"></a>
+<table style="width: 2000px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 42px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 23px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 35px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 42px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 23px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 35px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 980px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="16"><img alt="" src="hourly.html_files/px" style="width: 2000px; height: 60px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 262px; height: 20px;"/></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售时薪分析表</span></p></td>
+  <td colspan="9"><img alt="" src="hourly.html_files/px" style="width: 1638px; height: 20px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="16"><img alt="" src="hourly.html_files/px" style="width: 2000px; height: 54px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">中心-部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">参加人员</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工时数</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">成本时薪单价</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">时薪小计</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">系数</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">项目金额</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">项目金额分配</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售时薪单价</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">时薪利润率</span></p></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 980px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">79</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">324</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">678.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">219672</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">0.00</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">张三</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">80.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">张志敏测试员</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">100.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">wfw</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">23.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">李逵</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">23.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">July</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">321.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">victor</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">234.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">王二小</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">321.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="16"><img alt="" src="hourly.html_files/px" style="width: 2000px; height: 101px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="5"><img alt="" src="hourly.html_files/px" style="width: 285px; height: 20px;"/></td>
+  <td colspan="3"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">219672</span></p></td>
+  <td colspan="8"><img alt="" src="hourly.html_files/px" style="width: 1615px; height: 20px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="16"><img alt="" src="hourly.html_files/px" style="width: 2000px; height: 30px;"/></td>
+</tr>
+</table>
+<br/>
+<br/>
+
+<a name="JR_PAGE_ANCHOR_0_2"></a>
+<table style="width: 2000px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 65px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 35px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 65px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 35px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 980px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="14"><img alt="" src="hourly.html_files/px" style="width: 2000px; height: 55px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 61px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">中心-部门</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">参加人员</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工时数</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">成本时薪单价</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">时薪小计</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">系数</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">项目金额</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">项目金额分配</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">销售时薪单价</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">时薪利润率</span></p></td>
+  <td><img alt="" src="hourly.html_files/px" style="width: 980px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">wfw</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">23.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">李四光</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">4444.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">朱元璋</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">78.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td><img alt="" src="hourly.html_files/px" style="width: 20px; height: 62px;"/></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">研发中心</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">李世民</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">98.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 1280px; height: 62px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="14"><img alt="" src="hourly.html_files/px" style="width: 2000px; height: 428px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="4"><img alt="" src="hourly.html_files/px" style="width: 285px; height: 20px;"/></td>
+  <td colspan="2"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">219672</span></p></td>
+  <td colspan="8"><img alt="" src="hourly.html_files/px" style="width: 1615px; height: 20px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="14"><img alt="" src="hourly.html_files/px" style="width: 2000px; height: 30px;"/></td>
+</tr>
+</table>
+
+<![if IE]>
+<script>
+var links = document.querySelectorAll('link.jrWebFont');
+setTimeout(function(){ if (links) { for (var i = 0; i < links.length; i++) { links.item(i).href = links.item(i).href; } } }, 0);
+</script>
+<![endif]>
+</td><td width="50%">&nbsp;</td></tr>
+</table>
+</body>
+</html>

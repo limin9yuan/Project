@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="customer" language="groovy" pageWidth="2100" pageHeight="842" columnWidth="2060" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="98f9d3a0-5563-4895-9197-cd72b0b081bd">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="966"/>
+	<property name="ireport.y" value="202"/>
+	<queryString>
+		<![CDATA[select *
+from sales_customer_contact a
+left join sales_company_customer b
+on a.Customer_ID=b.Customer_ID
+order by b.Customer_Province desc,b.Customer_City desc,b.Customer_County desc ,b.Customer_Name desc,a.Contact_Dept desc]]>
+	</queryString>
+	<field name="Contact_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[联系人编号]]></fieldDescription>
+	</field>
+	<field name="Contact_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[姓名]]></fieldDescription>
+	</field>
+	<field name="Contact_Sex" class="java.lang.Integer">
+		<fieldDescription><![CDATA[性别]]></fieldDescription>
+	</field>
+	<field name="Contact_Salutation" class="java.lang.String">
+		<fieldDescription><![CDATA[称谓]]></fieldDescription>
+	</field>
+	<field name="Contact_BirthDay" class="java.lang.String">
+		<fieldDescription><![CDATA[出生日期]]></fieldDescription>
+	</field>
+	<field name="Contact_Title" class="java.lang.String">
+		<fieldDescription><![CDATA[职务]]></fieldDescription>
+	</field>
+	<field name="Contact_Responsibility" class="java.lang.String">
+		<fieldDescription><![CDATA[负责业务]]></fieldDescription>
+	</field>
+	<field name="Contact_Role" class="java.lang.String">
+		<fieldDescription><![CDATA[角色]]></fieldDescription>
+	</field>
+	<field name="Customer_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[企业客户编号]]></fieldDescription>
+	</field>
+	<field name="Contact_Dept" class="java.lang.String">
+		<fieldDescription><![CDATA[部门]]></fieldDescription>
+	</field>
+	<field name="Contact_Job" class="java.lang.String">
+		<fieldDescription><![CDATA[岗位]]></fieldDescription>
+	</field>
+	<field name="Contact_Marital_Status" class="java.lang.Integer">
+		<fieldDescription><![CDATA[婚否]]></fieldDescription>
+	</field>
+	<field name="Contact_Age" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[年龄]]></fieldDescription>
+	</field>
+	<field name="Contact_Family_Status" class="java.lang.String">
+		<fieldDescription><![CDATA[家庭情况]]></fieldDescription>
+	</field>
+	<field name="Contact_Graduate_Institutions" class="java.lang.String">
+		<fieldDescription><![CDATA[毕业院校]]></fieldDescription>
+	</field>
+	<field name="Contact_Skill" class="java.lang.String">
+		<fieldDescription><![CDATA[专业技能]]></fieldDescription>
+	</field>
+	<field name="Contact_Years_Working" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[工作年限]]></fieldDescription>
+	</field>
+	<field name="Contact_Experience" class="java.lang.String">
+		<fieldDescription><![CDATA[工作经验]]></fieldDescription>
+	</field>
+	<field name="Contact_Previous_Company" class="java.lang.String">
+		<fieldDescription><![CDATA[曾供职单位]]></fieldDescription>
+	</field>
+	<field name="Contact_Superiors" class="java.lang.String">
+		<fieldDescription><![CDATA[上级领导]]></fieldDescription>
+	</field>
+	<field name="Contact_Status" class="java.lang.String">
+		<fieldDescription><![CDATA[联系人状态]]></fieldDescription>
+	</field>
+	<field name="Contact_Introduction" class="java.lang.String">
+		<fieldDescription><![CDATA[联系情况]]></fieldDescription>
+	</field>
+	<field name="Contact_Owner" class="java.lang.String">
+		<fieldDescription><![CDATA[客户所有者]]></fieldDescription>
+	</field>
+	<field name="Contact_Sales" class="java.lang.String">
+		<fieldDescription><![CDATA[销售负责人]]></fieldDescription>
+	</field>
+	<field name="Contact_Phone_Number" class="java.lang.String">
+		<fieldDescription><![CDATA[手机]]></fieldDescription>
+	</field>
+	<field name="Contact_Mailbox" class="java.lang.String">
+		<fieldDescription><![CDATA[邮箱]]></fieldDescription>
+	</field>
+	<field name="Contact_Work_Phone_Number" class="java.lang.String">
+		<fieldDescription><![CDATA[工作电话]]></fieldDescription>
+	</field>
+	<field name="Contact_Family_Phone_Number" class="java.lang.String">
+		<fieldDescription><![CDATA[家庭电话]]></fieldDescription>
+	</field>
+	<field name="Contact_Fax" class="java.lang.String">
+		<fieldDescription><![CDATA[传真]]></fieldDescription>
+	</field>
+	<field name="Contact_Family_Address" class="java.lang.String">
+		<fieldDescription><![CDATA[家庭住址]]></fieldDescription>
+	</field>
+	<field name="Contact_Weixin" class="java.lang.String">
+		<fieldDescription><![CDATA[微信]]></fieldDescription>
+	</field>
+	<field name="Contact_QQ" class="java.lang.String">
+		<fieldDescription><![CDATA[QQ]]></fieldDescription>
+	</field>
+	<field name="Contact_Special_Day_Category" class="java.lang.String">
+		<fieldDescription><![CDATA[纪念日类别]]></fieldDescription>
+	</field>
+	<field name="Contact_Special_Day" class="java.lang.String">
+		<fieldDescription><![CDATA[纪念日]]></fieldDescription>
+	</field>
+	<field name="Contact_Interest" class="java.lang.String">
+		<fieldDescription><![CDATA[爱好]]></fieldDescription>
+	</field>
+	<field name="Contact_Remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[备注]]></fieldDescription>
+	</field>
+	<field name="Contact_Operator" class="java.lang.Long">
+		<fieldDescription><![CDATA[操作人]]></fieldDescription>
+	</field>
+	<field name="Contact_Operate_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[修改时间]]></fieldDescription>
+	</field>
+	<field name="Work_Address" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Contact_Create_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[创建时间]]></fieldDescription>
+	</field>
+	<field name="Customer_Province" class="java.lang.String">
+		<fieldDescription><![CDATA[省份]]></fieldDescription>
+	</field>
+	<field name="Customer_City" class="java.lang.String">
+		<fieldDescription><![CDATA[城市]]></fieldDescription>
+	</field>
+	<field name="Customer_County" class="java.lang.String">
+		<fieldDescription><![CDATA[区县]]></fieldDescription>
+	</field>
+	<field name="Customer_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[企业名称]]></fieldDescription>
+	</field>
+	<field name="Customer_Simple_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[助记简称]]></fieldDescription>
+	</field>
+	<field name="Customer_Owner" class="java.lang.String">
+		<fieldDescription><![CDATA[客户所有者]]></fieldDescription>
+	</field>
+	<field name="Customer_Sales" class="java.lang.String">
+		<fieldDescription><![CDATA[销售负责人]]></fieldDescription>
+	</field>
+	<field name="Customer_Product" class="java.lang.String">
+		<fieldDescription><![CDATA[产品需求]]></fieldDescription>
+	</field>
+	<field name="Customer_Req_Des" class="java.lang.String">
+		<fieldDescription><![CDATA[需求简要描述]]></fieldDescription>
+	</field>
+	<field name="Customer_Attachment" class="java.lang.String">
+		<fieldDescription><![CDATA[需求调研附件]]></fieldDescription>
+	</field>
+	<field name="Customer_Category" class="java.lang.String">
+		<fieldDescription><![CDATA[客户类别]]></fieldDescription>
+	</field>
+	<field name="Customer_Character" class="java.lang.String">
+		<fieldDescription><![CDATA[企业性质]]></fieldDescription>
+	</field>
+	<field name="Customer_Status" class="java.lang.String">
+		<fieldDescription><![CDATA[客户状态]]></fieldDescription>
+	</field>
+	<field name="Customer_Level" class="java.lang.String">
+		<fieldDescription><![CDATA[客户级别]]></fieldDescription>
+	</field>
+	<field name="Customer_Sale_Phase" class="java.lang.String">
+		<fieldDescription><![CDATA[销售阶段]]></fieldDescription>
+	</field>
+	<field name="Customer_Inner_Phase" class="java.lang.String">
+		<fieldDescription><![CDATA[客户内部阶段]]></fieldDescription>
+	</field>
+	<field name="Customer_Source" class="java.lang.String">
+		<fieldDescription><![CDATA[来源]]></fieldDescription>
+	</field>
+	<field name="Customer_Industry" class="java.lang.String">
+		<fieldDescription><![CDATA[行业]]></fieldDescription>
+	</field>
+	<field name="Customer_Staff_Size" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[人员规模]]></fieldDescription>
+	</field>
+	<field name="Customer_Credit_Rank" class="java.lang.Integer">
+		<fieldDescription><![CDATA[信用等级]]></fieldDescription>
+	</field>
+	<field name="Customer_Potential" class="java.lang.String">
+		<fieldDescription><![CDATA[客户潜力]]></fieldDescription>
+	</field>
+	<field name="Customer_Emp_Number" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[员工数量]]></fieldDescription>
+	</field>
+	<field name="Customer_Parent" class="java.lang.String">
+		<fieldDescription><![CDATA[上级单位]]></fieldDescription>
+	</field>
+	<field name="Customer_Introduction" class="java.lang.String">
+		<fieldDescription><![CDATA[公司简介]]></fieldDescription>
+	</field>
+	<field name="Customer_Visit_Mode" class="java.lang.String">
+		<fieldDescription><![CDATA[拜访交通方式]]></fieldDescription>
+	</field>
+	<field name="Customer_Old_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[旧客户编号]]></fieldDescription>
+	</field>
+	<field name="Customer_Child_Company" class="java.lang.String">
+		<fieldDescription><![CDATA[子公司名称]]></fieldDescription>
+	</field>
+	<field name="Customer_Hot" class="java.lang.Integer">
+		<fieldDescription><![CDATA[热点客户]]></fieldDescription>
+	</field>
+	<field name="Customer_Hot_Rank" class="java.lang.String">
+		<fieldDescription><![CDATA[热度]]></fieldDescription>
+	</field>
+	<field name="Customer_Hot_Classif" class="java.lang.String">
+		<fieldDescription><![CDATA[热点客户分类]]></fieldDescription>
+	</field>
+	<field name="Customer_Volume" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[预期成交金额]]></fieldDescription>
+	</field>
+	<field name="Customer_Hot_Desc" class="java.lang.String">
+		<fieldDescription><![CDATA[热点说明]]></fieldDescription>
+	</field>
+	<field name="Customer_Invoice_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[开票名称]]></fieldDescription>
+	</field>
+	<field name="Customer_Tax_Number" class="java.lang.String">
+		<fieldDescription><![CDATA[纳税人税号]]></fieldDescription>
+	</field>
+	<field name="Customer_Bank" class="java.lang.String">
+		<fieldDescription><![CDATA[开户行]]></fieldDescription>
+	</field>
+	<field name="Customer_Account_Num" class="java.lang.String">
+		<fieldDescription><![CDATA[账号]]></fieldDescription>
+	</field>
+	<field name="Customer_Contact_Sta" class="java.lang.String">
+		<fieldDescription><![CDATA[联系情况]]></fieldDescription>
+	</field>
+	<field name="Customer_Address" class="java.lang.String">
+		<fieldDescription><![CDATA[企业办公地址]]></fieldDescription>
+	</field>
+	<field name="Customer_Phone_Num" class="java.lang.String">
+		<fieldDescription><![CDATA[电话号码]]></fieldDescription>
+	</field>
+	<field name="Customer_Fax" class="java.lang.String">
+		<fieldDescription><![CDATA[传真]]></fieldDescription>
+	</field>
+	<field name="Customer_MailBox" class="java.lang.String">
+		<fieldDescription><![CDATA[邮箱]]></fieldDescription>
+	</field>
+	<field name="Customer_URL" class="java.lang.String">
+		<fieldDescription><![CDATA[官网地址]]></fieldDescription>
+	</field>
+	<field name="Customer_Postcode" class="java.lang.String">
+		<fieldDescription><![CDATA[邮编]]></fieldDescription>
+	</field>
+	<field name="Customer_Leader" class="java.lang.String">
+		<fieldDescription><![CDATA[企业负责人]]></fieldDescription>
+	</field>
+	<field name="Customer_Job_Title" class="java.lang.String">
+		<fieldDescription><![CDATA[职务]]></fieldDescription>
+	</field>
+	<field name="Customer_Payment_Rate" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[收费收缴率]]></fieldDescription>
+	</field>
+	<field name="Customer_Heating_Share" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[企业占全市热化率]]></fieldDescription>
+	</field>
+	<field name="Customer_Complaint_Rate" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[投诉率]]></fieldDescription>
+	</field>
+	<field name="Customer_Heating_Area" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[供热面积]]></fieldDescription>
+	</field>
+	<field name="Customer_Heating_Source_Number" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[热力站数量]]></fieldDescription>
+	</field>
+	<field name="Customer_Steam_Area" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[蒸汽面积]]></fieldDescription>
+	</field>
+	<field name="Customer_Hot_Water_Area" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[热水面积]]></fieldDescription>
+	</field>
+	<field name="Customer_Own_Heating_Source" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[自有热源]]></fieldDescription>
+	</field>
+	<field name="Customer_Out_Heating_Source" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[外购热源]]></fieldDescription>
+	</field>
+	<field name="Customer_Heat_Loss" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[热耗]]></fieldDescription>
+	</field>
+	<field name="Customer_Water_Loss" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[水耗]]></fieldDescription>
+	</field>
+	<field name="Customer_Electrick_Loss" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[电耗]]></fieldDescription>
+	</field>
+	<field name="Customer_Plan_One_Year" class="java.lang.String">
+		<fieldDescription><![CDATA[未来一年新增规划]]></fieldDescription>
+	</field>
+	<field name="Customer_Plan_Tow_Year" class="java.lang.String">
+		<fieldDescription><![CDATA[未来两年新增规划]]></fieldDescription>
+	</field>
+	<field name="Customer_Plan_Three_Year" class="java.lang.String">
+		<fieldDescription><![CDATA[未来三年新增规划]]></fieldDescription>
+	</field>
+	<field name="Customer_Remarks" class="java.lang.String">
+		<fieldDescription><![CDATA[备注]]></fieldDescription>
+	</field>
+	<field name="Customer_Operator" class="java.lang.Long">
+		<fieldDescription><![CDATA[操作人]]></fieldDescription>
+	</field>
+	<field name="Customer_Operate_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[修改时间]]></fieldDescription>
+	</field>
+	<field name="Opponent_Company" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Opponent_Project_Type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Opponent_Product_Type" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Opponent_Product_Price" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Customer_Create_Time" class="java.sql.Timestamp">
+		<fieldDescription><![CDATA[创建时间]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="129" y="27" width="100" height="20" uuid="a3038c9e-1dfa-4adc-8fc8-4a066d768117"/>
+				<text><![CDATA[客户档案表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="499" splitType="Stretch">
+			<textField>
+				<reportElement x="60" y="61" width="100" height="56" uuid="a107ed98-a574-4b0e-a109-3e801986cf50"/>
+				<textFieldExpression><![CDATA[$F{Contact_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="61" width="100" height="56" uuid="e9e11774-a926-4b6e-a9c1-9c85afc25882"/>
+				<textFieldExpression><![CDATA[$F{Contact_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="61" width="100" height="56" uuid="d6603143-37d0-424c-a322-143f5f57bf1c"/>
+				<textFieldExpression><![CDATA[$F{Contact_Sex}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="61" width="100" height="56" uuid="3232f77d-896e-4029-ac9d-e006f5018a4e"/>
+				<textFieldExpression><![CDATA[$F{Contact_Salutation}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="61" width="100" height="56" uuid="497eefa2-6c21-4271-89cd-105f39d329a6"/>
+				<textFieldExpression><![CDATA[$F{Contact_BirthDay}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="560" y="61" width="100" height="56" uuid="a81d754c-3714-41c3-aa78-9f65dc78a64d"/>
+				<textFieldExpression><![CDATA[$F{Contact_Title}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="61" width="100" height="56" uuid="5259eb23-4f24-4a9b-bd6b-bf9d14942bb2"/>
+				<textFieldExpression><![CDATA[$F{Contact_Responsibility}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="760" y="61" width="100" height="56" uuid="55e018a7-4fd1-48b4-9ef4-e7ed8792bb7c"/>
+				<textFieldExpression><![CDATA[$F{Contact_Role}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="860" y="61" width="100" height="56" uuid="e70741ba-b84a-4cf3-b320-2affd79bb083"/>
+				<textFieldExpression><![CDATA[$F{Customer_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="960" y="61" width="100" height="56" uuid="7f14584c-963e-47a8-8c3e-765071a63d1e"/>
+				<textFieldExpression><![CDATA[$F{Contact_Dept}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1060" y="61" width="100" height="56" uuid="6fd6dc7d-594a-44ce-a9d5-f8f423ed2399"/>
+				<textFieldExpression><![CDATA[$F{Contact_Job}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1160" y="61" width="100" height="56" uuid="b30f30e1-03a2-4d88-b0ea-06973f3e6380"/>
+				<textFieldExpression><![CDATA[$F{Contact_Marital_Status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1260" y="61" width="100" height="56" uuid="1dc4dc75-8de8-45db-a185-0b37e0735a8e"/>
+				<textFieldExpression><![CDATA[$F{Contact_Age}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1360" y="61" width="100" height="56" uuid="e8f7dd15-ae29-43f0-a2bd-c4a36d809929"/>
+				<textFieldExpression><![CDATA[$F{Contact_Family_Status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1460" y="61" width="100" height="56" uuid="f9ac2fe0-ce3c-4dc3-9aec-a97763b03ff3"/>
+				<textFieldExpression><![CDATA[$F{Contact_Graduate_Institutions}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1560" y="61" width="100" height="56" uuid="51cf4ee9-b721-4a98-88a8-bfd7e0209034"/>
+				<textFieldExpression><![CDATA[$F{Contact_Skill}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1660" y="61" width="100" height="56" uuid="59378a3b-2660-44d0-8e33-f4c913d99cd0"/>
+				<textFieldExpression><![CDATA[$F{Contact_Years_Working}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1760" y="61" width="100" height="56" uuid="69fa77b2-88ab-41e6-9bde-232ffdd6c287"/>
+				<textFieldExpression><![CDATA[$F{Contact_Experience}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1860" y="61" width="100" height="56" uuid="0529f758-5d8c-4419-8151-5a36494c05cb"/>
+				<textFieldExpression><![CDATA[$F{Contact_Previous_Company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1960" y="61" width="100" height="56" uuid="69868e65-f7f8-4aa2-b353-be776518b0b6"/>
+				<textFieldExpression><![CDATA[$F{Contact_Superiors}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="0" width="100" height="61" uuid="cccf06dc-3496-43d8-a645-ee9115315ab9"/>
+				<text><![CDATA[联系人编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="0" width="100" height="61" uuid="3b0df063-9709-4290-8b25-b73f16433600"/>
+				<text><![CDATA[姓名]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="0" width="100" height="61" uuid="014a157a-7dc3-4f5c-afd0-6d912b93c90e"/>
+				<text><![CDATA[性别]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="0" width="100" height="61" uuid="f03886f6-4bb6-4ac7-bcf6-abb44696fb66"/>
+				<text><![CDATA[称谓]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="100" height="61" uuid="4eba0fad-ec7f-459a-b87b-9c67d6c17812"/>
+				<text><![CDATA[出生日期]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="560" y="0" width="100" height="61" uuid="0577599a-c4fd-413f-b1eb-942ce4efc0d7"/>
+				<text><![CDATA[职务]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="0" width="100" height="61" uuid="bf0ed07a-0097-4e8e-b415-b03b3555d89a"/>
+				<text><![CDATA[负责业务]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="760" y="0" width="100" height="61" uuid="71943649-6045-4ce2-80a5-7101a7096848"/>
+				<text><![CDATA[角色]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="860" y="0" width="100" height="61" uuid="53bd4cac-ae06-408d-a8ab-3ccab9033a8a"/>
+				<text><![CDATA[企业客户编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="960" y="0" width="100" height="61" uuid="858c1106-cb8c-445a-8581-fd7729a537a6"/>
+				<text><![CDATA[部门]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1060" y="0" width="100" height="61" uuid="9b6b27cf-d64d-46a5-b64d-7ec863188de8"/>
+				<text><![CDATA[岗位]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1160" y="0" width="100" height="61" uuid="a53164b3-db94-4ee5-818e-3be816b5f0bd"/>
+				<text><![CDATA[婚否]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1260" y="0" width="100" height="61" uuid="e82e7d57-218c-48c8-91c3-3521f657d675"/>
+				<text><![CDATA[年龄]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1360" y="0" width="100" height="61" uuid="8d5d98f6-86c6-4c73-bd2a-f0bfc2f4a80f"/>
+				<text><![CDATA[家庭情况]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1460" y="0" width="100" height="61" uuid="fd74f74d-3a04-436a-bbfc-40912e9e7bb1"/>
+				<text><![CDATA[毕业院校]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1560" y="0" width="100" height="61" uuid="c02c16e6-9029-4963-a62b-db2abd67c335"/>
+				<text><![CDATA[专业技能]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1660" y="0" width="100" height="61" uuid="f0633463-df2e-46a2-8ce0-163b43ac1cd9"/>
+				<text><![CDATA[工作年限]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1760" y="0" width="100" height="61" uuid="128ab393-6945-4821-8463-30b403f3097a"/>
+				<text><![CDATA[工作经验]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1860" y="0" width="100" height="61" uuid="d0ff136f-4509-4915-8843-e666fac174b8"/>
+				<text><![CDATA[曾供职单位]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1960" y="0" width="100" height="61" uuid="8ff34293-6129-41a8-9f84-419bdaf110b7"/>
+				<text><![CDATA[上级领导]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="60" height="117" uuid="81b9cf1a-f17d-49cb-a0c6-627da9d298ca"/>
+				<text><![CDATA[序号]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="178" width="100" height="56" uuid="83a211b6-90d4-4040-812f-a401f3e5f483"/>
+				<textFieldExpression><![CDATA[$F{Contact_Status}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="117" width="100" height="61" uuid="72ac3565-4fdc-4855-8a60-06733c3f48b1"/>
+				<text><![CDATA[联系人状态]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="178" width="100" height="56" uuid="3d5c773a-e668-43d0-a18d-9869b26b6dc7"/>
+				<textFieldExpression><![CDATA[$F{Contact_Introduction}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="117" width="100" height="61" uuid="9bfa4407-1a92-48e8-98e6-f92f652ecf4f"/>
+				<text><![CDATA[联系情况]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="260" y="178" width="100" height="56" uuid="5ff72e7e-ee8f-4592-b608-17fad2c7fa89"/>
+				<textFieldExpression><![CDATA[$F{Contact_Owner}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="178" width="100" height="56" uuid="ec632a5e-07fb-45bf-a6a5-26002dd23dd3"/>
+				<textFieldExpression><![CDATA[$F{Contact_Sales}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="260" y="117" width="100" height="61" uuid="555ae237-8d25-42ee-9e66-c7dffa9301b6"/>
+				<text><![CDATA[客户所有者]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="360" y="117" width="100" height="61" uuid="583da9bf-d70f-4340-bffb-038079653b35"/>
+				<text><![CDATA[销售负责人]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="178" width="100" height="56" uuid="a43eb4ab-512b-4bd2-8521-613fa2dc3029"/>
+				<textFieldExpression><![CDATA[$F{Contact_Phone_Number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="560" y="178" width="100" height="56" uuid="ce3fb10c-6ec4-45c2-9bfc-fecca4d62f8a"/>
+				<textFieldExpression><![CDATA[$F{Contact_Mailbox}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="178" width="100" height="56" uuid="2471f331-18c2-45a7-ba59-8070ff4e6b37"/>
+				<textFieldExpression><![CDATA[$F{Contact_Work_Phone_Number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="760" y="178" width="100" height="56" uuid="cef861ce-fd86-40ba-8de5-0c4e694e2545"/>
+				<textFieldExpression><![CDATA[$F{Contact_Family_Phone_Number}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="760" y="117" width="100" height="61" uuid="6bd97ec5-96f1-41ff-8fd1-f8fd08ec6ff1"/>
+				<text><![CDATA[家庭电话]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="117" width="100" height="61" uuid="20c4c26f-5e2c-481c-b88f-93445ba8f352"/>
+				<text><![CDATA[手机]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="560" y="117" width="100" height="61" uuid="e37a994a-03e6-4071-884f-f30b65a0bea9"/>
+				<text><![CDATA[邮箱]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="117" width="100" height="61" uuid="4a5f4664-bddb-48e6-b758-f30435bb9471"/>
+				<text><![CDATA[工作电话]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="860" y="178" width="100" height="56" uuid="ef7217de-f0c5-420d-bc2c-5cee876365dd"/>
+				<textFieldExpression><![CDATA[$F{Contact_Fax}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="960" y="178" width="100" height="56" uuid="cf5b0c18-1af8-4efa-b331-a004c2aad4bd"/>
+				<textFieldExpression><![CDATA[$F{Contact_Family_Address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1060" y="178" width="100" height="56" uuid="c800b028-3c79-4c04-80dc-ab2b44b7d7e6"/>
+				<textFieldExpression><![CDATA[$F{Contact_Weixin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="860" y="117" width="100" height="61" uuid="704ed1a9-bce6-4455-aade-c6dd2e5ba82a"/>
+				<text><![CDATA[传真]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="960" y="117" width="100" height="61" uuid="2307b58d-3b02-421b-93e4-f0f36a65a9a6"/>
+				<text><![CDATA[家庭住址]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1060" y="117" width="100" height="61" uuid="03153675-a981-4271-8241-9e91a056fc1f"/>
+				<text><![CDATA[微信]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1160" y="178" width="100" height="56" uuid="306aa8c9-d627-492c-b2ef-60c2a12dc824"/>
+				<textFieldExpression><![CDATA[$F{Contact_QQ}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1260" y="178" width="100" height="56" uuid="3c309955-e289-4091-b102-b91d2f9055c1"/>
+				<textFieldExpression><![CDATA[$F{Contact_Special_Day_Category}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1360" y="178" width="100" height="56" uuid="fa86777f-dda1-488d-8662-6dba74b2a0bc"/>
+				<textFieldExpression><![CDATA[$F{Contact_Special_Day}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1160" y="117" width="100" height="61" uuid="54212b2b-8b3f-4cef-83f8-23a6021d759d"/>
+				<text><![CDATA[QQ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1260" y="117" width="100" height="61" uuid="c16cfb67-2eb6-4f1b-8797-3126e1d2e5c7"/>
+				<text><![CDATA[纪念日类别]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1360" y="117" width="100" height="61" uuid="4e6610c1-707c-4c4a-aa05-2567ab0894a1"/>
+				<text><![CDATA[纪念日]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1460" y="178" width="100" height="56" uuid="37373162-d34a-40c6-a0f4-187a24d1dd27"/>
+				<textFieldExpression><![CDATA[$F{Contact_Interest}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1460" y="117" width="100" height="61" uuid="c2634a64-ae3c-4028-9550-094d93dd4555"/>
+				<text><![CDATA[爱好]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1560" y="178" width="100" height="56" uuid="196c016f-96f7-4ba6-b883-24caf409eda2"/>
+				<textFieldExpression><![CDATA[$F{Contact_Remarks}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1660" y="178" width="100" height="56" uuid="b301d1b9-ed9d-4280-9296-73cf12b581f4"/>
+				<textFieldExpression><![CDATA[$F{Contact_Operator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1760" y="178" width="100" height="56" uuid="1a859e1c-4c77-49d2-a81b-e67db0135af4"/>
+				<textFieldExpression><![CDATA[$F{Contact_Operate_Time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1560" y="117" width="100" height="61" uuid="92cab0e8-8c1d-4364-b091-a9e567f796bf"/>
+				<text><![CDATA[备注]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1660" y="117" width="100" height="61" uuid="e7129ab9-6c52-420a-b3c6-eaeea2aee345"/>
+				<text><![CDATA[操作人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1760" y="117" width="100" height="61" uuid="1f46f39b-67c5-4062-85a2-c10a5a7df4d7"/>
+				<text><![CDATA[修改时间]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1860" y="178" width="100" height="56" uuid="a6e57e32-b41c-4c18-8d45-b29c05c35d40"/>
+				<textFieldExpression><![CDATA[$F{Work_Address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1960" y="178" width="100" height="56" uuid="402829bb-92e7-4ccf-a9fe-45e87d06680e"/>
+				<textFieldExpression><![CDATA[$F{Contact_Create_Time}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1860" y="117" width="100" height="61" uuid="ce5ab983-f9a3-4d4a-a93b-04c46a90b6f5"/>
+				<text><![CDATA[Work_Address]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1960" y="117" width="100" height="61" uuid="897f9e00-be1b-405a-b783-29d99bb6d3ce"/>
+				<text><![CDATA[创建时间]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="290" width="100" height="61" uuid="ad06cfdb-45ee-425f-bb47-9a31ca466843"/>
+				<textFieldExpression><![CDATA[$F{Customer_Province}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="290" width="100" height="61" uuid="f62746c6-45d2-43fc-ad09-3ccf1a38482e"/>
+				<textFieldExpression><![CDATA[$F{Customer_City}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="290" width="100" height="61" uuid="415ef794-2efb-4328-a80c-99d74fe325c0"/>
+				<textFieldExpression><![CDATA[$F{Customer_County}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="234" width="100" height="56" uuid="49366404-5880-42b0-afa1-81f122976f41"/>
+				<text><![CDATA[省份]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="234" width="100" height="56" uuid="4198dda5-264e-4f47-a8f2-a119474250f9"/>
+				<text><![CDATA[城市]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="234" width="100" height="56" uuid="cee1420c-dfb6-4498-a285-f312f10d072a"/>
+				<text><![CDATA[区县]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="290" width="100" height="61" uuid="d8e86a9b-c13e-4975-8dda-f9008db287ec"/>
+				<textFieldExpression><![CDATA[$F{Customer_Name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="234" width="100" height="56" uuid="376fe313-678f-4c7a-87df-ec284e255124"/>
+				<text><![CDATA[企业名称]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="460" y="290" width="100" height="61" uuid="bfe54436-1a19-416c-bd8e-b948227b8977"/>
+				<textFieldExpression><![CDATA[$F{Customer_Simple_Name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="460" y="234" width="100" height="56" uuid="63b2b16a-d9fb-4918-b35f-4be46580aec8"/>
+				<text><![CDATA[助记简称]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="560" y="290" width="100" height="61" uuid="647a7cd0-6527-4499-8f2b-9fb0e2690351"/>
+				<textFieldExpression><![CDATA[$F{Customer_Owner}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="560" y="234" width="100" height="56" uuid="c79b6f3b-4c74-4d2f-9939-49ae74c0abe5"/>
+				<text><![CDATA[客户所有者]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="660" y="290" width="100" height="61" uuid="70f3e831-72dd-4c2f-9e70-2c8b4668e3fe"/>
+				<textFieldExpression><![CDATA[$F{Customer_Sales}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="760" y="290" width="100" height="61" uuid="68ecc68a-a74a-413b-9309-58b7fae2b8c4"/>
+				<textFieldExpression><![CDATA[$F{Customer_Product}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="660" y="234" width="100" height="56" uuid="257f32f0-69d6-43a4-9931-804242d916c4"/>
+				<text><![CDATA[销售负责人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="760" y="234" width="100" height="56" uuid="ab1713a7-c21e-47df-b1ed-584a7e6d07a7"/>
+				<text><![CDATA[产品需求]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="860" y="290" width="100" height="61" uuid="f3ab620c-0ea1-4ba3-859e-2ef0c0c350a4"/>
+				<textFieldExpression><![CDATA[$F{Customer_Req_Des}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="960" y="290" width="100" height="61" uuid="225fde9c-fbd6-4fce-8f64-1c6118da4fdc"/>
+				<textFieldExpression><![CDATA[$F{Customer_Attachment}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1060" y="290" width="100" height="61" uuid="3c8b993b-cb57-4e7b-87e8-121f87c87f36"/>
+				<textFieldExpression><![CDATA[$F{Customer_Category}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="860" y="234" width="100" height="56" uuid="7e49a0f0-364a-444a-be05-f9b09297a44a"/>
+				<text><![CDATA[需求简要描述]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="960" y="234" width="100" height="56" uuid="2c64b24d-f7ac-4110-b6e3-50b1e54ae2d6"/>
+				<text><![CDATA[需求调研附件]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1060" y="234" width="100" height="56" uuid="b0151e5b-0822-493d-933a-3e967a2d7ad4"/>
+				<text><![CDATA[客户类别]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1160" y="290" width="100" height="61" uuid="72987daf-6ce3-4b26-9ee1-f938eb2e2013"/>
+				<textFieldExpression><![CDATA[$F{Customer_Character}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1260" y="290" width="100" height="61" uuid="deb6f798-66df-4dea-a087-2c42623d17ea"/>
+				<textFieldExpression><![CDATA[$F{Customer_Status}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1360" y="290" width="100" height="61" uuid="149e2129-9ca1-45a5-abcf-e48e5ed0dda8"/>
+				<textFieldExpression><![CDATA[$F{Customer_Level}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1160" y="234" width="100" height="56" uuid="9a54fd73-2a14-42ae-9b83-84e5c28eb473"/>
+				<text><![CDATA[企业性质]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1260" y="234" width="100" height="56" uuid="f8bb9728-394a-4368-a39d-ad8468191e7b"/>
+				<text><![CDATA[客户状态]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1360" y="234" width="100" height="56" uuid="b311c6f5-dbff-47ae-83ba-22719ce50104"/>
+				<text><![CDATA[客户级别]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1460" y="290" width="100" height="61" uuid="40db472f-ba38-4c64-b859-764dfdaac3e1"/>
+				<textFieldExpression><![CDATA[$F{Customer_Sale_Phase}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1460" y="234" width="100" height="56" uuid="c4f65415-3a05-4cce-b674-05c6a818f020"/>
+				<text><![CDATA[销售阶段]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1560" y="290" width="100" height="61" uuid="ad7f1369-8503-47e0-8e40-83442c2c4e2a"/>
+				<textFieldExpression><![CDATA[$F{Customer_Inner_Phase}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1660" y="290" width="100" height="61" uuid="42d9fdc1-92a1-424d-9796-19c17b91d6f0"/>
+				<textFieldExpression><![CDATA[$F{Customer_Source}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1560" y="234" width="100" height="56" uuid="2546a7bc-724c-4b2d-9aa4-2a1f1987dc76"/>
+				<text><![CDATA[客户内部阶段]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1660" y="234" width="100" height="56" uuid="58a2700e-2e78-40dc-a994-1638ee2fc2d3"/>
+				<text><![CDATA[来源]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1760" y="290" width="100" height="61" uuid="2ee4a4e6-a7bf-44c3-baf4-4f8bae5da6f3"/>
+				<textFieldExpression><![CDATA[$F{Customer_Industry}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1860" y="290" width="100" height="61" uuid="40a54faf-9d0f-4aad-a341-8dbe7d111071"/>
+				<textFieldExpression><![CDATA[$F{Customer_Staff_Size}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1760" y="234" width="100" height="56" uuid="4efcee38-2e16-4c18-a5b0-12d66a09682f"/>
+				<text><![CDATA[行业]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1860" y="234" width="100" height="56" uuid="d8cb7be8-20aa-4a53-98d4-40a23c4f0581"/>
+				<text><![CDATA[人员规模]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="1960" y="290" width="100" height="61" uuid="f424d2c6-8078-4097-a50b-f7a9c0093deb"/>
+				<textFieldExpression><![CDATA[$F{Customer_Credit_Rank}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="1960" y="234" width="100" height="56" uuid="2cbfe664-e345-4804-9fba-88a3c6c8ee42"/>
+				<text><![CDATA[信用等级]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="60" y="407" width="100" height="61" uuid="7c5fffb6-b412-4300-af45-81002c50ee4b"/>
+				<textFieldExpression><![CDATA[$F{Customer_Potential}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="60" y="351" width="100" height="56" uuid="6d8a53c5-e3c5-4b0f-bfb3-672b5123a2ba"/>
+				<text><![CDATA[客户潜力]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="160" y="407" width="100" height="61" uuid="ef89c2dd-8062-4019-bb50-18515765f27d"/>
+				<textFieldExpression><![CDATA[$F{Customer_Emp_Number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="407" width="100" height="61" uuid="11fad3cf-107e-4dfc-8f5d-f6424a014dbb"/>
+				<textFieldExpression><![CDATA[$F{Customer_Parent}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="160" y="351" width="100" height="56" uuid="9b76777f-7a69-4a46-92f4-2ed8113d90f2"/>
+				<text><![CDATA[员工数量]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="351" width="100" height="56" uuid="e5f86228-752b-4c95-8db6-15a3df2fe72d"/>
+				<text><![CDATA[上级单位]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="407" width="100" height="61" uuid="617d01a8-07e8-4983-a881-7e6ff7792e59"/>
+				<textFieldExpression><![CDATA[$F{Customer_Introduction}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="407" width="100" height="61" uuid="249ddc83-7cae-406d-8779-59b55e8d2d6f"/>
+				<textFieldExpression><![CDATA[$F{Customer_Visit_Mode}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="360" y="351" width="100" height="56" uuid="b48f951b-d34b-4d92-9c11-582e95e251f4"/>
+				<text><![CDATA[公司简介]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="351" width="100" height="56" uuid="f2a4c240-8bd2-4f64-9851-b86c16236dbf"/>
+				<text><![CDATA[拜访交通方式]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="560" y="407" width="100" height="61" uuid="6d8a1455-16d7-43e2-8e5f-132acb1bf05d"/>
+				<textFieldExpression><![CDATA[$F{Customer_Old_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="660" y="407" width="100" height="61" uuid="8378c34d-c31b-4170-a249-3d598109925d"/>
+				<textFieldExpression><![CDATA[$F{Customer_Child_Company}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="760" y="407" width="100" height="61" uuid="a03ae3ca-ddd2-4fe9-a3b6-1fd5c9e3488d"/>
+				<textFieldExpression><![CDATA[$F{Customer_Hot}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="760" y="351" width="100" height="56" uuid="8ff4b073-3aad-4d67-addd-c9b2e64bff0a"/>
+				<text><![CDATA[热点客户]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="660" y="351" width="100" height="56" uuid="166015a7-2814-4910-b242-5ffa008452f0"/>
+				<text><![CDATA[子公司名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="560" y="351" width="100" height="56" uuid="83ff9f37-6f37-48a8-bab3-fd9c32cfdd09"/>
+				<text><![CDATA[旧客户编号]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="860" y="407" width="100" height="61" uuid="65abf4cd-3782-4e9b-b3ce-e6d7e1676c37"/>
+				<textFieldExpression><![CDATA[$F{Customer_Hot_Rank}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="960" y="407" width="100" height="61" uuid="7047aa1a-c667-47fc-844e-f4525de4caec"/>
+				<textFieldExpression><![CDATA[$F{Customer_Hot_Classif}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1060" y="407" width="100" height="61" uuid="8056b79d-837d-4156-b76e-6d28cb40afe1"/>
+				<textFieldExpression><![CDATA[$F{Customer_Volume}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1160" y="407" width="100" height="61" uuid="e0f46201-6d88-44ab-b694-944f2452160a"/>
+				<textFieldExpression><![CDATA[$F{Customer_Hot_Desc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1260" y="407" width="100" height="61" uuid="5cf726e0-ac77-480a-ba36-8f064b458744"/>
+				<textFieldExpression><![CDATA[$F{Customer_Invoice_Name}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="860" y="351" width="100" height="56" uuid="63d2a7bc-1277-4d6c-b4bd-7817d948d860"/>
+				<text><![CDATA[热度]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="960" y="351" width="100" height="56" uuid="1a0ff25e-a3b4-44b9-8eb9-3ec3b02f9b74"/>
+				<text><![CDATA[热点客户分类]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1060" y="351" width="100" height="56" uuid="683fd69c-26cf-46a4-9af7-a4c6a995b014"/>
+				<text><![CDATA[预期成交金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1160" y="351" width="100" height="56" uuid="460b043f-3138-4bf8-984f-48b86f333236"/>
+				<text><![CDATA[热点说明]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1260" y="351" width="100" height="56" uuid="0dc56cab-f7a8-479f-abc2-a17410623205"/>
+				<text><![CDATA[开票名称]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

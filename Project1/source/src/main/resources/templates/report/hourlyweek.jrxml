@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="hourlyweek" language="groovy" pageWidth="2000" pageHeight="842" columnWidth="1960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c361032a-b94b-481b-b6f5-492113fdab76">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="397"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select  d.Project_Name,b.Employee_Name,a.Labor_Total_Hour_Num,b.Employee_Salary_Hour
+from budget_labor a
+left join inner_org_employee b
+on a.Employee_ID=b.Employee_ID
+left join project_budget c
+on a.Budget_ID=c.Budget_ID
+left join development_project d
+on c.Project_ID=d.Project_ID
+]]>
+	</queryString>
+	<field name="Project_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[项目名称]]></fieldDescription>
+	</field>
+	<field name="Employee_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[员工姓名/销售负责人]]></fieldDescription>
+	</field>
+	<field name="Labor_Total_Hour_Num" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[合计工时数]]></fieldDescription>
+	</field>
+	<field name="Employee_Salary_Hour" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[时薪]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="375" y="32" width="100" height="20" uuid="97e5662e-a747-4027-abd9-206246f78d47"/>
+				<text><![CDATA[销售时薪分析表 按周]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="171" height="61" uuid="e893e9ee-e566-479e-90c1-2f55136e7a5e"/>
+				<text><![CDATA[项目名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="0" width="100" height="61" uuid="5496ea87-7500-4fa5-a1f2-1ba08e664e1a"/>
+				<text><![CDATA[人员]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="0" width="100" height="61" uuid="d0617222-4150-49c3-8547-70c406fe82c3"/>
+				<text><![CDATA[第一周]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="371" y="0" width="100" height="61" uuid="1e077e28-6584-47c3-bcaf-02ed5e76226e"/>
+				<text><![CDATA[第二周]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="471" y="0" width="100" height="61" uuid="0c1447a9-98f9-480e-a71c-3d00898222e5"/>
+				<text><![CDATA[第三周]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="571" y="0" width="100" height="61" uuid="84a6a471-8564-4d6b-a571-e00b0ce96745"/>
+				<text><![CDATA[第四周]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="671" y="0" width="100" height="61" uuid="2cab4b88-17dd-4a9d-8027-7ba3248350a4"/>
+				<text><![CDATA[工时合计]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="771" y="0" width="100" height="61" uuid="f4e179e5-bc1c-4144-b2c5-c3626bc9e0d8"/>
+				<text><![CDATA[人工单位成本]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="871" y="0" width="100" height="61" uuid="ebb57e3b-e1ac-4664-b525-8643f6ad13b2"/>
+				<text><![CDATA[成本合计]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="171" height="61" uuid="aa20ffd6-2779-4bac-beec-b1ad98656d1c"/>
+				<textFieldExpression><![CDATA[$F{Project_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="171" y="0" width="100" height="61" uuid="373211d2-041a-4e49-8284-c838578bb3f9"/>
+				<textFieldExpression><![CDATA[$F{Employee_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="671" y="0" width="100" height="61" uuid="fd148161-10f2-4cf1-adfe-7359d4822e93"/>
+				<textFieldExpression><![CDATA[$F{Labor_Total_Hour_Num}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="771" y="0" width="100" height="61" uuid="b5cad082-2894-40c6-a909-c4b67e166514"/>
+				<textFieldExpression><![CDATA[$F{Employee_Salary_Hour}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

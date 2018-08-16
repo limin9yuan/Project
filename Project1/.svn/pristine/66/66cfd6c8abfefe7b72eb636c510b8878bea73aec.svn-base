@@ -1,0 +1,77 @@
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style type="text/css">
+    a {text-decoration: none}
+  </style>
+</head>
+<body text="#000000" link="#000000" alink="#000000" vlink="#000000">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="50%">&nbsp;</td><td align="center">
+
+<a name="JR_PAGE_ANCHOR_0_1"></a>
+<table style="width: 2000px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 1300px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="8"><img alt="" src="projectcost_hourly.html_files/px" style="width: 2000px; height: 18px;"/></td>
+</tr>
+<tr valign="top">
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工时统计表</span></p></td>
+  <td colspan="7"><img alt="" src="projectcost_hourly.html_files/px" style="width: 1900px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="8"><img alt="" src="projectcost_hourly.html_files/px" style="width: 2000px; height: 35px;"/></td>
+</tr>
+<tr valign="top">
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">项目编号</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">项目名称</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">项目人员姓名</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">人员级别</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工时统计</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">时薪</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工时成本</span></p></td>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 1300px; height: 61px;"/></td>
+</tr>
+<tr valign="top">
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">130303001001001</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">zm</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">79</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">1级</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">324</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">678.00</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">219672.00</span></p></td>
+  <td><img alt="" src="projectcost_hourly.html_files/px" style="width: 1300px; height: 54px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="8"><img alt="" src="projectcost_hourly.html_files/px" style="width: 2000px; height: 474px;"/></td>
+</tr>
+<tr valign="top">
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">工时总计</span></p></td>
+  <td><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">219672</span></p></td>
+  <td colspan="6"><img alt="" src="projectcost_hourly.html_files/px" style="width: 1800px; height: 45px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="8"><img alt="" src="projectcost_hourly.html_files/px" style="width: 2000px; height: 54px;"/></td>
+</tr>
+</table>
+
+<![if IE]>
+<script>
+var links = document.querySelectorAll('link.jrWebFont');
+setTimeout(function(){ if (links) { for (var i = 0; i < links.length; i++) { links.item(i).href = links.item(i).href; } } }, 0);
+</script>
+<![endif]>
+</td><td width="50%">&nbsp;</td></tr>
+</table>
+</body>
+</html>

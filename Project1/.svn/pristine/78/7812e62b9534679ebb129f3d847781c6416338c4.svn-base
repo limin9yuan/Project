@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="timesheet" language="groovy" pageWidth="2000" pageHeight="2000" columnWidth="1960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9ab44e7-5217-4b57-a597-f0b14d69a145">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select a.Project_ID,c.Project_Gategory,c.Project_Name,c.Project_Owner,a.Employee_ID,b.Employee_Name,d.Job_Name,b.Employee_Level,f.Dept_Name,b.Employee_Center,a.TimeSheet_Normal,a.TimeSheet_Overtime
+from timesheet a
+left join inner_org_employee b
+on a.Employee_ID=b.Employee_ID
+left join development_project c
+on a.Project_ID=c.Project_ID
+left join inner_org_job d
+on b.Job_ID=d.Job_ID
+left join inner_org_dept f
+on b.Dept_ID=f.Dept_ID]]>
+	</queryString>
+	<field name="Project_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[项目编号]]></fieldDescription>
+	</field>
+	<field name="Project_Gategory" class="java.lang.String">
+		<fieldDescription><![CDATA[项目类型]]></fieldDescription>
+	</field>
+	<field name="Project_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[项目名称]]></fieldDescription>
+	</field>
+	<field name="Project_Owner" class="java.lang.String">
+		<fieldDescription><![CDATA[负责人]]></fieldDescription>
+	</field>
+	<field name="Employee_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[员工工号]]></fieldDescription>
+	</field>
+	<field name="Employee_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[员工姓名/销售负责人]]></fieldDescription>
+	</field>
+	<field name="Job_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[岗位名称]]></fieldDescription>
+	</field>
+	<field name="Employee_Level" class="java.lang.String">
+		<fieldDescription><![CDATA[员工等级]]></fieldDescription>
+	</field>
+	<field name="Dept_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[部门名称]]></fieldDescription>
+	</field>
+	<field name="Employee_Center" class="java.lang.String">
+		<fieldDescription><![CDATA[所属中心]]></fieldDescription>
+	</field>
+	<field name="TimeSheet_Normal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[正常工时]]></fieldDescription>
+	</field>
+	<field name="TimeSheet_Overtime" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[加班工时]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="218" y="46" width="100" height="20" uuid="a3a03a60-8c46-42df-b16c-3c26f36cbf1c"/>
+				<text><![CDATA[工时统计表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="61" uuid="8ea2f138-f70a-4878-8276-15f5f86b5615"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[项目编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="61" uuid="1a59909c-3936-4121-b94e-f0b42c672d9c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[项目类型]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="167" height="61" uuid="87dc970d-e820-4a80-a0a3-f02b466f0b88"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[项目名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="367" y="0" width="100" height="61" uuid="fca34f82-9a11-4a16-bc9d-ff84b8f303bb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[项目经理]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="567" y="0" width="100" height="61" uuid="2860d879-0e78-4fd6-823c-c7787f923dcf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[员工姓名/销售负责人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="667" y="0" width="100" height="61" uuid="b04274aa-0030-43b6-9976-9d0ef7a47ae7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[岗位名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="767" y="0" width="100" height="61" uuid="01bbe585-3195-42ce-bc98-b5bfa2f5a316"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[员工等级]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="867" y="0" width="100" height="61" uuid="e3a03e27-6c35-4cd0-bc08-7be7fc2aefdc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[部门名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="967" y="0" width="100" height="61" uuid="b935c497-703e-4512-9dfb-ee196eb1bb6d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[所属中心]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1067" y="2" width="100" height="59" uuid="44d7d9e7-26ae-4d9d-8fb6-f45bd8b7898d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[正常工时]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1167" y="2" width="100" height="59" uuid="6e4058c3-bf79-4b4b-8199-afa19ae13c63"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[加班工时]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="467" y="2" width="100" height="59" uuid="be231267-2c0c-475e-8d15-6f0e438a7f7b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[工号]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="63" uuid="4ff97b96-845f-41d4-8333-4888acdaaeee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Project_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="63" uuid="97b3ee29-71f0-4d4f-b00a-4bf263d9d640"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Project_Gategory}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="167" height="63" uuid="9ae78462-0d6d-4b8d-ab9e-8fc80ea5e4fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Project_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="367" y="0" width="100" height="63" uuid="85236edd-b6f1-499d-a98b-8991fb407b27"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Project_Owner}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="567" y="0" width="100" height="63" uuid="af74f5c5-b137-46a6-a1d2-2af79992dda2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Employee_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="667" y="0" width="100" height="63" uuid="cec67640-e15c-4dee-8c5b-e76d97a02f0d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Job_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="767" y="0" width="100" height="63" uuid="e7a625b6-36f8-4421-81dd-366fa0348c86"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Employee_Level}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="867" y="0" width="100" height="63" uuid="d4524ceb-4e45-4b74-bee3-c711f8484c2e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Dept_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="967" y="0" width="100" height="63" uuid="1a42ccf3-478e-47e0-b521-036eb0dec46a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Employee_Center}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1067" y="0" width="100" height="63" uuid="6d138e82-e924-4e06-aa8a-c211222d3775"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TimeSheet_Normal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1167" y="0" width="100" height="63" uuid="18cfef04-f618-4241-af94-a1bccd555ff6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{TimeSheet_Overtime}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="467" y="0" width="100" height="63" uuid="504f85c1-3c6e-471c-8857-228c092fc1ff"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Employee_ID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

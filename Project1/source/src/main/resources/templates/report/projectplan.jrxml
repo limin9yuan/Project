@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="projectplan" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c9805dad-c04c-4f62-b483-7983f43a7a64">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\工作报表\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="Project_ID" class="java.lang.String">
+		<defaultValueExpression><![CDATA[$F{Project_ID}]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select a.Project_ID,g.Employee_Name as Project_Owner,a.Project_Name,a.Project_Description,Responsible_Center,
+d.Province_Name as Customer_Province1,e.City_Name as Customer_City1,f.Area_Name as Customer_County1,
+b.Budget_Profit_Rate,b.Budget_Total_Cost,b.Budget_Conformance,b.Budget_Service_Revenue,b.Budget_Service_Revenue_Net,b.Budget_Cost,b.Budget_Profit
+ from  development_project a
+ inner join project_budget b
+ on b.Project_ID=a.Project_ID
+inner  join sales_company_customer c
+ on a.Customer_ID=c.Customer_ID
+inner  join sales_province d
+ on d.Province_Id=c.Customer_Province
+inner  join sales_province_city e
+ on e.Province_Id=c.Customer_Province and  e.City_Id=c.Customer_City
+inner  join sales_city_area f
+ on f.City_Id=c.Customer_City and f.Area_Id=c.Customer_County
+inner  join inner_org_employee g
+ on g.Employee_ID=a.Project_Owner
+ where a.Project_ID=$P{Project_ID}]]>
+	</queryString>
+	<field name="Project_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[项目编号]]></fieldDescription>
+	</field>
+	<field name="Project_Owner" class="java.lang.String"/>
+	<field name="Project_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[项目名称]]></fieldDescription>
+	</field>
+	<field name="Project_Description" class="java.lang.String">
+		<fieldDescription><![CDATA[项目描述]]></fieldDescription>
+	</field>
+	<field name="Responsible_Center" class="java.lang.String">
+		<fieldDescription><![CDATA[负责中心]]></fieldDescription>
+	</field>
+	<field name="Customer_Province1" class="java.lang.String"/>
+	<field name="Customer_City1" class="java.lang.String"/>
+	<field name="Customer_County1" class="java.lang.String"/>
+	<field name="Budget_Profit_Rate" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[项目计划利润率]]></fieldDescription>
+	</field>
+	<field name="Budget_Total_Cost" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[计划成本总额]]></fieldDescription>
+	</field>
+	<field name="Budget_Conformance" class="java.lang.String">
+		<fieldDescription><![CDATA[计划是否合规]]></fieldDescription>
+	</field>
+	<field name="Budget_Service_Revenue" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[服务收入]]></fieldDescription>
+	</field>
+	<field name="Budget_Service_Revenue_Net" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[服务净收入]]></fieldDescription>
+	</field>
+	<field name="Budget_Cost" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[费用和支持（含税）]]></fieldDescription>
+	</field>
+	<field name="Budget_Profit" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[利润]]></fieldDescription>
+	</field>
+	<variable name="Projectid" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="79" uuid="1f5b7852-09b6-4149-9eba-6fb552a28443"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[项目计划表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="52" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="3" width="92" height="20" uuid="7724fcfe-7071-44b2-8fa2-526219f10861"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[负责中心：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="22" width="46" height="20" uuid="ab32fa30-a0b7-4bae-9dde-1337d14e1bfc"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[项目主管]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="46" y="22" width="46" height="20" uuid="c4c38e2f-ebea-4c23-ac46-0aae785de45c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[项目经理]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="141" y="23" width="59" height="19" uuid="6f8315d1-5633-4167-b35d-c9b9915b8403"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[项目名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="92" y="23" width="49" height="20" uuid="48aed5a4-83f1-4d7f-93d9-9daf6ac9b4f0"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[项目编号]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="92" y="3" width="108" height="20" uuid="12935ee6-1ca6-4779-9293-5a06ecabedd7"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Responsible_Center}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="3" width="355" height="20" uuid="cef8476d-1936-4879-8335-217de4a1bd87"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[财务主管审批：]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="23" width="155" height="20" uuid="3cc437b5-a84b-471f-9377-3fb4f4016da9"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[地区]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="289" y="23" width="48" height="20" uuid="265429ae-eabf-4e4c-a44a-9475e6b25b17"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[计划成本总额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="337" y="23" width="63" height="20" uuid="166b6595-4782-485c-8958-cb3ab933081f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[计划成本是否合规]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="23" width="41" height="20" uuid="1ee1508a-ee51-470b-b84d-b0fd98be7230"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[项目描述]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="241" y="23" width="48" height="20" uuid="ec9c1654-60ad-4173-94c2-ff0a7406059a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[计划利润率%]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="509" splitType="Stretch">
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="46" height="20" uuid="26b3aa3a-349b-4244-a151-8d9b20091ae2"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Project_Owner}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="46" y="0" width="46" height="20" uuid="373d1967-48b5-4f8f-85fd-99d7820e4c7f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement>
+					<font fontName="宋体"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Project_Owner}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="0" width="59" height="20" uuid="8127d121-c60c-43a9-9084-834c8cb05103"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Project_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="41" height="20" uuid="a5dc0c30-7819-4d9a-b04b-b76588130d6d"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Project_Description}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="241" y="0" width="48" height="20" uuid="f167aeea-6e59-4bd8-82a2-b2b9127b96c3"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Budget_Profit_Rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="289" y="0" width="48" height="20" uuid="0f2ba356-76ea-484c-87c3-d3fb5fb2de5e"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Budget_Total_Cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="337" y="0" width="63" height="20" uuid="2baabd8b-9e27-4ee5-a65e-b2b5cf010e56"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Budget_Conformance}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="40" width="100" height="20" uuid="bde3facc-b832-474b-a185-13a0eeaba321"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Budget_Service_Revenue}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="20" width="100" height="20" uuid="38f5ebc4-3875-4f91-af01-c3bc03e7e08f"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[服务收入]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="20" width="100" height="20" uuid="6dabb781-42f7-4592-979b-e97f57d2b3bc"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[服务净收入]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="200" y="40" width="137" height="20" uuid="e8f053ce-db80-4d63-be96-851bc8c3f4ae"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Budget_Cost}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="20" width="137" height="20" uuid="85a84ad6-6efb-450c-9d48-4d2a4be27f52"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[费用和支持（含税）]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="337" y="40" width="218" height="20" uuid="97e863cd-31ab-45ec-a33f-a53ba2a7ca9c"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Budget_Profit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="337" y="20" width="218" height="20" uuid="4d47a786-57e4-4eff-af53-89a074bbbeac"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<text><![CDATA[利润]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="92" y="0" width="49" height="20" uuid="2b9c4343-1fc1-4460-a368-2e2360b83bf4"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Project_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="40" width="100" height="20" uuid="a9439b8d-ec5c-4610-a796-1d3735e3197a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Budget_Service_Revenue_Net}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="50" height="20" uuid="f1a84dc7-7bd5-4440-bb56-f892acfd5af9"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Customer_Province1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="501" y="1" width="54" height="19" uuid="68b2a3ea-05a5-49c0-8a32-7dcec37b28d2"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Customer_County1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="1" width="51" height="19" uuid="bd02181b-29d2-4493-ac8c-fd0aed3e0d24"/>
+				<box>
+					<pen lineWidth="0.5"/>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{Customer_City1}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="100" y="147" width="87" height="38" uuid="98ea6ed6-4b21-47be-b1fc-d27120d9b509"/>
+				<subreportParameter name="Project_ID">
+					<subreportParameterExpression><![CDATA[$F{Project_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "projectplan_purchase.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="92" y="75" width="66" height="47" uuid="2a7e6ece-5d4b-40c0-8493-bd97bf566704"/>
+				<subreportParameter name="Project_ID">
+					<subreportParameterExpression><![CDATA[$F{Project_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "projectplan_budget.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="100" y="224" width="63" height="46" uuid="a1da2053-c08e-4e9c-af4c-cf4550e537ad"/>
+				<subreportParameter name="Project_ID">
+					<subreportParameterExpression><![CDATA[$F{Project_ID}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "projectplan_project.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

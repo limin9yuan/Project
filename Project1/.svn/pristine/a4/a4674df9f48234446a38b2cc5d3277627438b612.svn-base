@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="hourly" language="groovy" pageWidth="2000" pageHeight="842" columnWidth="1960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e43b1792-779e-405c-b488-1e4f7b6aa839">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select a.Employee_Center,a.Employee_Name,b.Labor_Total_Hour_Num,a.Employee_Salary_Hour,(a.Employee_Salary_Hour*b.Labor_Total_Hour_Num) as xiaoji,
+c.Budget_Account_Receivable
+from inner_org_employee a
+left join budget_labor b
+on a.Employee_ID=b.Employee_ID
+left join project_budget c
+on b.Budget_ID=c.Budget_ID]]>
+	</queryString>
+	<field name="Employee_Center" class="java.lang.String">
+		<fieldDescription><![CDATA[所属中心]]></fieldDescription>
+	</field>
+	<field name="Employee_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[员工姓名/销售负责人]]></fieldDescription>
+	</field>
+	<field name="Labor_Total_Hour_Num" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[合计工时数]]></fieldDescription>
+	</field>
+	<field name="Employee_Salary_Hour" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[时薪]]></fieldDescription>
+	</field>
+	<field name="xiaoji" class="java.lang.Integer">
+		<fieldDescription><![CDATA[时薪小计]]></fieldDescription>
+	</field>
+	<field name="Budget_Account_Receivable" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[应收账款总额]]></fieldDescription>
+	</field>
+	<variable name="xishu" class="java.lang.Integer">
+		<variableExpression><![CDATA[(($F{xiaoji})%($V{xiaojinum}))]]></variableExpression>
+	</variable>
+	<variable name="xiaojinum" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{xiaoji}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="242" y="40" width="100" height="20" uuid="cab2f97b-26a4-4473-bb4a-48e5a315e392"/>
+				<text><![CDATA[销售时薪分析表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="61" uuid="cdc22f31-729e-4d50-817f-1627be1cf8c9"/>
+				<text><![CDATA[中心-部门]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="61" uuid="fdd167f0-0217-40b7-a2fd-a219351fb339"/>
+				<text><![CDATA[参加人员]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="61" uuid="6c626861-f651-41f1-a4b8-4141b0a0794d"/>
+				<text><![CDATA[工时数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="61" uuid="dff6367c-377f-491e-8fd1-c17fd3a76b66"/>
+				<text><![CDATA[成本时薪单价]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="61" uuid="21d20ef8-a8f0-481c-b5c5-7b352a6b237f"/>
+				<text><![CDATA[时薪小计]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="0" width="100" height="61" uuid="3ba1c68a-2098-4156-af66-989d02e4e8cd"/>
+				<text><![CDATA[项目金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="100" height="61" uuid="2c6186c0-1db7-4273-82d0-434e7c1e9ace"/>
+				<text><![CDATA[系数]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="0" width="100" height="61" uuid="e043aa49-481e-4b29-9b17-9e212933728e"/>
+				<text><![CDATA[项目金额分配]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="800" y="0" width="100" height="61" uuid="562a47ae-1bac-4ed8-9f86-b292ff382123"/>
+				<text><![CDATA[销售时薪单价]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="900" y="0" width="100" height="61" uuid="ae97218d-32f1-48a5-921e-103e5f8375eb"/>
+				<text><![CDATA[时薪利润率]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="62" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="62" uuid="dd8bd298-3379-487f-bf1e-d9f5eb90273a"/>
+				<textFieldExpression><![CDATA[$F{Employee_Center}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="62" uuid="ee10e0f6-4077-4c22-922b-c9329a4b9b68"/>
+				<textFieldExpression><![CDATA[$F{Employee_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="62" uuid="9623f786-84e0-41b3-81c1-d9a7944f8c8f"/>
+				<textFieldExpression><![CDATA[$F{Labor_Total_Hour_Num}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="62" uuid="346b7c1d-d79b-4e8f-bf46-a7b3240d2e48"/>
+				<textFieldExpression><![CDATA[$F{Employee_Salary_Hour}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="62" uuid="4adead36-3756-46c7-a498-4e586ebcff50"/>
+				<textFieldExpression><![CDATA[$F{xiaoji}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="62" uuid="f983596d-2adc-4778-800b-e2d246a66fc9"/>
+				<textFieldExpression><![CDATA[$F{Budget_Account_Receivable}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="100" height="62" uuid="e390b729-138b-4464-8aaa-19d84abbc27f"/>
+				<textFieldExpression><![CDATA[$V{xishu}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="265" y="24" width="100" height="20" uuid="e886f364-bc90-448f-a9f3-6f83d969edbb"/>
+				<textFieldExpression><![CDATA[$V{xiaojinum}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

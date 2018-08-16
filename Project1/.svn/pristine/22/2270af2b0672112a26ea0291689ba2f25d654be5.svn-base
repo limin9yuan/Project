@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="hourly" type="hidden" name="hourly" th:value="bootdo2"/>
+<script type="text/javascript" src="/js/appjs/ireport/ireport_hourly.js"></script>
+</body>
+</html>

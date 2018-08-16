@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="costaccounting" language="groovy" pageWidth="2500" pageHeight="842" columnWidth="2460" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="78c059ff-184c-464c-a3b1-41ead0f8a9d5">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select d.Customer_Name,a.Contract_ID,b.Project_ID,b.Project_Name,b.Project_Owner,a.Contract_Total_Price,e.Received_Price,(e.Received_Price-f.Receivable_Price) as unRecervable_Price,
+g.Labor_Total_Cost,i.Purchase_Price,j.Expenses_Travel_Price,h.Budget_Tax
+
+from contract  a
+inner join contract_project c
+on a.Contract_ID=c.Contract_ID
+inner join development_project b
+on b.Project_ID=c.Project_ID
+left join sales_company_customer d
+on a.Customer_ID=d.Customer_ID
+left join payment_received e
+on a.Contract_ID=e.Contract_ID
+left join accounts_receivable f
+on a.Contract_ID=f.Contract_ID
+left join project_budget h
+on h.Project_ID=c.Project_ID
+left join budget_labor g
+on  h.Budget_ID=g.Budget_ID
+left join budget_purchase i
+on h.Budget_ID=i.Budget_ID
+left join approval_expenses__travel j
+on j.Project_ID=c.Project_ID]]>
+	</queryString>
+	<field name="Customer_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[企业名称]]></fieldDescription>
+	</field>
+	<field name="Contract_ID" class="java.lang.Integer">
+		<fieldDescription><![CDATA[合同编号]]></fieldDescription>
+	</field>
+	<field name="Project_ID" class="java.lang.String">
+		<fieldDescription><![CDATA[项目编号]]></fieldDescription>
+	</field>
+	<field name="Project_Name" class="java.lang.String">
+		<fieldDescription><![CDATA[项目名称]]></fieldDescription>
+	</field>
+	<field name="Project_Owner" class="java.lang.String">
+		<fieldDescription><![CDATA[负责人]]></fieldDescription>
+	</field>
+	<field name="Contract_Total_Price" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[合同总金额]]></fieldDescription>
+	</field>
+	<field name="Received_Price" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[回款金额]]></fieldDescription>
+	</field>
+	<field name="unRecervable_Price" class="java.math.BigDecimal"/>
+	<field name="Labor_Total_Cost" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[人工成本合计]]></fieldDescription>
+	</field>
+	<field name="Purchase_Price" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[采购金额预估]]></fieldDescription>
+	</field>
+	<field name="Expenses_Travel_Price" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[其他费用金额]]></fieldDescription>
+	</field>
+	<field name="Budget_Tax" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[税金]]></fieldDescription>
+	</field>
+	<variable name="count" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[new Integer ("1")]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="289" y="30" width="100" height="20" uuid="661bd4ca-847b-43ce-8e1a-0af74e7245fd"/>
+				<text><![CDATA[成本核算表]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="61" uuid="80636f99-707c-4344-8de8-586eab570c49"/>
+				<text><![CDATA[序号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="100" height="61" uuid="08fdc810-c967-4a0b-a49a-262cd7ed4b53"/>
+				<text><![CDATA[企业名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="200" y="0" width="100" height="61" uuid="0528b556-c015-4ff9-ab70-c80e7e6783be"/>
+				<text><![CDATA[合同编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="300" y="0" width="100" height="61" uuid="f631922f-8f7a-48e5-9996-f5b6a06e2aa4"/>
+				<text><![CDATA[项目编号]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="400" y="0" width="100" height="61" uuid="7a77d339-238b-4977-b547-5f883a064392"/>
+				<text><![CDATA[项目名称]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="500" y="0" width="100" height="61" uuid="1de02aa4-fbfc-4498-a4aa-ba46eb3167ab"/>
+				<text><![CDATA[负责人]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="600" y="0" width="100" height="61" uuid="c09038c4-6ff7-4e8b-b9fc-7b36f69c0ea1"/>
+				<text><![CDATA[合同总金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="700" y="0" width="100" height="61" uuid="c8487fd0-affe-4c84-a626-60d28a1ff88f"/>
+				<text><![CDATA[回款金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="800" y="0" width="100" height="61" uuid="df944ab2-d5e3-4be6-b879-12fcc6de01a3"/>
+				<text><![CDATA[未收款金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="900" y="0" width="100" height="61" uuid="85c86fbe-c7b9-4303-b829-a3516eba39b0"/>
+				<text><![CDATA[人工成本合计]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1000" y="0" width="100" height="61" uuid="05e0b877-4673-4f68-af7b-96f4c8607896"/>
+				<text><![CDATA[采购金额预估]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1100" y="0" width="100" height="61" uuid="9d50beac-9154-470d-abc0-2edf3716b012"/>
+				<text><![CDATA[其他费用金额]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1200" y="0" width="100" height="61" uuid="4764e8c2-9aa7-4849-965b-952363688729"/>
+				<text><![CDATA[税金]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1300" y="0" width="100" height="61" uuid="766d5e80-1d38-44d8-a1c7-f8c962a96044"/>
+				<text><![CDATA[成本费用合计]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1400" y="0" width="100" height="61" uuid="e73417f8-92d9-4558-9939-088e4fb7eed8"/>
+				<text><![CDATA[毛利润]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1500" y="0" width="100" height="61" uuid="0f3f5f07-78ff-4074-8230-ce1b2fd66a0a"/>
+				<text><![CDATA[毛利率]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1600" y="0" width="100" height="61" uuid="268b0fb5-1345-41ba-9e8b-1dc116fd512b"/>
+				<text><![CDATA[费用比例]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1700" y="0" width="100" height="61" uuid="fde98449-8416-475f-ae8f-efa1ef4037c8"/>
+				<text><![CDATA[间接人工成本]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1800" y="0" width="100" height="61" uuid="406cd7bd-66e6-4f7c-aa2d-d924be2f34e2"/>
+				<text><![CDATA[费用类其他成本]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="1900" y="0" width="100" height="61" uuid="b7fb91a6-8a56-4804-9787-8f391dbe8914"/>
+				<text><![CDATA[成本总记]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2000" y="0" width="100" height="61" uuid="605ba07e-4e4e-4463-a64b-71ecc723788a"/>
+				<text><![CDATA[净利润]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="2100" y="0" width="100" height="61" uuid="2b77b030-fe92-4433-9fb9-680e27070abe"/>
+				<text><![CDATA[净利率]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="65" uuid="fb082edd-ff41-46cd-a2c5-cf701a75a8af"/>
+				<textFieldExpression><![CDATA[$V{count}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="65" uuid="4a8e26fc-9643-44f2-b33f-f1708b2612b6"/>
+				<textFieldExpression><![CDATA[$F{Customer_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="65" uuid="ad375cea-012b-48f2-bff4-4e6e2772ac52"/>
+				<textFieldExpression><![CDATA[$F{Contract_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="65" uuid="68af9e9c-a580-4104-ab7d-8093a5c6e37e"/>
+				<textFieldExpression><![CDATA[$F{Project_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="0" width="100" height="65" uuid="cd41c085-110a-444a-8060-02a048787684"/>
+				<textFieldExpression><![CDATA[$F{Project_Name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="0" width="100" height="65" uuid="d964ebd6-3dde-4ce3-906c-429ae52bd060"/>
+				<textFieldExpression><![CDATA[$F{Project_Owner}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="600" y="0" width="100" height="65" uuid="b1cc44cb-9d03-4659-b6bb-e7d3a56a6785"/>
+				<textFieldExpression><![CDATA[$F{Contract_Total_Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="700" y="0" width="100" height="65" uuid="a0dfc5cb-a8ac-4f74-afb7-ffed7466c911"/>
+				<textFieldExpression><![CDATA[$F{Received_Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="800" y="0" width="100" height="65" uuid="05ebb0bb-38fc-439e-8292-221643ce5729"/>
+				<textFieldExpression><![CDATA[$F{unRecervable_Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="900" y="0" width="100" height="65" uuid="cf2515e8-e1e8-4a00-8dd7-987355e0bf10"/>
+				<textFieldExpression><![CDATA[$F{Labor_Total_Cost}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1000" y="0" width="100" height="65" uuid="189db293-67cb-4698-8811-ab7255a9a800"/>
+				<textFieldExpression><![CDATA[$F{Purchase_Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1100" y="0" width="100" height="65" uuid="18755c2c-be10-4b7b-a95c-cd24f6d7a066"/>
+				<textFieldExpression><![CDATA[$F{Expenses_Travel_Price}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1200" y="0" width="100" height="65" uuid="11567b7e-e95a-45e1-857d-38ef94c1a482"/>
+				<textFieldExpression><![CDATA[$F{Budget_Tax}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

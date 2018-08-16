@@ -1,0 +1,63 @@
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style type="text/css">
+    a {text-decoration: none}
+  </style>
+</head>
+<body text="#000000" link="#000000" alink="#000000" vlink="#000000">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="50%">&nbsp;</td><td align="center">
+
+<a name="JR_PAGE_ANCHOR_0_1"></a>
+<table style="width: 555px; border-collapse: collapse" cellpadding="0" cellspacing="0" border="0" bgcolor="white">
+<tr>
+  <td><img alt="" src="projectplan_purchase.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="projectplan_purchase.html_files/px" style="width: 100px; height: 1px;"/></td>
+  <td><img alt="" src="projectplan_purchase.html_files/px" style="width: 116px; height: 1px;"/></td>
+  <td><img alt="" src="projectplan_purchase.html_files/px" style="width: 110px; height: 1px;"/></td>
+  <td><img alt="" src="projectplan_purchase.html_files/px" style="width: 128px; height: 1px;"/></td>
+  <td><img alt="" src="projectplan_purchase.html_files/px" style="width: 1px; height: 1px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="6"><img alt="" src="projectplan_purchase.html_files/px" style="width: 555px; height: 99px;"/></td>
+</tr>
+<tr valign="top">
+  <td style=" vertical-align: middle;text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">采购详情</span></p></td>
+  <td colspan="5"><img alt="" src="projectplan_purchase.html_files/px" style="width: 455px; height: 27px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="6"><img alt="" src="projectplan_purchase.html_files/px" style="width: 555px; height: 2px;"/></td>
+</tr>
+<tr valign="top">
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">采购类型</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">采购金额预估</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">预估说明</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">客户承担</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">项目组承担</span></p></td>
+  <td><img alt="" src="projectplan_purchase.html_files/px" style="width: 1px; height: 39px;"/></td>
+</tr>
+<tr valign="top">
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">招标</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">70.00</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; "><p style="overflow: hidden; text-indent: 0px; "><img alt="" src="projectplan_purchase.html_files/px" border="0"/></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td style=" vertical-align: middle;border: 1px solid #000000; text-align: center;"><p style="overflow: hidden; text-indent: 0px; "><span style="font-family: 'DejaVu Sans', Arial, Helvetica, sans-serif; color: #000000; font-size: 10px; line-height: 1.3657227;">null</span></p></td>
+  <td><img alt="" src="projectplan_purchase.html_files/px" style="width: 1px; height: 39px;"/></td>
+</tr>
+<tr valign="top">
+  <td colspan="6"><img alt="" src="projectplan_purchase.html_files/px" style="width: 555px; height: 596px;"/></td>
+</tr>
+</table>
+
+<![if IE]>
+<script>
+var links = document.querySelectorAll('link.jrWebFont');
+setTimeout(function(){ if (links) { for (var i = 0; i < links.length; i++) { links.item(i).href = links.item(i).href; } } }, 0);
+</script>
+<![endif]>
+</td><td width="50%">&nbsp;</td></tr>
+</table>
+</body>
+</html>
