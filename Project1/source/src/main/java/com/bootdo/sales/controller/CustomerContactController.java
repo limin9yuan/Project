@@ -240,10 +240,10 @@ public class CustomerContactController extends BaseController {
 	/**
 	 * 查看联系人信息
 	 */
-	@GetMapping("/examineC/{contactId}")
+	@GetMapping("/examineC/{customerId}")
 	@RequiresPermissions("sales:customerContact:customerContact")
-	String examineC(@PathVariable("contactId") String contactId, Model model) {
-		model.addAttribute("contactId", contactId);
+	String examineC(@PathVariable("customerId") String customerId, Model model) {
+		model.addAttribute("customerId", customerId);
 		return "sales/companyCustomer/examineContact";
 	}
 	

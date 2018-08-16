@@ -48,23 +48,23 @@ function load() {
 //								{
 //									checkbox : true
 //								},
-//								{
-//									title : '操作',
-//									field : 'id',
-//									align : 'center',
-//									formatter : function(value, row, index) {
-//										var e = '<a class="btn btn-success" href="#" mce_href="#" title="查看" onclick="edit(\''
+								{
+									title : '操作',
+									field : 'id',
+									align : 'center',
+									formatter : function(value, row, index) {
+										var e = '<a class="btn btn-success" href="#" mce_href="#" title="查看" onclick="edit(\''
+												+ row.feedbackId
+												+ '\')"><i class="fa fa-search"></i></a> ';
+//										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
 //												+ row.feedbackId
-//												+ '\')"><i class="fa fa-search"></i></a> ';
-////										var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-////												+ row.feedbackId
-////												+ '\')"><i class="fa fa-remove"></i></a> ';
-////										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
-////												+ row.feedbackId
-////												+ '\')"><i class="fa fa-key"></i></a> ';
-//										return e ;
-//									}
-//								},
+//												+ '\')"><i class="fa fa-remove"></i></a> ';
+//										var f = '<a class="btn btn-success btn-sm" href="#" title="备用"  mce_href="#" onclick="resetPwd(\''
+//												+ row.feedbackId
+//												+ '\')"><i class="fa fa-key"></i></a> ';
+										return e ;
+									}
+								},
 								{
 									field : 'feedbackId', 
 									title : '客户反馈内容编号' 

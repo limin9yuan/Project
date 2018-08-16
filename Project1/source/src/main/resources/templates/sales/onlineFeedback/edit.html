@@ -102,88 +102,88 @@
 										readonly="readonly" class="form-control" rows="3"></textarea>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-sm-4 control-label">附件：</label>
-								<div class="col-sm-4">
-									<div class="file-manager">
-										<button
-											shiro:hasPermission="sales:onlineFeedback:onlineFeedback"
-											onclick="window.open('/sales/onlineFeedback/downLoadZipFile?id='+$('#feedbackAttachment').val())"
-											type="button" class="btn btn-danger ">
-											<i class="glyphicon glyphicon-cloud-download"></i>下载全部附件
-										</button>
-										<input id="feedbackAttachment" name="feedbackAttachment"
-											type="hidden" th:value="${feedbackAttachment}">
-									</div>
-								</div>
-							</div>
+<!-- 							<div class="form-group"> -->
+<!-- 								<label class="col-sm-4 control-label">附件：</label> -->
+<!-- 								<div class="col-sm-4"> -->
+<!-- 									<div class="file-manager"> -->
+<!-- 										<button -->
+<!-- 											shiro:hasPermission="sales:onlineFeedback:onlineFeedback" -->
+<!-- 											onclick="window.open('/sales/onlineFeedback/downLoadZipFile?id='+$('#feedbackAttachment').val())" -->
+<!-- 											type="button" class="btn btn-danger "> -->
+<!-- 											<i class="glyphicon glyphicon-cloud-download"></i>下载全部附件 -->
+<!-- 										</button> -->
+<!-- 										<input id="feedbackAttachment" name="feedbackAttachment" -->
+<!-- 											type="hidden" th:value="${feedbackAttachment}"> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							<!--***************文件显示*************************** -->
-							<div class="form-group" id="app">
-								<label class="col-sm-4 control-label"></label>
-								<div class="col-sm-8 animated fadeInRight">
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="file-box" v-for="row in rows">
-												<div class="file">
-													<span class="corner"></span>
-													<!-- 		xlsx表格 -->
-													<div class="image" v-if="row.suffix==1">
-														<img id="fileImg" alt="文件" class="img-responsive"
-															src="/img/fileImage/xlsxImage.png"
-															onclick="previewImg(this)" style="cursor: pointer">
-													</div>
-													<!-- 		word文档 -->
-													<div class="image" v-else-if="row.suffix==2">
-														<img id="fileImg" alt="文件" class="img-responsive"
-															src="/img/fileImage/docxImage.png"
-															onclick="previewImg(this)" style="cursor: pointer">
-													</div>
-													<!-- 		视频文件 -->
-													<div class="image" v-else-if="row.suffix==3">
-														<img id="fileImg" alt="文件" class="img-responsive"
-															src="/img/fileImage/videoImage.jpg"
-															onclick="previewImg(this)" style="cursor: pointer">
-													</div>
-													<!-- 		图片 -->
-													<div class="image" v-else-if="row.suffix==4">
-														<img id="fileImg" alt="文件" class="img-responsive"
-															:src="row.url" onclick="previewImg(this)"
-															style="cursor: pointer">
-													</div>
-													<!-- 		压缩文件 -->
-													<div class="image" v-else-if="row.suffix==5">
-														<img id="fileImg" alt="文件" class="img-responsive"
-															src="/img/fileImage/rarImage.jpeg"
-															onclick="previewImg(this)" style="cursor: pointer">
-													</div>
-													<!-- 		其他文件 -->
-													<div class="image" v-else-if="row.suffix==6">
-														<img id="fileImg" alt="文件" class="img-responsive"
-															src="/img/fileImage/fileImage.png"
-															onclick="previewImg(this)" style="cursor: pointer">
-													</div>
-													<div class="file-name">
-														<br /> <small>{{row.fileName}}</small> <br /> <small>{{row.createDate}}</small>
-													</div>
-													&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp;
-													&nbsp; &nbsp; &nbsp;
-													<button class="btn btn-warning btn-xs "
-														@click="window.open('/sales/onlineFeedback/down?fileName='+row.fileName)"
-														type="button">下载</button>
+<!-- 							<div class="form-group" id="app"> -->
+<!-- 								<label class="col-sm-4 control-label"></label> -->
+<!-- 								<div class="col-sm-8 animated fadeInRight"> -->
+<!-- 									<div class="row"> -->
+<!-- 										<div class="col-sm-12"> -->
+<!-- 											<div class="file-box" v-for="row in rows"> -->
+<!-- 												<div class="file"> -->
+<!-- 													<span class="corner"></span> -->
+<!-- 															xlsx表格 -->
+<!-- 													<div class="image" v-if="row.suffix==1"> -->
+<!-- 														<img id="fileImg" alt="文件" class="img-responsive" -->
+<!-- 															src="/img/fileImage/xlsxImage.png" -->
+<!-- 															onclick="previewImg(this)" style="cursor: pointer"> -->
+<!-- 													</div> -->
+<!-- 															word文档 -->
+<!-- 													<div class="image" v-else-if="row.suffix==2"> -->
+<!-- 														<img id="fileImg" alt="文件" class="img-responsive" -->
+<!-- 															src="/img/fileImage/docxImage.png" -->
+<!-- 															onclick="previewImg(this)" style="cursor: pointer"> -->
+<!-- 													</div> -->
+<!-- 															视频文件 -->
+<!-- 													<div class="image" v-else-if="row.suffix==3"> -->
+<!-- 														<img id="fileImg" alt="文件" class="img-responsive" -->
+<!-- 															src="/img/fileImage/videoImage.jpg" -->
+<!-- 															onclick="previewImg(this)" style="cursor: pointer"> -->
+<!-- 													</div> -->
+<!-- 															图片 -->
+<!-- 													<div class="image" v-else-if="row.suffix==4"> -->
+<!-- 														<img id="fileImg" alt="文件" class="img-responsive" -->
+<!-- 															:src="row.url" onclick="previewImg(this)" -->
+<!-- 															style="cursor: pointer"> -->
+<!-- 													</div> -->
+<!-- 															压缩文件 -->
+<!-- 													<div class="image" v-else-if="row.suffix==5"> -->
+<!-- 														<img id="fileImg" alt="文件" class="img-responsive" -->
+<!-- 															src="/img/fileImage/rarImage.jpeg" -->
+<!-- 															onclick="previewImg(this)" style="cursor: pointer"> -->
+<!-- 													</div> -->
+<!-- 															其他文件 -->
+<!-- 													<div class="image" v-else-if="row.suffix==6"> -->
+<!-- 														<img id="fileImg" alt="文件" class="img-responsive" -->
+<!-- 															src="/img/fileImage/fileImage.png" -->
+<!-- 															onclick="previewImg(this)" style="cursor: pointer"> -->
+<!-- 													</div> -->
+<!-- 													<div class="file-name"> -->
+<!-- 														<br /> <small>{{row.fileName}}</small> <br /> <small>{{row.createDate}}</small> -->
+<!-- 													</div> -->
+<!-- 													&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; -->
+<!-- 													&nbsp; &nbsp; &nbsp; -->
+<!-- 													<button class="btn btn-warning btn-xs " -->
+<!-- 														@click="window.open('/sales/onlineFeedback/down?fileName='+row.fileName)" -->
+<!-- 														type="button">下载</button> -->
 
-													<!-- 													<button class="btn btn-danger btn-xs" -->
-													<!-- 														@click="removeFile(row.id)" type="button">删除</button> -->
-													<!-- 															</a> -->
-												</div>
-											</div>
-											<div id="incomeNum"></div>
-										</div>
-									</div>
-									<div>
-										<ul id="page"></ul>
-									</div>
-								</div>
-							</div>
+<!-- 																										<button class="btn btn-danger btn-xs" -->
+<!-- 																											@click="removeFile(row.id)" type="button">删除</button> -->
+<!-- 																												</a> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<!-- 											<div id="incomeNum"></div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
+<!-- 									<div> -->
+<!-- 										<ul id="page"></ul> -->
+<!-- 									</div> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
 							<!-- 							<div class="form-group">	 -->
 							<!-- 								<label class="col-sm-2 control-label"></label> -->
 							<!-- 								<div class="col-sm-8"> -->

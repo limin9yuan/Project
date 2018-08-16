@@ -209,7 +209,7 @@ public class OnlineFeedbackController {
 		//根据ID查看附件列表
 				@ResponseBody
 				@GetMapping("/listId")
-				@RequiresPermissions("common:sysFile:sysFile")
+				@RequiresPermissions("sales:onlineFeedback:onlineFeedback")
 				public PageUtils listId(@RequestParam("feedbackId")String feedbackId,@RequestParam Map<String, Object> params) {
 //					String aa=request.getParameter("feedbackId");
 					params.put("feedbackId", feedbackId);
