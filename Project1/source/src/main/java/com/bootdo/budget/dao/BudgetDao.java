@@ -18,7 +18,7 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface BudgetDao {
-	List<BudgetDO> listProjectByArea(Map<String, Object> map);
+	List<DictDO> listProjectByArea(Map<String, Object> map);
 
 	BudgetDO view(String budgetId);
 

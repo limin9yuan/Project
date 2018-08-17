@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.bootdo.budget.dao.BudgetDao">
-	<select id="listProjectByArea" resultType="com.bootdo.budget.domain.BudgetDO">
-		SELECT concat(a.Project_ID,' ',a.Project_Name) as IDname
+	<select id="listProjectByArea" resultType="com.bootdo.common.domain.DictDO">
+		SELECT a.Project_ID value,concat(a.Project_ID,' ',a.Project_Name) as name
 		FROM development_project a
 		LEFT JOIN pre_sales_project b on a.Project_ID = b.Project_ID
 		LEFT JOIN sales_business c on b.Project_Business = c.Business_ID

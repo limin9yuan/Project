@@ -35,25 +35,16 @@ var addressResolve = function (options,optionValue) {
 			 addressInfo.provInfo.append(proOpts);
 
              if (optValue.proId != "") {
-                 // if (optValue.projectId != "") {
-                 //     addressInfo.projectInfo.val(optValue.projectId);
-                 //     addressInfo.setProject();
-                 //     addressInfo.provInfo.chosen(); //初始化chosen
-                 //     addressInfo.provInfo.trigger("change");
-                 //     addressInfo.projectInfo.trigger("liszt:updated");
-                 // }
                  addressInfo.provInfo.val(optValue.proId);
                  addressInfo.selectCity();
-                 addressInfo.setProject();
                  addressInfo.provInfo.chosen(); //初始化chosen
                  addressInfo.provInfo.trigger("change");
      		    addressInfo.cityInfo.trigger("liszt:updated");
-                addressInfo.projectInfo.trigger("liszt:updated");
-
             }else {
                 addressInfo.provInfo.chosen(); //初始化chosen
                 addressInfo.cityInfo.chosen();//初始化chosen
                 addressInfo.areaInfo.chosen();//初始化chosen
+                addressInfo.projectInfo.chosen();
             }
 
 		}
@@ -90,6 +81,7 @@ var addressResolve = function (options,optionValue) {
                 addressInfo.cityInfo.chosen(); //初始化chosen
                 addressInfo.cityInfo.trigger("change");
                addressInfo.areaInfo.trigger("liszt:updated");
+
            }else {
                addressInfo.cityInfo.chosen(); //初始化chosen
                addressInfo.cityInfo.trigger("liszt:updated");
@@ -131,64 +123,35 @@ var addressResolve = function (options,optionValue) {
   };
   this.selectProject = function () {
       addressInfo.projectInfo.chosen();
-	addressInfo.projectInfo.chosen("destroy");
-    addressInfo.projectInfo.empty();
-    addressInfo.projectInfo.append("<option value=''>请选择</option>");
-    if (addressInfo.provInfo.val() == "省") { //选择无效时直接返回
-      addressInfo.projectInfo.trigger("liszt:updated");
-      return;
-    }
-    var projectOpts='';
-    $.ajax({
-		url : '/budget/budget/listProjectByArea_ajax/',
-		type : "get",
-		data : {
-			'province' : addressInfo.provInfo.val(),
-			'city' : addressInfo.cityInfo.val(),
-			'area' : addressInfo.areaInfo.val(),
-		},
-		success : function(data) {
-			var result = data.projectByArea;
-			for (var i = 0; i < result.length; i++) {
-                projectOpts+="<option id='" + "option" + "'>" + result[i].idname + "</option>";
-			}
+  	  addressInfo.projectInfo.chosen("destroy");
+      addressInfo.projectInfo.empty();
+      addressInfo.projectInfo.append("<option value=''>请选择</option>");
+      var projectOpts = "";
+      $.ajax({
+          url : '/budget/budget/listProjectByArea_ajax/',
+  		type : "get",
+  		data : {
+  			'province' : addressInfo.provInfo.val(),
+  			'city' : addressInfo.cityInfo.val(),
+  			'area' : addressInfo.areaInfo.val(),
+  		},
+  		success : function(data) {
+            var dataNew = data.projectByArea;
+  			$.each(dataNew, function (index, item) {
+  		      //if (item.CityID == cityId) {
+  		        projectOpts += "<option value='" + item.value + "'>" + item.name + "</option>";
+  		     // }
+  		    });
             addressInfo.projectInfo.append(projectOpts);
-            addressInfo.projectInfo.chosen();
-           addressInfo.projectInfo.trigger("liszt:updated");
-		}
-	});
-    // addressInfo.projectInfo.val(optValue.projectId);
-  };
-  this.setProject = function () {
-      // alert(addressInfo.projectInfo.val());
-
-      addressInfo.projectInfo.chosen();
-	addressInfo.projectInfo.chosen("destroy");
-    addressInfo.projectInfo.empty();
-    addressInfo.projectInfo.append("<option value=''>请选择</option>");
-    if (addressInfo.provInfo.val() == "省") { //选择无效时直接返回
-      addressInfo.projectInfo.trigger("liszt:updated");
-      return;
-    }
-    var projectOpts='';
-    $.ajax({
-		url : '/project/project/getProjectByArea_ajax/',
-		type : "get",
-		data : {
-			'projectId' : optValue.areaId,
-		},
-		success : function(data) {
-			var result = data.project;
-
-            projectOpts="<option id='" + "option" + "'>" + result.idName + "</option>";
-
-            addressInfo.projectInfo.append(projectOpts);
+            if (optValue.areaId != "") {
+                addressInfo.projectInfo.val(optValue.projectId);
+                addressInfo.projectInfo.chosen();
+                addressInfo.projectInfo.trigger("change");
+            }
             addressInfo.projectInfo.chosen();
             addressInfo.projectInfo.trigger("liszt:updated");
-		}
-	});
-    // addressInfo.projectInfo.val(optValue.projectId);
-    // alert(addressInfo.projectInfo.val());
+  		}
+  	});
   };
   /*对象初始化方法*/
   this.init = function () {

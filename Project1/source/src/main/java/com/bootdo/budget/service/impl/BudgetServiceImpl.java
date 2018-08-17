@@ -61,7 +61,7 @@ public class BudgetServiceImpl implements BudgetService {
 
 	}
 	@Override
-	public List<BudgetDO> listProjectByArea(Map<String, Object> map) {
+	public List<DictDO> listProjectByArea(Map<String, Object> map) {
 		return budgetDao.listProjectByArea(map);
 	}
 

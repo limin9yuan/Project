@@ -20,7 +20,7 @@ import javax.servlet.ServletOutputStream;
  * @date 2017-12-11 14:44:13
  */
 public interface BudgetService {
-	List<BudgetDO> listProjectByArea(Map<String, Object> map);
+	List<DictDO> listProjectByArea(Map<String, Object> map);
 
 	int formUpdate(BudgetDO budget);
 

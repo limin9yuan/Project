@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bootdo.activiti.service.ActTaskService;
 import com.bootdo.activiti.utils.ActivitiUtils;
+import com.bootdo.common.domain.DictDO;
 import com.bootdo.common.domain.MainCopyPersonDO;
 import com.bootdo.common.service.MainCopyPersonService;
 import com.bootdo.contract.domain.ContractDO;
@@ -66,7 +67,7 @@ public class BudgetController extends BaseController {
 		params.put("city", city);
 		params.put("area", area);
 		Query queryListProjectByArea = new Query(params);
-		List<BudgetDO> listProjectByArea = budgetService.listProjectByArea(queryListProjectByArea);
+		List<DictDO> listProjectByArea = budgetService.listProjectByArea(queryListProjectByArea);
 		Map<String, Object> returnData = new HashMap<>();
 		returnData.put("projectByArea", listProjectByArea);
 		return returnData;
