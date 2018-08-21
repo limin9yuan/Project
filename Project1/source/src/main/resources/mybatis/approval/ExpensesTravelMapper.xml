@@ -54,7 +54,7 @@
 		`Expenses_Travel_Bank`,`Expenses_Travel_Card_Num`,`Expenses_Travel_Remarks`,
 		CASE `Expenses_Travel_Status` when '1' then '已审批' when '2' then '正在审批' else '未审批' END AS Expenses_Travel_Status,
 		`Expenses_Travel_Creator`,`Expenses_Travel_Create_Time`,
-		s.name AS Expenses_Travel_Operator,PROCESS_INSTANCE_ID
+		s.name AS Expenses_Travel_Operator,PROCESS_INSTANCE_ID,`Expenses_Travel_Opt_Time`
 		from approval_expenses__travel a
 		left join development_project d on a.Project_ID=d.Project_ID
 		left join sys_user s on a.Expenses_Travel_Operator=s.user_id
@@ -96,7 +96,7 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{expensesTravelOperator} AND I
 			</if>
 			<if test="expensesTravelStatus != null and expensesTravelStatus != ''"> and Expenses_Travel_Status = #{expensesTravelStatus}
 			</if>
-			<if test="expensesTravelOptTime != null and expensesTravelOptTime != ''"> and Expenses_Travel_Opt_Time &gt;= #{expensesTravelOptTime}
+			<if test="expensesTravelOptTime != null and expensesTravelOptTime != ''"> and Expenses_Travel_Opt_Time &lt;= #{expensesTravelOptTime}
 			</if>
 			<if test="expensesTravelCreator != null and expensesTravelCreator != ''"> and Expenses_Travel_Creator = #{expensesTravelCreator}
 			</if>

@@ -44,14 +44,17 @@
 		select DISTINCT `Payout_ID`,a.`Customer_ID`,`Business_ID`,a.`Project_ID`,
 		g.Employee_Name AS`Payout_Person`,`Payout_Useage`,`Payout_Price`,
 		`Payout_Means`,`Payout_Beneficiary_Bank`,`Payout_Card_Number`,
-		 j.Employee_Name as `Payout_Related_Contract_ID`,`Payout_Result`,PROCESS_INSTANCE_ID,
+		j.Employee_Name as `Payout_Related_Contract_ID`,`Payout_Result`,PROCESS_INSTANCE_ID,
 		`Payout_Remarks`,
 		CASE `Payout_Approval_Status` when '1' then '已审批' when '2' then '正在审批' else '未审批' END AS Payout_Approval_Status,
 		`Payout_Operate_Time`,`Payout_Creator`,`Payout_Create_Time`,d.Project_Name,
 		s.name AS Payout_Operator
 
 		from approval_payout a
-		left join development_project d on a.Project_ID=d.Project_ID
+		left join (select `Project_ID`,`Project_Name` from pre_sales_project a
+		WHERE not exists (select 1 from development_project where Project_ID=a.Project_ID)
+		UNION ALL
+		select `Project_ID`,`Project_Name` from development_project)d on a.Project_ID=d.Project_ID
 		left join sys_user s on a.Payout_Operator=s.user_id
 		left join inner_org_employee g on a.Payout_Person=g.Employee_ID
 		LEFT JOIN (SELECT h.Travel_ID, i.Employee_Name
@@ -80,7 +83,7 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{payoutOperator} AND Identific
 			<if test="payoutRemarks != null and payoutRemarks != ''"> and Payout_Remarks = #{payoutRemarks} </if>
 			<if test="payoutApprovalStatus != null and payoutApprovalStatus != ''"> and Payout_Approval_Status = #{payoutApprovalStatus}
 			</if>
-			<if test="payoutOperateTime != null and payoutOperateTime != ''"> and Payout_Operate_Time &gt;= #{payoutOperateTime} </if>
+			<if test="payoutOperateTime != null and payoutOperateTime != ''"> and Payout_Operate_Time &lt;= #{payoutOperateTime} </if>
 			<if test="payoutCreator != null and payoutCreator != ''"> and Payout_Creator = #{payoutCreator} </if>
 			<if test="payoutCreateTime != null and payoutCreateTime != ''"> and Payout_Create_Time &gt;= #{payoutCreateTime} </if>
 			<if test="assigneeName != null and assigneeName != ''">

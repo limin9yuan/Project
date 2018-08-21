@@ -76,7 +76,7 @@ OR EXISTS(SELECT 1 FROM sys_user WHERE user_id = #{expensesNormalOperator} AND I
 			</if>
 			<if test="expensesNormalStatus != null and expensesNormalStatus != ''"> and Expenses_Normal_Status = #{expensesNormalStatus}
 			</if>
-			<if test="expensesNormalOptTime != null and expensesNormalOptTime != ''"> and Expenses_Normal_Opt_Time &gt;= #{expensesNormalOptTime}
+			<if test="expensesNormalOptTime != null and expensesNormalOptTime != ''"> and Expenses_Normal_Opt_Time &lt;= #{expensesNormalOptTime}
 			</if>
 			<if test="expensesNormalCreator != null and expensesNormalCreator != ''"> and Expenses_Normal_Creator = #{expensesNormalCreator}
 			</if>
