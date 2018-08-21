@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <property name="CUSTOM_FILE_NAME" value="eureka" />
+    <!--<property name="CUSTOM_FILE_ROOT" value="/Users/wangxin/dev/projects/svn/ProductLine/数据金融/4-项目开发/idata-risk/logs/"/>-->
+    <property name="CUSTOM_FILE_ROOT" value="E:\\ftp_home\\wangxin\\app_test\\log\\"/>
+
+    <!--<springProperty scope="context" name="app.name" source="eureka.instance.hostname"/>-->
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <appender name="ROLLING-FILE-TRACE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${CUSTOM_FILE_ROOT}${log.app.name}/logs/${CUSTOM_FILE_NAME}-trace.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>TRACE</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/${CUSTOM_FILE_NAME}-trace.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 保留30天的历史日志 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <!--<pattern>${CUSTOM_LOG_PATTERN}</pattern>-->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING-FILE-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${CUSTOM_FILE_ROOT}${log.app.name}/logs/${CUSTOM_FILE_NAME}-debug.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/${CUSTOM_FILE_NAME}-debug.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 保留30天的历史日志 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <!--<pattern>${CUSTOM_LOG_PATTERN}</pattern>-->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+
+    <appender name="ROLLING-FILE-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${CUSTOM_FILE_ROOT}${log.app.name}/logs/${CUSTOM_FILE_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/${CUSTOM_FILE_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 保留30天的历史日志 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <!--<pattern>${CUSTOM_LOG_PATTERN}</pattern>-->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING-FILE-WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${CUSTOM_FILE_ROOT}${log.app.name}/logs/${CUSTOM_FILE_NAME}-warn.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/${CUSTOM_FILE_NAME}-warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 保留30天的历史日志 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <!--<pattern>${CUSTOM_LOG_PATTERN}</pattern>-->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ROLLING-FILE-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${CUSTOM_FILE_ROOT}${log.app.name}/logs/${CUSTOM_FILE_NAME}-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- daily rollover -->
+            <fileNamePattern>logs/${CUSTOM_FILE_NAME}-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 保留30天的历史日志 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <!--<pattern>${CUSTOM_LOG_PATTERN}</pattern>-->
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ROLLING-FILE-INFO"/>
+        <appender-ref ref="ROLLING-FILE-WARN"/>
+        <appender-ref ref="ROLLING-FILE-ERROR" />
+        <appender-ref ref="ROLLING-FILE-DEBUG" />
+    </root>
+
+</configuration>

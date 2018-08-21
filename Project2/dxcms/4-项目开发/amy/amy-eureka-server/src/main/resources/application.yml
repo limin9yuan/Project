@@ -1,0 +1,124 @@
+spring:
+  application:
+    name: eureka.wangxin.com
+---
+spring:
+  profiles: eureka
+  security:
+    user:
+      name: admin
+      password: 123123
+server:
+  port: 10000
+eureka:
+  instance:
+    hostname: eureka.wangxin.com
+logging:
+  config: classpath:logback.xml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+---
+spring:
+  profiles: eureka1
+  security:
+    user:
+      name: admin
+      password: 123123
+server:
+  port: 10001
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      user.name: admin
+      user.password: 123123
+    hostname: eureka1.wangxin.com
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://admin:123123@eureka2.wangxin.com:10002/eureka/,http://admin:123123@eureka3.wangxin.com:10003/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+logging:
+  config: classpath:logback.xml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+---
+spring:
+  profiles: eureka2
+  security:
+    user:
+      name: admin
+      password: 123123
+server:
+  port: 10002
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      user.name: admin
+      user.password: 123123
+    hostname: eureka2.wangxin.com
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://admin:123123@eureka1.wangxin.com:10001/eureka/,http://admin:123123@eureka3.wangxin.com:10003/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+logging:
+  config: classpath:logback.xml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+---
+spring:
+  profiles: eureka3
+  security:
+    user:
+      name: admin
+      password: 123123
+server:
+  port: 10003
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    health-check-url-path: /actuator/health
+    metadata-map:
+      user.name: admin
+      user.password: 123123
+    hostname: eureka3.wangxin.com
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://admin:123123@eureka1.wangxin.com:10001/eureka/,http://admin:123123@eureka2.wangxin.com:10002/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+logging:
+  config: classpath:logback.xml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS

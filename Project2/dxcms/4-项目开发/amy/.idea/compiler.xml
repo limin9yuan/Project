@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="amy-admin-server" />
+        <module name="amy-common" />
+        <module name="amy-config-server" />
+        <module name="amy-eureka-client1" />
+        <module name="amy-eureka-client2" />
+        <module name="amy-eureka-server" />
+        <module name="amy-eureka-service1" />
+        <module name="amy-eureka-service1-api" />
+        <module name="amy-eureka-service2" />
+        <module name="amy-eureka-service2-api" />
+        <module name="amy-turbine-server" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="amy-admin-server" target="1.8" />
+      <module name="amy-common" target="1.8" />
+      <module name="amy-config-bus" target="1.8" />
+      <module name="amy-config-client2" target="1.8" />
+      <module name="amy-config-server" target="1.8" />
+      <module name="amy-eureka-client1" target="1.8" />
+      <module name="amy-eureka-client2" target="1.8" />
+      <module name="amy-eureka-config-server" target="1.8" />
+      <module name="amy-eureka-server" target="1.8" />
+      <module name="amy-eureka-service1" target="1.8" />
+      <module name="amy-eureka-service1-api" target="1.8" />
+      <module name="amy-eureka-service2" target="1.8" />
+      <module name="amy-eureka-service2-api" target="1.8" />
+      <module name="amy-parent" target="1.8" />
+      <module name="amy-turbine-server" target="1.8" />
+      <module name="amy-zipkin-server" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

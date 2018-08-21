@@ -1,0 +1,51 @@
+server:
+  port: 11001
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+spring:
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://zipkin.wangxin.com:9411/
+    sender:
+      type: web
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss  #JSON处理日期类型的格式
+    time-zone: GMT+8
+  datasource:
+    name: main
+#    url: jdbc:mysql://localhost:3306/amy?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/amy?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    username: root
+    password: wxcl
+#    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 70
+    minIdle: 10
+    maxActive: 140
+    maxWait: 120000
+    timeBetweenEvictionRunsMillis: 120000
+    minEvictableIdleTimeMillis: 600000
+    validationQuery: SELECT 1
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 70
+
+mybatis:
+  type-aliases-package: org.wxcl.amy.service1
+  mapper-locations: classpath:db/**/*.xml

@@ -1,0 +1,29 @@
+server:
+  port: 11002
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+spring:
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://zipkin.wangxin.com:9411/
+    sender:
+      type: web
+
+#spring:
+#  security:
+#    user:
+#      name: admin
+#      password: 123123

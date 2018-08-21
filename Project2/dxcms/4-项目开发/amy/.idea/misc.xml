@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ASMPluginConfiguration">
+    <asm skipDebug="false" skipFrames="false" skipCode="false" expandFrames="false" />
+    <groovy codeStyle="LEGACY" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/amy-parent/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/amy-config-bus/pom.xml" />
+        <option value="$PROJECT_DIR$/amy-config-client2/pom.xml" />
+        <option value="$PROJECT_DIR$/amy-eureka-config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/amy-zipkin-server/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

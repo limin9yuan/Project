@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/amy-admin-server/amy-admin-server.iml" filepath="$PROJECT_DIR$/amy-admin-server/amy-admin-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-common/amy-common.iml" filepath="$PROJECT_DIR$/amy-common/amy-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-config-server/amy-config-server.iml" filepath="$PROJECT_DIR$/amy-config-server/amy-config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-eureka-client1/amy-eureka-client1.iml" filepath="$PROJECT_DIR$/amy-eureka-client1/amy-eureka-client1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-eureka-client2/amy-eureka-client2.iml" filepath="$PROJECT_DIR$/amy-eureka-client2/amy-eureka-client2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-eureka-server/amy-eureka-server.iml" filepath="$PROJECT_DIR$/amy-eureka-server/amy-eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-eureka-service1/amy-eureka-service1.iml" filepath="$PROJECT_DIR$/amy-eureka-service1/amy-eureka-service1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-eureka-service1-api/amy-eureka-service1-api.iml" filepath="$PROJECT_DIR$/amy-eureka-service1-api/amy-eureka-service1-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-eureka-service2/amy-eureka-service2.iml" filepath="$PROJECT_DIR$/amy-eureka-service2/amy-eureka-service2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-eureka-service2-api/amy-eureka-service2-api.iml" filepath="$PROJECT_DIR$/amy-eureka-service2-api/amy-eureka-service2-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-parent/amy-parent.iml" filepath="$PROJECT_DIR$/amy-parent/amy-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/amy-turbine-server/amy-turbine-server.iml" filepath="$PROJECT_DIR$/amy-turbine-server/amy-turbine-server.iml" />
+    </modules>
+  </component>
+</project>
