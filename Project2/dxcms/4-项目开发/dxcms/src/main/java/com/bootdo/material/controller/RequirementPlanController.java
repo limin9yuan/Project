@@ -53,17 +53,17 @@ public class RequirementPlanController {
 	}
 	
 	@GetMapping("/add")
-	@RequiresPermissions("system:requirementPlan:add")
+	@RequiresPermissions("requirementPlan:add")
 	String add(){
-	    return "system/requirementPlan/add";
+	    return "material/requirementPlan/add";
 	}
 
 	@GetMapping("/edit/{id}")
-	@RequiresPermissions("system:requirementPlan:edit")
+	@RequiresPermissions("requirementPlan:edit")
 	String edit(@PathVariable("id") Long id,Model model){
 		RequirementPlanDO requirementPlan = requirementPlanService.get(id);
 		model.addAttribute("requirementPlan", requirementPlan);
-	    return "system/requirementPlan/edit";
+	    return "material/requirementPlan/edit";
 	}
 	
 	/**
@@ -94,7 +94,7 @@ public class RequirementPlanController {
 	 */
 	@PostMapping( "/remove")
 	@ResponseBody
-	@RequiresPermissions("requirementPlan:requirementPlan:remove")
+	@RequiresPermissions("requirementPlan:remove")
 	public R remove( Long id){
 		if(requirementPlanService.remove(id)>0){
 		return R.ok();
@@ -107,7 +107,7 @@ public class RequirementPlanController {
 	 */
 	@PostMapping( "/batchRemove")
 	@ResponseBody
-	@RequiresPermissions("requirementPlan:requirementPlan:batchRemove")
+	@RequiresPermissions("requirementPlan:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids){
 		requirementPlanService.batchRemove(ids);
 		return R.ok();

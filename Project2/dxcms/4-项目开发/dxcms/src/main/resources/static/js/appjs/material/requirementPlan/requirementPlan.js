@@ -162,7 +162,7 @@ function add() {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/add' // iframe的url
+		content :'/requirementPlan/requirementPlan/add' // iframe的url
 	});
 }
 function edit(id) {
@@ -172,7 +172,7 @@ function edit(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '800px', '520px' ],
-		content : prefix + '/edit/' + id // iframe的url
+		content : '/requirementPlan/requirementPlan/edit/' + id // iframe的url
 	});
 }
 function remove(id) {
@@ -180,7 +180,7 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : prefix+"/remove",
+			url : "/requirementPlan/requirementPlan/remove",
 			type : "post",
 			data : {
 				'id' : id
@@ -219,7 +219,7 @@ function batchRemove() {
 			data : {
 				"ids" : ids
 			},
-			url : prefix + '/batchRemove',
+			url : '/requirementPlan/requirementPlan/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
 					layer.msg(r.msg);
