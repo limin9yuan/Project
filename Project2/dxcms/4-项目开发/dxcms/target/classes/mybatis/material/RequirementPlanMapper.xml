@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.material.dao.RequirementPlanDao">
+
+	<select id="get" resultType="com.bootdo.material.domain.RequirementPlanDO">
+		select `ID`,`CORPORATION_ID`,`REQUIREMENT_PLAN_NO`,`STATUS_ID`,`OWNER_ID`,`PURCHASE_DEPT_ID`,`AUTHOR_DEPT_ID`,`GUID`,`NAME`,`APPLY_REASON`,`STOCK_DATE`,`PERIOD_DATE`,`MAKE_DATE`,`MAKE_USER`,`TOTAL_MONEY`,`BUDGET_MONEY`,`IS_SUBMIT`,`IS_APPROVE_BEGIN`,`IS_APPROVE_FINISH`,`IS_CONFIRMED`,`IS_ACTIVED`,`REMARK` from ct_requirement_plan where ID = #{value}
+	</select>
+
+	<select id="list" resultType="com.bootdo.material.domain.RequirementPlanDO">
+		select `ID`,`CORPORATION_ID`,`REQUIREMENT_PLAN_NO`,`STATUS_ID`,`OWNER_ID`,`PURCHASE_DEPT_ID`,`AUTHOR_DEPT_ID`,`GUID`,`NAME`,`APPLY_REASON`,`STOCK_DATE`,`PERIOD_DATE`,`MAKE_DATE`,`MAKE_USER`,`TOTAL_MONEY`,`BUDGET_MONEY`,`IS_SUBMIT`,`IS_APPROVE_BEGIN`,`IS_APPROVE_FINISH`,`IS_CONFIRMED`,`IS_ACTIVED`,`REMARK` from ct_requirement_plan
+        <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="corporationId != null and corporationId != ''"> and CORPORATION_ID = #{corporationId} </if>
+		  		  <if test="requirementPlanNo != null and requirementPlanNo != ''"> and REQUIREMENT_PLAN_NO = #{requirementPlanNo} </if>
+		  		  <if test="statusId != null and statusId != ''"> and STATUS_ID = #{statusId} </if>
+		  		  <if test="ownerId != null and ownerId != ''"> and OWNER_ID = #{ownerId} </if>
+		  		  <if test="purchaseDeptId != null and purchaseDeptId != ''"> and PURCHASE_DEPT_ID = #{purchaseDeptId} </if>
+		  		  <if test="authorDeptId != null and authorDeptId != ''"> and AUTHOR_DEPT_ID = #{authorDeptId} </if>
+		  		  <if test="guid != null and guid != ''"> and GUID = #{guid} </if>
+		  		  <if test="name != null and name != ''"> and NAME = #{name} </if>
+		  		  <if test="applyReason != null and applyReason != ''"> and APPLY_REASON = #{applyReason} </if>
+		  		  <if test="stockDate != null and stockDate != ''"> and STOCK_DATE = #{stockDate} </if>
+		  		  <if test="periodDate != null and periodDate != ''"> and PERIOD_DATE = #{periodDate} </if>
+		  		  <if test="makeDate != null and makeDate != ''"> and MAKE_DATE = #{makeDate} </if>
+		  		  <if test="makeUser != null and makeUser != ''"> and MAKE_USER = #{makeUser} </if>
+		  		  <if test="totalMoney != null and totalMoney != ''"> and TOTAL_MONEY = #{totalMoney} </if>
+		  		  <if test="budgetMoney != null and budgetMoney != ''"> and BUDGET_MONEY = #{budgetMoney} </if>
+		  		  <if test="isSubmit != null and isSubmit != ''"> and IS_SUBMIT = #{isSubmit} </if>
+		  		  <if test="isApproveBegin != null and isApproveBegin != ''"> and IS_APPROVE_BEGIN = #{isApproveBegin} </if>
+		  		  <if test="isApproveFinish != null and isApproveFinish != ''"> and IS_APPROVE_FINISH = #{isApproveFinish} </if>
+		  		  <if test="isConfirmed != null and isConfirmed != ''"> and IS_CONFIRMED = #{isConfirmed} </if>
+		  		  <if test="isActived != null and isActived != ''"> and IS_ACTIVED = #{isActived} </if>
+		  		  <if test="remark != null and remark != ''"> and REMARK = #{remark} </if>
+		  		</where>
+        <choose>
+            <when test="sort != null and sort.trim() != ''">
+                order by ${sort} ${order}
+            </when>
+			<otherwise>
+                order by ID desc
+			</otherwise>
+        </choose>
+		<if test="offset != null and limit != null">
+			limit #{offset}, #{limit}
+		</if>
+	</select>
+	
+ 	<select id="count" resultType="int">
+		select count(*) from ct_requirement_plan
+		 <where>  
+		  		  <if test="id != null and id != ''"> and ID = #{id} </if>
+		  		  <if test="corporationId != null and corporationId != ''"> and CORPORATION_ID = #{corporationId} </if>
+		  		  <if test="requirementPlanNo != null and requirementPlanNo != ''"> and REQUIREMENT_PLAN_NO = #{requirementPlanNo} </if>
+		  		  <if test="statusId != null and statusId != ''"> and STATUS_ID = #{statusId} </if>
+		  		  <if test="ownerId != null and ownerId != ''"> and OWNER_ID = #{ownerId} </if>
+		  		  <if test="purchaseDeptId != null and purchaseDeptId != ''"> and PURCHASE_DEPT_ID = #{purchaseDeptId} </if>
+		  		  <if test="authorDeptId != null and authorDeptId != ''"> and AUTHOR_DEPT_ID = #{authorDeptId} </if>
+		  		  <if test="guid != null and guid != ''"> and GUID = #{guid} </if>
+		  		  <if test="name != null and name != ''"> and NAME = #{name} </if>
+		  		  <if test="applyReason != null and applyReason != ''"> and APPLY_REASON = #{applyReason} </if>
+		  		  <if test="stockDate != null and stockDate != ''"> and STOCK_DATE = #{stockDate} </if>
+		  		  <if test="periodDate != null and periodDate != ''"> and PERIOD_DATE = #{periodDate} </if>
+		  		  <if test="makeDate != null and makeDate != ''"> and MAKE_DATE = #{makeDate} </if>
+		  		  <if test="makeUser != null and makeUser != ''"> and MAKE_USER = #{makeUser} </if>
+		  		  <if test="totalMoney != null and totalMoney != ''"> and TOTAL_MONEY = #{totalMoney} </if>
+		  		  <if test="budgetMoney != null and budgetMoney != ''"> and BUDGET_MONEY = #{budgetMoney} </if>
+		  		  <if test="isSubmit != null and isSubmit != ''"> and IS_SUBMIT = #{isSubmit} </if>
+		  		  <if test="isApproveBegin != null and isApproveBegin != ''"> and IS_APPROVE_BEGIN = #{isApproveBegin} </if>
+		  		  <if test="isApproveFinish != null and isApproveFinish != ''"> and IS_APPROVE_FINISH = #{isApproveFinish} </if>
+		  		  <if test="isConfirmed != null and isConfirmed != ''"> and IS_CONFIRMED = #{isConfirmed} </if>
+		  		  <if test="isActived != null and isActived != ''"> and IS_ACTIVED = #{isActived} </if>
+		  		  <if test="remark != null and remark != ''"> and REMARK = #{remark} </if>
+		  		</where>
+	</select>
+	 
+	<insert id="save" parameterType="com.bootdo.material.domain.RequirementPlanDO">
+		insert into ct_requirement_plan
+		(
+			`ID`, 
+			`CORPORATION_ID`, 
+			`REQUIREMENT_PLAN_NO`, 
+			`STATUS_ID`, 
+			`OWNER_ID`, 
+			`PURCHASE_DEPT_ID`, 
+			`AUTHOR_DEPT_ID`, 
+			`GUID`, 
+			`NAME`, 
+			`APPLY_REASON`, 
+			`STOCK_DATE`, 
+			`PERIOD_DATE`, 
+			`MAKE_DATE`, 
+			`MAKE_USER`, 
+			`TOTAL_MONEY`, 
+			`BUDGET_MONEY`, 
+			`IS_SUBMIT`, 
+			`IS_APPROVE_BEGIN`, 
+			`IS_APPROVE_FINISH`, 
+			`IS_CONFIRMED`, 
+			`IS_ACTIVED`, 
+			`REMARK`
+		)
+		values
+		(
+			#{id}, 
+			#{corporationId}, 
+			#{requirementPlanNo}, 
+			#{statusId}, 
+			#{ownerId}, 
+			#{purchaseDeptId}, 
+			#{authorDeptId}, 
+			#{guid}, 
+			#{name}, 
+			#{applyReason}, 
+			#{stockDate}, 
+			#{periodDate}, 
+			#{makeDate}, 
+			#{makeUser}, 
+			#{totalMoney}, 
+			#{budgetMoney}, 
+			#{isSubmit}, 
+			#{isApproveBegin}, 
+			#{isApproveFinish}, 
+			#{isConfirmed}, 
+			#{isActived}, 
+			#{remark}
+		)
+	</insert>
+	 
+	<update id="update" parameterType="com.bootdo.material.domain.RequirementPlanDO">
+		update ct_requirement_plan 
+		<set>
+			<if test="corporationId != null">`CORPORATION_ID` = #{corporationId}, </if>
+			<if test="requirementPlanNo != null">`REQUIREMENT_PLAN_NO` = #{requirementPlanNo}, </if>
+			<if test="statusId != null">`STATUS_ID` = #{statusId}, </if>
+			<if test="ownerId != null">`OWNER_ID` = #{ownerId}, </if>
+			<if test="purchaseDeptId != null">`PURCHASE_DEPT_ID` = #{purchaseDeptId}, </if>
+			<if test="authorDeptId != null">`AUTHOR_DEPT_ID` = #{authorDeptId}, </if>
+			<if test="guid != null">`GUID` = #{guid}, </if>
+			<if test="name != null">`NAME` = #{name}, </if>
+			<if test="applyReason != null">`APPLY_REASON` = #{applyReason}, </if>
+			<if test="stockDate != null">`STOCK_DATE` = #{stockDate}, </if>
+			<if test="periodDate != null">`PERIOD_DATE` = #{periodDate}, </if>
+			<if test="makeDate != null">`MAKE_DATE` = #{makeDate}, </if>
+			<if test="makeUser != null">`MAKE_USER` = #{makeUser}, </if>
+			<if test="totalMoney != null">`TOTAL_MONEY` = #{totalMoney}, </if>
+			<if test="budgetMoney != null">`BUDGET_MONEY` = #{budgetMoney}, </if>
+			<if test="isSubmit != null">`IS_SUBMIT` = #{isSubmit}, </if>
+			<if test="isApproveBegin != null">`IS_APPROVE_BEGIN` = #{isApproveBegin}, </if>
+			<if test="isApproveFinish != null">`IS_APPROVE_FINISH` = #{isApproveFinish}, </if>
+			<if test="isConfirmed != null">`IS_CONFIRMED` = #{isConfirmed}, </if>
+			<if test="isActived != null">`IS_ACTIVED` = #{isActived}, </if>
+			<if test="remark != null">`REMARK` = #{remark}</if>
+		</set>
+		where ID = #{id}
+	</update>
+	
+	<delete id="remove">
+		delete from ct_requirement_plan where ID = #{value}
+	</delete>
+	
+	<delete id="batchRemove">
+		delete from ct_requirement_plan where ID in 
+		<foreach item="id" collection="array" open="(" separator="," close=")">
+			#{id}
+		</foreach>
+	</delete>
+
+</mapper>
