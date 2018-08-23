@@ -1,8 +1,10 @@
 package com.bootdo.material.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.bootdo.material.service.RequirementPlanService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -14,11 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bootdo.material.domain.RequirementPlanDO;
-import com.bootdo.material.service.RequirementPlanService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
+import org.wxcl.amy.model.MaterialModel;
+import org.wxcl.amy.model.RequirePlanDetailModel;
+import org.wxcl.amy.model.RequirePlanModel;
 
 /**
  * 
@@ -39,29 +42,35 @@ public class RequirementPlanController {
 	String RequirementPlan(){
 	    return "material/requirementPlan/requirementPlan";
 	}
-	
+
+	@ResponseBody
+	@GetMapping("/requirePlanDetailList")
+	@RequiresPermissions("requirementPlan:requirementPlan")
+	public PageUtils requirePlanDetailList(@RequestParam Map<String, Object> params){
+		//查询列表数据
+		Query query = new Query(params);
+		List<RequirePlanDetailModel> requirementPlanDetailList = new ArrayList<>();//调用接口
+		int total = 1;//调用接口
+		PageUtils pageUtils = new PageUtils(requirementPlanDetailList, total);
+		return pageUtils;
+	}
+
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("requirementPlan:requirementPlan")
 	public PageUtils list(@RequestParam Map<String, Object> params){
 		//查询列表数据
         Query query = new Query(params);
-		List<RequirementPlanDO> requirementPlanList = requirementPlanService.list(query);
+		List<RequirePlanModel> requirementPlanList = requirementPlanService.list(query);
 		int total = requirementPlanService.count(query);
 		PageUtils pageUtils = new PageUtils(requirementPlanList, total);
 		return pageUtils;
-	}
-	
-	@GetMapping("/add")
-	@RequiresPermissions("requirementPlan:add")
-	String add(){
-	    return "material/requirementPlan/add";
 	}
 
 	@GetMapping("/edit/{id}")
 	@RequiresPermissions("requirementPlan:edit")
 	String edit(@PathVariable("id") Long id,Model model){
-		RequirementPlanDO requirementPlan = requirementPlanService.get(id);
+		RequirePlanModel requirementPlan = requirementPlanService.get(id);
 		model.addAttribute("requirementPlan", requirementPlan);
 	    return "material/requirementPlan/edit";
 	}
@@ -72,7 +81,7 @@ public class RequirementPlanController {
 	@ResponseBody
 	@PostMapping("/save")
 	@RequiresPermissions("requirementPlan:requirementPlan:add")
-	public R save( RequirementPlanDO requirementPlan){
+	public R save( RequirePlanModel requirementPlan){
 		if(requirementPlanService.save(requirementPlan)>0){
 			return R.ok();
 		}
@@ -84,7 +93,7 @@ public class RequirementPlanController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("system:requirementPlan:edit")
-	public R update( RequirementPlanDO requirementPlan){
+	public R update( RequirePlanModel requirementPlan){
 		requirementPlanService.update(requirementPlan);
 		return R.ok();
 	}

@@ -1,6 +1,7 @@
 package com.bootdo.material.service;
 
 import com.bootdo.material.domain.RequirementPlanDO;
+import org.wxcl.amy.model.RequirePlanModel;
 
 import java.util.List;
 import java.util.Map;
@@ -13,16 +14,16 @@ import java.util.Map;
  * @date 2018-08-21 16:46:41
  */
 public interface RequirementPlanService {
+
+	RequirePlanModel get(Long id);
 	
-	RequirementPlanDO get(Long id);
-	
-	List<RequirementPlanDO> list(Map<String, Object> map);
+	List<RequirePlanModel> list(Map<String, Object> map);
 	
 	int count(Map<String, Object> map);
 	
-	int save(RequirementPlanDO requirementPlan);
+	int save(RequirePlanModel requirementPlan);
 	
-	int update(RequirementPlanDO requirementPlan);
+	int update(RequirePlanModel requirementPlan);
 	
 	int remove(Long id);
 	

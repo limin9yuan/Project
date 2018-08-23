@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.wxcl.amy.model.RequirePlanModel;
 
 /**
  * 
@@ -16,15 +17,15 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RequirementPlanDao {
 
-	RequirementPlanDO get(Long id);
+	RequirePlanModel get(Long id);
 	
-	List<RequirementPlanDO> list(Map<String,Object> map);
+	List<RequirePlanModel> list(Map<String,Object> map);
 	
 	int count(Map<String,Object> map);
 	
-	int save(RequirementPlanDO requirementPlan);
+	int save(RequirePlanModel requirementPlan);
 	
-	int update(RequirementPlanDO requirementPlan);
+	int update(RequirePlanModel requirementPlan);
 	
 	int remove(Long ID);
 	

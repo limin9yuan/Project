@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.bootdo.material.dao.RequirementPlanDao;
-import com.bootdo.material.domain.RequirementPlanDO;
 import com.bootdo.material.service.RequirementPlanService;
-
+import org.wxcl.amy.model.RequirePlanModel;
 
 
 @Service
@@ -18,12 +17,12 @@ public class RequirementPlanServiceImpl implements RequirementPlanService {
 	private RequirementPlanDao requirementPlanDao;
 	
 	@Override
-	public RequirementPlanDO get(Long id){
+	public RequirePlanModel get(Long id){
 		return requirementPlanDao.get(id);
 	}
 	
 	@Override
-	public List<RequirementPlanDO> list(Map<String, Object> map){
+	public List<RequirePlanModel> list(Map<String, Object> map){
 		return requirementPlanDao.list(map);
 	}
 	
@@ -33,12 +32,12 @@ public class RequirementPlanServiceImpl implements RequirementPlanService {
 	}
 	
 	@Override
-	public int save(RequirementPlanDO requirementPlan){
+	public int save(RequirePlanModel requirementPlan){
 		return requirementPlanDao.save(requirementPlan);
 	}
 	
 	@Override
-	public int update(RequirementPlanDO requirementPlan){
+	public int update(RequirePlanModel requirementPlan){
 		return requirementPlanDao.update(requirementPlan);
 	}
 	

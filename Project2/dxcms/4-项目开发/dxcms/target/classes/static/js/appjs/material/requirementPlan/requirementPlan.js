@@ -46,95 +46,43 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'id',
-									title : ''
+									field : 'status',
+									title : '状态'
 								},
 																{
-									field : 'corporationId',
-									title : ''
-								},
-																{
-									field : 'requirementPlanNo',
-									title : ''
-								},
-																{
-									field : 'statusId',
-									title : ''
-								},
-																{
-									field : 'ownerId',
-									title : ''
-								},
-																{
-									field : 'purchaseDeptId',
-									title : ''
-								},
-																{
-									field : 'authorDeptId',
-									title : ''
-								},
-																{
-									field : 'guid',
-									title : ''
+									field : 'planNo',
+									title : '编号'
 								},
 																{
 									field : 'name',
-									title : ''
+									title : '名称'
 								},
 																{
-									field : 'applyReason',
-									title : ''
+									field : 'authorDept',
+									title : '编制部门'
 								},
 																{
-									field : 'stockDate',
-									title : ''
-								},
-																{
-									field : 'periodDate',
-									title : ''
-								},
-																{
-									field : 'makeDate',
-									title : ''
-								},
-																{
-									field : 'makeUser',
-									title : ''
-								},
-																{
-									field : 'totalMoney',
-									title : ''
+									field : 'purchaseDept',
+									title : '采购部门'
 								},
 																{
 									field : 'budgetMoney',
-									title : ''
+									title : '预算金额(元)'
 								},
 																{
-									field : 'isSubmit',
-									title : ''
+									field : 'totalMoney',
+									title : '总金额(元)'
 								},
 																{
-									field : 'isApproveBegin',
-									title : ''
+									field : 'authorUser',
+									title : '编制人'
 								},
 																{
-									field : 'isApproveFinish',
-									title : ''
+									field : 'createDate',
+									title : '编制日期'
 								},
 																{
-									field : 'isConfirmed',
-									title : ''
-								},
-																{
-									field : 'isActived',
-									title : ''
-								},
-																{
-									field : 'remark',
-									title : ''
-								},
-																{
-									title : '操作',
+									title : '详细',
 									field : 'id',
 									align : 'center',
 									formatter : function(value, row, index) {
@@ -155,16 +103,16 @@ function load() {
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
 }
-function add() {
-	layer.open({
-		type : 2,
-		title : '增加',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
-		content :'/requirementPlan/requirementPlan/add' // iframe的url
-	});
-}
+// function add() {
+// 	layer.open({
+// 		type : 2,
+// 		title : '增加',
+// 		maxmin : true,
+// 		shadeClose : false, // 点击遮罩关闭层
+// 		area : [ '100%', '100%' ],
+// 		content :'/requirementPlan/requirementPlan/add' // iframe的url
+// 	});
+// }
 function edit(id) {
 	layer.open({
 		type : 2,
