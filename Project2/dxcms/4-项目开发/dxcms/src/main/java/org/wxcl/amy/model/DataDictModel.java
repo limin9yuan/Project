@@ -8,10 +8,11 @@ package org.wxcl.amy.model;
  */
 
 import java.util.Date;
+import java.util.UUID;
 
 public class DataDictModel {
     //编号
-    private Long id;
+    private UUID id;
     //标签名
     private String name;
     //数据值
@@ -37,11 +38,11 @@ public class DataDictModel {
     //删除标记
     private Boolean del_flag;
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

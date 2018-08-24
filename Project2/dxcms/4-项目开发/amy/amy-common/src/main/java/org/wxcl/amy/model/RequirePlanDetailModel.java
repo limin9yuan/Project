@@ -15,14 +15,24 @@ public class RequirePlanDetailModel {
     private UUID id;
     //需求计划Id
     private UUID requirePlanid;
-    //物资Id
+    //物资id
     private UUID materialId;
-    //物资
-    private MaterialModel material;
+    //物资编码
+    private String materilaCode;
+    //物资名称
+    private String materialName;
+    //单位名称
+    private String materialUnitName;
+    //规格
+    private String specification;
+    //材质
+    private String texture;
     //物资子码
     private String materialSubArray;
     //采购员Id
     private UUID purchaserId;
+    //采购员名称
+    private String purchaserName;
     //需求数量
     private Double requireQty;
     //采购数量
@@ -47,8 +57,8 @@ public class RequirePlanDetailModel {
     private Double reserveQty;
     //是否关闭
     private Boolean isClosed;
-    //是否已经采购
-    private Boolean isPurchased;
+    //是否已受理
+    private Boolean isAccepted;
     //生成日期
     private Date createDate;
     //是否可用
@@ -82,12 +92,44 @@ public class RequirePlanDetailModel {
         this.materialId = materialId;
     }
 
-    public MaterialModel getMaterial() {
-        return material;
+    public String getMaterilaCode() {
+        return materilaCode;
     }
 
-    public void setMaterial(MaterialModel material) {
-        this.material = material;
+    public void setMaterilaCode(String materilaCode) {
+        this.materilaCode = materilaCode;
+    }
+
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
+    }
+
+    public String getMaterialUnitName() {
+        return materialUnitName;
+    }
+
+    public void setMaterialUnitName(String materialUnitName) {
+        this.materialUnitName = materialUnitName;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
+    public String getTexture() {
+        return texture;
+    }
+
+    public void setTexture(String texture) {
+        this.texture = texture;
     }
 
     public String getMaterialSubArray() {
@@ -104,6 +146,14 @@ public class RequirePlanDetailModel {
 
     public void setPurchaserId(UUID purchaserId) {
         this.purchaserId = purchaserId;
+    }
+
+    public String getPurchaserName() {
+        return purchaserName;
+    }
+
+    public void setPurchaserName(String purchaserName) {
+        this.purchaserName = purchaserName;
     }
 
     public Double getRequireQty() {
@@ -202,12 +252,12 @@ public class RequirePlanDetailModel {
         isClosed = closed;
     }
 
-    public Boolean getPurchased() {
-        return isPurchased;
+    public Boolean getAccepted() {
+        return isAccepted;
     }
 
-    public void setPurchased(Boolean purchased) {
-        isPurchased = purchased;
+    public void setAccepted(Boolean accepted) {
+        isAccepted = accepted;
     }
 
     public Date getCreateDate() {

@@ -1,18 +1,28 @@
 $().ready(function() {
 	validateRule();
 	load();
-	datetimepicker();
+	// datetimepicker();
 });
-function datetimepicker(){
-	//开始时间
-	$('#timeStart').datetimepicker({
-		format:'YYYY-MM-DD',
-		// locale:moment.locale('zh-cn')
-	});
-	//结束时间
-	$('#timeEnd').datetimepicker({
-		format:'YYYY-MM-DD',
-		// locale:moment.locale('zh-cn')
+// function datetimepicker(){
+// 	//开始时间
+// 	$('#timeStart').datetimepicker({
+// 		format:'YYYY-MM-DD',
+// 		// locale:moment.locale('zh-cn')
+// 	});
+// 	//结束时间
+// 	$('#timeEnd').datetimepicker({
+// 		format:'YYYY-MM-DD',
+// 		// locale:moment.locale('zh-cn')
+// 	});
+// }
+function nextStep() {
+	layer.open({
+		type : 2,
+		title : '增加',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '100%', '100%' ],
+		content :'/requirementPlan/requirementPlan/nextStep' // iframe的url
 	});
 }
 function load() {
@@ -59,11 +69,11 @@ function load() {
 									checkbox : true
 								},
 																{
-									field : 'material.materialClassName',
-									title : '物资类型名称'
+									field : 'materialName',
+									title : '物资名称'
 								},
 																{
-									field : 'code',
+									field : 'materilaCode',
 									title : '物资编码'
 								},
 																{
@@ -71,11 +81,11 @@ function load() {
 									title : '型号'
 								},
 																{
-									field : 'MaterialUnit',
-									title : '单位'
+									field : 'materialUnitName',
+									title : '单位名称'
 								},
 																{
-									field : 'requireAmount',
+									field : 'requireQty',
 									title : '需求数量'
 								},
 																{
@@ -83,11 +93,11 @@ function load() {
 									title : '需求部门'
 								},
 																{
-									field : 'requireDeliverDate',
+									field : 'requireDate',
 									title : '要求到货时间'
 								},
 																{
-									field : 'makeDate',
+									field : 'createDate',
 									title : '创建日期'
 								},
 																{

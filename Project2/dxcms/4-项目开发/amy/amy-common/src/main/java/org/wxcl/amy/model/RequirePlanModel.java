@@ -17,32 +17,26 @@ public class RequirePlanModel {
     private UUID statusId;
     //审批状态名称
     private String statusName;
-    //审批状态
-    private DataDictModel status;
     //编制机构Id
     private UUID authorCorpId;
     //编制机构名称
     private String authorCorpName;
-    //编制机构
-    private CorporationModel authorCorp;
     //编制部门Id
     private UUID authorDeptId;
     //编制部门名称
     private String authorDeptName;
-    //编制部门
-    private CorporationModel authorDept;
     //编制人Id
     private UUID authorUserId;
     //编制人
-    private String authorUser;
+    private String authorUserName;
     //采购部门Id
     private UUID purchaseDeptId;
     //采购部门
-    private String purchaseDept;
+    private String purchaseDeptName;
     //需求计划类型Id
     private UUID requireTypeId;
     //需求计划类型
-    private String requireType;
+    private String requireTypeName;
     //编号
     private String planNo;
     //名称
@@ -70,7 +64,7 @@ public class RequirePlanModel {
     //生成人Id
     private UUID createUserId;
     //生成人
-    private String createUser;
+    private String createUserName;
     //备注
     private String remark;
 
@@ -98,14 +92,6 @@ public class RequirePlanModel {
         this.statusName = statusName;
     }
 
-    public DataDictModel getStatus() {
-        return status;
-    }
-
-    public void setStatus(DataDictModel status) {
-        this.status = status;
-    }
-
     public UUID getAuthorCorpId() {
         return authorCorpId;
     }
@@ -120,14 +106,6 @@ public class RequirePlanModel {
 
     public void setAuthorCorpName(String authorCorpName) {
         this.authorCorpName = authorCorpName;
-    }
-
-    public CorporationModel getAuthorCorp() {
-        return authorCorp;
-    }
-
-    public void setAuthorCorp(CorporationModel authorCorp) {
-        this.authorCorp = authorCorp;
     }
 
     public UUID getAuthorDeptId() {
@@ -146,14 +124,6 @@ public class RequirePlanModel {
         this.authorDeptName = authorDeptName;
     }
 
-    public CorporationModel getAuthorDept() {
-        return authorDept;
-    }
-
-    public void setAuthorDept(CorporationModel authorDept) {
-        this.authorDept = authorDept;
-    }
-
     public UUID getAuthorUserId() {
         return authorUserId;
     }
@@ -162,12 +132,12 @@ public class RequirePlanModel {
         this.authorUserId = authorUserId;
     }
 
-    public String getAuthorUser() {
-        return authorUser;
+    public String getAuthorUserName() {
+        return authorUserName;
     }
 
-    public void setAuthorUser(String authorUser) {
-        this.authorUser = authorUser;
+    public void setAuthorUserName(String authorUserName) {
+        this.authorUserName = authorUserName;
     }
 
     public UUID getPurchaseDeptId() {
@@ -178,12 +148,12 @@ public class RequirePlanModel {
         this.purchaseDeptId = purchaseDeptId;
     }
 
-    public String getPurchaseDept() {
-        return purchaseDept;
+    public String getPurchaseDeptName() {
+        return purchaseDeptName;
     }
 
-    public void setPurchaseDept(String purchaseDept) {
-        this.purchaseDept = purchaseDept;
+    public void setPurchaseDeptName(String purchaseDeptName) {
+        this.purchaseDeptName = purchaseDeptName;
     }
 
     public UUID getRequireTypeId() {
@@ -194,12 +164,12 @@ public class RequirePlanModel {
         this.requireTypeId = requireTypeId;
     }
 
-    public String getRequireType() {
-        return requireType;
+    public String getRequireTypeName() {
+        return requireTypeName;
     }
 
-    public void setRequireType(String requireType) {
-        this.requireType = requireType;
+    public void setRequireTypeName(String requireTypeName) {
+        this.requireTypeName = requireTypeName;
     }
 
     public String getPlanNo() {
@@ -306,12 +276,12 @@ public class RequirePlanModel {
         this.createUserId = createUserId;
     }
 
-    public String getCreateUser() {
-        return createUser;
+    public String getCreateUserName() {
+        return createUserName;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
     }
 
     public String getRemark() {

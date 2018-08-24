@@ -15,10 +15,18 @@ public class RequireApplyDetailModel {
     private UUID id;
     //需求申请Id
     private UUID RequireApplyId;
-    //物资Id
+    //物资id
     private UUID materialId;
-    //物资
-    private MaterialModel material;
+    //物资编码
+    private String materilaCode;
+    //物资名称
+    private String materialName;
+    //单位名称
+    private String materialUnitName;
+    //规格
+    private String specification;
+    //材质
+    private String texture;
     //物资子码
     private String materialSubArray;
     //需求数量
@@ -33,10 +41,16 @@ public class RequireApplyDetailModel {
     private Double budgetQty;
     //库存数量
     private Double stockQty;
+    //受理人id
+    private UUID acceptUserId;
+    //受理人名称
+    private String acceptUserName;
     //是否在用
     private Boolean isActived;
-    //是否确认(生成需求计划-true, 否则-false)
-    private Boolean isConfirmed;
+    //是否受理(生成需求计划-true, 否则-false)
+    private Boolean isAccepted;
+    //生成日期
+    private Date createDate;
     //描述
     private String description;
     //备注
@@ -66,12 +80,44 @@ public class RequireApplyDetailModel {
         this.materialId = materialId;
     }
 
-    public MaterialModel getMaterial() {
-        return material;
+    public String getMaterilaCode() {
+        return materilaCode;
     }
 
-    public void setMaterial(MaterialModel material) {
-        this.material = material;
+    public void setMaterilaCode(String materilaCode) {
+        this.materilaCode = materilaCode;
+    }
+
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
+    }
+
+    public String getMaterialUnitName() {
+        return materialUnitName;
+    }
+
+    public void setMaterialUnitName(String materialUnitName) {
+        this.materialUnitName = materialUnitName;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
+    public String getTexture() {
+        return texture;
+    }
+
+    public void setTexture(String texture) {
+        this.texture = texture;
     }
 
     public String getMaterialSubArray() {
@@ -130,6 +176,22 @@ public class RequireApplyDetailModel {
         this.stockQty = stockQty;
     }
 
+    public UUID getAcceptUserId() {
+        return acceptUserId;
+    }
+
+    public void setAcceptUserId(UUID acceptUserId) {
+        this.acceptUserId = acceptUserId;
+    }
+
+    public String getAcceptUserName() {
+        return acceptUserName;
+    }
+
+    public void setAcceptUserName(String acceptUserName) {
+        this.acceptUserName = acceptUserName;
+    }
+
     public Boolean getActived() {
         return isActived;
     }
@@ -138,12 +200,20 @@ public class RequireApplyDetailModel {
         isActived = actived;
     }
 
-    public Boolean getConfirmed() {
-        return isConfirmed;
+    public Boolean getAccepted() {
+        return isAccepted;
     }
 
-    public void setConfirmed(Boolean confirmed) {
-        isConfirmed = confirmed;
+    public void setAccepted(Boolean accepted) {
+        isAccepted = accepted;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getDescription() {

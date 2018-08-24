@@ -15,18 +15,24 @@ public class RequireApplyModel {
     private UUID id;
     //审批状态Id
     private UUID statusId;
+    //审批状态名称
+    private String statusName;
     //编制机构Id
     private UUID authorCorpId;
-    //编制机构
-    private CorporationModel authorCorp;
+    //编制机构名称
+    private String authorCorpName;
     //编制部门Id
     private UUID authorDeptId;
-    //编制部门
-    private CorporationModel authorDept;
+    //编制部门名称
+    private String authorDeptName;
     //编制人Id
     private UUID authorUserId;
+    //编制人
+    private String authorUserName;
     //需求申请接收人Id
     private UUID manageUserId;
+    //需求申请接收人
+    private String manageUserName;
     //编号
     private String planNo;
     //名称
@@ -50,7 +56,7 @@ public class RequireApplyModel {
     //生成人Id
     private UUID createUserId;
     //生成人
-    private String createUser;
+    private String createUserName;
     //备注
     private String remark;
 
@@ -70,6 +76,14 @@ public class RequireApplyModel {
         this.statusId = statusId;
     }
 
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
     public UUID getAuthorCorpId() {
         return authorCorpId;
     }
@@ -78,12 +92,12 @@ public class RequireApplyModel {
         this.authorCorpId = authorCorpId;
     }
 
-    public CorporationModel getAuthorCorp() {
-        return authorCorp;
+    public String getAuthorCorpName() {
+        return authorCorpName;
     }
 
-    public void setAuthorCorp(CorporationModel authorCorp) {
-        this.authorCorp = authorCorp;
+    public void setAuthorCorpName(String authorCorpName) {
+        this.authorCorpName = authorCorpName;
     }
 
     public UUID getAuthorDeptId() {
@@ -94,12 +108,12 @@ public class RequireApplyModel {
         this.authorDeptId = authorDeptId;
     }
 
-    public CorporationModel getAuthorDept() {
-        return authorDept;
+    public String getAuthorDeptName() {
+        return authorDeptName;
     }
 
-    public void setAuthorDept(CorporationModel authorDept) {
-        this.authorDept = authorDept;
+    public void setAuthorDeptName(String authorDeptName) {
+        this.authorDeptName = authorDeptName;
     }
 
     public UUID getAuthorUserId() {
@@ -110,12 +124,28 @@ public class RequireApplyModel {
         this.authorUserId = authorUserId;
     }
 
+    public String getAuthorUserName() {
+        return authorUserName;
+    }
+
+    public void setAuthorUserName(String authorUserName) {
+        this.authorUserName = authorUserName;
+    }
+
     public UUID getManageUserId() {
         return manageUserId;
     }
 
     public void setManageUserId(UUID manageUserId) {
         this.manageUserId = manageUserId;
+    }
+
+    public String getManageUserName() {
+        return manageUserName;
+    }
+
+    public void setManageUserName(String manageUserName) {
+        this.manageUserName = manageUserName;
     }
 
     public String getPlanNo() {
@@ -206,12 +236,12 @@ public class RequireApplyModel {
         this.createUserId = createUserId;
     }
 
-    public String getCreateUser() {
-        return createUser;
+    public String getCreateUserName() {
+        return createUserName;
     }
 
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
     }
 
     public String getRemark() {

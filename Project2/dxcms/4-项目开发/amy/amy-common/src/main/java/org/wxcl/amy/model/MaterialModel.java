@@ -15,22 +15,16 @@ public class MaterialModel {
     private UUID id;
     //物资类型Id
     private UUID materialClassId;
+    //物资类型编码
+    private String materialClassCode;
     //物资类型名称
-    private String MaterialClassName;
-    //物资类型
-    private DataDictModel MaterialClass;
+    private String materialClassName;
     //物资单位
     private UUID materialUnitId;
     //物资单位名称
-    private String MaterialUnitName;
+    private String materialUnitName;
     //单位
-    private DataDictModel MaterialUnit;
-    //审批状态Id
-    private UUID statusId;
-    //审批状态名称
-    private String statusName;
-    //审批状态
-    private DataDictModel status;
+    private DataDictModel materialUnit;
     //物资编码
     private String code;
     //物资简码
@@ -90,12 +84,20 @@ public class MaterialModel {
         this.materialClassId = materialClassId;
     }
 
+    public String getMaterialClassCode() {
+        return materialClassCode;
+    }
+
+    public void setMaterialClassCode(String materialClassCode) {
+        this.materialClassCode = materialClassCode;
+    }
+
     public String getMaterialClassName() {
-        return MaterialClassName;
+        return materialClassName;
     }
 
     public void setMaterialClassName(String materialClassName) {
-        MaterialClassName = materialClassName;
+        this.materialClassName = materialClassName;
     }
 
     public UUID getMaterialUnitId() {
@@ -107,27 +109,19 @@ public class MaterialModel {
     }
 
     public String getMaterialUnitName() {
-        return MaterialUnitName;
+        return materialUnitName;
     }
 
     public void setMaterialUnitName(String materialUnitName) {
-        MaterialUnitName = materialUnitName;
+        this.materialUnitName = materialUnitName;
     }
 
-    public UUID getStatusId() {
-        return statusId;
+    public DataDictModel getMaterialUnit() {
+        return materialUnit;
     }
 
-    public void setStatusId(UUID statusId) {
-        this.statusId = statusId;
-    }
-
-    public String getStatusName() {
-        return statusName;
-    }
-
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setMaterialUnit(DataDictModel materialUnit) {
+        this.materialUnit = materialUnit;
     }
 
     public String getCode() {

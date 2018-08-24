@@ -15,22 +15,16 @@ public class MaterialModel {
     private UUID id;
     //物资类型Id
     private UUID materialClassId;
+    //物资类型编码
+    private String materialClassCode;
     //物资类型名称
-    private String MaterialClassName;
-    //物资类型
-    private DataDictModel MaterialClass;
+    private String materialClassName;
     //物资单位
     private UUID materialUnitId;
     //物资单位名称
-    private String MaterialUnitName;
+    private String materialUnitName;
     //单位
-    private DataDictModel MaterialUnit;
-    //审批状态Id
-    private UUID statusId;
-    //审批状态名称
-    private String statusName;
-    //审批状态
-    private DataDictModel status;
+    private DataDictModel materialUnit;
     //物资编码
     private String code;
     //物资简码
@@ -63,40 +57,16 @@ public class MaterialModel {
     private Date makeDate;
     //备注
     private String remark;
-    //需求数量
-    private String requireAmount;
-    //需求部门
-    private String requireDept;
-    //要求到货时间
-    private String requireDeliverDate;
+    //扩展字段1
+    private String extend1;
+    //扩展字段2
+    private String extend2;
+    //扩展字段3
+    private String extend3;
     //扩展字段4
     private String extend4;
     //扩展字段5
     private String extend5;
-
-    public String getRequireDeliverDate() {
-        return requireDeliverDate;
-    }
-
-    public void setRequireDeliverDate(String requireDeliverDate) {
-        this.requireDeliverDate = requireDeliverDate;
-    }
-
-    public String getRequireDept() {
-        return requireDept;
-    }
-
-    public void setRequireDept(String requireDept) {
-        this.requireDept = requireDept;
-    }
-
-    public String getRequireAmount() {
-        return requireAmount;
-    }
-
-    public void setRequireAmount(String requireAmount) {
-        this.requireAmount = requireAmount;
-    }
 
     public UUID getId() {
         return id;
@@ -114,12 +84,20 @@ public class MaterialModel {
         this.materialClassId = materialClassId;
     }
 
+    public String getMaterialClassCode() {
+        return materialClassCode;
+    }
+
+    public void setMaterialClassCode(String materialClassCode) {
+        this.materialClassCode = materialClassCode;
+    }
+
     public String getMaterialClassName() {
-        return MaterialClassName;
+        return materialClassName;
     }
 
     public void setMaterialClassName(String materialClassName) {
-        MaterialClassName = materialClassName;
+        this.materialClassName = materialClassName;
     }
 
     public UUID getMaterialUnitId() {
@@ -131,27 +109,19 @@ public class MaterialModel {
     }
 
     public String getMaterialUnitName() {
-        return MaterialUnitName;
+        return materialUnitName;
     }
 
     public void setMaterialUnitName(String materialUnitName) {
-        MaterialUnitName = materialUnitName;
+        this.materialUnitName = materialUnitName;
     }
 
-    public UUID getStatusId() {
-        return statusId;
+    public DataDictModel getMaterialUnit() {
+        return materialUnit;
     }
 
-    public void setStatusId(UUID statusId) {
-        this.statusId = statusId;
-    }
-
-    public String getStatusName() {
-        return statusName;
-    }
-
-    public void setStatusName(String statusName) {
-        this.statusName = statusName;
+    public void setMaterialUnit(DataDictModel materialUnit) {
+        this.materialUnit = materialUnit;
     }
 
     public String getCode() {
@@ -280,6 +250,30 @@ public class MaterialModel {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getExtend1() {
+        return extend1;
+    }
+
+    public void setExtend1(String extend1) {
+        this.extend1 = extend1;
+    }
+
+    public String getExtend2() {
+        return extend2;
+    }
+
+    public void setExtend2(String extend2) {
+        this.extend2 = extend2;
+    }
+
+    public String getExtend3() {
+        return extend3;
+    }
+
+    public void setExtend3(String extend3) {
+        this.extend3 = extend3;
     }
 
     public String getExtend4() {
