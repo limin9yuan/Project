@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+
+    <div class="ibox float-e-margins">
+        <div class="ibox-content">
+            <form class="form-horizontal m-t" id="signupForm">
+                <ul class="list-unstyled list-inline">
+                    <li>物资类别</li>
+                    <li style="width:15%"><input id="materialClassCode" name="materialClassCode" class="form-control" type="text"></li>
+                    <li>编码</li>
+                    <li style="width:15%"><input id="code" name="code" class="form-control" type="text"></li>
+                    <li>名称</li>
+                    <li style="width:15%"><input id="name" name="name" class="form-control" type="text"></li>
+                    <li>型号</li>
+                    <li style="width:15%"><input id="specification" name="specification"class="form-control" type="text"></li>
+                    <li><button class="btn  btn-primary" onclick="reLoad()"  type="button">
+                        <i class="fa fa-search" aria-hidden="true"></i>查询
+                    </button></li>
+                    <li> <button class="btn btn-primary" onclick="resetSelect()" type="reset" >
+                        <i class="fa fa-refresh" aria-hidden="true"></i>重置
+                    </button></li>
+                </ul>
+            </form>
+
+            <table id="materialTable" data-mobile-responsive="true">
+            </table>
+        </div>
+    </div>
+
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/material/requireApply/materialList.js"></script>
+</script>
+</body>
+</html>

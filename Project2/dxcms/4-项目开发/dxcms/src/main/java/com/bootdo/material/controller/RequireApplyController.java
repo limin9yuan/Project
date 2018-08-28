@@ -27,21 +27,57 @@ public class RequireApplyController extends BaseController {
     @GetMapping("/add")
     @RequiresPermissions("material:requireApply:add")
     String addRequireApply(Model model){
+        Long createUserId =getUser().getUserId();
+        String createUserName =getUser().getUsername();
         String deptName =getUser().getDeptName();
         Long deptId =getUser().getDeptId();
         String planNo = "0001001009";
         String businessDate = DateUtils.format(new Date(),DateUtils.DATE_PATTERN);
+        String name = businessDate.substring(0,4)+"年"+businessDate.substring(5,7)+"月采购申请";
 
-        model.addAttribute("name", planNo);//名称
+        model.addAttribute("name", name);//名称
         model.addAttribute("planNo", planNo);//编号
         model.addAttribute("authorCorpName", deptName); //编制机构名称
         model.addAttribute("businessDate", businessDate); //编制机构名称
-
+        model.addAttribute("authorCorpName", deptName); //编制部门名称
         model.addAttribute("authorCorpId", deptId); //编制部门Id
+
+        model.addAttribute("createUserId", createUserId); //编制人Id
+        model.addAttribute("createUserName", createUserName); //编制人姓名
+        model.addAttribute("createDate", businessDate);//编制日期
 
         return prefix + "/add";
     }
+    @GetMapping("/materialList")
+    @RequiresPermissions("material:requireApply:add")
+    String materialList(Model model){
+        return prefix + "/materialList";
+    }
 
+    //取得选择物资列表
+    @GetMapping("/getMaterialList")
+    @RequiresPermissions("material:requireApply:add")
+    @ResponseBody
+    PageUtils getMaterialList(@RequestParam Map<String, Object> params){
+        // 查询列表数据
+        //Query query = new Query(params);
+        List<Map<String, Object>> materialList = new ArrayList();//调用接口
+        for(int i=1;i<11;i++){
+            //做测试数据 调用接口前使用 begin
+            Map<String, Object> materialMap = new HashMap<>();
+            materialMap.put("name","物资A"+i);
+            materialMap.put("materialClassName","物资类别"+i);
+            materialMap.put("code",i);
+            materialMap.put("brand","规格型号"+i);
+            materialMap.put("texture","材质"+i);
+            materialMap.put("materialUnitId","单位"+i);
+            materialList.add(materialMap);
+        }
+        //做测试数据 end
+        int total = 20;//调用接口
+        PageUtils pageUtil = new PageUtils(materialList, total);
+        return pageUtil;
+    }
     @GetMapping("/list")
     @ResponseBody
     PageUtils list(@RequestParam Map<String, Object> params) {
@@ -140,7 +176,31 @@ public class RequireApplyController extends BaseController {
                 "    }";
         return jsondata;
     }
+    @ResponseBody
+    @GetMapping("/getMaterialDetailByCode/{code}")
+    @RequiresPermissions("material:requireApply:add")
+    Map<String, Object> getMaterialDetailByCode(@PathVariable("code") String code){
+        //做测试数据 调用接口前使用 begin
+        Map<String, Object> materialMap = new HashMap<>();
+        materialMap.put("name","物资A"+code);
+        materialMap.put("materialClassName","物资类别"+code);
+        materialMap.put("code","物资编码"+code);
+        materialMap.put("materialUnitId","单位"+code);
+        materialMap.put("specification","规格型号"+code);
+        materialMap.put("texture","材质"+code);
+        materialMap.put("materialSubArray","包装物资"+code);
+        materialMap.put("budgetQty","1000");
+        materialMap.put("budgetPrice","900.24");
+        materialMap.put("referencePrice","890.45");
+        materialMap.put("stockQty","200");
+        materialMap.put("acceptUserName","张三");
+        materialMap.put("acceptUserId","zhangsan");
+        Map<String, Object> returnData = new HashMap<String, Object>();
+        returnData.put("materialDetail", materialMap);
 
+        return returnData;
+
+    }
 
 
 

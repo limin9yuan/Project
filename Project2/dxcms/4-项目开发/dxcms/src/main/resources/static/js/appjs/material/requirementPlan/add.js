@@ -16,13 +16,14 @@ $().ready(function() {
 // 	});
 // }
 function nextStep() {
+	var res = getSelectedMaterial();
 	layer.open({
 		type : 2,
-		title : '增加',
-		maxmin : true,
+		title : '编辑',
+		maxmin : false,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '100%', '100%' ],
-		content :'/requirementPlan/requirementPlan/nextStep' // iframe的url
+		content : '/requirementPlan/requirementPlan/nextStep/' + res // iframe的url
 	});
 }
 function load() {
@@ -30,7 +31,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url :"/material/requireApply/requireMaterialDetailList", // 服务器数据的加载地址
+						url :"/requirementPlan/requirementPlan/requirePlanDetailList", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
@@ -77,7 +78,7 @@ function load() {
 									title : '物资编码'
 								},
 																{
-									field : 'modelNumber',
+									field : 'brand',
 									title : '型号'
 								},
 																{
@@ -107,6 +108,21 @@ function load() {
 							 ]
 					});
 }
+function getSelectedMaterial() {
+    var rows = $('#exampleTable').bootstrapTable('getSelections');
+
+    if (rows.length == 0) {
+    		layer.msg("请选择一条数据");
+    		return;
+    }
+	var ids = new Array();
+		// 遍历所有选择的行数据，取每条数据对应的ID
+		$.each(rows, function(i, row) {
+			ids[i] = row['materilaCode'];
+		});
+	return ids;
+
+ }
 $.validator.setDefaults({
 	submitHandler : function() {
 		save();

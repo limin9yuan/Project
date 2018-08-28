@@ -7,7 +7,7 @@
 	left: 0;
 	top: 0;
 	padding: .0em;
-	font-size: 11px
+	font-size: 13px
 }
 
 .ui-jqgrid .ui-jqgrid-titlebar {
@@ -62,14 +62,16 @@
 }
 
 .ui-jqgrid .ui-jqgrid-htable th {
-	height: 22px;
+	height: 28px;
+	text-align:center;
 	padding: 0 2px 0 2px
 }
 
 .ui-jqgrid .ui-jqgrid-htable th div {
 	overflow: hidden;
 	position: relative;
-	height: 17px
+	height: 28px;
+	line-height:28px;
 }
 
 .ui-th-column,.ui-jqgrid .ui-jqgrid-htable th.ui-th-column {
@@ -780,5 +782,5 @@ a.g-menu-item, a.soptclass, a.clearsearchclass {
     display: block;
 }
 .ui-jqgrid .ui-jqgrid-view input, .ui-jqgrid .ui-jqgrid-view select, .ui-jqgrid .ui-jqgrid-view textarea, .ui-jqgrid .ui-jqgrid-view button {
-    font-size: 11px;
+    font-size: 13px;
 }

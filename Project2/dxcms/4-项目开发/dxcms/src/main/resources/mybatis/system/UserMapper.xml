@@ -8,13 +8,15 @@
 	</select>
 
 	<select id="list" resultType="com.bootdo.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user
-        <where>  
+		select `user_id`,`username`,a.`name`,`password`,a.`dept_id`,b.name dept_name,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,
+		`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user a
+		left join sys_dept b on a.dept_id=b.dept_id
+		<where>
 		  		  <if test="userId != null and userId != ''"> and user_id = #{userId} </if>
 		  		  <if test="username != null and username != ''"> and username = #{username} </if>
-		  		  <if test="name != null and name != ''"> and name = #{name} </if>
+		  		  <if test="name != null and name != ''"> and a.name = #{name} </if>
 		  		  <if test="password != null and password != ''"> and password = #{password} </if>
-		  		  <if test="deptId != null and deptId != ''"> and dept_id = #{deptId} </if>
+		  		  <if test="deptId != null and deptId != ''"> and a.dept_id = #{deptId} </if>
 		  		  <if test="email != null and email != ''"> and email = #{email} </if>
 		  		  <if test="mobile != null and mobile != ''"> and mobile = #{mobile} </if>
 		  		  <if test="status != null and status != ''"> and status = #{status} </if>

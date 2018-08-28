@@ -29,10 +29,10 @@ public class RequireApplyModel {
     private UUID authorUserId;
     //编制人
     private String authorUserName;
-    //需求申请接收人Id
-    private UUID manageUserId;
-    //需求申请接收人
-    private String manageUserName;
+    //受理部门id
+    private UUID acceptDeptId;
+    //受理部门名称
+    private String acceptDeptName;
     //编号
     private String planNo;
     //名称
@@ -132,20 +132,20 @@ public class RequireApplyModel {
         this.authorUserName = authorUserName;
     }
 
-    public UUID getManageUserId() {
-        return manageUserId;
+    public UUID getAcceptDeptId() {
+        return acceptDeptId;
     }
 
-    public void setManageUserId(UUID manageUserId) {
-        this.manageUserId = manageUserId;
+    public void setAcceptDeptId(UUID acceptDeptId) {
+        this.acceptDeptId = acceptDeptId;
     }
 
-    public String getManageUserName() {
-        return manageUserName;
+    public String getAcceptDeptName() {
+        return acceptDeptName;
     }
 
-    public void setManageUserName(String manageUserName) {
-        this.manageUserName = manageUserName;
+    public void setAcceptDeptName(String acceptDeptName) {
+        this.acceptDeptName = acceptDeptName;
     }
 
     public String getPlanNo() {

@@ -14,7 +14,9 @@ public class RequireApplyDetailModel {
     //主键
     private UUID id;
     //需求申请Id
-    private UUID RequireApplyId;
+    private UUID requireApplyId;
+    //需求计划明细id
+    private UUID requirePlanDetailId;
     //物资id
     private UUID materialId;
     //物资编码
@@ -65,11 +67,19 @@ public class RequireApplyDetailModel {
     }
 
     public UUID getRequireApplyId() {
-        return RequireApplyId;
+        return requireApplyId;
     }
 
     public void setRequireApplyId(UUID requireApplyId) {
-        RequireApplyId = requireApplyId;
+        this.requireApplyId = requireApplyId;
+    }
+
+    public UUID getRequirePlanDetailId() {
+        return requirePlanDetailId;
+    }
+
+    public void setRequirePlanDetailId(UUID requirePlanDetailId) {
+        this.requirePlanDetailId = requirePlanDetailId;
     }
 
     public UUID getMaterialId() {
