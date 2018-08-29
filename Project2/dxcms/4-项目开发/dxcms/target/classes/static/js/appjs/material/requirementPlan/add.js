@@ -1,20 +1,20 @@
 $().ready(function() {
 	validateRule();
 	load();
-	// datetimepicker();
+	datetimepicker();
 });
-// function datetimepicker(){
-// 	//开始时间
-// 	$('#timeStart').datetimepicker({
-// 		format:'YYYY-MM-DD',
-// 		// locale:moment.locale('zh-cn')
-// 	});
-// 	//结束时间
-// 	$('#timeEnd').datetimepicker({
-// 		format:'YYYY-MM-DD',
-// 		// locale:moment.locale('zh-cn')
-// 	});
-// }
+function datetimepicker(){
+	//开始时间
+	$('#timeStart').datetimepicker({
+		   format: 'YYYY-MM-DD ',
+		   locale: moment.locale('zh-cn')
+	   });
+	//结束时间
+	$('#timeEnd').datetimepicker({
+		   format: 'YYYY-MM-DD ',
+		   locale: moment.locale('zh-cn')
+	   });
+}
 function nextStep() {
 	var res = getSelectedMaterial();
 	layer.open({

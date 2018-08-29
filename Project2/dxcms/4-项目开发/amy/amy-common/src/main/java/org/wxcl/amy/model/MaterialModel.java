@@ -19,12 +19,12 @@ public class MaterialModel {
     private String materialClassCode;
     //物资类型名称
     private String materialClassName;
-    //物资单位
+    //父物资id
+    private UUID materialParentId;
+    //物资单位id
     private UUID materialUnitId;
     //物资单位名称
     private String materialUnitName;
-    //单位
-    private DataDictModel materialUnit;
     //物资编码
     private String code;
     //物资简码
@@ -52,9 +52,9 @@ public class MaterialModel {
     //是否在用
     private Boolean isActived;
     //创建人
-    private String makeUser;
+    private String createUser;
     //创建日期
-    private Date makeDate;
+    private Date createDate;
     //备注
     private String remark;
     //扩展字段1
@@ -100,6 +100,14 @@ public class MaterialModel {
         this.materialClassName = materialClassName;
     }
 
+    public UUID getMaterialParentId() {
+        return materialParentId;
+    }
+
+    public void setMaterialParentId(UUID materialParentId) {
+        this.materialParentId = materialParentId;
+    }
+
     public UUID getMaterialUnitId() {
         return materialUnitId;
     }
@@ -114,14 +122,6 @@ public class MaterialModel {
 
     public void setMaterialUnitName(String materialUnitName) {
         this.materialUnitName = materialUnitName;
-    }
-
-    public DataDictModel getMaterialUnit() {
-        return materialUnit;
-    }
-
-    public void setMaterialUnit(DataDictModel materialUnit) {
-        this.materialUnit = materialUnit;
     }
 
     public String getCode() {
@@ -228,20 +228,20 @@ public class MaterialModel {
         isActived = actived;
     }
 
-    public String getMakeUser() {
-        return makeUser;
+    public String getCreateUser() {
+        return createUser;
     }
 
-    public void setMakeUser(String makeUser) {
-        this.makeUser = makeUser;
+    public void setCreateUser(String createUser) {
+        this.createUser = createUser;
     }
 
-    public Date getMakeDate() {
-        return makeDate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setMakeDate(Date makeDate) {
-        this.makeDate = makeDate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getRemark() {

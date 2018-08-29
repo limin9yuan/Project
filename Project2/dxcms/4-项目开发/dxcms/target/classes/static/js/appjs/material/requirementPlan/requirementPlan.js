@@ -1,7 +1,19 @@
 $(function() {
 	load();
+	datetimepicker();
 });
-
+function datetimepicker(){
+	//开始时间
+	$('#timeStart').datetimepicker({
+		format:'YYYY-MM-DD',
+		locale:moment.locale('zh-cn')
+	});
+	//结束时间
+	$('#timeEnd').datetimepicker({
+		format:'YYYY-MM-DD',
+		locale:moment.locale('zh-cn')
+	});
+}
 function load() {
 	$('#exampleTable')
 			.bootstrapTable(

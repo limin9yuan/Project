@@ -9,7 +9,7 @@
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
 						<form class="form-horizontal m-t" id="signupForm">
-							<input id="materilaCode" name="materilaCode" th:value="${materilaCode}" class="form-control" type="text">
+							<input id="materilaCode" name="materilaCode" th:value="${materilaCode}" class="form-control" type="hidden">
 							<div class="form-group">
 								<label class="col-sm-2 control-label">单据编号:<span class="mustin">*</span></label>
 								<div class="col-sm-4">
@@ -86,8 +86,10 @@
 	<div th:include="include::footer"></div>
 	<link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
 	<link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
+
 	<script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
 	<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>
+	<script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script>
 	<script type="text/javascript" src="/js/appjs/material/requirementPlan/nextStep.js">
 	</script>
 </body>

@@ -40,6 +40,8 @@ public class PurchaseOrderDetailModel {
     private Date arriveDate;
     //需求计划编号列表
     private String requirePlanNoList;
+    //生成日期
+    private Date createDate;
     //是否在用
     private Boolean isActived;
     //描述
@@ -165,6 +167,14 @@ public class PurchaseOrderDetailModel {
 
     public void setRequirePlanNoList(String requirePlanNoList) {
         this.requirePlanNoList = requirePlanNoList;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public Boolean getActived() {

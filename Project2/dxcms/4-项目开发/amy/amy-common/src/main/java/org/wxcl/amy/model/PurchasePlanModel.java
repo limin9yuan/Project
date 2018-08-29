@@ -29,9 +29,9 @@ public class PurchasePlanModel {
     //编制人名称
     private String authorUserName;
     //计划编号
-    private String planNo;
+    private String code;
     //名称
-    private String Name;
+    private String name;
     //业务日期
     private Date businessDate;
     //预算金额
@@ -125,20 +125,20 @@ public class PurchasePlanModel {
         this.authorUserName = authorUserName;
     }
 
-    public String getPlanNo() {
-        return planNo;
+    public String getCode() {
+        return code;
     }
 
-    public void setPlanNo(String planNo) {
-        this.planNo = planNo;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public Date getBusinessDate() {

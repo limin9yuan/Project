@@ -6,15 +6,58 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <!-- <head th:include="include :: header"></head> -->
-<link rel="stylesheet" href="/js/plugins/ueditor/themes/default/css/ueditor.css">
-
+<link rel="stylesheet"
+	href="/js/plugins/ueditor/themes/default/css/ueditor.css">
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
 		<div class="col-sm-12">
 			<div class="ibox">
 				<div class="ibox-body">
 					<div>
-						<div id="sde1" style="width:100%;margin:0 auto;  box-shadow: 0 0 0 1px #d1d1d1, 0 0 3px 1px #ccc;height:20%;">
+						<div id="sde" style="width:100%;margin:0 auto;  box-shadow: 0 0 0 1px #d1d1d1, 0 0 3px 1px #ccc;height:800px;">
+							<p style="text-align: center;">
+								<span class="sde-ctrl" sde-type="text" sde-right="." id="text-input1" contenteditable="false"> <span class="sde-value" 
+								sde-left="[" sde-right="]" contenteditable="true" style="font-size: 20px">设备</span><span style="font-size: 20px">定作合同</span>
+								</span>
+							</p>
+							
+							<p style="text-align: right;">
+								<span class="sde-ctrl" sde-type="text" sde-right="." id="text-input2" contenteditable="false"> <span class="sde-value" 
+								sde-left="[" sde-right="]" contenteditable="true" style="font-weight:bold;font-size: 15px" >合同编号:</span>
+								</span>
+							</p>
+							
+							<p style="text-align: left;font-size: 15px">
+								<span style="font-weight:bold">定作方:</span> <span class="sde-ctrl" sde-type="text" sde-right="." id="text-input3" contenteditable="false"> <span class="sde-value" 
+								sde-left="[" sde-right="]" contenteditable="true" style="font-weight:bold;font-size: 15px">华润雪花啤酒（    ）有限公司</span><span style="font-weight:bold;font-size: 15px">（以下简称甲方）</span>
+								</span>
+							</p>
+							
+							<p style="text-align: left;font-size: 15px">
+								<span style="font-size: 15px">注册地址:</span> <span class="sde-ctrl" sde-type="text" sde-right="." id="text-input4" contenteditable="false"> <span class="sde-value" 
+								sde-left="[" sde-right="]" contenteditable="true" style="font-size: 15px" >法定代表人或负责人：</span>
+								</span>
+							</p>
+							
+							<p style="text-align: left;font-size: 15px">
+								<span style="font-size: 15px">经办人:</span> <span class="sde-ctrl" sde-type="text" sde-right="." id="text-input5" contenteditable="false"> <span class="sde-value" 
+								sde-left="[" sde-right="]" contenteditable="true" style="font-size: 15px" ></span>
+								</span>
+							</p>
+							
+							<p style="text-align: left;font-size: 15px">
+								<span style="font-size: 15px">业务电话:</span> <span class="sde-ctrl" sde-type="text" sde-right="." id="text-input6" contenteditable="false"> <span class="sde-value" 
+								sde-left="[" sde-right="]" contenteditable="true" style="font-size: 15px" ></span>
+								</span>
+							</p>
+							
+							<p></p>
+							
+							<p style="text-align: left;font-size: 15px">
+								<span style="font-weight:bold">承揽方:</span> <span class="sde-ctrl" sde-type="text" sde-right="." id="text-input7" contenteditable="false"> <span class="sde-value" 
+								sde-left="[" sde-right="]" contenteditable="true" style="font-weight:bold;font-size: 15px">                 </span><span style="font-weight:bold;font-size: 15px">（以下简称乙方）</span>
+								</span>
+							</p>
 						</div>
 					</div>
 				</div>
@@ -24,14 +67,19 @@
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript"
 		src="/js/appjs/contract/ContractCreation/ContractCreation.js"></script>
-<!-- 富文本js -->
-	<script type="text/javascript" charset="utf-8" src="/js/plugins/js/modernizr/2.8.3/modernizr.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="/js/plugins/sde.config.js"></script>
+	<!-- 富文本js -->
+	<script type="text/javascript" charset="utf-8"
+		src="/js/plugins/js/modernizr/2.8.3/modernizr.min.js"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="/js/plugins/sde.config.js"></script>
 
-	<script type="text/javascript" src="/js/plugins/ueditor/ueditor.all.min.js?_=1528990315106"></script>
-	<script type="text/javascript" src="/js/plugins/ueditor/lang/zh-cn/zh-cn.js?_=1528990315106"></script>
-	<script type="text/javascript" src="/js/plugins/js/sde-ie8-design.js?ba2b4d4610f330f6e1ad"></script>
-<!-- 富文本js END -->
+	<script type="text/javascript"
+		src="/js/plugins/ueditor/ueditor.all.min.js?_=1528990315106"></script>
+	<script type="text/javascript"
+		src="/js/plugins/ueditor/lang/zh-cn/zh-cn.js?_=1528990315106"></script>
+	<script type="text/javascript"
+		src="/js/plugins/js/sde-ie8-design.js?ba2b4d4610f330f6e1ad"></script>
+	<!-- 富文本js END -->
 </body>
 </html>
 

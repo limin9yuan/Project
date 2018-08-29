@@ -5,14 +5,35 @@
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
 		<div class="col-sm-12">
-			<div class="ibox">
-				<div class="ibox-body">
-					<div class="fixed-table-toolbar">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<div class="form-group">
+							<div class="col-sm-4">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="input-group input-inline-sm col-sm-12">
+											<div class="input-group date" id="timeStart">
+												<input id="start" class="form-control" type="text"
+													name="timeStart" style="width: 100px"> <span
+													class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</div>
+											<span class="input-group-addon">至</span>
+											<div class="input-group date" id="timeEnd">
+												<input id="end" class="form-control" type="text"
+													name="timeEnd" style="width: 100px"><span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"> </span> </span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div class="columns pull-left">
-							<!-- <button shiro:hasPermission="requirementPlan:add" type="button" class="btn  btn-primary" onclick="add()">
-								<i class="fa fa-plus" aria-hidden="true"></i>添加
-							</button> -->
-							<button shiro:hasPermission="requirementPlan:batchRemove" type="button" class="btn  btn-danger"
+							<button type="button" class="btn  btn-danger"
 								onclick="batchRemove()">
 								<i class="fa fa-trash" aria-hidden="true"></i>批量删除
 							</button>
@@ -24,9 +45,8 @@
 							<input id="searchName" type="text" class="form-control"
 								placeholder="">
 						</div>
-					</div>
-					<table id="exampleTable" data-mobile-responsive="true">
-					</table>
+						<table id="exampleTable" data-mobile-responsive="true"></table>
+					</form>
 				</div>
 			</div>
 		</div>

@@ -7,9 +7,9 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.wxcl.amy.model.MaterialModel;
-import org.wxcl.amy.model.RequireApplyDetailModel;
-import org.wxcl.amy.model.RequireApplyModel;
+import com.dx.client.model.datacenter.MaterialBean;
+import com.dx.client.model.purchase.RequireApplyItemBean;
+import com.dx.client.model.purchase.RequireApplyBean;
 
 import java.util.*;
 
@@ -18,12 +18,18 @@ import java.util.*;
 public class RequireApplyController extends BaseController {
     private String prefix="material/requireApply"  ;
 
+    /**
+     * 采购申请编制页
+     */
     @RequiresPermissions("material:requireApply:requireApply")
     @GetMapping("")
     String requireApply(Model model) {
         return prefix + "/requireApply";
     }
 
+    /**
+     * 采购申请编制页
+     */
     @GetMapping("/add")
     @RequiresPermissions("material:requireApply:add")
     String addRequireApply(Model model){
@@ -48,13 +54,84 @@ public class RequireApplyController extends BaseController {
 
         return prefix + "/add";
     }
+
+    /**
+     * 物资明细列表页
+     */
     @GetMapping("/materialList")
     @RequiresPermissions("material:requireApply:add")
     String materialList(Model model){
         return prefix + "/materialList";
     }
 
-    //取得选择物资列表
+    /**
+     * 修改页
+     */
+    @GetMapping("/edit/{id}")
+    @RequiresPermissions("material:requireApply:edit")
+    String edit(@PathVariable("id") String id, Model model) {
+        RequireApplyBean requireApplyModel = new RequireApplyBean();//此处为接口取得数据
+        //requireApplyModel.setId(id);
+        requireApplyModel.setName("2018年8月采购申请");
+        //requireApplyModel.setPlanNo(id);
+        requireApplyModel.setAuthorCorpName("采购部");
+        //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
+        //requireApplyModel.setAuthorCorpId("编制部门Id");
+        //requireApplyModel.setCreateUserId("编制人Id");
+        requireApplyModel.setCreateUserName("编制人姓名");
+        requireApplyModel.setRemark("备注");
+
+        model.addAttribute("requireApplyModel", requireApplyModel);//编制日期
+        return prefix + "/edit";
+    }
+
+    /**
+     * 修改
+     */
+    @ResponseBody
+    @RequestMapping("/update")
+    @RequiresPermissions("material:requireApply:edit")
+    public R update(RequireApplyBean requireApplyModel) {
+        int re=1;
+        //int re = requireApplyService.update(requireApplyModel) > 0
+        if (re > 0) {
+            return R.ok();
+        }
+        return R.error();
+    }
+
+    /**
+     * 删除
+     */
+    @PostMapping("/remove")
+    @ResponseBody
+    @RequiresPermissions("material:requireApply:remove")
+    public R remove(Long id) {
+        /*if(requireApplyService.checkCanRemove(id)) {
+            if (requireApplyService.remove(id) > 0) {
+                return R.ok();
+            }
+        }else {
+            return R.error(1, "该申请已经被审批,不允许删除");
+        }
+        return R.error();*/
+        return R.ok();
+    }
+
+    /**
+     * 批量删除
+     */
+    @PostMapping("/batchRemove")
+    @ResponseBody
+    @RequiresPermissions("material:requireApply:batchRemove")
+    public R remove(@RequestParam("ids[]") Long[] ids) {
+        //requireApplyService.batchRemove(ids);
+        return R.ok();
+    }
+
+    /**
+     * 取得选择物资列表
+     */
     @GetMapping("/getMaterialList")
     @RequiresPermissions("material:requireApply:add")
     @ResponseBody
@@ -78,27 +155,46 @@ public class RequireApplyController extends BaseController {
         PageUtils pageUtil = new PageUtils(materialList, total);
         return pageUtil;
     }
+
+    /**
+     * 采购申请列表
+     */
     @GetMapping("/list")
     @ResponseBody
     PageUtils list(@RequestParam Map<String, Object> params) {
         // 查询列表数据
-        Query query = new Query(params);
-        List<RequireApplyModel> requireApplyList = new ArrayList();//调用接口
-        //做测试数据 调用接口前使用 begin
-        RequireApplyModel requireApplyModel = new RequireApplyModel();
-        requireApplyModel.setName("测试");
-        requireApplyList.add(requireApplyModel);
+        //Query query = new Query(params);
+        List<Map<String, Object>> requireApplyList = new ArrayList();//调用接口
+        for(int i=1;i<11;i++){
+            //做测试数据 调用接口前使用 begin
+            Map<String, Object> materialMap = new HashMap<>();
+            materialMap.put("id",i);
+            materialMap.put("status","状态"+i);
+            materialMap.put("planNo",i);
+            materialMap.put("name","名称"+i);
+            materialMap.put("authorDeptName","编制部门"+i);
+            materialMap.put("purchaseDept","统管部门"+i);
+            materialMap.put("budgetMoney","100"+i);
+            materialMap.put("totalMoney","1000"+i);
+            materialMap.put("authorUserName","编制人"+i);
+            materialMap.put("createDate","2018-08-"+String.valueOf(10+i));
+            requireApplyList.add(materialMap);
+        }
         //做测试数据 end
-        int total = 1;//调用接口
+        int total = 20;//调用接口
         PageUtils pageUtil = new PageUtils(requireApplyList, total);
         return pageUtil;
     }
+
+    /**
+     * 采购申请明细
+     */
     @GetMapping("/requireMaterialDetailList")
     @ResponseBody
     PageUtils requireMaterialDetailList(@RequestParam Map<String, Object> params) {
         // 查询列表数据
         Query query = new Query(params);
-        List<RequireApplyDetailModel> requireMaterialDetailList = new ArrayList();//调用接口
+        List<RequireApplyItemBean> requireMaterialDetailList = new ArrayList();//调用接口
         //做测试数据 调用接口前使用 begin
         /*RequireApplyDetailModel requireApplyDetailModel = new  RequireApplyDetailModel();
         MaterialModel ma = new MaterialModel();
@@ -111,71 +207,9 @@ public class RequireApplyController extends BaseController {
         return pageUtil;
     }
 
-    @RequiresPermissions("material:requireApply:add")
-    @RequestMapping("/test")
-    @ResponseBody()
-    String test() {
-        System.out.println("已请求");
-        String jsondata = "{\"page\":\"1\"," +
-                "      \"total\":2," +
-                "      \"records\":\"13\"," +
-                "      \"rows\":" +
-                "          [" +
-                "            {" +
-                "              \"id\":\"13\"," +
-                "              \"cell\":" +
-                "                  [\"13\",\"2007-10-06\",\"Client 3\",\"1000.00\",\"0.00\",\"1000.00\",null]" +
-                "            }," +
-                "            {" +
-                "              \"id\":\"12\"," +
-                "              \"cell\":" +
-                "                  [\"12\",\"2007-10-06\",\"Client 2\",\"700.00\",\"140.00\",\"840.00\",null]" +
-                "            }," +
-                "            {" +
-                "              \"id\":\"11\"," +
-                "              \"cell\":" +
-                "                  [\"11\",\"2007-10-06\",\"Client 1\",\"600.00\",\"120.00\",\"720.00\",null]" +
-                "            }," +
-                "            {" +
-                "              \"id\":\"10\"," +
-                "              \"cell\":" +
-                "                  [\"10\",\"2007-10-06\",\"Client 2\",\"100.00\",\"20.00\",\"120.00\",null]" +
-                "            }," +
-                "            {" +
-                "              \"id\":\"9\"," +
-                "              \"cell\":" +
-                "                  [\"9\",\"2007-10-06\",\"Client 1\",\"200.00\",\"40.00\",\"240.00\",null]" +
-                "            }," +
-                "            {" +
-                "              \"id\":\"8\"," +
-                "              \"cell\":" +
-                "                  [\"8\",\"2007-10-06\",\"Client 3\",\"200.00\",\"0.00\",\"200.00\",null]" +
-                "            }," +
-                "            {" +
-                "              \"id\":\"7\"," +
-                "              \"cell\":" +
-                "                  [\"7\",\"2007-10-05\",\"Client 2\",\"120.00\",\"12.00\",\"134.00\",null]" +
-                "            }," +
-                "            {" +
-                "              \"id\":\"6\"," +
-                "              \"cell\":" +
-                "                  [\"6\",\"2007-10-05\",\"Client 1\",\"50.00\",\"10.00\",\"60.00\",\"\"]" +
-                "            }," +
-                "            {" +
-                "              \"id\":\"5\"," +
-                "              \"cell\":" +
-                "                  [\"5\",\"2007-10-05\",\"Client 3\",\"100.00\",\"0.00\",\"100.00\",\"no tax at all\"]" +
-                "            }," +
-                "            {" +
-                "              \"id\":\"4\"," +
-                "              \"cell\":" +
-                "                  [\"4\",\"2007-10-04\",\"Client 3\",\"150.00\",\"0.00\",\"150.00\",\"no tax\"]" +
-                "            }" +
-                "          ]," +
-                "      \"userdata\":{\"amount\":3220,\"tax\":342,\"total\":3564,\"name\":\"Totals:\"}" +
-                "    }";
-        return jsondata;
-    }
+    /**
+     * 取得一条采购物资记录
+     */
     @ResponseBody
     @GetMapping("/getMaterialDetailByCode/{code}")
     @RequiresPermissions("material:requireApply:add")
@@ -201,7 +235,40 @@ public class RequireApplyController extends BaseController {
         return returnData;
 
     }
+    /**
+     * 取得采购申请物资明细列表
+     */
+    @GetMapping("/getRequireApplyDetailByCode")
+    @RequiresPermissions("material:requireApply:edit")
+    @ResponseBody
+    Map<String, Object> getRequireApplyDetailByCode(@RequestParam("id") String id){
+        List<Map<String, Object>> requireApplyDetailList = new ArrayList<>();//调用接口
+        //做测试数据 调用接口前使用 begin
+        for (int i = 0; i < 15; i++) {
+            Map<String, Object> requireMap = new HashMap<>();
+            requireMap.put("planNo", i);
+            requireMap.put("name", "物资A" + i);
+            requireMap.put("code", "物资编码" + i);
+            requireMap.put("specification", "规格" + i);
+            requireMap.put("materialUnitName", "单位" + i);
+            requireMap.put("materialUnitId", "单位" + i);
+            requireMap.put("materialSubArray", "包装物料" + i);
+            requireMap.put("requireQty","100"+i);
+            requireMap.put("budgetQty","200"+i);
+            requireMap.put("stockQty", "150"+i);
+            requireMap.put("referencePrice", "50"+i);
+            requireMap.put("budgetPrice", "60"+i);
+            requireMap.put("requireDate","2018-08-2"+i);
+            requireMap.put("acceptUserId", "001");
+            requireMap.put("acceptUserName", "编制人"+i);
+            requireMap.put("description", "说明信息"+i);
+            requireApplyDetailList.add(requireMap);
+        }
+        Map<String, Object> returnData = new HashMap<String, Object>();
+        returnData.put("requireApplyDetailList", requireApplyDetailList);
 
+        return returnData;
 
+    }
 
 }

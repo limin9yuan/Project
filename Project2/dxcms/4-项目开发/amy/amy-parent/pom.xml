@@ -20,6 +20,10 @@
         <module>../amy-admin-server</module>
         <module>../amy-turbine-server</module>
         <module>../amy-eureka-client2</module>
+        <module>../dx-client-model</module>
+        <module>../dx-server-dcservice</module>
+        <module>../dx-server-dcservice-api</module>
+        <module>../dx-server-model</module>
     </modules>
 
     <properties>

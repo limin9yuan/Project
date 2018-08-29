@@ -34,7 +34,7 @@ public class RequireApplyModel {
     //受理部门名称
     private String acceptDeptName;
     //编号
-    private String planNo;
+    private String code;
     //名称
     private String name;
     //业务日期
@@ -148,12 +148,12 @@ public class RequireApplyModel {
         this.acceptDeptName = acceptDeptName;
     }
 
-    public String getPlanNo() {
-        return planNo;
+    public String getCode() {
+        return code;
     }
 
-    public void setPlanNo(String planNo) {
-        this.planNo = planNo;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {

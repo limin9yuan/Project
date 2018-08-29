@@ -38,7 +38,7 @@ public class RequirePlanModel {
     //需求计划类型
     private String requireTypeName;
     //编号
-    private String planNo;
+    private String code;
     //名称
     private String name;
     //业务时间(原版本:归属日期)
@@ -172,12 +172,12 @@ public class RequirePlanModel {
         this.requireTypeName = requireTypeName;
     }
 
-    public String getPlanNo() {
-        return planNo;
+    public String getCode() {
+        return code;
     }
 
-    public void setPlanNo(String planNo) {
-        this.planNo = planNo;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
