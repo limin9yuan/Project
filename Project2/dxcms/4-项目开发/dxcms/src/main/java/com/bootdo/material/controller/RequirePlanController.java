@@ -46,6 +46,12 @@ public class RequirePlanController {
 		return "material/requirementPlan/add";
 	}
 
+	@GetMapping("/addMore")
+	@RequiresPermissions("requirementPlan:add")
+	String addMore(){
+		return "material/requirementPlan/addMore";
+	}
+
 	@GetMapping("/nextStep/{materilaCode}")
 	@RequiresPermissions("requirementPlan:add")
 	String nextStep(@PathVariable("materilaCode") String materilaCode, Model model){
@@ -55,9 +61,46 @@ public class RequirePlanController {
 	}
 
 	@ResponseBody
-	@GetMapping("/getRequirePlanDetailByCode")
+	@GetMapping("/getMaterialDetailByCode/{code}")
 	@RequiresPermissions("requirementPlan:add")
-	Map<String, Object> getRequirePlanDetailByCode(@RequestParam("code") String code){
+	Map<String, Object> getMaterialDetailByCode(@PathVariable("code") String code){
+		List<Map<String, Object>> getRequirePlanDetailList = new ArrayList<>();//调用接口
+		String codeArray[] = code.split(",");
+		//做测试数据 调用接口前使用 begin
+		for (int i = 0; i < codeArray.length; i++) {
+			Map<String, Object> requireMap = new HashMap<>();
+			requireMap.put("requirePlanid", codeArray[i]);
+			requireMap.put("materialName", "物资A" + i);
+			requireMap.put("materilaCode", "物资编码" + i);
+			requireMap.put("specification", "规格" + i);
+			requireMap.put("materialUnitName", "单位" + i);
+			requireMap.put("materialSubArray", "包装物料" + i);
+			requireMap.put("requireQty","25345");
+			requireMap.put("purchaseQty","456");
+			requireMap.put("stockQty", "47");
+			requireMap.put("reserveQty", "57657");
+			requireMap.put("onwayQty", "878");
+			requireMap.put("budgetQty", "8768");
+			requireMap.put("referencePrice", "789");
+			requireMap.put("budgetPrice", "8908");
+			requireMap.put("referenceAmount", "34");
+			requireMap.put("requireDate","2018/8/27");
+			requireMap.put("arriveDate", "2018/8/27");
+			requireMap.put("purchaserName", "张三");
+			requireMap.put("description", "sb");
+			getRequirePlanDetailList.add(requireMap);
+		}
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("getRequirePlanDetailList", getRequirePlanDetailList);
+
+		return returnData;
+
+	}
+
+	@ResponseBody
+	@GetMapping("/getRequirePlanDetail")
+	@RequiresPermissions("requirementPlan:add")
+	Map<String, Object> getRequirePlanDetail(@RequestParam("code") String code){
 		List<Map<String, Object>> getRequirePlanDetailList = new ArrayList<>();//调用接口
 		String codeArray[] = code.split(",");
 		//做测试数据 调用接口前使用 begin

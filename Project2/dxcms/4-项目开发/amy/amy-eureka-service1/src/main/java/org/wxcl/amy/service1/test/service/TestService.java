@@ -12,7 +12,7 @@ import org.wxcl.amy.model.TestModel;
 import org.wxcl.amy.model.User;
 import org.wxcl.amy.service1.service.api.ITestService;
 import org.wxcl.amy.service1.test.biz.ITestBiz;
-import org.wxcl.amy.util.ResultUtil;
+import org.wxcl.amy.utils.common.ResultUtil;
 
 import java.io.File;
 import java.io.IOException;

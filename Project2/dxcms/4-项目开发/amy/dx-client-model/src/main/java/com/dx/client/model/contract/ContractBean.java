@@ -2,6 +2,7 @@ package com.dx.client.model.contract;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Auther: cxd
@@ -35,9 +36,9 @@ public class ContractBean {
     private String authorDeptId;
     //编制部门名称
     private String authorDeptName;
-    //编制人Id
+    //起草人Id
     private String authorUserId;
-    //编制人
+    //起草人
     private String authorUserName;
     //执行部门id
     private String performDeptId;
@@ -97,6 +98,14 @@ public class ContractBean {
     private String createUserName;
     //备注
     private String remark;
+    //合同物资明细
+    private List<ContractMaterialBean> contractMaterials;
+    //适用机构
+    private List<ContractSuitBean> contractSuits;
+    //供货公司
+    private List<ContractDeliverBean> contractDelivers;
+    //合同富文本输入的元素（key，value模式）
+    private List<ContractElementBean> contractElements;
 
     public String getId() {
         return id;
@@ -448,5 +457,37 @@ public class ContractBean {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<ContractMaterialBean> getContractMaterials() {
+        return contractMaterials;
+    }
+
+    public void setContractMaterials(List<ContractMaterialBean> contractMaterials) {
+        this.contractMaterials = contractMaterials;
+    }
+
+    public List<ContractSuitBean> getContractSuits() {
+        return contractSuits;
+    }
+
+    public void setContractSuits(List<ContractSuitBean> contractSuits) {
+        this.contractSuits = contractSuits;
+    }
+
+    public List<ContractDeliverBean> getContractDelivers() {
+        return contractDelivers;
+    }
+
+    public void setContractDelivers(List<ContractDeliverBean> contractDelivers) {
+        this.contractDelivers = contractDelivers;
+    }
+
+    public List<ContractElementBean> getContractElements() {
+        return contractElements;
+    }
+
+    public void setContractElements(List<ContractElementBean> contractElements) {
+        this.contractElements = contractElements;
     }
 }
