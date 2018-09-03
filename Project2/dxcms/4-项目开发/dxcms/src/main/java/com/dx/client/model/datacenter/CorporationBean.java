@@ -1,7 +1,5 @@
 package com.dx.client.model.datacenter;
 
-import java.util.UUID;
-
 /**
  * @Auther: cxd
  * @Date: 2018/8/28
@@ -9,7 +7,7 @@ import java.util.UUID;
  */
 public class CorporationBean {
     //主键
-    private UUID id;
+    private String id;
     //编号
     private String code;
     //名称

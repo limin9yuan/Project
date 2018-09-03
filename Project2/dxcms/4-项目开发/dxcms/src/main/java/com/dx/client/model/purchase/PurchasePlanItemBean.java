@@ -2,7 +2,6 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -11,13 +10,13 @@ import java.util.UUID;
  */
 public class PurchasePlanItemBean {
     //主键
-    private UUID id;
+    private String id;
     //采购计划id
-    private UUID purchasePlanId;
+    private String purchasePlanId;
     //需求计划明细id
-    private UUID requirePlanItemId;
+    private String requirePlanItemId;
     //物资id
-    private UUID materialId;
+    private String materialId;
     //物资编码
     private String materilaCode;
     //物资名称
@@ -31,7 +30,7 @@ public class PurchasePlanItemBean {
     //物资子码
     private String materialSubArray;
     //采购员Id
-    private UUID purchaserId;
+    private String purchaserId;
     //采购员名称
     private String purchaserName;
     //需求数量

@@ -2,7 +2,7 @@ package com.dx.client.model.contract;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
+import java.util.List;
 
 /**
  * @Auther: cxd
@@ -11,35 +11,41 @@ import java.util.UUID;
  */
 public class ContractBean {
     //主键
-    private UUID id;
+    private String id;
     //合同模板id
-    private UUID templateId;
-    //立项id
-    private UUID projectId;
+    private String templateId;
+    //合同模板名称
+    private String templateName;
+    //项目id
+    private String projectId;
+    //项目名称
+    private String projectName;
     //招标方案id
-    private UUID bidSchemeId;
+    private String bidSchemeId;
+    //招标方案名称
+    private String bidSchemeName;
     //审批状态Id
-    private UUID statusId;
+    private String statusId;
     //审批状态名称
     private String statusName;
     //编制机构Id
-    private UUID authorCorpId;
+    private String authorCorpId;
     //编制机构名称
     private String authorCorpName;
     //编制部门Id
-    private UUID authorDeptId;
+    private String authorDeptId;
     //编制部门名称
     private String authorDeptName;
-    //编制人Id
-    private UUID authorUserId;
-    //编制人
+    //起草人Id
+    private String authorUserId;
+    //起草人
     private String authorUserName;
     //执行部门id
-    private UUID performDeptId;
+    private String performDeptId;
     //执行部门名称
     private String performDeptName;
     //执行人id
-    private UUID performUserId;
+    private String performUserId;
     //执行人
     private String performUserName;
     //合同编号
@@ -47,19 +53,19 @@ public class ContractBean {
     //合同名称
     private String contractName;
     //合同甲方id（添加合同页不显示）
-    private UUID companyIdA;
+    private String companyIdA;
     //合同甲方名称（添加合同页不显示）
-    private UUID companyNameA;
+    private String companyNameA;
     //合同甲方联系人（添加合同页不显示）
-    private UUID companyContractsA;
+    private String companyContractsA;
     //合同乙方id（添加合同页不显示）
-    private UUID companyIdB;
+    private String companyIdB;
     //合同乙方名称（添加合同页不显示）
-    private UUID companyNameB;
+    private String companyNameB;
     //合同联系人（添加合同页不显示）
-    private UUID companyContractsB;
+    private String companyContractsB;
     //货币类型id
-    private UUID currencyTypeId;
+    private String currencyTypeId;
     //货币类型名称
     private String currencyTypeName;
     //税率
@@ -87,49 +93,81 @@ public class ContractBean {
     //生成日期
     private Date createDate;
     //生成人Id
-    private UUID createUserId;
+    private String createUserId;
     //生成人
     private String createUserName;
     //备注
     private String remark;
+    //合同物资明细
+    private List<ContractMaterialBean> contractMaterials;
+    //适用机构
+    private List<ContractSuitBean> contractSuits;
+    //供货公司
+    private List<ContractDeliverBean> contractDelivers;
+    //合同富文本输入的元素（key，value模式）
+    private List<ContractElementBean> contractElements;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getTemplateId() {
+    public String getTemplateId() {
         return templateId;
     }
 
-    public void setTemplateId(UUID templateId) {
+    public void setTemplateId(String templateId) {
         this.templateId = templateId;
     }
 
-    public UUID getProjectId() {
+    public String getTemplateName() {
+        return templateName;
+    }
+
+    public void setTemplateName(String templateName) {
+        this.templateName = templateName;
+    }
+
+    public String getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(UUID projectId) {
+    public void setProjectId(String projectId) {
         this.projectId = projectId;
     }
 
-    public UUID getBidSchemeId() {
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
+    }
+
+    public String getBidSchemeId() {
         return bidSchemeId;
     }
 
-    public void setBidSchemeId(UUID bidSchemeId) {
+    public void setBidSchemeId(String bidSchemeId) {
         this.bidSchemeId = bidSchemeId;
     }
 
-    public UUID getStatusId() {
+    public String getBidSchemeName() {
+        return bidSchemeName;
+    }
+
+    public void setBidSchemeName(String bidSchemeName) {
+        this.bidSchemeName = bidSchemeName;
+    }
+
+    public String getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(UUID statusId) {
+    public void setStatusId(String statusId) {
         this.statusId = statusId;
     }
 
@@ -141,11 +179,11 @@ public class ContractBean {
         this.statusName = statusName;
     }
 
-    public UUID getAuthorCorpId() {
+    public String getAuthorCorpId() {
         return authorCorpId;
     }
 
-    public void setAuthorCorpId(UUID authorCorpId) {
+    public void setAuthorCorpId(String authorCorpId) {
         this.authorCorpId = authorCorpId;
     }
 
@@ -157,11 +195,11 @@ public class ContractBean {
         this.authorCorpName = authorCorpName;
     }
 
-    public UUID getAuthorDeptId() {
+    public String getAuthorDeptId() {
         return authorDeptId;
     }
 
-    public void setAuthorDeptId(UUID authorDeptId) {
+    public void setAuthorDeptId(String authorDeptId) {
         this.authorDeptId = authorDeptId;
     }
 
@@ -173,11 +211,11 @@ public class ContractBean {
         this.authorDeptName = authorDeptName;
     }
 
-    public UUID getAuthorUserId() {
+    public String getAuthorUserId() {
         return authorUserId;
     }
 
-    public void setAuthorUserId(UUID authorUserId) {
+    public void setAuthorUserId(String authorUserId) {
         this.authorUserId = authorUserId;
     }
 
@@ -189,11 +227,11 @@ public class ContractBean {
         this.authorUserName = authorUserName;
     }
 
-    public UUID getPerformDeptId() {
+    public String getPerformDeptId() {
         return performDeptId;
     }
 
-    public void setPerformDeptId(UUID performDeptId) {
+    public void setPerformDeptId(String performDeptId) {
         this.performDeptId = performDeptId;
     }
 
@@ -205,11 +243,11 @@ public class ContractBean {
         this.performDeptName = performDeptName;
     }
 
-    public UUID getPerformUserId() {
+    public String getPerformUserId() {
         return performUserId;
     }
 
-    public void setPerformUserId(UUID performUserId) {
+    public void setPerformUserId(String performUserId) {
         this.performUserId = performUserId;
     }
 
@@ -237,52 +275,92 @@ public class ContractBean {
         this.contractName = contractName;
     }
 
-    public UUID getCompanyIdA() {
+    public String getCompanyIdA() {
         return companyIdA;
     }
 
-    public void setCompanyIdA(UUID companyIdA) {
+    public void setCompanyIdA(String companyIdA) {
         this.companyIdA = companyIdA;
     }
 
-    public UUID getCompanyNameA() {
+    public String getCompanyNameA() {
         return companyNameA;
     }
 
-    public void setCompanyNameA(UUID companyNameA) {
+    public void setCompanyNameA(String companyNameA) {
         this.companyNameA = companyNameA;
     }
 
-    public UUID getCompanyContractsA() {
+    public String getCompanyContractsA() {
         return companyContractsA;
     }
 
-    public void setCompanyContractsA(UUID companyContractsA) {
+    public void setCompanyContractsA(String companyContractsA) {
         this.companyContractsA = companyContractsA;
     }
 
-    public UUID getCompanyIdB() {
+    public String getCompanyIdB() {
         return companyIdB;
     }
 
-    public void setCompanyIdB(UUID companyIdB) {
+    public void setCompanyIdB(String companyIdB) {
         this.companyIdB = companyIdB;
     }
 
-    public UUID getCompanyNameB() {
+    public String getCompanyNameB() {
         return companyNameB;
     }
 
-    public void setCompanyNameB(UUID companyNameB) {
+    public void setCompanyNameB(String companyNameB) {
         this.companyNameB = companyNameB;
     }
 
-    public UUID getCompanyContractsB() {
+    public String getCompanyContractsB() {
         return companyContractsB;
     }
 
-    public void setCompanyContractsB(UUID companyContractsB) {
+    public void setCompanyContractsB(String companyContractsB) {
         this.companyContractsB = companyContractsB;
+    }
+
+    public String getCurrencyTypeId() {
+        return currencyTypeId;
+    }
+
+    public void setCurrencyTypeId(String currencyTypeId) {
+        this.currencyTypeId = currencyTypeId;
+    }
+
+    public String getCurrencyTypeName() {
+        return currencyTypeName;
+    }
+
+    public void setCurrencyTypeName(String currencyTypeName) {
+        this.currencyTypeName = currencyTypeName;
+    }
+
+    public double getTaxRate() {
+        return taxRate;
+    }
+
+    public void setTaxRate(double taxRate) {
+        this.taxRate = taxRate;
+    }
+
+    public BigDecimal getPerformanceBond() {
+        return performanceBond;
+    }
+
+    public void setPerformanceBond(BigDecimal performanceBond) {
+        this.performanceBond = performanceBond;
+    }
+
+    public BigDecimal getWarrantyBond() {
+        return warrantyBond;
+    }
+
+    public void setWarrantyBond(BigDecimal warrantyBond) {
+        this.warrantyBond = warrantyBond;
     }
 
     public BigDecimal getBudgetMoney() {
@@ -299,6 +377,22 @@ public class ContractBean {
 
     public void setTotalMoney(BigDecimal totalMoney) {
         this.totalMoney = totalMoney;
+    }
+
+    public Date getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(Date dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public Date getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Date dateTo) {
+        this.dateTo = dateTo;
     }
 
     public Boolean getSubmit() {
@@ -341,11 +435,11 @@ public class ContractBean {
         this.createDate = createDate;
     }
 
-    public UUID getCreateUserId() {
+    public String getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(UUID createUserId) {
+    public void setCreateUserId(String createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -363,5 +457,37 @@ public class ContractBean {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<ContractMaterialBean> getContractMaterials() {
+        return contractMaterials;
+    }
+
+    public void setContractMaterials(List<ContractMaterialBean> contractMaterials) {
+        this.contractMaterials = contractMaterials;
+    }
+
+    public List<ContractSuitBean> getContractSuits() {
+        return contractSuits;
+    }
+
+    public void setContractSuits(List<ContractSuitBean> contractSuits) {
+        this.contractSuits = contractSuits;
+    }
+
+    public List<ContractDeliverBean> getContractDelivers() {
+        return contractDelivers;
+    }
+
+    public void setContractDelivers(List<ContractDeliverBean> contractDelivers) {
+        this.contractDelivers = contractDelivers;
+    }
+
+    public List<ContractElementBean> getContractElements() {
+        return contractElements;
+    }
+
+    public void setContractElements(List<ContractElementBean> contractElements) {
+        this.contractElements = contractElements;
     }
 }

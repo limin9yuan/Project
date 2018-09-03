@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div>
+                    <div class="columns pull-right">
+                        <button shiro:hasPermission="material:purchasePlan:add" type="button"
+                                class="btn  btn-primary" onclick="add()">
+                            <i class="fa fa-plus" aria-hidden="true"></i>新增
+                        </button>
+                        <button shiro:hasPermission="material:purchasePlan:edit"
+                                class="btn  btn-primary" onclick="edit()">
+                            <i class="fa fa-import" aria-hidden="true"></i>修改
+                        </button>
+                        <button shiro:hasPermission="material:purchasePlan:batchRemove"
+                                type="button" class="btn  btn-danger" onclick="batchRemove()">
+                            <i class="fa fa-trash" aria-hidden="true"></i>批量删除
+                        </button>
+
+                        <button shiro:hasPermission="material:purchasePlan:batchRemove"
+                                type="button" class="btn  btn-danger" onclick="closeWin()">
+                            <i class="fa fa-export" aria-hidden="true"></i>关闭
+                        </button>
+                    </div>
+                </div>
+                <form class="form-horizontal m-t fixed-table-toolbar" id="signupForm">
+                    <div class="columns pull-right">
+                        <button class="btn btn-success" onclick="reLoad()">查询</button>
+                    </div>
+                    <div class="columns pull-right nopadding" style="width:160px;">
+                        <div class="input-group date" id="beginDate">
+                            <input id="start" class="form-control" type="text"
+                                   name="beginDate" style="width:120px"> <span
+                                class="input-group-addon"> <span
+                                class="glyphicon glyphicon-calendar"></span>
+											</span>
+                        </div>
+                    </div>
+                    <div class="columns pull-right nopadding" style="width:20px;">&nbsp;至&nbsp;
+                    </div>
+                    <div class="columns pull-right nopadding"  style="width:160px;">
+                        <div class="input-group date" id="endDate">
+                            <input id="end" class="form-control" type="text"
+                                   name="endDate" style="width:120px"> <span
+                                class="input-group-addon"> <span
+                                class="glyphicon glyphicon-calendar"></span>
+											</span>
+                        </div>
+                    </div>
+                    <div class="columns pull-right col-md-2 nopadding">
+                        <input id="searchName" type="text" class="form-control"
+                               placeholder="请输入编号或名称">
+
+                    </div>
+                    </div>
+
+
+                   <!-- <div class="text-right form-group">
+                        <div class="columns pull-right col-md-2">
+                            <button type="button" class="btn btn-primary" onclick="reLoad()">
+                                <i class="fa fa-search" aria-hidden="true"></i>查询
+                            </button>
+                            <button type="reset" class="btn btn-primary" onclick="resetSelect()">
+                                <i class="fa fa-refresh" aria-hidden="true"></i>重置
+                            </button>
+                        </div>
+                    </div>-->
+                </form>
+
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+<div>
+    <script type="text/javascript">
+        var s_edit_h = 'hidden';
+        var s_remove_h = 'hidden';
+        var s_view_h = 'hidden';
+    </script>
+</div>
+<div shiro:hasPermission="payment:purchaseManagement:edit">
+    <script type="text/javascript">
+        s_edit_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="payment:purchaseManagement:remove">
+    <script type="text/javascript">
+        var s_remove_h = '';
+    </script>
+</div>
+<div shiro:hasPermission="payment:purchaseManagement:view">
+    <script type="text/javascript">
+        var s_view_h = '';
+    </script>
+</div>
+</div>
+<div th:include="include :: footer"></div>
+<script type="text/javascript" src="/js/appjs/material/purchasePlan/purchasePlan.js"></script>
+</body>
+</html>

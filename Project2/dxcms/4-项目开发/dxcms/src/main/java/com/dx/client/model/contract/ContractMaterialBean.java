@@ -2,7 +2,6 @@ package com.dx.client.model.contract;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -11,15 +10,15 @@ import java.util.UUID;
  */
 public class ContractMaterialBean {
     //主键
-    private UUID id;
+    private String id;
     //合同id
-    private UUID contractId;
+    private String contractId;
     //适用机构id
-    private UUID suitCorpId;
+    private String suitCorpId;
     //适用机构名称
     private String suitCorpName;
     //物资id
-    private UUID materialId;
+    private String materialId;
     //物资编码
     private String materilaCode;
     //物资名称
@@ -43,7 +42,7 @@ public class ContractMaterialBean {
     //有效期至
     private Date dateTo;
     //合同物资父id
-    private UUID parentId;
+    private String parentId;
     //生成日期
     private Date createDate;
     //是否在用
@@ -53,27 +52,27 @@ public class ContractMaterialBean {
     //备注
     private String remark;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getContractId() {
+    public String getContractId() {
         return contractId;
     }
 
-    public void setContractId(UUID contractId) {
+    public void setContractId(String contractId) {
         this.contractId = contractId;
     }
 
-    public UUID getSuitCorpId() {
+    public String getSuitCorpId() {
         return suitCorpId;
     }
 
-    public void setSuitCorpId(UUID suitCorpId) {
+    public void setSuitCorpId(String suitCorpId) {
         this.suitCorpId = suitCorpId;
     }
 
@@ -85,11 +84,11 @@ public class ContractMaterialBean {
         this.suitCorpName = suitCorpName;
     }
 
-    public UUID getMaterialId() {
+    public String getMaterialId() {
         return materialId;
     }
 
-    public void setMaterialId(UUID materialId) {
+    public void setMaterialId(String materialId) {
         this.materialId = materialId;
     }
 
@@ -181,11 +180,11 @@ public class ContractMaterialBean {
         this.dateTo = dateTo;
     }
 
-    public UUID getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(UUID parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 

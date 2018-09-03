@@ -2,7 +2,6 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -11,21 +10,21 @@ import java.util.UUID;
  */
 public class AllocationPlanBean {
     //主键
-    private UUID id;
+    private String id;
     //审批状态id
-    private UUID statusId;
+    private String statusId;
     //审批状态名称
     private String statusName;
     //编制机构id
-    private UUID authorCorpId;
+    private String authorCorpId;
     //编制机构名称
     private String authorCorpName;
     //编制部门id
-    private UUID authorDeptId;
+    private String authorDeptId;
     //编制部门名称
     private String authorDeptName;
     //编制人id
-    private UUID authorUserId;
+    private String authorUserId;
     //编制人
     private String authorUserName;
     //计划编号
@@ -51,19 +50,19 @@ public class AllocationPlanBean {
     //备注
     private String remark;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getStatusId() {
+    public String getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(UUID statusId) {
+    public void setStatusId(String statusId) {
         this.statusId = statusId;
     }
 
@@ -75,11 +74,11 @@ public class AllocationPlanBean {
         this.statusName = statusName;
     }
 
-    public UUID getAuthorCorpId() {
+    public String getAuthorCorpId() {
         return authorCorpId;
     }
 
-    public void setAuthorCorpId(UUID authorCorpId) {
+    public void setAuthorCorpId(String authorCorpId) {
         this.authorCorpId = authorCorpId;
     }
 
@@ -91,11 +90,11 @@ public class AllocationPlanBean {
         this.authorCorpName = authorCorpName;
     }
 
-    public UUID getAuthorDeptId() {
+    public String getAuthorDeptId() {
         return authorDeptId;
     }
 
-    public void setAuthorDeptId(UUID authorDeptId) {
+    public void setAuthorDeptId(String authorDeptId) {
         this.authorDeptId = authorDeptId;
     }
 
@@ -107,11 +106,11 @@ public class AllocationPlanBean {
         this.authorDeptName = authorDeptName;
     }
 
-    public UUID getAuthorUserId() {
+    public String getAuthorUserId() {
         return authorUserId;
     }
 
-    public void setAuthorUserId(UUID authorUserId) {
+    public void setAuthorUserId(String authorUserId) {
         this.authorUserId = authorUserId;
     }
 

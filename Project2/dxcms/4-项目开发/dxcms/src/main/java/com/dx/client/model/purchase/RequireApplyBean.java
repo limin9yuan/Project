@@ -2,7 +2,6 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -11,25 +10,25 @@ import java.util.UUID;
  */
 public class RequireApplyBean {
     //主键
-    private UUID id;
+    private String id;
     //审批状态Id
-    private UUID statusId;
+    private String statusId;
     //审批状态名称
     private String statusName;
     //编制机构Id
-    private UUID authorCorpId;
+    private String authorCorpId;
     //编制机构名称
     private String authorCorpName;
     //编制部门Id
-    private UUID authorDeptId;
+    private String authorDeptId;
     //编制部门名称
     private String authorDeptName;
     //编制人Id
-    private UUID authorUserId;
+    private String authorUserId;
     //编制人
     private String authorUserName;
     //受理部门id
-    private UUID acceptDeptId;
+    private String acceptDeptId;
     //受理部门名称
     private String acceptDeptName;
     //编号
@@ -53,25 +52,25 @@ public class RequireApplyBean {
     //生成日期
     private Date createDate;
     //生成人Id
-    private UUID createUserId;
+    private String createUserId;
     //生成人
     private String createUserName;
     //备注
     private String remark;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getStatusId() {
+    public String getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(UUID statusId) {
+    public void setStatusId(String statusId) {
         this.statusId = statusId;
     }
 
@@ -83,11 +82,11 @@ public class RequireApplyBean {
         this.statusName = statusName;
     }
 
-    public UUID getAuthorCorpId() {
+    public String getAuthorCorpId() {
         return authorCorpId;
     }
 
-    public void setAuthorCorpId(UUID authorCorpId) {
+    public void setAuthorCorpId(String authorCorpId) {
         this.authorCorpId = authorCorpId;
     }
 
@@ -99,11 +98,11 @@ public class RequireApplyBean {
         this.authorCorpName = authorCorpName;
     }
 
-    public UUID getAuthorDeptId() {
+    public String getAuthorDeptId() {
         return authorDeptId;
     }
 
-    public void setAuthorDeptId(UUID authorDeptId) {
+    public void setAuthorDeptId(String authorDeptId) {
         this.authorDeptId = authorDeptId;
     }
 
@@ -115,11 +114,11 @@ public class RequireApplyBean {
         this.authorDeptName = authorDeptName;
     }
 
-    public UUID getAuthorUserId() {
+    public String getAuthorUserId() {
         return authorUserId;
     }
 
-    public void setAuthorUserId(UUID authorUserId) {
+    public void setAuthorUserId(String authorUserId) {
         this.authorUserId = authorUserId;
     }
 
@@ -131,11 +130,11 @@ public class RequireApplyBean {
         this.authorUserName = authorUserName;
     }
 
-    public UUID getAcceptDeptId() {
+    public String getAcceptDeptId() {
         return acceptDeptId;
     }
 
-    public void setAcceptDeptId(UUID acceptDeptId) {
+    public void setAcceptDeptId(String acceptDeptId) {
         this.acceptDeptId = acceptDeptId;
     }
 
@@ -227,11 +226,11 @@ public class RequireApplyBean {
         this.createDate = createDate;
     }
 
-    public UUID getCreateUserId() {
+    public String getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(UUID createUserId) {
+    public void setCreateUserId(String createUserId) {
         this.createUserId = createUserId;
     }
 

@@ -2,7 +2,6 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -11,11 +10,11 @@ import java.util.UUID;
  */
 public class RequirePlanItemBean {
     //主键
-    private UUID id;
+    private String id;
     //需求计划Id
-    private UUID requirePlanid;
+    private String requirePlanid;
     //物资id
-    private UUID materialId;
+    private String materialId;
     //物资编码
     private String materilaCode;
     //物资名称
@@ -29,7 +28,7 @@ public class RequirePlanItemBean {
     //物资子码
     private String materialSubArray;
     //采购员Id
-    private UUID purchaserId;
+    private String purchaserId;
     //采购员名称
     private String purchaserName;
     //需求数量
@@ -67,27 +66,27 @@ public class RequirePlanItemBean {
     //备注(一般用于系统备注)
     private String Remark;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getRequirePlanid() {
+    public String getRequirePlanid() {
         return requirePlanid;
     }
 
-    public void setRequirePlanid(UUID requirePlanid) {
+    public void setRequirePlanid(String requirePlanid) {
         this.requirePlanid = requirePlanid;
     }
 
-    public UUID getMaterialId() {
+    public String getMaterialId() {
         return materialId;
     }
 
-    public void setMaterialId(UUID materialId) {
+    public void setMaterialId(String materialId) {
         this.materialId = materialId;
     }
 
@@ -139,11 +138,11 @@ public class RequirePlanItemBean {
         this.materialSubArray = materialSubArray;
     }
 
-    public UUID getPurchaserId() {
+    public String getPurchaserId() {
         return purchaserId;
     }
 
-    public void setPurchaserId(UUID purchaserId) {
+    public void setPurchaserId(String purchaserId) {
         this.purchaserId = purchaserId;
     }
 

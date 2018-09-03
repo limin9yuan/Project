@@ -1,5 +1,4 @@
-var lastsel ="";
-var $ellipsis = null;
+var $ellipsis = null;//行选择物资图标对象
 $(function(){
 	//页面加载完成之后执行
 	initPage();
@@ -106,7 +105,6 @@ function initControl() {
                        "requireQty": "<span id='requireQty'>0.00</span>",
                        "referenceTotal": "<span id='referenceTotal'>0.00</span>"
                    });
-                   //$('table.ui-jqgrid-ftable td[aria-describedby="gridTable_UnitId"]').prevUntil().css("border-right-color", "#fff");
                },
                 onSelectRow : function(id) {
                   /*if (id && id !== lastsel) {
@@ -126,20 +124,19 @@ function initControl() {
     });
 
     //默认添加10行 空行
-    for (var i = 1; i < 5; i++) {
+    for (var i = 0; i < 10; i++) {
         var rowdata = getEmptyRow();
         $grid.jqGrid('addRowData', i, rowdata);
     };
-
-    $grid.find('.editable').attr("disabled", "disabled");
+    //设置只读
     $grid.find('.disabled').attr("disabled", "disabled");
+    //将第一行的选择物资按钮激活
     $grid.find("tbody tr:eq(1)").find('input').removeAttr('disabled').attr("isvalid", "yes");
-	/*可以控制界面上增删改查的按钮是否显示*/
-	//jQuery("#requireApplyTable").jqGrid('navGrid', '#requireApplyPage', {edit : true,add : true,del : true});
-	//jQuery("#requireApplyTable").jqGrid('inlineNav', '#requireApplyPage');
+
     registEvent();
 }
-function getMaterialDetailByCode(code){
+//取得物资数据
+function getMaterialDetailByCode(code,index){
     var dataTmp="";
     var url = '/material/requireApply/getMaterialDetailByCode/'+code;
    $.ajax({
@@ -175,6 +172,7 @@ function getMaterialDetailByCode(code){
 
                 //$ellipsis.parents('[role=row]').find('input').removeAttr('disabled').attr("isvalid", "yes");
                 $ellipsis.parents('[role=row]').next().find('input').removeAttr('disabled');
+                layer.close(index);
             } else {
                 parent.layer.msg('该物资已存在,不能重复添加');
             }
@@ -183,10 +181,11 @@ function getMaterialDetailByCode(code){
 
     return dataTmp;
 }
+//空数据行
 function getEmptyRow(){
     var rowdata = {
         // name : '<input name="name" type="text" class="editable center disabled" readonly/>',//物资名称
-         name : '<div class="product"><input name="name" readonly type="text" class="editable" isvalid="no" checkexpession="NotNull"/><span class="ui-icon-ellipsis"></span></div>',
+         name : '<div class="product"><input name="name" readonly type="text" class="editable left disabled" isvalid="no" checkexpession="NotNull"/><span class="ui-icon-ellipsis"></span></div>',
          code : '<input name="code" type="text" class="editable left disabled" />',//物资编码
          specification: '<input name="specification" type="text" class="editable left disabled" />',//规格型号
          materialUnitId: '<input name="materialUnitName" type="text" class="editable left disabled" /><input name="materialUnitId" type="hidden"/>',//单位
@@ -206,24 +205,31 @@ function getEmptyRow(){
     }
     return rowdata;
 }
+//添加行
 function addRow(){
     //alert($(".bills").height());
     //s$(".bills").height($(".bills").height+25);
 
      var $grid = $("#requireApplyTable");
      var ids = $grid.jqGrid('getDataIDs');
-     var maxid = Math.max.apply(Math,ids);
-     var newid = maxid+1;
+     var thistr = "1";
+     var newid = "0"
+     if(ids.length>0){
+        thistr = ids.length+1;//新加行tr序号
+        newid = Math.max.apply(Math,ids)+1;
+     }else{
+        thistr = "1";
+        newid = "0"
+     }
      var rowdata =getEmptyRow();
      $grid.jqGrid('addRowData', newid, rowdata);
-     $grid.find("tbody tr:eq("+newid+")").find('input').find('.editable').attr("disabled", "disabled");
-     $grid.find("tbody tr:eq("+newid+")").find('input').find('.disabled').attr("disabled", "disabled");
-     alert($grid.find("tbody tr:eq("+maxid+")").find('input[name="name"]').val());
-     if($grid.find("tbody tr:eq("+maxid+")").find('input[name="name"]').val()!=""){
-        $grid.find("tbody tr:eq("+newid+")").find('input').removeAttr('disabled').attr("isvalid", "yes");
+     $grid.find("tbody tr:eq("+thistr+")").find('.disabled').attr("disabled", "disabled");
+     if($grid.find("tbody tr:eq("+thistr+")").last().find('input[name="name"]').val()!="" || ids.length==0){
+        $grid.find("tbody tr:eq("+thistr+")").find('input').removeAttr('disabled').attr("isvalid", "yes");
      }
      registEvent();
 }
+//注册单元格事件
 function registEvent(){
     var $grid = $("#requireApplyTable");
     //数字input
@@ -247,8 +253,8 @@ function registEvent(){
                 btn: ['确定','取消'],
                 yes: function(index, layero){
                    var res = window["layui-layer-iframe" + index].getSelectedMaterial();
-                   getMaterialDetailByCode(res);
-                   layer.close(index);
+                   getMaterialDetailByCode(res,index);
+
                 },
                 btn2:function(index, layero){
                     layer.close(index);
@@ -289,4 +295,15 @@ function registEvent(){
         $("#requireQty").text(toDecimal(requireTotalQty));
         $("#referenceTotal").text(toDecimal(referenceTotal));
     });
+}
+
+//删除行数据
+function deleteRow(){
+	var ids = $("#requireApplyTable").jqGrid("getGridParam", "selarrrow");
+	$(ids).each(function (index, id){
+	     //由id获得对应数据行
+		var row = $("#requireApplyTable").jqGrid('getRowData', id);
+		$("#requireApplyTable").delRowData(id);
+	});
+	$("#requireApplyTable").find("tbody tr:eq(1)").find('input').removeAttr('disabled').attr("isvalid", "yes");
 }

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm" style="margin-top:0px;">
+                        <div class="form-group">
+                            <div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+                                <input id="name" name="name" th:value="${name}" class="form-control" type="text">
+                                <input id="deptId" name="deptId" th:value="${deptId}" class="form-control" type="hidden">
+                                <input id="createUserId" name="createUserId" th:value="${createUserId}" class="form-control" type="hidden">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">单据编号<span class="mustin">*</span></label>
+                            <div class="col-sm-3"><input id="planNo" name="planNo" th:value="${planNo}" class="form-control" type="text"></div>
+
+                            <label class="col-sm-1 control-label">统管部门<span class="mustin">*</span></label>
+                            <div class="col-sm-3"><input id="deptName" name="deptName" th:value="${deptName}" class="form-control" type="text"></div>
+
+                            <label class="col-sm-1 control-label">单据日期<span class="mustin">*</span></label>
+                            <div class="col-sm-3"><input id="businessDate" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" isvalid="yes" checkexpession="NotNull" th:value="${businessDate}" />
+                                <!--<input id="businessDate" name="businessDate" th:value="${businessDate}" class="form-control" type="text">-->
+                            </div>
+                        </div>
+
+                        <div class="bills">
+                            <div class="gridPanel">
+                                <table id="requireApplyTable"></table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">编制人<span class="mustin">*</span></label>
+                            <div class="col-sm-3"><input id="createUserName" name="planNo" th:value="${createUserName}" class="form-control" type="text"></div>
+
+                            <label class="col-sm-1 control-label">编制日期<span class="mustin">*</span></label>
+                            <div class="col-sm-3"><input id="createDate" name="createDate" th:value="${createDate}" class="form-control" type="text"></div>
+
+                            <label class="col-sm-1 control-label">备注</label>
+                            <div class="col-sm-3"><input id="remark" name="remark" th:value="${remark}" class="form-control" type="text"></div>
+                        </div>
+                        <div class="text-right form-group" >
+                            <div class="columns pull-right col-md-4">
+                                <button class="btn  btn-primary" onclick="reLoad()"
+                                        type="button">
+                                    <i class="fa fa-search" aria-hidden="true"></i>查询
+                                </button>
+                                <button type="reset" class="btn btn-primary" onclick="resetSelect()">
+                                    <i class="fa fa-refresh" aria-hidden="true"></i>重置
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
+<link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
+
+<script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
+<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>
+<script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script>
+<script type="text/javascript" src="/js/appjs/material/purchasePlan/edit.js"></script>
+
+</body>
+</html>

@@ -2,7 +2,6 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -11,13 +10,13 @@ import java.util.UUID;
  */
 public class PurchaseOrderItemBean {
     //主键
-    private UUID id;
+    private String id;
     //采购订单id
-    private UUID purchaseOrderId;
+    private String purchaseOrderId;
     //货源计划明细id
-    private UUID allocationPlanItemId;
+    private String allocationPlanItemId;
     //物资id
-    private UUID materialId;
+    private String materialId;
     //物资编码
     private String materilaCode;
     //物资名称
@@ -49,35 +48,35 @@ public class PurchaseOrderItemBean {
     //备注
     private String remark;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getPurchaseOrderId() {
+    public String getPurchaseOrderId() {
         return purchaseOrderId;
     }
 
-    public void setPurchaseOrderId(UUID purchaseOrderId) {
+    public void setPurchaseOrderId(String purchaseOrderId) {
         this.purchaseOrderId = purchaseOrderId;
     }
 
-    public UUID getAllocationPlanItemId() {
+    public String getAllocationPlanItemId() {
         return allocationPlanItemId;
     }
 
-    public void setAllocationPlanItemId(UUID allocationPlanItemId) {
+    public void setAllocationPlanItemId(String allocationPlanItemId) {
         this.allocationPlanItemId = allocationPlanItemId;
     }
 
-    public UUID getMaterialId() {
+    public String getMaterialId() {
         return materialId;
     }
 
-    public void setMaterialId(UUID materialId) {
+    public void setMaterialId(String materialId) {
         this.materialId = materialId;
     }
 

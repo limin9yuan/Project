@@ -14,7 +14,7 @@ public class PurchaseOrderItemBean {
     //采购订单id
     private String purchaseOrderId;
     //货源计划明细id
-    private String allocationPlanItemId;
+    private String allotPlanItemId;
     //物资id
     private String materialId;
     //物资编码
@@ -64,12 +64,12 @@ public class PurchaseOrderItemBean {
         this.purchaseOrderId = purchaseOrderId;
     }
 
-    public String getAllocationPlanItemId() {
-        return allocationPlanItemId;
+    public String getAllotPlanItemId() {
+        return allotPlanItemId;
     }
 
-    public void setAllocationPlanItemId(String allocationPlanItemId) {
-        this.allocationPlanItemId = allocationPlanItemId;
+    public void setAllotPlanItemId(String allotPlanItemId) {
+        this.allotPlanItemId = allotPlanItemId;
     }
 
     public String getMaterialId() {

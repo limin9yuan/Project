@@ -1,7 +1,6 @@
 package com.dx.client.model.datacenter;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -10,9 +9,9 @@ import java.util.UUID;
  */
 public class CompanyBankBean {
     //主键
-    private UUID id;
+    private String id;
     //公司id
-    private UUID companyId;
+    private String companyId;
     //开户行名称
     private String name;
     //账户
@@ -26,19 +25,19 @@ public class CompanyBankBean {
     //备注
     private String remark;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(UUID companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 

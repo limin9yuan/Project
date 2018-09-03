@@ -1,7 +1,6 @@
 package com.dx.client.model.datacenter;
 
 import java.util.Date;
-import java.util.UUID;
 
 /*
  * @author cxd
@@ -11,17 +10,17 @@ import java.util.UUID;
  */
 public class MaterialBean {
     //主键
-    private UUID id;
+    private String id;
     //物资类型Id
-    private UUID materialClassId;
+    private String materialClassId;
     //物资类型编码
     private String materialClassCode;
     //物资类型名称
     private String materialClassName;
     //父物资id
-    private UUID materialParentId;
+    private String materialParentId;
     //物资单位id
-    private UUID materialUnitId;
+    private String materialUnitId;
     //物资单位名称
     private String materialUnitName;
     //物资编码
@@ -57,19 +56,19 @@ public class MaterialBean {
     //备注
     private String remark;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getMaterialClassId() {
+    public String getMaterialClassId() {
         return materialClassId;
     }
 
-    public void setMaterialClassId(UUID materialClassId) {
+    public void setMaterialClassId(String materialClassId) {
         this.materialClassId = materialClassId;
     }
 
@@ -89,19 +88,19 @@ public class MaterialBean {
         this.materialClassName = materialClassName;
     }
 
-    public UUID getMaterialParentId() {
+    public String getMaterialParentId() {
         return materialParentId;
     }
 
-    public void setMaterialParentId(UUID materialParentId) {
+    public void setMaterialParentId(String materialParentId) {
         this.materialParentId = materialParentId;
     }
 
-    public UUID getMaterialUnitId() {
+    public String getMaterialUnitId() {
         return materialUnitId;
     }
 
-    public void setMaterialUnitId(UUID materialUnitId) {
+    public void setMaterialUnitId(String materialUnitId) {
         this.materialUnitId = materialUnitId;
     }
 

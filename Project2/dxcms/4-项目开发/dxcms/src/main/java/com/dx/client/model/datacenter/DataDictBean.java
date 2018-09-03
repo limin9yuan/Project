@@ -1,7 +1,6 @@
 package com.dx.client.model.datacenter;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -10,7 +9,7 @@ import java.util.UUID;
  */
 public class DataDictBean {
     //编号
-    private UUID id;
+    private String id;
     //标签名
     private String name;
     //数据值
@@ -22,15 +21,15 @@ public class DataDictBean {
     //排序（升序）
     private Double sort;
     //父级编号
-    private UUID parentId;
+    private String parentId;
     //创建者id
-    private UUID createUserId;
+    private String createUserId;
     //创建人
     private String createUserName;
     //创建时间
     private Date createDate;
     //更新者id
-    private UUID updateUserId;
+    private String updateUserId;
     //更新者
     private String updateUserName;
     //更新时间
@@ -40,11 +39,11 @@ public class DataDictBean {
     //删除标记
     private Boolean delFlag;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -88,19 +87,19 @@ public class DataDictBean {
         this.sort = sort;
     }
 
-    public UUID getParentId() {
+    public String getParentId() {
         return parentId;
     }
 
-    public void setParentId(UUID parentId) {
+    public void setParentId(String parentId) {
         this.parentId = parentId;
     }
 
-    public UUID getCreateUserId() {
+    public String getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(UUID createUserId) {
+    public void setCreateUserId(String createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -120,11 +119,11 @@ public class DataDictBean {
         this.createDate = createDate;
     }
 
-    public UUID getUpdateUserId() {
+    public String getUpdateUserId() {
         return updateUserId;
     }
 
-    public void setUpdateUserId(UUID updateUserId) {
+    public void setUpdateUserId(String updateUserId) {
         this.updateUserId = updateUserId;
     }
 

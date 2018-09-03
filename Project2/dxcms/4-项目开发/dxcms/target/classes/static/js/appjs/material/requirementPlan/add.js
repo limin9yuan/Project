@@ -17,14 +17,19 @@ function datetimepicker(){
 }
 function nextStep() {
 	var res = getSelectedMaterial();
-	layer.open({
-		type : 2,
-		title : '编辑',
-		maxmin : false,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '100%', '100%' ],
-		content : '/requirementPlan/requirementPlan/nextStep/' + res // iframe的url
-	});
+	if (res.length == 0) {
+		layer.msg("请选择添加的数据");
+		return;
+	}else {
+		layer.open({
+			type : 2,
+			title : '编辑',
+			maxmin : false,
+			shadeClose : false, // 点击遮罩关闭层
+			area : [ '100%', '100%' ],
+			content : '/requirementPlan/requirementPlan/nextStep/' + res // iframe的url
+		});
+	}
 }
 function load() {
 	$('#exampleTable')
@@ -39,7 +44,7 @@ function load() {
 						toolbar : '#exampleToolbar',
 						striped : true, // 设置为true会有隔行变色效果
 						dataType : "json", // 服务器返回的数据类型
-						pagination : true, // 设置为true会在底部显示分页条
+						// pagination : true, // 设置为true会在底部显示分页条
 						// queryParamsType : "limit",
 						// //设置为limit则会发送符合RESTFull格式的参数
 						singleSelect : false, // 设置为true将禁止多选
@@ -53,8 +58,8 @@ function load() {
 						queryParams : function(params) {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-								limit: params.limit,
-								offset:params.offset
+								limit: 500,
+								offset:0
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};

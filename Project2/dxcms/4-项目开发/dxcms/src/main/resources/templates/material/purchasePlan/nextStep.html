@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t" id="signupForm">
+                        <input id="materilaCode" name="materilaCode" th:value="${materilaCode}" class="form-control" type="hidden">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">单据编号:<span class="mustin">*</span></label>
+                            <div class="col-sm-4">
+                                <input name="customerId" id="customerId"
+                                       class="form-control"
+                                       style="width: 100%">
+                                </input>
+                            </div>
+                            <label class="col-sm-2 control-label">类型:<span class="mustin">*</span></label>
+                            <div class="col-sm-4">
+                                <select data-placeholder="请选择" name="businessId" id="businessId"
+                                        class="form-control chosen-select" tabindex="2"
+                                        style="width: 100%">
+                                    <option value="">全部</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">采购部门:<span class="mustin">*</span></label>
+                            <div class="col-sm-4">
+                                <input name="customerId" id="customerId"
+                                       class="form-control"
+                                       style="width: 100%">
+                                </input>
+                            </div>
+                            <label class="col-sm-2 control-label">单据日期:<span class="mustin">*</span></label>
+                            <div class="col-sm-4">
+                                <input name="customerId" id="customerId"
+                                       class="form-control"
+                                       style="width: 100%">
+                                </input>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="columns pull-right">
+                                <button type="button" class="btn  btn-primary"
+                                        onclick="addRow()">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>添加
+                                </button>
+                                <button type="button" class="btn  btn-danger"
+                                        onclick="deleteSelectedRow()">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>删除
+                                </button>
+                            </div>
+                        </div>
+                        <div class="bills">
+                            <table id="requirePlanTable" data-mobile-responsive="true"></table>
+                            <div id="requirePlanPage"></div>
+                        </div>
+                        <div class="form-group">
+                            <div class="columns pull-right">
+                                <button shiro:hasPermission="addRequirementPlan:save" type="button" class="btn  btn-primary"
+                                        onclick="batchRemove()">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>保存
+                                </button>
+                                <button shiro:hasPermission="addRequirementPlan:submitApproval" type="button" class="btn  btn-success"
+                                        onclick="batchRemove()">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>提交审批
+                                </button>
+                                <button shiro:hasPermission="addRequirementPlan:withdrawApproval" type="button" class="btn  btn-warning"
+                                        onclick="batchRemove()">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>撤回审批
+                                </button>
+                                <button shiro:hasPermission="addRequirementPlan:close" type="button" class="btn  btn-danger"
+                                        onclick="closeWin()">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>关闭
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-1 control-label">编制人<span class="mustin">*</span></label>
+                            <div class="col-sm-3"><input id="createUserName" name="planNo" th:value="${createUserName}" class="form-control" type="text"></div>
+
+                            <label class="col-sm-1 control-label">编制日期<span class="mustin">*</span></label>
+                            <div class="col-sm-3"><input id="createDate" name="createDate" th:value="${createDate}" class="form-control" type="text"></div>
+
+                            <label class="col-sm-1 control-label">备注</label>
+                            <div class="col-sm-3"><input id="remark" name="remark" th:value="${remark}" class="form-control" type="text"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include::footer"></div>
+<link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
+<link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
+
+<script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
+<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>
+<script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script>
+<script type="text/javascript" src="/js/appjs/material/purchasePlan/nextStep.js">
+</script>
+</body>
+</html>

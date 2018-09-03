@@ -2,7 +2,6 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -11,33 +10,33 @@ import java.util.UUID;
  */
 public class PurchaseOrderBean {
     //主键
-    private UUID id;
+    private String id;
     //订单类型id（订单、发货通知单、到货通知单）
-    private UUID typeId;
+    private String typeId;
     //订单类型名称
     private String typeName;
     //审批状态id
-    private UUID statusId;
+    private String statusId;
     //审批状态名称
     private String statusName;
     //编制机构id
-    private UUID authorCorpId;
+    private String authorCorpId;
     //编制机构名称
     private String authorCorpName;
     //编制部门id
-    private UUID authorDeptId;
+    private String authorDeptId;
     //编制部门名称
     private String authorDeptName;
     //编制人id
-    private UUID authorUserId;
+    private String authorUserId;
     //编制人名称
     private String authorUserName;
     //执行机构id
-    private UUID performCorpId;
+    private String performCorpId;
     //执行机构名称
     private String performCorpName;
     //执行人id
-    private UUID performUserId;
+    private String performUserId;
     //执行人
     private String performUserName;
     //单据编号
@@ -47,15 +46,15 @@ public class PurchaseOrderBean {
     //单据名称
     private String name;
     //供应商id
-    private UUID companyId;
+    private String companyId;
     //供应商名称
     private String companyName;
     //发货单位id
-    private UUID deliverCompanyId;
+    private String deliverCompanyId;
     //发货单位名称
     private String deliverCompanyName;
     //合同id
-    private UUID contractId;
+    private String contractId;
     //合同编号
     private String contractNo;
     //税率
@@ -85,13 +84,13 @@ public class PurchaseOrderBean {
     //生成日期
     private Date createDate;
     //生成人Id
-    private UUID createUserId;
+    private String createUserId;
     //生成人
     private String createUserName;
     //备注
     private String remark;
     //打印人id
-    private UUID printUserId;
+    private String printUserId;
     //打印人
     private String printUserName;
     //打印日期
@@ -99,19 +98,19 @@ public class PurchaseOrderBean {
     //打印次数
     private Integer printTimes;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getTypeId() {
+    public String getTypeId() {
         return typeId;
     }
 
-    public void setTypeId(UUID typeId) {
+    public void setTypeId(String typeId) {
         this.typeId = typeId;
     }
 
@@ -123,11 +122,11 @@ public class PurchaseOrderBean {
         this.typeName = typeName;
     }
 
-    public UUID getStatusId() {
+    public String getStatusId() {
         return statusId;
     }
 
-    public void setStatusId(UUID statusId) {
+    public void setStatusId(String statusId) {
         this.statusId = statusId;
     }
 
@@ -139,11 +138,11 @@ public class PurchaseOrderBean {
         this.statusName = statusName;
     }
 
-    public UUID getAuthorCorpId() {
+    public String getAuthorCorpId() {
         return authorCorpId;
     }
 
-    public void setAuthorCorpId(UUID authorCorpId) {
+    public void setAuthorCorpId(String authorCorpId) {
         this.authorCorpId = authorCorpId;
     }
 
@@ -155,11 +154,11 @@ public class PurchaseOrderBean {
         this.authorCorpName = authorCorpName;
     }
 
-    public UUID getAuthorDeptId() {
+    public String getAuthorDeptId() {
         return authorDeptId;
     }
 
-    public void setAuthorDeptId(UUID authorDeptId) {
+    public void setAuthorDeptId(String authorDeptId) {
         this.authorDeptId = authorDeptId;
     }
 
@@ -171,11 +170,11 @@ public class PurchaseOrderBean {
         this.authorDeptName = authorDeptName;
     }
 
-    public UUID getAuthorUserId() {
+    public String getAuthorUserId() {
         return authorUserId;
     }
 
-    public void setAuthorUserId(UUID authorUserId) {
+    public void setAuthorUserId(String authorUserId) {
         this.authorUserId = authorUserId;
     }
 
@@ -187,11 +186,11 @@ public class PurchaseOrderBean {
         this.authorUserName = authorUserName;
     }
 
-    public UUID getPerformCorpId() {
+    public String getPerformCorpId() {
         return performCorpId;
     }
 
-    public void setPerformCorpId(UUID performCorpId) {
+    public void setPerformCorpId(String performCorpId) {
         this.performCorpId = performCorpId;
     }
 
@@ -203,11 +202,11 @@ public class PurchaseOrderBean {
         this.performCorpName = performCorpName;
     }
 
-    public UUID getPerformUserId() {
+    public String getPerformUserId() {
         return performUserId;
     }
 
-    public void setPerformUserId(UUID performUserId) {
+    public void setPerformUserId(String performUserId) {
         this.performUserId = performUserId;
     }
 
@@ -243,11 +242,11 @@ public class PurchaseOrderBean {
         this.name = name;
     }
 
-    public UUID getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(UUID companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 
@@ -259,11 +258,11 @@ public class PurchaseOrderBean {
         this.companyName = companyName;
     }
 
-    public UUID getDeliverCompanyId() {
+    public String getDeliverCompanyId() {
         return deliverCompanyId;
     }
 
-    public void setDeliverCompanyId(UUID deliverCompanyId) {
+    public void setDeliverCompanyId(String deliverCompanyId) {
         this.deliverCompanyId = deliverCompanyId;
     }
 
@@ -275,11 +274,11 @@ public class PurchaseOrderBean {
         this.deliverCompanyName = deliverCompanyName;
     }
 
-    public UUID getContractId() {
+    public String getContractId() {
         return contractId;
     }
 
-    public void setContractId(UUID contractId) {
+    public void setContractId(String contractId) {
         this.contractId = contractId;
     }
 
@@ -395,11 +394,11 @@ public class PurchaseOrderBean {
         this.createDate = createDate;
     }
 
-    public UUID getCreateUserId() {
+    public String getCreateUserId() {
         return createUserId;
     }
 
-    public void setCreateUserId(UUID createUserId) {
+    public void setCreateUserId(String createUserId) {
         this.createUserId = createUserId;
     }
 
@@ -419,11 +418,11 @@ public class PurchaseOrderBean {
         this.remark = remark;
     }
 
-    public UUID getPrintUserId() {
+    public String getPrintUserId() {
         return printUserId;
     }
 
-    public void setPrintUserId(UUID printUserId) {
+    public void setPrintUserId(String printUserId) {
         this.printUserId = printUserId;
     }
 

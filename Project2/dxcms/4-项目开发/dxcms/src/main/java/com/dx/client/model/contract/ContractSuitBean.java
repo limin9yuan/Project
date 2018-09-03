@@ -1,7 +1,6 @@
 package com.dx.client.model.contract;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -10,9 +9,9 @@ import java.util.UUID;
  */
 public class ContractSuitBean {
     //主键
-    private UUID id;
+    private String id;
     //适用机构id
-    private UUID suitCorpId;
+    private String suitCorpId;
     //适用机构名称
     private String suitCorpName;
     //创建时间
@@ -20,19 +19,19 @@ public class ContractSuitBean {
     //是否在用
     private Boolean isActived;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getSuitCorpId() {
+    public String getSuitCorpId() {
         return suitCorpId;
     }
 
-    public void setSuitCorpId(UUID suitCorpId) {
+    public void setSuitCorpId(String suitCorpId) {
         this.suitCorpId = suitCorpId;
     }
 

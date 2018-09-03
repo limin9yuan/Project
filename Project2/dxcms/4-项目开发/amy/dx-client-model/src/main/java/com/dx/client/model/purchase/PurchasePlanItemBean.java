@@ -59,4 +59,204 @@ public class PurchasePlanItemBean {
     private String description;
     //备注(一般用于系统备注)
     private String Remark;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPurchasePlanId() {
+        return purchasePlanId;
+    }
+
+    public void setPurchasePlanId(String purchasePlanId) {
+        this.purchasePlanId = purchasePlanId;
+    }
+
+    public String getRequirePlanItemId() {
+        return requirePlanItemId;
+    }
+
+    public void setRequirePlanItemId(String requirePlanItemId) {
+        this.requirePlanItemId = requirePlanItemId;
+    }
+
+    public String getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId;
+    }
+
+    public String getMaterilaCode() {
+        return materilaCode;
+    }
+
+    public void setMaterilaCode(String materilaCode) {
+        this.materilaCode = materilaCode;
+    }
+
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
+    }
+
+    public String getMaterialUnitName() {
+        return materialUnitName;
+    }
+
+    public void setMaterialUnitName(String materialUnitName) {
+        this.materialUnitName = materialUnitName;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
+    public String getTexture() {
+        return texture;
+    }
+
+    public void setTexture(String texture) {
+        this.texture = texture;
+    }
+
+    public String getMaterialSubArray() {
+        return materialSubArray;
+    }
+
+    public void setMaterialSubArray(String materialSubArray) {
+        this.materialSubArray = materialSubArray;
+    }
+
+    public String getPurchaserId() {
+        return purchaserId;
+    }
+
+    public void setPurchaserId(String purchaserId) {
+        this.purchaserId = purchaserId;
+    }
+
+    public String getPurchaserName() {
+        return purchaserName;
+    }
+
+    public void setPurchaserName(String purchaserName) {
+        this.purchaserName = purchaserName;
+    }
+
+    public Double getRequireQty() {
+        return requireQty;
+    }
+
+    public void setRequireQty(Double requireQty) {
+        this.requireQty = requireQty;
+    }
+
+    public Double getPurchaseQty() {
+        return purchaseQty;
+    }
+
+    public void setPurchaseQty(Double purchaseQty) {
+        this.purchaseQty = purchaseQty;
+    }
+
+    public Double getBudgetQty() {
+        return budgetQty;
+    }
+
+    public void setBudgetQty(Double budgetQty) {
+        this.budgetQty = budgetQty;
+    }
+
+    public BigDecimal getReferencePrice() {
+        return referencePrice;
+    }
+
+    public void setReferencePrice(BigDecimal referencePrice) {
+        this.referencePrice = referencePrice;
+    }
+
+    public BigDecimal getBudgetPrice() {
+        return budgetPrice;
+    }
+
+    public void setBudgetPrice(BigDecimal budgetPrice) {
+        this.budgetPrice = budgetPrice;
+    }
+
+    public Date getRequireDate() {
+        return requireDate;
+    }
+
+    public void setRequireDate(Date requireDate) {
+        this.requireDate = requireDate;
+    }
+
+    public Date getArriveDate() {
+        return arriveDate;
+    }
+
+    public void setArriveDate(Date arriveDate) {
+        this.arriveDate = arriveDate;
+    }
+
+    public Boolean getClosed() {
+        return isClosed;
+    }
+
+    public void setClosed(Boolean closed) {
+        isClosed = closed;
+    }
+
+    public Boolean getAccepted() {
+        return isAccepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        isAccepted = accepted;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Boolean getActived() {
+        return isActived;
+    }
+
+    public void setActived(Boolean actived) {
+        isActived = actived;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String remark) {
+        Remark = remark;
+    }
 }

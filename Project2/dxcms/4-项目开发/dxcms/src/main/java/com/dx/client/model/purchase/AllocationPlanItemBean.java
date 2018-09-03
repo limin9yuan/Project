@@ -1,7 +1,6 @@
 package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 /**
  * @Auther: cxd
@@ -10,21 +9,21 @@ import java.util.UUID;
  */
 public class AllocationPlanItemBean {
     //主键
-    private UUID id;
+    private String id;
     //货源计划id
-    private UUID allocationPlanId;
+    private String allocationPlanId;
     //采购计划明细id
-    private UUID purchasePlanItemId;
+    private String purchasePlanItemId;
     //供应商id
-    private UUID companyId;
+    private String companyId;
     //供应商名称
     private String companyName;
     //发货单位id
-    private UUID deliverCompanyId;
+    private String deliverCompanyId;
     //发货单位名称
     private String deliverCompanyName;
     //合同id
-    private UUID contractId;
+    private String contractId;
     //分配比例
     private Double allotRatio;
     //分配数量
@@ -36,35 +35,35 @@ public class AllocationPlanItemBean {
     //备注
     private String remark;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getAllocationPlanId() {
+    public String getAllocationPlanId() {
         return allocationPlanId;
     }
 
-    public void setAllocationPlanId(UUID allocationPlanId) {
+    public void setAllocationPlanId(String allocationPlanId) {
         this.allocationPlanId = allocationPlanId;
     }
 
-    public UUID getPurchasePlanItemId() {
+    public String getPurchasePlanItemId() {
         return purchasePlanItemId;
     }
 
-    public void setPurchasePlanItemId(UUID purchasePlanItemId) {
+    public void setPurchasePlanItemId(String purchasePlanItemId) {
         this.purchasePlanItemId = purchasePlanItemId;
     }
 
-    public UUID getCompanyId() {
+    public String getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(UUID companyId) {
+    public void setCompanyId(String companyId) {
         this.companyId = companyId;
     }
 
@@ -76,11 +75,11 @@ public class AllocationPlanItemBean {
         this.companyName = companyName;
     }
 
-    public UUID getDeliverCompanyId() {
+    public String getDeliverCompanyId() {
         return deliverCompanyId;
     }
 
-    public void setDeliverCompanyId(UUID deliverCompanyId) {
+    public void setDeliverCompanyId(String deliverCompanyId) {
         this.deliverCompanyId = deliverCompanyId;
     }
 
@@ -92,11 +91,11 @@ public class AllocationPlanItemBean {
         this.deliverCompanyName = deliverCompanyName;
     }
 
-    public UUID getContractId() {
+    public String getContractId() {
         return contractId;
     }
 
-    public void setContractId(UUID contractId) {
+    public void setContractId(String contractId) {
         this.contractId = contractId;
     }
 

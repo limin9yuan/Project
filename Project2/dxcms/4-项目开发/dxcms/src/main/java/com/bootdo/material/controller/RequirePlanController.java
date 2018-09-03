@@ -60,6 +60,98 @@ public class RequirePlanController {
 		return "material/requirementPlan/nextStep";
 	}
 
+	@GetMapping("/check/{planNo}")
+	@RequiresPermissions("requirementPlan:check")
+	String check(@PathVariable("planNo") String planNo, Model model){
+		model.addAttribute("planNo",planNo);
+		model.addAttribute("invoiceDate","2018/8/27");
+		model.addAttribute("purchaseDept","采购部门");
+		model.addAttribute("authorUser","编制人");
+		model.addAttribute("createDate","2018/8/27");
+		model.addAttribute("remark","sb");
+
+		return "material/requirementPlan/check";
+	}
+
+	@RequestMapping("/check_ajax/{planNo}")
+	@ResponseBody
+	Map<String, Object> check_ajax(@PathVariable("planNo") String planNo) {
+		List<Map<String, Object>> checkList = new ArrayList<>();//调用接口
+		//做测试数据 调用接口前使用 begin
+		for (int i = 1; i < 6; i++) {
+			Map<String, Object> requireMap = new HashMap<>();
+			requireMap.put("requirePlanid", "物资编码" + i);
+			requireMap.put("materialName", "物资A" + i);
+			requireMap.put("materilaCode", "物资编码" + i);
+			requireMap.put("specification", "规格" + i);
+			requireMap.put("materialUnitName", "单位" + i);
+			requireMap.put("materialSubArray", "包装物料" + i);
+			requireMap.put("requireQty","25345");
+			requireMap.put("purchaseQty","456");
+			requireMap.put("stockQty", "47");
+			requireMap.put("reserveQty", "57657");
+			requireMap.put("onwayQty", "878");
+			requireMap.put("budgetQty", "8768");
+			requireMap.put("referencePrice", "789");
+			requireMap.put("budgetPrice", "8908");
+			requireMap.put("referenceAmount", "34");
+			requireMap.put("requireDate","2018/8/27");
+			requireMap.put("arriveDate", "2018/8/27");
+			requireMap.put("purchaserName", "张三");
+			requireMap.put("description", "sb");
+			checkList.add(requireMap);
+		}
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("checkList", checkList);
+		return returnData;
+	}
+
+	@GetMapping("/edit/{planNo}")
+	@RequiresPermissions("requirementPlan:edit")
+	String edit(@PathVariable("planNo") String planNo, Model model){
+		model.addAttribute("planNo",planNo);
+		model.addAttribute("invoiceDate","2018/8/27");
+		model.addAttribute("purchaseDept","采购部门");
+		model.addAttribute("authorUser","编制人");
+		model.addAttribute("createDate","2018/8/27");
+		model.addAttribute("remark","sb");
+
+		return "material/requirementPlan/edit";
+	}
+
+	@RequestMapping("/edit_ajax/{planNo}")
+	@ResponseBody
+	Map<String, Object> edit_ajax(@PathVariable("planNo") String planNo) {
+		List<Map<String, Object>> editList = new ArrayList<>();//调用接口
+		//做测试数据 调用接口前使用 begin
+		for (int i = 1; i < 6; i++) {
+			Map<String, Object> requireMap = new HashMap<>();
+			requireMap.put("requirePlanid", "物资编码" + i);
+			requireMap.put("materialName", "物资A" + i);
+			requireMap.put("materilaCode", "物资编码" + i);
+			requireMap.put("specification", "规格" + i);
+			requireMap.put("materialUnitName", "单位" + i);
+			requireMap.put("materialSubArray", "包装物料" + i);
+			requireMap.put("requireQty","25345");
+			requireMap.put("purchaseQty","456");
+			requireMap.put("stockQty", "47");
+			requireMap.put("reserveQty", "57657");
+			requireMap.put("onwayQty", "878");
+			requireMap.put("budgetQty", "8768");
+			requireMap.put("referencePrice", "789");
+			requireMap.put("budgetPrice", "8908");
+			requireMap.put("referenceAmount", "34");
+			requireMap.put("requireDate","2018/8/27");
+			requireMap.put("arriveDate", "2018/8/27");
+			requireMap.put("purchaserName", "张三");
+			requireMap.put("description", "sb");
+			editList.add(requireMap);
+		}
+		Map<String, Object> returnData = new HashMap<String, Object>();
+		returnData.put("editList", editList);
+		return returnData;
+	}
+
 	@ResponseBody
 	@GetMapping("/getMaterialDetailByCode/{code}")
 	@RequiresPermissions("requirementPlan:add")
@@ -141,7 +233,7 @@ public class RequirePlanController {
 		//查询列表数据
 //		Query query = new Query(params);
 		List<Map<String, Object>> requirementPlanDetailList = new ArrayList<>();//调用接口
-		for(int i=1;i<11;i++){
+		for(int i=1;i<21;i++){
 			//做测试数据 调用接口前使用 begin
 			Map<String, Object> requireMap = new HashMap<>();
 			requireMap.put("materialName","物资A"+i);

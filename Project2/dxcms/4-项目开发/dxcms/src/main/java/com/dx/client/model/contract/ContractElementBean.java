@@ -1,7 +1,5 @@
 package com.dx.client.model.contract;
 
-import java.util.UUID;
-
 /**
  * @Auther: cxd
  * @Date: 2018/8/28
@@ -9,9 +7,9 @@ import java.util.UUID;
  */
 public class ContractElementBean {
     //主键
-    private UUID id;
+    private String id;
     //合同id
-    private UUID contractId;
+    private String contractId;
     //元素键
     private String key;
     //元素值
@@ -21,19 +19,19 @@ public class ContractElementBean {
     //备注
     private String remark;
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getContractId() {
+    public String getContractId() {
         return contractId;
     }
 
-    public void setContractId(UUID contractId) {
+    public void setContractId(String contractId) {
         this.contractId = contractId;
     }
 
