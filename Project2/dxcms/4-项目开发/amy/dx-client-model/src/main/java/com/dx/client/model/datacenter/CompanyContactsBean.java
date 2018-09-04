@@ -19,7 +19,7 @@ public class CompanyContactsBean {
     //电子邮箱
     private String email;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //生成日期
     private Date createDate;
     //生成人
@@ -67,11 +67,11 @@ public class CompanyContactsBean {
         this.email = email;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 

@@ -9,7 +9,8 @@
 <head th:include="include :: header"></head>
 <!-- 	//树状下拉复选框-MultipleTreeSelect -->
 <link type="text/css" rel="stylesheet" href="/css/demo.css">
-<link type="text/css" rel="stylesheet" href="/css/metroStyle/metroStyle.css">
+<link type="text/css" rel="stylesheet"
+	href="/css/metroStyle/metroStyle.css">
 <!-- ** jquery-autocompleter-master插件 -->
 <link rel="stylesheet" href="/css/normalize.css">
 
@@ -27,8 +28,27 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
-					<input type="hidden" id="selectTree" name="selectTree" class="form-control" th:value="${selectTree}">
+
+						<ul id="myTab" class="nav nav-tabs">
+							<li class="active"><a href="#baseInfo" data-toggle="tab"><span
+									class="mustin">*&nbsp;</span>合同基本信息</a></li>
+							<li><a href="#contractTemplate" data-toggle="tab">合同模板</a></li>
+							<li><a href="#contractMaterialDetail" data-toggle="tab">合同物料明细</a></li>
+						</ul>
+
 						<form class="form-horizontal m-t" id="signupForm">
+							<div class="form-group">
+								<div
+									class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+									<input id="authorDeptId" name="authorDeptId" th:value="${authorDeptId}" class="form-control" type="hidden">
+									<input id="performUserId" name="performUserId" class="form-control" type="hidden"><!--执行人id -->
+									<input id="authorUserId" name="authorUserId" class="form-control" th:value="${authorUserId}" type="hidden">  <!-- 起草人id -->
+									<input id="projectId" name="projectId" class="form-control" type="hidden"> <!-- 项目id -->
+									<input type="hidden" id="selectTree" name="selectTree"
+									class="form-control" th:value="${selectTree}">
+								</div>
+							</div>
+							
 							<div class="form-group">
 								<div class="col-sm-3 col-sm-offset-4">
 									<button type="submit" class="btn btn-success">保存</button>
@@ -43,318 +63,324 @@
 									<button type="button" id="uploadFile" style="display: none"></button>
 								</div>
 							</div>
-							<!-- 							左侧合同基本信息开始 -->
-							<div class="ibox float-e-margins" id="box-top">
-								<div class="form-group" style="padding-left: 15px">
-									<label class="col-sm-2 control-label"><u>合同基本信息（tab1页）</u></label>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">合同名称 <span
-										class="mustin">*</span></label>
-									<div class="col-sm-3">
-										<input id="contractName" name="contractName"
-											class="form-control" type="text">
-									</div>
-									<label class="col-sm-2 control-label">合同/意向协议编号 <span
-										class="mustin">*</span></label>
-									<div class="col-sm-3">
-										<input id="contractCode" name="contractCode"
-											class="form-control" type="text">
-									</div>
-								</div>
-								<div class="form-group">
-									<!-- 								打开页面选择 -->
-									<label class="col-sm-2 control-label">项目名称 </label>
-									<div class="col-sm-3 icon">
-										<input id="projectId" name="projectId" class="form-control" type="text" placeholder="==输入==">
-<!-- 										<input type="text" name="nope" id="nope" placeholder="Crayola colors" maxlength="40" />  jquery-autocompleter-master-->
-									</div>
-									<!-- 								打开页面选择 -->
-									<label class="col-sm-2 control-label">招标方案</label>
-									<div class="col-sm-3">
-										<input id="bidSchemeId" name="bidSchemeId"
-											class="form-control" type="text">
-									</div>
-								</div>
+							<div id="myTabContent" class="tab-content">
+								<div class="tab-pane fade in active" id="baseInfo">
 
-								<div class="form-group">
-									<label class="col-sm-2 control-label">结算币别 <span
-										class="mustin">*</span></label>
-									<div class="col-sm-3">
-								<!-- 	下拉框复选关键字multiple  -->
-										<select data-placeholder="请选择" name="currencyTypeId"  
-											id="currencyTypeId" class="form-control chosen-select"
-											tabindex="2" style="width: 100%">
-<!-- 											<option value="RMB">人民币</option> -->
-<!-- 											<option value="美元">美元</option> -->
-<!-- 											<option value="欧元">欧元</option> -->
-										</select>
-									</div>
-									<label class="col-sm-2 control-label">税率 <span
-										class="mustin">*</span></label>
-									<div class="col-sm-3">
-										<select data-placeholder="请选择" name="taxRate" id="taxRate"
-											class="form-control chosen-select" tabindex="2"
-											style="width: 100%">
-<!-- 											<option value="16%增值税发票">16%增值税发票</option> -->
-										</select>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-2 control-label">履约保证金 </label>
-									<div class="col-sm-3">
-										<input id="performanceBond" name="performanceBond"
-											class="form-control" type="text" placeholder="元">
-									</div>
-
-									<label class="col-sm-2 control-label">质保金</label>
-									<div class="col-sm-3">
-										<input id="warrantyBond" name="warrantyBond"
-											class="form-control" type="text" placeholder="元">
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-2 control-label">有效起始日期 </label>
-									<div class="col-sm-3">
-										<div class="input-group date" id="dateFrom">
-											<input class="form-control" type="text" name="dateFrom">
-											<span class="input-group-addon"> <span
-												class="glyphicon glyphicon-calendar"></span>
-											</span>
+									<!-- 							左侧合同基本信息开始 -->
+									<div class="form-group" style="padding-left: 15px"></div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">合同名称 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-3">
+											<input id="contractName" name="contractName"
+												class="form-control" type="text">
+										</div>
+										<label class="col-sm-2 control-label">合同/意向协议编号 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-3">
+											<input id="contractCode" name="contractCode"
+												class="form-control" type="text">
 										</div>
 									</div>
-									<label class="col-sm-2 control-label">有效截止日期</label>
-									<div class="col-sm-3">
-										<div class="input-group date" id="dateTo">
-											<input class="form-control" type="text" name="dateTo">
-											<span class="input-group-addon"> <span
-												class="glyphicon glyphicon-calendar"></span>
-											</span>
-										</div>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-2 control-label">合同总金额 </label>
-									<div class="col-sm-3">
-										<input id="totalMoney" name="totalMoney" class="form-control"
-											type="text" placeholder="元">
-									</div>
-
-									<!-- 									<label class="col-sm-1 control-label">用章类型 <span -->
-									<!-- 										class="mustin">*</span></label> -->
-									<!-- 									<div class="col-sm-2"> -->
-									<!-- 										<select data-placeholder="请选择" name="sealType" id="sealType" -->
-									<!-- 											class="form-control chosen-select" tabindex="2" -->
-									<!-- 											style="width: 100%"> -->
-									<!-- 											<option value="合同章">合同章</option> -->
-									<!-- 											<option value="公章">公章</option> -->
-									<!-- 										</select> -->
-									<!-- 									</div> -->
-								</div>
-								<div class="form-group">
-								<!-- 	多选 -->
-									<label class="col-sm-2 control-label">适用机构 <span
-										class="mustin">*</span></label>
-									<div class="col-sm-3">
-									<textarea id="contractSuits" name="contractSuits" class="form-control " style="width: 378px;overflow:hidden;" checks="10"  textLabel="jasontext"  type="text" readonly="readonly"></textarea>
-<!-- 										<select data-placeholder="请选择" name="effectiveAgency" -->
-<!-- 											id="effectiveAgency" class="form-control chosen-select" multiple -->
-<!-- 											tabindex="2" style="width: 100%"> -->
-<!-- 											<option value="">请选择</option> -->
-<!-- 											<option value="1">测试1</option> -->
-<!-- 											<option value="2">测试2</option> -->
-<!-- 											<option value="3">测试3</option> -->
-<!-- 											<option value="4">测试4</option> -->
-<!-- 										</select> -->
-									</div>
-									<label class="col-sm-2 control-label">供货公司 <span
-										class="mustin">*</span></label>
-									<div class="col-sm-3">
-										<!-- 										多选 -->
+									<div class="form-group">
 										<!-- 								打开页面选择 -->
-										<input id="contractDelivers" name="contractDelivers"
-											class="form-control" type="text">
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-2 control-label">签订机构 <span class="mustin">*</span></label>
-<!-- 									<textarea id="authorCorpId" name="authorCorpId" class="form-control " style="width: 378px;overflow:hidden;" checks="10"  textLabel="jasontext"  type="text" readonly="readonly"></textarea> -->
-<!-- 									<div class="col-sm-3"> -->
-<!-- 										<select data-placeholder="请选择" name="authorCorpId" -->
-<!-- 											id="authorCorpId" class="form-control chosen-select" -->
-<!-- 											tabindex="2" style="width: 100%"> -->
-<!-- 											<option value="">数据为用户所属机构</option> -->
-<!-- 										</select> -->
-<!-- 									</div> -->
-									<label class="col-sm-2 control-label">签订部门 <span class="mustin">*</span></label>
-<!-- 									<textarea id="authorDeptId" name="authorDeptId" class="form-control " style="width: 378px;overflow:hidden;" checks="10"  textLabel="jasontext"  type="text" readonly="readonly"></textarea> -->
-<!-- 									<div class="col-sm-3"> -->
-<!-- 										<select data-placeholder="请选择" name="authorDeptId" -->
-<!-- 											id="authorDeptId" class="form-control chosen-select" -->
-<!-- 											tabindex="2" style="width: 100%"> -->
-<!-- 											<option value="">为当前用户所属部门</option> -->
-<!-- 										</select> -->
-<!-- 									</div> -->
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-2 control-label">执行人 <span
-										class="mustin">*</span>
-									</label>
-									<div class="col-sm-3">
-										<input id="performUserId" name="performUserId"
-											class="form-control" type="text">
-									</div>
-
-									<label class="col-sm-2 control-label">起草人</label>
-									<div class="col-sm-3">
-										<input id="authorUserId" name="authorUserId"
-											class="form-control" type="text" placeholder="默认为当前用户">
-									</div>
-								</div>
-
-								<div class="form-group">
-									<div class="col-sm-6 control-label">
-										<label class="col-sm-4 radio-inline"> <input type="checkbox"
-											name="checkbox" value="1" onclick="triggerCheckbox(this)" />
-											录入明细 <span class="mustin">*</span>
-										</label>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-2 control-label">摘要</label>
-									<div class="col-sm-8">
-										<textarea id="abstract" name="abstract" class="form-control"
-											rows="3"></textarea>
-									</div>
-								</div>
-
-								<div class="form-group">
-									<label class="col-sm-2 control-label">附件 <span
-										class="mustin">*</span></label>
-									<div class="col-sm-4">
-										<div class="file-manager">
-											<button type="button" class="layui-btn btn btn-danger"
-												id="test1" style="width: 100%;">
-												<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
-											</button>
-
+										<label class="col-sm-2 control-label">项目名称 </label>
+										<div class="col-sm-3 icon">
+											<input id="projectName" name="projectName" class="form-control"
+												type="text" placeholder="==请选择==" onclick="openProject()" readonly="readonly">
+											<!-- 										<input type="text" name="nope" id="nope" placeholder="Crayola colors" maxlength="40" />  jquery-autocompleter-master-->
+										</div>
+										<!-- 								打开页面选择 -->
+										<label class="col-sm-2 control-label">招标方案</label>
+										<div class="col-sm-3">
+											<input id="bidSchemeId" name="bidSchemeId"
+												class="form-control" type="text">
 										</div>
 									</div>
-								</div>
-								<!-- 							文件显示列表 -->
-								<div class="form-group">
-									<label class="col-sm-2 control-label"></label>
-									<div class="col-sm-4">
-										<div class="layui-upload">
-											<div class="layui-upload-list">
-												<table id="sds" class="layui-table">
-													<thead>
-														<tr>
-															<th style="text-align: center;">文件名</th>
-															<th style="text-align: center;">大小</th>
-															<th style="text-align: center;">状态</th>
-															<th style="text-align: center;">操作</th>
-														</tr>
-													</thead>
-													<tbody id="demoList"></tbody>
-												</table>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">结算币别 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-3">
+											<!-- 	下拉框复选关键字multiple  -->
+											<select data-placeholder="请选择" name="currencyTypeId"
+												id="currencyTypeId" class="form-control chosen-select"
+												tabindex="2" style="width: 100%">
+												<!-- 											<option value="RMB">人民币</option> -->
+												<!-- 											<option value="美元">美元</option> -->
+												<!-- 											<option value="欧元">欧元</option> -->
+											</select>
+										</div>
+										<label class="col-sm-2 control-label">税率 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-3">
+											<select data-placeholder="请选择" name="taxRate" id="taxRate"
+												class="form-control chosen-select" tabindex="2"
+												style="width: 100%">
+												<!-- 											<option value="16%增值税发票">16%增值税发票</option> -->
+											</select>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">履约保证金 </label>
+										<div class="col-sm-3">
+											<input id="performanceBond" name="performanceBond"
+												class="form-control" type="text" placeholder="元">
+										</div>
+
+										<label class="col-sm-2 control-label">质保金</label>
+										<div class="col-sm-3">
+											<input id="warrantyBond" name="warrantyBond"
+												class="form-control" type="text" placeholder="元">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">有效起始日期 </label>
+										<div class="col-sm-3">
+											<div class="input-group date" id="dateFrom">
+												<input class="form-control" type="text" name="dateFrom">
+												<span class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</div>
+										</div>
+										<label class="col-sm-2 control-label">有效截止日期</label>
+										<div class="col-sm-3">
+											<div class="input-group date" id="dateTo">
+												<input class="form-control" type="text" name="dateTo">
+												<span class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</div>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">合同总金额 </label>
+										<div class="col-sm-3">
+											<input id="totalMoney" name="totalMoney" class="form-control"
+												type="text" placeholder="元">
+										</div>
+
+										<!-- 									<label class="col-sm-1 control-label">用章类型 <span -->
+										<!-- 										class="mustin">*</span></label> -->
+										<!-- 									<div class="col-sm-2"> -->
+										<!-- 										<select data-placeholder="请选择" name="sealType" id="sealType" -->
+										<!-- 											class="form-control chosen-select" tabindex="2" -->
+										<!-- 											style="width: 100%"> -->
+										<!-- 											<option value="合同章">合同章</option> -->
+										<!-- 											<option value="公章">公章</option> -->
+										<!-- 										</select> -->
+										<!-- 									</div> -->
+									</div>
+									<div class="form-group">
+										<!-- 	多选 -->
+										<label class="col-sm-2 control-label">适用机构 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-3">
+											<textarea id="contractSuits" name="contractSuits"
+												class="form-control " style="width: 378px;overflow:hidden;"
+												checks="11" textLabel="jasontext" type="text"
+												readonly="readonly"></textarea>
+										</div>
+										<label class="col-sm-2 control-label">供货公司 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-3">
+											<!-- 										多选 -->
+											<!-- 								打开页面选择 -->
+											<input id="contractDelivers" name="contractDelivers"
+												class="form-control" type="text" onclick="openContractDelivers()" readonly="readonly" placeholder="==请选择==">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">签订机构 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-3">
+											<input id="authorCorpName" name="authorCorpName"
+												class="form-control " style="width: 378px;overflow:hidden;"
+												checks="" textLabel="jasontext" type="text"
+												readonly="readonly" />
+										</div>
+										<label class="col-sm-2 control-label">签订部门 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-3">
+											<input id="authorDeptName" name="authorDeptName" 
+												class="form-control " style="width: 378px;overflow:hidden;"
+												checks="" textLabel="jasontext" type="text" th:value="${authorDeptName}"
+												readonly="readonly" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">执行人 <span
+											class="mustin">*</span>
+										</label>
+										<div class="col-sm-3">
+											<input id="performUserName" name="performUserName"
+												class="form-control" type="text">
+										</div>
+
+										<label class="col-sm-2 control-label">起草人</label>
+										<div class="col-sm-3">
+											<input id="authorUserName" name="authorUserName" th:value="${authorUserName}"
+												class="form-control" type="text" placeholder="默认为当前用户">
+										</div>
+									</div>
+
+									<div class="form-group">
+										<div class="col-sm-6 control-label">
+											<label class="col-sm-4 radio-inline"> <input
+												type="checkbox" name="checkbox" value="1"
+												onclick="triggerCheckbox(this)" /> 录入明细 <span
+												class="mustin">*</span>
+											</label>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">摘要</label>
+										<div class="col-sm-8">
+											<textarea id="abstract" name="abstract" class="form-control"
+												rows="3"></textarea>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-2 control-label">附件 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<div class="file-manager">
+												<button type="button" class="layui-btn btn btn-danger"
+													id="test1" style="width: 100%;">
+													<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
+												</button>
+
+											</div>
+										</div>
+									</div>
+									<!-- 							文件显示列表 -->
+									<div class="form-group">
+										<label class="col-sm-2 control-label"></label>
+										<div class="col-sm-4">
+											<div class="layui-upload">
+												<div class="layui-upload-list">
+													<table id="sds" class="layui-table">
+														<thead>
+															<tr>
+																<th style="text-align: center;">文件名</th>
+																<th style="text-align: center;">大小</th>
+																<th style="text-align: center;">状态</th>
+																<th style="text-align: center;">操作</th>
+															</tr>
+														</thead>
+														<tbody id="demoList"></tbody>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<!-- 左侧合同基本信信息结束-->
-							<!-- 					富文本编辑 -->
-							<div class="form-group"
-									style="padding-top: 50px">
-									<label class="col-sm-2 control-label"><u>合同模板（tab2页）</u></label>载入模板
+								<!-- 左侧合同基本信信息结束-->
+								<!-- 					富文本编辑 -->
+								<div class="tab-pane fade" id="contractTemplate">
+
+
+									<div class="ibox float-e-margins" id="box-richText"
+										style="padding-left: 12%">
+
+										<div id="contractElements"
+											style="width:80%;box-shadow: 0 0 0 1px #d1d1d1, 0 0 3px 1px #ccc;height:500px;">
+											<p style="text-align: center;">
+												<span class="sde-ctrl" sde-type="text" sde-right="."
+													id="text-input1" contenteditable="false"> <span
+													class="sde-value" sde-left="[" sde-right="]"
+													contenteditable="true" style="font-size: 20px">设备</span><span
+													style="font-size: 20px">定作合同</span>
+												</span>
+											</p>
+
+											<p style="text-align: right;">
+												<span class="sde-ctrl" sde-type="text" sde-right="."
+													id="text-input2" contenteditable="false"> <span
+													class="sde-value" sde-left="[" sde-right="]"
+													contenteditable="true"
+													style="font-weight:bold;font-size: 15px">合同编号:</span>
+												</span>
+											</p>
+
+											<p style="text-align: left;font-size: 15px">
+												<span style="font-weight:bold">定作方:</span> <span
+													class="sde-ctrl" sde-type="text" sde-right="."
+													id="text-input3" contenteditable="false"> <span
+													class="sde-value" sde-left="[" sde-right="]"
+													contenteditable="true"
+													style="font-weight:bold;font-size: 15px">华润雪花啤酒（
+														）有限公司</span><span style="font-weight:bold;font-size: 15px">（以下简称甲方）</span>
+												</span>
+											</p>
+
+											<p style="text-align: left;font-size: 15px">
+												<span style="font-size: 15px">注册地址:</span> <span
+													class="sde-ctrl" sde-type="text" sde-right="."
+													id="text-input4" contenteditable="false"> <span
+													class="sde-value" sde-left="[" sde-right="]"
+													contenteditable="true" style="font-size: 15px">法定代表人或负责人：</span>
+												</span>
+											</p>
+
+											<p style="text-align: left;font-size: 15px">
+												<span style="font-size: 15px">经办人:</span> <span
+													class="sde-ctrl" sde-type="text" sde-right="."
+													id="text-input5" contenteditable="false"> <span
+													class="sde-value" sde-left="[" sde-right="]"
+													contenteditable="true" style="font-size: 15px"></span>
+												</span>
+											</p>
+
+											<p style="text-align: left;font-size: 15px">
+												<span style="font-size: 15px">业务电话:</span> <span
+													class="sde-ctrl" sde-type="text" sde-right="."
+													id="text-input6" contenteditable="false"> <span
+													class="sde-value" sde-left="[" sde-right="]"
+													contenteditable="true" style="font-size: 15px"></span>
+												</span>
+											</p>
+
+											<p></p>
+
+											<p style="text-align: left;font-size: 15px">
+												<span style="font-weight:bold">承揽方:</span> <span
+													class="sde-ctrl" sde-type="text" sde-right="."
+													id="text-input7" contenteditable="false"> <span
+													class="sde-value" sde-left="[" sde-right="]"
+													contenteditable="true"
+													style="font-weight:bold;font-size: 15px"> </span><span
+													style="font-weight:bold;font-size: 15px">（以下简称乙方）</span>
+												</span>
+											</p>
+										</div>
+									</div>
 								</div>
-							<div class="ibox float-e-margins" id="box-richText" style="padding-left: 12%">
-								
-								<div id="contractElements" style="width:80%;box-shadow: 0 0 0 1px #d1d1d1, 0 0 3px 1px #ccc;height:500px;">
-									<p style="text-align: center;">
-										<span class="sde-ctrl" sde-type="text" sde-right="."
-											id="text-input1" contenteditable="false"> <span
-											class="sde-value" sde-left="[" sde-right="]"
-											contenteditable="true" style="font-size: 20px">设备</span><span
-											style="font-size: 20px">定作合同</span>
-										</span>
-									</p>
+								<!-- 						富文本编辑 END -->
 
-									<p style="text-align: right;">
-										<span class="sde-ctrl" sde-type="text" sde-right="."
-											id="text-input2" contenteditable="false"> <span
-											class="sde-value" sde-left="[" sde-right="]"
-											contenteditable="true"
-											style="font-weight:bold;font-size: 15px">合同编号:</span>
-										</span>
-									</p>
-
-									<p style="text-align: left;font-size: 15px">
-										<span style="font-weight:bold">定作方:</span> <span
-											class="sde-ctrl" sde-type="text" sde-right="."
-											id="text-input3" contenteditable="false"> <span
-											class="sde-value" sde-left="[" sde-right="]"
-											contenteditable="true"
-											style="font-weight:bold;font-size: 15px">华润雪花啤酒（ ）有限公司</span><span
-											style="font-weight:bold;font-size: 15px">（以下简称甲方）</span>
-										</span>
-									</p>
-
-									<p style="text-align: left;font-size: 15px">
-										<span style="font-size: 15px">注册地址:</span> <span
-											class="sde-ctrl" sde-type="text" sde-right="."
-											id="text-input4" contenteditable="false"> <span
-											class="sde-value" sde-left="[" sde-right="]"
-											contenteditable="true" style="font-size: 15px">法定代表人或负责人：</span>
-										</span>
-									</p>
-
-									<p style="text-align: left;font-size: 15px">
-										<span style="font-size: 15px">经办人:</span> <span
-											class="sde-ctrl" sde-type="text" sde-right="."
-											id="text-input5" contenteditable="false"> <span
-											class="sde-value" sde-left="[" sde-right="]"
-											contenteditable="true" style="font-size: 15px"></span>
-										</span>
-									</p>
-
-									<p style="text-align: left;font-size: 15px">
-										<span style="font-size: 15px">业务电话:</span> <span
-											class="sde-ctrl" sde-type="text" sde-right="."
-											id="text-input6" contenteditable="false"> <span
-											class="sde-value" sde-left="[" sde-right="]"
-											contenteditable="true" style="font-size: 15px"></span>
-										</span>
-									</p>
-
-									<p></p>
-
-									<p style="text-align: left;font-size: 15px">
-										<span style="font-weight:bold">承揽方:</span> <span
-											class="sde-ctrl" sde-type="text" sde-right="."
-											id="text-input7" contenteditable="false"> <span
-											class="sde-value" sde-left="[" sde-right="]"
-											contenteditable="true"
-											style="font-weight:bold;font-size: 15px"> </span><span
-											style="font-weight:bold;font-size: 15px">（以下简称乙方）</span>
-										</span>
-									</p>
+								<div class="tab-pane fade" id="contractMaterialDetail">
+									<div class="form-group"
+										style="padding-left: 15px;padding-top: 50px">
+										<label class="col-sm-2 control-label"><u>合同物料明细（tab3页）</u></label>
+									</div>
 								</div>
 							</div>
-							<!-- 						富文本编辑 END -->
-							<div class="ibox float-e-margins" id="box-bottom">
-								<div class="form-group"
-									style="padding-left: 15px;padding-top: 50px">
-									<label class="col-sm-2 control-label"><u>合同物料明细（tab3页）</u></label>
-								</div>
-							</div>
+							<!-- 							<div class="form-group"> -->
+							<!-- 								<div class="col-sm-4 col-sm-offset-8"> -->
+							<!-- 									<button type="button" class="btn btn-primary" id="lastBtn" disabled="true" -->
+							<!-- 										onclick="lastStep('myTab',3,'lastBtn','nextBtn')">上一步</button> -->
+							<!-- 									<button type="button" class="btn btn-primary" id="nextBtn" -->
+							<!-- 										onclick="nextStepThis('myTab',3,'lastBtn','nextBtn')">下一步</button> -->
+							<!-- 								</div> -->
+							<!-- 							</div> -->
 						</form>
 					</div>
 				</div>
@@ -367,58 +393,63 @@
 	<script src="/js/layui.js"></script>
 	<script src="/js/vue.min.js"></script>
 	<script src="/js/plugins/layer/layer.min.js"></script>
-	
+
 	<script type="text/javascript" src="/js/plugins/common.js"></script>
-	
-	
-	
-<!-- 	//树状下拉复选框-MultipleTreeSelect -->
-<!-- 	<script src="/js/jquery-1.11.2.min.js"></script> -->
+
+
+
+	<!-- 	//树状下拉复选框-MultipleTreeSelect -->
+	<!-- 	<script src="/js/jquery-1.11.2.min.js"></script> -->
 	<script type="text/javascript" src="/js/plugins/zTree/jquery.ztree.all.min.js"></script>
 	<script type="text/javascript" src="/js/plugins/MultipleTreeSelect.js"></script>
-	<script type="text/javascript" src="/js/plugins/autocompleter/js/main.js"></script>
-<!-- 	//树状下拉复选框END -->	
+	<script type="text/javascript"
+		src="/js/plugins/autocompleter/js/main.js"></script>
+	<!-- 	//树状下拉复选框END -->
 
 
 	<!-- ** jquery-autocompleter-master插件 -->
-<!-- 	<script src="js/jquery.min.js"></script> -->
+	<!-- 	<script src="js/jquery.min.js"></script> -->
 
-<!--     <script src="js/jquery.autocompleter.js"></script> -->
+	<!--     <script src="js/jquery.autocompleter.js"></script> -->
 
-<!--     <script src="/js/appjs/contract/ContractCreation/main.js"></script> -->
-<!-- ** jquery-autocompleter-master插件END -->
+	<!--     <script src="/js/appjs/contract/ContractCreation/main.js"></script> -->
+	<!-- ** jquery-autocompleter-master插件END -->
 
 
 	<!-- 富文本js -->
-	<script type="text/javascript" charset="utf-8" src="/js/plugins/js/modernizr/2.8.3/modernizr.min.js"></script>
-	<script type="text/javascript" charset="utf-8" src="/js/plugins/sde.config.js"></script>
-	<script type="text/javascript" src="/js/plugins/ueditor/ueditor.all.min.js?_=1528990315106"></script>
-	<script type="text/javascript" src="/js/plugins/ueditor/lang/zh-cn/zh-cn.js?_=1528990315106"></script>
-	<script type="text/javascript" src="/js/plugins/js/sde-ie8-design.js?ba2b4d4610f330f6e1ad"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="/js/plugins/js/modernizr/2.8.3/modernizr.min.js"></script>
+	<script type="text/javascript" charset="utf-8"
+		src="/js/plugins/sde.config.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/ueditor/ueditor.all.min.js?_=1528990315106"></script>
+	<script type="text/javascript"
+		src="/js/plugins/ueditor/lang/zh-cn/zh-cn.js?_=1528990315106"></script>
+	<script type="text/javascript"
+		src="/js/plugins/js/sde-ie8-design.js?ba2b4d4610f330f6e1ad"></script>
 	<!-- 富文本js END -->
-	
-	
-	
-<!-- 	// 树状下拉复选框js代码-->
+
+
+
+	<!-- 	// 树状下拉复选框js代码-->
 	<script type="text/javascript">
-function selectTree(){
-	var treeData=$("#selectTree").val();
-	var myobj=eval(treeData);//selectTree input框内容位json数据 转换为json对象
-// 		alert(myobj);
-
-     var defaults = {
-
-         zNodes: myobj,
-         height:233
-     };
-     $("#contractSuits").drawMultipleTree(defaults);//初始化树状下拉复选框
-//     var a=$("#selectTree").drawMultipleTree("getChecks","val");
-//     alert(a);
-    
-}
-<!-- 	// 树状下拉复选框js代码END-->
-
+		function selectTree() {
+			var treeData = $("#selectTree").val();
+			var myobj = eval(treeData); //selectTree input框内容位json数据 转换为json对象
+			// 		alert(myobj);
+	
+			var defaults = {
+				zNodes : myobj,
+				height : 233
+			};
+			$("#contractSuits").drawMultipleTree(defaults); //初始化树状下拉复选框
+			//     var a=$("#selectTree").drawMultipleTree("getChecks","val");
+			//     alert(a);
+	
+		}
+		<!-- 	// 树状下拉复选框js代码END-->
 	</script>
+	<script type="text/javascript" src="/js/plugins/common.js"></script>
 </body>
 </html>
 

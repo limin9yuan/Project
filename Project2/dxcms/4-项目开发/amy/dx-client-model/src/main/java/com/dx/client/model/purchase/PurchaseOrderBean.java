@@ -36,9 +36,9 @@ public class PurchaseOrderBean {
     //执行机构名称
     private String performCorpName;
     //执行人id
-    private String performUserId;
+    private String executerId;
     //执行人
-    private String performUserName;
+    private String executerName;
     //单据编号
     private String code;
     //关联单据编号
@@ -68,19 +68,19 @@ public class PurchaseOrderBean {
     //支付方式
     private String paymentType;
     //是否变更
-    private Boolean isChanged;
+    private boolean isChanged;
     //是否已提交
-    private Boolean isSubmit;
+    private boolean isSubmit;
     //是否开始审批
-    private Boolean IsApproveBegin;
+    private boolean IsApproveBegin;
     //是否审批完成
     private String isApproveFinish;
     //终止
-    private Boolean isStoped;
+    private boolean isStopped;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //是否已上传
-    private Boolean isPushed;
+    private boolean isPushed;
     //生成日期
     private Date createDate;
     //生成人Id
@@ -96,7 +96,7 @@ public class PurchaseOrderBean {
     //打印日期
     private Date printDate;
     //打印次数
-    private Integer printTimes;
+    private int printTimes;
 
     public String getId() {
         return id;
@@ -202,20 +202,20 @@ public class PurchaseOrderBean {
         this.performCorpName = performCorpName;
     }
 
-    public String getPerformUserId() {
-        return performUserId;
+    public String getExecuterId() {
+        return executerId;
     }
 
-    public void setPerformUserId(String performUserId) {
-        this.performUserId = performUserId;
+    public void setExecuterId(String executerId) {
+        this.executerId = executerId;
     }
 
-    public String getPerformUserName() {
-        return performUserName;
+    public String getExecuterName() {
+        return executerName;
     }
 
-    public void setPerformUserName(String performUserName) {
-        this.performUserName = performUserName;
+    public void setExecuterName(String executerName) {
+        this.executerName = executerName;
     }
 
     public String getCode() {
@@ -330,27 +330,27 @@ public class PurchaseOrderBean {
         this.paymentType = paymentType;
     }
 
-    public Boolean getChanged() {
+    public boolean isChanged() {
         return isChanged;
     }
 
-    public void setChanged(Boolean changed) {
+    public void setChanged(boolean changed) {
         isChanged = changed;
     }
 
-    public Boolean getSubmit() {
+    public boolean isSubmit() {
         return isSubmit;
     }
 
-    public void setSubmit(Boolean submit) {
+    public void setSubmit(boolean submit) {
         isSubmit = submit;
     }
 
-    public Boolean getApproveBegin() {
+    public boolean isApproveBegin() {
         return IsApproveBegin;
     }
 
-    public void setApproveBegin(Boolean approveBegin) {
+    public void setApproveBegin(boolean approveBegin) {
         IsApproveBegin = approveBegin;
     }
 
@@ -362,27 +362,27 @@ public class PurchaseOrderBean {
         this.isApproveFinish = isApproveFinish;
     }
 
-    public Boolean getStoped() {
-        return isStoped;
+    public boolean isStopped() {
+        return isStopped;
     }
 
-    public void setStoped(Boolean stoped) {
-        isStoped = stoped;
+    public void setStopped(boolean stopped) {
+        isStopped = stopped;
     }
 
-    public Boolean getActived() {
+    public boolean isActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 
-    public Boolean getPushed() {
+    public boolean isPushed() {
         return isPushed;
     }
 
-    public void setPushed(Boolean pushed) {
+    public void setPushed(boolean pushed) {
         isPushed = pushed;
     }
 
@@ -442,11 +442,11 @@ public class PurchaseOrderBean {
         this.printDate = printDate;
     }
 
-    public Integer getPrintTimes() {
+    public int getPrintTimes() {
         return printTimes;
     }
 
-    public void setPrintTimes(Integer printTimes) {
+    public void setPrintTimes(int printTimes) {
         this.printTimes = printTimes;
     }
 }

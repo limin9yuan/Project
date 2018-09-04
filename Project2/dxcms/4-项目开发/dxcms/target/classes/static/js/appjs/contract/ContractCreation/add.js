@@ -2,9 +2,23 @@ $().ready(function() {
 	loadDic("contract-currency","currencyTypeId");			//币别
 	loadDic("contract-tax-rate","taxRate");					//税率
 //	$("#currencyTypeId").chosen({ search_contains: true }); //支持模糊查询
-	loadCrmData("/ContractCreation/ContractCreation/tree","authorDeptId");//签订部门
+//	loadCrmData("/ContractCreation/ContractCreation/tree","authorDeptId");//签订部门
 	$("#effectiveAgency").chosen("destory");//
 
+		$.ajax({
+			type : "GET",
+			url : "/ContractCreation/ContractCreation/tree",
+			success : function(tree) {
+				var defaults = {
+						zNodes : tree,
+						height : 233,
+						chkStyle: "radio",//设置单选树形 默认是多选
+						radioType : "all"
+					};
+					$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
+					$("#authorDeptName").drawMultipleTree(defaults);
+			}
+		});
 	$('#startDate').datetimepicker({ //初始化日期
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
@@ -13,6 +27,21 @@ $().ready(function() {
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
 	});
+	
+	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
+		$('#lastBtn').attr("disabled", true);
+		$('#nextBtn').attr("disabled", false);
+	});
+	$('#myTab a[href="#contractTemplate"]').on('shown.bs.tab', function(e) {
+		$('#lastBtn').attr("disabled", true);
+		$('#nextBtn').attr("disabled", false);
+		richText();
+	});
+	$('#myTab a[href="#contractMaterialDetail"]').on('shown.bs.tab', function(e) {
+		$('#lastBtn').attr("disabled", true);
+		$('#nextBtn').attr("disabled", false);
+	});
+	
 	// ————上传文件**********************************************
 	layui.use('upload', function() {
 		var $ = layui.jquery;
@@ -71,10 +100,8 @@ $().ready(function() {
 		});
 	});
 //	*****************************上传文件END
-	 
 	selectTree();
 	validateRule();
-	richText();
 });
 
 $.validator.setDefaults({
@@ -106,7 +133,24 @@ function save() {
 		}
 	});
 }
-
+//打开项目页面
+function openProject() {
+	layer.open({
+		type : 2,
+		title : "选择项目信息",
+		area : [ '60%', '90%' ],
+		content : "/ContractCreation/ContractCreation/project"
+	})
+}
+//打开供货页面
+function openContractDelivers() {
+	layer.open({
+		type : 2,
+		title : "选择供货信息",
+		area : [ '60%', '90%' ],
+		content : "/ContractCreation/ContractCreation/contractDelivers"
+	})
+}
 //判断选择的币种改变页面的其他单位
 $('#currencyTypeId').change(function() {
 	var currencyTypeId = $("#currencyTypeId").val();
@@ -839,4 +883,19 @@ function richText() {
 	//		debugger;//js执行在这么会自己停止的，然后你可以在控制台下输出ctrls，看看里面有什么
 	});
 //	window.sde = sde;
+}
+
+function nextStepThis(tabId, totalStep, lastBtn, nextBtn) {
+	nextStep(tabId, totalStep, lastBtn, nextBtn);
+//	if (address == null) {
+//		if ($('#' + tabId + ' li:eq(1)').attr("class") == 'active') {
+//			address = new addressResolve({
+//				proId : 'province',
+//				cityId : 'city',
+//				areaId : 'area'
+//			});
+//			address.init();
+//		}
+//
+//	}
 }

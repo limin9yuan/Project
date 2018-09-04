@@ -23,7 +23,7 @@ function nextStep() {
 	}else {
 		layer.open({
 			type : 2,
-			title : '编辑',
+			title : '',
 			maxmin : false,
 			shadeClose : false, // 点击遮罩关闭层
 			area : [ '100%', '100%' ],

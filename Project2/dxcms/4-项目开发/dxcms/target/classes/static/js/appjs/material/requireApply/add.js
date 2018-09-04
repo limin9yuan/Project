@@ -129,10 +129,12 @@ function initControl() {
         $grid.jqGrid('addRowData', i, rowdata);
     };
     //设置只读
-    $grid.find('.disabled').attr("disabled", "disabled");
+     $grid.find('input').attr("disabled", "disabled");
+     //$grid.find('.disabled').attr("disabled", "disabled");
     //将第一行的选择物资按钮激活
     $grid.find("tbody tr:eq(1)").find('input').removeAttr('disabled').attr("isvalid", "yes");
-
+    $grid.find('.disabled').attr("disabled", "disabled");
+    //注册事件
     registEvent();
 }
 //取得物资数据
@@ -185,7 +187,7 @@ function getMaterialDetailByCode(code,index){
 function getEmptyRow(){
     var rowdata = {
         // name : '<input name="name" type="text" class="editable center disabled" readonly/>',//物资名称
-         name : '<div class="product"><input name="name" readonly type="text" class="editable left disabled" isvalid="no" checkexpession="NotNull"/><span class="ui-icon-ellipsis"></span></div>',
+         name : '<div class="product"><input name="name" readonly type="text" class="editable left" isvalid="no" checkexpession="NotNull"/><span class="ui-icon-ellipsis"></span></div>',
          code : '<input name="code" type="text" class="editable left disabled" />',//物资编码
          specification: '<input name="specification" type="text" class="editable left disabled" />',//规格型号
          materialUnitId: '<input name="materialUnitName" type="text" class="editable left disabled" /><input name="materialUnitId" type="hidden"/>',//单位
@@ -224,9 +226,9 @@ function addRow(){
      var rowdata =getEmptyRow();
      $grid.jqGrid('addRowData', newid, rowdata);
      $grid.find("tbody tr:eq("+thistr+")").find('.disabled').attr("disabled", "disabled");
-     if($grid.find("tbody tr:eq("+thistr+")").last().find('input[name="name"]').val()!="" || ids.length==0){
+     /*if($grid.find("tbody tr:eq("+thistr+")").last().find('input[name="name"]').val()!="" || ids.length==0){
         $grid.find("tbody tr:eq("+thistr+")").find('input').removeAttr('disabled').attr("isvalid", "yes");
-     }
+     }*/
      registEvent();
 }
 //注册单元格事件
@@ -265,36 +267,41 @@ function registEvent(){
     $grid.find('.decimal').keyup(function () {
         var $qty = $(this).parents('[role=row]').find('input[name="requireQty"]');                    //数量
         var $price = $(this).parents('[role=row]').find('input[name="referencePrice"]');                //单价
-        var $referenceTotal = $(this).parents('[role=row]').find('input[name="referenceTotal"]');                //单价
+        var $referenceTotal = $(this).parents('[role=row]').find('input[name="referenceTotal"]');                //金额
         //数量*单价=金额
         $referenceTotal.val(toDecimal($qty.val() * $price.val()));
-        //合计
-        var budgetTotalQty = 0.00, budgetTotalAccount = 0.00,  requireTotalQty = 0.00,  referenceTotal = 0.00;
-        $grid.find("tbody tr").each(function (i) {
-             //预算数量
-            /*var Qty = $(this).find('td:eq(7)').find('input').val();
-            if (Qty != "" && Qty != undefined) {
-                budgetTotalQty += Number(Qty);
-            }*/
-            //需求数量
-             var qty = $(this).find('td:eq(8)').find('input').val();
-            if (qty != "" && qty != undefined) {
-                requireTotalQty += Number(qty);
-            }
-            //预算金额
-            /*var account = $(this).find('td:eq(11)').find('input').val();
-            if (account != "" && Qty != undefined) {
-                requireTotalQty += Number(account);
-            }*/
-            //参考金额
-            var account = $(this).find('td:eq(12)').find('input').val();
-            if (account != "" && account != undefined) {
-                referenceTotal += Number(account);
-            }
-        });
-        $("#requireQty").text(toDecimal(requireTotalQty));
-        $("#referenceTotal").text(toDecimal(referenceTotal));
+        calculateTotal();
     });
+}
+
+//
+function calculateTotal(){
+    //合计
+    var budgetTotalQty = 0.00, budgetTotalAccount = 0.00,  requireTotalQty = 0.00,  referenceTotal = 0.00;
+    $("#requireApplyTable").find("tbody tr").each(function (i) {
+         //预算数量
+        /*var Qty = $(this).find('td:eq(7)').find('input').val();
+        if (Qty != "" && Qty != undefined) {
+            budgetTotalQty += Number(Qty);
+        }*/
+        //需求数量
+         var qty = $(this).find('td:eq(9)').find('input').val();
+        if (qty != "" && qty != undefined) {
+            requireTotalQty += Number(qty);
+        }
+        //预算金额
+        /*var account = $(this).find('td:eq(11)').find('input').val();
+        if (account != "" && Qty != undefined) {
+            requireTotalQty += Number(account);
+        }*/
+        //参考金额
+        var account = $(this).find('td:eq(13)').find('input').val();
+        if (account != "" && account != undefined) {
+            referenceTotal += Number(account);
+        }
+    });
+    $("#requireQty").text(toDecimal(requireTotalQty));
+    $("#referenceTotal").text(toDecimal(referenceTotal));
 }
 
 //删除行数据
@@ -306,4 +313,100 @@ function deleteRow(){
 		$("#requireApplyTable").delRowData(id);
 	});
 	$("#requireApplyTable").find("tbody tr:eq(1)").find('input').removeAttr('disabled').attr("isvalid", "yes");
+	calculateTotal();
+}
+
+//保存表单
+function save() {
+
+    var applyEntryJson = [];
+    $("#requireApplyTable").find('[role=row]').each(function (i) {
+        if ($(this).find('input[name="name"]').val()) {
+             applyEntryJson.push({
+             name : $(this).find('input[name="name"]').val(),//物资名称
+             code : $(this).find('input[name="code"]').val(),//物资编码
+             specification: $(this).find('input[name="specification"]').val(),//规格型号
+             materialUnitId: $(this).find('input[name="materialUnitId"]').val(),//单位
+             materialSubArray:$(this).find('input[name="materialSubArray"]').val(),//包装物资
+
+             stockQty:$(this).find('input[name="stockQty"]').val(),//库存数量
+             budgetQty: $(this).find('input[name="budgetQty"]').val(),//预算数量
+             requireQty: $(this).find('input[name="requireQty"]').val(),//需求数量
+
+             budgetPrice: $(this).find('input[name="budgetPrice"]').val(),//预算单价
+             referencePrice: $(this).find('input[name="referencePrice"]').val(),//参考单价
+             budgetTotal:$(this).find('input[name="budgetTotal"]').val(),//预算金额
+             referenceTotal:$(this).find('input[name="referenceTotal"]').val(),//参考金额
+             requireDate: $(this).find('input[name="requireDate"]').val(),//要求到货时间
+             acceptUserId: $(this).find('input[name="acceptUserId"]').val(),//受理人
+             description: $(this).find('input[name="description"]').val()//说明信息
+            });
+        }
+    });
+    $.ajax({
+    		cache : true,
+    		type : "POST",
+    		url : "/material/requireApply/save",
+    		data :  {
+                   	 'name' : $("#name").val(),
+                   	 'code' : $("#code").val(),
+                   	 'authorCorpId' : $("#authorCorpId").val(),
+                   	 'businessDate' : $("#businessDate").data('date'),
+                   	 'createUserId' : $("#createUserId").val(),
+                   	 'createDate' : $("#createDate").data('date'),
+                   	 'applyEntryJson' : applyEntryJson
+                   	 },// 你的formid
+    		async : false,
+    		error : function(request) {
+    			parent.layer.alert("Connection error");
+    		},
+    		success : function(data) {
+    			if (data.code == 0) {
+
+    				parent.layer.msg("操作成功");
+    				$("#submitButton").attr("disabled", true);// 上面的验证通过才会执行到这里禁用按钮。
+    				//freshParenWindow();
+    			} else {
+    				parent.layer.alert(data.msg)
+    			}
+
+    		}
+    	});
+}
+
+//提交申请
+function commitApply() {
+    $.ajax({
+    		cache : true,
+    		type : "POST",
+    		url : "/material/requireApply/commitApply",
+    		data :  {
+                   	 'name' : $("#name").val(),
+                   	 'code' : $("#code").val(),
+                   	 'authorCorpId' : $("#authorCorpId").val(),
+                   	 'businessDate' : $("#businessDate").data('date'),
+                   	 'createUserId' : $("#createUserId").val(),
+                   	 'createDate' : $("#createDate").data('date'),
+                   	 'applyEntryJson' : applyEntryJson
+                   	 },// 你的formid
+    		async : false,
+    		error : function(request) {
+    			parent.layer.alert("Connection error");
+    		},
+    		success : function(data) {
+    			if (data.code == 0) {
+
+    				parent.layer.msg("操作成功");
+    				$("#submitButton").attr("disabled", true);// 上面的验证通过才会执行到这里禁用按钮。
+    				//freshParenWindow();
+    			} else {
+    				parent.layer.alert(data.msg)
+    			}
+
+    		}
+    	});
+}
+//提交申请
+function cancelApply() {
+    //layer.close();
 }

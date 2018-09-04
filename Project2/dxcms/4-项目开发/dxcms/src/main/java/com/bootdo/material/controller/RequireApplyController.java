@@ -73,7 +73,7 @@ public class RequireApplyController extends BaseController {
         RequireApplyBean requireApplyModel = new RequireApplyBean();//此处为接口取得数据
         //requireApplyModel.setId(id);
         requireApplyModel.setName("2018年8月采购申请");
-        //requireApplyModel.setPlanNo(id);
+        requireApplyModel.setId(id);
         requireApplyModel.setAuthorCorpName("采购部");
         //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
         //requireApplyModel.setAuthorCorpId("编制部门Id");
@@ -270,5 +270,42 @@ public class RequireApplyController extends BaseController {
         return returnData;
 
     }
+    /**
+     * 保存
+     */
+    @ResponseBody
+    @PostMapping("/save")
+    @RequiresPermissions("material:requireApply:add")
+    public R save(@RequestParam Map<String, Object> params) {
+        System.out.println(params);
+        //int contactIds = service.save(customerContact);
 
+        return R.ok();
+    }
+
+    /**
+     * 提交审批
+     */
+    @ResponseBody
+    @PostMapping("/commitApply")
+    @RequiresPermissions("material:requireApply:add")
+    public R approve(@RequestParam Map<String, Object> params) {
+        System.out.println(params);
+        //int contactIds = service.save(customerContact);
+
+        return R.ok();
+    }
+
+    /**
+     * 取消审批
+     */
+    @ResponseBody
+    @PostMapping("/cancelApply")
+    @RequiresPermissions("material:requireApply:add")
+    public R cancelApply(@RequestParam Map<String, Object> params) {
+        System.out.println(params);
+        //int contactIds = service.save(customerContact);
+
+        return R.ok();
+    }
 }

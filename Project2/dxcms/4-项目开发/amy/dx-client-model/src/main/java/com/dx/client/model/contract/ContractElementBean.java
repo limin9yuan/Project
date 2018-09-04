@@ -15,7 +15,7 @@ public class ContractElementBean {
     //元素值
     private String value;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //备注
     private String remark;
 
@@ -51,11 +51,11 @@ public class ContractElementBean {
         this.value = value;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 

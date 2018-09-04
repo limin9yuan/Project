@@ -55,9 +55,9 @@ public class CompanyBean {
     //经营期限至
     private String dealDateEnd;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //是否加入黑名单
-    private Boolean isBlacklist;
+    private boolean isBlacklist;
     //生成日期
     private Date createDate;
     //生成人
@@ -249,19 +249,19 @@ public class CompanyBean {
         this.dealDateEnd = dealDateEnd;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 
-    public Boolean getBlacklist() {
+    public boolean getBlacklist() {
         return isBlacklist;
     }
 
-    public void setBlacklist(Boolean blacklist) {
+    public void setBlacklist(boolean blacklist) {
         isBlacklist = blacklist;
     }
 

@@ -11,6 +11,11 @@
 						<form class="form-horizontal m-t" id="signupForm">
 							<input id="materilaCode" name="materilaCode" th:value="${materilaCode}" class="form-control" type="hidden">
 							<div class="form-group">
+								<div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+									<input id="title" name="title" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2 control-label">单据编号:<span class="mustin">*</span></label>
 								<div class="col-sm-4">
 									<input id="planNo" name="planNo" th:value="${planNo}" class="form-control"
@@ -19,7 +24,7 @@
 								</div>
 								<label class="col-sm-2 control-label">类型:<span class="mustin">*</span></label>
 								<div class="col-sm-4">
-									<select data-placeholder="请选择" name="businessId" id="businessId"
+									<select data-placeholder="请选择" name="type" id="type"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 										<option value="">全部</option>
@@ -88,16 +93,16 @@
 							</div>
 							<div class="text-right form-group">
 								<div class="columns pull-right col-md-4">
-									<button shiro:hasPermission="addRequirementPlan:save" type="button" class="btn  btn-success"
-										onclick="batchRemove()">
+									<button shiro:hasPermission="requirementPlan:add" type="button" class="btn  btn-success"
+										onclick="update()">
 										<i class="fa" aria-hidden="true"></i>保存
 									</button>
-									<button shiro:hasPermission="addRequirementPlan:submitApproval" type="button" class="btn  btn-success"
-										onclick="batchRemove()">
+									<button shiro:hasPermission="requirementPlan:submitApproval" type="button" class="btn  btn-success"
+										onclick="submitApproval()">
 										<i class="fa" aria-hidden="true"></i>提交审批
 									</button>
-									<button shiro:hasPermission="addRequirementPlan:withdrawApproval" type="button" class="btn  btn-success"
-										onclick="batchRemove()">
+									<button shiro:hasPermission="requirementPlan:withdrawApproval" type="button" class="btn  btn-success"
+										onclick="withdrawApproval()">
 										<i class="fa" aria-hidden="true"></i>撤回审批
 									</button>
 									<!-- <button shiro:hasPermission="addRequirementPlan:close" type="button" class="btn  btn-success"

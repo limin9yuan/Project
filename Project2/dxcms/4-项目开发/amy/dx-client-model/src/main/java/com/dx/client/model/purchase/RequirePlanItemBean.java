@@ -54,13 +54,13 @@ public class RequirePlanItemBean {
     //安全储备量
     private Double reserveQty;
     //是否关闭
-    private Boolean isClosed;
+    private boolean isClosed;
     //是否已受理
-    private Boolean isAccepted;
+    private boolean isAccepted;
     //生成日期
     private Date createDate;
     //是否可用
-    private Boolean isActived;
+    private boolean isActived;
     //描述
     private String description;
     //备注(一般用于系统备注)
@@ -242,19 +242,19 @@ public class RequirePlanItemBean {
         this.reserveQty = reserveQty;
     }
 
-    public Boolean getClosed() {
+    public boolean getClosed() {
         return isClosed;
     }
 
-    public void setClosed(Boolean closed) {
+    public void setClosed(boolean closed) {
         isClosed = closed;
     }
 
-    public Boolean getAccepted() {
+    public boolean getAccepted() {
         return isAccepted;
     }
 
-    public void setAccepted(Boolean accepted) {
+    public void setAccepted(boolean accepted) {
         isAccepted = accepted;
     }
 
@@ -266,11 +266,11 @@ public class RequirePlanItemBean {
         this.createDate = createDate;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 

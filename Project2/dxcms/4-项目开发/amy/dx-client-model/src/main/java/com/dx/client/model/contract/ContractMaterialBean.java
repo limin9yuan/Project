@@ -46,7 +46,7 @@ public class ContractMaterialBean {
     //生成日期
     private Date createDate;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //描述
     private String description;
     //备注
@@ -196,11 +196,11 @@ public class ContractMaterialBean {
         this.createDate = createDate;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 

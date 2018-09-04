@@ -17,7 +17,7 @@ public class CompanyBankBean {
     //账户
     private String account;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //生成日期
     private Date createDate;
     //生成人
@@ -57,11 +57,11 @@ public class CompanyBankBean {
         this.account = account;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 

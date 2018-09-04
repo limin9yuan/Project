@@ -31,7 +31,7 @@ public class AllotPlanItemBean {
     //合同单价
     private BigDecimal unitPrice;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //备注
     private String remark;
 
@@ -123,11 +123,11 @@ public class AllotPlanItemBean {
         this.unitPrice = unitPrice;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 

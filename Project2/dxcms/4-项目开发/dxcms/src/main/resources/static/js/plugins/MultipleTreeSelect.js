@@ -62,7 +62,7 @@
         init: function () {
             var _self = this;
             this.targetOffset = this.$target_element.offset();
-            this.$target_element.nameLabel = this.$target_element.attr("name");
+            this.$target_element.nameLabel = this.$target_element.attr("text");
             this.$target_element.idLabel = this.$target_element.attr("id");
             this.$target_element.checks = this.$target_element.attr("checks");
             this.$target_element.textLabel = this.$target_element.attr("textLabel");
@@ -73,7 +73,7 @@
             if (this.$target_element.nameLabel === undefined || this.$target_element.nameLabel === "") {
                 this.$target_element.nameLabel = GenNonDuplicateID(3);
             }
-            this.$target_element.attr("name",  this.$target_element.textLabel === "" ? this.$target_element.nameLabel + "text" :  this.$target_element.textLabel);
+            this.$target_element.attr("text",  this.$target_element.textLabel === "" ? this.$target_element.nameLabel + "text" :  this.$target_element.textLabel);
             /*默认以当前元素为选项容器*/
             /*初始化树容器*/
             this.init_tree_container = init_tree_container.call(this);
@@ -90,7 +90,7 @@
                 v = "";
             rv = "";
             for (var i = 0, l = nodes.length; i < l; i++) {
-                v += nodes[i].name + ",";
+                v += nodes[i].text + ",";
                 rv += nodes[i].id + ",";
             }
             if (v.length > 0) v = v.substring(0, v.length - 1);
@@ -183,7 +183,7 @@
                 v = "";
             rv = "";
             for (var i = 0, l = nodes.length; i < l; i++) {
-                v += nodes[i].name + ",";
+                v += nodes[i].text + ",";
                 rv += nodes[i].id + ",";
             }
             if (v.length > 0) v = v.substring(0, v.length - 1);

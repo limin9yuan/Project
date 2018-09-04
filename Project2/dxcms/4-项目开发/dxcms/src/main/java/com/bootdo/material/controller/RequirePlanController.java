@@ -278,59 +278,66 @@ public class RequirePlanController {
 		return pageUtils;
 	}
 
-//	@GetMapping("/edit/{id}")
-//	@RequiresPermissions("requirementPlan:edit")
-//	String edit(@PathVariable("id") Long id,Model model){
-//		RequirePlanModel requirementPlan = requirementPlanService.get(id);
-//		model.addAttribute("requirementPlan", requirementPlan);
-//	    return "material/requirementPlan/edit";
-//	}
-//
-//	/**
-//	 * 保存
-//	 */
-//	@ResponseBody
-//	@PostMapping("/save")
-//	@RequiresPermissions("requirementPlan:requirementPlan:add")
-//	public R save( RequirePlanModel requirementPlan){
-//		if(requirementPlanService.save(requirementPlan)>0){
-//			return R.ok();
-//		}
-//		return R.error();
-//	}
-//	/**
-//	 * 修改
-//	 */
-//	@ResponseBody
-//	@RequestMapping("/update")
-//	@RequiresPermissions("system:requirementPlan:edit")
-//	public R update( RequirePlanModel requirementPlan){
-//		requirementPlanService.update(requirementPlan);
-//		return R.ok();
-//	}
-//
-//	/**
-//	 * 删除
-//	 */
-//	@PostMapping( "/remove")
-//	@ResponseBody
-//	@RequiresPermissions("requirementPlan:remove")
-//	public R remove( Long id){
-//		if(requirementPlanService.remove(id)>0){
-//		return R.ok();
-//		}
-//		return R.error();
-//	}
-//
-//	/**
-//	 * 删除
-//	 */
-//	@PostMapping( "/batchRemove")
-//	@ResponseBody
-//	@RequiresPermissions("requirementPlan:batchRemove")
-//	public R remove(@RequestParam("ids[]") Long[] ids){
-//		requirementPlanService.batchRemove(ids);
-//		return R.ok();
-//	}
-	
+	/**
+	 * 保存
+	 */
+	@ResponseBody
+	@PostMapping("/save")
+	@RequiresPermissions("requirementPlan:add")
+	public R save(@RequestParam Map<String, Object> params){
+		System.out.println(params);
+		//int contactIds = service.save(customerContact);
+
+		return R.ok();
+	}
+	/**
+	 * 修改
+	 */
+	@ResponseBody
+	@RequestMapping("/update")
+	@RequiresPermissions("requirementPlan:add")
+	public R update(@RequestParam Map<String, Object> params){
+		System.out.println(params);
+		//int contactIds = service.save(customerContact);
+
+		return R.ok();
+	}
+
+	/**
+	 * 删除
+	 */
+	@PostMapping( "/remove")
+	@ResponseBody
+	@RequiresPermissions("requirementPlan:remove")
+	public R remove( String id){
+		System.out.println(id);
+		//int contactIds = service.save(customerContact);
+
+		return R.ok();
+	}
+
+	/**
+	 * 提交审批
+	 */
+	@PostMapping( "/submitApproval")
+	@ResponseBody
+	@RequiresPermissions("requirementPlan:submitApproval")
+	public R submitApproval( String planNo){
+		System.out.println(planNo);
+		//int contactIds = service.save(customerContact);
+
+		return R.ok();
+	}
+	/**
+	 * 撤回审批
+	 */
+	@PostMapping( "/withdrawApproval")
+	@ResponseBody
+	@RequiresPermissions("requirementPlan:withdrawApproval")
+	public R withdrawApproval( String planNo){
+		System.out.println(planNo);
+		//int contactIds = service.save(customerContact);
+
+		return R.ok();
+	}
 }

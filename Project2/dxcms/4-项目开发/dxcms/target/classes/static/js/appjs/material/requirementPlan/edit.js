@@ -2,9 +2,126 @@ $().ready(function() {
 	validateRule();
 	pageInit();
 	edit_ajax();
-	// initPage();
-	// datetimepicker();
+	datetimepicker();
 });
+function withdrawApproval() {
+	var planNo = $("#planNo").val();//单据编号
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/requirementPlan/requirementPlan/withdrawApproval",
+		data :  {
+				 'planNo' : planNo
+				 },// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				// parent.reLoad();
+				// var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				// parent.layer.close(index);
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+}
+function submitApproval() {
+	var planNo = $("#planNo").val();//单据编号
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/requirementPlan/requirementPlan/submitApproval",
+		data :  {
+				 'planNo' : planNo
+				 },// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				// parent.reLoad();
+				// var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				// parent.layer.close(index);
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+}
+function update() {
+	var applyEntryJson = [];
+    $("#requirePlanTable").find('[role=row]').each(function (i) {
+        if ($(this).find('input[name="requirePlanid"]').val()) {
+             applyEntryJson.push({
+				 requirePlanid : $(this).find('input[name="requirePlanid"]').val(),//序号
+				 materialName : $(this).find('input[name="materialName"]').val(),//物料名称
+				 materilaCode: $(this).find('input[name="materilaCode"]').val(),//物料编码
+				 specification: $(this).find('input[name="specification"]').val(),//规格型号
+				 materialUnitName: $(this).find('input[name="materialUnitName"]').val(),//单位
+
+				 materialSubArray: $(this).find('input[name="materialSubArray"]').val(),//包装物料
+				 requireQty: $(this).find('input[name="requireQty"]').val(),//需求数量
+				 purchaseQty: $(this).find('input[name="purchaseQty"]').val(),//采购数量
+
+				 stockQty: $(this).find('input[name="stockQty"]').val(),//库存数量
+				 reserveQty: $(this).find('input[name="reserveQty"]').val(),//安全库存
+				 onwayQty: $(this).find('input[name="onwayQty"]').val(),//在途数量
+				 budgetQty: $(this).find('input[name="budgetQty"]').val(),//预算数量
+				 referencePrice: $(this).find('input[name="referencePrice"]').val(),//参考单价
+				 budgetPrice: $(this).find('input[name="budgetPrice"]').val(),//预算金额
+				 referenceAmount: $(this).find('input[name="referenceAmount"]').val(),//参考金额
+
+				 requireDate: $(this).find('input[name="requireDate"]').val(),//需求日期
+				 arriveDate: $(this).find('input[name="arriveDate"]').val(),//要求到货时间
+				 purchaserName: $(this).find('input[name="purchaserName"]').val(),//采购员
+				 description: $(this).find('input[name="description"]').val()//说明信息
+            });
+        }
+    });
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/requirementPlan/requirementPlan/update",
+		data :  {
+				 'title' : $("#title").val(),
+				 'planNo' : $("#planNo").val(),
+				 'type' : $("#type").val(),
+				 'purchaseDept' : $("#purchaseDept").val(),
+				 'invoiceDate' : $("#invoiceDate").val(),
+				 'authorUser' : $("#authorUser").val(),
+				 'createDate' : $("#createDate").data('date'),
+				 'remark' : $("#remark").val(),
+				 'applyEntryJson' : applyEntryJson
+				 },// 你的formid
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				parent.layer.msg("操作成功");
+				// parent.reLoad();
+				// var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+				// parent.layer.close(index);
+
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+
+}
 function calculateTotal() {
 	var sum_requireQty = 0.00;
 	var sum_purchaseQty = 0.00;
@@ -375,4 +492,12 @@ function validateRule() {
 			}
 		}
 	})
+}
+function datetimepicker(){
+	//开始时间
+	$('#createDate').datetimepicker({
+		   format: 'YYYY-MM-DD ',
+		   locale: moment.locale('zh-cn')
+	});
+
 }

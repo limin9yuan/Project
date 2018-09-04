@@ -1,0 +1,61 @@
+package com.dx.client.model.contract;
+
+import java.util.Date;
+
+/**
+ * @Auther: DX01
+ * @Date: 2018/9/4 09:49
+ * @Description: 合同文本html
+ */
+public class ContractHtmlBean {
+    //主键
+    private String id;
+    //合同id
+    private String contractId;
+    //合同html
+    private StringBuffer contractHtml;
+    //创建日期
+    private Date createDate;
+    //备注
+    private String remark;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(String contractId) {
+        this.contractId = contractId;
+    }
+
+    public StringBuffer getContractHtml() {
+        return contractHtml;
+    }
+
+    public void setContractHtml(StringBuffer contractHtml) {
+        this.contractHtml = contractHtml;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+}
