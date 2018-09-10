@@ -83,29 +83,34 @@ public class ContractBean {
     //有效期至
     private Date dateTo;
     //是否已提交
-    private Boolean isSubmit;
+    private boolean isSubmit;
     //是否开始审批
-    private Boolean IsApproveBegin;
+    private boolean IsApproveBegin;
     //是否审批完成
     private String isApproveFinish;
+    //是否终止
+    private boolean isStopped;
     //是否在用
-    private String isActived;
-    //生成日期
+    private boolean isActived;
+    //是否归档
+    private boolean isOnFiled;
+    //创建日期
     private Date createDate;
-    //生成人Id
+    //创建人Id
     private String createUserId;
-    //生成人
+    //创建人
     private String createUserName;
     //备注
     private String remark;
-    //合同物资明细
+
+    /*//合同物资明细
     private List<ContractMaterialBean> contractMaterials;
     //适用机构
     private List<ContractSuitBean> contractSuits;
     //供货公司
     private List<ContractDeliverBean> contractDelivers;
     //合同富文本输入的元素（key，value模式）
-    private List<ContractElementBean> contractElements;
+    private List<ContractElementBean> contractElements;*/
 
     public String getId() {
         return id;
@@ -395,19 +400,19 @@ public class ContractBean {
         this.dateTo = dateTo;
     }
 
-    public Boolean getSubmit() {
+    public boolean isSubmit() {
         return isSubmit;
     }
 
-    public void setSubmit(Boolean submit) {
+    public void setSubmit(boolean submit) {
         isSubmit = submit;
     }
 
-    public Boolean getApproveBegin() {
+    public boolean isApproveBegin() {
         return IsApproveBegin;
     }
 
-    public void setApproveBegin(Boolean approveBegin) {
+    public void setApproveBegin(boolean approveBegin) {
         IsApproveBegin = approveBegin;
     }
 
@@ -419,12 +424,28 @@ public class ContractBean {
         this.isApproveFinish = isApproveFinish;
     }
 
-    public String getIsActived() {
+    public boolean isStopped() {
+        return isStopped;
+    }
+
+    public void setStopped(boolean stopped) {
+        isStopped = stopped;
+    }
+
+    public boolean isActived() {
         return isActived;
     }
 
-    public void setIsActived(String isActived) {
-        this.isActived = isActived;
+    public void setActived(boolean actived) {
+        isActived = actived;
+    }
+
+    public boolean isOnFiled() {
+        return isOnFiled;
+    }
+
+    public void setOnFiled(boolean onFiled) {
+        isOnFiled = onFiled;
     }
 
     public Date getCreateDate() {
@@ -457,37 +478,5 @@ public class ContractBean {
 
     public void setRemark(String remark) {
         this.remark = remark;
-    }
-
-    public List<ContractMaterialBean> getContractMaterials() {
-        return contractMaterials;
-    }
-
-    public void setContractMaterials(List<ContractMaterialBean> contractMaterials) {
-        this.contractMaterials = contractMaterials;
-    }
-
-    public List<ContractSuitBean> getContractSuits() {
-        return contractSuits;
-    }
-
-    public void setContractSuits(List<ContractSuitBean> contractSuits) {
-        this.contractSuits = contractSuits;
-    }
-
-    public List<ContractDeliverBean> getContractDelivers() {
-        return contractDelivers;
-    }
-
-    public void setContractDelivers(List<ContractDeliverBean> contractDelivers) {
-        this.contractDelivers = contractDelivers;
-    }
-
-    public List<ContractElementBean> getContractElements() {
-        return contractElements;
-    }
-
-    public void setContractElements(List<ContractElementBean> contractElements) {
-        this.contractElements = contractElements;
     }
 }

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<style type="text/css">
+/* 有效起始日期 错误浮动 */
+#dateFrom-error {
+	position: relative;
+	float: left;
+	top: 10px;
+}
+/* 有效截止日期错误浮动 */
+#dateTo-error {
+	position: relative;
+	float: left;
+	top: 10px;
+}
+</style>
+<!-- 	//树状下拉复选框-MultipleTreeSelect -->
+<!-- <link type="text/css" rel="stylesheet" href="/css/demo.css"> -->
+<link type="text/css" rel="stylesheet" href="/css/metroStyle/metroStyle.css">
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<div class="form-group">
+							<label class="col-sm-1 control-label">合同/协议编号</label>
+							<div class="col-sm-3">
+								<input id="contractCode" name="contractCode" type="text"
+									class="form-control">
+							</div>
+							
+							<label class="col-sm-1 control-label">项目编号</label>
+							<div class="col-sm-3">
+								<input id="projectId" name="projectId" type="text" class="form-control">
+							</div>
+							
+							<label class="col-sm-1 control-label">合同名称</label>
+							<div class="col-sm-3">
+								<input id="contractName" name="contractName" type="text" class="form-control">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-1 control-label">有效起始日期 </label>
+							<div class="col-sm-3">
+								<div class="input-group date" id="timeMin">
+									<input class="form-control" type="text" id="dateFrom"
+										name="timeMin"> <span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+							
+							<label class="col-sm-1 control-label">有效截止日期</label>
+							<div class="col-sm-3">
+								<div class="input-group date" id="timeMax">
+									<input class="form-control" type="text" id="dateTo"
+										name="timeMax"> <span class="input-group-addon">
+										<span class="glyphicon glyphicon-calendar"></span>
+									</span>
+								</div>
+							</div>
+							
+							<label class="col-sm-1 control-label">起草机构</label>
+							<div class="col-sm-3">
+								<input id="authorDeptName" name="authorDeptId" class="form-control "   type="text"
+												th:value="${authorDeptName}" readonly="readonly" th:checks="${authorDeptId}" th:textLabel="${authorDeptName}"/>
+							</div>
+						</div>
+						<div class="columns pull-right" style="padding-bottom: 15px">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="searchName" type="text" class="form-control"
+								placeholder="">
+						</div>
+						<table id="contractTable" data-mobile-responsive="true"></table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+			<div> 
+				<script type="text/javascript"> 
+	 				var s_edit_h = 'hidden';
+	 				var s_remove_h = 'hidden';
+	 				var s_check_h = 'hidden';
+				</script> 
+			</div>
+			<div shiro:hasPermission="ContractCreation:ContractCreation:edit"> 
+				<script type="text/javascript"> 
+	 				s_edit_h = '';
+				</script> 
+			</div> 
+			<div shiro:hasPermission="ContractCreation:ContractCreation:remove"> 
+				<script type="text/javascript"> 
+	 				var s_remove_h = '';
+				</script> 
+			</div> 
+			<div shiro:hasPermission="ContractCreation:ContractCreation:remove"> 
+				<script type="text/javascript"> 
+	 				var s_check_h = '';
+				</script> 
+			</div> 
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript"
+		src="/js/appjs/contract/ContractCreation/contract.js"></script>
+		
+		<!-- 	//树状下拉复选框-MultipleTreeSelect -->
+
+	<script type="text/javascript"
+		src="/js/plugins/zTree/jquery.ztree.all.min.js"></script>
+	<script type="text/javascript" src="/js/plugins/MultipleTreeSelect.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/autocompleter/js/main.js"></script>
+	<!-- 	//树状下拉复选框END -->
+</body>
+</html>

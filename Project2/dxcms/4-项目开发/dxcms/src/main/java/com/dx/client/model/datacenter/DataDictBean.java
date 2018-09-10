@@ -37,7 +37,7 @@ public class DataDictBean {
     //备注信息
     private String remark;
     //删除标记
-    private Boolean delFlag;
+    private boolean delFlag;
 
     public String getId() {
         return id;
@@ -151,11 +151,11 @@ public class DataDictBean {
         this.remark = remark;
     }
 
-    public Boolean getDelFlag() {
+    public boolean getDelFlag() {
         return delFlag;
     }
 
-    public void setDelFlag(Boolean delFlag) {
+    public void setDelFlag(boolean delFlag) {
         this.delFlag = delFlag;
     }
 }

@@ -8,7 +8,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.0.116:3306/dxcms?useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://192.168.0.104:3306/dxcms?useUnicode=true&characterEncoding=utf8
     username: root
     password: 123456
     initialSize: 1

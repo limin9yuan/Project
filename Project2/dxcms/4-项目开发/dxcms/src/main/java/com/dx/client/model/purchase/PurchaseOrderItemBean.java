@@ -14,7 +14,7 @@ public class PurchaseOrderItemBean {
     //采购订单id
     private String purchaseOrderId;
     //货源计划明细id
-    private String allocationPlanItemId;
+    private String allotPlanItemId;
     //物资id
     private String materialId;
     //物资编码
@@ -39,10 +39,10 @@ public class PurchaseOrderItemBean {
     private Date arriveDate;
     //需求计划编号列表
     private String requirePlanNoList;
-    //生成日期
+    //创建日期
     private Date createDate;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //描述
     private String description;
     //备注
@@ -64,12 +64,12 @@ public class PurchaseOrderItemBean {
         this.purchaseOrderId = purchaseOrderId;
     }
 
-    public String getAllocationPlanItemId() {
-        return allocationPlanItemId;
+    public String getAllotPlanItemId() {
+        return allotPlanItemId;
     }
 
-    public void setAllocationPlanItemId(String allocationPlanItemId) {
-        this.allocationPlanItemId = allocationPlanItemId;
+    public void setAllotPlanItemId(String allotPlanItemId) {
+        this.allotPlanItemId = allotPlanItemId;
     }
 
     public String getMaterialId() {
@@ -176,11 +176,11 @@ public class PurchaseOrderItemBean {
         this.createDate = createDate;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 

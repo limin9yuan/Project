@@ -1,5 +1,7 @@
 package com.dx.client.model.contract;
 
+import java.util.Date;
+
 /**
  * @Auther: cxd
  * @Date: 2018/8/28
@@ -15,7 +17,9 @@ public class ContractElementBean {
     //元素值
     private String value;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
+    //创建日期
+    private Date createDate;
     //备注
     private String remark;
 
@@ -51,12 +55,20 @@ public class ContractElementBean {
         this.value = value;
     }
 
-    public Boolean getActived() {
+    public boolean isActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public String getRemark() {

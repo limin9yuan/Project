@@ -14,7 +14,7 @@ public class ContractSuitBean {
     private String suitCorpId;
     //适用机构名称
     private String suitCorpName;
-    //创建时间
+    //创建日期
     private Date createDate;
     //是否在用
     private boolean isActived;

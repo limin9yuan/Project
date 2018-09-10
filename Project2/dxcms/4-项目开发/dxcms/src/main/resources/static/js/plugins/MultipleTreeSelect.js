@@ -62,7 +62,7 @@
         init: function () {
             var _self = this;
             this.targetOffset = this.$target_element.offset();
-            this.$target_element.nameLabel = this.$target_element.attr("text");
+            this.$target_element.nameLabel = this.$target_element.attr("name");
             this.$target_element.idLabel = this.$target_element.attr("id");
             this.$target_element.checks = this.$target_element.attr("checks");
             this.$target_element.textLabel = this.$target_element.attr("textLabel");
@@ -136,7 +136,7 @@
         this.tree_container = $('<div   class="menuContent" style="display:none;background-color: white; position: absolute;z-index:110004;border: solid 1px;border-radius: 5px;padding-bottom: 10px" >' +
             '<ul id="' + this.ztreeid + '" class="ztree" style="padding:0 0;margin-top:0;border: none;border-radius: 5px;  height:'+this.options.height+'; width:' +getelementwidth(this.$target_element) + '; background-color: white"></ul>' +
             '</div>').insertAfter(this.$target_element);
-        this.checked_val_element = $('<input type="hidden" name="' +
+        this.checked_val_element = $('<input type="hidden" id="' + this.$target_element.nameLabel + '" name="' +
             this.$target_element.nameLabel + '">').insertAfter(this.tree_container);
         $('#'+this.ztreeid).slimScroll({
             height: this.options.height,
@@ -166,16 +166,32 @@
         var initNodeCheckeState = function (checks, nodes) {
             if (checks != "" && checks != undefined && checks != null) {
                var checks_array= checks.split(',');
-                for (var i = 0; i < nodes.length; i++) {
-                    for(var t = 0; t < checks_array.length; t++){
-                        if ((""+nodes[i].id)===checks_array[t]) {
-                            nodes[i].checked = true
-                        }
+                for (var i = 0; i < nodes.children.length; i++) {
+                    if(nodes.hasChildren){
+                        nodes.children = initChildNodeCheckeState(checks_array,nodes.children);
+                    }else{
+                        break;
                     }
 
                 }
             }
             return nodes;
+        }
+        var initChildNodeCheckeState = function (checks_array, childNodes) {
+            for (var i = 0; i < childNodes.length; i++) {
+                for(var t = 0; t < checks_array.length; t++){
+                    if ((""+childNodes[i].id)===checks_array[t]) {
+                        childNodes[i].checked = true
+                    }
+                }
+                if(childNodes[i].hasChildren){
+                    childNodes[i].children = initChildNodeCheckeState(checks_array,childNodes[i].children);
+                }else{
+                    break;
+                }
+
+            }
+            return childNodes;
         }
         var ztreeOnCheck = function (e, treeId, treeNode) {
 

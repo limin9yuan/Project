@@ -18,9 +18,9 @@ public class CompanyBankBean {
     private String account;
     //是否在用
     private boolean isActived;
-    //生成日期
+    //创建日期
     private Date createDate;
-    //生成人
+    //创建人
     private String createUser;
     //备注
     private String remark;

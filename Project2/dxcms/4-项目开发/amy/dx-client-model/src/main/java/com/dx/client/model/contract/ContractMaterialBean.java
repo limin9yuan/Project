@@ -43,7 +43,7 @@ public class ContractMaterialBean {
     private Date dateTo;
     //合同物资父id
     private String parentId;
-    //生成日期
+    //创建日期
     private Date createDate;
     //是否在用
     private boolean isActived;

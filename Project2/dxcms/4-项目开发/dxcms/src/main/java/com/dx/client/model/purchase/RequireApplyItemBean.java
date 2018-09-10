@@ -46,10 +46,10 @@ public class RequireApplyItemBean {
     //受理人名称
     private String acceptUserName;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //是否受理(生成需求计划-true, 否则-false)
-    private Boolean isAccepted;
-    //生成日期
+    private boolean isAccepted;
+    //创建日期
     private Date createDate;
     //描述
     private String description;
@@ -200,19 +200,19 @@ public class RequireApplyItemBean {
         this.acceptUserName = acceptUserName;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 
-    public Boolean getAccepted() {
+    public boolean getAccepted() {
         return isAccepted;
     }
 
-    public void setAccepted(Boolean accepted) {
+    public void setAccepted(boolean accepted) {
         isAccepted = accepted;
     }
 

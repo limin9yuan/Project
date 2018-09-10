@@ -12,21 +12,28 @@
 						<div class="form-group">
 							<div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
 								<input id="name" name="name" th:value="${requireApplyModel.name}" class="form-control" type="text">
-								<input id="authorCorpId" name="authorCorpId" th:value="${requireApplyModel.authorCorpId}" class="form-control" type="hidden">
 								<input id="createUserId" name="createUserId" th:value="${requireApplyModel.createUserId}" class="form-control" type="hidden">
 								<input id="id" name="id" th:value="${requireApplyModel.id}" class="form-control" type="hidden">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-1 control-label">单据编号<span class="mustin">*</span></label>
-							<div class="col-sm-3"><input id="planNo" name="planNo" th:value="${requireApplyModel.planNo}" class="form-control" type="text"></div>
+							<div class="col-sm-3"><input id="code" name="code" th:value="${requireApplyModel.code}" class="form-control" type="text" readonly></div>
 
 							<label class="col-sm-1 control-label">统管部门<span class="mustin">*</span></label>
-							<div class="col-sm-3"><input id="authorCorpName" name="authorCorpName" th:value="${requireApplyModel.authorCorpName}" class="form-control" type="text"></div>
+							<div class="col-sm-3"><input id="authorCorpName" name="authorCorpId" th:value="${requireApplyModel.authorCorpName}" class="form-control" type="text" readonly th:checks="${requireApplyModel.authorCorpId}" th:textLabel="${requireApplyModel.authorCorpName}"></div>
 
 							<label class="col-sm-1 control-label">单据日期<span class="mustin">*</span></label>
-							<div class="col-sm-3"><input id="businessDate" type="text" class="form-control input-wdatepicker" onfocus="WdatePicker()" isvalid="yes" checkexpession="NotNull" th:value="${requireApplyModel.businessDate}" />
-								<!--<input id="businessDate" name="businessDate" th:value="${businessDate}" class="form-control" type="text">-->
+							<div class="col-sm-3">
+								<div class="columns pull-left nopadding"  >
+									<div class="input-group date" id="businessDate">
+										<input id="business" class="form-control" type="text"
+											   name="businessDate" th:value="${requireApplyModel.businessDate}"> <span
+											class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+											</span>
+									</div>
+								</div>
 							</div>
 						</div>
 
@@ -37,27 +44,26 @@
 						</div>
 						<div class="form-group">
 							<label class="col-sm-1 control-label">编制人<span class="mustin">*</span></label>
-							<div class="col-sm-3"><input id="createUserName" name="createUserName" th:value="${requireApplyModel.createUserName}" class="form-control" type="text"></div>
+							<div class="col-sm-3"><input id="createUserName" name="createUserName" th:value="${requireApplyModel.createUserName}" class="form-control" type="text" readonly></div>
 
 							<label class="col-sm-1 control-label">编制日期<span class="mustin">*</span></label>
-							<div class="col-sm-3"><input id="createDate" name="createDate" th:value="${requireApplyModel.createDate}" class="form-control" type="text"></div>
+							<div class="col-sm-3"><input id="createDate" name="createUserName" th:value="${requireApplyModel.createDate}" class="form-control" type="text" readonly>	</div>
 
 							<label class="col-sm-1 control-label">备注</label>
 							<div class="col-sm-3"><input id="remark" name="remark" th:value="${requireApplyModel.remark}" class="form-control" type="text"></div>
 						</div>
 						<div class="text-right form-group" >
 							<div class="columns pull-right col-md-4">
-								<button class="btn btn-primary" onclick="reLoad()"
-										type="button">
+								<button shiro:hasPermission="material:requireApply:add" type="submit" class="btn btn-success" id="saveBtn">
 									<i class="fa" aria-hidden="true"></i>保存
 								</button>
-								<button type="button" class="btn btn-primary" onclick="resetSelect()">
+								<button shiro:hasPermission="material:requireApply:approve" type="button" class="btn btn-success" onclick="commitApply()" id="commitApplyBtn">
 									<i class="fa" aria-hidden="true"></i>提交审批
 								</button>
-								<button type="button" class="btn btn-primary" onclick="resetSelect()">
+								<button shiro:hasPermission="material:requireApply:cancelApprove" type="button" class="btn btn-success" onclick="cancelApply()" id="cancelApplyBtn">
 									<i class="fa" aria-hidden="true"></i>撤回审批
 								</button>
-								<button type="button" class="btn btn-primary" onclick="resetSelect()">
+								<button type="button" class="btn btn-success" onclick="closeTabWin()">
 									<i class="fa" aria-hidden="true"></i>关闭
 								</button>
 							</div>
@@ -73,9 +79,15 @@
 <link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
 <link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
 
+<link type="text/css" rel="stylesheet" href="/css/metroStyle/metroStyle.css">
+
 <script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
 <script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>
 <script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script>
+
+<script type="text/javascript" src="/js/plugins/zTree/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="/js/plugins/MultipleTreeSelect.js"></script>
+
 <script type="text/javascript" src="/js/appjs/material/requireApply/edit.js"></script>
 
 </body>

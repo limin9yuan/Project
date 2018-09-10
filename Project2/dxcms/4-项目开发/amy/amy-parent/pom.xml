@@ -24,6 +24,18 @@
         <module>../dx-server-dcservice</module>
         <module>../dx-server-dcservice-api</module>
         <module>../dx-server-model</module>
+        <module>../dx-service-datacenter</module>
+        <module>../dx-service-datacenter-api</module>
+        <module>../dx-service-file</module>
+        <module>../dx-service-file-api</module>
+        <module>../dx-service-contract</module>
+        <module>../dx-service-contract-api</module>
+        <module>../dx-service-purchase</module>
+        <module>../dx-service-purchase-api</module>
+        <module>../dx-service-tender</module>
+        <module>../dx-service-tender-api</module>
+        <module>../dx-service-sales</module>
+        <module>../dx-service-sales-api</module>
     </modules>
 
     <properties>

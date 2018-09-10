@@ -28,7 +28,7 @@ public class AllotPlanBean {
     //编制人
     private String authorUserName;
     //计划编号
-    private String planNo;
+    private String code;
     //名称
     private String Name;
     //业务日期
@@ -43,9 +43,9 @@ public class AllotPlanBean {
     private String isApproveFinish;
     //是否在用
     private boolean isActived;
-    //生成日期
+    //创建日期
     private Date createDate;
-    //生成人
+    //创建人
     private String createUser;
     //备注
     private String remark;
@@ -122,12 +122,12 @@ public class AllotPlanBean {
         this.authorUserName = authorUserName;
     }
 
-    public String getPlanNo() {
-        return planNo;
+    public String getCode() {
+        return code;
     }
 
-    public void setPlanNo(String planNo) {
-        this.planNo = planNo;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getName() {
@@ -154,7 +154,7 @@ public class AllotPlanBean {
         this.totalMoney = totalMoney;
     }
 
-    public boolean getSubmit() {
+    public boolean isSubmit() {
         return isSubmit;
     }
 
@@ -162,7 +162,7 @@ public class AllotPlanBean {
         isSubmit = submit;
     }
 
-    public boolean getApproveBegin() {
+    public boolean isApproveBegin() {
         return IsApproveBegin;
     }
 
@@ -178,7 +178,7 @@ public class AllotPlanBean {
         this.isApproveFinish = isApproveFinish;
     }
 
-    public boolean getActived() {
+    public boolean isActived() {
         return isActived;
     }
 

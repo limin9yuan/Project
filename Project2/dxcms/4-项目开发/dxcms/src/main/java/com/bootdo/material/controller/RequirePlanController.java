@@ -227,9 +227,9 @@ public class RequirePlanController {
 	}
 
 	@ResponseBody
-	@GetMapping("/requirePlanDetailList")
+	@GetMapping("/requirePlanAddList")
 	@RequiresPermissions("requirementPlan:requirementPlan")
-	public PageUtils requirePlanDetailList(@RequestParam Map<String, Object> params){
+	public PageUtils requirePlanAddList(@RequestParam Map<String, Object> params){
 		//查询列表数据
 //		Query query = new Query(params);
 		List<Map<String, Object>> requirementPlanDetailList = new ArrayList<>();//调用接口

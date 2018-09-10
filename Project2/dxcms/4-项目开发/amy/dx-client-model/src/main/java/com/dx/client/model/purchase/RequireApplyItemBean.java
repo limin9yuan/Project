@@ -49,7 +49,7 @@ public class RequireApplyItemBean {
     private boolean isActived;
     //是否受理(生成需求计划-true, 否则-false)
     private boolean isAccepted;
-    //生成日期
+    //创建日期
     private Date createDate;
     //描述
     private String description;

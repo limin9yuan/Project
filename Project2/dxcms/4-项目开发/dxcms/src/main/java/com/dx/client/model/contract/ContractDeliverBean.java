@@ -17,7 +17,7 @@ public class ContractDeliverBean {
     //创建时间
     private Date createDate;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
 
     public String getId() {
         return id;
@@ -51,11 +51,11 @@ public class ContractDeliverBean {
         this.createDate = createDate;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 }

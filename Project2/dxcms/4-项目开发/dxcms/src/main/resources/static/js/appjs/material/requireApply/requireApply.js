@@ -1,8 +1,10 @@
 $(function() {
+    //加载数据
 	load();
+	//初始化日期控件
 	initDatetimepicker();
 });
-
+//加载数据
 function load() {
 	$('#requireApply')
 			.bootstrapTable(
@@ -100,30 +102,55 @@ function load() {
 								} ]
 					});
 }
+
+//初始化日期控件
+function initDatetimepicker() {
+	 $('#beginDate').datetimepicker({
+	        format: 'YYYY-MM-DD ',
+	        locale: moment.locale('zh-cn')
+	    });
+	 $('#endDate').datetimepicker({
+	        format: 'YYYY-MM-DD ',
+	        locale: moment.locale('zh-cn')
+	    });
+}
+
+//查询
 function reLoad() {
 	$('#requireApply').bootstrapTable('refresh');
 }
-// function add() {
-// 	layer.open({
-// 		type : 2,
-// 		title : '增加',
-// 		maxmin : true,
-// 		shadeClose : false, // 点击遮罩关闭层
-// 		area : [ '100%', '100%' ],
-// 		content :'/requirementPlan/requirementPlan/add' // iframe的url
-// 	});
-// }
-function edit(id) {
-	layer.open({
-		type : 2,
-		title : '',
-		maxmin : false,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '100%', '100%' ],
-		content : '/material/requireApply/edit/' + id // iframe的url
-	});
+
+//添加
+function add() {
+    $('.J_menuItem',window.parent.document).each(function () {
+        if ($(this).attr('href') == '/material/requireApply/add') {
+            parent.menuItemFromChild($(this));
+            return false;
+        }
+    });
 }
 
+//修改
+function edit(id) {
+    var param={
+    href:'/material/requireApply/edit/' + id,
+    index:'editRequireApply',
+    text:'采购申请修改'
+    }
+	parent.openNewTabFromChild(param);
+}
+
+//查看
+function view(id) {
+    var param={
+    href:'/material/requireApply/view/' + id,
+    index:'viewRequireApply',
+    text:'采购申请查看'
+    }
+	parent.openNewTabFromChild(param);
+}
+
+//删除
 function remove(id) {
 	layer.confirm('确定要删除选中的记录？', {
 		btn : [ '确定', '取消' ]
@@ -146,47 +173,3 @@ function remove(id) {
 	})
 }
 
-function batchRemove() {
-	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
-	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
-		return;
-	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
-		btn : [ '确定', '取消' ]
-	// 按钮
-	}, function() {
-		var ids = new Array();
-		// 遍历所有选择的行数据，取每条数据对应的ID
-		$.each(rows, function(i, row) {
-			ids[i] = row['id'];
-		});
-		$.ajax({
-			type : 'POST',
-			data : {
-				"ids" : ids
-			},
-			url : '/requirementPlan/requirementPlan/batchRemove',
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	}, function() {
-
-	});
-}
-function initDatetimepicker() {
-	 $('#beginDate').datetimepicker({
-	        format: 'YYYY-MM-DD ',
-	        locale: moment.locale('zh-cn')
-	    });
-	 $('#endDate').datetimepicker({
-	        format: 'YYYY-MM-DD ',
-	        locale: moment.locale('zh-cn')
-	    });
-}

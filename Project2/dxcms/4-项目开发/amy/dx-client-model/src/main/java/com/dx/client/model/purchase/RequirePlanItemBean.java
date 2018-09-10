@@ -57,7 +57,7 @@ public class RequirePlanItemBean {
     private boolean isClosed;
     //是否已受理
     private boolean isAccepted;
-    //生成日期
+    //创建日期
     private Date createDate;
     //是否可用
     private boolean isActived;

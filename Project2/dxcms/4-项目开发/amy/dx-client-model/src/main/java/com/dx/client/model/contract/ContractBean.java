@@ -94,11 +94,11 @@ public class ContractBean {
     private boolean isActived;
     //是否归档
     private boolean isOnFiled;
-    //生成日期
+    //创建日期
     private Date createDate;
-    //生成人Id
+    //创建人Id
     private String createUserId;
-    //生成人
+    //创建人
     private String createUserName;
     //备注
     private String remark;

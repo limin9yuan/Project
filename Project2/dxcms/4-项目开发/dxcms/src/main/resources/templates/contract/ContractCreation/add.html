@@ -7,6 +7,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <head th:include="include :: header"></head>
+<style type="text/css">
+/* 结算币别错误浮动 */
+#currencyTypeId-error {
+	position: relative;
+	float: right;
+	top: 35px;
+	padding-bottom: 35px;
+	padding-right: 90%
+}
+/* 税率错误浮动 */
+#taxRate-error {
+	position: relative;
+	float: right;
+	top: 35px;
+	padding-bottom: 35px;
+	padding-right: 90%
+}
+/* 有效起始日期 错误浮动 */
+#dateFrom-error {
+	position: relative;
+	float: left;
+	top: 10px;
+}
+/* 有效截止日期错误浮动 */
+#dateTo-error {
+	position: relative;
+	float: left;
+	top: 10px;
+}
+</style>
 <!-- 	//树状下拉复选框-MultipleTreeSelect -->
 <link type="text/css" rel="stylesheet" href="/css/demo.css">
 <link type="text/css" rel="stylesheet"
@@ -20,8 +50,16 @@
 <!-- 富文本 -->
 <link rel="stylesheet"
 	href="/js/plugins/ueditor/themes/default/css/ueditor.css">
-<link href="/css/layui.css" rel="stylesheet">
+<link href="/js/plugins/jqTreeGrid/jquery.treegrid.css" rel="stylesheet">
 <!-- 富文本END -->
+<!-- 	<link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" /> -->
+<!-- <link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" /> -->
+
+<link href="/css/layui.css" rel="stylesheet">
+
+
+<link rel="stylesheet" href="/js/plugins/jqwidgets/styles/jqx.base.css"
+	type="text/css" />
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
 		<div class="row">
@@ -33,43 +71,51 @@
 							<li class="active"><a href="#baseInfo" data-toggle="tab"><span
 									class="mustin">*&nbsp;</span>合同基本信息</a></li>
 							<li><a href="#contractTemplate" data-toggle="tab">合同模板</a></li>
-							<li><a href="#contractMaterialDetail" data-toggle="tab">合同物料明细</a></li>
+							<li><a href="#contractMaterialDetail" id="contracM"
+								style="display: none" data-toggle="tab">合同物料明细</a></li>
 						</ul>
 
 						<form class="form-horizontal m-t" id="signupForm">
 							<div class="form-group">
 								<div
 									class="input-group input-inline-sm col-sm-4 col-md-offset-4">
-									<input id="authorDeptId" name="authorDeptId" th:value="${authorDeptId}" class="form-control" type="hidden">
-									<input id="performUserId" name="performUserId" class="form-control" type="hidden"><!--执行人id -->
-									<input id="authorUserId" name="authorUserId" class="form-control" th:value="${authorUserId}" type="hidden">  <!-- 起草人id -->
-									<input id="projectId" name="projectId" class="form-control" type="hidden"> <!-- 项目id -->
-									<input type="hidden" id="selectTree" name="selectTree"
-									class="form-control" th:value="${selectTree}">
+									<input id="authorDeptId" name="authorDeptId"
+										th:value="${authorDeptId}" class="form-control" type="hidden">
+									<input id="performUserId" name="performUserId"
+										class="form-control" type="hidden">
+									<!--执行人id -->
+									<input id="authorUserId" name="authorUserId"
+										class="form-control" th:value="${authorUserId}" type="hidden">
+									<!-- 起草人id -->
+									<input id="projectId" name="projectId" class="form-control"
+										type="hidden">
+									<!-- 项目id -->
+									
 								</div>
 							</div>
-							
-							<div class="form-group">
-								<div class="col-sm-3 col-sm-offset-4">
-									<button type="submit" class="btn btn-success">保存</button>
-									&nbsp;
-									<button type="button" class="btn btn-success">提交审批</button>
-									&nbsp;
-									<button type="button" class="btn btn-success">撤回审批</button>
-									&nbsp;
-									<button type="button" class="btn btn-success"
-										onclick="closeWin()">关闭</button>
 
-									<button type="button" id="uploadFile" style="display: none"></button>
-								</div>
-							</div>
 							<div id="myTabContent" class="tab-content">
 								<div class="tab-pane fade in active" id="baseInfo">
+
+									<div class="form-group">
+										<div class="col-sm-3 col-sm-offset-4">
+											<button type="submit" class="btn btn-success">保存</button>
+											&nbsp;
+											<button type="button" class="btn btn-success">提交审批</button>
+											&nbsp;
+											<button type="button" class="btn btn-success">撤回审批</button>
+											&nbsp;
+											<button type="button" class="btn btn-success"
+												onclick="closeWin()">关闭</button>
+
+											<button type="button" id="uploadFile" style="display: none"></button>
+										</div>
+									</div>
 
 									<!-- 							左侧合同基本信息开始 -->
 									<div class="form-group" style="padding-left: 15px"></div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">合同名称 <span
+										<label class="col-sm-2 control-label ">合同名称 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
 											<input id="contractName" name="contractName"
@@ -86,8 +132,9 @@
 										<!-- 								打开页面选择 -->
 										<label class="col-sm-2 control-label">项目名称 </label>
 										<div class="col-sm-3 icon">
-											<input id="projectName" name="projectName" class="form-control"
-												type="text" placeholder="==请选择==" onclick="openProject()" readonly="readonly">
+											<input id="projectName" name="projectName"
+												class="form-control" type="text" placeholder="==请选择=="
+												onclick="openProject()" readonly="readonly">
 											<!-- 										<input type="text" name="nope" id="nope" placeholder="Crayola colors" maxlength="40" />  jquery-autocompleter-master-->
 										</div>
 										<!-- 								打开页面选择 -->
@@ -116,7 +163,8 @@
 										<div class="col-sm-3">
 											<select data-placeholder="请选择" name="taxRate" id="taxRate"
 												class="form-control chosen-select" tabindex="2"
-												style="width: 100%">
+												style="width: 100%;">
+												<option value="">请选择</option>
 												<!-- 											<option value="16%增值税发票">16%增值税发票</option> -->
 											</select>
 										</div>
@@ -135,23 +183,22 @@
 												class="form-control" type="text" placeholder="元">
 										</div>
 									</div>
-
 									<div class="form-group">
 										<label class="col-sm-2 control-label">有效起始日期 </label>
 										<div class="col-sm-3">
-											<div class="input-group date" id="dateFrom">
-												<input class="form-control" type="text" name="dateFrom">
-												<span class="input-group-addon"> <span
-													class="glyphicon glyphicon-calendar"></span>
+											<div class="input-group date" id="timeMin">
+												<input class="form-control" type="text" id="dateFrom"
+													name="timeMin"> <span class="input-group-addon">
+													<span class="glyphicon glyphicon-calendar"></span>
 												</span>
 											</div>
 										</div>
 										<label class="col-sm-2 control-label">有效截止日期</label>
 										<div class="col-sm-3">
-											<div class="input-group date" id="dateTo">
-												<input class="form-control" type="text" name="dateTo">
-												<span class="input-group-addon"> <span
-													class="glyphicon glyphicon-calendar"></span>
+											<div class="input-group date" id="timeMax">
+												<input class="form-control" type="text" id="dateTo"
+													name="timeMax"> <span class="input-group-addon">
+													<span class="glyphicon glyphicon-calendar"></span>
 												</span>
 											</div>
 										</div>
@@ -182,8 +229,7 @@
 										<div class="col-sm-3">
 											<textarea id="contractSuits" name="contractSuits"
 												class="form-control " style="width: 378px;overflow:hidden;"
-												checks="11" textLabel="jasontext" type="text"
-												readonly="readonly"></textarea>
+												 textLabel="jasontext" type="text" readonly="readonly"></textarea>
 										</div>
 										<label class="col-sm-2 control-label">供货公司 <span
 											class="mustin">*</span></label>
@@ -191,7 +237,9 @@
 											<!-- 										多选 -->
 											<!-- 								打开页面选择 -->
 											<input id="contractDelivers" name="contractDelivers"
-												class="form-control" type="text" onclick="openContractDelivers()" readonly="readonly" placeholder="==请选择==">
+												class="form-control" type="text"
+												onclick="openContractDelivers()" readonly="readonly"
+												placeholder="==请选择==">
 										</div>
 									</div>
 
@@ -207,11 +255,11 @@
 										<label class="col-sm-2 control-label">签订部门 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input id="authorDeptName" name="authorDeptName" 
-												class="form-control " style="width: 378px;overflow:hidden;"
-												checks="" textLabel="jasontext" type="text" th:value="${authorDeptName}"
-												readonly="readonly" />
+											<input id="authorDeptName" name="authorDeptId" class="form-control "   type="text"
+												th:value="${authorDeptName}" readonly="readonly" th:checks="${authorDeptId}" th:textLabel="${authorDeptName}"/>
 										</div>
+<!-- 										<input id="authorCorpName" name="authorCorpId" th:value="${authorCorpName}" -->
+<!-- 										 class="form-control" type="text" readonly th:checks="${authorCorpId}" th:textLabel="${authorCorpName}"> -->
 									</div>
 
 									<div class="form-group">
@@ -220,13 +268,18 @@
 										</label>
 										<div class="col-sm-3">
 											<input id="performUserName" name="performUserName"
-												class="form-control" type="text">
+												class="form-control " style="width: 378px;overflow:hidden;"
+												checks="" textLabel="jasontext" type="text"
+												readonly="readonly" />
+											<!-- 											<input id="performUserName" name="performUserName" -->
+											<!-- 												class="form-control" type="text"> -->
 										</div>
 
 										<label class="col-sm-2 control-label">起草人</label>
 										<div class="col-sm-3">
-											<input id="authorUserName" name="authorUserName" th:value="${authorUserName}"
-												class="form-control" type="text" placeholder="默认为当前用户">
+											<input id="authorUserName" name="authorUserName"
+												th:value="${authorUserName}" class="form-control"
+												type="text" placeholder="默认为当前用户">
 										</div>
 									</div>
 
@@ -366,21 +419,25 @@
 								</div>
 								<!-- 						富文本编辑 END -->
 
+
+
+
 								<div class="tab-pane fade" id="contractMaterialDetail">
-									<div class="form-group"
-										style="padding-left: 15px;padding-top: 50px">
-										<label class="col-sm-2 control-label"><u>合同物料明细（tab3页）</u></label>
+									<div class="fixed-table-toolbar">
+										<div class="columns pull-left">
+											<button shiro:hasPermission="ContractCreation:ContractCreation:import" 
+												type="button" class="btn  btn-primary" name="excelinsertbtn">
+												<i class="fa fa-import" aria-hidden="true"></i>导入
+											</button>
+											<button class="btn  btn-danger" onclick="window.open('/ContractCreation/ContractCreation/downloadTemplate')"
+											type="button"><i class="glyphicon glyphicon-save-file "></i>  下载模板</button>
+										</div>
 									</div>
+									<div id="treeTable"></div>
 								</div>
+
+
 							</div>
-							<!-- 							<div class="form-group"> -->
-							<!-- 								<div class="col-sm-4 col-sm-offset-8"> -->
-							<!-- 									<button type="button" class="btn btn-primary" id="lastBtn" disabled="true" -->
-							<!-- 										onclick="lastStep('myTab',3,'lastBtn','nextBtn')">上一步</button> -->
-							<!-- 									<button type="button" class="btn btn-primary" id="nextBtn" -->
-							<!-- 										onclick="nextStepThis('myTab',3,'lastBtn','nextBtn')">下一步</button> -->
-							<!-- 								</div> -->
-							<!-- 							</div> -->
 						</form>
 					</div>
 				</div>
@@ -399,8 +456,9 @@
 
 
 	<!-- 	//树状下拉复选框-MultipleTreeSelect -->
-	<!-- 	<script src="/js/jquery-1.11.2.min.js"></script> -->
-	<script type="text/javascript" src="/js/plugins/zTree/jquery.ztree.all.min.js"></script>
+
+	<script type="text/javascript"
+		src="/js/plugins/zTree/jquery.ztree.all.min.js"></script>
 	<script type="text/javascript" src="/js/plugins/MultipleTreeSelect.js"></script>
 	<script type="text/javascript"
 		src="/js/plugins/autocompleter/js/main.js"></script>
@@ -431,6 +489,12 @@
 
 
 
+
+	<!-- <script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script> -->
+	<!-- <script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.min.js"></script> -->
+	<!-- <script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script> -->
+	<!-- 	<script type="text/javascript" src="/js/plugins/jqTreeGrid/jquery.treegrid.js"></script> -->
+
 	<!-- 	// 树状下拉复选框js代码-->
 	<script type="text/javascript">
 		function selectTree() {
@@ -450,6 +514,27 @@
 		<!-- 	// 树状下拉复选框js代码END-->
 	</script>
 	<script type="text/javascript" src="/js/plugins/common.js"></script>
+
+	<script type="text/javascript" src="/js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="/js/plugins/jqwidgets/jqxcore.js"></script>
+	<script type="text/javascript" src="/js/plugins/jqwidgets/jqxdata.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxbuttons.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxscrollbar.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxlistbox.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxdropdownlist.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxdatatable.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxtreegrid.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxtooltip.js"></script>
+	<script type="text/javascript" src="/js/plugins/jqwidgets/jqxinput.js"></script>
+	
+	<script type="text/javascript" src="/js/appjs/contract/ContractCreation/ImportMaterial.js"></script>
 </body>
 </html>
 

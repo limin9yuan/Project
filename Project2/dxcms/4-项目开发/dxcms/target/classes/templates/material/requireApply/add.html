@@ -8,20 +8,19 @@
 		<div class="col-sm-12">
 			<div class="ibox float-e-margins">
 				<div class="ibox-content">
-					<form class="form-horizontal m-t" id="signupForm" style="margin-top:0px;">
+					<form class="form-horizontal m-t" id="requireApplyForm" style="margin-top:0px;">
 						<div class="form-group">
 							<div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
 								<input id="name" name="name" th:value="${name}" class="form-control" type="text">
-								<input id="authorCorpId" name="authorCorpId" th:value="${authorCorpId}" class="form-control" type="hidden">
 								<input id="createUserId" name="createUserId" th:value="${createUserId}" class="form-control" type="hidden">
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-sm-1 control-label">单据编号<span class="mustin">*</span></label>
-							<div class="col-sm-3"><input id="planNo" name="planNo" th:value="${planNo}" class="form-control" type="text"></div>
+							<div class="col-sm-3"><input id="code" name="code" th:value="${code}" class="form-control" type="text"></div>
 
 							<label class="col-sm-1 control-label">统管部门<span class="mustin">*</span></label>
-							<div class="col-sm-3"><input id="authorCorpName" name="authorCorpName" th:value="${authorCorpName}" class="form-control" type="text"></div>
+							<div class="col-sm-3"><input id="authorCorpName" name="authorCorpId" th:value="${authorCorpName}" class="form-control" type="text" readonly th:checks="${authorCorpId}" th:textLabel="${authorCorpName}"></div>
 
 							<label class="col-sm-1 control-label">单据日期<span class="mustin">*</span></label>
 							<div class="col-sm-3">
@@ -58,19 +57,10 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-1 control-label">编制人<span class="mustin">*</span></label>
-						<div class="col-sm-3"><input id="createUserName" name="createUserName" th:value="${createUserName}" class="form-control" type="text"></div>
+						<div class="col-sm-3"><input id="createUserName" name="createUserName" th:value="${createUserName}" class="form-control" type="text" readonly></div>
 
 						<label class="col-sm-1 control-label">编制日期<span class="mustin">*</span></label>
-						<div class="col-sm-3">
-							<div class="columns pull-left nopadding" >
-								<div class="input-group date" id="createDate">
-									<input id="create" class="form-control" type="text"
-										   name="createDate" th:value="${createDate}" > <span
-										class="input-group-addon"> <span
-										class="glyphicon glyphicon-calendar"></span>
-											</span>
-								</div>
-							</div>
+						<div class="col-sm-3"><input id="createDate" name="createUserName" th:value="${createDate}" class="form-control" type="text" readonly>
 						</div>
 
 						<label class="col-sm-1 control-label">备注</label>
@@ -78,17 +68,16 @@
 					</div>
 					<div class="text-right form-group" >
 						<div class="columns pull-right col-md-4">
-							<button class="btn btn-primary" onclick="save()"
-									type="button">
+							<button shiro:hasPermission="material:requireApply:add" type="submit" class="btn btn-success" id="saveBtn">
 								<i class="fa" aria-hidden="true"></i>保存
 							</button>
-							<button type="button" class="btn btn-primary" onclick="commitApply()">
-								<i class="fa" aria-hidden="true"></i>提交申请
+							<button shiro:hasPermission="material:requireApply:approve" type="button" class="btn btn-success" onclick="commitApply()" id="commitApplyBtn">
+								<i class="fa" aria-hidden="true"></i>提交审批
 							</button>
-							<button type="button" class="btn btn-primary" onclick="closeTab()">
-								<i class="fa" aria-hidden="true"></i>撤回申请
+							<button shiro:hasPermission="material:requireApply:cancelApprove" type="button" class="btn btn-success" onclick="cancelApply()" id="cancelApplyBtn">
+								<i class="fa" aria-hidden="true"></i>撤回审批
 							</button>
-							<button type="button" class="btn btn-primary" onclick="closeTab()">
+							<button type="button" class="btn btn-success" onclick="closeTabWin()">
 								<i class="fa" aria-hidden="true"></i>关闭
 							</button>
 						</div>
@@ -104,9 +93,16 @@
 <link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
 <link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
 
+
+<link type="text/css" rel="stylesheet" href="/css/metroStyle/metroStyle.css">
+
 <script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
 <script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>
 <script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script>
+
+<script type="text/javascript" src="/js/plugins/zTree/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="/js/plugins/MultipleTreeSelect.js"></script>
+
 <script type="text/javascript" src="/js/appjs/material/requireApply/add.js"></script>
 
 </body>

@@ -48,7 +48,7 @@ public class MaterialBean {
     //中间包装条码
     private String middleBarCode;
     //是否在用
-    private Boolean isActived;
+    private boolean isActived;
     //创建人
     private String createUser;
     //创建日期
@@ -208,11 +208,11 @@ public class MaterialBean {
         this.middleBarCode = middleBarCode;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 

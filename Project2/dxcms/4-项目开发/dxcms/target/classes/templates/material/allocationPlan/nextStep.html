@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="ibox float-e-margins">
+					<div class="ibox-content">
+						<form class="form-horizontal m-t" id="signupForm">
+							<input id="purchasePlanId" name="purchasePlanId" th:value="${purchasePlanId}" class="form-control" type="hidden">
+							<input id="tabNames" name="tabNames" th:value="${tabNames}" class="form-control" type="text">
+							<div class="form-group">
+								<div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+									<input id="title" name="title" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-2 control-label">单据编号:<span class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<input id="planNo" name="planNo" th:value="${planNo}" class="form-control"
+										style="width: 100%">
+									</input>
+								</div>
+								<label class="col-sm-2 control-label">类型:<span class="mustin">*</span></label>
+								<div class="col-sm-4">
+									<select data-placeholder="请选择" name="type" id="type"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+										<option value="">全部</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="columns pull-left col-md-4">
+									<button type="button" class="btn btn-grid-add"
+										onclick="deleteSelectedRow()">
+										<i class="fa" aria-hidden="true"></i>删除
+									</button>
+									<button type="button" class="btn btn-grid-add"
+										onclick="">
+										<i class="fa" aria-hidden="true"></i>导出
+									</button>
+									<button type="button" class="btn btn-grid-add"
+										onclick="">
+										<i class="fa" aria-hidden="true"></i>导入
+									</button>
+								</div>
+							</div>
+							<!-- tab标签 -->
+							<!-- <div class="table">
+								<ul id="myTab" class="nav nav-tabs"></ul>
+							</div> -->
+							<ul id="myTab" class="nav nav-tabs">
+								<!-- <li class=""><a href="#t0" data-toggle="tab" aria-expanded="false">办公用品类</a></li>
+								<li class=""><a href="#t1" data-toggle="tab" aria-expanded="false">机物料类</a></li>
+								<li class="active"><a href="#t2" data-toggle="tab" aria-expanded="true">单独采购</a></li> -->
+							</ul>
+							<div id='myTabContent' class='tab-content bills'>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-1 control-label">编制人<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<input id="authorUser" name="authorUser" th:value="${authorUser}" class="form-control" type="text">
+								</div>
+
+								<label class="col-sm-1 control-label">编制日期<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<div class="columns pull-left nopadding" >
+										<div class="input-group date" id="createDate">
+											<input id="create" class="form-control" type="text"
+												   name="createDate" th:value="${createDate}" > <span
+												class="input-group-addon"> <span
+												class="glyphicon glyphicon-calendar"></span>
+													</span>
+										</div>
+									</div>
+								</div>
+
+								<label class="col-sm-1 control-label">备注</label>
+								<div class="col-sm-3">
+									<input id="remark" name="remark" th:value="${remark}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="text-right form-group">
+								<div class="columns pull-right col-md-4">
+									<button shiro:hasPermission="requirementPlan:add" type="button" class="btn  btn-success"
+										onclick="save()">
+										<i class="fa" aria-hidden="true"></i>保存
+									</button>
+									<button shiro:hasPermission="requirementPlan:submitApproval" type="button" class="btn  btn-success"
+										onclick="submitApproval()">
+										<i class="fa" aria-hidden="true"></i>提交审批
+									</button>
+									<button shiro:hasPermission="requirementPlan:withdrawApproval" type="button" class="btn  btn-success"
+										onclick="withdrawApproval()">
+										<i class="fa" aria-hidden="true"></i>撤回审批
+									</button>
+									<!-- <button shiro:hasPermission="addRequirementPlan:close" type="button" class="btn  btn-success"
+										onclick="closeWin()">
+										<i class="fa fa-plus" aria-hidden="true"></i>关闭
+									</button> -->
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
+	<link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
+
+	<script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
+	<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>
+	<script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script>
+	<script type="text/javascript" src="/js/appjs/material/allocationPlan/nextStep.js">
+	</script>
+</body>
+</html>

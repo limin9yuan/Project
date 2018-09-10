@@ -1,39 +1,17 @@
 var $ellipsis = null;//行选择物资图标对象
-$(function(){
-	//页面加载完成之后执行
+
+//页面加载完成之后执行
+$().ready(function() {
+	//初始化页面
 	initPage();
+	//初始化页面
 	initControl();
+	//初始化日期控件
     initDatetimepicker()
+    //页面数据验证
+    validateRule();
 });
-function initDatetimepicker() {
-	 $('#createDate').datetimepicker({
-	        format: 'YYYY-MM-DD ',
-	        locale: moment.locale('zh-cn')
-	    });
-	 $('#businessDate').datetimepicker({
-	        format: 'YYYY-MM-DD ',
-	        locale: moment.locale('zh-cn')
-	    });
-}
-function getGridData(){
-    var dataTmp="";
-    var url = '/material/requireApply/test';
-   $.ajax({
-   		cache : true,
-   		type : "get",
-   		url : url,
-   		async : false,
-   		error : function(request) {
-   			parent.layer.alert("Connection error");
-   		},
-   		success : function(data) {
-   			dataTmp=data;
 
-   		}
-   	});
-
-    return dataTmp;
-}
 //初始化页面
 function initPage() {
     $(".bills").height(360);
@@ -102,7 +80,9 @@ function initControl() {
                    //合计
                    $(this).footerData("set", {
                        "UnitId": "合计：",
+                       "budgetQty": "<span id='budgetQty'>0.00</span>",
                        "requireQty": "<span id='requireQty'>0.00</span>",
+                       "budgetTotal": "<span id='budgetTotal'>0.00</span>",
                        "referenceTotal": "<span id='referenceTotal'>0.00</span>"
                    });
                },
@@ -128,65 +108,52 @@ function initControl() {
         var rowdata = getEmptyRow();
         $grid.jqGrid('addRowData', i, rowdata);
     };
-    //设置只读
+    //将全部输入框设为只读
      $grid.find('input').attr("disabled", "disabled");
-     //$grid.find('.disabled').attr("disabled", "disabled");
     //将第一行的选择物资按钮激活
     $grid.find("tbody tr:eq(1)").find('input').removeAttr('disabled').attr("isvalid", "yes");
     $grid.find('.disabled').attr("disabled", "disabled");
     //注册事件
     registEvent();
+
+    //初始化统管部门
+    $.ajax({
+        type : "GET",
+        url : "/system/sysDept/tree",
+        success : function(tree) {
+            tree.checked=false;
+            var defaults = {
+                    zNodes : tree,
+                    height : 233,
+                    chkStyle: "radio",//设置单选树形 默认是多选
+                    radioType : "all",
+                    callback:{
+                        onCheck: function (treeNode) {
+                        //alert("my callback");
+                        }
+                    }
+                };
+            $("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框
+
+        }
+    });
 }
-//取得物资数据
-function getMaterialDetailByCode(code,index){
-    var dataTmp="";
-    var url = '/material/requireApply/getMaterialDetailByCode/'+code;
-   $.ajax({
-   		cache : true,
-   		type : "get",
-   		url : url,
-   		async : false,
-   		error : function(request) {
-   			parent.layer.alert("Connection error");
-   		},
-   		success : function(data) {
-   		    result=data.materialDetail;
-            if ( $("#requireApplyTable").find('[role=row]').find('[data-value=' + result.code + ']').length == 0) {
 
-                $ellipsis.parents('[role=row]').find('input[name="name"]').val(result.name);
-                $ellipsis.parents('[role=row]').find('input[name="code"]').val(result.code).attr('data-value', result.code);
-                $ellipsis.parents('[role=row]').find('input[name="specification"]').val(result.specification);
-                $ellipsis.parents('[role=row]').find('input[name="materialUnitId"]').val(result.materialUnitId);
-                $ellipsis.parents('[role=row]').find('input[name="materialUnitName"]').val(result.materialUnitName);
-                $ellipsis.parents('[role=row]').find('input[name="materialSubArray"]').val(result.materialSubArray);
-                $ellipsis.parents('[role=row]').find('input[name="requireQty"]').val('0');
-                $ellipsis.parents('[role=row]').find('input[name="budgetQty"]').val(result.budgetQty);
-                $ellipsis.parents('[role=row]').find('input[name="stockQty"]').val(result.stockQty);
-                $ellipsis.parents('[role=row]').find('input[name="referencePrice"]').val(result.referencePrice);
-                $ellipsis.parents('[role=row]').find('input[name="budgetPrice"]').val(result.budgetPrice);
-                $ellipsis.parents('[role=row]').find('input[name="referenceTotal"]').val('0.00');
-                var tmpBudgetTotal = (Number(result.budgetPrice)*Number(result.budgetQty)).toFixed(2);
-                $ellipsis.parents('[role=row]').find('input[name="budgetTotal"]').val(tmpBudgetTotal);
-                $ellipsis.parents('[role=row]').find('input[name="requireDate"]').val(result.requireDate);
-                $ellipsis.parents('[role=row]').find('input[name="acceptUserId"]').val(result.acceptUserId);
-                $ellipsis.parents('[role=row]').find('input[name="acceptUserName"]').val(result.acceptUserName);
-                $ellipsis.parents('[role=row]').find('input[name="description"]').val(result.description);
-
-                //$ellipsis.parents('[role=row]').find('input').removeAttr('disabled').attr("isvalid", "yes");
-                $ellipsis.parents('[role=row]').next().find('input').removeAttr('disabled');
-                layer.close(index);
-            } else {
-                parent.layer.msg('该物资已存在,不能重复添加');
-            }
-   		}
-   	});
-
-    return dataTmp;
+//初始化日期控件
+function initDatetimepicker() {
+	 $('#createDate').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
+	 $('#businessDate').datetimepicker({
+	        format: 'YYYY-MM-DD',
+	        locale: moment.locale('zh-cn')
+	    });
 }
+
 //空数据行
 function getEmptyRow(){
     var rowdata = {
-        // name : '<input name="name" type="text" class="editable center disabled" readonly/>',//物资名称
          name : '<div class="product"><input name="name" readonly type="text" class="editable left" isvalid="no" checkexpession="NotNull"/><span class="ui-icon-ellipsis"></span></div>',
          code : '<input name="code" type="text" class="editable left disabled" />',//物资编码
          specification: '<input name="specification" type="text" class="editable left disabled" />',//规格型号
@@ -207,30 +174,7 @@ function getEmptyRow(){
     }
     return rowdata;
 }
-//添加行
-function addRow(){
-    //alert($(".bills").height());
-    //s$(".bills").height($(".bills").height+25);
 
-     var $grid = $("#requireApplyTable");
-     var ids = $grid.jqGrid('getDataIDs');
-     var thistr = "1";
-     var newid = "0"
-     if(ids.length>0){
-        thistr = ids.length+1;//新加行tr序号
-        newid = Math.max.apply(Math,ids)+1;
-     }else{
-        thistr = "1";
-        newid = "0"
-     }
-     var rowdata =getEmptyRow();
-     $grid.jqGrid('addRowData', newid, rowdata);
-     $grid.find("tbody tr:eq("+thistr+")").find('.disabled').attr("disabled", "disabled");
-     /*if($grid.find("tbody tr:eq("+thistr+")").last().find('input[name="name"]').val()!="" || ids.length==0){
-        $grid.find("tbody tr:eq("+thistr+")").find('input').removeAttr('disabled').attr("isvalid", "yes");
-     }*/
-     registEvent();
-}
 //注册单元格事件
 function registEvent(){
     var $grid = $("#requireApplyTable");
@@ -274,54 +218,121 @@ function registEvent(){
     });
 }
 
-//
+//计算汇总值
 function calculateTotal(){
     //合计
     var budgetTotalQty = 0.00, budgetTotalAccount = 0.00,  requireTotalQty = 0.00,  referenceTotal = 0.00;
     $("#requireApplyTable").find("tbody tr").each(function (i) {
          //预算数量
-        /*var Qty = $(this).find('td:eq(7)').find('input').val();
+        var Qty = $(this).find('td:eq(7)').find('input').val();
         if (Qty != "" && Qty != undefined) {
             budgetTotalQty += Number(Qty);
-        }*/
+        }
         //需求数量
          var qty = $(this).find('td:eq(9)').find('input').val();
         if (qty != "" && qty != undefined) {
             requireTotalQty += Number(qty);
         }
         //预算金额
-        /*var account = $(this).find('td:eq(11)').find('input').val();
+        var account = $(this).find('td:eq(11)').find('input').val();
         if (account != "" && Qty != undefined) {
             requireTotalQty += Number(account);
-        }*/
+        }
         //参考金额
         var account = $(this).find('td:eq(13)').find('input').val();
         if (account != "" && account != undefined) {
             referenceTotal += Number(account);
         }
     });
+    $("#budgetQty").text(toDecimal(requireTotalQty));
+    $("#budgetTotal").text(toDecimal(referenceTotal));
     $("#requireQty").text(toDecimal(requireTotalQty));
     $("#referenceTotal").text(toDecimal(referenceTotal));
 }
 
-//删除行数据
+//取得物资数据，并赋值给Grid
+function getMaterialDetailByCode(code,index){
+   var url = '/material/requireApply/getMaterialDetailByCode/'+code;
+   $.ajax({
+   		cache : true,
+   		type : "get",
+   		url : url,
+   		async : false,
+   		error : function(request) {
+   			parent.layer.alert("Connection error");
+   		},
+   		success : function(data) {
+   		    result=data.materialDetail;
+            if ( $("#requireApplyTable").find('[role=row]').find('[data-value=' + result.code + ']').length == 0) {
+
+                $ellipsis.parents('[role=row]').find('input[name="name"]').val(result.name);
+                $ellipsis.parents('[role=row]').find('input[name="code"]').val(result.code).attr('data-value', result.code);
+                $ellipsis.parents('[role=row]').find('input[name="specification"]').val(result.specification);
+                $ellipsis.parents('[role=row]').find('input[name="materialUnitId"]').val(result.materialUnitId);
+                $ellipsis.parents('[role=row]').find('input[name="materialUnitName"]').val(result.materialUnitName);
+                $ellipsis.parents('[role=row]').find('input[name="materialSubArray"]').val(result.materialSubArray);
+                $ellipsis.parents('[role=row]').find('input[name="requireQty"]').val('0');
+                $ellipsis.parents('[role=row]').find('input[name="budgetQty"]').val(result.budgetQty);
+                $ellipsis.parents('[role=row]').find('input[name="stockQty"]').val(result.stockQty);
+                $ellipsis.parents('[role=row]').find('input[name="referencePrice"]').val(result.referencePrice);
+                $ellipsis.parents('[role=row]').find('input[name="budgetPrice"]').val(result.budgetPrice);
+                $ellipsis.parents('[role=row]').find('input[name="referenceTotal"]').val('0.00');
+                var tmpBudgetTotal = (Number(result.budgetPrice)*Number(result.budgetQty)).toFixed(2);
+                $ellipsis.parents('[role=row]').find('input[name="budgetTotal"]').val(tmpBudgetTotal);
+                $ellipsis.parents('[role=row]').find('input[name="requireDate"]').val(result.requireDate);
+                $ellipsis.parents('[role=row]').find('input[name="acceptUserId"]').val(result.acceptUserId);
+                $ellipsis.parents('[role=row]').find('input[name="acceptUserName"]').val(result.acceptUserName);
+                $ellipsis.parents('[role=row]').find('input[name="description"]').val(result.description);
+
+                //$ellipsis.parents('[role=row]').find('input').removeAttr('disabled').attr("isvalid", "yes");
+                $ellipsis.parents('[role=row]').next().find('input').removeAttr('disabled');
+                layer.close(index);
+            } else {
+                parent.layer.msg('该物资已存在,不能重复添加');
+            }
+   		}
+   	});
+}
+
+//添加行
+function addRow(){
+     var $grid = $("#requireApplyTable");
+     var ids = $grid.jqGrid('getDataIDs');
+     var thistr = "1";
+     var newid = "0"
+     if(ids.length>0){
+        thistr = ids.length+1;//新加行tr序号
+        newid = Math.max.apply(Math,ids)+1;
+     }else{
+        thistr = "1";
+        newid = "0"
+     }
+     var rowdata =getEmptyRow();
+     $grid.jqGrid('addRowData', newid, rowdata);
+     $grid.find("tbody tr:eq("+thistr+")").find('input').attr("disabled", "disabled");
+     if(!!$grid.find("tbody tr:eq("+thistr+")").last().find('input[name="name"]').val() || ids.length==0){
+        $grid.find("tbody tr:eq("+thistr+")").find('input').removeAttr('disabled').attr("isvalid", "yes");
+     }
+     $grid.find("tbody tr:eq("+thistr+")").find('.disabled').attr("disabled", "disabled");
+     registEvent();
+}
+
+//删除行
 function deleteRow(){
 	var ids = $("#requireApplyTable").jqGrid("getGridParam", "selarrrow");
 	$(ids).each(function (index, id){
-	     //由id获得对应数据行
-		var row = $("#requireApplyTable").jqGrid('getRowData', id);
 		$("#requireApplyTable").delRowData(id);
 	});
 	$("#requireApplyTable").find("tbody tr:eq(1)").find('input').removeAttr('disabled').attr("isvalid", "yes");
+	//计算汇总值
 	calculateTotal();
 }
 
-//保存表单
-function save() {
-
+//取得可编辑表格数据
+function getGridData(){
     var applyEntryJson = [];
     $("#requireApplyTable").find('[role=row]').each(function (i) {
-        if ($(this).find('input[name="name"]').val()) {
+        if (!!$(this).find('input[name="name"]').val()) {
              applyEntryJson.push({
              name : $(this).find('input[name="name"]').val(),//物资名称
              code : $(this).find('input[name="code"]').val(),//物资编码
@@ -343,62 +354,78 @@ function save() {
             });
         }
     });
-    $.ajax({
-    		cache : true,
-    		type : "POST",
-    		url : "/material/requireApply/save",
-    		data :  {
-                   	 'name' : $("#name").val(),
-                   	 'code' : $("#code").val(),
-                   	 'authorCorpId' : $("#authorCorpId").val(),
-                   	 'businessDate' : $("#businessDate").data('date'),
-                   	 'createUserId' : $("#createUserId").val(),
-                   	 'createDate' : $("#createDate").data('date'),
-                   	 'applyEntryJson' : applyEntryJson
-                   	 },// 你的formid
-    		async : false,
-    		error : function(request) {
-    			parent.layer.alert("Connection error");
-    		},
-    		success : function(data) {
-    			if (data.code == 0) {
-
-    				parent.layer.msg("操作成功");
-    				$("#submitButton").attr("disabled", true);// 上面的验证通过才会执行到这里禁用按钮。
-    				//freshParenWindow();
-    			} else {
-    				parent.layer.alert(data.msg)
-    			}
-
-    		}
-    	});
+    return applyEntryJson;
 }
 
-//提交申请
+//保存
+function save() {
+    $('#saveBtn').attr("disabled","disabled");
+    applyEntryJson = getGridData();
+    $.ajax({
+        cache : true,
+        type : "POST",
+        url : "/material/requireApply/save",
+        data :  {
+                 'name' : $("#name").val(),
+                 'code' : $("#code").val(),
+                 'authorCorpId' : $("#authorCorpId").val(),
+                 'businessDate' : $("#businessDate").data('date'),
+                 'createUserId' : $("#createUserId").val(),
+                 'createDate' : $("#createDate").val(),
+                 'applyEntryJson' : applyEntryJson
+                 },
+        async : false,
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },
+        success : function(data) {
+            if (data.code == 0) {
+                $('#saveBtn').removeAttr('disabled');
+                $("#id").val(data.id);
+                parent.layer.msg("保存成功");
+            } else {
+                parent.layer.alert(data.msg)
+            }
+
+        }
+    });
+}
+
+//提交审批
 function commitApply() {
+    //提交审批按钮设为不可用
+    $('#commitApplyBtn').attr("disabled","disabled");
+    //组织数据
+    var param = null;
+    if($("#id").val()!=""){
+        param = {id:$("#id").val()};
+    }else{
+        applyEntryJson = getGridData();
+        param = {
+                 'name' : $("#name").val(),//名称
+                 'code' : $("#code").val(),//单据编号
+                 'authorCorpId' : $("#authorCorpId").val(),//统管部门id
+                 'businessDate' : $("#businessDate").data('date'),//单据日期
+                 'createUserId' : $("#createUserId").val(),//编制人
+                 'createDate' : $("#createDate").val(),//编制日期
+                 'applyEntryJson' : applyEntryJson //物资明细数据
+                 };
+    }
+    //提交
     $.ajax({
     		cache : true,
     		type : "POST",
     		url : "/material/requireApply/commitApply",
-    		data :  {
-                   	 'name' : $("#name").val(),
-                   	 'code' : $("#code").val(),
-                   	 'authorCorpId' : $("#authorCorpId").val(),
-                   	 'businessDate' : $("#businessDate").data('date'),
-                   	 'createUserId' : $("#createUserId").val(),
-                   	 'createDate' : $("#createDate").data('date'),
-                   	 'applyEntryJson' : applyEntryJson
-                   	 },// 你的formid
+    		data :  param,
     		async : false,
     		error : function(request) {
     			parent.layer.alert("Connection error");
     		},
     		success : function(data) {
     			if (data.code == 0) {
-
-    				parent.layer.msg("操作成功");
-    				$("#submitButton").attr("disabled", true);// 上面的验证通过才会执行到这里禁用按钮。
-    				//freshParenWindow();
+    			    //提交审批按钮设为可用
+    			    $('#commitApplyBtn').removeAttr('disabled');
+    				parent.layer.msg("提交审批成功");
     			} else {
     				parent.layer.alert(data.msg)
     			}
@@ -406,7 +433,50 @@ function commitApply() {
     		}
     	});
 }
-//提交申请
+//撤销审批
 function cancelApply() {
-    //layer.close();
+}
+//关闭
+function closeTabWin() {
+    var tmpObj = $('.J_menuTab.active i',window.parent.document);
+    parent.closeTabFromChild(tmpObj);
+}
+
+//验证规则
+function validateRule() {
+	var icon = "<i class='fa fa-times-circle'></i> ";
+	$("#requireApplyForm").validate({
+		rules : {
+			name : {
+				maxlength : 200
+			},
+			code : {
+				required : true,
+                maxlength : 50
+			},
+			businessDate : {
+				required : true,
+				date:true
+			},
+			remark : {
+				maxlength : 100
+			}
+		},
+		messages : {
+			code : {
+			    required : "请输入单据编号",
+				maxlength : icon + "单据编号必须50个字符以内"
+			},
+			businessDate : {
+                required : "请输入编制日期",
+                date:"请输入正确格式的日期"
+            },
+			remark : {
+            	maxlength : icon + "备注必须100个字符以内"
+            }
+		},
+        submitHandler : function() {
+            save();
+        }
+	})
 }

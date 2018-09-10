@@ -1,21 +1,42 @@
-
-var prefix = "/material/purchasePlan"
-$(function() {
+$().ready(function() {
+    validateRule();
     load();
-    //loadCrmData("/project/project/listDic","projectId","全部");
     datetimepicker();
 });
-function resetSelect(){
-    $('#purchaseTime').data('date','');
-    $("#projectId").val("");
-    $("#projectId").trigger("chosen:updated"); //回到初始状态
+function datetimepicker(){
+    //开始时间
+    $('#timeStart').datetimepicker({
+        format: 'YYYY-MM-DD ',
+        locale: moment.locale('zh-cn')
+    });
+    //结束时间
+    $('#timeEnd').datetimepicker({
+        format: 'YYYY-MM-DD ',
+        locale: moment.locale('zh-cn')
+    });
+}
+function nextStep() {
+    var res = getSelectedMaterial();
+    if (res.length == 0) {
+        layer.msg("请选择添加的数据");
+        return;
+    }else {
+        layer.open({
+            type : 2,
+            title : '',
+            maxmin : false,
+            shadeClose : false, // 点击遮罩关闭层
+            area : [ '100%', '100%' ],
+            content : '/material/purchasePlan/nextStep/' + res // iframe的url
+        });
+    }
 }
 function load() {
     $('#exampleTable')
         .bootstrapTable(
             {
                 method : 'get', // 服务器数据的请求方式 get or post
-                url : prefix + "/purchasePlanDetailList", // 服务器数据的加载地址
+                url :"/material/purchasePlan/purchasePlanDetailList", // 服务器数据的加载地址
                 //	showRefresh : true,
                 //	showToggle : true,
                 //	showColumns : true,
@@ -23,7 +44,7 @@ function load() {
                 toolbar : '#exampleToolbar',
                 striped : true, // 设置为true会有隔行变色效果
                 dataType : "json", // 服务器返回的数据类型
-                pagination : true, // 设置为true会在底部显示分页条
+                // pagination : true, // 设置为true会在底部显示分页条
                 // queryParamsType : "limit",
                 // //设置为limit则会发送符合RESTFull格式的参数
                 singleSelect : false, // 设置为true将禁止多选
@@ -31,17 +52,14 @@ function load() {
                 // //发送到服务器的数据编码类型
                 pageSize : 10, // 如果设置了分页，每页数据条数
                 pageNumber : 1, // 如果设置了分布，首页页码
-                search : false, // 是否显示搜索框
-                //showColumns : true, // 是否显示内容下拉框（选择显示的列）
+                //search : true, // 是否显示搜索框
+                showColumns : false, // 是否显示内容下拉框（选择显示的列）
                 sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者 "server"
                 queryParams : function(params) {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-                        limit: params.limit,
-                        offset:params.offset,
-                        purchasePerson:$('#purchasePerson').val(),
-                        projectId:$('#projectId').val(),
-                        purchaseTime:$('#purchaseTime').data('date')
+                        limit: 500,
+                        offset:0
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };
@@ -55,84 +73,54 @@ function load() {
                 columns : [
                     {
                         checkbox : true
-                    },/*{
-                        title : '操作',
-                        field : 'id',
-                        align : 'center',
-                        formatter : function(value, row, index) {
-                            var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                                + row.purchaseId
-                                + '\')"><i class="fa fa-edit"></i></a> ';
-                            var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                                + row.purchaseId
-                                + '\')"><i class="fa fa-remove"></i></a> ';
-                            var f = '<a class="btn btn-success btn-sm"'+s_view_h+' href="#" title="查看"  mce_href="#" onclick="view(\''
-                                + row.purchaseId
-                                + '\')"><i class="fa fa-search"></i></a> ';
-                            return e + d +f ;
-                        }
-                    },*/{
+                    },
+                    {
                         field : 'requirePlanid',
                         title : '需求计划编号'
-                    },{
+                    },
+                    {
                         field : 'materialName',
-                        title : '物料名称'
-                    },{
+                        title : '物资名称'
+                    },
+                    {
                         field : 'materilaCode',
-                        title : '物料编码'
-                    },{
+                        title : '物资编码'
+                    },
+                    {
                         field : 'specification',
                         title : '规格型号'
-                    },{
+                    },
+                    {
                         field : 'materialUnitName',
                         title : '单位'
-                    },{
+                    },
+                    {
                         field : 'referencePrice',
                         title : '单价'
-                    },{
+                    },
+                    {
                         field : 'requireQty',
                         title : '需求数量'
-                    },{
-                        field : 'purchaseTotalPrice(没有)',
+                    },
+                    {
+                        field : 'requireDept',
                         title : '需求部门'
-                    },{
+                    },
+                    {
                         field : 'arriveDate',
                         title : '要求到货时间'
-                    },{
+                    },
+                    {
                         field : 'createDate',
                         title : '编制时间'
-                    },{
+                    },
+                    {
                         field : 'description',
                         title : '说明信息'
                     }
                 ]
             });
 }
-function reLoad() {
-    $('#exampleTable').bootstrapTable('refresh');
-}
-function nextStep() {
-    var res = getSelectedMaterial();
-    layer.open({
-        type : 2,
-        title : '编辑',
-        maxmin : false,
-        shadeClose : false, // 点击遮罩关闭层
-        area : [ '100%', '100%' ],
-        content : '/material/purchasePlan/nextStep/' + res // iframe的url
-    });
-}
-function datetimepicker() {
-    $('#budgetOperateTimeMin').datetimepicker({
-        format: 'YYYY-MM-DD ',
-        locale: moment.locale('zh-cn')
-    });
-    $('#budgetOperateTimeMax').datetimepicker({
-        format: 'YYYY-MM-DD ',
-        locale: moment.locale('zh-cn')
-    });
-}
-
 function getSelectedMaterial() {
     var rows = $('#exampleTable').bootstrapTable('getSelections');
 
@@ -143,8 +131,53 @@ function getSelectedMaterial() {
     var ids = new Array();
     // 遍历所有选择的行数据，取每条数据对应的ID
     $.each(rows, function(i, row) {
-        ids[i] = row['materilaCode'];
+        ids[i] = row['requirePlanid'];
     });
     return ids;
 
+}
+$.validator.setDefaults({
+    submitHandler : function() {
+        save();
+    }
+});
+function save() {
+    $.ajax({
+        cache : true,
+        type : "POST",
+        url : "/system/purchasePlan/save",
+        data : $('#signupForm').serialize(),// 你的formid
+        async : false,
+        error : function(request) {
+            parent.layer.alert("Connection error");
+        },
+        success : function(data) {
+            if (data.code == 0) {
+                parent.layer.msg("操作成功");
+                parent.reLoad();
+                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
+                parent.layer.close(index);
+
+            } else {
+                parent.layer.alert(data.msg)
+            }
+
+        }
+    });
+
+}
+function validateRule() {
+    var icon = "<i class='fa fa-times-circle'></i> ";
+    $("#signupForm").validate({
+        rules : {
+            name : {
+                required : true
+            }
+        },
+        messages : {
+            name : {
+                required : icon + "请输入姓名"
+            }
+        }
+    })
 }

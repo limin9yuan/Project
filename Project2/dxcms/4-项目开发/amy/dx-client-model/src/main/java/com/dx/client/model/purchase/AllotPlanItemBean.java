@@ -14,6 +14,28 @@ public class AllotPlanItemBean {
     private String allotPlanId;
     //采购计划明细id
     private String purchasePlanItemId;
+    //需求机构id
+    private String requireCorpId;
+    //需求机构名称
+    private String requireCorpName;
+    //物资类别id
+    private String materialClassId;
+    //物资类别名称
+    private String materialClassName;
+    //物资id
+    private String materialId;
+    //物资编码
+    private String materilaCode;
+    //物资名称
+    private String materialName;
+    //单位名称
+    private String materialUnitName;
+    //规格
+    private String specification;
+    //材质
+    private String texture;
+    //物资子码
+    private String materialSubArray;
     //供应商id
     private String companyId;
     //供应商名称
@@ -57,6 +79,94 @@ public class AllotPlanItemBean {
 
     public void setPurchasePlanItemId(String purchasePlanItemId) {
         this.purchasePlanItemId = purchasePlanItemId;
+    }
+
+    public String getRequireCorpId() {
+        return requireCorpId;
+    }
+
+    public void setRequireCorpId(String requireCorpId) {
+        this.requireCorpId = requireCorpId;
+    }
+
+    public String getRequireCorpName() {
+        return requireCorpName;
+    }
+
+    public void setRequireCorpName(String requireCorpName) {
+        this.requireCorpName = requireCorpName;
+    }
+
+    public String getMaterialClassId() {
+        return materialClassId;
+    }
+
+    public void setMaterialClassId(String materialClassId) {
+        this.materialClassId = materialClassId;
+    }
+
+    public String getMaterialClassName() {
+        return materialClassName;
+    }
+
+    public void setMaterialClassName(String materialClassName) {
+        this.materialClassName = materialClassName;
+    }
+
+    public String getMaterialId() {
+        return materialId;
+    }
+
+    public void setMaterialId(String materialId) {
+        this.materialId = materialId;
+    }
+
+    public String getMaterilaCode() {
+        return materilaCode;
+    }
+
+    public void setMaterilaCode(String materilaCode) {
+        this.materilaCode = materilaCode;
+    }
+
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
+    }
+
+    public String getMaterialUnitName() {
+        return materialUnitName;
+    }
+
+    public void setMaterialUnitName(String materialUnitName) {
+        this.materialUnitName = materialUnitName;
+    }
+
+    public String getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(String specification) {
+        this.specification = specification;
+    }
+
+    public String getTexture() {
+        return texture;
+    }
+
+    public void setTexture(String texture) {
+        this.texture = texture;
+    }
+
+    public String getMaterialSubArray() {
+        return materialSubArray;
+    }
+
+    public void setMaterialSubArray(String materialSubArray) {
+        this.materialSubArray = materialSubArray;
     }
 
     public String getCompanyId() {
@@ -123,7 +233,7 @@ public class AllotPlanItemBean {
         this.unitPrice = unitPrice;
     }
 
-    public boolean getActived() {
+    public boolean isActived() {
         return isActived;
     }
 

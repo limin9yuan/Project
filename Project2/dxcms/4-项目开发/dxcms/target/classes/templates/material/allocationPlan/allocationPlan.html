@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<div class="form-group">
+							<div class="col-sm-4">
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="input-group input-inline-sm col-sm-12">
+											<div class="input-group date" id="timeStart">
+												<input id="start" class="form-control" type="text"
+													name="timeStart" style="width: 100px"> <span
+													class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"></span>
+												</span>
+											</div>
+											<span class="input-group-addon">至</span>
+											<div class="input-group date" id="timeEnd">
+												<input id="end" class="form-control" type="text"
+													name="timeEnd" style="width: 100px"><span
+													class="input-group-addon"><span
+													class="glyphicon glyphicon-calendar"> </span> </span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="searchName" type="text" class="form-control"
+								placeholder="">
+						</div>
+						<table id="exampleTable" data-mobile-responsive="true"></table>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+				var s_check_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="requirementPlan:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="requirementPlan:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="requirementPlan:check">
+			<script type="text/javascript">
+				var s_check_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/material/allocationPlan/allocationPlan.js"></script>
+</body>
+</html>

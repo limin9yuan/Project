@@ -42,18 +42,18 @@ public class RequireApplyBean {
     //总金额
     private BigDecimal totalMoney;
     //是否已提交
-    private Boolean isSubmit;
+    private boolean isSubmit;
     //是否开始审批
-    private Boolean IsApproveBegin;
+    private boolean IsApproveBegin;
     //是否审批完成
     private String isApproveFinish;
     //是否在用
     private String isActived;
-    //生成日期
+    //创建日期
     private Date createDate;
-    //生成人Id
+    //创建人Id
     private String createUserId;
-    //生成人
+    //创建人
     private String createUserName;
     //备注
     private String remark;
@@ -186,19 +186,19 @@ public class RequireApplyBean {
         this.totalMoney = totalMoney;
     }
 
-    public Boolean getSubmit() {
+    public boolean getSubmit() {
         return isSubmit;
     }
 
-    public void setSubmit(Boolean submit) {
+    public void setSubmit(boolean submit) {
         isSubmit = submit;
     }
 
-    public Boolean getApproveBegin() {
+    public boolean getApproveBegin() {
         return IsApproveBegin;
     }
 
-    public void setApproveBegin(Boolean approveBegin) {
+    public void setApproveBegin(boolean approveBegin) {
         IsApproveBegin = approveBegin;
     }
 

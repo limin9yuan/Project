@@ -48,20 +48,20 @@ public class RequirePlanBean {
     //总金额(明细总金额)
     private BigDecimal totalMoney;
     //是否已提交
-    private  Boolean isSubmit;
+    private  boolean isSubmit;
     //是否开始审批
-    private Boolean isApproveBegin;
+    private boolean isApproveBegin;
     //是否审批完成
-    private Boolean isApproveFinish;
+    private boolean isApproveFinish;
     //申请理由
     private String applyReason;
     //是否在用
-    private Boolean isActived;
-    //生成日期
+    private boolean isActived;
+    //创建日期
     private Date createDate;
-    //生成人Id
+    //创建人Id
     private String createUserId;
-    //生成人
+    //创建人
     private String createUserName;
     //备注
     private String remark;
@@ -218,27 +218,27 @@ public class RequirePlanBean {
         this.totalMoney = totalMoney;
     }
 
-    public Boolean getSubmit() {
+    public boolean getSubmit() {
         return isSubmit;
     }
 
-    public void setSubmit(Boolean submit) {
+    public void setSubmit(boolean submit) {
         isSubmit = submit;
     }
 
-    public Boolean getApproveBegin() {
+    public boolean getApproveBegin() {
         return isApproveBegin;
     }
 
-    public void setApproveBegin(Boolean approveBegin) {
+    public void setApproveBegin(boolean approveBegin) {
         isApproveBegin = approveBegin;
     }
 
-    public Boolean getApproveFinish() {
+    public boolean getApproveFinish() {
         return isApproveFinish;
     }
 
-    public void setApproveFinish(Boolean approveFinish) {
+    public void setApproveFinish(boolean approveFinish) {
         isApproveFinish = approveFinish;
     }
 
@@ -250,11 +250,11 @@ public class RequirePlanBean {
         this.applyReason = applyReason;
     }
 
-    public Boolean getActived() {
+    public boolean getActived() {
         return isActived;
     }
 
-    public void setActived(Boolean actived) {
+    public void setActived(boolean actived) {
         isActived = actived;
     }
 

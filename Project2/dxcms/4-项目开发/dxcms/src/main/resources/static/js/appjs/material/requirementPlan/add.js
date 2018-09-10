@@ -36,7 +36,7 @@ function load() {
 			.bootstrapTable(
 					{
 						method : 'get', // 服务器数据的请求方式 get or post
-						url :"/requirementPlan/requirementPlan/requirePlanDetailList", // 服务器数据的加载地址
+						url :"/requirementPlan/requirementPlan/requirePlanAddList", // 服务器数据的加载地址
 					//	showRefresh : true,
 					//	showToggle : true,
 					//	showColumns : true,
