@@ -8,6 +8,20 @@ server:
 #security:
 #  basic:
 #    enabled: false
+
+feign:
+  hystrix:
+    enabled: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
 spring:
   thymeleaf:
     mode: LEGACYHTML5
@@ -28,6 +42,16 @@ spring:
     type: ehcache
     ehcache:
       config: classpath:config/ehcache.xml
+  sleuth:
+    web:
+      client:
+        enabled: true
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://zipkin.wangxin.com:9411/
+    sender:
+      type: web
 mybatis:
   configuration:
     map-underscore-to-camel-case: true

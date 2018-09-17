@@ -1,0 +1,5 @@
+org\wxcl\amy\service1\fallback\TestServiceFallback.class
+org\wxcl\amy\service1\service\api\ITestService.class
+org\wxcl\amy\service1\fallback\TestServiceFallbackFactory.class
+org\wxcl\amy\service1\config\MultipartSupportConfig.class
+org\wxcl\amy\service1\fallback\TestServiceFallbackFactory$1.class

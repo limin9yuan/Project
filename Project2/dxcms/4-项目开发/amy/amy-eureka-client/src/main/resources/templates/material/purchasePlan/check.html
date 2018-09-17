@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm">
+						<input id="requirePlanid" name="requirePlanid" th:value="${requirePlanid}" class="form-control" type="hidden">
+						<div class="form-group">
+							<label class="col-sm-1 control-label">单据编号<span class="mustin">*</span></label>
+							<div class="col-sm-3"><input id="planNo" name="planNo" th:value="${planNo}" class="form-control" type="text"></div>
+
+							<label class="col-sm-1 control-label">类型:<span class="mustin">*</span></label>
+							<div class="col-sm-3">
+								<select disabled data-placeholder="请选择" name="type" id="businessId"
+										class="form-control chosen-select" tabindex="2"
+										style="width: 100%">
+									<option value="">全部</option>
+								</select>
+							</div>
+
+							<label class="col-sm-1 control-label">计划日期<span class="mustin">*</span></label>
+							<div class="col-sm-3">
+								<div class="columns pull-left nopadding"  >
+									<div class="input-group date" id="businessDate">
+										<input id="business" class="form-control" type="text"
+											   name="businessDate" th:value="${businessDate}" > <span
+											class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+											</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="bills">
+							<div class="gridPanel">
+								<table id="purchasePlanTable" data-mobile-responsive="true"></table>
+								<div id="purchasePlanPage"></div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-1 control-label">编制人<span class="mustin">*</span></label>
+							<div class="col-sm-3">
+								<input readonly id="authorUser" name="authorUser" th:value="${authorUser}" class="form-control" type="text">
+							</div>
+
+							<label class="col-sm-1 control-label">编制日期<span class="mustin">*</span></label>
+							<div class="col-sm-3">
+								<div class="columns pull-left nopadding" >
+									<div class="input-group date" id="createDate">
+										<input readonly id="create" class="form-control" type="text"
+											   name="createDate" th:value="${createDate}" > <span
+											class="input-group-addon"> <span
+											class="glyphicon glyphicon-calendar"></span>
+													</span>
+									</div>
+								</div>
+							</div>
+
+							<label class="col-sm-1 control-label">备注</label>
+							<div class="col-sm-3">
+								<input readonly id="remark" name="remark" th:value="${remark}" class="form-control" type="text">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:include="include::footer"></div>
+<link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
+<link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
+
+<script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
+<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>
+<script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script>
+<script type="text/javascript" src="/js/appjs/material/purchasePlan/check.js">
+</script>
+</body>
+</html>

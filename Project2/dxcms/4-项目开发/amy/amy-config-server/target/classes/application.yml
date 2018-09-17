@@ -1,0 +1,132 @@
+server:
+  port: 14000
+
+spring:
+  application:
+    name: config.wangxin.com
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://git.wxcl-amy.win/wangxin/config-server.git
+          search-paths: /dev
+          username: wangxin
+          password: 1qazxsw23edcvfr4
+          clone-on-start: true
+        encrypt:
+          enabled: true
+  rabbitmq:
+    host: mq.wxcl-amy.win
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123123@eureka1.wangxin.com:10001/eureka/,http://admin:123123@eureka2.wangxin.com:10002/eureka/,http://admin:123123@eureka3.wangxin.com:10003/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: config.wangxin.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+logging:
+  config: classpath:logback.xml
+---
+server:
+  port: 14001
+spring:
+  profiles: config1
+  application:
+    name: config.wangxin.com
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://git.wxcl-amy.win/wangxin/config-server.git
+          search-paths: /dev
+          username: wangxin
+          password: 1qazxsw23edcvfr4
+          clone-on-start: true
+        encrypt:
+          enabled: true
+  rabbitmq:
+    host: mq.wxcl-amy.win
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123123@eureka1.wangxin.com:10001/eureka/,http://admin:123123@eureka2.wangxin.com:10002/eureka/,http://admin:123123@eureka3.wangxin.com:10003/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: config1.wangxin.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+logging:
+  config: classpath:logback.xml
+---
+server:
+  port: 14002
+spring:
+  profiles: config2
+  application:
+    name: config.wangxin.com
+  cloud:
+    config:
+      server:
+        git:
+          uri: http://git.wxcl-amy.win/wangxin/config-server.git
+          search-paths: /dev
+          username: wangxin
+          password: 1qazxsw23edcvfr4
+          clone-on-start: true
+        encrypt:
+          enabled: true
+  rabbitmq:
+    host: mq.wxcl-amy.win
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123123@eureka1.wangxin.com:10001/eureka/,http://admin:123123@eureka2.wangxin.com:10002/eureka/,http://admin:123123@eureka3.wangxin.com:10003/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: config2.wangxin.com
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+logging:
+  config: classpath:logback.xml
+

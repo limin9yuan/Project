@@ -102,15 +102,14 @@ public class ContractBean {
     private String createUserName;
     //备注
     private String remark;
-
-    /*//合同物资明细
-    private List<ContractMaterialBean> contractMaterials;
+    //合同物资明细
+    private List<ContractMaterialBean> contractMaterialBeans;
     //适用机构
-    private List<ContractSuitBean> contractSuits;
-    //供货公司
-    private List<ContractDeliverBean> contractDelivers;
-    //合同富文本输入的元素（key，value模式）
-    private List<ContractElementBean> contractElements;*/
+    private List<ContractSuitBean> contractSuitBeans;
+    //发货单位
+    private List<ContractDeliverBean> contractDeliverBeans;
+    //合同附件
+    private List<ContractEnclosureBean> contractEnclosureBeans;
 
     public String getId() {
         return id;
@@ -478,5 +477,37 @@ public class ContractBean {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<ContractMaterialBean> getContractMaterialBeans() {
+        return contractMaterialBeans;
+    }
+
+    public void setContractMaterialBeans(List<ContractMaterialBean> contractMaterialBeans) {
+        this.contractMaterialBeans = contractMaterialBeans;
+    }
+
+    public List<ContractSuitBean> getContractSuitBeans() {
+        return contractSuitBeans;
+    }
+
+    public void setContractSuitBeans(List<ContractSuitBean> contractSuitBeans) {
+        this.contractSuitBeans = contractSuitBeans;
+    }
+
+    public List<ContractDeliverBean> getContractDeliverBeans() {
+        return contractDeliverBeans;
+    }
+
+    public void setContractDeliverBeans(List<ContractDeliverBean> contractDeliverBeans) {
+        this.contractDeliverBeans = contractDeliverBeans;
+    }
+
+    public List<ContractEnclosureBean> getContractEnclosureBeans() {
+        return contractEnclosureBeans;
+    }
+
+    public void setContractEnclosureBeans(List<ContractEnclosureBean> contractEnclosureBeans) {
+        this.contractEnclosureBeans = contractEnclosureBeans;
     }
 }

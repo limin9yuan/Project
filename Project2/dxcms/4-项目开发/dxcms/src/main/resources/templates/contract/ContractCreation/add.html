@@ -20,7 +20,7 @@
 #taxRate-error {
 	position: relative;
 	float: right;
-	top: 35px;
+	top: 35px;     
 	padding-bottom: 35px;
 	padding-right: 90%
 }
@@ -75,42 +75,41 @@
 								style="display: none" data-toggle="tab">合同物料明细</a></li>
 						</ul>
 
-						<form class="form-horizontal m-t" id="signupForm">
-							<div class="form-group">
-								<div
-									class="input-group input-inline-sm col-sm-4 col-md-offset-4">
-									<input id="authorDeptId" name="authorDeptId"
-										th:value="${authorDeptId}" class="form-control" type="hidden">
-									<input id="performUserId" name="performUserId"
-										class="form-control" type="hidden">
-									<!--执行人id -->
-									<input id="authorUserId" name="authorUserId"
-										class="form-control" th:value="${authorUserId}" type="hidden">
-									<!-- 起草人id -->
-									<input id="projectId" name="projectId" class="form-control"
-										type="hidden">
-									<!-- 项目id -->
-									
-								</div>
+						<div class="form-group">
+							<div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+								<input id="authorDeptId" name="authorDeptId"
+									th:value="${authorDeptId}" class="form-control" type="hidden">
+								<input id="performUserId" name="performUserId"
+									class="form-control" type="hidden">
+								<!--执行人id -->
+								<input id="authorUserId" name="authorUserId"
+									class="form-control" th:value="${authorUserId}" type="hidden">
+								<!-- 起草人id -->
+								<input id="projectId" name="projectId" class="form-control"
+									type="hidden">
+								<!-- 项目id -->
+
 							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-3 col-sm-offset-4">
+								<button type="submit" id="saveBtn" class="btn btn-success">保存</button>
+								&nbsp;
+								<button type="button" class="btn btn-success">提交审批</button>
+								&nbsp;
+								<button type="button" class="btn btn-success">撤回审批</button>
+								&nbsp;
+								<button type="button" class="btn btn-success"
+									onclick="closeWin()">关闭</button>
 
-							<div id="myTabContent" class="tab-content">
-								<div class="tab-pane fade in active" id="baseInfo">
+								<button type="button" id="uploadFile" style="display: none"></button>
+							</div>
+						</div>
+						<div id="myTabContent" class="tab-content">
 
-									<div class="form-group">
-										<div class="col-sm-3 col-sm-offset-4">
-											<button type="submit" class="btn btn-success">保存</button>
-											&nbsp;
-											<button type="button" class="btn btn-success">提交审批</button>
-											&nbsp;
-											<button type="button" class="btn btn-success">撤回审批</button>
-											&nbsp;
-											<button type="button" class="btn btn-success"
-												onclick="closeWin()">关闭</button>
+							<div class="tab-pane fade in active" id="baseInfo">
 
-											<button type="button" id="uploadFile" style="display: none"></button>
-										</div>
-									</div>
+								<form class="form-horizontal m-t" id="signupForm">
 
 									<!-- 							左侧合同基本信息开始 -->
 									<div class="form-group" style="padding-left: 15px"></div>
@@ -229,7 +228,7 @@
 										<div class="col-sm-3">
 											<textarea id="contractSuits" name="contractSuits"
 												class="form-control " style="width: 378px;overflow:hidden;"
-												 textLabel="jasontext" type="text" readonly="readonly"></textarea>
+												textLabel="jasontext" type="text" readonly="readonly"></textarea>
 										</div>
 										<label class="col-sm-2 control-label">供货公司 <span
 											class="mustin">*</span></label>
@@ -255,11 +254,13 @@
 										<label class="col-sm-2 control-label">签订部门 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input id="authorDeptName" name="authorDeptId" class="form-control "   type="text"
-												th:value="${authorDeptName}" readonly="readonly" th:checks="${authorDeptId}" th:textLabel="${authorDeptName}"/>
+											<input id="authorDeptName" name="authorDeptId"
+												class="form-control " type="text"
+												th:value="${authorDeptName}" readonly="readonly"
+												th:checks="${authorDeptId}" th:textLabel="${authorDeptName}" />
 										</div>
-<!-- 										<input id="authorCorpName" name="authorCorpId" th:value="${authorCorpName}" -->
-<!-- 										 class="form-control" type="text" readonly th:checks="${authorCorpId}" th:textLabel="${authorCorpName}"> -->
+										<!-- 										<input id="authorCorpName" name="authorCorpId" th:value="${authorCorpName}" -->
+										<!-- 										 class="form-control" type="text" readonly th:checks="${authorCorpId}" th:textLabel="${authorCorpName}"> -->
 									</div>
 
 									<div class="form-group">
@@ -335,17 +336,17 @@
 											</div>
 										</div>
 									</div>
-								</div>
-								<!-- 左侧合同基本信信息结束-->
-								<!-- 					富文本编辑 -->
-								<div class="tab-pane fade" id="contractTemplate">
-
-
+								</form>
+							</div>
+							<!-- 左侧合同基本信信息结束-->
+							<!-- 					富文本编辑 -->
+							<div class="tab-pane fade" id="contractTemplate">
+								<form class="form-horizontal m-t" id="richTextForm">
 									<div class="ibox float-e-margins" id="box-richText"
 										style="padding-left: 12%">
 
 										<div id="contractElements"
-											style="width:80%;box-shadow: 0 0 0 1px #d1d1d1, 0 0 3px 1px #ccc;height:500px;">
+											style="width:80%;box-shadow: 0 0 0 1px #d1d1d1, 0 0 3px 1px #ccc;height:600px;">
 											<p style="text-align: center;">
 												<span class="sde-ctrl" sde-type="text" sde-right="."
 													id="text-input1" contenteditable="false"> <span
@@ -354,7 +355,6 @@
 													style="font-size: 20px">定作合同</span>
 												</span>
 											</p>
-
 											<p style="text-align: right;">
 												<span class="sde-ctrl" sde-type="text" sde-right="."
 													id="text-input2" contenteditable="false"> <span
@@ -416,29 +416,34 @@
 											</p>
 										</div>
 									</div>
-								</div>
-								<!-- 						富文本编辑 END -->
-
-
-
-
-								<div class="tab-pane fade" id="contractMaterialDetail">
-									<div class="fixed-table-toolbar">
-										<div class="columns pull-left">
-											<button shiro:hasPermission="ContractCreation:ContractCreation:import" 
-												type="button" class="btn  btn-primary" name="excelinsertbtn">
-												<i class="fa fa-import" aria-hidden="true"></i>导入
-											</button>
-											<button class="btn  btn-danger" onclick="window.open('/ContractCreation/ContractCreation/downloadTemplate')"
-											type="button"><i class="glyphicon glyphicon-save-file "></i>  下载模板</button>
-										</div>
-									</div>
-									<div id="treeTable"></div>
-								</div>
-
-
+								</form>
 							</div>
-						</form>
+							<!-- 						富文本编辑 END -->
+
+
+
+
+							<div class="tab-pane fade" id="contractMaterialDetail"
+								style="padding-top: 50px">
+								<div class="fixed-table-toolbar">
+									<div class="columns pull-left">
+										<button
+											shiro:hasPermission="ContractCreation:ContractCreation:import"
+											type="button" class="btn  btn-primary" name="excelinsertbtn">
+											<i class="fa fa-import" aria-hidden="true"></i>导入
+										</button>
+										<button class="btn  btn-danger"
+											onclick="window.open('/ContractCreation/ContractCreation/downloadTemplate')"
+											type="button">
+											<i class="glyphicon glyphicon-save-file "></i> 下载模板
+										</button>
+										<button type="button" id="butTextId" onclick="dsds()">sdsadf</button>
+									</div>
+								</div>
+								<div id="treeTable"></div>
+							</div>
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -533,8 +538,7 @@
 	<script type="text/javascript"
 		src="/js/plugins/jqwidgets/jqxtooltip.js"></script>
 	<script type="text/javascript" src="/js/plugins/jqwidgets/jqxinput.js"></script>
-	
-	<script type="text/javascript" src="/js/appjs/contract/ContractCreation/ImportMaterial.js"></script>
+
 </body>
 </html>
 

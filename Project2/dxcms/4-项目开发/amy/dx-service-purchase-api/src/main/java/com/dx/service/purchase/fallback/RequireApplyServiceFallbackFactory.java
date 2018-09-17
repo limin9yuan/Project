@@ -22,7 +22,7 @@ public class RequireApplyServiceFallbackFactory implements FallbackFactory<IRequ
     public IRequireApplyService create(Throwable throwable) {
         return new IRequireApplyService() {
             @Override
-            public ResultMsg save(RequireApplyBean requireApplyBean, List<RequireApplyItemBean> requireApplyItemBeans, boolean isSubmit) {
+            public ResultMsg save(RequireApplyBean requireApplyBean) {
                 return null;
             }
 

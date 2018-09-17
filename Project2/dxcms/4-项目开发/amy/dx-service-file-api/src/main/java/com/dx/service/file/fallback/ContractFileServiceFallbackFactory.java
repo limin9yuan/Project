@@ -1,6 +1,5 @@
 package com.dx.service.file.fallback;
 
-import com.dx.client.model.contract.ContractFileBean;
 import com.dx.client.model.contract.ContractHtmlBean;
 import com.dx.service.file.service.api.IContractFileService;
 import feign.hystrix.FallbackFactory;
@@ -19,9 +18,8 @@ public class ContractFileServiceFallbackFactory implements FallbackFactory<ICont
     @Override
     public IContractFileService create(Throwable throwable) {
         return new IContractFileService() {
-
             @Override
-            public ResultMsg save(ContractHtmlBean contractHtmlBean, List<ContractFileBean> contractFileBeans) {
+            public ResultMsg save(ContractHtmlBean contractHtmlBean) {
                 return null;
             }
 
@@ -31,7 +29,7 @@ public class ContractFileServiceFallbackFactory implements FallbackFactory<ICont
             }
 
             @Override
-            public ResultMsg getFiles(String contractId) {
+            public ResultMsg getEnclosures(String contractId) {
                 return null;
             }
         };

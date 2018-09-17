@@ -2,6 +2,7 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Auther: cxd
@@ -65,6 +66,8 @@ public class RequirePlanBean {
     private String createUserName;
     //备注
     private String remark;
+    //需求计划明细列表
+    private List<RequirePlanItemBean> requirePlanItemBeans;
 
     public String getId() {
         return id;
@@ -218,7 +221,7 @@ public class RequirePlanBean {
         this.totalMoney = totalMoney;
     }
 
-    public boolean getSubmit() {
+    public boolean isSubmit() {
         return isSubmit;
     }
 
@@ -226,7 +229,7 @@ public class RequirePlanBean {
         isSubmit = submit;
     }
 
-    public boolean getApproveBegin() {
+    public boolean isApproveBegin() {
         return isApproveBegin;
     }
 
@@ -234,7 +237,7 @@ public class RequirePlanBean {
         isApproveBegin = approveBegin;
     }
 
-    public boolean getApproveFinish() {
+    public boolean isApproveFinish() {
         return isApproveFinish;
     }
 
@@ -250,7 +253,7 @@ public class RequirePlanBean {
         this.applyReason = applyReason;
     }
 
-    public boolean getActived() {
+    public boolean isActived() {
         return isActived;
     }
 
@@ -288,5 +291,13 @@ public class RequirePlanBean {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<RequirePlanItemBean> getRequirePlanItemBeans() {
+        return requirePlanItemBeans;
+    }
+
+    public void setRequirePlanItemBeans(List<RequirePlanItemBean> requirePlanItemBeans) {
+        this.requirePlanItemBeans = requirePlanItemBeans;
     }
 }

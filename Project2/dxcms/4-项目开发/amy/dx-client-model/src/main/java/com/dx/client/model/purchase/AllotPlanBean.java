@@ -2,6 +2,7 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Auther: cxd
@@ -49,6 +50,8 @@ public class AllotPlanBean {
     private String createUser;
     //备注
     private String remark;
+    //货源计划明细列表
+    private List<AllotPlanItemBean> allotPlanItemBeans;
 
     public String getId() {
         return id;
@@ -208,5 +211,13 @@ public class AllotPlanBean {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<AllotPlanItemBean> getAllotPlanItemBeans() {
+        return allotPlanItemBeans;
+    }
+
+    public void setAllotPlanItemBeans(List<AllotPlanItemBean> allotPlanItemBeans) {
+        this.allotPlanItemBeans = allotPlanItemBeans;
     }
 }

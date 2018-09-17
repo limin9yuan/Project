@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+        <div class="ibox-body">
+            <div class="fixed-table-toolbar">
+                <div class="columns pull-right">
+                    <button class="btn btn-success" onclick="reLoad()">查询</button>
+                </div>
+                <div class="columns pull-right nopadding" style="width:160px;">
+                    <div class="input-group date" id="timeStart">
+                        <input id="start" class="form-control" type="text"
+                               name="beginDate" style="width:120px"> <span
+                            class="input-group-addon"> <span
+                            class="glyphicon glyphicon-calendar"></span>
+											</span>
+                    </div>
+                </div>
+                <div class="columns pull-right nopadding" style="width:20px;">&nbsp;至&nbsp;
+                </div>
+                <div class="columns pull-right nopadding"  style="width:160px;">
+                    <div class="input-group date" id="timeEnd">
+                        <input id="end" class="form-control" type="text"
+                               name="endDate" style="width:120px"> <span
+                            class="input-group-addon"> <span
+                            class="glyphicon glyphicon-calendar"></span>
+											</span>
+                    </div>
+                </div>
+
+                    <table id="exampleTable" data-mobile-responsive="true"></table>
+                <div class="text-right form-group">
+                    <div class="columns pull-right">
+                        <button type="button" class="btn  btn-success"
+                                onclick="nextStep()">
+                            <!--<i class="fa fa-plus" aria-hidden="true"></i>-->下一步
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+     </div>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/appjs/material/purchasePlan/add.js">
+</script>
+</body>
+</html>

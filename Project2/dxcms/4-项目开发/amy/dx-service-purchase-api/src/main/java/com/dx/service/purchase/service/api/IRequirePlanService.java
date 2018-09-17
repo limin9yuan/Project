@@ -3,7 +3,7 @@ package com.dx.service.purchase.service.api;
 import com.dx.client.model.purchase.RequireApplyItemBean;
 import com.dx.client.model.purchase.RequirePlanBean;
 import com.dx.client.model.purchase.RequirePlanItemBean;
-import com.dx.service.purchase.config.MultipartSupportConfig;
+import com.dx.service.purchase.config.PurchaseFeignConfig;
 import com.dx.service.purchase.fallback.RequirePlanServiceFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,16 +21,14 @@ import java.util.Map;
  * @Description:需求计划API
  */
 @FeignClient(name="PURCHASESERVICE.DX.COM",
-        configuration = MultipartSupportConfig.class,
+        configuration = PurchaseFeignConfig.class,
         fallbackFactory = RequirePlanServiceFallbackFactory.class
 )
 public interface IRequirePlanService {
     //保存
     @RequestMapping("/purchase/requirePlanService/save")
     @ResponseBody
-    public ResultMsg save(@RequestBody RequirePlanBean requirePlanBean,
-                          @RequestBody List<RequirePlanItemBean> requirePlanItemBeans,
-                          @RequestParam boolean isSubmit);
+    public ResultMsg save(@RequestBody RequirePlanBean requirePlanBean);
 
     //注销
     @RequestMapping("/purchase/requirePlanService/cancel")

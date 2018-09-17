@@ -20,7 +20,7 @@ public class ContractServiceFallbackFactory implements FallbackFactory<IContract
     public IContractService create(Throwable throwable) {
         return new IContractService() {
             @Override
-            public ResultMsg save(ContractBean contractBean, List<ContractMaterialBean> contractMaterialBeans, List<ContractSuitBean> contractSuitBeans, List<ContractDeliverBean> contractDeliverBeans, List<ContractEnclosureBean> contractEnclosureBeans, List<ContractElementBean> contractElementBeans, ContractHtmlBean contractHtmlBean, boolean isSubmit) {
+            public ResultMsg save(ContractBean contractBean) {
                 return null;
             }
 
@@ -80,7 +80,7 @@ public class ContractServiceFallbackFactory implements FallbackFactory<IContract
             }
 
             @Override
-            public ResultMsg changeContract(ContractBean beforeContractBean, List<ContractMaterialBean> beforeContractMaterialBeans, List<ContractSuitBean> beforeContractSuitBeans, List<ContractDeliverBean> beforeContractDeliverBeans, List<ContractEnclosureBean> beforeContractEnclosureBean, ContractBean afterContractBean, List<ContractMaterialBean> afterContractMaterialBeans, List<ContractSuitBean> afterContractSuitBeans, List<ContractDeliverBean> afterContractDeliverBeans, List<ContractEnclosureBean> afterContractEnclosureBean) {
+            public ResultMsg changeContract(ContractBean contractBean) {
                 return null;
             }
 

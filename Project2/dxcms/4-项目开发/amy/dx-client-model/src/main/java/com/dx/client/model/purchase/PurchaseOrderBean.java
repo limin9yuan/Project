@@ -2,6 +2,7 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Auther: cxd
@@ -107,5 +108,406 @@ public class PurchaseOrderBean {
     private Date printDate;
     //打印次数
     private int printTimes;
+    //采购订单明细列表
+    private List<PurchaseOrderItemBean> purchaseOrderItemBeans;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
+    public String getTypeName() {
+        return typeName;
+    }
+
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
+    }
+
+    public String getStatusId() {
+        return statusId;
+    }
+
+    public void setStatusId(String statusId) {
+        this.statusId = statusId;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public String getAuthorCorpId() {
+        return authorCorpId;
+    }
+
+    public void setAuthorCorpId(String authorCorpId) {
+        this.authorCorpId = authorCorpId;
+    }
+
+    public String getAuthorCorpName() {
+        return authorCorpName;
+    }
+
+    public void setAuthorCorpName(String authorCorpName) {
+        this.authorCorpName = authorCorpName;
+    }
+
+    public String getAuthorDeptId() {
+        return authorDeptId;
+    }
+
+    public void setAuthorDeptId(String authorDeptId) {
+        this.authorDeptId = authorDeptId;
+    }
+
+    public String getAuthorDeptName() {
+        return authorDeptName;
+    }
+
+    public void setAuthorDeptName(String authorDeptName) {
+        this.authorDeptName = authorDeptName;
+    }
+
+    public String getAuthorUserId() {
+        return authorUserId;
+    }
+
+    public void setAuthorUserId(String authorUserId) {
+        this.authorUserId = authorUserId;
+    }
+
+    public String getAuthorUserName() {
+        return authorUserName;
+    }
+
+    public void setAuthorUserName(String authorUserName) {
+        this.authorUserName = authorUserName;
+    }
+
+    public String getPerformCorpId() {
+        return performCorpId;
+    }
+
+    public void setPerformCorpId(String performCorpId) {
+        this.performCorpId = performCorpId;
+    }
+
+    public String getPerformCorpName() {
+        return performCorpName;
+    }
+
+    public void setPerformCorpName(String performCorpName) {
+        this.performCorpName = performCorpName;
+    }
+
+    public String getExecuterId() {
+        return executerId;
+    }
+
+    public void setExecuterId(String executerId) {
+        this.executerId = executerId;
+    }
+
+    public String getExecuterName() {
+        return executerName;
+    }
+
+    public void setExecuterName(String executerName) {
+        this.executerName = executerName;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getRelatedCode() {
+        return relatedCode;
+    }
+
+    public void setRelatedCode(String relatedCode) {
+        this.relatedCode = relatedCode;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getDeliverCompanyId() {
+        return deliverCompanyId;
+    }
+
+    public void setDeliverCompanyId(String deliverCompanyId) {
+        this.deliverCompanyId = deliverCompanyId;
+    }
+
+    public String getDeliverCompanyName() {
+        return deliverCompanyName;
+    }
+
+    public void setDeliverCompanyName(String deliverCompanyName) {
+        this.deliverCompanyName = deliverCompanyName;
+    }
+
+    public String getContractId() {
+        return contractId;
+    }
+
+    public void setContractId(String contractId) {
+        this.contractId = contractId;
+    }
+
+    public String getContractCode() {
+        return contractCode;
+    }
+
+    public void setContractCode(String contractCode) {
+        this.contractCode = contractCode;
+    }
+
+    public double getTaxRate() {
+        return taxRate;
+    }
+
+    public void setTaxRate(double taxRate) {
+        this.taxRate = taxRate;
+    }
+
+    public String getPurchasePlanId() {
+        return purchasePlanId;
+    }
+
+    public void setPurchasePlanId(String purchasePlanId) {
+        this.purchasePlanId = purchasePlanId;
+    }
+
+    public String getPurchasePlanCode() {
+        return purchasePlanCode;
+    }
+
+    public void setPurchasePlanCode(String purchasePlanCode) {
+        this.purchasePlanCode = purchasePlanCode;
+    }
+
+    public String getAllotPlanId() {
+        return allotPlanId;
+    }
+
+    public void setAllotPlanId(String allotPlanId) {
+        this.allotPlanId = allotPlanId;
+    }
+
+    public String getAllotPlanCode() {
+        return allotPlanCode;
+    }
+
+    public void setAllotPlanCode(String allotPlanCode) {
+        this.allotPlanCode = allotPlanCode;
+    }
+
+    public Date getBusinessDate() {
+        return businessDate;
+    }
+
+    public void setBusinessDate(Date businessDate) {
+        this.businessDate = businessDate;
+    }
+
+    public BigDecimal getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(BigDecimal totalMoney) {
+        this.totalMoney = totalMoney;
+    }
+
+    public String getArriveAddress() {
+        return arriveAddress;
+    }
+
+    public void setArriveAddress(String arriveAddress) {
+        this.arriveAddress = arriveAddress;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public String getQualityStandard() {
+        return qualityStandard;
+    }
+
+    public void setQualityStandard(String qualityStandard) {
+        this.qualityStandard = qualityStandard;
+    }
+
+    public boolean isChanged() {
+        return isChanged;
+    }
+
+    public void setChanged(boolean changed) {
+        isChanged = changed;
+    }
+
+    public boolean isSubmit() {
+        return isSubmit;
+    }
+
+    public void setSubmit(boolean submit) {
+        isSubmit = submit;
+    }
+
+    public boolean isApproveBegin() {
+        return IsApproveBegin;
+    }
+
+    public void setApproveBegin(boolean approveBegin) {
+        IsApproveBegin = approveBegin;
+    }
+
+    public String getIsApproveFinish() {
+        return isApproveFinish;
+    }
+
+    public void setIsApproveFinish(String isApproveFinish) {
+        this.isApproveFinish = isApproveFinish;
+    }
+
+    public boolean isStopped() {
+        return isStopped;
+    }
+
+    public void setStopped(boolean stopped) {
+        isStopped = stopped;
+    }
+
+    public boolean isActived() {
+        return isActived;
+    }
+
+    public void setActived(boolean actived) {
+        isActived = actived;
+    }
+
+    public boolean isPushed() {
+        return isPushed;
+    }
+
+    public void setPushed(boolean pushed) {
+        isPushed = pushed;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getCreateUserId() {
+        return createUserId;
+    }
+
+    public void setCreateUserId(String createUserId) {
+        this.createUserId = createUserId;
+    }
+
+    public String getCreateUserName() {
+        return createUserName;
+    }
+
+    public void setCreateUserName(String createUserName) {
+        this.createUserName = createUserName;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getPrintUserId() {
+        return printUserId;
+    }
+
+    public void setPrintUserId(String printUserId) {
+        this.printUserId = printUserId;
+    }
+
+    public String getPrintUserName() {
+        return printUserName;
+    }
+
+    public void setPrintUserName(String printUserName) {
+        this.printUserName = printUserName;
+    }
+
+    public Date getPrintDate() {
+        return printDate;
+    }
+
+    public void setPrintDate(Date printDate) {
+        this.printDate = printDate;
+    }
+
+    public int getPrintTimes() {
+        return printTimes;
+    }
+
+    public void setPrintTimes(int printTimes) {
+        this.printTimes = printTimes;
+    }
+
+    public List<PurchaseOrderItemBean> getPurchaseOrderItemBeans() {
+        return purchaseOrderItemBeans;
+    }
+
+    public void setPurchaseOrderItemBeans(List<PurchaseOrderItemBean> purchaseOrderItemBeans) {
+        this.purchaseOrderItemBeans = purchaseOrderItemBeans;
+    }
 }

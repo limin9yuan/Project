@@ -3,7 +3,7 @@ package com.dx.service.purchase.service.api;
 import com.dx.client.model.purchase.AllotPlanBean;
 import com.dx.client.model.purchase.AllotPlanItemBean;
 import com.dx.client.model.purchase.PurchasePlanItemBean;
-import com.dx.service.purchase.config.MultipartSupportConfig;
+import com.dx.service.purchase.config.PurchaseFeignConfig;
 import com.dx.service.purchase.fallback.AllotPlanServiceFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,16 +21,14 @@ import java.util.Map;
  * @Description:货源计划API
  */
 @FeignClient(name="PURCHASESERVICE.DX.COM",
-        configuration = MultipartSupportConfig.class,
+        configuration = PurchaseFeignConfig.class,
         fallbackFactory = AllotPlanServiceFallbackFactory.class
 )
 public interface IAllotPlanService {
     //保存
     @RequestMapping("/purchase/allotPlanService/save")
     @ResponseBody
-    public ResultMsg save(@RequestBody AllotPlanBean allotPlanBean,
-                          @RequestBody List<AllotPlanItemBean> allotPlanItemBeans,
-                          @RequestParam boolean isSubmit);
+    public ResultMsg save(@RequestBody AllotPlanBean allotPlanBean);
 
     //注销
     @RequestMapping("/purchase/allotPlanService/cancel")

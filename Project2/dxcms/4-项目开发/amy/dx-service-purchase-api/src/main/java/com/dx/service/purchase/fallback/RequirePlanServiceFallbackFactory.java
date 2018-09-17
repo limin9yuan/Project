@@ -22,7 +22,7 @@ public class RequirePlanServiceFallbackFactory implements FallbackFactory<IRequi
     public IRequirePlanService create(Throwable throwable) {
         return new IRequirePlanService() {
             @Override
-            public ResultMsg save(RequirePlanBean requirePlanBean, List<RequirePlanItemBean> requirePlanItemBeans, boolean isSubmit) {
+            public ResultMsg save(RequirePlanBean requirePlanBean) {
                 return null;
             }
 

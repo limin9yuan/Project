@@ -1,0 +1,5 @@
+org\wxcl\amy\service1\Application.class
+org\wxcl\amy\service1\test\biz\TestBizImpl.class
+org\wxcl\amy\service1\test\dao\TestModelMapper.class
+org\wxcl\amy\service1\test\service\TestService.class
+org\wxcl\amy\service1\test\biz\ITestBiz.class

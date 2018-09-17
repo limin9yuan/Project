@@ -192,7 +192,7 @@ function check(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '100%', '100%' ],
-		content : '/ContractCreation/ContractCreation/see' + id // iframe的url
+		content : '/ContractCreation/ContractCreation/see/' + id // iframe的url
 	});
 }
 function edit(id) {
@@ -202,7 +202,7 @@ function edit(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '100%', '100%' ],
-		content : '/ContractCreation/ContractCreation/edit/' + id // iframe的url
+		content : "/ContractCreation/ContractCreation/edit/" + id // iframe的url
 	});
 }
 function remove(id) {

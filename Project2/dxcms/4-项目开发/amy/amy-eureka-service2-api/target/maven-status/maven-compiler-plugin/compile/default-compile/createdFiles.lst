@@ -1,0 +1,6 @@
+org\wxcl\amy\service2\fallback\TestServiceFallbackFactory$1.class
+org\wxcl\amy\service2\fallback\TestServiceFallbackFactory.class
+org\wxcl\amy\service2\service\api\ITestService.class
+org\wxcl\amy\service2\config\FeignConfig.class
+org\wxcl\amy\service2\fallback\TestServiceFallback.class
+org\wxcl\amy\service2\model\User.class

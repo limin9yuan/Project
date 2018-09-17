@@ -1,6 +1,7 @@
 package com.dx.client.model.contract;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Auther: DX01
@@ -18,6 +19,8 @@ public class ContractHtmlBean {
     private Date createDate;
     //备注
     private String remark;
+    //合同元素列表
+    private List<ContractElementBean> contractElementBeans;
 
     public String getId() {
         return id;
@@ -57,5 +60,13 @@ public class ContractHtmlBean {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<ContractElementBean> getContractElementBeans() {
+        return contractElementBeans;
+    }
+
+    public void setContractElementBeans(List<ContractElementBean> contractElementBeans) {
+        this.contractElementBeans = contractElementBeans;
     }
 }

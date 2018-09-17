@@ -1,19 +1,29 @@
+var materialData;//合同物资
+var sde;//富文本对象
+var jsonArray=[];//富文本key and value
 $().ready(function() {
+	$("button[name=excelinsertbtn]").click(function() {
+		layer.open({
+			type : 2,
+			title : 'Excel导入',
+			maxmin : true,
+			shadeClose : false, // 点击遮罩关闭层
+			area : [ '500px', '250px' ],
+			content : '/ContractCreation/ContractCreation/importM', // iframe的url
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				window["layui-layer-iframe" + index].clickButtonFile();
+				//                var res = window["layui-layer-iframe" + index].info();
+				//                alert(res);
+				//                jqxTreeGrid(data);
 
-	$("button[name=excelinsertbtn]").click(function () {
-	    layer.open({
-				type : 2,
-				title :'Excel导入',
-				maxmin : true,
-				shadeClose : false, // 点击遮罩关闭层
-				area : [ '500px', '250px' ],
-				content : '/ContractCreation/ContractCreation/importM'  // iframe的url
-			});
+			}
+		});
 
 	})
-	loadDic("contract-currency","currencyTypeId");			//币别
-	loadDic("contract-tax-rate","taxRate");					//税率
-//	$("#currencyTypeId").chosen({ search_contains: true }); //支持模糊查询
+	loadDic("contract-currency", "currencyTypeId"); //币别
+	loadDic("contract-tax-rate", "taxRate"); //税率
+	//	$("#currencyTypeId").chosen({ search_contains: true }); //支持模糊查询
 	$('#timeMin').datetimepicker({ //初始化日期
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
@@ -22,31 +32,31 @@ $().ready(function() {
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
 	});
-		$.ajax({
-			type : "GET",
-			url : "/ContractCreation/ContractCreation/tree",
-			success : function(tree) {
-				tree.checked=false;
-				var defaults = {
-						zNodes : tree,
-						height : 233,
-						chkStyle: "radio",//设置单选树形 默认是多选
-						radioType : "all",
-						callback:{
-	                        onCheck: function (treeNode) {
-	                        //alert("my callback");
-	                        }
-	                    }
-					};
-					$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
-					$("#authorDeptName").drawMultipleTree(defaults);
-					
-					 $("#contractSuits").drawMultipleTree(defaults);
-					$("#performUserName").drawMultipleTree(defaults);
-					
-			}
-		});
-		
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/tree",
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
+			$("#authorDeptName").drawMultipleTree(defaults);
+
+			$("#contractSuits").drawMultipleTree(defaults);
+			$("#performUserName").drawMultipleTree(defaults);
+
+		}
+	});
+	
 	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
@@ -55,13 +65,15 @@ $().ready(function() {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
 		richText();
+	
+
 	});
 	$('#myTab a[href="#contractMaterialDetail"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
-		jqxTreeGrid();
+
 	});
-	
+
 	// ————上传文件**********************************************
 	layui.use('upload', function() {
 		var $ = layui.jquery;
@@ -75,8 +87,8 @@ $().ready(function() {
 			size : 1000,
 			accept : 'file',
 			multiple : true,
-			auto : false, //不自动上传设置
-			bindAction : '#uploadFile', //“上传”按钮的ID
+//			auto : false, //不自动上传设置
+//			bindAction : '#uploadFile', //“上传”按钮的ID
 			choose : function(obj) {
 				//******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************  
 				var files = this.files = obj.pushFile(); // 将每次选择的文件追加到文件队列
@@ -120,25 +132,88 @@ $().ready(function() {
 			}
 		});
 	});
-//	*****************************上传文件END
+	//	*****************************上传文件END
+	jqxTreeGrid();
 	validateRule();
 });
 
-$.validator.setDefaults({
-	submitHandler : function() {
-		var a=$("#contractSuits").drawMultipleTree("getChecks","val");//获取selectTree适用机构的val
-	   alert(a)
-		alert("进入save");
-		document.getElementById("uploadFile").click();
-		setTimeout('save()', 500);//延迟执行save()方法2毫秒
-	}
-});
+
+//得到合同物资数据test
+function dsds() {
+	var ctrls=sde.getControlById();
+	var ele=new Array();//value
+	var rite=new Array();//key
+	ctrls.forEach(ctrl=>{
+//		debugger;//debug断点
+//		这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
+//		console.log(ctrl.getValue());
+		ele.push(ctrl.getValue());
+		
+		var element=ctrl.getCtrlElement()//获取控制的Value节点
+		rite.push(element.id);
+//		alert(element.id);
+	});
+	var jsonArray=[];
+	for(var i = 0;i<ele.length;i++){  
+        var json = {};  
+        for(var j=0;j<rite.length;j++){  
+            if(i==j){  
+                json.key = rite[j];  
+                json.value = ele[i];  
+                jsonArray.push(json);  
+            }  
+        }  
+    }
+	console.log(jsonArray);
+	console.log(ele);
+	console.log(rite);
+	
+}
+
+$("#saveBtn").click(function (){
+  if($("#signupForm").valid()){
+	  document.getElementById("uploadFile").click();
+	  
+		var ctrls=sde.getControlById();
+		var ele=new Array();//value
+		var rite=new Array();//key
+		ctrls.forEach(ctrl=>{
+//			debugger;//debug断点
+//			这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
+//			console.log(ctrl.getValue());
+			ele.push(ctrl.getValue());
+			
+			var element=ctrl.getCtrlElement()//获取控制的Value节点
+			rite.push(element.id);
+//			alert(element.id);
+		});
+		
+		for(var i = 0;i<ele.length;i++){  
+	        var json = {};  
+	        for(var j=0;j<rite.length;j++){  
+	            if(i==j){  
+	                json.key = rite[j];  
+	                json.value = ele[i];  
+	                jsonArray.push(json);  
+	            }  
+	        }  
+	    }
+		console.log(jsonArray);
+	  setTimeout('save()', 500); //延迟执行save()方法5毫秒
+   }
+})
+
+
 function save() {
+
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/ContractCreation/ContractCreation/save",
-		data : $('#signupForm').serialize(),// 你的formid
+		data : {"rowData" : JSON.stringify(materialData),
+				"signupForm":$('#signupForm').serialize(),
+				"richTextKV":JSON.stringify(jsonArray)},
+		// 你的formid)
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -146,7 +221,7 @@ function save() {
 		success : function(data) {
 			if (data.code == 0) {
 				parent.layer.msg("操作成功");
-				
+
 			} else {
 				parent.layer.alert(data.msg);
 			}
@@ -154,25 +229,23 @@ function save() {
 	});
 }
 //树状下拉复选框-MultipleTreeSelect
-function selectTree(){
-	
-   
+function selectTree() {
 }
 //日期判断
-$.validator.addMethod("compareDate",function(value,element){
+$.validator.addMethod("compareDate", function(value, element) {
 	var assigntime = $("#dateFrom").val();
-    var deadlinetime = $("#dateTo").val();
-    var reg = new RegExp('-','g');
-    assigntime = assigntime.replace(reg,'/');//正则替换
-    deadlinetime = deadlinetime.replace(reg,'/');
-    assigntime = new Date(parseInt(Date.parse(assigntime),10));
-    deadlinetime = new Date(parseInt(Date.parse(deadlinetime),10));
-    if(assigntime>deadlinetime){
-        return false;
-    }else{
-        return true;
-    }
-},"<font  color='#E47068'><strong>结束日期必须大于开始日期</strong></font>");
+	var deadlinetime = $("#dateTo").val();
+	var reg = new RegExp('-', 'g');
+	assigntime = assigntime.replace(reg, '/'); //正则替换
+	deadlinetime = deadlinetime.replace(reg, '/');
+	assigntime = new Date(parseInt(Date.parse(assigntime), 10));
+	deadlinetime = new Date(parseInt(Date.parse(deadlinetime), 10));
+	if (assigntime > deadlinetime) {
+		return false;
+	} else {
+		return true;
+	}
+}, "<font  color='#E47068'><strong>结束日期必须大于开始日期</strong></font>");
 
 //打开项目页面
 function openProject() {
@@ -195,7 +268,7 @@ function openContractDelivers() {
 //判断选择的币种改变页面的其他单位
 $('#currencyTypeId').change(function() {
 	var currencyTypeId = $("#currencyTypeId").val();
-//		alert(currencyTypeId);
+	//		alert(currencyTypeId);
 	if (currencyTypeId == "RMB") {
 		$("#performanceBond").attr("placeholder", "元");
 		$("#warrantyBond").attr("placeholder", "元");
@@ -217,296 +290,261 @@ $('#currencyTypeId').change(function() {
 //2、此项不选中，合同总金额可以填写，选中，合同总金额来源于物料明细数量和单价计算金额
 function triggerCheckbox(checkbox) {
 	if (checkbox.checked == true) {
-		 $("#contracM").show();//显示合物料明细
-		 $("#totalMoney").attr("placeholder","请导入合同物资数据");
-		 $("#totalMoney").attr("readonly","readonly");//设置合同总金额为不可输入
-		 
+		$("#contracM").show(); //显示合物料明细
+		$("#totalMoney").attr("placeholder", "请导入合同物资数据");
+		$("#totalMoney").attr("readonly", "readonly"); //设置合同总金额为不可输入
+
 	} else {
-		 $("#contracM").hide();//隐藏合同物料明细
-		 $("#totalMoney").attr("placeholder","元");
-		 $("#totalMoney").removeAttr("readonly");
+		$("#contracM").hide(); //隐藏合同物料明细
+		$("#totalMoney").attr("placeholder", "元");
+		$("#totalMoney").removeAttr("readonly");
 	}
 }
 
-function selecttree(){
+function selecttree() {
 	$.ajax({
-        type : "GET",
-        url : "/ContractCreation/ContractCreation/tree",
-        success : function(tree) {
-            var defaults = {
-                    zNodes : tree,
-                    height : 233,
-//                    chkStyle: "radio",//设置单选树形 默认是多选
-                    radioType : "all"
-                    
-                };
-            $("#contractSuits").drawMultipleTree(defaults); //初始化树状下拉复选框
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/tree",
+		success : function(tree) {
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				//                    chkStyle: "radio",//设置单选树形 默认是多选
+				radioType : "all"
+			};
+			$("#contractSuits").drawMultipleTree(defaults); //初始化树状下拉复选框
 
-        }
-    });
-}
-function treeGrid(){
-	$("#jq-grid").jqGrid({  
-        treeGrid: true,  
-        treeGridModel: 'adjacency',   // treeGrid模式，跟json元数据有关  
-        ExpandColumn : 'menuName',    // 一般设置第一行
-        ExpandColClick : true,        // 是否可以点击
-//        url: '/ContractCreation/ContractCreation/test',  // 获取数据url
-        datatype: 'json',  
-        colNames:['父id','子id','适用机构','物料名称','物料编码','规格型号','单位','数量','含税单价（元）','有效起始日期','有效截止日期','备注','操作'],      
-        colModel:[      
-        	{name:'parentId',index:'parentId', width:"100%",hidden:true}, //父id
-        	{name:'contractId',index:'contractId',width:"100%"},//子id
-            {name:'suitCorpName',index:'suitCorpName',width:"100%"},      //适用机构
-            
-            {name:'materialName',index:'materialName', width:"100%"}, //物料名称     
-            {name:'materilaCode',index:'materilaCode', width:"100%"},//物料编码      
-            {name:'specification',index:'specification', width:"100%"},//规格型号
-            
-            {name:'materialUnitName',index:'materialUnitName', width:"100%"},//单位
-            {name:'qty',index:'qty', width:"100%"},//数量
-            {name:'price',index:'price', width:"100"},//含税单价（元）
-            
-            {name:'dateFrom',index:'dateFrom', width:"150%"},//有效起始日期
-            {name:'dateTo',index:'dateTo', width:"150%"},//有效截止日期
-            {name:'remark',index:'remark', width:"100%"},//备注  
-            
-            // 自定义按钮，显示在table的最后一栏
-            {name:'caozuo',index:'caozuo', width:"200%" , align:'center',
-                formatter: function (cellvalue, options, rowObject) {  
-                    var buttons = "";
-                    buttons += "<button href=\"#\" class=\"ui-button ui-corner-all ui-widget\" onclick=\"bianji('"+options.rowId+"')\">编辑</button>";
-                    // 判断是有还有子菜单，如果有子菜单多生成一个添加子菜单按钮
-                    if(!rowObject.isLeaf){
-                        buttons += "&nbsp;<button href=\"#\" class=\"ui-button ui-corner-all ui-widget\" onclick=\"tianjia('"+options.rowId+"')\">添加子菜单</button>";
-                    }
-                return  buttons;
-                }   
-            } 
-         ],  
-        pager:"#gridPager",     // 显示分页div的id 
-        viewrecords: true,      // 是否显示信息条数
-        jsonReader: {           // 设置读取数据时的字段
-             root: "rows",      // json中代表实际模型数据的入口  
-             page: "nowPage",   // json中代表当前页码的数据  
-             total: "total",    // json中代表页码总数的数据  
-             records: "records", // json中代表数据行总数的数据  
-             repeatitems: false, // 如果设为false，则jqGrid在解析json时，会根据name来搜索对应的数据元素 
-             id: "contractId"          // 设置rowid
-        },      
-        treeReader : {           //设置树形显示时4个关键字段对应的返回数据字段
-          level_field: "0",      // 属性层级
-          parent_id_field: "parentId", //父级rowid 
-          leaf_field: "contractId",      //是否还有子级菜单
-          expanded_field: "parentId" //是否加载完毕
-        },  
-        caption: "菜单管理",     
-        mtype: "get",  
-        height: "auto",    // 设为具体数值则会根据实际记录数出现垂直滚动条  
-        rowNum : "-1",     // 显示全部记录  
-        shrinkToFit:false  // 控制水平滚动条   
-     }); 
-     // 自定义jq按钮
-    $("#jq-grid").jqGrid("navGrid", "#gridPager", {  
-//        addfunc : AddOrModifyBtn,          // (1) 点击添加按钮  
-//        editfunc : AddOrModifyBtn,         // (2) 点击编辑按钮 
-//        delfunc : Deleting,                // (3) 点击删除按钮 
-//        alerttext : "请选择需要操作的数据行!"  // (4) 当未选中任何行而点击编辑、删除、查看按钮时，弹出的提示信息  
-    }); 
+		}
+	});
 }
 
 
 
-function jqxTreeGrid(){
-	var source =
-    {
-        dataType: "json",
-        //设置字段名称，name和后台实体对应
-        dataFields: [
-             { name: "id", type: "string" },//id
-             { name: "parentId", type: "string" },//父id
-             
-             { name: "suitCorpName", type: "string" },//适用机构
-             { name: "materialName", type: "string" },//物料名称
-             
-             { name: "materilaCode", type: "string" },//物料编码
-             { name: "specification", type: "string" },//规格型号
-             
-             { name: "materialUnitName", type: "string" },//单位
-             { name: "qty", type: "double" },//数量
-             
-             { name: "price", type: "BigDecimal" },//含税单价（元）
-             { name: "dateFrom", type: "Date" },//有效起始日期
-             
-             { name: "dateTo", type: "Date" },//有效截止日期
-             { name: "remark", type: "string" },//备注
-             
-             { name: "materilaCode", type: "string" },//子id  合同id
-        ],
-        hierarchy:
-            {
-//                root: "MaterilaCode",  //设置孩子节点？
-                keyDataField: { name: 'id' },
-                parentDataField: { name: 'parentId' }
-            },
-//        url : "/ContractCreation/ContractCreation/test", //数据请求链接
-//            localData:test,
-        id: "id" ,//设置主键
-        
-        
-    };
+function jqxTreeGrid(data) {
+	materialData=data;
+	var source = {
+		dataType : "json",
+		//设置字段名称，name和后台实体对应
+		dataFields : [
+			{
+				name : "id",
+				type : "string"
+			}, //id
+			{
+				name : "suitCorpId",
+				type : "string"
+			}, //适用机构
 
-   var dataAdapter = new $.jqx.dataAdapter(source);//加载source
-   
-   function loadTable(){
-     var averageW=parseInt($("#treeTable").width()*0.2);//定义表格树每列的宽度
-     $("#treeTable").jqxTreeGrid(
-    //设置一些基本的属性
-     {
-    	 width: "100%",
-         source: dataAdapter,
-         sortable: true,
-         altRows: true,
-         autoRowHeight: false,
-         editable: true,
-         checkboxes: false,
-         hierarchicalCheckboxes: true,
-         editSettings: { saveOnPageChange: true, saveOnBlur: true, saveOnSelectionChange: false, cancelOnEsc: true, saveOnEnter: true, editOnDoubleClick: false, editOnF2: false },
-　　　　//表头（每列显示的名称，与上文中source中的dataField对应）
-         columns:[
-           {
-             text:"适用机构",
-             dataField:'suitCorpName',
-             align: "center",
-//             width:averageW
-             width:'200px'
-           },
-           {
-             text:"物料名称",
-             dataField:"materialName",
-             align:"center",
-//             cellsAlign: 'center',
-//             width:averageW,
-             width:'100px'
-           },
-           {
-               text:"物料编码",
-               dataField:"materilaCode",
-               align:"center",
-//               cellsAlign: 'center',
-//               width:averageW,
-               width:'100px'
-            },
-            {
-	           text:"规格型号",
-	           dataField:"specification",
-	           align:"center",
-//	           cellsAlign: 'center',
-//	           width:averageW,
-	           width:'100px'
-            },
-            {
-	           text:"单位",
-	           dataField:"materialUnitName",
-	           align:"center",
-//	           cellsAlign: 'center',
-//	           width:averageW,
-	           width:'100px'
-            },
-            {
-            	text:"数量",
-            	dataField:"qty",
-            	align:"center",
-//            	cellsAlign: 'center',
-//            	width:averageW,
-            	 width:'100px'
-            },
-            {
-            	text:"含税单价（元）",
-            	dataField:"price",
-            	align:"center",
-//            	cellsAlign: 'center',
-//            	width:averageW,
-            	 width:'100px'
-            },
-            {
-            	text:"有效起始日期",
-            	dataField:"dateFrom",
-            	align:"center",
-//            	cellsAlign: 'center',
-//            	width:averageW,
-            	 width:'200px'
-            },
-            {
-            	text:"有效截止日期",
-            	dataField:"dateTo",
-            	align:"center",
-//            	cellsAlign: 'center',
-//            	width:averageW,
-            	 width:'200px'
-            },
-            {
-            	text:"备注",
-            	dataField:"remark",
-            	align:"center",
-//            	cellsAlign: 'center',
-//            	width:averageW,
-            	 width:'200px'
-            }
-//           {
-//             text:"操作",
-//             dataField:'toolBar',
-//             cellsAlign: 'center',
-//             align: "center",
-////             width:averageW,
-//             width:'200px',
-//             cellsRenderer:function(row,clomun,value){
-//               var toolBtn= '<div class="custom-btn-group">'+
-//                               '<button class="custom-btn-small add-btn" title="添加" data-toggle="modal" data-target=".addRow">'+
-//                                 '<i class="fa fa-plus" aria-hidden="true"></i>'+
-//                               '</button>'+
-//                               '<button class="custom-btn-small edit-btn" title="编辑" data-toggle="modal" data-target=".edit-modal">'+
-//                                 '<i class="fa fa-pencil" aria-hidden="true"></i>'+
-//                               '</button>'+
-//                               '<button class="custom-btn-small del-btn" title="删除">'+
-//                                 '<i class="fa fa-trash" aria-hidden="true"></i>'+
-//                               '</button>'+
-//                             '</div>';
-//               return toolBtn;
-//               
-//             }
-//           }
-         ]
-     });
-   }
-   loadTable();
+			{
+				name : "materialName",
+				type : "string"
+			}, //物料名称
+			{
+				name : "materilaCode",
+				type : "string"
+			}, //物料编码
+			{
+				name : "parentId",
+				type : "string"
+			}, //父id
+			//					             { name: "specification", type: "string" },//规格型号
+
+			{
+				name : "materialUnitName",
+				type : "string"
+			}, //单位
+			{
+				name : "qty",
+				type : "double"
+			}, //数量
+
+			{
+				name : "price",
+				type : "BigDecimal"
+			}, //含税单价（元）
+			{
+				name : "dateFrom",
+				type : "Date"
+			}, //有效起始日期
+
+			{
+				name : "dateTo",
+				type : "Date"
+			}, //有效截止日期
+			{
+				name : "remark",
+				type : "string"
+			}, //备注
+
+			{
+				name : "materilaCode",
+				type : "string"
+			}, //子id  合同id
+		],
+		hierarchy : {
+			//					                root: "MaterilaCode",  //设置孩子节点？
+			keyDataField : {
+				name : 'materilaCode'
+			},
+			parentDataField : {
+				name : 'parentId'
+			}
+		},
+		//			url : null, //数据请求链接
+		localData : data,
+		id : "materilaCode", //设置主键
+
+
+	};
+
+	var dataAdapter = new $.jqx.dataAdapter(source); //加载source
+	function loadTable() {
+		var averageW = parseInt($("#treeTable").width() * 0.2); //定义表格树每列的宽度
+		$("#treeTable").jqxTreeGrid(
+			//设置一些基本的属性
+			{
+				width : "100%",
+				source : dataAdapter,
+				sortable : true,
+				altRows : true,
+				autoRowHeight : false,
+				editable : true,
+				checkboxes : false,
+				hierarchicalCheckboxes : true,
+				editSettings : {
+					saveOnPageChange : true,
+					saveOnBlur : true,
+					saveOnSelectionChange : false,
+					cancelOnEsc : true,
+					saveOnEnter : true,
+					editOnDoubleClick : false,
+					editOnF2 : false
+				},
+				//表头（每列显示的名称，与上文中source中的dataField对应）
+				columns : [
+					{
+						text : "适用机构",
+						dataField : 'suitCorpId',
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "物料编码",
+						dataField : "materilaCode",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "物料名称",
+						dataField : "materialName",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "父物资编码",
+						dataField : "parentId",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					//					{
+					//						text : "规格型号",
+					//						dataField : "specification",
+					//						align : "center",
+					//						cellsAlign : 'center',
+					//					},
+					//						            {
+					//							           text:"单位",
+					//							           dataField:"materialUnitName",
+					//							           align:"center",
+					//							           cellsAlign: 'center',
+					////							           width:averageW,
+					////							           width:'100px'
+					//						            },
+					{
+						text : "数量",
+						dataField : "qty",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "含税单价（元）",
+						dataField : "price",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "有效起始日期",
+						dataField : "dateFrom",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "有效截止日期",
+						dataField : "dateTo",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "备注",
+						dataField : "remark",
+						align : "center",
+						cellsAlign : 'center',
+					}
+				//           {
+				//             text:"操作",
+				//             dataField:'toolBar',
+				//             cellsAlign: 'center',
+				//             align: "center",
+				////             width:averageW,
+				//             width:'200px',
+				//             cellsRenderer:function(row,clomun,value){
+				//               var toolBtn= '<div class="custom-btn-group">'+
+				//                               '<button class="custom-btn-small add-btn" title="添加" data-toggle="modal" data-target=".addRow">'+
+				//                                 '<i class="fa fa-plus" aria-hidden="true"></i>'+
+				//                               '</button>'+
+				//                               '<button class="custom-btn-small edit-btn" title="编辑" data-toggle="modal" data-target=".edit-modal">'+
+				//                                 '<i class="fa fa-pencil" aria-hidden="true"></i>'+
+				//                               '</button>'+
+				//                               '<button class="custom-btn-small del-btn" title="删除">'+
+				//                                 '<i class="fa fa-trash" aria-hidden="true"></i>'+
+				//                               '</button>'+
+				//                             '</div>';
+				//               return toolBtn;
+				//               
+				//             }
+				//           }
+				]
+			});
+	}
+	loadTable();
 //   $(window).resize(function(){
 //     loadTable();
 //   })
 }
+
+
+
 //rowSelect  当行被点击时执行的事件
-$("#treeTable").on('rowSelect', function (event) {
-     var args = event.args;
-     alert(args);
-     //获取选中行的数据
-     var rowData = args.row;
-     //获取选中行的主键（id）
-     var rowKey = args.key;
+$("#treeTable").on('rowSelect', function(event) {
+	var args = event.args;
+	//获取选中行的数据
+	var rowData = args.row;
+	//获取选中行的主键（id）
+	var rowKey = args.key;
 //    
 //     
 //     $("#treeTable").jqxTreeGrid('addRow', null, {}, 'first', rowKey);//参数解释：'addRow' ——>表明这是一个增加行的方法。
-   //message.id ——>要增加数据的主键id（如果这个参数设置为null，则新加数据的主键id就会调用jqxTreeGrid默认的方法把父id（选中行的id）加1后作为增加数据的主键id!
-   //message ——> 要增加的数据。 
-   //'last' ——> 设置新增的数据在表格中显示的位置（last:将新增的数据放在所选节点下的最后一行。first：将新增的数据放在所选节点下的第一行） 
-   //rowKey ——> 所选节点的id（父节点的id，主要是判断新增的数据该放在哪个节点（行）下）
+//message.id ——>要增加数据的主键id（如果这个参数设置为null，则新加数据的主键id就会调用jqxTreeGrid默认的方法把父id（选中行的id）加1后作为增加数据的主键id!
+//message ——> 要增加的数据。 
+//'last' ——> 设置新增的数据在表格中显示的位置（last:将新增的数据放在所选节点下的最后一行。first：将新增的数据放在所选节点下的第一行） 
+//rowKey ——> 所选节点的id（父节点的id，主要是判断新增的数据该放在哪个节点（行）下）
 //   $("#treeTable").jqxTreeGrid('updateRow', rowKey, {});//参数解释：updateRow ——> 表明这是一个更新方法
-   //rowKey ——> 所选行的主键id
-   //message ——> 更新的数据
+//rowKey ——> 所选行的主键id
+//message ——> 更新的数据
 //   $("#treeTable").jqxTreeGrid('deleteRow',rowKey);//参数解释：
-   //deleteRow ——> 表明这是一个删除方法
-   //rowKey —— > 要删除节点（行）的主键id
- });
-
+//deleteRow ——> 表明这是一个删除方法
+//rowKey —— > 要删除节点（行）的主键id
+});
 
 
 
@@ -514,125 +552,125 @@ $("#treeTable").on('rowSelect', function (event) {
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
-		ignore: ":hidden:not(select)",
-			rules : {
-				contractName:{
-					//合同名称
-					required : true
-				},
-				contractCode:{
-					//合同/意向协议编号*
-					required : true
-				},
-				currencyTypeId:{
-					//结算币种
-					required : true
-				},
-				taxRate:{
-					//税率
-					required : true
-				},
-				contractSuits:{
-					//生效机构
-					required : true
-				},
-				contractDelivers:{
-					//供货公司
-					required : true
-				},
-				authorCorpName:{
-					//签订机构
-					required : true
-				},
-				authorDeptName:{
-					//签订部门
-					required : true
-				},
-				performUserName:{
-					//执行人
-					required : true
-				},
-				performanceBond:{
-					//履约保证金 >=0
-					number:true,
-					rangelength:[0,18]
-				},
-				warrantyBond:{
-					//质保金 >=0
-					number:true,
-					rangelength:[0,18]
-				},
-				totalMoney:{
-					//合同总金额 >=0
-					number:true,
-					rangelength:[0,18]
-				},
-				timeMin : {
-					compareDate: true
-				},
-				timeMax : {
-					compareDate: true
-				}
+		ignore : ":hidden:not(select)",
+		rules : {
+			contractName : {
+				//合同名称
+				required : true
 			},
-			messages : {
-				contractName:{
-					//合同名称
-					required : icon + "合同名称不能为空"
-				},
-				contractCode:{
-					//合同/意向协议编号*
-					required : icon + "合同/意向协议编号不能为空"
-				},
-				currencyTypeId:{
-					//结算币种
-					required : icon + "结算币种不能为空"
-				},
-				taxRate:{
-					//税率
-					required : icon + "税率不能为空"
-				},
-				contractSuits:{
-					//生效机构
-					required : icon + "生效机构不能为空"
-				},
-				contractDelivers:{
-					//供货公司
-					required : icon + "供货公司不能为空"
-				},
-				authorCorpName:{
-					//签订机构
-					required : icon + "签订机构不能为空"
-				},
-				authorDeptName:{
-					//签订部门
-					required : icon + "签订部门不能为空"
-				},
-				performUserName:{
-					//执行人
-					required : icon + "执行人不能为为空"
-				},
-				performanceBond:{
-					//履约保证金 >=0
-					number:icon + "请输入正确的数字金额",
-					rangelength:icon + "输入数字不能小于0同时不能大于18位"
-				},
-				warrantyBond:{
-					//质保金 >=0
-					number:icon + "请输入正确的数字金额",
-					rangelength:icon + "输入数字不能小于0同时不能大于18位"
-				},
-				totalMoney:{
-					//合同总金额 >=0
-					number:icon + "请输入正确的数字金额",
-					rangelength:icon + "输入数字不能小于0同时不能大于18位"
-				},
-				timeMin : {
-					compareDate : icon + "开始时间不能大于结束时间"
-				},
-				timeMax : {
-					compareDate : icon + "结束时间不能小于开始时间"
-				}
+			contractCode : {
+				//合同/意向协议编号*
+				required : true
+			},
+			currencyTypeId : {
+				//结算币种
+				required : true
+			},
+			taxRate : {
+				//税率
+				required : true
+			},
+			contractSuits : {
+				//生效机构
+				required : true
+			},
+			contractDelivers : {
+				//供货公司
+				required : true
+			},
+			authorCorpName : {
+				//签订机构
+				required : true
+			},
+			authorDeptName : {
+				//签订部门
+				required : true
+			},
+			performUserName : {
+				//执行人
+				required : true
+			},
+			performanceBond : {
+				//履约保证金 >=0
+				number : true,
+				rangelength : [ 0, 18 ]
+			},
+			warrantyBond : {
+				//质保金 >=0
+				number : true,
+				rangelength : [ 0, 18 ]
+			},
+			totalMoney : {
+				//合同总金额 >=0
+				number : true,
+				rangelength : [ 0, 18 ]
+			},
+			timeMin : {
+				compareDate : true
+			},
+			timeMax : {
+				compareDate : true
 			}
+		},
+		messages : {
+			contractName : {
+				//合同名称
+				required : icon + "合同名称不能为空"
+			},
+			contractCode : {
+				//合同/意向协议编号*
+				required : icon + "合同/意向协议编号不能为空"
+			},
+			currencyTypeId : {
+				//结算币种
+				required : icon + "结算币种不能为空"
+			},
+			taxRate : {
+				//税率
+				required : icon + "税率不能为空"
+			},
+			contractSuits : {
+				//生效机构
+				required : icon + "生效机构不能为空"
+			},
+			contractDelivers : {
+				//供货公司
+				required : icon + "供货公司不能为空"
+			},
+			authorCorpName : {
+				//签订机构
+				required : icon + "签订机构不能为空"
+			},
+			authorDeptName : {
+				//签订部门
+				required : icon + "签订部门不能为空"
+			},
+			performUserName : {
+				//执行人
+				required : icon + "执行人不能为为空"
+			},
+			performanceBond : {
+				//履约保证金 >=0
+				number : icon + "请输入正确的数字金额",
+				rangelength : icon + "输入数字不能小于0同时不能大于18位"
+			},
+			warrantyBond : {
+				//质保金 >=0
+				number : icon + "请输入正确的数字金额",
+				rangelength : icon + "输入数字不能小于0同时不能大于18位"
+			},
+			totalMoney : {
+				//合同总金额 >=0
+				number : icon + "请输入正确的数字金额",
+				rangelength : icon + "输入数字不能小于0同时不能大于18位"
+			},
+			timeMin : {
+				compareDate : icon + "开始时间不能大于结束时间"
+			},
+			timeMax : {
+				compareDate : icon + "结束时间不能小于开始时间"
+			}
+		}
 	});
 }
 
@@ -746,124 +784,124 @@ function richText() {
 		}, {
 			name : 'sde-toolbar-editor',
 			title : '编辑',
-			items : [ 
-//				{
-//				name : 'sde-toolbar-editor-history',
-//				title : '历史记录',
-//				items : [ {
-//					name : 'drafts',
-//					title : '草稿箱'
-//				}, {
-//					name : 'undo',
-//					title : '撤销'
-//				}, '|', {
-//					name : 'redo',
-//					title : '恢复'
-//				} ]
-//			}, 
-			{
-				name : 'sde-toolbar-editor-clipboard',
-				title : '剪切板',
-				items : [ {
-					name : 'paste',
-					title : '粘贴'
+			items : [
+				//				{
+				//				name : 'sde-toolbar-editor-history',
+				//				title : '历史记录',
+				//				items : [ {
+				//					name : 'drafts',
+				//					title : '草稿箱'
+				//				}, {
+				//					name : 'undo',
+				//					title : '撤销'
+				//				}, '|', {
+				//					name : 'redo',
+				//					title : '恢复'
+				//				} ]
+				//			}, 
+				{
+					name : 'sde-toolbar-editor-clipboard',
+					title : '剪切板',
+					items : [ {
+						name : 'paste',
+						title : '粘贴'
+					}, {
+						name : 'copy',
+						title : '复制'
+					}, '|', {
+						name : 'cut',
+						title : '剪切'
+					} ]
 				}, {
-					name : 'copy',
-					title : '复制'
-				}, '|', {
-					name : 'cut',
-					title : '剪切'
+					name : 'sde-toolbar-editor-fonts',
+					title : '字体',
+					items : [ {
+						name : 'fontfamily',
+						title : '字体'
+					}, {
+						name : 'removeformat',
+						title : '清除格式'
+					}, {
+						name : 'autotypeset',
+						title : '自动格式化'
+					}, {
+						name : 'formatmatch',
+						title : '格式刷'
+					}, '|', {
+						name : 'fontsize',
+						title : '字号'
+					}, {
+						name : 'upsize',
+						title : '增大字体'
+					}, {
+						name : 'downsize',
+						title : '缩小字体'
+					}, {
+						name : 'subscript',
+						title : '上标'
+					}, {
+						name : 'superscript',
+						title : '下标'
+					}, {
+						name : 'bold',
+						title : '加粗'
+					}, {
+						name : 'italic',
+						title : '倾斜'
+					}, {
+						name : 'underline',
+						title : '下划线'
+					}, {
+						name : 'strikethrough',
+						title : '删除线'
+					}, {
+						name : 'forecolor',
+						title : '文字颜色'
+					}, {
+						name : 'backcolor',
+						title : '背景颜色'
+					} ]
+				}, {
+					name : 'sde-toolbar-editor-paragraphs',
+					title : '段落',
+					items : [ {
+						name : 'justifyleft',
+						title : '向左对齐'
+					}, {
+						name : 'justifycenter',
+						title : '居中对齐'
+					}, {
+						name : 'justifyright',
+						title : '向右对齐'
+					}, {
+						name : 'justifyjustify',
+						title : '两端对齐'
+					}, {
+						name : 'blockquote',
+						title : '引用'
+					}, {
+						name : 'blockindent',
+						title : '增加缩进'
+					}, {
+						name : 'blockoutdent',
+						title : '减小缩进'
+					}, '|', {
+						name : 'unorderedlist',
+						title : '无序编号'
+					}, {
+						name : 'orderedlist',
+						title : '有序编号'
+					}, {
+						name : 'rowspacingtop',
+						title : '段前距'
+					}, {
+						name : 'rowspacingbottom',
+						title : '段后距'
+					}, {
+						name : 'lineheight',
+						title : '行高'
+					} ]
 				} ]
-			}, {
-				name : 'sde-toolbar-editor-fonts',
-				title : '字体',
-				items : [ {
-					name : 'fontfamily',
-					title : '字体'
-				}, {
-					name : 'removeformat',
-					title : '清除格式'
-				}, {
-					name : 'autotypeset',
-					title : '自动格式化'
-				}, {
-					name : 'formatmatch',
-					title : '格式刷'
-				}, '|', {
-					name : 'fontsize',
-					title : '字号'
-				}, {
-					name : 'upsize',
-					title : '增大字体'
-				}, {
-					name : 'downsize',
-					title : '缩小字体'
-				}, {
-					name : 'subscript',
-					title : '上标'
-				}, {
-					name : 'superscript',
-					title : '下标'
-				}, {
-					name : 'bold',
-					title : '加粗'
-				}, {
-					name : 'italic',
-					title : '倾斜'
-				}, {
-					name : 'underline',
-					title : '下划线'
-				}, {
-					name : 'strikethrough',
-					title : '删除线'
-				}, {
-					name : 'forecolor',
-					title : '文字颜色'
-				}, {
-					name : 'backcolor',
-					title : '背景颜色'
-				} ]
-			}, {
-				name : 'sde-toolbar-editor-paragraphs',
-				title : '段落',
-				items : [ {
-					name : 'justifyleft',
-					title : '向左对齐'
-				}, {
-					name : 'justifycenter',
-					title : '居中对齐'
-				}, {
-					name : 'justifyright',
-					title : '向右对齐'
-				}, {
-					name : 'justifyjustify',
-					title : '两端对齐'
-				}, {
-					name : 'blockquote',
-					title : '引用'
-				}, {
-					name : 'blockindent',
-					title : '增加缩进'
-				}, {
-					name : 'blockoutdent',
-					title : '减小缩进'
-				}, '|', {
-					name : 'unorderedlist',
-					title : '无序编号'
-				}, {
-					name : 'orderedlist',
-					title : '有序编号'
-				}, {
-					name : 'rowspacingtop',
-					title : '段前距'
-				}, {
-					name : 'rowspacingbottom',
-					title : '段后距'
-				}, {
-					name : 'lineheight',
-					title : '行高'
-				} ]
-			} ]
 		}, {
 			name : 'sde-toolbar-insert',
 			title : '插入',
@@ -941,15 +979,15 @@ function richText() {
 					name : 'kityformula',
 					title : '公式'
 				} ]
-			}, 
-//			{
-//				name : 'sde-toolbar-insert-blockcomment',
-//				title : '批注',
-//				items : [ {
-//					name : 'blockcomment',
-//					title : '批注'
-//				} ]
-//			} 
+			},
+			//			{
+			//				name : 'sde-toolbar-insert-blockcomment',
+			//				title : '批注',
+			//				items : [ {
+			//					name : 'blockcomment',
+			//					title : '批注'
+			//				} ]
+			//			} 
 			]
 		}, {
 			name : 'sde-toolbar-table',
@@ -1189,37 +1227,48 @@ function richText() {
 			} ]
 		} ]
 	};
-	var sde = new SDE(options);
+	sde = new SDE(options);
 
 	sde.addListener('ready', function() { //打开页面加载
-		var ctrls = sde.getControlById(); //获得页面控件数据数组
-		var ctrlsArray = new Array();
-
-		for (var i = 0; i < ctrls.length; i++) {
-			//			alert(ctrls[i].getValue());
-			var v = ctrls[i].getValue();
-			ctrlsArray[i] = v;
-		}
-		$.ajax({
-			type : 'post',
-			url : '/ContractCreation/ContractCreation/richText',
-			data : {
-				"ctrls" : ctrlsArray
-			},
-			success : function(r) {
-				if (r.code == 0) {
-					//					layer.msg(r.msg);
-				} else {
-					alert("操作异常");
-				}
-			},
-			error : function(r) {
-				alert("error");
-			}
-		});
+//		var ctrls=sde.getControlById();
+//		var ele=new Array();
+//		ctrls.forEach(ctrl=>{
+////			debugger;
+//			//这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
+//			console.log(ctrl.getValue());
+//			ele=ctrl.getCtrlElement()//获取控制的Value节点
+////			ele.attr("id");
+//			console.log(ele.id);
+//		});
+//		var cs = sde.getControlById(); //获得页面控件文本数据数组
+//		var ctrlsArray = new Array();
+//		for (var i = 0; i < cs.length; i++) {
+//			//			alert(ctrls[i].getValue());
+//			var v = cs[i].getValue();
+//			ctrlsArray[i] = v;
+//		}
+//		console.log(ctrlsArray);
+//		console.log("******************");
+//
+//		$.ajax({
+//			type : 'post',
+//			url : '/ContractCreation/ContractCreation/richText',
+//			data : {
+//				"rTeId" : ctrlsArray,
+//			},
+//			success : function(r) {
+//				if (r.code == 0) {
+//					//					layer.msg(r.msg);
+//				} else {
+//					alert("操作异常");
+//				}
+//			},
+//			error : function(r) {
+//				alert("error");
+//			}
+//		});
 	//		debugger;//js执行在这么会自己停止的，然后你可以在控制台下输出ctrls，看看里面有什么
 	});
-//	window.sde = sde;
 }
 
 function nextStepThis(tabId, totalStep, lastBtn, nextBtn) {

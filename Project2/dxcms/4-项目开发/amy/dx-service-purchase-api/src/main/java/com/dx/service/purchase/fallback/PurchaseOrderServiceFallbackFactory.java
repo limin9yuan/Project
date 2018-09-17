@@ -22,7 +22,7 @@ public class PurchaseOrderServiceFallbackFactory implements FallbackFactory<IPur
     public IPurchaseOrderService create(Throwable throwable) {
         return new IPurchaseOrderService() {
             @Override
-            public ResultMsg save(PurchaseOrderBean purchaseOrderBean, List<PurchaseOrderItemBean> purchaseOrderItemBeans, boolean isSubmit) {
+            public ResultMsg save(PurchaseOrderBean purchaseOrderBean) {
                 return null;
             }
 
@@ -77,7 +77,7 @@ public class PurchaseOrderServiceFallbackFactory implements FallbackFactory<IPur
             }
 
             @Override
-            public ResultMsg changeOrder(String purchaseOrderId, PurchaseOrderBean afterPurchaseOrderBean, List<PurchaseOrderItemBean> afterPurchaseOrderItemBeans) {
+            public ResultMsg changeOrder(PurchaseOrderBean purchaseOrderBean) {
                 return null;
             }
 

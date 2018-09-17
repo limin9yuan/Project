@@ -11,6 +11,7 @@
     <modules>
         <module>../amy-common</module>
         <module>../amy-eureka-server</module>
+        <module>../amy-eureka-client</module>
         <module>../amy-eureka-client1</module>
         <module>../amy-config-server</module>
         <module>../amy-eureka-service2</module>

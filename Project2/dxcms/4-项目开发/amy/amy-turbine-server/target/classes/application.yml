@@ -1,0 +1,32 @@
+server:
+  port: 16000
+
+feign:
+  hystrix:
+    enabled: true
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+#turbine:
+#  app-config: client.wangxin.com,service1.wangxin.com,service2.wangxin.com
+#  aggregator:
+#    clusterConfig: client,service1,service2
+#  clusterNameExpression: metadata['cluster']
+#  combine-host: true
+#  instanceUrlSuffix:
+#    default: actuator/hystrix.stream
+
+turbine:
+  aggregator:
+    clusterConfig: default
+  appConfig: client.wangxin.com,client2.wangxin.com
+  clusterNameExpression: new String("default")
+

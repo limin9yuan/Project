@@ -1,0 +1,25 @@
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://admin:123123@eureka1.wangxin.com:10001/eureka/,http://admin:123123@eureka2.wangxin.com:10002/eureka/,http://admin:123123@eureka3.wangxin.com:10003/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: turbine.wangxin.com
+
+spring:
+  application:
+    name: turbine.wangxin.com
+  cloud:
+    config:
+      #uri: http://192.168.1.222:14000
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: CONFIG.WANGXIN.COM
+  rabbitmq:
+    host: mq.wxcl-amy.win
+    port: 5672
+    username: guest
+    password: guest

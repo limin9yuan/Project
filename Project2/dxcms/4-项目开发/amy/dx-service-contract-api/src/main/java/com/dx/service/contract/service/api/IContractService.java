@@ -1,6 +1,9 @@
 package com.dx.service.contract.service.api;
 
 import com.dx.client.model.contract.*;
+import com.dx.service.contract.config.ContractFeignConfigConfig;
+import com.dx.service.contract.fallback.ContractServiceFallbackFactory;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,18 +18,15 @@ import java.util.Map;
  * @Date: 2018/9/4 07:58
  * @Description: 合同API
  */
+@FeignClient(name="CONTRACTSERVICE.DX.COM",
+        configuration = ContractFeignConfigConfig.class,
+        fallbackFactory = ContractServiceFallbackFactory.class
+)
 public interface IContractService {
     //保存
     @RequestMapping("/contract/contractService/save")
     @ResponseBody
-    public ResultMsg save(@RequestBody ContractBean contractBean,                           //合同信息
-                          @RequestBody List<ContractMaterialBean> contractMaterialBeans,    //合同物资明细
-                          @RequestBody List<ContractSuitBean> contractSuitBeans,            //适用机构
-                          @RequestBody List<ContractDeliverBean> contractDeliverBeans,      //发货单位
-                          @RequestBody List<ContractEnclosureBean> contractEnclosureBeans,  //合同附件
-                          @RequestBody List<ContractElementBean> contractElementBeans,      //合同元素
-                          @RequestBody ContractHtmlBean contractHtmlBean,                   //合同文本HTML
-                          @RequestParam boolean isSubmit);                                  //是否提交审批
+    public ResultMsg save(@RequestBody ContractBean contractBean);
 
     //注销
     @RequestMapping("/contract/contractService/cancel")
@@ -93,21 +93,11 @@ public interface IContractService {
     public ResultMsg onFiled(@RequestParam("contractId") String contractId);
 
     //变更合同
-    //before****：变更前，after****：变更后
+    //contractId：变更合同id，after****：变更后
     //返回数据：List<>：变更记录
     @RequestMapping("/contract/contractService/changeContract")
     @ResponseBody
-    public ResultMsg changeContract(@RequestBody ContractBean beforeContractBean,                           //合同信息
-                                 @RequestBody List<ContractMaterialBean> beforeContractMaterialBeans,       //合同物资明细
-                                 @RequestBody List<ContractSuitBean> beforeContractSuitBeans,               //适用机构
-                                 @RequestBody List<ContractDeliverBean> beforeContractDeliverBeans,         //发货单位
-                                 @RequestBody List<ContractEnclosureBean> beforeContractEnclosureBean,      //合同附件
-                                 @RequestBody ContractBean afterContractBean,                               //合同信息
-                                 @RequestBody List<ContractMaterialBean> afterContractMaterialBeans,        //合同物资明细
-                                 @RequestBody List<ContractSuitBean> afterContractSuitBeans,                //适用机构
-                                 @RequestBody List<ContractDeliverBean> afterContractDeliverBeans,          //发货单位
-                                 @RequestBody List<ContractEnclosureBean> afterContractEnclosureBean        //合同附件
-                                 );
+    public ResultMsg changeContract(@RequestBody ContractBean contractBean);
 
     //查询
     //orderBy参数如：blog_ID desc，示例代码：PageHelper.startPage(pageNum , pageSize); PageHelper.orderBy("blog_ID desc");

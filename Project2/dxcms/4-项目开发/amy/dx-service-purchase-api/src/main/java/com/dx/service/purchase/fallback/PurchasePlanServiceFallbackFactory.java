@@ -22,7 +22,7 @@ public class PurchasePlanServiceFallbackFactory implements FallbackFactory<IPurc
     public IPurchasePlanService create(Throwable throwable) {
         return new IPurchasePlanService() {
             @Override
-            public ResultMsg save(PurchasePlanBean purchasePlanBean, List<PurchasePlanItemBean> purchasePlanItemBeans, boolean isSubmit) {
+            public ResultMsg save(PurchasePlanBean purchasePlanBean) {
                 return null;
             }
 

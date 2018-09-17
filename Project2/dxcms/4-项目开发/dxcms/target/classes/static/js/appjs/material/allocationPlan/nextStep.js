@@ -374,18 +374,15 @@ function getAllocationPlanDetail(){
 
 			var orderEntry = data.returnList;
 			var nameArrays = data.categoryList;
+			var supplierArrays = data.supplierList;
 			for (var i = 0; i < orderEntry.length; i++) {
 				tableName = "t" + i + "table";
 				singleTableName = "t" + i + "singleTable";
 				if (i == 0) {
 					$("#myTab").append("<li class='active'><a href='#"+"t"+i+ "' data-toggle='tab'>"+nameArrays[i]+"</a></li>");
-
-				}else {
-					$("#myTab").append("<li><a href='#"+"t"+i+ "' data-toggle='tab'>"+nameArrays[i]+"</a></li>");
-				}
-				if (i==0) {
 					$("#myTabContent").append("<div class='tab-pane fade in active' id='"+"t"+i+ "'><div class='gridPanel'><table id='"+tableName+"' data-mobile-responsive='true'></table><div id='requirePlanPage'></div></div></div>");
 				}else {
+					$("#myTab").append("<li><a href='#"+"t"+i+ "' data-toggle='tab'>"+nameArrays[i]+"</a></li>");
 					if (nameArrays[i] == "单独采购") {
 						$("#myTabContent").append("<div class='tab-pane fade' id='"+"t"+i+ "'><div class='gridPanel'><table id='"+singleTableName+"' data-mobile-responsive='true'></table><div id='requirePlanPage'></div></div></div>");
 					}
@@ -393,71 +390,108 @@ function getAllocationPlanDetail(){
 						$("#myTabContent").append("<div class='tab-pane fade' id='"+"t"+i+ "'><div class='gridPanel'><table id='"+tableName+"' data-mobile-responsive='true'></table><div id='requirePlanPage'></div></div></div>");
 					}
 				}
-				pageInit(tableName);
-				singleSupplierTableInit(singleTableName);
-				var typeEntity = orderEntry[i];
-				if (typeEntity[i].materialClassName == "单独采购") {
-					for (var j = 0; j < typeEntity.length; j++) {
-		                var rowdata = {
-							authorDeptName : '<input name="authorDeptName" type="text" class="editable left disabled"/ readonly>',//需求机构
-							materialClassName : '<input name="materialClassName" type="text" class="editable left disabled"/>',//物料类型
-							materialName: '<input name="materialName" type="text" class="editable left disabled"/ readonly>',//物料名称
-							materilaCode: '<input name="materilaCode" type="text" class="editable left disabled" readonly/>',//物料编码
-							specification: '<input name="specification" type="text" class="editable left disabled" readonly/>',//物料特性
-							materialUnitName: '<input name="materialUnitName" type="text" class="editable left disabled" readonly/>',//单位
-							purchaseQty: '<input name="purchaseQty" type="text" class="editable left disabled decimal"/>',//采购数量
-							unitPrice: '<input name="unitPrice" type="text" class="editable left disabled" readonly/>',//合同单价
-							allotQty: '<input name="allotQty" type="text" class="editable left disabled"/>',//分配数量
-							allotRatio: '<input name="allotRatio" type="text" class="editable left disabled"/>',//分配比例
-							companyName: '<input name="companyName" type="text" class="editable left disabled decimal"/>',//供应商
-		                }
-		                $("#"+singleTableName).jqGrid('addRowData', j, rowdata);
-		            };
-					$("#"+singleTableName).find('[role=row]').each(function (k) {
-			            var row = typeEntity[k-1];
-			            if (row != undefined) {
-							$(this).find('input[name="authorDeptName"]').val(row.authorDeptName).attr('data-value', row.authorDeptName);
-			                $(this).find('input[name="materialClassName"]').val(row.materialClassName);
-			                $(this).find('input[name="materialName"]').val(row.materialName);
-			                $(this).find('input[name="materilaCode"]').val(row.materilaCode);
-			                $(this).find('input[name="specification"]').val(row.specification);
-			                $(this).find('input[name="materialUnitName"]').val(row.materialUnitName);
-			                $(this).find('input[name="purchaseQty"]').val(row.purchaseQty);
-							$(this).find('input[name="unitPrice"]').val(row.unitPrice);
-			                $(this).find('input[name="allotQty"]').val(row.allotQty);
-			                $(this).find('input[name="allotRatio"]').val(row.allotRatio);
-			                $(this).find('input[name="companyName"]').val(row.companyName);
-			            }
-					});
-				}else {
-					for (var j = 0; j < typeEntity.length; j++) {
-		                var rowdata = {
-							authorDeptName : '<input name="authorDeptName" type="text" class="editable left disabled"/ readonly>',//需求机构
-							materialClassName : '<input name="materialClassName" type="text" class="editable left disabled"/>',//物料类型
-							materialName: '<input name="materialName" type="text" class="editable left disabled"/ readonly>',//物料名称
-							materilaCode: '<input name="materilaCode" type="text" class="editable left disabled" readonly/>',//物料编码
-							specification: '<input name="specification" type="text" class="editable left disabled" readonly/>',//物料特性
-							materialUnitName: '<input name="materialUnitName" type="text" class="editable left disabled" readonly/>',//单位
-							purchaseQty: '<input name="purchaseQty" type="text" class="editable left disabled decimal"/>',//采购数量
-		                }
-		                $("#"+tableName).jqGrid('addRowData', j, rowdata);
-		            };
-					$("#"+tableName).find('[role=row]').each(function (k) {
-			            var row = typeEntity[k-1];
-			            if (row != undefined) {
-			                $(this).find('input[name="authorDeptName"]').val(row.authorDeptName).attr('data-value', row.authorDeptName);
-			                $(this).find('input[name="materialClassName"]').val(row.materialClassName);
-			                $(this).find('input[name="materialName"]').val(row.materialName);
-			                $(this).find('input[name="materilaCode"]').val(row.materilaCode);
-			                $(this).find('input[name="specification"]').val(row.specification);
-			                $(this).find('input[name="materialUnitName"]').val(row.materialUnitName);
-			                $(this).find('input[name="purchaseQty"]').val(row.purchaseQty);
-			            }
-					});
-				}
 			}
+			for (var i = 0; i < orderEntry.length; i++) {
+				tableName = "t" + i + "table";
+				singleTableName = "t" + i + "singleTable";
+				if (i==0) {
+					pageInit(tableName,supplierArrays[i]);
+
+				}
+				else {
+					if (nameArrays[i] == "单独采购") {
+						singleSupplierTableInit(singleTableName);
+					}
+					else {
+						pageInit(tableName,supplierArrays[i]);
+					}
+				}
+				loadData(orderEntry[i], i);
+			}
+
 		}
 	});
+}
+function loadData(orderEntry, i) {
+	tableName = "t" + i + "table";
+	singleTableName = "t" + i + "singleTable";
+	var typeEntity = orderEntry;
+	if (typeEntity[i].materialClassName == "单独采购") {
+		for (var j = 0; j < typeEntity.length; j++) {
+			// var row = typeEntity[j-1];
+			var rowdata = {
+				authorDeptName : '<input value="'+typeEntity[j].authorDeptName+'" name="authorDeptName" type="text" class="editable left disabled" readonly/>',//需求机构
+				materialClassName : '<input value="'+typeEntity[j].materialClassName+'" name="materialClassName" type="text" class="editable left disabled" readonly/>',//物料类型
+				materialName: '<input value="'+typeEntity[j].materialName+'" name="materialName" type="text" class="editable left disabled" readonly/>',//物料名称
+				materilaCode: '<input value="'+typeEntity[j].materilaCode+'" name="materilaCode" type="text" class="editable left disabled" readonly/>',//物料编码
+				specification: '<input value="'+typeEntity[j].specification+'" name="specification" type="text" class="editable left disabled" readonly/>',//物料特性
+				materialUnitName: '<input value="'+typeEntity[j].materialUnitName+'" name="materialUnitName" type="text" class="editable left disabled" readonly/>',//单位
+				purchaseQty: '<input value="'+typeEntity[j].purchaseQty+'" name="purchaseQty" type="text" class="editable left disabled decimal" readonly/>',//采购数量
+				unitPrice: '<input value="'+typeEntity[j].unitPrice+'" name="unitPrice" type="text" class="editable left disabled" readonly/>',//合同单价
+				allotQty: '<input value="'+typeEntity[j].allotQty+'" name="allotQty" type="text" class="editable left disabled"/>',//分配数量
+				allotRatio: '<input value="'+typeEntity[j].allotRatio+'" name="allotRatio" type="text" class="editable left disabled"/>',//分配比例
+				companyName: '<input value="'+typeEntity[j].companyName+'" name="companyName" type="text" class="editable left disabled decimal" readonly/>',//供应商
+			}
+			$("#"+singleTableName).jqGrid('addRowData', j, rowdata);
+		};
+		// $("#"+singleTableName).find('[role=row]').each(function (k) {
+		// 	var row = typeEntity[k-1];
+		// 	if (row != undefined) {
+		// 		$(this).find('input[name="authorDeptName"]').val(row.authorDeptName).attr('data-value', row.authorDeptName);
+		// 		$(this).find('input[name="materialClassName"]').val(row.materialClassName);
+		// 		$(this).find('input[name="materialName"]').val(row.materialName);
+		// 		$(this).find('input[name="materilaCode"]').val(row.materilaCode);
+		// 		$(this).find('input[name="specification"]').val(row.specification);
+		// 		$(this).find('input[name="materialUnitName"]').val(row.materialUnitName);
+		// 		$(this).find('input[name="purchaseQty"]').val(row.purchaseQty);
+		// 		$(this).find('input[name="unitPrice"]').val(row.unitPrice);
+		// 		$(this).find('input[name="allotQty"]').val(row.allotQty);
+		// 		$(this).find('input[name="allotRatio"]').val(row.allotRatio);
+		// 		$(this).find('input[name="companyName"]').val(row.companyName);
+		// 	}
+		// });
+	}else {
+		for (var j = 0; j < typeEntity.length; j++) {
+			// var row = typeEntity[j-1];
+			var jsonstr= "{"
+				+"authorDeptName :  '<input value=\""+typeEntity[j].authorDeptName+"\" name=\"authorDeptName\" type=\"text\" class=\"editable left disabled\" readonly/>',"//需求机构
+				// +"materialClassName :" '<input value="'+typeEntity[j].materialClassName+'" name="materialClassName" type="text" class="editable left disabled" readonly/>',//物料类型
+				// +"materialName :" '<input value="'+typeEntity[j].materialName+'" name="materialName" type="text" class="editable left disabled" readonly/>',//物料名称
+				// +"materilaCode :" '<input value="'+typeEntity[j].materilaCode+'" name="materilaCode" type="text" class="editable left disabled" readonly/>',//物料编码
+				// +"specification :" '<input value="'+typeEntity[j].specification+'" name="specification" type="text" class="editable left disabled" readonly/>',//物料特性
+				// +"materialUnitName :" '<input value="'+typeEntity[j].materialUnitName+'" name="materialUnitName" type="text" class="editable left disabled" readonly/>',//单位
+				// +"purchaseQty :" '<input value="'+typeEntity[j].purchaseQty+'" name="purchaseQty" type="text" class="editable left disabled decimal" readonly/>',//采购数量
+				// +"unitPrice0 :" '<input value="'+typeEntity[j].unitPrice+'" name="unitPrice'+i+'" type="text" class="editable left disabled" readonly/>',//合同单价
+				// +"allotQty0 :" '<input value="'+typeEntity[j].allotQty+'" name="allotQty'+i+'" type="text" class="editable left disabled"/>',//分配数量
+				+"allotRatio0 : '<input value=\""+typeEntity[j].allotRatio+"\" name=\"allotRatio"+i+"\" type=\"text\" class=\"editable left disabled\"/>'"//分配比例
+			+"}";
+			var rowdata = JSON.parse(jsonstr);
+			$("#"+tableName).jqGrid('addRowData', j, rowdata);
+		};
+		// $("#"+tableName).find('[role=row]').each(function (k) {
+		// 	var row = typeEntity[k-1];
+		// 	if (row != undefined) {
+		// 		$(this).find('input[name="authorDeptName"]').val(row.authorDeptName).attr('data-value', row.authorDeptName);
+		// 		$(this).find('input[name="materialClassName"]').val(row.materialClassName);
+		// 		$(this).find('input[name="materialName"]').val(row.materialName);
+		// 		$(this).find('input[name="materilaCode"]').val(row.materilaCode);
+		// 		$(this).find('input[name="specification"]').val(row.specification);
+		// 		$(this).find('input[name="materialUnitName"]').val(row.materialUnitName);
+		// 		$(this).find('input[name="purchaseQty"]').val(row.purchaseQty);
+		// 	}
+		// });
+		// for (var i = 0; i < typeEntity.length; i++) {
+		// 	var rowdata = {
+		// 		unitPrice : '<input name="unitPrice'+i+'" type="text" class="editable left disabled" readonly/>',//合同单价
+		// 		allotQty : '<input name="allotQty'+i+'" type="text" class="editable left disabled"/>',//分配数量
+		// 		allotRatio : '<input name="allotRatio'+i+'" type="text" class="editable left disabled"/>',//分配比例
+		// 	}
+		// 	$("#"+tableName).jqGrid('addRowData', i, rowdata);
+		// }
+	}
+	$(".ui-jqgrid-view").width(1228);
+	$(".ui-jqgrid-hdiv").width(1228);
+	$(".ui-jqgrid-bdiv").width(1228);
 }
 function singleSupplierTableInit(singleTableName){
 	var tableColNames = [ '需求机构', '物料类型', '物料名称', '物料编码', '物料特性','单位',
@@ -497,10 +531,10 @@ function singleSupplierTableInit(singleTableName){
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
 				viewrecords : true,
 				rownumbers: true,
-               shrinkToFit: false,
-               gridview: true,
-               footerrow: true,
-			   cellEdit:true,
+               	shrinkToFit: false,
+               	gridview: true,
+               	footerrow: true,
+			   	cellEdit:true,
 			    multiselect: true,
 			   onSelectRow : function(id) {
 				  var lastsel;
@@ -525,7 +559,7 @@ function singleSupplierTableInit(singleTableName){
 	// jQuery("#requirePlanTable").jqGrid('navGrid', '#requirePlanPage', {edit : false,add : false,del : false});
 	// jQuery("#requirePlanTable").jqGrid('inlineNav', "#requirePlanPage");
 }
-function pageInit(tableName){
+function pageInit(tableName,supplier){
 	var tableColNames = [ '需求机构', '物料类型', '物料名称', '物料编码', '物料特性','单位',
 						  '采购数量'];
 	var tableColModel = [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
@@ -537,6 +571,20 @@ function pageInit(tableName){
 				 {name : 'materialUnitName',index : 'materialUnitName',width : 100,align : "right",sortable: false},
 				 {name : 'purchaseQty',index : 'purchaseQty',width : 100,align : "right",sortable: false}
 			 ];
+	var supplierName = supplier;
+	if (supplierName != undefined) {
+		for (var i = 0; i < supplierName.length; i++) {
+			tableColNames.push('合同单价');
+			tableColNames.push('分配数量');
+			tableColNames.push('分配比例');
+			tableColModel.push({name : 'unitPrice'+i,index : 'unitPrice'+i,width : 100,align : "right",sortable: false});
+			tableColModel.push({name : 'allotQty'+i,index : 'allotQty'+i,width : 100,align : "right",sortable: false});
+			tableColModel.push({name : 'allotRatio'+i,index : 'allotRatio'+i,width : 100,align : "right",sortable: false});
+			// tableColModel.push({name : 'unitPrice',index : 'unitPrice',width : 100,align : "right",sortable: false});
+			// tableColModel.push({name : 'allotQty',index : 'allotQty',width : 100,align : "right",sortable: false});
+			// tableColModel.push({name : 'allotRatio',index : 'allotRatio',width : 100,align : "right",sortable: false});
+		}
+	}
     var $grid = $("#"+tableName);
 	//创建jqGrid组件
 	$grid.jqGrid(
@@ -559,11 +607,12 @@ function pageInit(tableName){
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
 				viewrecords : true,
 				rownumbers: true,
-               shrinkToFit: false,
-               gridview: true,
-               footerrow: true,
-			   cellEdit:true,
+               	shrinkToFit: false,
+               	gridview: true,
+               	footerrow: true,
+			   	cellEdit:true,
 			    multiselect: true,
+				autoScroll: true,
 			   onSelectRow : function(id) {
 				  var lastsel;
 				   // deleteSelectedRow(id);
@@ -574,13 +623,15 @@ function pageInit(tableName){
                   }
                 }
 			});
+			var tempGroupHeader = [];
+			for (var i = 0; i < supplierName.length; i++) {
+				tempGroupHeader.push({ startColumnName: 'unitPrice'+i, numberOfColumns: 3, titleText: '<div align="center"><span>'+supplierName[i].companyName+'</span></div>'});
+
+			}
 			 //表头合并
 		    $grid.jqGrid('setGroupHeaders', {
 		        useColSpanStyle: true,
-		        groupHeaders: [
-		          { startColumnName: 'requireQty', numberOfColumns: 6, titleText: '<div align="center"><span>数量信息</span></div>'},
-		          { startColumnName: 'referencePrice', numberOfColumns: 3, titleText: '<div align="center"><span>金额信息</span></div>'}
-		        ]
+		        groupHeaders: tempGroupHeader
 		    });
 	/*创建jqGrid的操作按钮容器*/
 	/*可以控制界面上增删改查的按钮是否显示*/

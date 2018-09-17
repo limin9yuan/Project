@@ -22,7 +22,7 @@ public class AllotPlanServiceFallbackFactory implements FallbackFactory<IAllotPl
     public IAllotPlanService create(Throwable throwable) {
         return new IAllotPlanService() {
             @Override
-            public ResultMsg save(AllotPlanBean allotPlanBean, List<AllotPlanItemBean> allotPlanItemBeans, boolean isSubmit) {
+            public ResultMsg save(AllotPlanBean allotPlanBean) {
                 return null;
             }
 

@@ -2,6 +2,7 @@ package com.dx.client.model.purchase;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @Auther: cxd
@@ -51,6 +52,8 @@ public class PurchasePlanBean {
     private String createUser;
     //备注
     private String remark;
+    //采购计划明细列表
+    private List<PurchasePlanItemBean> purchasePlanItemBeans;
 
     public String getId() {
         return id;
@@ -164,7 +167,7 @@ public class PurchasePlanBean {
         this.totalMoney = totalMoney;
     }
 
-    public boolean getSubmit() {
+    public boolean isSubmit() {
         return isSubmit;
     }
 
@@ -172,7 +175,7 @@ public class PurchasePlanBean {
         isSubmit = submit;
     }
 
-    public boolean getApproveBegin() {
+    public boolean isApproveBegin() {
         return IsApproveBegin;
     }
 
@@ -188,7 +191,7 @@ public class PurchasePlanBean {
         this.isApproveFinish = isApproveFinish;
     }
 
-    public boolean getActived() {
+    public boolean isActived() {
         return isActived;
     }
 
@@ -218,5 +221,13 @@ public class PurchasePlanBean {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public List<PurchasePlanItemBean> getPurchasePlanItemBeans() {
+        return purchasePlanItemBeans;
+    }
+
+    public void setPurchasePlanItemBeans(List<PurchasePlanItemBean> purchasePlanItemBeans) {
+        this.purchasePlanItemBeans = purchasePlanItemBeans;
     }
 }

@@ -1,7 +1,7 @@
 package com.dx.service.purchase.service.api;
 
 import com.dx.client.model.purchase.*;
-import com.dx.service.purchase.config.MultipartSupportConfig;
+import com.dx.service.purchase.config.PurchaseFeignConfig;
 import com.dx.service.purchase.fallback.PurchaseOrderServiceFallbackFactory;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,16 +19,14 @@ import java.util.Map;
  * @Description:采购订单API
  */
 @FeignClient(name="PURCHASESERVICE.DX.COM",
-        configuration = MultipartSupportConfig.class,
+        configuration = PurchaseFeignConfig.class,
         fallbackFactory = PurchaseOrderServiceFallbackFactory.class
 )
 public interface IPurchaseOrderService {
     //保存
     @RequestMapping("/purchase/purchaseOrderService/save")
     @ResponseBody
-    public ResultMsg save(@RequestBody PurchaseOrderBean purchaseOrderBean,
-                          @RequestBody List<PurchaseOrderItemBean> purchaseOrderItemBeans,
-                          @RequestParam boolean isSubmit);
+    public ResultMsg save(@RequestBody PurchaseOrderBean purchaseOrderBean);
 
     //注销
     @RequestMapping("/purchase/purchaseOrderService/cancel")
@@ -88,14 +86,12 @@ public interface IPurchaseOrderService {
     //返回数据：List<purchaseOrderChangeBean>：变更记录
     @RequestMapping("/purchase/purchaseOrderService/changeOrder")
     @ResponseBody
-    public ResultMsg changeOrder(@RequestParam("purchaseOrderId") String purchaseOrderId,
-                                 @RequestBody PurchaseOrderBean afterPurchaseOrderBean,
-                                 @RequestBody List<PurchaseOrderItemBean> afterPurchaseOrderItemBeans);
+    public ResultMsg changeOrder(@RequestBody PurchaseOrderBean purchaseOrderBean);
 
     //打印计数
     @RequestMapping("/purchase/purchaseOrderService/printCountOrder")
     @ResponseBody
-    public ResultMsg printCountOrder(@RequestParam("purchaseOrderId") String purchaseOrderId, @RequestParam("purchaseOrderId") String printUserId);
+    public ResultMsg printCountOrder(@RequestParam("purchaseOrderId") String purchaseOrderId, @RequestParam("printUserId") String printUserId);
 
     //修改执行人
     @RequestMapping("/purchase/purchaseOrderService/modifyExecuter")

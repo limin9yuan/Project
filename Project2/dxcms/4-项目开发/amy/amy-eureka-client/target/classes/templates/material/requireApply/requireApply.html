@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="col-sm-12">
+			<div class="ibox">
+				<div class="ibox-body">
+					<div class="fixed-table-toolbar">
+						<div class="columns pull-left">
+							<button shiro:hasPermission="material:requireApply:add" type="button" class="btn btn-success" onclick="add()">
+								<i class="fa" aria-hidden="true"></i>添加
+							</button>
+						</div>
+						<div class="columns pull-right">
+							<button class="btn btn-success" onclick="reLoad()">查询</button>
+						</div>
+						<div class="columns pull-right nopadding" style="width:160px;">
+							<div class="input-group date" id="beginDate">
+								<input id="start" class="form-control" type="text"
+									   name="beginDate" style="width:120px"> <span
+									class="input-group-addon"> <span
+									class="glyphicon glyphicon-calendar"></span>
+											</span>
+							</div>
+						</div>
+						<div class="columns pull-right nopadding" style="width:20px;">&nbsp;至&nbsp;
+						</div>
+						<div class="columns pull-right nopadding"  style="width:160px;">
+							<div class="input-group date" id="endDate">
+								<input id="end" class="form-control" type="text"
+									   name="endDate" style="width:120px"> <span
+									class="input-group-addon"> <span
+									class="glyphicon glyphicon-calendar"></span>
+											</span>
+							</div>
+						</div>
+						<div class="columns pull-right col-md-2 nopadding">
+							<input id="searchName" type="text" class="form-control"
+								   placeholder="请输入编号或名称">
+
+						</div>
+					</div>
+					<table id="requireApply" data-mobile-responsive="true">
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--shiro控制bootstraptable行内按钮看见性 来自bootdo的创新方案 -->
+		<div>
+			<script type="text/javascript">
+				var s_edit_h = 'hidden';
+				var s_remove_h = 'hidden';
+			</script>
+		</div>
+		<div shiro:hasPermission="material:requireApply:edit">
+			<script type="text/javascript">
+				s_edit_h = '';
+			</script>
+		</div>
+		<div shiro:hasPermission="material:requireApply:remove">
+			<script type="text/javascript">
+				var s_remove_h = '';
+			</script>
+		</div>
+	</div>
+	<div th:include="include :: footer"></div>
+	<script type="text/javascript" src="/js/appjs/material/requireApply/requireApply.js"></script>
+</body>
+</html>
+
+

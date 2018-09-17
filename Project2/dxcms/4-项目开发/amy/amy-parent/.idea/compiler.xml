@@ -9,6 +9,7 @@
         <module name="amy-admin-server" />
         <module name="amy-common" />
         <module name="amy-config-server" />
+        <module name="amy-eureka-client" />
         <module name="amy-eureka-client1" />
         <module name="amy-eureka-client2" />
         <module name="amy-eureka-server" />
@@ -35,9 +36,5 @@
         <module name="dx-service-tender-api" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="dx-service-contract-perform" target="1.8" />
-      <module name="dx-service-contract-perform-api" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

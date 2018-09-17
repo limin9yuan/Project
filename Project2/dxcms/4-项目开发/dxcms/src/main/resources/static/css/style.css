@@ -7381,7 +7381,7 @@ body.skin-3 {
     color:#000;
     border-top:0px;
 }
-.bills{overflow-x:hidden;overflow-y: border-radius:5px;position:relative;background:#FFFFFF;border: 0px solid rgb(204, 204, 204);padding: 0px}
+.bills{overflow-x:hidden;;overflow-y: border-radius:5px;position:relative;background:#FFFFFF;border: 0px solid rgb(204, 204, 204);padding: 0px}
 .bills .ui-jqgrid .footrow-ltr{border-left:none;color: #555;font-weight:100;border-bottom:none;background-color: rgb(255, 253, 205);}
 .bills .ui-jqgrid .footrow-ltr .jqgrid-rownum{width:auto !important;}
 .bills .ui-jqgrid .footrow-ltr td{background-color: rgb(255, 253, 205);border-right:1px solid #ccc;}
