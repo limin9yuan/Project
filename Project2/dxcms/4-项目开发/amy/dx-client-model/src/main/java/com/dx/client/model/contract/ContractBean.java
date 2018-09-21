@@ -110,6 +110,8 @@ public class ContractBean {
     private List<ContractDeliverBean> contractDeliverBeans;
     //合同附件
     private List<ContractEnclosureBean> contractEnclosureBeans;
+    //合同文本的html
+    private List<ContractHtmlBean> contractHtmlBeans;
 
     public String getId() {
         return id;
@@ -509,5 +511,13 @@ public class ContractBean {
 
     public void setContractEnclosureBeans(List<ContractEnclosureBean> contractEnclosureBeans) {
         this.contractEnclosureBeans = contractEnclosureBeans;
+    }
+
+    public List<ContractHtmlBean> getContractHtmlBeans() {
+        return contractHtmlBeans;
+    }
+
+    public void setContractHtmlBeans(List<ContractHtmlBean> contractHtmlBeans) {
+        this.contractHtmlBeans = contractHtmlBeans;
     }
 }

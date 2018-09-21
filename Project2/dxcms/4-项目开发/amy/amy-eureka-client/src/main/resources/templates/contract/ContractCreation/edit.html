@@ -72,24 +72,6 @@
 						</ul>
 
 
-						<!-- 							<input id="contractCode" name="contractCode" -->
-						<!-- 								th:value="${contractCode}" class="form-control" type="text"> -->
-						<div class="form-group">
-							<div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
-								<input id="authorDeptId" name="authorDeptId"
-									class="form-control" type="hidden"> <input
-									id="performUserId" name="performUserId" class="form-control"
-									type="hidden">
-								<!--执行人id -->
-								<input id="authorUserId" name="authorUserId"
-									class="form-control" type="hidden">
-								<!-- 起草人id -->
-								<input id="projectId" name="projectId" class="form-control"
-									type="hidden">
-								<!-- 项目id -->
-
-							</div>
-						</div>
 						<div class="form-group">
 							<div class="col-sm-4 col-sm-offset-4">
 								<button type="submit" class="btn btn-success" id="saveBtn">保存</button>
@@ -108,6 +90,26 @@
 							<div class="tab-pane fade in active" id="baseInfo"
 								th:each="bo, iterStat : ${beanlist}">
 								<form class="form-horizontal m-t" id="signupForm">
+									<div class="form-group">
+										<div
+											class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+											<input id="id" name="id" type="hidden" class="form-control" th:value="${id}">
+											<input id="authorDeptId" name="authorDeptId"
+												class="form-control" type="hidden" th:value="${authorDeptId}"> 
+											<!--执行人id -->
+											<input id="authorUserId" name="authorUserId"
+												class="form-control" type="hidden">
+											<!-- 起草人id -->
+											<input id="projectId" name="projectId" class="form-control"
+												type="hidden">
+											<!-- 项目id -->
+											<input id="deliverCompanyId" name="deliverCompanyId" class="form-control" type="hidden">
+											<!-- 供货公司id -->
+											<input type="hidden" id="suitCorpId" name="suitCorpId" th:value="${suitCorpId}"   class="contracform-control">
+											<input type="hidden" id="authorCorpId" name="authorCorpId" th:value="${authorCorpId}"  class="contracform-control">
+											<input type="hidden" id="performUserId" name="performUserId" th:value="${performUserId}"  class="contracform-control">
+										</div>
+									</div>
 									<!-- 							左侧合同基本信息开始 -->
 									<div class="form-group" style="padding-left: 15px"></div>
 									<div class="form-group">
@@ -230,11 +232,11 @@
 										<label class="col-sm-2 control-label">适用机构 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<textarea id="contractSuits" name="contractSuitsId"
+											<textarea id="suitCorpName" name="suitCorpId"
 												class="form-control " style="width: 378px;overflow:hidden;"
-												th:checks="${bo.contractSuitsId}"
-												th:value="${bo.contractSuits}"
-												th:textLabel="${bo.contractSuits}" type="text"
+												th:checks="${bo.suitCorpId}"
+												th:value="${bo.suitCorpName}"
+												th:textLabel="${bo.suitCorpName}" type="text"
 												readonly="readonly"></textarea>
 										</div>
 										<label class="col-sm-2 control-label">供货公司 <span
@@ -242,9 +244,9 @@
 										<div class="col-sm-3">
 											<!-- 										多选 -->
 											<!-- 								打开页面选择 -->
-											<input id="contractDelivers" name="contractDelivers"
+											<input id="deliverCompanyName" name="deliverCompanyName"
 												class="form-control" type="text"
-												th:value="${bo.contractDelivers}"
+												th:value="${bo.deliverCompanyName}"
 												onclick="openContractDelivers()" readonly="readonly"
 												placeholder="==请选择==">
 										</div>
@@ -270,8 +272,6 @@
 												th:checks="${bo.authorDeptId}"
 												th:textLabel="${bo.authorDeptName}" />
 										</div>
-										<!-- 										<input id="authorCorpName" name="authorCorpId" th:value="${authorCorpName}" -->
-										<!-- 										 class="form-control" type="text" readonly th:checks="${authorCorpId}" th:textLabel="${authorCorpName}"> -->
 									</div>
 
 									<div class="form-group">
@@ -292,7 +292,7 @@
 										<label class="col-sm-2 control-label">起草人</label>
 										<div class="col-sm-3">
 											<input id="authorUserName" name="performUserId"
-												th:value="${authorUserName}" class="form-control"
+												th:value="${bo.authorUserName}" class="form-control"
 												type="text" placeholder="默认为当前用户">
 										</div>
 									</div>
@@ -506,7 +506,8 @@
 
 
 
-							<div class="tab-pane fade" id="contractMaterialDetail" style="padding-top: 50px">
+							<div class="tab-pane fade" id="contractMaterialDetail"
+								style="padding-top: 50px">
 								<div class="fixed-table-toolbar">
 									<div class="columns pull-left">
 										<button
@@ -597,7 +598,7 @@
 				zNodes : myobj,
 				height : 233
 			};
-			$("#contractSuits").drawMultipleTree(defaults); //初始化树状下拉复选框
+			$("#suitCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框
 			//     var a=$("#selectTree").drawMultipleTree("getChecks","val");
 			//     alert(a);
 	

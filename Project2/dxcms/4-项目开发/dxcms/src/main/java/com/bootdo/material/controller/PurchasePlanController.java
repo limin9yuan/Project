@@ -1,10 +1,8 @@
 package com.bootdo.material.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+import com.bootdo.common.utils.DateUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -47,7 +45,27 @@ public class PurchasePlanController extends BaseController {
     @GetMapping("/nextStep/{requirePlanid}")
     @RequiresPermissions("material:purchasePlan:add")
     String nextStep(@PathVariable("requirePlanid") String requirePlanid, Model model){
+
+        Long createUserId =getUser().getUserId();
+        String createUserName =getUser().getUsername();
+        String deptName =getUser().getDeptName();
+        Long deptId =getUser().getDeptId();
+        String planNo = "0001001009";
+        String businessDate = DateUtils.format(new Date(),DateUtils.DATE_PATTERN);
+        String name = businessDate.substring(0,4)+"年"+businessDate.substring(5,7)+"月采购申请";
+
         model.addAttribute("requirePlanid",requirePlanid);
+
+        model.addAttribute("name", name);//名称
+        model.addAttribute("planNo", planNo);//编号
+        model.addAttribute("authorCorpName", deptName); //编制机构名称
+        model.addAttribute("businessDate", businessDate); //编制机构名称
+        model.addAttribute("authorCorpName", deptName); //编制部门名称
+        model.addAttribute("authorCorpId", deptId); //编制部门Id
+
+        model.addAttribute("createUserId", createUserId); //编制人Id
+        model.addAttribute("createUserName", createUserName); //编制人姓名
+        model.addAttribute("createDate", businessDate);//编制日期
 
         return "material/purchasePlan/nextStep";
     }
@@ -81,8 +99,6 @@ public class PurchasePlanController extends BaseController {
             purchaseMap.put("requireQty","25345");
             purchaseMap.put("purchaseQty","456");
             purchaseMap.put("stockQty", "47");
-            purchaseMap.put("reserveQty", "57657");
-            purchaseMap.put("onwayQty", "878");
             purchaseMap.put("budgetQty", "8768");
             purchaseMap.put("referencePrice", "789");
             purchaseMap.put("budgetPrice", "8908");
@@ -100,13 +116,63 @@ public class PurchasePlanController extends BaseController {
         return returnData;
     }
 
+
+    @RequestMapping("/checkPurchasePlanGroup/{planNo}")
+    @ResponseBody
+    Map<String, Object> checkPurchasePlanGroup(@PathVariable("planNo") String planNo) {
+        List<Map<String, Object>> checkPurchasePlanGroup = new ArrayList<>();//调用接口
+        //做测试数据 调用接口前使用 begin
+        int type1=0;
+        int type1cnt=0;
+        int budgetAmount=0;
+        for (int i = 0; i < 6; i++) {
+            Map<String, Object> purchaseMap = new HashMap<>();
+            //purchaseMap.put("requirePlanid", codeArray[i]);
+            if(i<=3) {
+                type1 = type1+ 5;
+                type1cnt = type1cnt  + 500;
+                budgetAmount = budgetAmount+1400;
+            }
+            if(i==3){
+                purchaseMap.put("materialType", "物料类别1" );
+                purchaseMap.put("materialUnitName", "单位1" );
+                purchaseMap.put("purchaseQty",type1);
+                purchaseMap.put("referenceAmount",type1cnt );
+                purchaseMap.put("budgetAmount", budgetAmount);
+                checkPurchasePlanGroup.add(purchaseMap);
+                type1 = 0;
+                type1cnt = 0;
+                budgetAmount = 0;
+            }
+            if(i>3) {
+                type1 = type1+ 5;
+                type1cnt = type1cnt  + 500;
+                budgetAmount = budgetAmount+1400;
+                purchaseMap.put("materialType", "物料类别2" );
+                purchaseMap.put("materialUnitName", "单位2");
+                purchaseMap.put("purchaseQty",type1);
+                purchaseMap.put("referenceAmount",type1cnt );
+                purchaseMap.put("budgetAmount", budgetAmount);
+                checkPurchasePlanGroup.add(purchaseMap);
+            }
+        }
+
+        Map<String, Object> returnData = new HashMap<String, Object>();
+        returnData.put("checkPurchasePlanGroup", checkPurchasePlanGroup);
+        return returnData;
+    }
+
     @GetMapping("/edit/{planNo}")
     @RequiresPermissions("material:purchasePlan:edit")
     String edit(@PathVariable("planNo") String planNo, Model model){
+        String businessDate = DateUtils.format(new Date(),DateUtils.DATE_PATTERN);
+        String name = businessDate.substring(0,4)+"年"+businessDate.substring(5,7)+"月采购申请";
         model.addAttribute("planNo",planNo);
-        model.addAttribute("businessDate","2018/8/27");
+        model.addAttribute("name", name);//名称
+        model.addAttribute("type","月度计划");
+        model.addAttribute("businessDate",businessDate);
         model.addAttribute("authorUser","编制人");
-        model.addAttribute("createDate","2018/8/27");
+        model.addAttribute("createDate",businessDate);
         model.addAttribute("remark","sb");
 
         return "material/purchasePlan/edit";
@@ -117,32 +183,38 @@ public class PurchasePlanController extends BaseController {
     Map<String, Object> edit_ajax(@PathVariable("planNo") String planNo) {
         List<Map<String, Object>> editList = new ArrayList<>();//调用接口
         //做测试数据 调用接口前使用 begin
-        for (int i = 1; i < 6; i++) {
-            Map<String, Object> purchaseMap = new HashMap<>();
-            //purchaseMap.put("requirePlanid", "物资编码" + i);
-            purchaseMap.put("materialType", "物料类别" + i);
-            purchaseMap.put("materialName", "物资A" + i);
-            purchaseMap.put("materilaCode", "物资编码" + i);
-            purchaseMap.put("specification", "规格" + i);
-            purchaseMap.put("materialUnitName", "单位" + i);
-            purchaseMap.put("materialSubArray", "包装物料" + i);
-            purchaseMap.put("requireQty","25345");
-            purchaseMap.put("purchaseQty","456");
-            purchaseMap.put("stockQty", "47");
-            purchaseMap.put("reserveQty", "57657");
-            purchaseMap.put("onwayQty", "878");
-            purchaseMap.put("budgetQty", "8768");
-            purchaseMap.put("referencePrice", "789");
-            purchaseMap.put("budgetPrice", "8908");
-            purchaseMap.put("referenceAmount", "34");
-            //purchaseMap.put("requireDate","2018/8/27");
-            purchaseMap.put("arriveDate", "2018/8/27");
-           // purchaseMap.put("purchaserName", "张三");
-            purchaseMap.put("requireDept", "需求部门" + i);
-            purchaseMap.put("requirePlanid", "需求计划编号" + i);
-            purchaseMap.put("description", "sb");
+        for (int i = 0; i < 6; i++) {
+                Map<String, Object> purchaseMap = new HashMap<>();
+                if(i<=3){
+                    purchaseMap.put("materialType", "物料类别1");
+
+                    purchaseMap.put("materialUnitName", "单位1");
+                }else{
+                    purchaseMap.put("materialType", "物料类别2");
+                    purchaseMap.put("materialUnitName", "单位2");
+                }
+
+                purchaseMap.put("materialName", "物资A" + i);
+                purchaseMap.put("materilaCode", "物资编码" + i);
+                purchaseMap.put("specification", "规格" + i);
+                purchaseMap.put("materialSubArray", "包装物料" + i);
+                purchaseMap.put("requireQty","100");
+                purchaseMap.put("purchaseQty","5");
+                purchaseMap.put("stockQty", "47");
+                purchaseMap.put("reserveQty", "57657");
+                purchaseMap.put("onwayQty", "878");
+                purchaseMap.put("budgetQty", "7");
+                purchaseMap.put("referencePrice", "100");
+                purchaseMap.put("budgetPrice", "200");
+                purchaseMap.put("referenceAmount", "500");
+                //purchaseMap.put("requireDate","2018/8/27");
+                purchaseMap.put("arriveDate", "2018/8/27");
+                //purchaseMap.put("purchaserName", "张三");
+                purchaseMap.put("requireDept", "需求部门" + i);
+                purchaseMap.put("requirePlanid", i);
+                purchaseMap.put("description", "sb");
             editList.add(purchaseMap);
-        }
+            }
         Map<String, Object> returnData = new HashMap<String, Object>();
         returnData.put("editList", editList);
         return returnData;
@@ -231,10 +303,6 @@ public class PurchasePlanController extends BaseController {
                 purchaseMap.put("budgetAmount", budgetAmount);
                 purchasePlanGroup.add(purchaseMap);
             }
-
-
-
-
         }
 
         Map<String, Object> returnData = new HashMap<String, Object>();
@@ -242,6 +310,51 @@ public class PurchasePlanController extends BaseController {
 
         return returnData;
 
+    }
+
+    @RequestMapping("/editPurchasePlanGroup/{planNo}")
+    @ResponseBody
+    Map<String, Object> editPurchasePlanGroup(@PathVariable("planNo") String planNo) {
+        List<Map<String, Object>> editPurchasePlanGroup = new ArrayList<>();//调用接口
+        //做测试数据 调用接口前使用 begin
+        int type1=0;
+        int type1cnt=0;
+        int budgetAmount=0;
+        for (int i = 0; i < 6; i++) {
+            Map<String, Object> purchaseMap = new HashMap<>();
+            //purchaseMap.put("requirePlanid", codeArray[i]);
+            if(i<=3) {
+                type1 = type1+ 5;
+                type1cnt = type1cnt  + 500;
+                budgetAmount = budgetAmount+1400;
+            }
+            if(i==3){
+                purchaseMap.put("materialType", "物料类别1" );
+                purchaseMap.put("materialUnitName", "单位1" );
+                purchaseMap.put("purchaseQty",type1);
+                purchaseMap.put("referenceAmount",type1cnt );
+                purchaseMap.put("budgetAmount", budgetAmount);
+                editPurchasePlanGroup.add(purchaseMap);
+                type1 = 0;
+                type1cnt = 0;
+                budgetAmount = 0;
+            }
+            if(i>3) {
+                type1 = type1+ 5;
+                type1cnt = type1cnt  + 500;
+                budgetAmount = budgetAmount+1400;
+                purchaseMap.put("materialType", "物料类别2" );
+                purchaseMap.put("materialUnitName", "单位2");
+                purchaseMap.put("purchaseQty",type1);
+                purchaseMap.put("referenceAmount",type1cnt );
+                purchaseMap.put("budgetAmount", budgetAmount);
+                editPurchasePlanGroup.add(purchaseMap);
+            }
+        }
+
+        Map<String, Object> returnData = new HashMap<String, Object>();
+        returnData.put("editPurchasePlanGroup", editPurchasePlanGroup);
+        return returnData;
     }
 
     @ResponseBody
@@ -403,6 +516,19 @@ public class PurchasePlanController extends BaseController {
     @ResponseBody
     @RequiresPermissions("material:purchasePlan:withdrawApproval")
     public R withdrawApproval( String planNo){
+        System.out.println(planNo);
+        //int contactIds = service.save(customerContact);
+
+        return R.ok();
+    }
+
+    /**
+     * 关闭
+     */
+    @PostMapping( "/closeWin")
+    @ResponseBody
+    @RequiresPermissions("material:purchasePlan:closeWin")
+    public R closeWin( String planNo){
         System.out.println(planNo);
         //int contactIds = service.save(customerContact);
 

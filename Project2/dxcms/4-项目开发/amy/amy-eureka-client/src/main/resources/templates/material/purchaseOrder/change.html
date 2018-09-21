@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<form class="form-horizontal m-t" id="signupForm" style="margin-top:0px;">
+						<div class="form-group">
+							<div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+								<span th:text="${purchaseOrder.name}"></span>
+							</div>
+						</div>
+						<table class="purchaseOrder"><tbody>
+							<tr><td colspan="2" width="50%">供应商名称：<span th:text="${purchaseOrder.companyName}"></span></td>
+								<td width="25%">采购订单编号：<span th:text="${purchaseOrder.code}"></span></td>
+								<td width="25%"  class="r">采购计划单编号：<span th:text="${purchaseOrder.code}"></span></td>
+							</tr>
+							<tr><td>联系人：<span th:text="${purchaseOrder.code}"></span> </td>
+								<td>电话/传真：<span th:text="${purchaseOrder.code}"></span></td>
+								<td  colspan="2" rowspan="2"  class="r">意向协议（询价比报告单）编号<br><span th:text="${purchaseOrder.code}"></span></td>
+							</tr>
+							<tr>
+								<td>税率：<span th:text="${purchaseOrder.taxRate}"</td><td>付款方式及期限：<span th:text="${purchaseOrder.paymentType}"></span></td>
+							</tr>
+							<tr>paymentType
+								<td  colspan="2" class="rb">交货地点：<span th:text="${purchaseOrder.arriveAddress}"></span></td>
+								<td  colspan="2" class="rb">质量标准：<span th:text="${purchaseOrder.code}"></span></td>
+							</tr>
+						</tbody></table>
+						<table class="materialDetail"><tr>
+							<td class="l rb">序号</td>
+							<td class="rb">物资编码</td>
+							<td class="rb">物资名称</td>
+							<td class="rb">规格型号（技术要求）</td>
+							<td class="rb">单位</td>
+							<td class="rb">采购数量</td>
+							<td class="rb">含税单价</td>
+							<td class="rb">含税单价<br>（元）</td>
+							<td class="rb">金额<br>（元）</td>
+							<td class="rb">到货日期</td>
+							<td class="rb">需求计划编号</td>
+							<td class="rb">备注</td>
+						</tr>
+							<tr th:each="ma: ${materialList}">
+								<td class="l" th:text="${ma.code}">1</td>
+								<td  th:text="${ma.name}"></td>
+								<td  class="ltrbn"></td>
+								<td  class="ltrbn"></td>
+								<td  class="ltrbn"></td>
+								<td  class="ltrbn"></td>
+								<td  class="ltrbn"></td>
+								<td  class="ltrbn"></td>
+								<td  class="ltrbn"></td>
+								<td  class="ltrbn"></td>
+								<td  class="ltrbn"></td>
+								<td class="r"></td>
+							</tr>
+						</table>
+						<table class="purchaseOrder" style="margin-top:-1px;"><tbody>
+							<tr>
+								<td width="33.3%">注：请在发票备注栏内注明订单号</td>
+								<td style="text-align:right;"  width="33.3%">本页总金额：</td>
+								<td class="r"  width="33.4%"></td>
+							</tr>
+							<tr>
+								<td>货源分配计划单编号</td>
+								<td style="text-align:right;">订单总金额：</td>
+								<td class="r"></td></tr>
+							<tr><td></td><td></td><td class="r"></td></tr>
+							<tr  class="rb"><td></td><td class="rb"></td><td class="rb"></td></tr>
+						</tbody></table>
+						<div class="bills">
+							<div class="gridPanel">
+								<table id="requireApplyTable"></table>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-sm-1 control-label">编制人<span class="mustin">*</span></label>
+							<div class="col-sm-3"><input id="createUserName" name="createUserName" th:value="${purchaseOrder.createUserName}" class="form-control" type="text" readonly></div>
+
+							<label class="col-sm-1 control-label">编制日期<span class="mustin">*</span></label>
+							<div class="col-sm-3"><input id="createDate" name="createUserName" th:value="${purchaseOrder.createDate}" class="form-control" type="text" readonly>	</div>
+
+							<label class="col-sm-1 control-label">备注</label>
+							<div class="col-sm-3"><input id="remark" name="remark" th:value="${purchaseOrder.remark}" class="form-control" type="text"></div>
+						</div>
+						<div class="text-right form-group" >
+							<div class="columns pull-right col-md-4">
+								<button type="button" class="btn btn-success" id="saveBtn">
+									<i class="fa" aria-hidden="true"></i>保存
+								</button>
+								<button type="button" class="btn btn-success" onclick="commitApply()"  id="commitApplyBtn">
+									<i class="fa" aria-hidden="true"></i>提交审批
+								</button>
+								<button type="button" class="btn btn-success" onclick="cancelApply()">
+									<i class="fa" aria-hidden="true"></i>撤回审批
+								</button>
+								<button type="button" class="btn btn-success" onclick="closeTabWin()">
+									<i class="fa" aria-hidden="true"></i>关闭
+								</button>
+							</div>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:include="include::footer"></div>
+<link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
+<link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
+
+<link type="text/css" rel="stylesheet" href="/css/metroStyle/metroStyle.css">
+
+<script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
+<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>
+<script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script>
+
+<script type="text/javascript" src="/js/plugins/zTree/jquery.ztree.all.min.js"></script>
+<script type="text/javascript" src="/js/plugins/MultipleTreeSelect.js"></script>
+
+<script type="text/javascript" src="/js/appjs/material/requireApply/change.js"></script>
+
+</body>
+</html>

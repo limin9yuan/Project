@@ -169,13 +169,13 @@ function load() {
 						align : 'center',
 						formatter : function(value, row, index) {
 							var e = '<a class="btn btn-primary btn-sm ' + s_edit_h + '" href="#" mce_href="#" title="编辑" onclick="edit(\''
-								+ row.contractCode
+								+ row.id
 								+ '\')"><i class="fa fa-edit"></i></a> ';
 							var d = '<a class="btn btn-warning btn-sm ' + s_remove_h + '" href="#" title="删除"  mce_href="#" onclick="remove(\''
-								+ row.contractCode
+								+ row.id
 								+ '\')"><i class="fa fa-remove"></i></a> ';
 							var f = '<a class="btn btn-success btn-sm ' + s_check_h + '" href="#" title="查看"  mce_href="#" onclick="check(\''
-								+ row.contractCode
+								+ row.id
 								+ '\')"><i class="fa fa-search"></i></a> ';
 							return f + e + d;
 						}

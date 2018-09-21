@@ -1,26 +1,29 @@
-var materialData;//合同物资
-var sde;//富文本对象
-var jsonArray=[];//富文本key and value
+var materialData; //合同物资
+var sde; //富文本对象
+var jsonArray = []; //富文本key and value
+var jsonCompanyName = [];
+var jsonSuitBeans = [];
+var contractElementBeans = [];
 $().ready(function() {
-	
-	$("button[name=excelinsertbtn]").click(function () {
-	    layer.open({
-				type : 2,
-				title :'Excel导入',
-				maxmin : true,
-				shadeClose : false, // 点击遮罩关闭层
-				area : [ '500px', '250px' ],
-				content : '/ContractCreation/ContractCreation/importE',  // iframe的url
-				 btn: ['确定','取消'],
-	             yes: function(index, layero){
-	            	 window["layui-layer-iframe" + index].clickButtonFileEdit();
-	             }
-			});
+
+	$("button[name=excelinsertbtn]").click(function() {
+		layer.open({
+			type : 2,
+			title : 'Excel导入',
+			maxmin : true,
+			shadeClose : false, // 点击遮罩关闭层
+			area : [ '500px', '250px' ],
+			content : '/ContractCreation/ContractCreation/importE', // iframe的url
+			btn : [ '确定', '取消' ],
+			yes : function(index, layero) {
+				window["layui-layer-iframe" + index].clickButtonFileEdit();
+			}
+		});
 
 	})
-	loadDic("contract-currency","currencyTypeId");			//币别
-	loadDic("contract-tax-rate","taxRate");					//税率
-//	$("#currencyTypeId").chosen({ search_contains: true }); //支持模糊查询
+	loadDic("contract-currency", "currencyTypeId"); //币别
+	loadDic("contract-tax-rate", "taxRate"); //税率
+	//	$("#currencyTypeId").chosen({ search_contains: true }); //支持模糊查询
 	$('#timeMin').datetimepicker({ //初始化日期
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
@@ -29,31 +32,106 @@ $().ready(function() {
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
 	});
-		$.ajax({
-			type : "GET",
-			url : "/ContractCreation/ContractCreation/tree",
-			success : function(tree) {
-				tree.checked=false;
-				var defaults = {
-						zNodes : tree,
-						height : 233,
-						chkStyle: "radio",//设置单选树形 默认是多选
-						radioType : "all",
-						callback:{
-	                        onCheck: function (treeNode) {
-	                        //alert("my callback");
-	                        }
-	                    }
-					};
-					$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
-					$("#authorDeptName").drawMultipleTree(defaults);
-					
-					 $("#contractSuits").drawMultipleTree(defaults);
-					$("#performUserName").drawMultipleTree(defaults);
-					
-			}
-		});
-		
+
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+			'deptIds' : $("#suitCorpId").val()
+		},
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+
+			$("#suitCorpName").drawMultipleTree(defaults);
+
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+			'deptIds' : $("#authorCorpId").val()
+		},
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+
+			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
+
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+			'deptIds' : $("#authorDeptId").val()
+		},
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+
+			$("#authorDeptName").drawMultipleTree(defaults);
+
+		}
+	});
+
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editUserTree",
+		data : {
+			'deptIds' : $("#performUserId").val()
+		},
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+
+			$("#performUserName").drawMultipleTree(defaults);
+
+		}
+	});
+
+
 	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
@@ -66,9 +144,9 @@ $().ready(function() {
 	$('#myTab a[href="#contractMaterialDetail"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
-		
+
 	});
-	
+
 	// ————上传文件**********************************************
 	layui.use('upload', function() {
 		var $ = layui.jquery;
@@ -118,7 +196,33 @@ $().ready(function() {
 			},
 			done : function(r) {
 				if (r.code == 0) {
+					var tmpFile = {
+						"url" : r.url,
+						"type" : r.typeId,
+						"date" : r.createDate
+					};
+					if (window.localStorage.getItem("fileArray") == null) {
+						window.localStorage.setItem("fileArray", JSON.stringify(tmpFile));
+						window.localStorage.setItem("fileCount", 1);
+					} else {
+						var tmpArray = window.localStorage.getItem("fileArray");
+						var tmpCount = window.localStorage.getItem("fileCount");
+						tmpArray = tmpArray + "," + JSON.stringify(tmpFile);
+						window.localStorage.setItem("fileArray", tmpArray);
+						window.localStorage.setItem("fileCount", 1 + Number(tmpCount));
+						//						console.log(tmpCount);
+						console.log("[" + tmpArray.toString() + "]");
+						var fileInformation = "[" + tmpArray.toString() + "]";
+						update(fileInformation);
+					}
+					//					window.localStorage.getItem("fileArray");
+					if (fileCount == Number(window.localStorage.getItem("fileCount"))) {
+						window.localStorage.removeItem("fileArray")
+					}
+					//					console.log("["+window.localStorage.getItem("fileArray")+"]");
+
 					parent.layer.alert(r.msg);
+
 					if (r.serviceAttachment > 0) {
 					}
 				} else {
@@ -127,83 +231,154 @@ $().ready(function() {
 			}
 		});
 	});
-//	*****************************上传文件END
+	//	*****************************上传文件END
 	validateRule();
-	
+
 	jqxTreeGrid();
 });
 //得到合同物资数据test
 function dsds() {
-	var ctrls=sde.getControlById();
-	var ele=new Array();//value
-	var rite=new Array();//key
-	ctrls.forEach(ctrl=>{
-//		debugger;//debug断点
-//		这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
-//		console.log(ctrl.getValue());
+	var ctrls = sde.getControlById();
+	var ele = new Array(); //value
+	var rite = new Array(); //key
+	ctrls.forEach(ctrl => {
+		//		debugger;//debug断点
+		//		这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
+		//		console.log(ctrl.getValue());
 		ele.push(ctrl.getValue());
-		
-		var element=ctrl.getCtrlElement()//获取控制的Value节点
+
+		var element = ctrl.getCtrlElement() //获取控制的Value节点
 		rite.push(element.id);
-//		alert(element.id);
+	//		alert(element.id);
 	});
-	var jsonArray=[];
-	for(var i = 0;i<ele.length;i++){  
-      var json = {};  
-      for(var j=0;j<rite.length;j++){  
-          if(i==j){  
-              json.key = rite[j];  
-              json.value = ele[i];  
-              jsonArray.push(json);  
-          }  
-      }  
-  }
+	var jsonArray = [];
+	for (var i = 0; i < ele.length; i++) {
+		var json = {};
+		for (var j = 0; j < rite.length; j++) {
+			if (i == j) {
+				json.key = rite[j];
+				json.value = ele[i];
+				jsonArray.push(json);
+			}
+		}
+	}
 	console.log(jsonArray);
 	console.log(ele);
 	console.log(rite);
-	
+
 }
-$("#saveBtn").click(function (){
-	  if($("#signupForm").valid()){
-		  document.getElementById("uploadFile").click();
-		  
-			var ctrls=sde.getControlById();
-			var ele=new Array();//value
-			var rite=new Array();//key
-			ctrls.forEach(ctrl=>{
-//				debugger;//debug断点
-//				这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
-//				console.log(ctrl.getValue());
-				ele.push(ctrl.getValue());
-				
-				var element=ctrl.getCtrlElement()//获取控制的Value节点
-				rite.push(element.id);
-//				alert(element.id);
-			});
-			
-			for(var i = 0;i<ele.length;i++){  
-		        var json = {};  
-		        for(var j=0;j<rite.length;j++){  
-		            if(i==j){  
-		                json.key = rite[j];  
-		                json.value = ele[i];  
-		                jsonArray.push(json);  
-		            }  
-		        }  
-		    }
-			console.log(jsonArray);
-		  setTimeout('update()', 500); //延迟执行save()方法5毫秒
-	   }
-	})
-function update() {
+$("#saveBtn").click(function() {
+	if ($("#signupForm").valid()) {
+		document.getElementById("uploadFile").click();
+
+		var ctrls = sde.getControlById();
+		var ele = new Array(); //value
+		var rite = new Array(); //key
+		ctrls.forEach(ctrl => {
+			//				debugger;//debug断点
+			//				这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
+			//				console.log(ctrl.getValue());
+			ele.push(ctrl.getValue());
+
+			var element = ctrl.getCtrlElement() //获取控制的Value节点
+			rite.push(element.id);
+		//				alert(element.id);
+		});
+
+		for (var i = 0; i < ele.length; i++) {
+			var json = {};
+			for (var j = 0; j < rite.length; j++) {
+				if (i == j) {
+					json.key = rite[j];
+					json.value = ele[i];
+					jsonArray.push(json);
+				}
+			}
+		}
+		//			console.log(jsonArray);
+
+		//富文本全部text
+		var div = document.createElement('div');
+		div.innerHTML = sde.html();
+		div.innerText //即为纯文本
+
+		var myDate = new Date();
+
+		contractElementBeans = [ {
+			"isActived" : true,
+			"createDate" : myDate.toLocaleDateString(),
+			jsonArray
+		} ];
+		console.log(JSON.stringify(contractElementBeans));
+		//供货公司
+		var deliverCompanyNameArr = new Array();
+		var deliverCompanyName = $("#deliverCompanyName").val();
+		deliverCompanyNameArr = deliverCompanyName.split(",");
+		var deliverCompanyIdArr = new Array();
+		var deliverCompanyId = $("#deliverCompanyId").val();
+		deliverCompanyIdArr = deliverCompanyId.split(",");
+		jsonCompanyName = new Array();
+		for (var i = 0; i < deliverCompanyNameArr.length; i++) {
+			var jsons = {};
+			for (var j = 0; j < deliverCompanyIdArr.length; j++) {
+				if (i == j) {
+					jsons.deliverCompanyId = deliverCompanyIdArr[j];
+					jsons.deliverCompanyName = deliverCompanyNameArr[i];
+					jsonCompanyName.push(jsons);
+				}
+			}
+		}
+		//			console.log("供货公司");
+		//			console.log(jsonCompanyName);
+
+		//适用机构
+		var contractSuitBeansArr = new Array();
+		var contractSuitBeans = $("#contractSuitBeans").val();
+		contractSuitBeansArr = contractSuitBeans.split(",");
+
+		var suitCorpIdArr = new Array();
+		var suitCorpId = $("#contractSuitBeans").drawMultipleTree("getChecks", "val");
+		suitCorpIdArr = suitCorpId.split(",");
+		$("#suitCorpId").val(suitCorpId);
+		jsonSuitBeans = new Array();
+		for (var i = 0; i < contractSuitBeansArr.length; i++) {
+			var jsonc = {};
+			for (var j = 0; j < suitCorpIdArr.length; j++) {
+				if (i == j) {
+					jsonc.deliverCompanyId = suitCorpIdArr[j];
+					jsonc.deliverCompanyName = contractSuitBeansArr[i];
+					jsonSuitBeans.push(jsonc);
+				}
+			}
+		}
+	//			console.log("适用机构");
+	//			console.log(jsonSuitBeans);
+	//		  setTimeout('update()', 500); //延迟执行save()方法5毫秒
+	}
+})
+function update(fileInformation) {
+	//富文本全部text
+	var div = document.createElement('div');
+	div.innerHTML = sde.html();
+	div.innerText //即为纯文本
+	var signupForm = $('#signupForm').serializeArray();
+	console.log(signupForm);
+	var params = {
+		"htmlText" : div.innerText,
+		"contractId":$("#id").val(),
+		"contractMaterialBeans" : JSON.stringify(materialData),
+		"signupForm" : JSON.stringify(signupForm),
+		"fileInformation" : fileInformation,
+		"jsonCompanyName" : JSON.stringify(jsonCompanyName),
+		"jsonSuitBeans" : JSON.stringify(jsonSuitBeans),
+		"richTextKVJson" : JSON.stringify(contractElementBeans)
+	};
 	//合同物资信息
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/ContractCreation/ContractCreation/update",
-		data : {"rowData" : JSON.stringify(materialData),
-			"signupForm":$('#signupForm').serialize(),
-			"richTextKV":JSON.stringify(jsonArray)},// 你的formid
+		data : params, // 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -221,20 +396,20 @@ function update() {
 
 }
 //日期判断
-$.validator.addMethod("compareDate",function(value,element){
+$.validator.addMethod("compareDate", function(value, element) {
 	var assigntime = $("#dateFrom").val();
-    var deadlinetime = $("#dateTo").val();
-    var reg = new RegExp('-','g');
-    assigntime = assigntime.replace(reg,'/');//正则替换
-    deadlinetime = deadlinetime.replace(reg,'/');
-    assigntime = new Date(parseInt(Date.parse(assigntime),10));
-    deadlinetime = new Date(parseInt(Date.parse(deadlinetime),10));
-    if(assigntime>deadlinetime){
-        return false;
-    }else{
-        return true;
-    }
-},"<font  color='#E47068'><strong>结束日期必须大于开始日期</strong></font>");
+	var deadlinetime = $("#dateTo").val();
+	var reg = new RegExp('-', 'g');
+	assigntime = assigntime.replace(reg, '/'); //正则替换
+	deadlinetime = deadlinetime.replace(reg, '/');
+	assigntime = new Date(parseInt(Date.parse(assigntime), 10));
+	deadlinetime = new Date(parseInt(Date.parse(deadlinetime), 10));
+	if (assigntime > deadlinetime) {
+		return false;
+	} else {
+		return true;
+	}
+}, "<font  color='#E47068'><strong>结束日期必须大于开始日期</strong></font>");
 //打开项目页面
 function openProject() {
 	layer.open({
@@ -250,13 +425,13 @@ function openContractDelivers() {
 		type : 2,
 		title : "选择供货信息",
 		area : [ '60%', '90%' ],
-		content : "/ContractCreation/ContractCreation/contractDelivers"
+		content : "/ContractCreation/ContractCreation/contractDeliverBeans"
 	})
 }
 //判断选择的币种改变页面的其他单位
 $('#currencyTypeId').change(function() {
 	var currencyTypeId = $("#currencyTypeId").val();
-//		alert(currencyTypeId);
+	//		alert(currencyTypeId);
 	if (currencyTypeId == "RMB") {
 		$("#performanceBond").attr("placeholder", "元");
 		$("#warrantyBond").attr("placeholder", "元");
@@ -278,94 +453,94 @@ $('#currencyTypeId').change(function() {
 //2、此项不选中，合同总金额可以填写，选中，合同总金额来源于物料明细数量和单价计算金额
 function triggerCheckbox(checkbox) {
 	if (checkbox.checked == true) {
-		 $("#contracM").show();//显示合物料明细
-		 $("#totalMoney").attr("placeholder","请导入合同物资数据");
-		 $("#totalMoney").attr("readonly","readonly");//设置合同总金额为不可输入
-		 
+		$("#contracM").show(); //显示合物料明细
+		$("#totalMoney").attr("placeholder", "请导入合同物资数据");
+		$("#totalMoney").attr("readonly", "readonly"); //设置合同总金额为不可输入
+
 	} else {
-		 $("#contracM").hide();//隐藏合同物料明细
-		 $("#totalMoney").attr("placeholder","元");
-		 $("#totalMoney").removeAttr("readonly");
+		$("#contracM").hide(); //隐藏合同物料明细
+		$("#totalMoney").attr("placeholder", "元");
+		$("#totalMoney").removeAttr("readonly");
 	}
 }
 
 
 
-function jqxTreeGrid(){
+function jqxTreeGrid() {
 	var source = {
-			dataType : "json",
-			//设置字段名称，name和后台实体对应
-			dataFields : [
-				{
-					name : "id",
-					type : "string"
-				}, //id
-				{
-					name : "suitCorpId",
-					type : "string"
-				}, //适用机构
+		dataType : "json",
+		//设置字段名称，name和后台实体对应
+		dataFields : [
+			{
+				name : "id",
+				type : "string"
+			}, //id
+			{
+				name : "suitCorpId",
+				type : "string"
+			}, //适用机构
 
-				{
-					name : "materialName",
-					type : "string"
-				}, //物料名称
-				{
-					name : "materilaCode",
-					type : "string"
-				}, //物料编码
-				{
-					name : "parentId",
-					type : "string"
-				}, //父id
-				//					             { name: "specification", type: "string" },//规格型号
+			{
+				name : "materialName",
+				type : "string"
+			}, //物料名称
+			{
+				name : "materilaCode",
+				type : "string"
+			}, //物料编码
+			{
+				name : "parentId",
+				type : "string"
+			}, //父id
+			//					             { name: "specification", type: "string" },//规格型号
 
-				{
-					name : "materialUnitName",
-					type : "string"
-				}, //单位
-				{
-					name : "qty",
-					type : "double"
-				}, //数量
+			{
+				name : "materialUnitName",
+				type : "string"
+			}, //单位
+			{
+				name : "qty",
+				type : "double"
+			}, //数量
 
-				{
-					name : "price",
-					type : "BigDecimal"
-				}, //含税单价（元）
-				{
-					name : "dateFrom",
-					type : "Date"
-				}, //有效起始日期
+			{
+				name : "price",
+				type : "BigDecimal"
+			}, //含税单价（元）
+			{
+				name : "dateFrom",
+				type : "Date"
+			}, //有效起始日期
 
-				{
-					name : "dateTo",
-					type : "Date"
-				}, //有效截止日期
-				{
-					name : "remark",
-					type : "string"
-				}, //备注
+			{
+				name : "dateTo",
+				type : "Date"
+			}, //有效截止日期
+			{
+				name : "remark",
+				type : "string"
+			}, //备注
 
-				{
-					name : "materilaCode",
-					type : "string"
-				}, //子id  合同id
-			],
-			hierarchy : {
-				//					                root: "MaterilaCode",  //设置孩子节点？
-				keyDataField : {
-					name : 'materilaCode'
-				},
-				parentDataField : {
-					name : 'parentId'
-				}
+			{
+				name : "materilaCode",
+				type : "string"
+			}, //子id  合同id
+		],
+		hierarchy : {
+			//					                root: "MaterilaCode",  //设置孩子节点？
+			keyDataField : {
+				name : 'materilaCode'
 			},
-			url : "/ContractCreation/ContractCreation/test", //数据请求链接
-//			localData : data,
-			id : "materilaCode", //设置主键
+			parentDataField : {
+				name : 'parentId'
+			}
+		},
+		url : "/ContractCreation/ContractCreation/materila/" + $("#id").val(), //数据请求链接
+		//			localData : data,
+		id : "materilaCode", //设置主键
 
 
-		};
+	};
 
 	var dataAdapter = new $.jqx.dataAdapter(source); //加载source
 	function loadTable() {
@@ -416,12 +591,12 @@ function jqxTreeGrid(){
 						align : "center",
 						cellsAlign : 'center',
 					},
-//					{
-//						text : "规格型号",
-//						dataField : "specification",
-//						align : "center",
-//						cellsAlign : 'center',
-//					},
+					//					{
+					//						text : "规格型号",
+					//						dataField : "specification",
+					//						align : "center",
+					//						cellsAlign : 'center',
+					//					},
 					//						            {
 					//							           text:"单位",
 					//							           dataField:"materialUnitName",
@@ -434,7 +609,7 @@ function jqxTreeGrid(){
 						text : "数量",
 						dataField : "qty",
 						align : "center",
-						cellsAlign: 'center',
+						cellsAlign : 'center',
 					},
 					{
 						text : "含税单价（元）",
@@ -460,115 +635,115 @@ function jqxTreeGrid(){
 						align : "center",
 						cellsAlign : 'center',
 					}
-//           {
-//             text:"操作",
-//             dataField:'toolBar',
-//             cellsAlign: 'center',
-//             align: "center",
-////             width:averageW,
-//             width:'200px',
-//             cellsRenderer:function(row,clomun,value){
-//               var toolBtn= '<div class="custom-btn-group">'+
-//                               '<button class="custom-btn-small add-btn" title="添加" data-toggle="modal" data-target=".addRow">'+
-//                                 '<i class="fa fa-plus" aria-hidden="true"></i>'+
-//                               '</button>'+
-//                               '<button class="custom-btn-small edit-btn" title="编辑" data-toggle="modal" data-target=".edit-modal">'+
-//                                 '<i class="fa fa-pencil" aria-hidden="true"></i>'+
-//                               '</button>'+
-//                               '<button class="custom-btn-small del-btn" title="删除">'+
-//                                 '<i class="fa fa-trash" aria-hidden="true"></i>'+
-//                               '</button>'+
-//                             '</div>';
-//               return toolBtn;
-//               
-//             }
-//           }
-         ]
-     });
-   }
-   loadTable();
+				//           {
+				//             text:"操作",
+				//             dataField:'toolBar',
+				//             cellsAlign: 'center',
+				//             align: "center",
+				////             width:averageW,
+				//             width:'200px',
+				//             cellsRenderer:function(row,clomun,value){
+				//               var toolBtn= '<div class="custom-btn-group">'+
+				//                               '<button class="custom-btn-small add-btn" title="添加" data-toggle="modal" data-target=".addRow">'+
+				//                                 '<i class="fa fa-plus" aria-hidden="true"></i>'+
+				//                               '</button>'+
+				//                               '<button class="custom-btn-small edit-btn" title="编辑" data-toggle="modal" data-target=".edit-modal">'+
+				//                                 '<i class="fa fa-pencil" aria-hidden="true"></i>'+
+				//                               '</button>'+
+				//                               '<button class="custom-btn-small del-btn" title="删除">'+
+				//                                 '<i class="fa fa-trash" aria-hidden="true"></i>'+
+				//                               '</button>'+
+				//                             '</div>';
+				//               return toolBtn;
+				//               
+				//             }
+				//           }
+				]
+			});
+	}
+	loadTable();
 //   $(window).resize(function(){
 //     loadTable();
 //   })
 }
 
 
-function ImportJqxTreeGrid(data){
-	materialData=data;
+function ImportJqxTreeGrid(data) {
+	materialData = data;
 	var source = {
-			dataType : "json",
-			//设置字段名称，name和后台实体对应
-			dataFields : [
-				{
-					name : "id",
-					type : "string"
-				}, //id
-				{
-					name : "suitCorpId",
-					type : "string"
-				}, //适用机构
+		dataType : "json",
+		//设置字段名称，name和后台实体对应
+		dataFields : [
+			{
+				name : "id",
+				type : "string"
+			}, //id
+			{
+				name : "suitCorpId",
+				type : "string"
+			}, //适用机构
 
-				{
-					name : "materialName",
-					type : "string"
-				}, //物料名称
-				{
-					name : "materilaCode",
-					type : "string"
-				}, //物料编码
-				{
-					name : "parentId",
-					type : "string"
-				}, //父id
-				//					             { name: "specification", type: "string" },//规格型号
+			{
+				name : "materialName",
+				type : "string"
+			}, //物料名称
+			{
+				name : "materilaCode",
+				type : "string"
+			}, //物料编码
+			{
+				name : "parentId",
+				type : "string"
+			}, //父id
+			//					             { name: "specification", type: "string" },//规格型号
 
-				{
-					name : "materialUnitName",
-					type : "string"
-				}, //单位
-				{
-					name : "qty",
-					type : "double"
-				}, //数量
+			{
+				name : "materialUnitName",
+				type : "string"
+			}, //单位
+			{
+				name : "qty",
+				type : "double"
+			}, //数量
 
-				{
-					name : "price",
-					type : "BigDecimal"
-				}, //含税单价（元）
-				{
-					name : "dateFrom",
-					type : "Date"
-				}, //有效起始日期
+			{
+				name : "price",
+				type : "BigDecimal"
+			}, //含税单价（元）
+			{
+				name : "dateFrom",
+				type : "Date"
+			}, //有效起始日期
 
-				{
-					name : "dateTo",
-					type : "Date"
-				}, //有效截止日期
-				{
-					name : "remark",
-					type : "string"
-				}, //备注
+			{
+				name : "dateTo",
+				type : "Date"
+			}, //有效截止日期
+			{
+				name : "remark",
+				type : "string"
+			}, //备注
 
-				{
-					name : "materilaCode",
-					type : "string"
-				}, //子id  合同id
-			],
-			hierarchy : {
-				//					                root: "MaterilaCode",  //设置孩子节点？
-				keyDataField : {
-					name : 'materilaCode'
-				},
-				parentDataField : {
-					name : 'parentId'
-				}
+			{
+				name : "materilaCode",
+				type : "string"
+			}, //子id  合同id
+		],
+		hierarchy : {
+			//					                root: "MaterilaCode",  //设置孩子节点？
+			keyDataField : {
+				name : 'materilaCode'
 			},
-//			url : "/ContractCreation/ContractCreation/test", //数据请求链接
-			localData : data,
-			id : "materilaCode", //设置主键
+			parentDataField : {
+				name : 'parentId'
+			}
+		},
+		//			url : "/ContractCreation/ContractCreation/test", //数据请求链接
+		localData : data,
+		id : "materilaCode", //设置主键
 
 
-		};
+	};
 
 	var dataAdapter = new $.jqx.dataAdapter(source); //加载source
 	function loadTable() {
@@ -613,12 +788,12 @@ function ImportJqxTreeGrid(data){
 						align : "center",
 						cellsAlign : 'center',
 					},
-//					{
-//						text : "规格型号",
-//						dataField : "specification",
-//						align : "center",
-//						cellsAlign : 'center',
-//					},
+					//					{
+					//						text : "规格型号",
+					//						dataField : "specification",
+					//						align : "center",
+					//						cellsAlign : 'center',
+					//					},
 					//						            {
 					//							           text:"单位",
 					//							           dataField:"materialUnitName",
@@ -631,7 +806,7 @@ function ImportJqxTreeGrid(data){
 						text : "数量",
 						dataField : "qty",
 						align : "center",
-						cellsAlign: 'center',
+						cellsAlign : 'center',
 					},
 					{
 						text : "含税单价（元）",
@@ -657,33 +832,33 @@ function ImportJqxTreeGrid(data){
 						align : "center",
 						cellsAlign : 'center',
 					}
-//           {
-//             text:"操作",
-//             dataField:'toolBar',
-//             cellsAlign: 'center',
-//             align: "center",
-////             width:averageW,
-//             width:'200px',
-//             cellsRenderer:function(row,clomun,value){
-//               var toolBtn= '<div class="custom-btn-group">'+
-//                               '<button class="custom-btn-small add-btn" title="添加" data-toggle="modal" data-target=".addRow">'+
-//                                 '<i class="fa fa-plus" aria-hidden="true"></i>'+
-//                               '</button>'+
-//                               '<button class="custom-btn-small edit-btn" title="编辑" data-toggle="modal" data-target=".edit-modal">'+
-//                                 '<i class="fa fa-pencil" aria-hidden="true"></i>'+
-//                               '</button>'+
-//                               '<button class="custom-btn-small del-btn" title="删除">'+
-//                                 '<i class="fa fa-trash" aria-hidden="true"></i>'+
-//                               '</button>'+
-//                             '</div>';
-//               return toolBtn;
-//               
-//             }
-//           }
-         ]
-     });
-   }
-   loadTable();
+				//           {
+				//             text:"操作",
+				//             dataField:'toolBar',
+				//             cellsAlign: 'center',
+				//             align: "center",
+				////             width:averageW,
+				//             width:'200px',
+				//             cellsRenderer:function(row,clomun,value){
+				//               var toolBtn= '<div class="custom-btn-group">'+
+				//                               '<button class="custom-btn-small add-btn" title="添加" data-toggle="modal" data-target=".addRow">'+
+				//                                 '<i class="fa fa-plus" aria-hidden="true"></i>'+
+				//                               '</button>'+
+				//                               '<button class="custom-btn-small edit-btn" title="编辑" data-toggle="modal" data-target=".edit-modal">'+
+				//                                 '<i class="fa fa-pencil" aria-hidden="true"></i>'+
+				//                               '</button>'+
+				//                               '<button class="custom-btn-small del-btn" title="删除">'+
+				//                                 '<i class="fa fa-trash" aria-hidden="true"></i>'+
+				//                               '</button>'+
+				//                             '</div>';
+				//               return toolBtn;
+				//               
+				//             }
+				//           }
+				]
+			});
+	}
+	loadTable();
 //   $(window).resize(function(){
 //     loadTable();
 //   })
@@ -700,16 +875,16 @@ function ImportJqxTreeGrid(data){
 //    
 //     
 //     $("#treeTable").jqxTreeGrid('addRow', null, {}, 'first', rowKey);//参数解释：'addRow' ——>表明这是一个增加行的方法。
-   //message.id ——>要增加数据的主键id（如果这个参数设置为null，则新加数据的主键id就会调用jqxTreeGrid默认的方法把父id（选中行的id）加1后作为增加数据的主键id!
-   //message ——> 要增加的数据。 
-   //'last' ——> 设置新增的数据在表格中显示的位置（last:将新增的数据放在所选节点下的最后一行。first：将新增的数据放在所选节点下的第一行） 
-   //rowKey ——> 所选节点的id（父节点的id，主要是判断新增的数据该放在哪个节点（行）下）
+//message.id ——>要增加数据的主键id（如果这个参数设置为null，则新加数据的主键id就会调用jqxTreeGrid默认的方法把父id（选中行的id）加1后作为增加数据的主键id!
+//message ——> 要增加的数据。 
+//'last' ——> 设置新增的数据在表格中显示的位置（last:将新增的数据放在所选节点下的最后一行。first：将新增的数据放在所选节点下的第一行） 
+//rowKey ——> 所选节点的id（父节点的id，主要是判断新增的数据该放在哪个节点（行）下）
 //   $("#treeTable").jqxTreeGrid('updateRow', rowKey, {});//参数解释：updateRow ——> 表明这是一个更新方法
-   //rowKey ——> 所选行的主键id
-   //message ——> 更新的数据
+//rowKey ——> 所选行的主键id
+//message ——> 更新的数据
 //   $("#treeTable").jqxTreeGrid('deleteRow',rowKey);//参数解释：
-   //deleteRow ——> 表明这是一个删除方法
-   //rowKey —— > 要删除节点（行）的主键id
+//deleteRow ——> 表明这是一个删除方法
+//rowKey —— > 要删除节点（行）的主键id
 // });
 
 
@@ -718,125 +893,125 @@ function ImportJqxTreeGrid(data){
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
-		ignore: ":hidden:not(select)",
-			rules : {
-				contractName:{
-					//合同名称
-					required : true
-				},
-				contractCode:{
-					//合同/意向协议编号*
-					required : true
-				},
-				currencyTypeId:{
-					//结算币种
-					required : true
-				},
-				taxRate:{
-					//税率
-					required : true
-				},
-				contractSuits:{
-					//生效机构
-					required : true
-				},
-				contractDelivers:{
-					//供货公司
-					required : true
-				},
-				authorCorpName:{
-					//签订机构
-					required : true
-				},
-				authorDeptName:{
-					//签订部门
-					required : true
-				},
-				performUserName:{
-					//执行人
-					required : true
-				},
-				performanceBond:{
-					//履约保证金 >=0
-					number:true,
-					rangelength:[0,18]
-				},
-				warrantyBond:{
-					//质保金 >=0
-					number:true,
-					rangelength:[0,18]
-				},
-				totalMoney:{
-					//合同总金额 >=0
-					number:true,
-					rangelength:[0,18]
-				},
-				timeMin : {
-					compareDate: true
-				},
-				timeMax : {
-					compareDate: true
-				}
+		ignore : ":hidden:not(select)",
+		rules : {
+			contractName : {
+				//合同名称
+				required : true
 			},
-			messages : {
-				contractName:{
-					//合同名称
-					required : icon + "合同名称不能为空"
-				},
-				contractCode:{
-					//合同/意向协议编号*
-					required : icon + "合同/意向协议编号不能为空"
-				},
-				currencyTypeId:{
-					//结算币种
-					required : icon + "结算币种不能为空"
-				},
-				taxRate:{
-					//税率
-					required : icon + "税率不能为空"
-				},
-				contractSuits:{
-					//生效机构
-					required : icon + "生效机构不能为空"
-				},
-				contractDelivers:{
-					//供货公司
-					required : icon + "供货公司不能为空"
-				},
-				authorCorpName:{
-					//签订机构
-					required : icon + "签订机构不能为空"
-				},
-				authorDeptName:{
-					//签订部门
-					required : icon + "签订部门不能为空"
-				},
-				performUserName:{
-					//执行人
-					required : icon + "执行人不能为为空"
-				},
-				performanceBond:{
-					//履约保证金 >=0
-					number:icon + "请输入正确的数字金额",
-					rangelength:icon + "输入数字不能小于0同时不能大于18位"
-				},
-				warrantyBond:{
-					//质保金 >=0
-					number:icon + "请输入正确的数字金额",
-					rangelength:icon + "输入数字不能小于0同时不能大于18位"
-				},
-				totalMoney:{
-					//合同总金额 >=0
-					number:icon + "请输入正确的数字金额",
-					rangelength:icon + "输入数字不能小于0同时不能大于18位"
-				},
-				timeMin : {
-					compareDate : icon + "开始时间不能大于结束时间"
-				},
-				timeMax : {
-					compareDate : icon + "结束时间不能小于开始时间"
-				}
+			contractCode : {
+				//合同/意向协议编号*
+				required : true
+			},
+			currencyTypeId : {
+				//结算币种
+				required : true
+			},
+			taxRate : {
+				//税率
+				required : true
+			},
+			suitCorpName : {
+				//生效机构
+				required : true
+			},
+			contractDeliverBeans : {
+				//供货公司
+				required : true
+			},
+			authorCorpName : {
+				//签订机构
+				required : true
+			},
+			authorDeptName : {
+				//签订部门
+				required : true
+			},
+			performUserName : {
+				//执行人
+				required : true
+			},
+			performanceBond : {
+				//履约保证金 >=0
+				number : true,
+				rangelength : [ 0, 18 ]
+			},
+			warrantyBond : {
+				//质保金 >=0
+				number : true,
+				rangelength : [ 0, 18 ]
+			},
+			totalMoney : {
+				//合同总金额 >=0
+				number : true,
+				rangelength : [ 0, 18 ]
+			},
+			timeMin : {
+				compareDate : true
+			},
+			timeMax : {
+				compareDate : true
 			}
+		},
+		messages : {
+			contractName : {
+				//合同名称
+				required : icon + "合同名称不能为空"
+			},
+			contractCode : {
+				//合同/意向协议编号*
+				required : icon + "合同/意向协议编号不能为空"
+			},
+			currencyTypeId : {
+				//结算币种
+				required : icon + "结算币种不能为空"
+			},
+			taxRate : {
+				//税率
+				required : icon + "税率不能为空"
+			},
+			suitCorpName : {
+				//生效机构
+				required : icon + "生效机构不能为空"
+			},
+			contractDeliverBeans : {
+				//供货公司
+				required : icon + "供货公司不能为空"
+			},
+			authorCorpName : {
+				//签订机构
+				required : icon + "签订机构不能为空"
+			},
+			authorDeptName : {
+				//签订部门
+				required : icon + "签订部门不能为空"
+			},
+			performUserName : {
+				//执行人
+				required : icon + "执行人不能为为空"
+			},
+			performanceBond : {
+				//履约保证金 >=0
+				number : icon + "请输入正确的数字金额",
+				rangelength : icon + "输入数字不能小于0同时不能大于18位"
+			},
+			warrantyBond : {
+				//质保金 >=0
+				number : icon + "请输入正确的数字金额",
+				rangelength : icon + "输入数字不能小于0同时不能大于18位"
+			},
+			totalMoney : {
+				//合同总金额 >=0
+				number : icon + "请输入正确的数字金额",
+				rangelength : icon + "输入数字不能小于0同时不能大于18位"
+			},
+			timeMin : {
+				compareDate : icon + "开始时间不能大于结束时间"
+			},
+			timeMax : {
+				compareDate : icon + "结束时间不能小于开始时间"
+			}
+		}
 	});
 }
 
@@ -950,124 +1125,124 @@ function richText() {
 		}, {
 			name : 'sde-toolbar-editor',
 			title : '编辑',
-			items : [ 
-//				{
-//				name : 'sde-toolbar-editor-history',
-//				title : '历史记录',
-//				items : [ {
-//					name : 'drafts',
-//					title : '草稿箱'
-//				}, {
-//					name : 'undo',
-//					title : '撤销'
-//				}, '|', {
-//					name : 'redo',
-//					title : '恢复'
-//				} ]
-//			}, 
-			{
-				name : 'sde-toolbar-editor-clipboard',
-				title : '剪切板',
-				items : [ {
-					name : 'paste',
-					title : '粘贴'
+			items : [
+				//				{
+				//				name : 'sde-toolbar-editor-history',
+				//				title : '历史记录',
+				//				items : [ {
+				//					name : 'drafts',
+				//					title : '草稿箱'
+				//				}, {
+				//					name : 'undo',
+				//					title : '撤销'
+				//				}, '|', {
+				//					name : 'redo',
+				//					title : '恢复'
+				//				} ]
+				//			}, 
+				{
+					name : 'sde-toolbar-editor-clipboard',
+					title : '剪切板',
+					items : [ {
+						name : 'paste',
+						title : '粘贴'
+					}, {
+						name : 'copy',
+						title : '复制'
+					}, '|', {
+						name : 'cut',
+						title : '剪切'
+					} ]
 				}, {
-					name : 'copy',
-					title : '复制'
-				}, '|', {
-					name : 'cut',
-					title : '剪切'
+					name : 'sde-toolbar-editor-fonts',
+					title : '字体',
+					items : [ {
+						name : 'fontfamily',
+						title : '字体'
+					}, {
+						name : 'removeformat',
+						title : '清除格式'
+					}, {
+						name : 'autotypeset',
+						title : '自动格式化'
+					}, {
+						name : 'formatmatch',
+						title : '格式刷'
+					}, '|', {
+						name : 'fontsize',
+						title : '字号'
+					}, {
+						name : 'upsize',
+						title : '增大字体'
+					}, {
+						name : 'downsize',
+						title : '缩小字体'
+					}, {
+						name : 'subscript',
+						title : '上标'
+					}, {
+						name : 'superscript',
+						title : '下标'
+					}, {
+						name : 'bold',
+						title : '加粗'
+					}, {
+						name : 'italic',
+						title : '倾斜'
+					}, {
+						name : 'underline',
+						title : '下划线'
+					}, {
+						name : 'strikethrough',
+						title : '删除线'
+					}, {
+						name : 'forecolor',
+						title : '文字颜色'
+					}, {
+						name : 'backcolor',
+						title : '背景颜色'
+					} ]
+				}, {
+					name : 'sde-toolbar-editor-paragraphs',
+					title : '段落',
+					items : [ {
+						name : 'justifyleft',
+						title : '向左对齐'
+					}, {
+						name : 'justifycenter',
+						title : '居中对齐'
+					}, {
+						name : 'justifyright',
+						title : '向右对齐'
+					}, {
+						name : 'justifyjustify',
+						title : '两端对齐'
+					}, {
+						name : 'blockquote',
+						title : '引用'
+					}, {
+						name : 'blockindent',
+						title : '增加缩进'
+					}, {
+						name : 'blockoutdent',
+						title : '减小缩进'
+					}, '|', {
+						name : 'unorderedlist',
+						title : '无序编号'
+					}, {
+						name : 'orderedlist',
+						title : '有序编号'
+					}, {
+						name : 'rowspacingtop',
+						title : '段前距'
+					}, {
+						name : 'rowspacingbottom',
+						title : '段后距'
+					}, {
+						name : 'lineheight',
+						title : '行高'
+					} ]
 				} ]
-			}, {
-				name : 'sde-toolbar-editor-fonts',
-				title : '字体',
-				items : [ {
-					name : 'fontfamily',
-					title : '字体'
-				}, {
-					name : 'removeformat',
-					title : '清除格式'
-				}, {
-					name : 'autotypeset',
-					title : '自动格式化'
-				}, {
-					name : 'formatmatch',
-					title : '格式刷'
-				}, '|', {
-					name : 'fontsize',
-					title : '字号'
-				}, {
-					name : 'upsize',
-					title : '增大字体'
-				}, {
-					name : 'downsize',
-					title : '缩小字体'
-				}, {
-					name : 'subscript',
-					title : '上标'
-				}, {
-					name : 'superscript',
-					title : '下标'
-				}, {
-					name : 'bold',
-					title : '加粗'
-				}, {
-					name : 'italic',
-					title : '倾斜'
-				}, {
-					name : 'underline',
-					title : '下划线'
-				}, {
-					name : 'strikethrough',
-					title : '删除线'
-				}, {
-					name : 'forecolor',
-					title : '文字颜色'
-				}, {
-					name : 'backcolor',
-					title : '背景颜色'
-				} ]
-			}, {
-				name : 'sde-toolbar-editor-paragraphs',
-				title : '段落',
-				items : [ {
-					name : 'justifyleft',
-					title : '向左对齐'
-				}, {
-					name : 'justifycenter',
-					title : '居中对齐'
-				}, {
-					name : 'justifyright',
-					title : '向右对齐'
-				}, {
-					name : 'justifyjustify',
-					title : '两端对齐'
-				}, {
-					name : 'blockquote',
-					title : '引用'
-				}, {
-					name : 'blockindent',
-					title : '增加缩进'
-				}, {
-					name : 'blockoutdent',
-					title : '减小缩进'
-				}, '|', {
-					name : 'unorderedlist',
-					title : '无序编号'
-				}, {
-					name : 'orderedlist',
-					title : '有序编号'
-				}, {
-					name : 'rowspacingtop',
-					title : '段前距'
-				}, {
-					name : 'rowspacingbottom',
-					title : '段后距'
-				}, {
-					name : 'lineheight',
-					title : '行高'
-				} ]
-			} ]
 		}, {
 			name : 'sde-toolbar-insert',
 			title : '插入',
@@ -1145,15 +1320,15 @@ function richText() {
 					name : 'kityformula',
 					title : '公式'
 				} ]
-			}, 
-//			{
-//				name : 'sde-toolbar-insert-blockcomment',
-//				title : '批注',
-//				items : [ {
-//					name : 'blockcomment',
-//					title : '批注'
-//				} ]
-//			} 
+			},
+			//			{
+			//				name : 'sde-toolbar-insert-blockcomment',
+			//				title : '批注',
+			//				items : [ {
+			//					name : 'blockcomment',
+			//					title : '批注'
+			//				} ]
+			//			} 
 			]
 		}, {
 			name : 'sde-toolbar-table',
@@ -1393,7 +1568,7 @@ function richText() {
 			} ]
 		} ]
 	};
-	
+
 	sde = new SDE(options);
 //	sde.addListener('ready', function() { //打开页面加载
 //		var ctrl = sde.getControlById(); //获得页面控件数据数组
@@ -1422,7 +1597,7 @@ function richText() {
 //				alert("error");
 //			}
 //		});
-	//		debugger;//js执行在这么会自己停止的，然后你可以在控制台下输出ctrls，看看里面有什么
+//		debugger;//js执行在这么会自己停止的，然后你可以在控制台下输出ctrls，看看里面有什么
 //	});
 //	window.sde = sde;
 }

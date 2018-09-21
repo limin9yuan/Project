@@ -162,7 +162,7 @@ function getEmptyRow(){
 
          stockQty: '<input name="stockQty" type="text" class="editable left disabled" />',//库存数量
          budgetQty: '<input name="budgetQty" type="text" class="editable left disabled" />',//预算数量
-         requireQty: '<input name="requireQty" type="text" class="editable left decimal" checkexpession="Double" />',//需求数量
+         requireQty: '<input name="requireQty" type="text" class="editable left decimal" />',//需求数量
 
          budgetPrice: '<input name="budgetPrice" type="text" class="editable left disabled" />',//预算单价
          referencePrice: '<input name="referencePrice" type="text" class="editable left disabled" />',//参考单价
@@ -208,7 +208,8 @@ function registEvent(){
             });
     });
     //需求数量文本框换算
-    $grid.find('.decimal').keyup(function () {
+    $grid.find('.decimal').bind("keyup afterpaste",function(){
+        clearNoNum($(this));
         var $qty = $(this).parents('[role=row]').find('input[name="requireQty"]');                    //数量
         var $price = $(this).parents('[role=row]').find('input[name="referencePrice"]');                //单价
         var $referenceTotal = $(this).parents('[role=row]').find('input[name="referenceTotal"]');                //金额
@@ -217,7 +218,6 @@ function registEvent(){
         calculateTotal();
     });
 }
-
 //计算汇总值
 function calculateTotal(){
     //合计
@@ -474,9 +474,20 @@ function validateRule() {
 			remark : {
             	maxlength : icon + "备注必须100个字符以内"
             }
-		},
-        submitHandler : function() {
-            save();
-        }
+		}
 	})
 }
+
+//保存按钮事件
+$("#saveBtn").click(function (){
+    if($("#requireApplyForm").valid()){
+        save();
+     }
+})
+
+//提交审批按钮事件
+$("#commitApplyBtn").click(function (){
+    if($("#requireApplyForm").valid()){
+        commitApply();
+     }
+})

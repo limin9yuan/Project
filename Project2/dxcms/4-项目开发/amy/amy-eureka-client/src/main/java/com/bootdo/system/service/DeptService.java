@@ -34,4 +34,5 @@ public interface DeptService {
 	Tree<DeptDO> getTree(String deptIds);
 	
 	boolean checkDeptHasUser(Long deptId);
+	Tree<DeptDO> getTreeU(String deptIds);
 }

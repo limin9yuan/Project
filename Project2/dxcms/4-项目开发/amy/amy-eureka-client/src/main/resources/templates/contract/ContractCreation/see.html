@@ -71,74 +71,78 @@
 								style="display: none" data-toggle="tab">合同物料明细</a></li>
 						</ul>
 
-						<form class="form-horizontal m-t" id="signupForm">
-							<input id="contractCode" name="contractCode"
-								th:value="${contractCode}" class="form-control" type="text">
-							<div class="form-group">
-								<div
-									class="input-group input-inline-sm col-sm-4 col-md-offset-4">
-									<input id="authorDeptId" name="authorDeptId"
-										class="form-control" type="hidden"> <input
-										id="performUserId" name="performUserId" class="form-control"
-										type="hidden">
-									<!--执行人id -->
-									<input id="authorUserId" name="authorUserId"
-										class="form-control" type="hidden">
-									<!-- 起草人id -->
-									<input id="projectId" name="projectId" class="form-control"
-										type="hidden">
-									<!-- 项目id -->
 
-								</div>
+						<div class="form-group">
+							<div class="col-sm-4 col-sm-offset-4">
+								<button type="submit" class="btn btn-success" id="saveBtn">保存</button>
+								&nbsp;
+								<button type="button" class="btn btn-success">提交审批</button>
+								&nbsp;
+								<button type="button" class="btn btn-success">撤回审批</button>
+								&nbsp;
+								<button type="button" class="btn btn-success"
+									onclick="closeWin()">关闭</button>
+
+								<button type="button" id="uploadFile" style="display: none"></button>
 							</div>
-
-							<div id="myTabContent" class="tab-content">
-								<div class="tab-pane fade in active" id="baseInfo" th:each="bo, iterStat : ${beanlist}">
-
-<!-- 									<div class="form-group"> -->
-<!-- 										<div class="col-sm-3 col-sm-offset-4"> -->
-<!-- 											<button type="submit" class="btn btn-success" -->
-<!-- 												onclick="update()">保存</button> -->
-<!-- 											&nbsp; -->
-<!-- 											<button type="button" class="btn btn-success">提交审批</button> -->
-<!-- 											&nbsp; -->
-<!-- 											<button type="button" class="btn btn-success">撤回审批</button> -->
-<!-- 											&nbsp; -->
-<!-- 											<button type="button" class="btn btn-success" -->
-<!-- 												onclick="closeWin()">关闭</button> -->
-
-<!-- 											<button type="button" id="uploadFile" style="display: none"></button> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
+						</div>
+						<div id="myTabContent" class="tab-content">
+							<div class="tab-pane fade in active" id="baseInfo"
+								th:each="bo, iterStat : ${beanlist}">
+								<form class="form-horizontal m-t" id="signupForm">
+									<div class="form-group">
+										<div
+											class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+											<input id="id" name="id" type="hidden" class="form-control" th:value="${id}">
+											<input id="authorDeptId" name="authorDeptId"
+												class="form-control" type="hidden" th:value="${authorDeptId}"> 
+											<!--执行人id -->
+											<input id="authorUserId" name="authorUserId"
+												class="form-control" type="hidden">
+											<!-- 起草人id -->
+											<input id="projectId" name="projectId" class="form-control"
+												type="hidden">
+											<!-- 项目id -->
+											<input id="deliverCompanyId" name="deliverCompanyId" class="form-control" type="hidden">
+											<!-- 供货公司id -->
+											<input type="hidden" id="suitCorpId" name="suitCorpId" th:value="${suitCorpId}"   class="contracform-control">
+											<input type="hidden" id="authorCorpId" name="authorCorpId" th:value="${authorCorpId}"  class="contracform-control">
+											<input type="hidden" id="performUserId" name="performUserId" th:value="${performUserId}"  class="contracform-control">
+										</div>
+									</div>
 									<!-- 							左侧合同基本信息开始 -->
 									<div class="form-group" style="padding-left: 15px"></div>
-									<div class="form-group" >
+									<div class="form-group">
 										<label class="col-sm-2 control-label ">合同名称 <span
 											class="mustin">*</span></label>
-										<div class="col-sm-3" >
+										<div class="col-sm-3">
 											<input id="contractName" name="contractName" readonly="readonly"
-												class="form-control" type="text" th:value="${bo.contractName}">
+												class="form-control" type="text"
+												th:value="${bo.contractName}">
 										</div>
 										<label class="col-sm-2 control-label">合同/意向协议编号 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
 											<input id="contractCode" name="contractCode" readonly="readonly"
-												class="form-control" type="text" th:value="${bo.contractCode}">
+												class="form-control" type="text"
+												th:value="${bo.contractCode}">
 										</div>
 									</div>
-									<div class="form-group" >
+									<div class="form-group">
 										<!-- 								打开页面选择 -->
 										<label class="col-sm-2 control-label">项目名称 </label>
-										<div class="col-sm-3 icon"> 
-											<input id="projectName" name="projectName" required="required"
+										<div class="col-sm-3 icon">
+											<input id="projectName" name="projectName" 
 												class="form-control" type="text" placeholder="==请选择=="
-												onclick="openProject()" readonly="readonly" th:value="${bo.projectName}">
+												 readonly="readonly"
+												th:value="${bo.projectName}">
 											<!-- 										<input type="text" name="nope" id="nope" placeholder="Crayola colors" maxlength="40" />  jquery-autocompleter-master-->
 										</div>
 										<label class="col-sm-2 control-label">招标方案</label>
 										<div class="col-sm-3">
 											<input id="bidSchemeId" name="bidSchemeId" readonly="readonly"
-												class="form-control" type="text" th:value="${bo.bidSchemeId}">
+												class="form-control" type="text"
+												th:value="${bo.bidSchemeId}">
 										</div>
 									</div>
 
@@ -150,7 +154,9 @@
 											<select data-placeholder="请选择" name="currencyTypeId" disabled="disabled"
 												id="currencyTypeId" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
-												<option  th:text="${bo.currencyTypeId}" th:value="${bo.currencyTypeId}" th:selected="${bo.currencyTypeId eq bo.type}"></option>
+												<option th:text="${bo.currencyTypeId}"
+													th:value="${bo.currencyTypeId}"
+													th:selected="${bo.currencyTypeId eq bo.type}"></option>
 											</select>
 										</div>
 										<label class="col-sm-2 control-label">税率 <span
@@ -168,32 +174,36 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">履约保证金 </label>
 										<div class="col-sm-3">
-											<input id="performanceBond" name="performanceBond"  th:value="${bo.performanceBond}" readonly="readonly"
-												class="form-control" type="text" placeholder="元">
+											<input id="performanceBond" name="performanceBond"
+												th:value="${bo.performanceBond}" class="form-control" readonly="readonly"
+												type="text" placeholder="元">
 										</div>
 
 										<label class="col-sm-2 control-label">质保金</label>
 										<div class="col-sm-3">
-											<input id="warrantyBond" name="warrantyBond"  th:value="${bo.warrantyBond}" readonly="readonly"
-												class="form-control" type="text" placeholder="元">
+											<input id="warrantyBond" name="warrantyBond" readonly="readonly"
+												th:value="${bo.warrantyBond}" class="form-control"
+												type="text" placeholder="元">
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">有效起始日期 </label>
 										<div class="col-sm-3">
 											<div class="input-group date" id="timeMin">
-												<input class="form-control" type="text" id="dateFrom" th:value="${bo.dateFrom}" readonly="readonly"
-													name="timeMin"> <span class="input-group-addon">
-													<span class="glyphicon glyphicon-calendar"></span>
+												<input class="form-control" type="text" id="dateFrom" readonly="readonly"
+													th:value="${bo.dateFrom}" name="timeMin"> <span
+													class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"></span>
 												</span>
 											</div>
 										</div>
 										<label class="col-sm-2 control-label">有效截止日期</label>
 										<div class="col-sm-3">
-											<div class="input-group date" id="timeMax">
-												<input class="form-control" type="text" id="dateTo" th:value="${bo.dateTo}" readonly="readonly"
-													name="timeMax"> <span class="input-group-addon">
-													<span class="glyphicon glyphicon-calendar"></span>
+											<div class="input-group date" id="timeMax"> 
+												<input class="form-control" type="text" id="dateTo" readonly="readonly"
+													th:value="${bo.dateTo}" name="timeMax"> <span
+													class="input-group-addon"> <span
+													class="glyphicon glyphicon-calendar"></span>
 												</span>
 											</div>
 										</div>
@@ -202,8 +212,8 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">合同总金额 </label>
 										<div class="col-sm-3">
-											<input id="totalMoney" name="totalMoney" class="form-control" th:value="${bo.totalMoney}" readonly="readonly"
-												type="text" placeholder="元">
+											<input id="totalMoney" name="totalMoney" class="form-control" readonly="readonly"
+												th:value="${bo.totalMoney}" type="text" placeholder="元">
 										</div>
 
 										<!-- 									<label class="col-sm-1 control-label">用章类型 <span -->
@@ -222,18 +232,22 @@
 										<label class="col-sm-2 control-label">适用机构 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<textarea id="contractSuits" name="contractSuitsId" 
-												class="form-control " style="width: 378px;overflow:hidden;" th:checks="${bo.contractSuitsId}" required="required"
-												th:value="${bo.contractSuits}" th:textLabel="${bo.contractSuits}" type="text" readonly="readonly"></textarea>
+											<textarea id="suitCorpName" name="suitCorpId"
+												class="form-control " style="width: 378px;overflow:hidden;" 
+												th:checks="${bo.suitCorpId}"
+												th:value="${bo.suitCorpName}"
+												th:textLabel="${bo.suitCorpName}" type="text"
+												readonly="readonly"></textarea>
 										</div>
 										<label class="col-sm-2 control-label">供货公司 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
 											<!-- 										多选 -->
 											<!-- 								打开页面选择 -->
-											<input id="contractDelivers" name="contractDelivers"
-												class="form-control" type="text" th:value="${bo.contractDelivers}"
-												onclick="openContractDelivers()" readonly="readonly"
+											<input id="deliverCompanyName" name="deliverCompanyName"
+												class="form-control" type="text"
+												th:value="${bo.deliverCompanyName}"
+												 readonly="readonly"
 												placeholder="==请选择==">
 										</div>
 									</div>
@@ -241,22 +255,23 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">签订机构 <span
 											class="mustin">*</span></label>
-										<div class="col-sm-3"> 
-											<input id="authorCorpName" name="authorCorpId" th:value="${bo.authorCorpName}" th:textLabel="${bo.authorCorpName}"
-												th:checks="${bo.authorCorpId}" class="form-control " style="width: 378px;overflow:hidden;"
-												 textLabel="jasontext" type="text" required="required"
-												readonly="readonly" />
+										<div class="col-sm-3">
+											<input id="authorCorpName" name="authorCorpId" 
+												th:value="${bo.authorCorpName}"
+												th:textLabel="${bo.authorCorpName}"
+												th:checks="${bo.authorCorpId}" class="form-control "
+												style="width: 378px;overflow:hidden;" textLabel="jasontext"
+												type="text" readonly="readonly" />
 										</div>
 										<label class="col-sm-2 control-label">签订部门 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input id="authorDeptName" name="authorDeptId" required="required"
+											<input id="authorDeptName" name="authorDeptId" 
 												class="form-control " type="text"
 												th:value="${bo.authorDeptName}" readonly="readonly"
-												th:checks="${bo.authorDeptId}" th:textLabel="${bo.authorDeptName}" />
+												th:checks="${bo.authorDeptId}"
+												th:textLabel="${bo.authorDeptName}" />
 										</div>
-										<!-- 										<input id="authorCorpName" name="authorCorpId" th:value="${authorCorpName}" -->
-										<!-- 										 class="form-control" type="text" readonly th:checks="${authorCorpId}" th:textLabel="${authorCorpName}"> -->
 									</div>
 
 									<div class="form-group">
@@ -264,10 +279,11 @@
 											class="mustin">*</span>
 										</label>
 										<div class="col-sm-3">
-											<input id="performUserName" name="performUserId" required="required"
+											<input id="performUserName" name="performUserId"
 												class="form-control " style="width: 378px;overflow:hidden;"
-												th:value="${bo.performUserName}" th:textLabel="${bo.performUserName}"
-												th:checks="${bo.performUserId}"  type="text"
+												th:value="${bo.performUserName}"
+												th:textLabel="${bo.performUserName}"
+												th:checks="${bo.performUserId}" type="text"
 												readonly="readonly" />
 											<!-- 											<input id="performUserName" name="performUserName" -->
 											<!-- 												class="form-control" type="text"> -->
@@ -276,14 +292,14 @@
 										<label class="col-sm-2 control-label">起草人</label>
 										<div class="col-sm-3">
 											<input id="authorUserName" name="performUserId" readonly="readonly"
-												th:value="${authorUserName}" class="form-control"
+												th:value="${bo.authorUserName}" class="form-control"
 												type="text" placeholder="默认为当前用户">
 										</div>
 									</div>
 
 									<div class="form-group">
 										<div class="col-sm-6 control-label">
-											<label class="col-sm-4 radio-inline"> <input readonly="readonly"
+											<label class="col-sm-4 radio-inline"> <input
 												type="checkbox" name="checkbox" value="1"
 												onclick="triggerCheckbox(this)" /> 录入明细 <span
 												class="mustin">*</span>
@@ -294,45 +310,45 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">摘要</label>
 										<div class="col-sm-8">
-											<textarea id="abstract" name="abstract" class="form-control" readonly="readonly"
+											<textarea id="abstract" name="abstract" class="form-control"
 												rows="3"></textarea>
 										</div>
 									</div>
 
-<!-- 									<div class="form-group"> -->
-<!-- 										<label class="col-sm-2 control-label">附件 <span -->
-<!-- 											class="mustin">*</span></label> -->
-<!-- 										<div class="col-sm-4"> -->
-<!-- 											<div class="file-manager"> -->
-<!-- 												<button type="button" class="layui-btn btn btn-danger" -->
-<!-- 													id="test1" style="width: 100%;"> -->
-<!-- 													<i class="glyphicon glyphicon-cloud-upload"></i>选择文件 -->
-<!-- 												</button> -->
+									<div class="form-group">
+										<label class="col-sm-2 control-label">附件 <span
+											class="mustin">*</span></label>
+										<div class="col-sm-4">
+											<div class="file-manager">
+												<button type="button" class="layui-btn btn btn-danger"
+													id="test1" style="width: 100%;">
+													<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
+												</button>
 
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
-<!-- 																文件显示列表 -->
-<!-- 									<div class="form-group"> -->
-<!-- 										<label class="col-sm-2 control-label"></label> -->
-<!-- 										<div class="col-sm-4"> -->
-<!-- 											<div class="layui-upload"> -->
-<!-- 												<div class="layui-upload-list"> -->
-<!-- 													<table id="sds" class="layui-table"> -->
-<!-- 														<thead> -->
-<!-- 															<tr> -->
-<!-- 																<th style="text-align: center;">文件名</th> -->
-<!-- 																<th style="text-align: center;">大小</th> -->
-<!-- 																<th style="text-align: center;">状态</th> -->
-<!-- 																<th style="text-align: center;">操作</th> -->
-<!-- 															</tr> -->
-<!-- 														</thead> -->
-<!-- 														<tbody id="demoList"></tbody> -->
-<!-- 													</table> -->
-<!-- 												</div> -->
-<!-- 											</div> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
+											</div>
+										</div>
+									</div>
+									<!-- 							文件显示列表 -->
+									<div class="form-group">
+										<label class="col-sm-2 control-label"></label>
+										<div class="col-sm-4">
+											<div class="layui-upload">
+												<div class="layui-upload-list">
+													<table id="sds" class="layui-table">
+														<thead>
+															<tr>
+																<th style="text-align: center;">文件名</th>
+																<th style="text-align: center;">大小</th>
+																<th style="text-align: center;">状态</th>
+																<th style="text-align: center;">操作</th>
+															</tr>
+														</thead>
+														<tbody id="demoList"></tbody>
+													</table>
+												</div>
+											</div>
+										</div>
+									</div>
 
 									<!--*************** 文件显示  *************************** -->
 									<div class="form-group" id="app">
@@ -401,11 +417,12 @@
 											</div>
 										</div>
 									</div>
-								</div>
-								<!-- 左侧合同基本信信息结束-->
-								<!-- 					富文本编辑 -->
-								<div class="tab-pane fade" id="contractTemplate">
-
+								</form>
+							</div>
+							<!-- 左侧合同基本信信息结束-->
+							<!-- 					富文本编辑 -->
+							<div class="tab-pane fade" id="contractTemplate">
+								<form class="form-horizontal m-t" id="richTextForm">
 
 									<div class="ibox float-e-margins" id="box-richText"
 										style="padding-left: 12%">
@@ -482,33 +499,36 @@
 											</p>
 										</div>
 									</div>
-								</div>
-								<!-- 						富文本编辑 END -->
-
-
-
-
-								<div class="tab-pane fade" id="contractMaterialDetail">
-									<div class="fixed-table-toolbar">
-										<div class="columns pull-left">
-											<button
-												shiro:hasPermission="ContractCreation:ContractCreation:import" disabled="disabled"
-												type="button" class="btn  btn-primary" name="excelinsertbtn">
-												<i class="fa fa-import" aria-hidden="true"></i>导入
-											</button>
-											<button class="btn  btn-danger"
-												onclick="window.open('/ContractCreation/ContractCreation/downloadTemplate')"
-												type="button">
-												<i class="glyphicon glyphicon-save-file "></i> 下载模板
-											</button>
-										</div>
-									</div>
-									<div id="treeTable"></div>
-								</div>
-
-
+								</form>
 							</div>
-						</form>
+							<!-- 						富文本编辑 END -->
+
+
+
+
+							<div class="tab-pane fade" id="contractMaterialDetail"
+								style="padding-top: 50px">
+								<div class="fixed-table-toolbar">
+									<div class="columns pull-left">
+										<button
+											shiro:hasPermission="ContractCreation:ContractCreation:import"
+											type="button" class="btn  btn-primary" name="excelinsertbtn">
+											<i class="fa fa-import" aria-hidden="true"></i>导入
+										</button>
+										<button class="btn  btn-danger"
+											onclick="window.open('/ContractCreation/ContractCreation/downloadTemplate')"
+											type="button">
+											<i class="glyphicon glyphicon-save-file "></i> 下载模板
+										</button>
+										<button type="button" onclick="dsds()">sadsad</button>
+									</div>
+								</div>
+								<div id="treeTable"></div>
+							</div>
+
+
+						</div>
+
 					</div>
 				</div>
 			</div>
@@ -516,7 +536,9 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript"
-		src="/js/appjs/contract/ContractCreation/see.js"></script>
+		src="/js/appjs/contract/ContractCreation/edit.js"></script>
+	<script type="text/javascript"
+		src="/js/appjs/contract/ContractCreation/ImportMaterial.js"></script>
 	<script src="/js/layui.js"></script>
 	<script src="/js/vue.min.js"></script>
 	<script src="/js/plugins/layer/layer.min.js"></script>
@@ -576,7 +598,7 @@
 				zNodes : myobj,
 				height : 233
 			};
-			$("#contractSuits").drawMultipleTree(defaults); //初始化树状下拉复选框
+			$("#suitCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框
 			//     var a=$("#selectTree").drawMultipleTree("getChecks","val");
 			//     alert(a);
 	

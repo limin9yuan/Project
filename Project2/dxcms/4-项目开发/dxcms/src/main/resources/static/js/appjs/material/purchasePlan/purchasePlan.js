@@ -113,13 +113,17 @@ function load() {
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
 }
+
 function add() {
-    window.location.assign("/material/purchasePlan/add")
-    //window.location.replace("/material/purchasePlan/add")
-    //window.open('/material/purchasePlan/add')
+    $('.J_menuItem',window.parent.document).each(function () {
+        if ($(this).attr('href') == 'material/purchasePlan/add') {
+            parent.menuItemFromChild($(this));
+            return false;
+        }
+    });
 }
 
-function edit(id) {
+/*function edit(id) {
     layer.open({
         type : 2,
         title : '编辑',
@@ -128,6 +132,16 @@ function edit(id) {
         area : [ '100%', '100%' ],
         content : '/material/purchasePlan/edit/' + id // iframe的url
     });
+}*/
+
+//修改
+function edit(id) {
+    var param={
+        href:'/material/purchasePlan/edit/' + id,
+        index:'editPurchasePlan',
+        text:'采购计划修改'
+    }
+    parent.openNewTabFromChild(param);
 }
 function check(id) {
     layer.open({

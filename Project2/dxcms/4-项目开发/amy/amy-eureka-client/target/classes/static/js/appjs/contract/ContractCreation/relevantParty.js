@@ -28,8 +28,9 @@ function load() {
 				queryParams : function(params) {
 					return {
 						//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-						limit : params.limit,
+						pageSize : params.limit,
 						offset : params.offset,
+						pageNumber:Number(params.offset) / Number(params.limit) + 1,
 						deliverCompanyId : $("#deliverCompanyId").val(),
 						deliverCompanyName : $("#deliverCompanyName").val()
 					};
@@ -66,15 +67,20 @@ function selectData() {
 		return row;
 	});
 	//多条
-	var ids = "";
+	var name = "";
+	var	id="";
 	for (var i = 0; i < row.length; i++) {
 		if (i == 0 || i == "0") {
-			ids += row[i].deliverCompanyName;
+			id +=row[i].deliverCompanyId+",";
+			name += row[i].deliverCompanyName+"," ;
 		} else {
-			ids += "," + row[i].deliverCompanyName;
+			id += row[i].deliverCompanyId+",";
+			name +=row[i].deliverCompanyName+",";
 		}
 	}
-	parent.$("#contractDelivers").val(ids);
+//	alert(name);
+	parent.$("#deliverCompanyName").val(name);
+	parent.$("#deliverCompanyId").val(id);
 
 	closeWin();
 

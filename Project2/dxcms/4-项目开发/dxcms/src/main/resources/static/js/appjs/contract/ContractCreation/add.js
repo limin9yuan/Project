@@ -1,6 +1,8 @@
-var materialData;//合同物资
-var sde;//富文本对象
-var jsonArray=[];//富文本key and value
+var materialData; //合同物资
+var sde; //富文本对象
+var jsonArray = []; //富文本key and value
+var jsonCompanyName = [];
+var jsonSuitBeans = [];
 $().ready(function() {
 	$("button[name=excelinsertbtn]").click(function() {
 		layer.open({
@@ -21,7 +23,7 @@ $().ready(function() {
 		});
 
 	})
-	loadDic("contract-currency", "currencyTypeId"); //币别
+	loadDic("contract-currency", "currencyTypeName"); //币别
 	loadDic("contract-tax-rate", "taxRate"); //税率
 	//	$("#currencyTypeId").chosen({ search_contains: true }); //支持模糊查询
 	$('#timeMin').datetimepicker({ //初始化日期
@@ -34,7 +36,10 @@ $().ready(function() {
 	});
 	$.ajax({
 		type : "GET",
-		url : "/ContractCreation/ContractCreation/tree",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+			'deptIds' : $("#authorDeptId").val()
+		},
 		success : function(tree) {
 			tree.checked = false;
 			var defaults = {
@@ -48,15 +53,56 @@ $().ready(function() {
 					}
 				}
 			};
-			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
 			$("#authorDeptName").drawMultipleTree(defaults);
 
-			$("#contractSuits").drawMultipleTree(defaults);
+
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/tree",
+		data : {
+			'deptIds' : $("#authorDeptId").val()
+		},
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				//				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
+
+			$("#contractSuitBeans").drawMultipleTree(defaults);
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/userTree",
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
 			$("#performUserName").drawMultipleTree(defaults);
 
 		}
 	});
-	
+
 	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
@@ -65,7 +111,7 @@ $().ready(function() {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
 		richText();
-	
+
 
 	});
 	$('#myTab a[href="#contractMaterialDetail"]').on('shown.bs.tab', function(e) {
@@ -87,8 +133,8 @@ $().ready(function() {
 			size : 1000,
 			accept : 'file',
 			multiple : true,
-//			auto : false, //不自动上传设置
-//			bindAction : '#uploadFile', //“上传”按钮的ID
+			//			auto : false, //不自动上传设置
+			//			bindAction : '#uploadFile', //“上传”按钮的ID
 			choose : function(obj) {
 				//******************************预览选择的文件并根据后缀名判断显示不同的图片********************************************  
 				var files = this.files = obj.pushFile(); // 将每次选择的文件追加到文件队列
@@ -133,6 +179,7 @@ $().ready(function() {
 		});
 	});
 	//	*****************************上传文件END
+	//	selectTree();
 	jqxTreeGrid();
 	validateRule();
 });
@@ -140,79 +187,127 @@ $().ready(function() {
 
 //得到合同物资数据test
 function dsds() {
-	var ctrls=sde.getControlById();
-	var ele=new Array();//value
-	var rite=new Array();//key
-	ctrls.forEach(ctrl=>{
-//		debugger;//debug断点
-//		这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
-//		console.log(ctrl.getValue());
-		ele.push(ctrl.getValue());
-		
-		var element=ctrl.getCtrlElement()//获取控制的Value节点
-		rite.push(element.id);
-//		alert(element.id);
-	});
-	var jsonArray=[];
-	for(var i = 0;i<ele.length;i++){  
-        var json = {};  
-        for(var j=0;j<rite.length;j++){  
-            if(i==j){  
-                json.key = rite[j];  
-                json.value = ele[i];  
-                jsonArray.push(json);  
-            }  
-        }  
-    }
-	console.log(jsonArray);
-	console.log(ele);
-	console.log(rite);
-	
+	var formData=$('#signupForm').serialize();
+//	var obj={}
+//    for (var i in a) {
+//        obj[a[i].name]=a[i]['value'];
+//    }
+	console.log($('#signupForm').serialize());
+	 console.log("*************");
+	 var a=$('#signupForm').serializeArray();
+	 console.log(JSON.stringify(a));
+//	console.log($('#signupForm').serialize());
 }
 
-$("#saveBtn").click(function (){
-  if($("#signupForm").valid()){
-	  document.getElementById("uploadFile").click();
-	  
-		var ctrls=sde.getControlById();
-		var ele=new Array();//value
-		var rite=new Array();//key
-		ctrls.forEach(ctrl=>{
-//			debugger;//debug断点
-//			这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
-//			console.log(ctrl.getValue());
+$("#saveBtn").click(function() {
+	if ($("#signupForm").valid()) {
+		document.getElementById("uploadFile").click();
+
+
+		var ctrls = sde.getControlById();
+		var ele = new Array(); //value
+		var rite = new Array(); //key
+		ctrls.forEach(ctrl => {
+			//			debugger;//debug断点
+			//			这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
+			//			console.log(ctrl.getValue());
 			ele.push(ctrl.getValue());
-			
-			var element=ctrl.getCtrlElement()//获取控制的Value节点
+
+			var element = ctrl.getCtrlElement() //获取控制的Value节点
 			rite.push(element.id);
-//			alert(element.id);
+		//			alert(element.id);
 		});
-		
-		for(var i = 0;i<ele.length;i++){  
-	        var json = {};  
-	        for(var j=0;j<rite.length;j++){  
-	            if(i==j){  
-	                json.key = rite[j];  
-	                json.value = ele[i];  
-	                jsonArray.push(json);  
-	            }  
-	        }  
-	    }
-		console.log(jsonArray);
-	  setTimeout('save()', 500); //延迟执行save()方法5毫秒
-   }
+
+		for (var i = 0; i < ele.length; i++) {
+			var json = {};
+			for (var j = 0; j < rite.length; j++) {
+				if (i == j) {
+					json.key = rite[j];
+					json.value = ele[i];
+					jsonArray.push(json);
+				}
+			}
+		}
+		//		console.log(jsonArray);
+
+		//供货公司
+		var deliverCompanyNameArr = new Array();
+		var deliverCompanyName = $("#deliverCompanyName").val();
+		deliverCompanyNameArr = deliverCompanyName.split(",");
+		var deliverCompanyIdArr = new Array();
+		var deliverCompanyId = $("#deliverCompanyId").val();
+		deliverCompanyIdArr = deliverCompanyId.split(",");
+		jsonCompanyName = new Array();
+		for (var i = 0; i < deliverCompanyNameArr.length; i++) {
+			var jsons = {};
+			for (var j = 0; j < deliverCompanyIdArr.length; j++) {
+				if (i == j) {
+					jsons.deliverCompanyId = deliverCompanyIdArr[j];
+					jsons.deliverCompanyName = deliverCompanyNameArr[i];
+					jsonCompanyName.push(jsons);
+				}
+			}
+		}
+//		console.log("供货公司");
+//		console.log(jsonCompanyName);
+
+		//适用机构
+		var contractSuitBeansArr = new Array();
+		var contractSuitBeans = $("#contractSuitBeans").val();
+		contractSuitBeansArr = contractSuitBeans.split(",");
+
+		var suitCorpIdArr = new Array();
+		var suitCorpId = $("#contractSuitBeans").drawMultipleTree("getChecks", "val");
+		suitCorpIdArr = suitCorpId.split(",");
+		$("#suitCorpId").val(suitCorpId);
+		jsonSuitBeans = new Array();
+		for (var i = 0; i < contractSuitBeansArr.length; i++) {
+			var jsonc = {};
+			for (var j = 0; j < suitCorpIdArr.length; j++) {
+				if (i == j) {
+					jsonc.deliverCompanyId = suitCorpIdArr[j];
+					jsonc.deliverCompanyName = contractSuitBeansArr[i];
+					jsonSuitBeans.push(jsonc);
+				}
+			}
+		}
+//		console.log("适用机构");
+//		console.log(jsonSuitBeans);
+		setTimeout('save()', 500); //延迟执行save()方法5毫秒
+	}
 })
 
-
 function save() {
-
+	var signupForm=$('#signupForm').serializeArray();
+	 console.log(signupForm);
+		var params = {
+//			"projectId":$("#projectId").val(),
+//			"projectName":$("#projectName").val(),
+//			"contractCode":$("#contractCode").val(),
+//			"contractName":$("#contractName").val(),
+//			"bidSchemeName":$("#bidSchemeName").val(),
+//			"currencyTypeName":$("#currencyTypeName").val(),
+////			"taxRate":$("#taxRate").val(),
+//			"performanceBond":$("#performanceBond").val(),
+//			"warrantyBond":$("#warrantyBond").val(),
+//			"dateFrom":$("#dateFrom").val(),
+//			"dateTo":$("#dateTo").val(),
+//			"totalMoney":$("#totalMoney").val(),
+//			"authorCorpName":$("#authorCorpName").val(),
+//			"authorDeptName":$("#authorDeptName").val(),
+//			"performUserName":$("#performUserName").val(),
+//			"authorUserName":$("#authorUserName").val(),
+			"contractMaterialBeans" : JSON.stringify(materialData),
+			"signupForm" : JSON.stringify(signupForm),
+			"jsonCompanyName":JSON.stringify(jsonCompanyName),
+			"jsonSuitBeans":JSON.stringify(jsonSuitBeans),
+			"richTextKVJson" : JSON.stringify(jsonArray)
+		};
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/ContractCreation/ContractCreation/save",
-		data : {"rowData" : JSON.stringify(materialData),
-				"signupForm":$('#signupForm').serialize(),
-				"richTextKV":JSON.stringify(jsonArray)},
+		data : params,
 		// 你的formid)
 		async : false,
 		error : function(request) {
@@ -230,7 +325,78 @@ function save() {
 }
 //树状下拉复选框-MultipleTreeSelect
 function selectTree() {
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+			'deptIds' : $("#authorDeptId").val()
+		},
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+			$("#authorDeptName").drawMultipleTree(defaults);
+
+
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/tree",
+		data : {
+			'deptIds' : $("#authorDeptId").val()
+		},
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
+
+			$("#contractSuitBeans").drawMultipleTree(defaults);
+			$("#performUserName").drawMultipleTree(defaults);
+
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/usertree",
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+			$("#performUserName").drawMultipleTree(defaults);
+
+		}
+	});
 }
+
 //日期判断
 $.validator.addMethod("compareDate", function(value, element) {
 	var assigntime = $("#dateFrom").val();
@@ -262,7 +428,7 @@ function openContractDelivers() {
 		type : 2,
 		title : "选择供货信息",
 		area : [ '60%', '90%' ],
-		content : "/ContractCreation/ContractCreation/contractDelivers"
+		content : "/ContractCreation/ContractCreation/contractDeliverBeans"
 	})
 }
 //判断选择的币种改变页面的其他单位
@@ -312,16 +478,15 @@ function selecttree() {
 				//                    chkStyle: "radio",//设置单选树形 默认是多选
 				radioType : "all"
 			};
-			$("#contractSuits").drawMultipleTree(defaults); //初始化树状下拉复选框
+			$("#contractSuitBeans").drawMultipleTree(defaults); //初始化树状下拉复选框
 
 		}
 	});
 }
 
 
-
 function jqxTreeGrid(data) {
-	materialData=data;
+	materialData = data;
 	var source = {
 		dataType : "json",
 		//设置字段名称，name和后台实体对应
@@ -570,11 +735,11 @@ function validateRule() {
 				//税率
 				required : true
 			},
-			contractSuits : {
+			contractSuitBeans : {
 				//生效机构
 				required : true
 			},
-			contractDelivers : {
+			contractDeliverBeans : {
 				//供货公司
 				required : true
 			},
@@ -629,11 +794,11 @@ function validateRule() {
 				//税率
 				required : icon + "税率不能为空"
 			},
-			contractSuits : {
+			contractSuitBeans : {
 				//生效机构
 				required : icon + "生效机构不能为空"
 			},
-			contractDelivers : {
+			contractDeliverBeans : {
 				//供货公司
 				required : icon + "供货公司不能为空"
 			},
@@ -1230,44 +1395,44 @@ function richText() {
 	sde = new SDE(options);
 
 	sde.addListener('ready', function() { //打开页面加载
-//		var ctrls=sde.getControlById();
-//		var ele=new Array();
-//		ctrls.forEach(ctrl=>{
-////			debugger;
-//			//这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
-//			console.log(ctrl.getValue());
-//			ele=ctrl.getCtrlElement()//获取控制的Value节点
-////			ele.attr("id");
-//			console.log(ele.id);
-//		});
-//		var cs = sde.getControlById(); //获得页面控件文本数据数组
-//		var ctrlsArray = new Array();
-//		for (var i = 0; i < cs.length; i++) {
-//			//			alert(ctrls[i].getValue());
-//			var v = cs[i].getValue();
-//			ctrlsArray[i] = v;
-//		}
-//		console.log(ctrlsArray);
-//		console.log("******************");
-//
-//		$.ajax({
-//			type : 'post',
-//			url : '/ContractCreation/ContractCreation/richText',
-//			data : {
-//				"rTeId" : ctrlsArray,
-//			},
-//			success : function(r) {
-//				if (r.code == 0) {
-//					//					layer.msg(r.msg);
-//				} else {
-//					alert("操作异常");
-//				}
-//			},
-//			error : function(r) {
-//				alert("error");
-//			}
-//		});
-	//		debugger;//js执行在这么会自己停止的，然后你可以在控制台下输出ctrls，看看里面有什么
+		//		var ctrls=sde.getControlById();
+		//		var ele=new Array();
+		//		ctrls.forEach(ctrl=>{
+		////			debugger;
+		//			//这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
+		//			console.log(ctrl.getValue());
+		//			ele=ctrl.getCtrlElement()//获取控制的Value节点
+		////			ele.attr("id");
+		//			console.log(ele.id);
+		//		});
+		//		var cs = sde.getControlById(); //获得页面控件文本数据数组
+		//		var ctrlsArray = new Array();
+		//		for (var i = 0; i < cs.length; i++) {
+		//			//			alert(ctrls[i].getValue());
+		//			var v = cs[i].getValue();
+		//			ctrlsArray[i] = v;
+		//		}
+		//		console.log(ctrlsArray);
+		//		console.log("******************");
+		//
+		//		$.ajax({
+		//			type : 'post',
+		//			url : '/ContractCreation/ContractCreation/richText',
+		//			data : {
+		//				"rTeId" : ctrlsArray,
+		//			},
+		//			success : function(r) {
+		//				if (r.code == 0) {
+		//					//					layer.msg(r.msg);
+		//				} else {
+		//					alert("操作异常");
+		//				}
+		//			},
+		//			error : function(r) {
+		//				alert("error");
+		//			}
+		//		});
+		//		debugger;//js执行在这么会自己停止的，然后你可以在控制台下输出ctrls，看看里面有什么
 	});
 }
 

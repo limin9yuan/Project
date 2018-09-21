@@ -20,8 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+//import com.alibaba.fastjson.JSONArray;
+//import com.alibaba.fastjson.JSONObject;
 
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.ss.util.NumberToTextConverter;
@@ -40,13 +40,18 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.wxcl.amy.utils.common.ResultMsg;
 
 import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
+import com.github.pagehelper.PageInfo;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.service.FileService;
@@ -56,46 +61,53 @@ import com.bootdo.common.utils.R;
 import com.bootdo.common.utils.FileType;
 import com.bootdo.common.utils.FileUtil;
 import com.bootdo.system.domain.DeptDO;
+import com.bootdo.system.service.DeptService;
 import com.bootdo.system.service.UserService;
 import com.dx.client.model.contract.ContractBean;
 import com.dx.client.model.contract.ContractDeliverBean;
+import com.dx.client.model.contract.ContractElementBean;
+import com.dx.client.model.contract.ContractEnclosureBean;
+import com.dx.client.model.contract.ContractHtmlBean;
 import com.dx.client.model.contract.ContractMaterialBean;
 import com.dx.client.model.contract.ContractSuitBean;
-//import com.dx.service.contract.service.api.IContractService;
+import com.dx.client.model.purchase.RequireApplyItemBean;
+import com.dx.service.contract.service.api.IContractService;
 
 /**
  * 合同起草
  * 
  * @author Administrator
- * @param <contractDelivers>
+ * @param
  * 
  * 
  */
 @Controller
 @RequestMapping("/ContractCreation/ContractCreation")
-public class ContractController<contractDelivers> extends BaseController {
+public class ContractController extends BaseController {
 	@Autowired
 	UserService userService;
 	@Autowired
 	private BootdoConfig bootdoConfig;
 	@Autowired
 	private FileService sysFileService;
-
+	@Autowired
+	private DeptService sysDeptService;
 //	@Autowired 
 //	private ContractBean contractBean;
-//	@Autowired
-//	private IContractService iContractService;
+	@Autowired
+	private IContractService iContractService;
+
 	/**
 	 * @param model
 	 * @return
 	 */
 	@RequiresPermissions("ContractCreation:ContractCreation")
 	@GetMapping()
-	String ContractCreation(Model model) {
-		Long userId = getUser().getUserId();
-		String userName = getUser().getUsername();
-		String deptName = getUser().getDeptName();
-		Long deptId = getUser().getDeptId();
+	String ContractCreation(Model model,Long userId,String userName,String deptName,Long deptId) {
+//		Long userId = getUser().getUserId();
+//		String userName = getUser().getUsername();
+//		String deptName = getUser().getDeptName();
+//		Long deptId = getUser().getDeptId();
 		model.addAttribute("authorUserName", userName);
 		model.addAttribute("authorUserId", userId);
 		model.addAttribute("authorDeptName", deptName);
@@ -118,13 +130,15 @@ public class ContractController<contractDelivers> extends BaseController {
 	}
 
 	// 列表页
-	@RequestMapping("listData")
+	@RequestMapping("/listData")
 	@ResponseBody
 	@RequiresPermissions("ContractCreation:ContractCreation:list")
-	public PageUtils listData(@RequestParam Map<String, Object> params) {
+	public PageInfo listData(@RequestParam Map<String, Object> params) {
 		// 测试数据
-		Query query = new Query(params);
-		List<ContractBean> list = new ArrayList<ContractBean>();// 调用接口
+
+		ResultMsg rsm = iContractService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),"", params);
+		
+		List<ContractBean> list = new ArrayList<ContractBean>();
 		for (int i = 1; i <= 10; i++) {
 			ContractBean contractBean = new ContractBean();
 			Date date = new Date();
@@ -143,9 +157,13 @@ public class ContractController<contractDelivers> extends BaseController {
 			contractBean.setAuthorDeptName("编制部门--" + i);// 编制部门
 			list.add(contractBean);
 		}
-		int total = list.size();// 调用接口
-		PageUtils pageUtils = new PageUtils(list, total);
-		return pageUtils;
+		
+		int total = 20;//调用接口
+		PageInfo pageInfo = new PageInfo(list, Integer.parseInt(params.get("pageNumber").toString()));
+		pageInfo.setTotal(total);
+		//测试数据 end
+//        PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
+		return pageInfo;
 	}
 
 //	@RequestMapping("/edit_ajax/{recordId}")
@@ -156,10 +174,10 @@ public class ContractController<contractDelivers> extends BaseController {
 //		returnData.put("record", record);
 //		return returnData;
 //	}
-	// 修改
-	@GetMapping("/edit/{contractCode}")
+	// 修改页数据
+	@GetMapping("/edit/{id}")
 	@RequiresPermissions("ContractCreation:ContractCreation:edit")
-	String edit(@PathVariable("contractCode") String contractCode, Model model) {
+	String edit(@PathVariable("id") String id, Model model) {
 		// RecordDO record = recordService.get(recordId);
 		List<Map<String, Object>> beanlist = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<>();
@@ -175,9 +193,10 @@ public class ContractController<contractDelivers> extends BaseController {
 		map.put("dateFrom", "2018-9-11");
 		map.put("dateTo", "2018-9-11");
 		map.put("totalMoney", "45678913");
-		map.put("contractSuitsId", "6");
-		map.put("contractSuits", "研发部");
-		map.put("contractDelivers", "供货公司0");
+		map.put("suitCorpId", "6");
+		map.put("suitCorpName", "研发部");
+		map.put("deliverCompanyName", "供货公司0");
+		map.put("deliverCompanyId", "1230");
 		map.put("authorCorpName", "研发部");
 		map.put("authorCorpId", "6");
 		map.put("authorDeptName", "研发部");
@@ -188,15 +207,18 @@ public class ContractController<contractDelivers> extends BaseController {
 		beanlist.add(map);
 
 		model.addAttribute("beanlist", beanlist);
+		model.addAttribute("suitCorpId", 6);
+		model.addAttribute("authorCorpId", 6);
+		model.addAttribute("performUserId", 135);
 		return "/contract/ContractCreation/edit";
 	}
 
 	/**
-	 * 查看
+	 * 查看页数据
 	 */
-	@GetMapping("/see/{contractCode}")
+	@GetMapping("/see/{id}")
 	@RequiresPermissions("ContractCreation:ContractCreation:see")
-	String see(@PathVariable("contractCode") String contractCode, Model model) {
+	String see(@PathVariable("id") String id, Model model) {
 		List<Map<String, Object>> beanlist = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<>();
 		map.put("contractName", "合同名称");
@@ -211,9 +233,9 @@ public class ContractController<contractDelivers> extends BaseController {
 		map.put("dateFrom", "2018-9-11");
 		map.put("dateTo", "2018-9-11");
 		map.put("totalMoney", "45678913");
-		map.put("contractSuitsId", "6");
-		map.put("contractSuits", "研发部");
-		map.put("contractDelivers", "供货公司0");
+		map.put("suitCorpId", "6");
+		map.put("suitCorpName", "研发部");
+		map.put("deliverCompanyName", "供货公司0");
 		map.put("authorCorpName", "研发部");
 		map.put("authorCorpId", "6");
 		map.put("authorDeptName", "研发部");
@@ -224,7 +246,7 @@ public class ContractController<contractDelivers> extends BaseController {
 		beanlist.add(map);
 
 		model.addAttribute("beanlist", beanlist);
-		model.addAttribute("contractCode", contractCode);
+		model.addAttribute("id", id);
 		return "contract/ContractCreation/see";
 	}
 
@@ -236,25 +258,23 @@ public class ContractController<contractDelivers> extends BaseController {
 	@RequiresPermissions("ContractCreation:ContractCreation:remove")
 	public R remove(String id) {
 		System.out.println(id);
-		if (id != "") {
+		ResultMsg remove = iContractService.remove(id);
+		if ("1".equals(remove.getCode())) {
 			return R.ok();
 		}
-//		if (recordService.remove(contractCode) > 0) {
-//			return R.ok();
-//		}
 		return R.error();
 	}
 
-	/**
-	 * 批量删除
-	 */
-	@PostMapping("/batchRemove")
-	@ResponseBody
-	@RequiresPermissions("ContractCreation:ContractCreation:batchRemove")
-	public R remove(@RequestParam("ids[]") String[] contractCode) {
-//		recordService.batchRemove(contractCode);
-		return R.ok();
-	}
+//	/**
+//	 * 批量删除
+//	 */
+//	@PostMapping("/batchRemove")
+//	@ResponseBody
+//	@RequiresPermissions("ContractCreation:ContractCreation:batchRemove")
+//	public R remove(@RequestParam("ids[]") String[] contractCode) {
+////		recordService.batchRemove(contractCode);
+//		return R.ok();
+//	}
 
 	@GetMapping("/selectTree")
 	@ResponseBody
@@ -263,16 +283,16 @@ public class ContractController<contractDelivers> extends BaseController {
 
 		// 适用机构 下拉列表查询数据
 		List<Map<String, Object>> selectTree = new ArrayList<>();// 调用接口
-		for (int i = 0; i < 4; i++) {
-			ContractSuitBean contractSuitBean = new ContractSuitBean();
-			Map<String, Object> contractSuits = new HashMap<>();
-			// 测试数据 调用接口前使用
-			contractSuits.put("id", "1" + i); // 注意*前台页面接受的必须是id、pid即name,前台引用jquery
-			contractSuits.put("pId", "0"); // 树形下拉框插件MultipleTreeSelect,也必须是json数据*
-			contractSuits.put("text", "火之国");
-			JSONObject js = new JSONObject(contractSuits); // 将map类型转成json数据
-			selectTree.add(js); // 将转换完成的json数据add到selectTree
-		}
+//		for (int i = 0; i < 4; i++) {
+//			ContractSuitBean contractSuitBean = new ContractSuitBean();
+//			Map<String, Object> contractSuitBeans = new HashMap<>();
+//			// 测试数据 调用接口前使用
+//			contractSuitBeans.put("id", "1" + i); // 注意*前台页面接受的必须是id、pid即name,前台引用jquery
+//			contractSuitBeans.put("pId", "0"); // 树形下拉框插件MultipleTreeSelect,也必须是json数据*
+//			contractSuitBeans.put("text", "火之国");
+//			JSONObject js = new JSONObject(contractSuitBeans); // 将map类型转成json数据
+//			selectTree.add(js); // 将转换完成的json数据add到selectTree
+//		}
 //		model.addAttribute("selectTree", selectTree); // 将数据传到前台
 		return selectTree;
 	}
@@ -292,9 +312,33 @@ public class ContractController<contractDelivers> extends BaseController {
 	}
 
 	//
+	@GetMapping("/editTree")
+	@ResponseBody
+	public Tree<DeptDO> editTree(@RequestParam String deptIds) {
+		Tree<DeptDO> tree = new Tree<DeptDO>();
+		tree = sysDeptService.getTree(deptIds);
+		return tree;
+	}
+
 	@GetMapping("/tree")
 	@ResponseBody
 	public Tree<DeptDO> tree() {
+		Tree<DeptDO> tree = new Tree<DeptDO>();
+		tree = sysDeptService.getTree();
+		return tree;
+	}
+
+	@GetMapping("/editUserTree")
+	@ResponseBody
+	public Tree<DeptDO> editUserTree(@RequestParam String deptIds) {
+		Tree<DeptDO> tree = new Tree<DeptDO>();
+		tree = sysDeptService.getTreeU(deptIds);
+		return tree;
+	}
+
+	@GetMapping("/userTree")
+	@ResponseBody
+	public Tree<DeptDO> userTree() {
 		Tree<DeptDO> tree = new Tree<DeptDO>();
 		tree = userService.getTree();
 		return tree;
@@ -306,27 +350,166 @@ public class ContractController<contractDelivers> extends BaseController {
 	@ResponseBody
 	@RequestMapping("/update")
 	@RequiresPermissions("ContractCreation:ContractCreation:edit")
-	public R update(@RequestParam("rowData") String rowData,@RequestParam("signupForm") String signupForm,@RequestParam("richTextKV") String richTextKV) {
-		// int contactIds = service.save(customerContact);
+	public R update(@RequestParam Map<String, Object> params) {
+		ContractBean contractBean = new ContractBean();
+		ContractHtmlBean contractHtmlBean=new ContractHtmlBean();
+		//附件
+		List<ContractEnclosureBean> fileBena=new ArrayList<ContractEnclosureBean>();
+		//表单
+		List<ContractBean> contractBeanl = new ArrayList<ContractBean>();
+		// 供货公司
+		List<ContractDeliverBean> contractDeliverBeans = new ArrayList<ContractDeliverBean>();
+		// 适用机构
+		List<ContractSuitBean> contractSuitBeans = new ArrayList<ContractSuitBean>();
+		// 富文本
+		List<ContractElementBean> richTextList = new ArrayList<ContractElementBean>();
+		// 合同物资列表
+		List<ContractMaterialBean> contractMaterialBeansList = new ArrayList<ContractMaterialBean>();
+		//附件
+		JSONArray file = JSONArray.fromObject(params.get("fileInformation"));
+		for (int i = 0; i < file.size(); i++) {
+			ContractEnclosureBean signupFormModel = (ContractEnclosureBean) JSONObject.toBean((JSONObject) file.get(i),ContractEnclosureBean.class);
+			fileBena.add(signupFormModel);
+		}
+		//表单
+		JSONArray signupForm = JSONArray.fromObject(params.get("signupForm"));
+		for (int i = 0; i < signupForm.size(); i++) {
+			ContractBean signupFormModel = (ContractBean) JSONObject.toBean((JSONObject) signupForm.get(i),
+					ContractBean.class);
+			contractBeanl.add(signupFormModel);
+		}
+		// 供货公司
+		JSONArray DeliverBeans = JSONArray.fromObject(params.get("jsonCompanyName"));
+		for (int i = 0; i < DeliverBeans.size(); i++) {
+			ContractDeliverBean DeliverModel = (ContractDeliverBean) JSONObject.toBean((JSONObject) DeliverBeans.get(i),
+					ContractDeliverBean.class);
+			contractDeliverBeans.add(DeliverModel);
+		}
+		// 适用机构
+		JSONArray SuitBeans = JSONArray.fromObject(params.get("jsonSuitBeans"));
+		for (int i = 0; i < SuitBeans.size(); i++) {
+			ContractSuitBean SuitBeansModel = (ContractSuitBean) JSONObject.toBean((JSONObject) SuitBeans.get(i),
+					ContractSuitBean.class);
+			contractSuitBeans.add(SuitBeansModel);
+		}
+		// 合同物资列表
+		JSONArray contractMaterialBeans = JSONArray.fromObject(params.get("contractMaterialBeans"));
+		for (int i = 0; i < contractMaterialBeans.size(); i++) {
+			ContractMaterialBean contractModel = (ContractMaterialBean) JSONObject
+					.toBean((JSONObject) contractMaterialBeans.get(i), ContractMaterialBean.class);
+			contractMaterialBeansList.add(contractModel);
+		}
+		// 富文本
+		JSONArray array = JSONArray.fromObject(params.get("richTextKVJson"));
+		for (int i = 0; i < array.size(); i++) {
+			ContractElementBean contractModelR = (ContractElementBean) JSONObject.toBean((JSONObject) array.get(i),
+					ContractElementBean.class);
+			richTextList.add(contractModelR);
+		}
+		ContractMaterialBean contractMaterialBean=new ContractMaterialBean();
+		ContractElementBean contractElementBean=new ContractElementBean();
+		contractMaterialBean.setContractId((String)params.get("contractId"));
+		contractBean.setContractMaterialBeans(contractMaterialBeansList);
+		contractBean.setContractDeliverBeans(contractDeliverBeans);
+		contractBean.setContractSuitBeans(contractSuitBeans);
+		contractBean.setContractEnclosureBeans(fileBena);
+		contractElementBean.setContractId((String)params.get("contractId"));
+		contractHtmlBean.setContractElementBeans(richTextList);
+		contractHtmlBean.setHtmlText((StringBuffer)params.get("htmlText"));
+		
+		ResultMsg msg = iContractService.save(contractBean);
+		System.out.println(msg.getCode());
+		if ("1".equals(msg.getCode())) {
+			return R.ok();
+		}
+		return R.error();
 
-		return R.ok();
 	}
 
-	 @ResponseBody
-	    @PostMapping("/save")
-	    @RequiresPermissions("ContractCreation:ContractCreation:add")
-	    public R save(@RequestParam("rowData") String rowData,@RequestParam("signupForm") String signupForm,@RequestParam("richTextKV") String richTextKV) {
-	        System.out.println("合同物资"+" "+rowData);
-	        System.out.println("****************************************");
-	        System.out.println("表单"+" "+signupForm);
-	        System.out.println("****************************************");
-	        System.out.println("富文本"+" "+richTextKV);
-	        //int contactIds = service.save(customerContact);
-
-	        return R.ok();
-	    }
-	@GetMapping("/project")
+	/**
+	 * 保存
+	 * 
+	 * @param params
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("/save")
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
+	public R save(@RequestParam Map<String, Object> params) {
+		ContractBean contractBean = new ContractBean();
+		ContractHtmlBean contractHtmlBean=new ContractHtmlBean();
+		//附件
+		List<ContractEnclosureBean> fileBena=new ArrayList<ContractEnclosureBean>();
+		//表单
+		List<ContractBean> contractBeanl = new ArrayList<ContractBean>();
+		// 供货公司
+		List<ContractDeliverBean> contractDeliverBeans = new ArrayList<ContractDeliverBean>();
+		// 适用机构
+		List<ContractSuitBean> contractSuitBeans = new ArrayList<ContractSuitBean>();
+		// 富文本
+		List<ContractElementBean> richTextList = new ArrayList<ContractElementBean>();
+		// 合同物资列表
+		List<ContractMaterialBean> contractMaterialBeansList = new ArrayList<ContractMaterialBean>();
+		
+		
+		//附件
+		JSONArray file = JSONArray.fromObject(params.get("fileInformation"));
+		for (int i = 0; i < file.size(); i++) {
+			ContractEnclosureBean signupFormModel = (ContractEnclosureBean) JSONObject.toBean((JSONObject) file.get(i),ContractEnclosureBean.class);
+			fileBena.add(signupFormModel);
+		}
+		//表单
+		JSONArray signupForm = JSONArray.fromObject(params.get("signupForm"));
+		for (int i = 0; i < signupForm.size(); i++) {
+			ContractBean signupFormModel = (ContractBean) JSONObject.toBean((JSONObject) signupForm.get(i),
+					ContractBean.class);
+			contractBeanl.add(signupFormModel);
+		}
+		// 供货公司
+		JSONArray DeliverBeans = JSONArray.fromObject(params.get("jsonCompanyName"));
+		for (int i = 0; i < DeliverBeans.size(); i++) {
+			ContractDeliverBean DeliverModel = (ContractDeliverBean) JSONObject.toBean((JSONObject) DeliverBeans.get(i),
+					ContractDeliverBean.class);
+			contractDeliverBeans.add(DeliverModel);
+		}
+		// 适用机构
+		JSONArray SuitBeans = JSONArray.fromObject(params.get("jsonSuitBeans"));
+		for (int i = 0; i < SuitBeans.size(); i++) {
+			ContractSuitBean SuitBeansModel = (ContractSuitBean) JSONObject.toBean((JSONObject) SuitBeans.get(i),
+					ContractSuitBean.class);
+			contractSuitBeans.add(SuitBeansModel);
+		}
+		// 合同物资列表
+		JSONArray contractMaterialBeans = JSONArray.fromObject(params.get("contractMaterialBeans"));
+		for (int i = 0; i < contractMaterialBeans.size(); i++) {
+			ContractMaterialBean contractModel = (ContractMaterialBean) JSONObject.toBean((JSONObject) contractMaterialBeans.get(i), ContractMaterialBean.class);
+			contractMaterialBeansList.add(contractModel);
+		}
+		// 富文本
+		JSONArray array = JSONArray.fromObject(params.get("richTextKVJson"));
+		for (int i = 0; i < array.size(); i++) {
+			ContractElementBean contractModelR = (ContractElementBean) JSONObject.toBean((JSONObject) array.get(i),
+					ContractElementBean.class);
+			richTextList.add(contractModelR);
+		}
+		contractBean.setContractMaterialBeans(contractMaterialBeansList);
+		contractBean.setContractDeliverBeans(contractDeliverBeans);
+		contractBean.setContractSuitBeans(contractSuitBeans);
+		contractBean.setContractEnclosureBeans(fileBena);
+//		contractBean.setContractHtmlBeans(contractHtmlBeans);
+		contractHtmlBean.setContractElementBeans(richTextList);
+		contractHtmlBean.setHtmlText((StringBuffer)params.get("htmlText"));
+		
+		ResultMsg msg = iContractService.save(contractBean);
+		System.out.println(msg.getCode());
+		if ("1".equals(msg.getCode())) {
+			return R.ok();
+		}
+		return R.error();
+	}
+
+	@GetMapping("/project")
+//	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	String project() {
 		return "/contract/ContractCreation/projectList";
 	}
@@ -334,9 +517,10 @@ public class ContractController<contractDelivers> extends BaseController {
 	@GetMapping("/projectList")
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	@ResponseBody
-	public PageUtils projectList(@RequestParam Map<String, Object> params) {
+	public PageInfo projectList(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
-//			Query query = new Query(params);
+		ResultMsg rsm = iContractService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),"", params);
+
 		List<Map<String, Object>> projectList = new ArrayList<>();// 调用接口
 		for (int i = 1; i <= 10; i++) {
 			// 做测试数据 调用接口前使用 begin
@@ -345,13 +529,16 @@ public class ContractController<contractDelivers> extends BaseController {
 			map.put("projectName", "物资编码" + i);
 			projectList.add(map);
 		}
-		int total = 20;// 调用接口
-		PageUtils pageUtils = new PageUtils(projectList, total);
-		return pageUtils;
+		int total = 20;//调用接口
+		PageInfo pageInfo = new PageInfo(projectList, Integer.parseInt(params.get("pageNumber").toString()));
+		pageInfo.setTotal(total);
+		//测试数据 end
+//        PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
+		return pageInfo;
 	}
 
-	@GetMapping("/contractDelivers")
-	@RequiresPermissions("ContractCreation:ContractCreation:add")
+	@GetMapping("/contractDeliverBeans")
+//	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	String contractDeliversList() {
 		return "/contract/ContractCreation/relevantParty";
 	}
@@ -359,13 +546,10 @@ public class ContractController<contractDelivers> extends BaseController {
 	@GetMapping("/contractDeliversList")
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	@ResponseBody
-	public PageUtils contractDeliversList(@RequestParam Map<String, Object> params) {
+	public PageInfo contractDeliversList(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
-//			Query query = new Query(params);
-		List<ContractDeliverBean> contractDelivers = new ArrayList<ContractDeliverBean>();// 调用接口
-
-//		List<Map<String, Object>> contractDeliversList = new ArrayList<>();// 调用接口
-
+		ResultMsg rsm = iContractService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),"", params);
+		List<ContractDeliverBean> contractDeliverBeans = new ArrayList<ContractDeliverBean>();// 调用接口
 		for (int i = 0; i <= 10; i++) {
 			ContractDeliverBean aa = new ContractDeliverBean();
 			Date nowDate = new Date();
@@ -373,19 +557,23 @@ public class ContractController<contractDelivers> extends BaseController {
 			aa.setDeliverCompanyName("供货公司" + i);
 			aa.setId("1" + i);
 			aa.setCreateDate(nowDate);
-			contractDelivers.add(aa);
+			contractDeliverBeans.add(aa);
 		}
-
-		int total = 20;// 调用接口
-		PageUtils pageUtils = new PageUtils(contractDelivers, total);
-		return pageUtils;
+		int total = 20;//调用接口
+		PageInfo pageInfo = new PageInfo(contractDeliverBeans, Integer.parseInt(params.get("pageNumber").toString()));
+		pageInfo.setTotal(total);
+		//测试数据 end
+//        PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
+		return pageInfo;
 	}
 
-	// 合同物料测试数据
-	@GetMapping("/test")
+	// 合同物料数据
+	@GetMapping("/materila/{id}")
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	@ResponseBody
-	public PageUtils test(@RequestParam Map<String, Object> params) {
+	public PageUtils materila(@RequestParam Map<String, Object> params, @PathVariable("id") String contractId) {
+		ResultMsg lists = iContractService.getMaterialsByContractId(contractId);// 调用接口
+
 		List<ContractMaterialBean> list = new ArrayList<ContractMaterialBean>();// 调用接口
 		// 做测试数据 调用接口前使用
 		ContractMaterialBean bean = new ContractMaterialBean();
@@ -456,7 +644,7 @@ public class ContractController<contractDelivers> extends BaseController {
 	String importM() {
 		return "/contract/ContractCreation/ImportMaterial";
 	}
-	
+
 	@GetMapping("/importE")
 	@RequiresPermissions("ContractCreation:ContractCreation:import")
 	String importE() {
@@ -478,7 +666,8 @@ public class ContractController<contractDelivers> extends BaseController {
 //		chars.charAt((int)(Math.random() * 52))+
 		String fileName = file.getOriginalFilename();
 //		fileName = FileUtil.renameToUUID(fileName);
-		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, new Date());
+		Date date=new Date();
+		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, date);
 		try {
 			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
 		} catch (Exception e) {
@@ -488,8 +677,11 @@ public class ContractController<contractDelivers> extends BaseController {
 		System.out.println(ids);
 		if (ids > 0) {
 			R r = R.ok();
-			r.put("customerAttachment", ids);
-			r.put("fileName", sysFile.getUrl());
+//			r.put("customerAttachment", ids);
+			r.put("fileNameUrl", sysFile.getUrl());
+			r.put("fileType", FileType.fileType(fileName));
+			r.put("fileDate", date);
+			
 			return r;
 //			return R.ok().put("fileName", sysFile.getUrl());
 		}

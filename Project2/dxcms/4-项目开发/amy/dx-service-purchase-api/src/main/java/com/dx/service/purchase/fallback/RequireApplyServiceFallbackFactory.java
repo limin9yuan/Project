@@ -52,7 +52,7 @@ public class RequireApplyServiceFallbackFactory implements FallbackFactory<IRequ
             }
 
             @Override
-            public ResultMsg createItems(List<MaterialBean> materialBeans) {
+            public ResultMsg createItems(List<String> materialCodes) {
                 return null;
             }
 

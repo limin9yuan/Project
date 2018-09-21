@@ -121,7 +121,10 @@ function initControl() {
     //初始化统管部门
     $.ajax({
         type : "GET",
-        url : "/system/sysDept/tree",
+        url : "/system/sysDept/treeEdit",
+        data : {
+        		'deptIds' : $("#authorCorpIdInit").val()
+        		},
         success : function(tree) {
             tree.checked=false;
             var defaults = {

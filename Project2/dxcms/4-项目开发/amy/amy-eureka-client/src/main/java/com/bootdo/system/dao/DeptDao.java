@@ -33,4 +33,6 @@ public interface DeptDao {
 	Long[] listParentDept();
 	
 	int getDeptUserNumber(Long deptId);
+	
+	List<DeptDO> listIncludeUser(Map<String,Object> map);
 }

@@ -29,30 +29,105 @@ $().ready(function() {
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
 	});
-		$.ajax({
-			type : "GET",
-			url : "/ContractCreation/ContractCreation/tree",
-			success : function(tree) {
-				tree.checked=false;
-				var defaults = {
-						zNodes : tree,
-						height : 233,
-						chkStyle: "radio",//设置单选树形 默认是多选
-						radioType : "all",
-						callback:{
-	                        onCheck: function (treeNode) {
-	                        //alert("my callback");
-	                        }
-	                    }
-					};
-					$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
-					$("#authorDeptName").drawMultipleTree(defaults);
-					
-					 $("#contractSuits").drawMultipleTree(defaults);
-					$("#performUserName").drawMultipleTree(defaults);
-					
-			}
-		});
+	
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+     		'deptIds' : $("#suitCorpId").val()
+     		},
+		success : function(tree) {
+			tree.checked=false;
+			var defaults = {
+					zNodes : tree,
+					height : 233,
+					chkStyle: "radio",//设置单选树形 默认是多选
+					radioType : "all",
+					callback:{
+                        onCheck: function (treeNode) {
+                        //alert("my callback");
+                        }
+                    }
+				};
+				
+				 $("#suitCorpName").drawMultipleTree(defaults);
+				
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+     		'deptIds' : $("#authorCorpId").val()
+     		},
+		success : function(tree) {
+			tree.checked=false;
+			var defaults = {
+					zNodes : tree,
+					height : 233,
+					chkStyle: "radio",//设置单选树形 默认是多选
+					radioType : "all",
+					callback:{
+                        onCheck: function (treeNode) {
+                        //alert("my callback");
+                        }
+                    }
+				};
+				
+			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
+				
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+     		'deptIds' : $("#authorDeptId").val()
+     		},
+		success : function(tree) {
+			tree.checked=false;
+			var defaults = {
+					zNodes : tree,
+					height : 233,
+					chkStyle: "radio",//设置单选树形 默认是多选
+					radioType : "all",
+					callback:{
+                        onCheck: function (treeNode) {
+                        //alert("my callback");
+                        }
+                    }
+				};
+				
+			$("#authorDeptName").drawMultipleTree(defaults);
+				
+		}
+	});
+	
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editUserTree",
+		data : {
+     		'deptIds' : $("#performUserId").val()
+     		},
+		success : function(tree) {
+			tree.checked=false;
+			var defaults = {
+					zNodes : tree,
+					height : 233,
+					chkStyle: "radio",//设置单选树形 默认是多选
+					radioType : "all",
+					callback:{
+                        onCheck: function (treeNode) {
+                        	//alert("my callback");
+                        }
+                    }
+				};
+				
+			$("#performUserName").drawMultipleTree(defaults);
+				
+		}
+	});
+	
 		
 	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
@@ -250,7 +325,7 @@ function openContractDelivers() {
 		type : 2,
 		title : "选择供货信息",
 		area : [ '60%', '90%' ],
-		content : "/ContractCreation/ContractCreation/contractDelivers"
+		content : "/ContractCreation/ContractCreation/contractDeliverBeans"
 	})
 }
 //判断选择的币种改变页面的其他单位
@@ -360,7 +435,7 @@ function jqxTreeGrid(){
 					name : 'parentId'
 				}
 			},
-			url : "/ContractCreation/ContractCreation/test", //数据请求链接
+			url : "/ContractCreation/ContractCreation/materila/"+$("#id").val(), //数据请求链接
 //			localData : data,
 			id : "materilaCode", //设置主键
 
@@ -736,11 +811,11 @@ function validateRule() {
 					//税率
 					required : true
 				},
-				contractSuits:{
+				suitCorpName:{
 					//生效机构
 					required : true
 				},
-				contractDelivers:{
+				contractDeliverBeans:{
 					//供货公司
 					required : true
 				},
@@ -795,11 +870,11 @@ function validateRule() {
 					//税率
 					required : icon + "税率不能为空"
 				},
-				contractSuits:{
+				suitCorpName:{
 					//生效机构
 					required : icon + "生效机构不能为空"
 				},
-				contractDelivers:{
+				contractDeliverBeans:{
 					//供货公司
 					required : icon + "供货公司不能为空"
 				},

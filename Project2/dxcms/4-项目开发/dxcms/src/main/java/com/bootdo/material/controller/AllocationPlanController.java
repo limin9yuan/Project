@@ -184,29 +184,11 @@ public class AllocationPlanController {
 
 
         List<List> returnList = new ArrayList<>();
-
         for (int i = 0; i < categoryList.size(); i++){
-            int companyIndex = 0;
-            List<String> companyList = new ArrayList<>();
             List<Map<String, Object>> temp = new ArrayList<>();
             for (int j = 0; j < getAllocationPlanDetailList.size(); j++){
-                Map<String, Object> tempMap = getAllocationPlanDetailList.get(j);
-                if (categoryList.get(i) == tempMap.get("materialClassName")){
-                    if(companyList.size() == 0 ||!companyList.contains(tempMap.get("companyId"))){
-
-                        companyList.add((String) tempMap.get("companyId"));
-                        tempMap.put("unitPrice" + companyIndex, tempMap.get("unitPrice"));
-                        tempMap.put("allotQty" + companyIndex, tempMap.get("allotQty"));
-                        tempMap.put("allotRatio" + companyIndex, tempMap.get("allotRatio"));
-                        companyIndex++;
-                    }else {
-                        int tempIndex = companyList.indexOf(tempMap.get("companyId"));
-                        tempMap.put("unitPrice" + tempIndex, tempMap.get("unitPrice"));
-                        tempMap.put("allotQty" + tempIndex, tempMap.get("allotQty"));
-                        tempMap.put("allotRatio" + tempIndex, tempMap.get("allotRatio"));
-                    }
-
-                    temp.add(tempMap);
+                if (categoryList.get(i) == getAllocationPlanDetailList.get(j).get("materialClassName")){
+                    temp.add(getAllocationPlanDetailList.get(j));
                 }
             }
             returnList.add(temp);

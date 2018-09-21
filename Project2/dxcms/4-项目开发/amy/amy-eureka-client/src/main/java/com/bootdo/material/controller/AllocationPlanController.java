@@ -2,6 +2,8 @@ package com.bootdo.material.controller;
 
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
+import com.bootdo.common.utils.R;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +35,7 @@ public class AllocationPlanController {
     @ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("allocationPlan:allocationPlan")
-    public PageUtils list(@RequestParam Map<String, Object> params){
+    public PageInfo list(@RequestParam Map<String, Object> params){
         //查询列表数据
         Query query = new Query(params);
         List<Map<String, Object>> allocationPlanList = new ArrayList<>();//调用接口
@@ -51,14 +53,14 @@ public class AllocationPlanController {
             allocationPlanList.add(requirePlanMap);
         }
         int total = 20;//调用接口
-        PageUtils pageUtils = new PageUtils(allocationPlanList, total);
-        return pageUtils;
+        PageInfo pageInfo = new PageInfo(allocationPlanList, total);
+        return pageInfo;
     }
 
     @ResponseBody
     @GetMapping("/allocationPlanAddList")
     @RequiresPermissions("allocationPlan:allocationPlan")
-    public PageUtils allocationPlanAddList(@RequestParam Map<String, Object> params){
+    public PageInfo allocationPlanAddList(@RequestParam Map<String, Object> params){
         //查询列表数据
 //		Query query = new Query(params);
         List<Map<String, Object>> allocationPlanAddList = new ArrayList<>();//调用接口
@@ -78,8 +80,8 @@ public class AllocationPlanController {
             allocationPlanAddList.add(requireMap);
         }
         int total = 20;//调用接口
-        PageUtils pageUtils = new PageUtils(allocationPlanAddList, total);
-        return pageUtils;
+        PageInfo pageInfo = new PageInfo(allocationPlanAddList, total);
+        return pageInfo;
     }
 
     @GetMapping("/nextStep/{purchasePlanId}")
@@ -220,6 +222,44 @@ public class AllocationPlanController {
 
     }
 
+    /**
+     * 保存
+     */
+    @ResponseBody
+    @PostMapping("/save")
+    @RequiresPermissions("allocationPlan:add")
+    public R save(@RequestParam Map<String, Object> params){
+        System.out.println(params);
+        //int contactIds = service.save(customerContact);
+
+        return R.ok();
+    }
+
+    /**
+     * 提交审批
+     */
+    @PostMapping( "/submitApproval")
+    @ResponseBody
+    @RequiresPermissions("allocationPlan:submitApproval")
+    public R submitApproval( String planNo){
+        System.out.println(planNo);
+        //int contactIds = service.save(customerContact);
+
+        return R.ok();
+    }
+    /**
+     * 撤回审批
+     */
+    @PostMapping( "/withdrawApproval")
+    @ResponseBody
+    @RequiresPermissions("allocationPlan:withdrawApproval")
+    public R withdrawApproval( String planNo){
+        System.out.println(planNo);
+        //int contactIds = service.save(customerContact);
+
+        return R.ok();
+    }
+
     private static void clearList(List<Map<String, Object>> list)
     {
         if (list == null) return;
@@ -238,41 +278,4 @@ public class AllocationPlanController {
             }
         }
     }
-
-
-//    @ResponseBody
-//    @GetMapping("/addLi")
-//    @RequiresPermissions("allocationPlan:add")
-//    Map<String, Object> addLi(){
-//        List<Map<String, Object>> getList = new ArrayList<>();//调用接口
-//        //做测试数据 调用接口前使用 begin
-//        for (int i = 0; i < 3; i++) {
-//            Map<String, Object> listMap = new HashMap<>();
-//            listMap.put("id", "id" +i);
-//            listMap.put("name", "办公用品类" + i);
-//            getList.add(listMap);
-//        }
-//        Map<String, Object> returnData = new HashMap<String, Object>();
-//        returnData.put("getList", getList);
-//
-//        return returnData;
-//
-//    }
-//
-//    @ResponseBody
-//    @GetMapping("/addSingleLi")
-//    @RequiresPermissions("allocationPlan:add")
-//    Map<String, Object> addSingleLi(){
-//        //做测试数据 调用接口前使用 begin
-//
-//        Map<String, Object> singleMap = new HashMap<>();
-//        singleList.put("id", "purchase");
-//        singleList.put("name", "单独采购");
-//
-//        Map<String, Object> returnData = new HashMap<String, Object>();
-//        returnData.put("singleList", singleList);
-//
-//        return returnData;
-//
-//    }
 }

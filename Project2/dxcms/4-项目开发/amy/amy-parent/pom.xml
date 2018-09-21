@@ -37,8 +37,9 @@
         <module>../dx-service-tender-api</module>
         <module>../dx-service-sales</module>
         <module>../dx-service-sales-api</module>
+        
     </modules>
-
+	
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>

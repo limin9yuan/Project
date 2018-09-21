@@ -48,15 +48,7 @@
 									</button>
 								</div>
 							</div>
-							<!-- tab标签 -->
-							<!-- <div class="table">
-								<ul id="myTab" class="nav nav-tabs"></ul>
-							</div> -->
-							<ul id="myTab" class="nav nav-tabs">
-								<!-- <li class=""><a href="#t0" data-toggle="tab" aria-expanded="false">办公用品类</a></li>
-								<li class=""><a href="#t1" data-toggle="tab" aria-expanded="false">机物料类</a></li>
-								<li class="active"><a href="#t2" data-toggle="tab" aria-expanded="true">单独采购</a></li> -->
-							</ul>
+							<ul id="myTab" class="nav nav-tabs"></ul>
 							<div id='myTabContent' class='tab-content bills'>
 							</div>
 							<div class="form-group">
@@ -85,15 +77,15 @@
 							</div>
 							<div class="text-right form-group">
 								<div class="columns pull-right col-md-4">
-									<button shiro:hasPermission="requirementPlan:add" type="button" class="btn  btn-success"
+									<button shiro:hasPermission="allocationPlan:add" type="button" class="btn  btn-success"
 										onclick="save()">
 										<i class="fa" aria-hidden="true"></i>保存
 									</button>
-									<button shiro:hasPermission="requirementPlan:submitApproval" type="button" class="btn  btn-success"
+									<button shiro:hasPermission="allocationPlan:submitApproval" type="button" class="btn  btn-success"
 										onclick="submitApproval()">
 										<i class="fa" aria-hidden="true"></i>提交审批
 									</button>
-									<button shiro:hasPermission="requirementPlan:withdrawApproval" type="button" class="btn  btn-success"
+									<button shiro:hasPermission="allocationPlan:withdrawApproval" type="button" class="btn  btn-success"
 										onclick="withdrawApproval()">
 										<i class="fa" aria-hidden="true"></i>撤回审批
 									</button>

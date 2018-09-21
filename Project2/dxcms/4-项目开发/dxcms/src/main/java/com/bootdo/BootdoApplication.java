@@ -1,4 +1,4 @@
-package com.bootdo;
+﻿package com.bootdo;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -19,6 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableAutoConfiguration(exclude = {
         org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration.class
 })
+
 @SpringBootApplication
 @EnableEurekaClient
 @EnableFeignClients(basePackages = {"org.wxcl.amy","com.dx"})
@@ -28,8 +29,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @MapperScan({"com.bootdo.*.dao","org.wxcl.amy"})
 public class BootdoApplication {
+
     public static void main(String[] args) {
-		LogUtils.initLogParams(args);
+        LogUtils.initLogParams(args);
         SpringApplication.run(BootdoApplication.class, args);
         System.out.println("ヾ(◍°∇°◍)ﾉﾞ    bootdo启动成功      ヾ(◍°∇°◍)ﾉﾞ\n" +
                 " ______                    _   ______            \n" +
@@ -39,4 +41,5 @@ public class BootdoApplication {
                 " _| |__) || \\__. || \\__. || |, _| |_.' /| \\__. | \n" +
                 "|_______/  '.__.'  '.__.' \\__/|______.'  '.__.'  ");
     }
+
 }

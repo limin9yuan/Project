@@ -62,7 +62,7 @@ public interface IRequireApplyService {
     //返回数据：List<RequireApplyItemBean>
     @RequestMapping("/purchase/requireApplyService/createItems")
     @ResponseBody
-    public ResultMsg createItems(@RequestBody List<MaterialBean> materialBeans);
+    public ResultMsg createItems(@RequestParam("materialCodes") List<String> materialCodes);
 
     //查询
     //orderBy参数如：blog_ID desc，示例代码：PageHelper.startPage(pageNum , pageSize); PageHelper.orderBy("blog_ID desc");

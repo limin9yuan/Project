@@ -1,25 +1,36 @@
-package com.bootdo.material.controller;
+﻿package com.bootdo.material.controller;
 
 
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.*;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.dx.client.model.datacenter.MaterialBean;
 import com.dx.client.model.purchase.RequireApplyItemBean;
 import com.dx.client.model.purchase.RequireApplyBean;
+import org.wxcl.amy.utils.common.ResultMsg;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+@RefreshScope
+@RestController
 @RequestMapping("/material/requireApply")
-@Controller
 public class RequireApplyController extends BaseController {
+    //@Autowired
+    //private com.dx.service.purchase.service.api.IRequireApplyService requireApplyService;
+
+
     private String prefix="material/requireApply"  ;
 
     /**
-     * 采购申请编制页
+     * 采购申请管理页
      */
     @RequiresPermissions("material:requireApply:requireApply")
     @GetMapping("")
@@ -37,12 +48,12 @@ public class RequireApplyController extends BaseController {
         String createUserName =getUser().getUsername();
         String deptName =getUser().getDeptName();
         Long deptId =getUser().getDeptId();
-        String planNo = "0001001009";
+        String code = "";
         String businessDate = DateUtils.format(new Date(),DateUtils.DATE_PATTERN);
         String name = businessDate.substring(0,4)+"年"+businessDate.substring(5,7)+"月采购申请";
 
         model.addAttribute("name", name);//名称
-        model.addAttribute("planNo", planNo);//编号
+        model.addAttribute("code", code);//编号
         model.addAttribute("authorCorpName", deptName); //编制机构名称
         model.addAttribute("businessDate", businessDate); //编制机构名称
         model.addAttribute("authorCorpName", deptName); //编制部门名称
@@ -71,10 +82,11 @@ public class RequireApplyController extends BaseController {
     @RequiresPermissions("material:requireApply:edit")
     String edit(@PathVariable("id") String id, Model model) {
         RequireApplyBean requireApplyModel = new RequireApplyBean();//此处为接口取得数据
-        //requireApplyModel.setId(id);
-        requireApplyModel.setName("2018年8月采购申请");
         requireApplyModel.setId(id);
-        requireApplyModel.setAuthorCorpName("采购部");
+        requireApplyModel.setName("2018年8月采购申请");
+        requireApplyModel.setCode(id);
+        requireApplyModel.setAuthorCorpId("8");
+        requireApplyModel.setAuthorCorpName("研发二部");
         //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
         //requireApplyModel.setAuthorCorpId("编制部门Id");
         //requireApplyModel.setCreateUserId("编制人Id");
@@ -84,6 +96,27 @@ public class RequireApplyController extends BaseController {
         model.addAttribute("requireApplyModel", requireApplyModel);//编制日期
         return prefix + "/edit";
     }
+    /**
+     * 查看页
+     */
+    @GetMapping("/view/{id}")
+    @RequiresPermissions("material:requireApply:requireApply")
+    String view(@PathVariable("id") String id, Model model) {
+        RequireApplyBean requireApplyModel = new RequireApplyBean();//此处为接口取得数据
+        requireApplyModel.setId(id);
+        requireApplyModel.setName("2018年8月采购申请");
+        requireApplyModel.setCode(id);
+        requireApplyModel.setAuthorCorpId("8");
+        requireApplyModel.setAuthorCorpName("研发二部");
+        //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
+        //requireApplyModel.setAuthorCorpId("编制部门Id");
+        //requireApplyModel.setCreateUserId("编制人Id");
+        requireApplyModel.setCreateUserName("编制人姓名");
+        requireApplyModel.setRemark("备注");
+
+        model.addAttribute("requireApplyModel", requireApplyModel);//编制日期
+        return prefix + "/view";
+    }
 
     /**
      * 修改
@@ -91,12 +124,36 @@ public class RequireApplyController extends BaseController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("material:requireApply:edit")
-    public R update(RequireApplyBean requireApplyModel) {
+    public R update(@RequestParam Map<String, Object> params) {
+
+        RequireApplyBean requireApplyModel = new RequireApplyBean();
+        requireApplyModel.setName((String)params.get("name"));
+        requireApplyModel.setCode((String)params.get("code"));
+        requireApplyModel.setAuthorCorpId((String)params.get("authorCorpId"));
+        requireApplyModel.setCreateUserId((String)params.get("createUserId"));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date createDate = sdf.parse((String)params.get("createDate"));
+            requireApplyModel.setCreateDate(createDate);
+        }catch (Exception e){
+            return R.error();
+        }
+        List itemList = new ArrayList<RequireApplyItemBean>();
+
+        ;
+
+        JSONArray array = JSONArray.fromObject(params.get("applyEntryJson"));
+        for(int i=0;i<array.size();i++){
+            System.out.println(array.get(i));
+            RequireApplyItemBean requireApplyItemBean = (RequireApplyItemBean) JSONObject.toBean((JSONObject)array.get(i), RequireApplyItemBean.class);
+            itemList.add(requireApplyItemBean);
+        }
         int re=1;
         //int re = requireApplyService.update(requireApplyModel) > 0
-        if (re > 0) {
+        //ResultMsg rms = requireApplyService.save(requireApplyModel,itemList, false);
+        /*if ("1".equals(rms.getCode())) {
             return R.ok();
-        }
+        }*/
         return R.error();
     }
 
@@ -115,17 +172,6 @@ public class RequireApplyController extends BaseController {
             return R.error(1, "该申请已经被审批,不允许删除");
         }
         return R.error();*/
-        return R.ok();
-    }
-
-    /**
-     * 批量删除
-     */
-    @PostMapping("/batchRemove")
-    @ResponseBody
-    @RequiresPermissions("material:requireApply:batchRemove")
-    public R remove(@RequestParam("ids[]") Long[] ids) {
-        //requireApplyService.batchRemove(ids);
         return R.ok();
     }
 
@@ -288,20 +334,21 @@ public class RequireApplyController extends BaseController {
      */
     @ResponseBody
     @PostMapping("/commitApply")
-    @RequiresPermissions("material:requireApply:add")
+    @RequiresPermissions("material:requireApply:approve")
     public R approve(@RequestParam Map<String, Object> params) {
         System.out.println(params);
         //int contactIds = service.save(customerContact);
-
-        return R.ok();
+        R r = new R();
+        r.put("id",1);
+        return r.ok();
     }
 
     /**
      * 取消审批
      */
     @ResponseBody
-    @PostMapping("/cancelApply")
-    @RequiresPermissions("material:requireApply:add")
+    @PostMapping("/cancelApprove")
+    @RequiresPermissions("material:requireApply:cancelApprove")
     public R cancelApply(@RequestParam Map<String, Object> params) {
         System.out.println(params);
         //int contactIds = service.save(customerContact);

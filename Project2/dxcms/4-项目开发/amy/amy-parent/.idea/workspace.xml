@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9f69e007-f388-4b13-9311-a8e4cb20781e" name="Default" comment="" />
-    <ignored path="$PROJECT_DIR$/../dx-server-model/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-turbine-server/target/" />
+    <list default="true" id="ca43e6d6-7e3f-4fdf-812e-92b1ebd0e12c" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/../dx-server-dcservice-api/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-file/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-eureka-service1/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-contract-api/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-datacenter-api/target/" />
     <ignored path="$PROJECT_DIR$/../dx-service-tender-api/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-purchase-api/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-server-dcservice/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-purchase/target/" />
     <ignored path="$PROJECT_DIR$/../amy-eureka-service2/target/" />
     <ignored path="$PROJECT_DIR$/../amy-common/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-datacenter-api/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-sales-api/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-file/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-eureka-client/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-eureka-service1/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-admin-server/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-eureka-client2/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-server-dcservice-api/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-purchase-api/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-tender/target/" />
-    <ignored path="$PROJECT_DIR$/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-eureka-server/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-server-dcservice/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-eureka-client1/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-datacenter/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-sales/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-file-api/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-purchase/target/" />
     <ignored path="$PROJECT_DIR$/../dx-client-model/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-config-server/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-eureka-service2-api/target/" />
-    <ignored path="$PROJECT_DIR$/../amy-eureka-service1-api/target/" />
     <ignored path="$PROJECT_DIR$/../dx-service-contract/target/" />
-    <ignored path="$PROJECT_DIR$/../dx-service-contract-api/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-eureka-client/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-file-api/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-datacenter/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-admin-server/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-eureka-service1-api/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-tender/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-sales-api/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-service-sales/target/" />
+    <ignored path="$PROJECT_DIR$/../dx-server-model/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-turbine-server/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-config-server/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-eureka-server/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-eureka-service2-api/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-eureka-client1/target/" />
+    <ignored path="$PROJECT_DIR$/../amy-eureka-client2/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,25 +39,64 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="AllocationPlanController.java" pinned="false" current-in-tab="true">
+    <leaf>
+      <file leaf-file-name="RequirePlanController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="450">
+              <caret line="342" column="4" selection-start-line="319" selection-start-column="3" selection-end-line="342" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AllocationPlanController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4">
-              <caret line="188" column="33" selection-start-line="188" selection-start-column="33" selection-end-line="188" selection-end-column="33" />
+            <state relative-caret-position="420">
+              <caret line="259" selection-start-line="259" selection-end-line="259" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequirePlanServiceFallbackFactory.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/fallback/RequirePlanServiceFallbackFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="361">
+              <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="IRequirePlanService.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/service/api/IRequirePlanService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="237">
+              <caret line="51" column="28" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequireApplyController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequireApplyController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1928">
+              <caret line="192" column="12" lean-forward="true" selection-start-line="192" selection-start-column="4" selection-end-line="192" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>page</find>
+    </findStrings>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/BootdoApplication.java" />
+        <option value="$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java" />
         <option value="$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java" />
-        <option value="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-dev.yml" />
-        <option value="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-pro.yml" />
       </list>
     </option>
   </component>
@@ -84,7 +123,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -117,15 +155,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
-              <item name="amy-eureka-client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="bootdo" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -134,22 +163,63 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="bootdo" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
-              <item name="amy-eureka-client" type="462c0819:PsiDirectoryNode" />
+              <item name="dx-service-purchase-api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dx-service-purchase-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dx-service-purchase-api" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dx-service-purchase-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dx-service-purchase-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="purchase" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dx-service-purchase-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="purchase" type="462c0819:PsiDirectoryNode" />
+              <item name="fallback" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dx-service-purchase-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="purchase" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -166,8 +236,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-    <property name="settings.editor.splitter.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -205,48 +274,48 @@
       <patterns />
     </configuration>
     <configuration name="App (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="amy-admin-server" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.admin.server.App" />
-    </configuration>
-    <configuration name="App (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="amy-eureka-client2" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.eureka.client2.App" />
-    </configuration>
-    <configuration name="App (3)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="amy-eureka-server" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.eureka.server.App" />
-    </configuration>
-    <configuration name="App (4)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="amy-eureka-client1" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.eureka.client1.App" />
-    </configuration>
-    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="amy-turbine-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.turbine.App" />
     </configuration>
-    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="amy-eureka-service1" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.service1.Application" />
+    <configuration name="App (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="amy-eureka-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.eureka.server.App" />
     </configuration>
-    <configuration name="Application (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <configuration name="App (3)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="amy-eureka-client1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.eureka.client1.App" />
+    </configuration>
+    <configuration name="App (4)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="amy-eureka-client2" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.eureka.client2.App" />
+    </configuration>
+    <configuration name="App" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="amy-admin-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.admin.server.App" />
+    </configuration>
+    <configuration name="Application (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="dx-server-dcservice" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.dx.server.dcservice.Application" />
     </configuration>
-    <configuration name="Application (3)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="dx-service-datacenter" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dx.service.datacenter.Application" />
-    </configuration>
-    <configuration name="Application (4)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <configuration name="Application (2)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="dx-service-purchase" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.dx.service.purchase.Application" />
+    </configuration>
+    <configuration name="Application (3)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="amy-eureka-service2" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.service2.Application" />
+    </configuration>
+    <configuration name="Application (4)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="dx-service-datacenter" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dx.service.datacenter.Application" />
     </configuration>
     <configuration name="Application (5)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="amy-config-server" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.config.server.Application" />
     </configuration>
     <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <module name="amy-eureka-service2" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.service2.Application" />
+      <module name="amy-eureka-service1" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="org.wxcl.amy.service1.Application" />
     </configuration>
     <configuration name="BootdoApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="amy-eureka-client" />
@@ -295,17 +364,17 @@
       <method />
     </configuration>
     <list>
-      <item itemvalue="Spring Boot.App" />
       <item itemvalue="Spring Boot.Application" />
       <item itemvalue="Spring Boot.Application (1)" />
-      <item itemvalue="Spring Boot.App (1)" />
-      <item itemvalue="Spring Boot.App (2)" />
-      <item itemvalue="Spring Boot.App (3)" />
       <item itemvalue="Spring Boot.Application (2)" />
-      <item itemvalue="Spring Boot.App (4)" />
       <item itemvalue="Spring Boot.Application (3)" />
       <item itemvalue="Spring Boot.Application (4)" />
+      <item itemvalue="Spring Boot.App" />
+      <item itemvalue="Spring Boot.App (1)" />
       <item itemvalue="Spring Boot.Application (5)" />
+      <item itemvalue="Spring Boot.App (2)" />
+      <item itemvalue="Spring Boot.App (3)" />
+      <item itemvalue="Spring Boot.App (4)" />
       <item itemvalue="Spring Boot.BootdoApplication" />
     </list>
     <recent_temporary>
@@ -319,57 +388,55 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="9f69e007-f388-4b13-9311-a8e4cb20781e" name="Default" comment="" />
-      <created>1536909945390</created>
+      <changelist id="ca43e6d6-7e3f-4fdf-812e-92b1ebd0e12c" name="Default" comment="" />
+      <created>1537501395299</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1536909945390</updated>
-      <workItem from="1536909946967" duration="545000" />
-      <workItem from="1536910496647" duration="8685000" />
-      <workItem from="1537147916569" duration="5818000" />
+      <updated>1537501395299</updated>
+      <workItem from="1537501400594" duration="9763000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15048000" />
+    <option name="totallyTimeSpent" value="9763000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50067115" side_tool="true" weight="0.90868926" />
-      <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Designer" order="2" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="bottom" id="Event Log" sideWeight="0.50067115" side_tool="true" weight="0.39911634" />
+      <window_info anchor="right" id="Maven Projects" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info id="Capture Tool" />
+      <window_info id="Designer" />
+      <window_info anchor="right" id="Database" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.17231223" />
+      <window_info id="UI Designer" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" weight="0.66863036" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.3298969" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="bottom" id="Java Enterprise" order="7" />
-      <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.90868926" />
-      <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25637585" />
-      <window_info anchor="right" id="Bean Validation" order="3" />
-      <window_info id="Web" order="2" side_tool="true" />
-      <window_info anchor="right" id="BPMNPalette" order="3" />
-      <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" weight="0.3298969" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info id="Image Layers" />
+      <window_info anchor="bottom" id="Java Enterprise" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49932885" weight="0.73195875" />
+      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Spring" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
+      <window_info anchor="right" id="Bean Validation" />
+      <window_info id="Web" side_tool="true" />
+      <window_info anchor="right" id="BPMNPalette" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info id="Favorites" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,77 +447,56 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/fallback/PurchaseOrderServiceFallbackFactory.java">
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/BootdoApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+        <state relative-caret-position="274">
+          <caret line="28" column="48" selection-start-line="28" selection-start-column="48" selection-end-line="28" selection-end-column="48" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/BootdoApplication.java">
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="551">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
+        <state relative-caret-position="450">
+          <caret line="342" column="4" selection-start-line="319" selection-start-column="3" selection-end-line="342" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3496">
-          <caret line="188" column="33" selection-start-line="188" selection-start-column="33" selection-end-line="188" selection-end-column="33" />
+        <state relative-caret-position="420">
+          <caret line="259" selection-start-line="259" selection-end-line="259" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/BootdoApplication.java">
+    <entry file="file://$PROJECT_DIR$/../dx-service-purchase/src/main/java/com/dx/service/purchase/service/RequireApplyService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="14" column="51" selection-end-line="44" selection-end-column="1" />
+        <state relative-caret-position="133">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/fallback/PurchaseOrderServiceFallbackFactory.java">
+    <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/fallback/RequirePlanServiceFallbackFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="43" selection-start-line="23" selection-start-column="43" selection-end-line="23" selection-end-column="43" />
+        <state relative-caret-position="361">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-pro.yml">
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequireApplyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
+        <state relative-caret-position="-1928">
+          <caret line="192" column="12" lean-forward="true" selection-start-line="192" selection-start-column="4" selection-end-line="192" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-dev.yml">
+    <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/service/api/IRequirePlanService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="35" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/BootdoApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="29" column="13" selection-start-line="29" selection-start-column="13" selection-end-line="29" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/fallback/PurchaseOrderServiceFallbackFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="188" column="33" selection-start-line="188" selection-start-column="33" selection-end-line="188" selection-end-column="33" />
+        <state relative-caret-position="237">
+          <caret line="51" column="28" selection-start-line="51" selection-start-column="21" selection-end-line="51" selection-end-column="28" />
         </state>
       </provider>
     </entry>

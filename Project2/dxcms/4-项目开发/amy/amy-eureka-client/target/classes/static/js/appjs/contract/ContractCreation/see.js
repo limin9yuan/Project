@@ -1,3 +1,8 @@
+var materialData;//合同物资
+var sde;//富文本对象
+var jsonArray=[];//富文本key and value
+var jsonCompanyName = [];
+var jsonSuitBeans = [];
 $().ready(function() {
 	
 	$("button[name=excelinsertbtn]").click(function () {
@@ -7,7 +12,11 @@ $().ready(function() {
 				maxmin : true,
 				shadeClose : false, // 点击遮罩关闭层
 				area : [ '500px', '250px' ],
-				content : '/ContractCreation/ContractCreation/importM'  // iframe的url
+				content : '/ContractCreation/ContractCreation/importE',  // iframe的url
+				 btn: ['确定','取消'],
+	             yes: function(index, layero){
+	            	 window["layui-layer-iframe" + index].clickButtonFileEdit();
+	             }
 			});
 
 	})
@@ -22,30 +31,105 @@ $().ready(function() {
 		format : 'YYYY-MM-DD',
 		locale : moment.locale('zh-cn')
 	});
-		$.ajax({
-			type : "GET",
-			url : "/ContractCreation/ContractCreation/tree",
-			success : function(tree) {
-				tree.checked=false;
-				var defaults = {
-						zNodes : tree,
-						height : 233,
-						chkStyle: "radio",//设置单选树形 默认是多选
-						radioType : "all",
-						callback:{
-	                        onCheck: function (treeNode) {
-	                        //alert("my callback");
-	                        }
-	                    }
-					};
-					$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
-					$("#authorDeptName").drawMultipleTree(defaults);
-					
-					 $("#contractSuits").drawMultipleTree(defaults);
-					$("#performUserName").drawMultipleTree(defaults);
-					
-			}
-		});
+	
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+     		'deptIds' : $("#suitCorpId").val()
+     		},
+		success : function(tree) {
+			tree.checked=false;
+			var defaults = {
+					zNodes : tree,
+					height : 233,
+					chkStyle: "radio",//设置单选树形 默认是多选
+					radioType : "all",
+					callback:{
+                        onCheck: function (treeNode) {
+                        //alert("my callback");
+                        }
+                    }
+				};
+				
+				 $("#suitCorpName").drawMultipleTree(defaults);
+				
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+     		'deptIds' : $("#authorCorpId").val()
+     		},
+		success : function(tree) {
+			tree.checked=false;
+			var defaults = {
+					zNodes : tree,
+					height : 233,
+					chkStyle: "radio",//设置单选树形 默认是多选
+					radioType : "all",
+					callback:{
+                        onCheck: function (treeNode) {
+                        //alert("my callback");
+                        }
+                    }
+				};
+				
+			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
+				
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editTree",
+		data : {
+     		'deptIds' : $("#authorDeptId").val()
+     		},
+		success : function(tree) {
+			tree.checked=false;
+			var defaults = {
+					zNodes : tree,
+					height : 233,
+					chkStyle: "radio",//设置单选树形 默认是多选
+					radioType : "all",
+					callback:{
+                        onCheck: function (treeNode) {
+                        //alert("my callback");
+                        }
+                    }
+				};
+				
+			$("#authorDeptName").drawMultipleTree(defaults);
+				
+		}
+	});
+	
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/editUserTree",
+		data : {
+     		'deptIds' : $("#performUserId").val()
+     		},
+		success : function(tree) {
+			tree.checked=false;
+			var defaults = {
+					zNodes : tree,
+					height : 233,
+					chkStyle: "radio",//设置单选树形 默认是多选
+					radioType : "all",
+					callback:{
+                        onCheck: function (treeNode) {
+                        	//alert("my callback");
+                        }
+                    }
+				};
+				
+			$("#performUserName").drawMultipleTree(defaults);
+				
+		}
+	});
+	
 		
 	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
@@ -59,7 +143,7 @@ $().ready(function() {
 	$('#myTab a[href="#contractMaterialDetail"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
-		jqxTreeGrid();
+		
 	});
 	
 	// ————上传文件**********************************************
@@ -111,7 +195,29 @@ $().ready(function() {
 			},
 			done : function(r) {
 				if (r.code == 0) {
+					var tmpFile={"url":r.url,"type":r.typeId,"date":r.createDate};
+					if (window.localStorage.getItem("fileArray")==null) {
+						window.localStorage.setItem("fileArray",JSON.stringify(tmpFile));
+						window.localStorage.setItem("fileCount",1);
+					}else{
+						var tmpArray = window.localStorage.getItem("fileArray");
+						var tmpCount = window.localStorage.getItem("fileCount");
+						tmpArray = tmpArray+","+JSON.stringify(tmpFile);
+						window.localStorage.setItem("fileArray",tmpArray);
+						window.localStorage.setItem("fileCount",1+Number(tmpCount));
+//						console.log(tmpCount);
+						console.log("["+tmpArray.toString()+"]");
+						var fileInformation ="["+tmpArray.toString()+"]";
+						update(fileInformation);
+					}
+//					window.localStorage.getItem("fileArray");
+					if (fileCount==Number(window.localStorage.getItem("fileCount"))) {
+						window.localStorage.removeItem("fileArray")
+					}
+//					console.log("["+window.localStorage.getItem("fileArray")+"]");
+					
 					parent.layer.alert(r.msg);
+
 					if (r.serviceAttachment > 0) {
 					}
 				} else {
@@ -122,25 +228,132 @@ $().ready(function() {
 	});
 //	*****************************上传文件END
 	validateRule();
-	richTextkey();
+	
+	jqxTreeGrid();
 });
-
-function richTextkey(){
-	//提取富文本信息
-			var a=$("#box-richText span[id]");
-			var c=new Array(); 
-			for (var i = 0; i < a.length; i++) {
-				c.push($(a[i]).prop('id'));
-			}
-//			alert(c);
-			console.log(c);
+//得到合同物资数据test
+function dsds() {
+	var ctrls=sde.getControlById();
+	var ele=new Array();//value
+	var rite=new Array();//key
+	ctrls.forEach(ctrl=>{
+//		debugger;//debug断点
+//		这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
+//		console.log(ctrl.getValue());
+		ele.push(ctrl.getValue());
+		
+		var element=ctrl.getCtrlElement()//获取控制的Value节点
+		rite.push(element.id);
+//		alert(element.id);
+	});
+	var jsonArray=[];
+	for(var i = 0;i<ele.length;i++){  
+      var json = {};  
+      for(var j=0;j<rite.length;j++){  
+          if(i==j){  
+              json.key = rite[j];  
+              json.value = ele[i];  
+              jsonArray.push(json);  
+          }  
+      }  
+  }
+	console.log(jsonArray);
+	console.log(ele);
+	console.log(rite);
+	
 }
-function update() {
+$("#saveBtn").click(function (){
+	  if($("#signupForm").valid()){
+		  document.getElementById("uploadFile").click();
+		  
+			var ctrls=sde.getControlById();
+			var ele=new Array();//value
+			var rite=new Array();//key
+			ctrls.forEach(ctrl=>{
+//				debugger;//debug断点
+//				这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
+//				console.log(ctrl.getValue());
+				ele.push(ctrl.getValue());
+				
+				var element=ctrl.getCtrlElement()//获取控制的Value节点
+				rite.push(element.id);
+//				alert(element.id);
+			});
+			
+			for(var i = 0;i<ele.length;i++){  
+		        var json = {};  
+		        for(var j=0;j<rite.length;j++){  
+		            if(i==j){  
+		                json.key = rite[j];  
+		                json.value = ele[i];  
+		                jsonArray.push(json);  
+		            }  
+		        }  
+		    }
+			console.log(jsonArray);
+			//供货公司
+			var deliverCompanyNameArr = new Array();
+			var deliverCompanyName = $("#deliverCompanyName").val();
+			deliverCompanyNameArr = deliverCompanyName.split(",");
+			var deliverCompanyIdArr = new Array();
+			var deliverCompanyId = $("#deliverCompanyId").val();
+			deliverCompanyIdArr = deliverCompanyId.split(",");
+			jsonCompanyName = new Array();
+			for (var i = 0; i < deliverCompanyNameArr.length; i++) {
+				var jsons = {};
+				for (var j = 0; j < deliverCompanyIdArr.length; j++) {
+					if (i == j) {
+						jsons.deliverCompanyId = deliverCompanyIdArr[j];
+						jsons.deliverCompanyName = deliverCompanyNameArr[i];
+						jsonCompanyName.push(jsons);
+					}
+				}
+			}
+//			console.log("供货公司");
+//			console.log(jsonCompanyName);
+
+			//适用机构
+			var contractSuitBeansArr = new Array();
+			var contractSuitBeans = $("#contractSuitBeans").val();
+			contractSuitBeansArr = contractSuitBeans.split(",");
+
+			var suitCorpIdArr = new Array();
+			var suitCorpId = $("#contractSuitBeans").drawMultipleTree("getChecks", "val");
+			suitCorpIdArr = suitCorpId.split(",");
+			$("#suitCorpId").val(suitCorpId);
+			jsonSuitBeans = new Array();
+			for (var i = 0; i < contractSuitBeansArr.length; i++) {
+				var jsonc = {};
+				for (var j = 0; j < suitCorpIdArr.length; j++) {
+					if (i == j) {
+						jsonc.deliverCompanyId = suitCorpIdArr[j];
+						jsonc.deliverCompanyName = contractSuitBeansArr[i];
+						jsonSuitBeans.push(jsonc);
+					}
+				}
+			}
+//			console.log("适用机构");
+//			console.log(jsonSuitBeans);
+//		  setTimeout('update()', 500); //延迟执行save()方法5毫秒
+	   }
+	})
+function update(fileInformation) {
+	var signupForm=$('#signupForm').serializeArray();
+	 console.log(signupForm);
+		var params = {
+			"contractMaterialBeans" : JSON.stringify(materialData),
+			"signupForm" : JSON.stringify(signupForm),
+			"fileInformation":fileInformation,
+			"jsonCompanyName":JSON.stringify(jsonCompanyName),
+			"jsonSuitBeans":JSON.stringify(jsonSuitBeans),
+			"richTextKVJson" : JSON.stringify(jsonArray)
+		};
+	//合同物资信息
 	$.ajax({
 		cache : true,
 		type : "POST",
 		url : "/ContractCreation/ContractCreation/update",
-		data : $('#signupForm').serialize(),// 你的formid
+		data : params,// 你的formid
 		async : false,
 		error : function(request) {
 			parent.layer.alert("Connection error");
@@ -187,7 +400,7 @@ function openContractDelivers() {
 		type : 2,
 		title : "选择供货信息",
 		area : [ '60%', '90%' ],
-		content : "/ContractCreation/ContractCreation/contractDelivers"
+		content : "/ContractCreation/ContractCreation/contractDeliverBeans"
 	})
 }
 //判断选择的币种改变页面的其他单位
@@ -227,6 +440,7 @@ function triggerCheckbox(checkbox) {
 }
 
 
+
 function jqxTreeGrid(){
 	var source = {
 			dataType : "json",
@@ -255,6 +469,10 @@ function jqxTreeGrid(){
 				}, //父id
 				//					             { name: "specification", type: "string" },//规格型号
 
+				{
+					name : "materialUnitName",
+					type : "string"
+				}, //单位
 				{
 					name : "qty",
 					type : "double"
@@ -292,7 +510,7 @@ function jqxTreeGrid(){
 					name : 'parentId'
 				}
 			},
-			url : "/ContractCreation/ContractCreation/test", //数据请求链接
+			url : "/ContractCreation/ContractCreation/materila/"+$("#id").val(), //数据请求链接
 //			localData : data,
 			id : "materilaCode", //设置主键
 
@@ -348,7 +566,6 @@ function jqxTreeGrid(){
 						align : "center",
 						cellsAlign : 'center',
 					},
-					
 //					{
 //						text : "规格型号",
 //						dataField : "specification",
@@ -393,37 +610,235 @@ function jqxTreeGrid(){
 						align : "center",
 						cellsAlign : 'center',
 					}
-				//           {
-				//             text:"操作",
-				//             dataField:'toolBar',
-				//             cellsAlign: 'center',
-				//             align: "center",
-				////             width:averageW,
-				//             width:'200px',
-				//             cellsRenderer:function(row,clomun,value){
-				//               var toolBtn= '<div class="custom-btn-group">'+
-				//                               '<button class="custom-btn-small add-btn" title="添加" data-toggle="modal" data-target=".addRow">'+
-				//                                 '<i class="fa fa-plus" aria-hidden="true"></i>'+
-				//                               '</button>'+
-				//                               '<button class="custom-btn-small edit-btn" title="编辑" data-toggle="modal" data-target=".edit-modal">'+
-				//                                 '<i class="fa fa-pencil" aria-hidden="true"></i>'+
-				//                               '</button>'+
-				//                               '<button class="custom-btn-small del-btn" title="删除">'+
-				//                                 '<i class="fa fa-trash" aria-hidden="true"></i>'+
-				//                               '</button>'+
-				//                             '</div>';
-				//               return toolBtn;
-				//               
-				//             }
-				//           }
-				]
-			});
-	}
-	loadTable();
+//           {
+//             text:"操作",
+//             dataField:'toolBar',
+//             cellsAlign: 'center',
+//             align: "center",
+////             width:averageW,
+//             width:'200px',
+//             cellsRenderer:function(row,clomun,value){
+//               var toolBtn= '<div class="custom-btn-group">'+
+//                               '<button class="custom-btn-small add-btn" title="添加" data-toggle="modal" data-target=".addRow">'+
+//                                 '<i class="fa fa-plus" aria-hidden="true"></i>'+
+//                               '</button>'+
+//                               '<button class="custom-btn-small edit-btn" title="编辑" data-toggle="modal" data-target=".edit-modal">'+
+//                                 '<i class="fa fa-pencil" aria-hidden="true"></i>'+
+//                               '</button>'+
+//                               '<button class="custom-btn-small del-btn" title="删除">'+
+//                                 '<i class="fa fa-trash" aria-hidden="true"></i>'+
+//                               '</button>'+
+//                             '</div>';
+//               return toolBtn;
+//               
+//             }
+//           }
+         ]
+     });
+   }
+   loadTable();
 //   $(window).resize(function(){
 //     loadTable();
 //   })
 }
+
+
+function ImportJqxTreeGrid(data){
+	materialData=data;
+	var source = {
+			dataType : "json",
+			//设置字段名称，name和后台实体对应
+			dataFields : [
+				{
+					name : "id",
+					type : "string"
+				}, //id
+				{
+					name : "suitCorpId",
+					type : "string"
+				}, //适用机构
+
+				{
+					name : "materialName",
+					type : "string"
+				}, //物料名称
+				{
+					name : "materilaCode",
+					type : "string"
+				}, //物料编码
+				{
+					name : "parentId",
+					type : "string"
+				}, //父id
+				//					             { name: "specification", type: "string" },//规格型号
+
+				{
+					name : "materialUnitName",
+					type : "string"
+				}, //单位
+				{
+					name : "qty",
+					type : "double"
+				}, //数量
+
+				{
+					name : "price",
+					type : "BigDecimal"
+				}, //含税单价（元）
+				{
+					name : "dateFrom",
+					type : "Date"
+				}, //有效起始日期
+
+				{
+					name : "dateTo",
+					type : "Date"
+				}, //有效截止日期
+				{
+					name : "remark",
+					type : "string"
+				}, //备注
+
+				{
+					name : "materilaCode",
+					type : "string"
+				}, //子id  合同id
+			],
+			hierarchy : {
+				//					                root: "MaterilaCode",  //设置孩子节点？
+				keyDataField : {
+					name : 'materilaCode'
+				},
+				parentDataField : {
+					name : 'parentId'
+				}
+			},
+//			url : "/ContractCreation/ContractCreation/test", //数据请求链接
+			localData : data,
+			id : "materilaCode", //设置主键
+
+
+		};
+
+	var dataAdapter = new $.jqx.dataAdapter(source); //加载source
+	function loadTable() {
+		var averageW = parseInt($("#treeTable").width() * 0.2); //定义表格树每列的宽度
+		$("#treeTable").jqxTreeGrid(
+			//设置一些基本的属性
+			{
+				width : "100%",
+				source : dataAdapter,
+				sortable : true,
+				altRows : true,
+				autoRowHeight : false,
+				editable : true,
+				checkboxes : false,
+				hierarchicalCheckboxes : true,
+				editSettings : {
+					saveOnPageChange : true,
+					saveOnBlur : true,
+					saveOnSelectionChange : false,
+					cancelOnEsc : true,
+					saveOnEnter : true,
+					editOnDoubleClick : false,
+					editOnF2 : false
+				},
+				//表头（每列显示的名称，与上文中source中的dataField对应）
+				columns : [
+					{
+						text : "适用机构",
+						dataField : 'suitCorpId',
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "物料名称",
+						dataField : "materialName",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "物料编码",
+						dataField : "materilaCode",
+						align : "center",
+						cellsAlign : 'center',
+					},
+//					{
+//						text : "规格型号",
+//						dataField : "specification",
+//						align : "center",
+//						cellsAlign : 'center',
+//					},
+					//						            {
+					//							           text:"单位",
+					//							           dataField:"materialUnitName",
+					//							           align:"center",
+					//							           cellsAlign: 'center',
+					////							           width:averageW,
+					////							           width:'100px'
+					//						            },
+					{
+						text : "数量",
+						dataField : "qty",
+						align : "center",
+						cellsAlign: 'center',
+					},
+					{
+						text : "含税单价（元）",
+						dataField : "price",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "有效起始日期",
+						dataField : "dateFrom",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "有效截止日期",
+						dataField : "dateTo",
+						align : "center",
+						cellsAlign : 'center',
+					},
+					{
+						text : "备注",
+						dataField : "remark",
+						align : "center",
+						cellsAlign : 'center',
+					}
+//           {
+//             text:"操作",
+//             dataField:'toolBar',
+//             cellsAlign: 'center',
+//             align: "center",
+////             width:averageW,
+//             width:'200px',
+//             cellsRenderer:function(row,clomun,value){
+//               var toolBtn= '<div class="custom-btn-group">'+
+//                               '<button class="custom-btn-small add-btn" title="添加" data-toggle="modal" data-target=".addRow">'+
+//                                 '<i class="fa fa-plus" aria-hidden="true"></i>'+
+//                               '</button>'+
+//                               '<button class="custom-btn-small edit-btn" title="编辑" data-toggle="modal" data-target=".edit-modal">'+
+//                                 '<i class="fa fa-pencil" aria-hidden="true"></i>'+
+//                               '</button>'+
+//                               '<button class="custom-btn-small del-btn" title="删除">'+
+//                                 '<i class="fa fa-trash" aria-hidden="true"></i>'+
+//                               '</button>'+
+//                             '</div>';
+//               return toolBtn;
+//               
+//             }
+//           }
+         ]
+     });
+   }
+   loadTable();
+//   $(window).resize(function(){
+//     loadTable();
+//   })
+}
+
 //rowSelect  当行被点击时执行的事件
 //$("#treeTable").on('rowSelect', function (event) {
 //     var args = event.args;
@@ -471,11 +886,11 @@ function validateRule() {
 					//税率
 					required : true
 				},
-				contractSuits:{
+				suitCorpName:{
 					//生效机构
 					required : true
 				},
-				contractDelivers:{
+				contractDeliverBeans:{
 					//供货公司
 					required : true
 				},
@@ -530,11 +945,11 @@ function validateRule() {
 					//税率
 					required : icon + "税率不能为空"
 				},
-				contractSuits:{
+				suitCorpName:{
 					//生效机构
 					required : icon + "生效机构不能为空"
 				},
-				contractDelivers:{
+				contractDeliverBeans:{
 					//供货公司
 					required : icon + "供货公司不能为空"
 				},
@@ -1128,35 +1543,37 @@ function richText() {
 			} ]
 		} ]
 	};
-	var sde = new SDE(options);
-
-	sde.addListener('ready', function() { //打开页面加载
-		var ctrls = sde.getControlById(); //获得页面控件数据数组
-		var ctrlsArray = new Array();
-
-		for (var i = 0; i < ctrls.length; i++) {
-			var v = ctrls[i].getValue();
-			ctrlsArray[i] = v;
-		}
-		$.ajax({
-			type : 'post',
-			url : '/ContractCreation/ContractCreation/save',
-			data : {
-				"ctrls" : ctrlsArray
-			},
-			success : function(r) {
-				if (r.code == 0) {
-					//					layer.msg(r.msg);
-				} else {
-					alert("操作异常");
-				}
-			},
-			error : function(r) {
-				alert("error");
-			}
-		});
+	
+	sde = new SDE(options);
+//	sde.addListener('ready', function() { //打开页面加载
+//		var ctrl = sde.getControlById(); //获得页面控件数据数组
+//		var ctrlsArray = new Array();
+//
+//		for (var i = 0; i < ctrl.length; i++) {
+//			//			alert(ctrls[i].getValue());
+//			var v = ctrl[i].getValue();
+//			ctrlsArray[i] = v;
+//		}
+//		console.log(ctrlsArray);
+//		$.ajax({
+//			type : 'post',
+////			url : '/ContractCreation/ContractCreation/update',
+//			data : {
+//				"ctrls" : ctrlsArray
+//			},
+//			success : function(r) {
+//				if (r.code == 0) {
+//					//					layer.msg(r.msg);
+//				} else {
+//					alert("操作异常");
+//				}
+//			},
+//			error : function(r) {
+//				alert("error");
+//			}
+//		});
 	//		debugger;//js执行在这么会自己停止的，然后你可以在控制台下输出ctrls，看看里面有什么
-	});
+//	});
 //	window.sde = sde;
 }
 

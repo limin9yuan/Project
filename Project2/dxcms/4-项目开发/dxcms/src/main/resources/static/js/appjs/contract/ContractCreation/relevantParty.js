@@ -66,15 +66,20 @@ function selectData() {
 		return row;
 	});
 	//多条
-	var ids = "";
+	var name = "";
+	var	id="";
 	for (var i = 0; i < row.length; i++) {
 		if (i == 0 || i == "0") {
-			ids += row[i].deliverCompanyName;
+			id +=row[i].deliverCompanyId+",";
+			name += row[i].deliverCompanyName+"," ;
 		} else {
-			ids += "," + row[i].deliverCompanyName;
+			id += row[i].deliverCompanyId+",";
+			name +=row[i].deliverCompanyName+",";
 		}
 	}
-	parent.$("#contractDelivers").val(ids);
+//	alert(name);
+	parent.$("#deliverCompanyName").val(name);
+	parent.$("#deliverCompanyId").val(id);
 
 	closeWin();
 

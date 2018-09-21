@@ -35,9 +35,9 @@ public class ClientControllerForService1 {
     @ApiOperation(value="测试1", notes="调用service1的test1方法返回相应结果")
     @RequestMapping("/test1")
     public Object test1()throws Exception{
-        Object obj1=this.testServiceA.test1();
-        System.out.println(obj1);
-        return "ok!"+username;
+            Object obj1=this.testServiceA.test1();
+            System.out.println(obj1);
+            return "ok!"+username;
     }
 
     @RequestMapping("/save")

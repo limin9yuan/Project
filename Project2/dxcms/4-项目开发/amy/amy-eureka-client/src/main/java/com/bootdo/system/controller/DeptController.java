@@ -32,7 +32,7 @@ public class DeptController extends BaseController {
 	@Autowired
 	private DeptService sysDeptService;
 
-	@GetMapping()
+	@GetMapping()   
 	@RequiresPermissions("system:sysDept:sysDept")
 	String dept() {
 		return prefix + "/dept";

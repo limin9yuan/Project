@@ -1,4 +1,5 @@
 var typeCount=0;
+var supplier="";
 $().ready(function() {
 	validateRule();
 	datetimepicker();
@@ -9,7 +10,7 @@ function withdrawApproval() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/requirementPlan/requirementPlan/withdrawApproval",
+		url : "/allocationPlan/allocationPlan/withdrawApproval",
 		data :  {
 				 'planNo' : planNo
 				 },// 你的formid
@@ -36,7 +37,7 @@ function submitApproval() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/requirementPlan/requirementPlan/submitApproval",
+		url : "/allocationPlan/allocationPlan/submitApproval",
 		data :  {
 				 'planNo' : planNo
 				 },// 你的formid
@@ -59,49 +60,57 @@ function submitApproval() {
 	});
 }
 function save() {
-	var applyEntryJson = [];
-    $("#requirePlanTable").find('[role=row]').each(function (i) {
-        if ($(this).find('input[name="requirePlanid"]').val()) {
-             applyEntryJson.push({
-				 requirePlanid : $(this).find('input[name="requirePlanid"]').val(),//序号
-				 materialName : $(this).find('input[name="materialName"]').val(),//物料名称
-				 materilaCode: $(this).find('input[name="materilaCode"]').val(),//物料编码
-				 specification: $(this).find('input[name="specification"]').val(),//规格型号
-				 materialUnitName: $(this).find('input[name="materialUnitName"]').val(),//单位
+	var tableName="";
+	var applyEntryJsonArray = [];
+	for(var k=0;k<typeCount;k++){
+		tableName = "t" + k+"table";
+		$("#"+tableName).find('[role=row]').each(function (f) {
+	        if ($(this).find('input[name="authorDeptName"]').val()) {
+				var recordJson = {
+					authorDeptName : $(this).find('input[name="authorDeptName"]').val(),//需求机构
+					materialClassName : $(this).find('input[name="materialClassName"]').val(),//物料类型
+					materialName: $(this).find('input[name="materialName"]').val(),//物料名称
+					materilaCode: $(this).find('input[name="materilaCode"]').val(),//物料编码
+					specification: $(this).find('input[name="specification"]').val(),//物料特性
+					materialUnitName: $(this).find('input[name="materialUnitName"]').val(),//单位
+					purchaseQty: $(this).find('input[name="purchaseQty"]').val(),//采购数量
+			   };
+			   if (k != typeCount-1) {
+				   var companyArray = supplier[k];
+				   for (var j = 0; j < companyArray.length; j++) {
+					   if ($(this).find('input[name="unitPrice'+j+'"]').val() != ""
+				   			&& $(this).find('input[name="allotQty'+j+'"]').val() != ""
+							&& $(this).find('input[name="allotRatio'+j+'"]').val()!= "") {
+							recordJson["companyId"] = companyArray[j].companyId;
+	 					    recordJson["unitPrice"] = $(this).find('input[name="unitPrice'+j+'"]').val();
+	 					    recordJson["allotQty"] = $(this).find('input[name="allotQty'+j+'"]').val();
+	 					    recordJson["allotRatio"] = $(this).find('input[name="allotRatio'+j+'"]').val();
+					   }
 
-				 materialSubArray: $(this).find('input[name="materialSubArray"]').val(),//包装物料
-				 requireQty: $(this).find('input[name="requireQty"]').val(),//需求数量
-				 purchaseQty: $(this).find('input[name="purchaseQty"]').val(),//采购数量
+					}
+			   }else {
+				   recordJson["companyId"] = $(this).find('input[name="companyId"]').val();
+				   recordJson["unitPrice"] = $(this).find('input[name="unitPrice"]').val();
+				   recordJson["allotQty"] = $(this).find('input[name="allotQty"]').val();
+				   recordJson["allotRatio"] = $(this).find('input[name="allotRatio"]').val();
+			   }
+	            applyEntryJsonArray.push(recordJson);
+	        }
+	    });
+	}
 
-				 stockQty: $(this).find('input[name="stockQty"]').val(),//库存数量
-				 reserveQty: $(this).find('input[name="reserveQty"]').val(),//安全库存
-				 onwayQty: $(this).find('input[name="onwayQty"]').val(),//在途数量
-				 budgetQty: $(this).find('input[name="budgetQty"]').val(),//预算数量
-				 referencePrice: $(this).find('input[name="referencePrice"]').val(),//参考单价
-				 budgetPrice: $(this).find('input[name="budgetPrice"]').val(),//预算金额
-				 referenceAmount: $(this).find('input[name="referenceAmount"]').val(),//参考金额
-
-				 requireDate: $(this).find('input[name="requireDate"]').val(),//需求日期
-				 arriveDate: $(this).find('input[name="arriveDate"]').val(),//要求到货时间
-				 purchaserName: $(this).find('input[name="purchaserName"]').val(),//采购员
-				 description: $(this).find('input[name="description"]').val()//说明信息
-            });
-        }
-    });
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/requirementPlan/requirementPlan/save",
+		url : "/allocationPlan/allocationPlan/save",
 		data :  {
 				 'title' : $("#title").val(),
 				 'planNo' : $("#planNo").val(),
 				 'type' : $("#type").val(),
-				 'purchaseDept' : $("#purchaseDept").val(),
-				 'invoiceDate' : $("#invoiceDate").val(),
 				 'authorUser' : $("#authorUser").val(),
 				 'createDate' : $("#createDate").data('date'),
 				 'remark' : $("#remark").val(),
-				 'applyEntryJson' : applyEntryJson
+				 'applyEntryJsonArray' : applyEntryJsonArray
 				 },// 你的formid
 		async : false,
 		error : function(request) {
@@ -123,20 +132,20 @@ function save() {
 
 }
 function deleteSelectedRow(){
-	var tableName="";
+	var activeTableName="";
 	for(i=0;i<typeCount;i++){
 		if($('#myTab li:eq('+i+')').attr("class")=='active'){
-			tableName = "t" + i+"table"
+			activeTableName = "t" + i+"table"
 			break;
 		}
 	}
 	//获取多选到的id集合
-	var ids = $("#" +tableName).jqGrid("getGridParam", "selarrrow");
+	var ids = $("#" +activeTableName).jqGrid("getGridParam", "selarrrow");
 	//遍历访问这个集合
 	$(ids).each(function (index, id){
 	     //由id获得对应数据行
-		var row = $("#" +tableName).jqGrid('getRowData', id);
-		$("#" +tableName).delRowData(id);
+		var row = $("#" +activeTableName).jqGrid('getRowData', id);
+		$("#" +activeTableName).delRowData(id);
 	});
 }
 function getAllocationPlanDetail(){
@@ -153,6 +162,8 @@ function getAllocationPlanDetail(){
 			var nameArrays = data.categoryList;
 			typeCount = nameArrays.length;
 			var supplierArrays = data.supplierList;
+			supplier = supplierArrays;
+			// localStorage.setItem("supplierArrays",supplierArrays);
 			for (var i = 0; i < orderEntry.length; i++) {
 				tableName = "t" + i + "table";
 				if (i == 0) {
@@ -204,7 +215,7 @@ function loadData(orderEntry, i,supplierArrays) {
 				unitPrice: '<input value="'+typeEntity[j].unitPrice+'" name="unitPrice" type="text" class="editable left disabled" readonly/>',//合同单价
 				allotQty: '<input value="'+typeEntity[j].allotQty+'" name="allotQty" type="text" class="editable left disabled"/>',//分配数量
 				allotRatio: '<input value="'+typeEntity[j].allotRatio+'" name="allotRatio" type="text" class="editable left disabled"/>',//分配比例
-				companyName: '<input value="'+typeEntity[j].companyName+'" name="companyName" type="text" class="editable left disabled decimal" readonly/>',//供应商
+				companyName: '<input value="'+typeEntity[j].companyName+'" name="companyName" type="text" class="editable left disabled decimal" readonly/><input value="'+typeEntity[j].companyId+'" name="companyId" type="hidden" class="editable left disabled decimal" readonly/>',//供应商
 			}
 			$("#"+tableName).jqGrid('addRowData', j, rowdata);
 		};

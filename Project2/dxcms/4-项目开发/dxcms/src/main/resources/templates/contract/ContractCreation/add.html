@@ -20,7 +20,7 @@
 #taxRate-error {
 	position: relative;
 	float: right;
-	top: 35px;     
+	top: 35px;
 	padding-bottom: 35px;
 	padding-right: 90%
 }
@@ -76,26 +76,10 @@
 						</ul>
 
 						<div class="form-group">
-							<div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
-								<input id="authorDeptId" name="authorDeptId"
-									th:value="${authorDeptId}" class="form-control" type="hidden">
-								<input id="performUserId" name="performUserId"
-									class="form-control" type="hidden">
-								<!--执行人id -->
-								<input id="authorUserId" name="authorUserId"
-									class="form-control" th:value="${authorUserId}" type="hidden">
-								<!-- 起草人id -->
-								<input id="projectId" name="projectId" class="form-control"
-									type="hidden">
-								<!-- 项目id -->
-
-							</div>
-						</div>
-						<div class="form-group">
 							<div class="col-sm-3 col-sm-offset-4">
 								<button type="submit" id="saveBtn" class="btn btn-success">保存</button>
 								&nbsp;
-								<button type="button" class="btn btn-success">提交审批</button>
+								<button type="button" class="btn btn-success" onclick="dsds()">提交审批</button>
 								&nbsp;
 								<button type="button" class="btn btn-success">撤回审批</button>
 								&nbsp;
@@ -110,7 +94,27 @@
 							<div class="tab-pane fade in active" id="baseInfo">
 
 								<form class="form-horizontal m-t" id="signupForm">
+									<div class="form-group">
+										<div
+											class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+											<input id="authorDeptId" name="authorDeptId"
+												th:value="${authorDeptId}" class="form-control"
+												type="hidden"> <input id="performUserId"
+												name="performUserId" class="form-control" type="hidden">
+											<!--执行人id -->
+											<input id="authorUserId" name="authorUserId" class="form-control" th:value="${authorUserId}" type="hidden">
+											<!-- 起草人id -->
+											<input id="projectId" name="projectId" class="form-control" type="hidden">
+												<input id="deliverCompanyId" name="deliverCompanyId" class="form-control" type="hidden">
+											<!-- 供货公司id -->
+											<!-- 项目id -->
+											<input type="hidden" id="suitCorpId" name="suitCorpId"   class="contracform-control">
+<!-- 											<input type="text" id="contractSuitsId" name="contractSuitsId" th:value="${contractSuitsId}"  class="contracform-control"> -->
+<!-- 											<input type="text" id="authorCorpId" name="authorCorpId" th:value="${authorCorpId}"  class="contracform-control"> -->
+<!-- 											<input type="text" id="performUserId" name="performUserId" th:value="${performUserId}"  class="contracform-control"> -->
 
+										</div>
+									</div>
 									<!-- 							左侧合同基本信息开始 -->
 									<div class="form-group" style="padding-left: 15px"></div>
 									<div class="form-group">
@@ -139,7 +143,7 @@
 										<!-- 								打开页面选择 -->
 										<label class="col-sm-2 control-label">招标方案</label>
 										<div class="col-sm-3">
-											<input id="bidSchemeId" name="bidSchemeId"
+											<input id="bidSchemeName" name="bidSchemeName"
 												class="form-control" type="text">
 										</div>
 									</div>
@@ -149,8 +153,8 @@
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
 											<!-- 	下拉框复选关键字multiple  -->
-											<select data-placeholder="请选择" name="currencyTypeId"
-												id="currencyTypeId" class="form-control chosen-select"
+											<select data-placeholder="请选择" name="currencyTypeName"
+												id="currencyTypeName" class="form-control chosen-select"
 												tabindex="2" style="width: 100%">
 												<!-- 											<option value="RMB">人民币</option> -->
 												<!-- 											<option value="美元">美元</option> -->
@@ -226,16 +230,14 @@
 										<label class="col-sm-2 control-label">适用机构 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<textarea id="contractSuits" name="contractSuits"
+											<textarea id="contractSuitBeans" name="contractSuitBeans" 
 												class="form-control " style="width: 378px;overflow:hidden;"
 												textLabel="jasontext" type="text" readonly="readonly"></textarea>
 										</div>
 										<label class="col-sm-2 control-label">供货公司 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<!-- 										多选 -->
-											<!-- 								打开页面选择 -->
-											<input id="contractDelivers" name="contractDelivers"
+											<input id=deliverCompanyName name="deliverCompanyName"
 												class="form-control" type="text"
 												onclick="openContractDelivers()" readonly="readonly"
 												placeholder="==请选择==">
@@ -437,7 +439,6 @@
 											type="button">
 											<i class="glyphicon glyphicon-save-file "></i> 下载模板
 										</button>
-										<button type="button" id="butTextId" onclick="dsds()">sdsadf</button>
 									</div>
 								</div>
 								<div id="treeTable"></div>
@@ -501,23 +502,6 @@
 	<!-- 	<script type="text/javascript" src="/js/plugins/jqTreeGrid/jquery.treegrid.js"></script> -->
 
 	<!-- 	// 树状下拉复选框js代码-->
-	<script type="text/javascript">
-		function selectTree() {
-			var treeData = $("#selectTree").val();
-			var myobj = eval(treeData); //selectTree input框内容位json数据 转换为json对象
-			// 		alert(myobj);
-	
-			var defaults = {
-				zNodes : myobj,
-				height : 233
-			};
-			$("#contractSuits").drawMultipleTree(defaults); //初始化树状下拉复选框
-			//     var a=$("#selectTree").drawMultipleTree("getChecks","val");
-			//     alert(a);
-	
-		}
-		<!-- 	// 树状下拉复选框js代码END-->
-	</script>
 	<script type="text/javascript" src="/js/plugins/common.js"></script>
 
 	<script type="text/javascript" src="/js/jquery-1.11.2.min.js"></script>

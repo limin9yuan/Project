@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.wxcl.amy.service1.model.User;
+import org.wxcl.amy.model.User;
 
 import java.util.HashMap;
 import java.util.Map;

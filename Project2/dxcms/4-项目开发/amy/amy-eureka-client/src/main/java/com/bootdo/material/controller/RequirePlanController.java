@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -229,7 +230,7 @@ public class RequirePlanController {
 	@ResponseBody
 	@GetMapping("/requirePlanAddList")
 	@RequiresPermissions("requirementPlan:requirementPlan")
-	public PageUtils requirePlanAddList(@RequestParam Map<String, Object> params){
+	public PageInfo requirePlanAddList(@RequestParam Map<String, Object> params){
 		//查询列表数据
 //		Query query = new Query(params);
 		List<Map<String, Object>> requirementPlanDetailList = new ArrayList<>();//调用接口
@@ -248,14 +249,14 @@ public class RequirePlanController {
 			requirementPlanDetailList.add(requireMap);
 		}
 		int total = 20;//调用接口
-		PageUtils pageUtils = new PageUtils(requirementPlanDetailList, total);
-		return pageUtils;
+		PageInfo pageInfo = new PageInfo(requirementPlanDetailList, total);
+		return pageInfo;
 	}
 
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("requirementPlan:requirementPlan")
-	public PageUtils list(@RequestParam Map<String, Object> params){
+	public PageInfo list(@RequestParam Map<String, Object> params){
 		//查询列表数据
 		Query query = new Query(params);
 		List<Map<String, Object>> requirementPlanList = new ArrayList<>();//调用接口
@@ -274,8 +275,8 @@ public class RequirePlanController {
 			requirementPlanList.add(requirePlanMap);
 		}
 		int total = 20;//调用接口
-		PageUtils pageUtils = new PageUtils(requirementPlanList, total);
-		return pageUtils;
+		PageInfo pageInfo = new PageInfo(requirementPlanList, total);
+		return pageInfo;
 	}
 
 	/**

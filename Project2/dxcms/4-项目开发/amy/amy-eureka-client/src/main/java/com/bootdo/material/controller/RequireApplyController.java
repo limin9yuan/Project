@@ -3,23 +3,39 @@ package com.bootdo.material.controller;
 
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.*;
+import com.github.pagehelper.PageInfo;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.dx.client.model.datacenter.MaterialBean;
 import com.dx.client.model.purchase.RequireApplyItemBean;
 import com.dx.client.model.purchase.RequireApplyBean;
+import org.wxcl.amy.utils.common.ResultMsg;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
-@RequestMapping("/material/requireApply")
+@RefreshScope
 @Controller
+@RequestMapping("/material/requireApply")
 public class RequireApplyController extends BaseController {
+    @Autowired
+    private com.dx.service.purchase.service.api.IRequireApplyService requireApplyService;
+    @Autowired
+    private com.dx.service.datacenter.service.api.IMaterialService  materialService;
+
+
+
     private String prefix="material/requireApply"  ;
 
     /**
-     * 采购申请编制页
+     * 采购申请管理页
      */
     @RequiresPermissions("material:requireApply:requireApply")
     @GetMapping("")
@@ -37,12 +53,12 @@ public class RequireApplyController extends BaseController {
         String createUserName =getUser().getUsername();
         String deptName =getUser().getDeptName();
         Long deptId =getUser().getDeptId();
-        String planNo = "0001001009";
+        String code = "";
         String businessDate = DateUtils.format(new Date(),DateUtils.DATE_PATTERN);
         String name = businessDate.substring(0,4)+"年"+businessDate.substring(5,7)+"月采购申请";
 
         model.addAttribute("name", name);//名称
-        model.addAttribute("planNo", planNo);//编号
+        model.addAttribute("code", code);//编号
         model.addAttribute("authorCorpName", deptName); //编制机构名称
         model.addAttribute("businessDate", businessDate); //编制机构名称
         model.addAttribute("authorCorpName", deptName); //编制部门名称
@@ -71,18 +87,43 @@ public class RequireApplyController extends BaseController {
     @RequiresPermissions("material:requireApply:edit")
     String edit(@PathVariable("id") String id, Model model) {
         RequireApplyBean requireApplyModel = new RequireApplyBean();//此处为接口取得数据
-        //requireApplyModel.setId(id);
-        requireApplyModel.setName("2018年8月采购申请");
         requireApplyModel.setId(id);
-        requireApplyModel.setAuthorCorpName("采购部");
+        requireApplyModel.setName("2018年8月采购申请");
+        requireApplyModel.setCode(id);
+        requireApplyModel.setAuthorCorpId("8");
+        requireApplyModel.setAuthorCorpName("研发二部");
         //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
         //requireApplyModel.setAuthorCorpId("编制部门Id");
         //requireApplyModel.setCreateUserId("编制人Id");
         requireApplyModel.setCreateUserName("编制人姓名");
         requireApplyModel.setRemark("备注");
 
-        model.addAttribute("requireApplyModel", requireApplyModel);//编制日期
+        ResultMsg rm = requireApplyService.primary(id);
+        rm.setData(requireApplyModel);
+        model.addAttribute("requireApplyModel", rm.getData());//编制日期
         return prefix + "/edit";
+    }
+    /**
+     * 查看页
+     */
+    @GetMapping("/view/{id}")
+    @RequiresPermissions("material:requireApply:requireApply")
+    String view(@PathVariable("id") String id, Model model) {
+        RequireApplyBean requireApplyModel = new RequireApplyBean();//此处为接口取得数据
+        requireApplyModel.setId(id);
+        requireApplyModel.setName("2018年8月采购申请");
+        requireApplyModel.setCode(id);
+        requireApplyModel.setAuthorCorpId("8");
+        requireApplyModel.setAuthorCorpName("研发二部");
+        //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
+        //requireApplyModel.setAuthorCorpId("编制部门Id");
+        //requireApplyModel.setCreateUserId("编制人Id");
+        requireApplyModel.setCreateUserName("编制人姓名");
+        requireApplyModel.setRemark("备注");
+        ResultMsg rm = requireApplyService.primary(id);
+        rm.setData(requireApplyModel);
+        model.addAttribute("requireApplyModel", rm.getData());//编制日期
+        return prefix + "/view";
     }
 
     /**
@@ -91,10 +132,32 @@ public class RequireApplyController extends BaseController {
     @ResponseBody
     @RequestMapping("/update")
     @RequiresPermissions("material:requireApply:edit")
-    public R update(RequireApplyBean requireApplyModel) {
+    public R update(@RequestParam Map<String, Object> params) {
+
+        RequireApplyBean requireApplyModel = new RequireApplyBean();
+        requireApplyModel.setName((String)params.get("name"));
+        requireApplyModel.setCode((String)params.get("code"));
+        requireApplyModel.setAuthorCorpId((String)params.get("authorCorpId"));
+        requireApplyModel.setCreateUserId((String)params.get("createUserId"));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date createDate = sdf.parse((String)params.get("createDate"));
+            requireApplyModel.setCreateDate(createDate);
+        }catch (Exception e){
+            return R.error();
+        }
+        List itemList = new ArrayList<RequireApplyItemBean>();
+
+        JSONArray array = JSONArray.fromObject(params.get("applyEntryJson"));
+        for(int i=0;i<array.size();i++){
+            System.out.println(array.get(i));
+            RequireApplyItemBean requireApplyItemBean = (RequireApplyItemBean) JSONObject.toBean((JSONObject)array.get(i), RequireApplyItemBean.class);
+            itemList.add(requireApplyItemBean);
+        }
         int re=1;
-        //int re = requireApplyService.update(requireApplyModel) > 0
-        if (re > 0) {
+        requireApplyModel.setRequireApplyItemBeans(itemList);
+        ResultMsg rms = requireApplyService.save(requireApplyModel);
+        if ("1".equals(rms.getCode())) {
             return R.ok();
         }
         return R.error();
@@ -106,27 +169,19 @@ public class RequireApplyController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("material:requireApply:remove")
-    public R remove(Long id) {
-        /*if(requireApplyService.checkCanRemove(id)) {
-            if (requireApplyService.remove(id) > 0) {
+    public R remove(String id) {
+        //boolean canRemove = requireApplyService.checkCanRemove(id);
+        if(true) {
+            //调用接口
+            ResultMsg rms = requireApplyService.remove(id);
+            if ("1".equals(rms.getCode())) {
                 return R.ok();
             }
         }else {
             return R.error(1, "该申请已经被审批,不允许删除");
         }
-        return R.error();*/
-        return R.ok();
-    }
 
-    /**
-     * 批量删除
-     */
-    @PostMapping("/batchRemove")
-    @ResponseBody
-    @RequiresPermissions("material:requireApply:batchRemove")
-    public R remove(@RequestParam("ids[]") Long[] ids) {
-        //requireApplyService.batchRemove(ids);
-        return R.ok();
+        return R.error();
     }
 
     /**
@@ -135,10 +190,13 @@ public class RequireApplyController extends BaseController {
     @GetMapping("/getMaterialList")
     @RequiresPermissions("material:requireApply:add")
     @ResponseBody
-    PageUtils getMaterialList(@RequestParam Map<String, Object> params){
+    PageInfo getMaterialList(@RequestParam Map<String, Object> params){
         // 查询列表数据
-        //Query query = new Query(params);
-        List<Map<String, Object>> materialList = new ArrayList();//调用接口
+        ResultMsg rsm = materialService.search(params.get("pageNumber").toString(),
+                params.get("pageSize").toString(),"",
+                params);
+        //做测试数据 begin
+        List<Map<String, Object>> materialList = new ArrayList();
         for(int i=1;i<11;i++){
             //做测试数据 调用接口前使用 begin
             Map<String, Object> materialMap = new HashMap<>();
@@ -150,10 +208,13 @@ public class RequireApplyController extends BaseController {
             materialMap.put("materialUnitId","单位"+i);
             materialList.add(materialMap);
         }
+        int total = 20;
+        PageInfo pageInfo = new PageInfo(materialList,
+                Integer.parseInt(params.get("pageNumber").toString()));
+        pageInfo.setTotal(total);
         //做测试数据 end
-        int total = 20;//调用接口
-        PageUtils pageUtil = new PageUtils(materialList, total);
-        return pageUtil;
+        //PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
+        return pageInfo;
     }
 
     /**
@@ -161,12 +222,14 @@ public class RequireApplyController extends BaseController {
      */
     @GetMapping("/list")
     @ResponseBody
-    PageUtils list(@RequestParam Map<String, Object> params) {
+    PageInfo list(@RequestParam Map<String, Object> params) {
         // 查询列表数据
-        //Query query = new Query(params);
-        List<Map<String, Object>> requireApplyList = new ArrayList();//调用接口
+        ResultMsg rsm = requireApplyService.search(params.get("pageNumber").toString(),
+                params.get("pageSize").toString(),"",
+                params);
+        //做测试数据 begin
+        List<Map<String, Object>> requireApplyList = new ArrayList();
         for(int i=1;i<11;i++){
-            //做测试数据 调用接口前使用 begin
             Map<String, Object> materialMap = new HashMap<>();
             materialMap.put("id",i);
             materialMap.put("status","状态"+i);
@@ -180,10 +243,14 @@ public class RequireApplyController extends BaseController {
             materialMap.put("createDate","2018-08-"+String.valueOf(10+i));
             requireApplyList.add(materialMap);
         }
+        int total = 20;
+        PageInfo pageInfo = new PageInfo(requireApplyList,
+                Integer.parseInt(params.get("pageNumber").toString()));
+        pageInfo.setTotal(total);
         //做测试数据 end
-        int total = 20;//调用接口
-        PageUtils pageUtil = new PageUtils(requireApplyList, total);
-        return pageUtil;
+        //PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
+
+        return pageInfo;
     }
 
     /**
@@ -191,9 +258,12 @@ public class RequireApplyController extends BaseController {
      */
     @GetMapping("/requireMaterialDetailList")
     @ResponseBody
-    PageUtils requireMaterialDetailList(@RequestParam Map<String, Object> params) {
+    PageInfo requireMaterialDetailList(@RequestParam Map<String, Object> params) {
+
+        ResultMsg rsm = materialService.search(params.get("pageNumber").toString(),
+                params.get("pageSize").toString(),
+                "",params);
         // 查询列表数据
-        Query query = new Query(params);
         List<RequireApplyItemBean> requireMaterialDetailList = new ArrayList();//调用接口
         //做测试数据 调用接口前使用 begin
         /*RequireApplyDetailModel requireApplyDetailModel = new  RequireApplyDetailModel();
@@ -203,8 +273,8 @@ public class RequireApplyController extends BaseController {
         requireMaterialDetailList.add(requireApplyDetailModel);*/
         //做测试数据 end
         int total = 1;//调用接口
-        PageUtils pageUtil = new PageUtils(requireMaterialDetailList, total);
-        return pageUtil;
+        PageInfo pageInfo = new PageInfo(requireMaterialDetailList, total);
+        return pageInfo;
     }
 
     /**
@@ -214,24 +284,27 @@ public class RequireApplyController extends BaseController {
     @GetMapping("/getMaterialDetailByCode/{code}")
     @RequiresPermissions("material:requireApply:add")
     Map<String, Object> getMaterialDetailByCode(@PathVariable("code") String code){
-        //做测试数据 调用接口前使用 begin
-        Map<String, Object> materialMap = new HashMap<>();
-        materialMap.put("name","物资A"+code);
-        materialMap.put("materialClassName","物资类别"+code);
-        materialMap.put("code","物资编码"+code);
-        materialMap.put("materialUnitId","单位"+code);
-        materialMap.put("specification","规格型号"+code);
-        materialMap.put("texture","材质"+code);
-        materialMap.put("materialSubArray","包装物资"+code);
-        materialMap.put("budgetQty","1000");
-        materialMap.put("budgetPrice","900.24");
-        materialMap.put("referencePrice","890.45");
-        materialMap.put("stockQty","200");
-        materialMap.put("acceptUserName","张三");
-        materialMap.put("acceptUserId","zhangsan");
+        //调用接口
+        ResultMsg rsm = materialService.detail(code);
+        //做测试数据 begin
+        RequireApplyItemBean materialItemBean = new RequireApplyItemBean();
+        materialItemBean.setMaterialName("物资A"+code);
+        //materialItemBean.setMaterialClassName("物资类别"+code);
+        materialItemBean.setMaterilaCode("物资编码"+code);
+        materialItemBean.setMaterialUnitName("单位"+code);
+        materialItemBean.setSpecification("规格型号"+code);
+        materialItemBean.setTexture("材质"+code);
+        //materialItemBean.setOutsideBarCode("包装物资"+code);
+        materialItemBean.setBudgetQty(1000.23);//预算数量
+        materialItemBean.setBudgetPrice(new BigDecimal("900.24"));//预算单价
+        materialItemBean.setReferencePrice(new BigDecimal("900.24"));//参考单价
+        materialItemBean.setStockQty(200.34);//库存数量
+        materialItemBean.setAcceptUserName("张三");
+        materialItemBean.setAcceptUserId("zhangsan");
         Map<String, Object> returnData = new HashMap<String, Object>();
-        returnData.put("materialDetail", materialMap);
-
+        rsm.setData(materialItemBean);
+        //做测试数据 end
+        returnData.put("materialDetail", rsm.getData());
         return returnData;
 
     }
@@ -242,8 +315,11 @@ public class RequireApplyController extends BaseController {
     @RequiresPermissions("material:requireApply:edit")
     @ResponseBody
     Map<String, Object> getRequireApplyDetailByCode(@RequestParam("id") String id){
-        List<Map<String, Object>> requireApplyDetailList = new ArrayList<>();//调用接口
+        //调用接口
+        ResultMsg rsm = requireApplyService.detail(id);
+
         //做测试数据 调用接口前使用 begin
+        List<Map<String, Object>> requireApplyDetailList = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
             Map<String, Object> requireMap = new HashMap<>();
             requireMap.put("planNo", i);
@@ -288,20 +364,21 @@ public class RequireApplyController extends BaseController {
      */
     @ResponseBody
     @PostMapping("/commitApply")
-    @RequiresPermissions("material:requireApply:add")
+    @RequiresPermissions("material:requireApply:approve")
     public R approve(@RequestParam Map<String, Object> params) {
         System.out.println(params);
         //int contactIds = service.save(customerContact);
-
-        return R.ok();
+        R r = new R();
+        r.put("id",1);
+        return r.ok();
     }
 
     /**
      * 取消审批
      */
     @ResponseBody
-    @PostMapping("/cancelApply")
-    @RequiresPermissions("material:requireApply:add")
+    @PostMapping("/cancelApprove")
+    @RequiresPermissions("material:requireApply:cancelApprove")
     public R cancelApply(@RequestParam Map<String, Object> params) {
         System.out.println(params);
         //int contactIds = service.save(customerContact);
