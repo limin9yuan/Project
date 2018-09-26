@@ -11,9 +11,14 @@
 						<form class="form-horizontal m-t" id="signupForm">
 							<input id="materilaCode" name="materilaCode" th:value="${materilaCode}" class="form-control" type="hidden">
 							<div class="form-group">
+								<div class="input-group input-inline-sm col-sm-4 col-md-offset-4">
+									<input id="title" name="title" th:value="${requirePlanModel.name}" class="form-control" type="text">
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-2 control-label">单据编号:<span class="mustin">*</span></label>
 								<div class="col-sm-4">
-									<input readonly id="planNo" name="planNo" th:value="${planNo}" class="form-control"
+									<input readonly id="planNo" name="planNo" th:value="${requirePlanModel.Id}" class="form-control"
 										style="width: 100%">
 									</input>
 								</div>
@@ -29,13 +34,13 @@
 							<div class="form-group">
 								<label class="col-sm-2 control-label">采购部门:<span class="mustin">*</span></label>
 								<div class="col-sm-4">
-									<input readonly id="purchaseDept" name="purchaseDept" th:value="${purchaseDept}" class="form-control"
+									<input readonly id="purchaseDept" name="purchaseDept" th:value="${requirePlanModel.purchaseDeptName}" class="form-control"
 										style="width: 100%">
 									</input>
 								</div>
 								<label class="col-sm-2 control-label">单据日期:<span class="mustin">*</span></label>
 								<div class="col-sm-4">
-									<input readonly id="invoiceDate" name="invoiceDate" th:value="${invoiceDate}" class="form-control"
+									<input readonly id="invoiceDate" name="invoiceDate" th:value="${#dates.format(requirePlanModel.businessDate,'yyyy-MM-dd')}" class="form-control"
 										style="width: 100%">
 									</input>
 								</div>
@@ -49,7 +54,7 @@
 							<div class="form-group">
 								<label class="col-sm-1 control-label">编制人<span class="mustin">*</span></label>
 								<div class="col-sm-3">
-									<input readonly id="authorUser" name="authorUser" th:value="${authorUser}" class="form-control" type="text">
+									<input readonly id="authorUser" name="authorUser" th:value="${requirePlanModel.authorUserName}" class="form-control" type="text">
 								</div>
 
 								<label class="col-sm-1 control-label">编制日期<span class="mustin">*</span></label>
@@ -57,7 +62,7 @@
 									<div class="columns pull-left nopadding" >
 										<div class="input-group date" id="createDate">
 											<input readonly id="create" class="form-control" type="text"
-												   name="createDate" th:value="${createDate}" > <span
+												   name="createDate" th:value="${#dates.format(requirePlanModel.createDate,'yyyy-MM-dd')}" > <span
 												class="input-group-addon"> <span
 												class="glyphicon glyphicon-calendar"></span>
 													</span>
@@ -67,7 +72,7 @@
 
 								<label class="col-sm-1 control-label">备注</label>
 								<div class="col-sm-3">
-									<input readonly id="remark" name="remark" th:value="${remark}" class="form-control" type="text">
+									<input readonly id="remark" name="remark" th:value="${requirePlanModel.remark}" class="form-control" type="text">
 								</div>
 							</div>
 						</form>

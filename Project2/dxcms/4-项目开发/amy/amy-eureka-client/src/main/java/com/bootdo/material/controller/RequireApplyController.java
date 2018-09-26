@@ -86,7 +86,10 @@ public class RequireApplyController extends BaseController {
     @GetMapping("/edit/{id}")
     @RequiresPermissions("material:requireApply:edit")
     String edit(@PathVariable("id") String id, Model model) {
-        RequireApplyBean requireApplyModel = new RequireApplyBean();//此处为接口取得数据
+        //调用接口
+        ResultMsg rm = requireApplyService.primary(id);
+        //做测试数据 begin
+        RequireApplyBean requireApplyModel = new RequireApplyBean();
         requireApplyModel.setId(id);
         requireApplyModel.setName("2018年8月采购申请");
         requireApplyModel.setCode(id);
@@ -97,9 +100,9 @@ public class RequireApplyController extends BaseController {
         //requireApplyModel.setCreateUserId("编制人Id");
         requireApplyModel.setCreateUserName("编制人姓名");
         requireApplyModel.setRemark("备注");
-
-        ResultMsg rm = requireApplyService.primary(id);
+        rm = new ResultMsg();
         rm.setData(requireApplyModel);
+        //做测试数据 end
         model.addAttribute("requireApplyModel", rm.getData());//编制日期
         return prefix + "/edit";
     }
@@ -109,7 +112,10 @@ public class RequireApplyController extends BaseController {
     @GetMapping("/view/{id}")
     @RequiresPermissions("material:requireApply:requireApply")
     String view(@PathVariable("id") String id, Model model) {
-        RequireApplyBean requireApplyModel = new RequireApplyBean();//此处为接口取得数据
+        //调用接口
+        ResultMsg rm = requireApplyService.primary(id);
+        //做测试数据 begin
+        RequireApplyBean requireApplyModel = new RequireApplyBean();
         requireApplyModel.setId(id);
         requireApplyModel.setName("2018年8月采购申请");
         requireApplyModel.setCode(id);
@@ -120,9 +126,10 @@ public class RequireApplyController extends BaseController {
         //requireApplyModel.setCreateUserId("编制人Id");
         requireApplyModel.setCreateUserName("编制人姓名");
         requireApplyModel.setRemark("备注");
-        ResultMsg rm = requireApplyService.primary(id);
+        rm = new ResultMsg();
         rm.setData(requireApplyModel);
-        model.addAttribute("requireApplyModel", rm.getData());//编制日期
+        //做测试数据 end
+        model.addAttribute("requireApplyModel", rm.getData());
         return prefix + "/view";
     }
 
@@ -139,10 +146,13 @@ public class RequireApplyController extends BaseController {
         requireApplyModel.setCode((String)params.get("code"));
         requireApplyModel.setAuthorCorpId((String)params.get("authorCorpId"));
         requireApplyModel.setCreateUserId((String)params.get("createUserId"));
+        requireApplyModel.setRemark((String)params.get("remark"));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             Date createDate = sdf.parse((String)params.get("createDate"));
             requireApplyModel.setCreateDate(createDate);
+            Date businessDate = sdf.parse((String)params.get("businessDate"));
+            requireApplyModel.setBusinessDate(businessDate);
         }catch (Exception e){
             return R.error();
         }
@@ -154,7 +164,6 @@ public class RequireApplyController extends BaseController {
             RequireApplyItemBean requireApplyItemBean = (RequireApplyItemBean) JSONObject.toBean((JSONObject)array.get(i), RequireApplyItemBean.class);
             itemList.add(requireApplyItemBean);
         }
-        int re=1;
         requireApplyModel.setRequireApplyItemBeans(itemList);
         ResultMsg rms = requireApplyService.save(requireApplyModel);
         if ("1".equals(rms.getCode())) {
@@ -170,18 +179,13 @@ public class RequireApplyController extends BaseController {
     @ResponseBody
     @RequiresPermissions("material:requireApply:remove")
     public R remove(String id) {
-        //boolean canRemove = requireApplyService.checkCanRemove(id);
-        if(true) {
-            //调用接口
-            ResultMsg rms = requireApplyService.remove(id);
-            if ("1".equals(rms.getCode())) {
-                return R.ok();
-            }
-        }else {
-            return R.error(1, "该申请已经被审批,不允许删除");
-        }
 
-        return R.error();
+        //调用接口
+        ResultMsg rms = requireApplyService.remove(id);
+        if ("1".equals(rms.getCode())) {
+            return R.ok();
+        }
+        return R.error(rms.getCode(), rms.getMsg());
     }
 
     /**
@@ -285,12 +289,14 @@ public class RequireApplyController extends BaseController {
     @RequiresPermissions("material:requireApply:add")
     Map<String, Object> getMaterialDetailByCode(@PathVariable("code") String code){
         //调用接口
-        ResultMsg rsm = materialService.detail(code);
+        List ml = new ArrayList();
+        ml.add(code);
+        ResultMsg rsm = requireApplyService.createItems(ml);
         //做测试数据 begin
         RequireApplyItemBean materialItemBean = new RequireApplyItemBean();
         materialItemBean.setMaterialName("物资A"+code);
-        //materialItemBean.setMaterialClassName("物资类别"+code);
-        materialItemBean.setMaterilaCode("物资编码"+code);
+        materialItemBean.setMaterialSubArray("物资M包装"+code);
+        materialItemBean.setMaterialCode("物资编码"+code);
         materialItemBean.setMaterialUnitName("单位"+code);
         materialItemBean.setSpecification("规格型号"+code);
         materialItemBean.setTexture("材质"+code);
@@ -302,6 +308,7 @@ public class RequireApplyController extends BaseController {
         materialItemBean.setAcceptUserName("张三");
         materialItemBean.setAcceptUserId("zhangsan");
         Map<String, Object> returnData = new HashMap<String, Object>();
+        rsm = new ResultMsg();
         rsm.setData(materialItemBean);
         //做测试数据 end
         returnData.put("materialDetail", rsm.getData());
@@ -319,26 +326,25 @@ public class RequireApplyController extends BaseController {
         ResultMsg rsm = requireApplyService.detail(id);
 
         //做测试数据 调用接口前使用 begin
-        List<Map<String, Object>> requireApplyDetailList = new ArrayList<>();
+        List<RequireApplyItemBean> requireApplyDetailList = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
-            Map<String, Object> requireMap = new HashMap<>();
-            requireMap.put("planNo", i);
-            requireMap.put("name", "物资A" + i);
-            requireMap.put("code", "物资编码" + i);
-            requireMap.put("specification", "规格" + i);
-            requireMap.put("materialUnitName", "单位" + i);
-            requireMap.put("materialUnitId", "单位" + i);
-            requireMap.put("materialSubArray", "包装物料" + i);
-            requireMap.put("requireQty","100"+i);
-            requireMap.put("budgetQty","200"+i);
-            requireMap.put("stockQty", "150"+i);
-            requireMap.put("referencePrice", "50"+i);
-            requireMap.put("budgetPrice", "60"+i);
-            requireMap.put("requireDate","2018-08-2"+i);
-            requireMap.put("acceptUserId", "001");
-            requireMap.put("acceptUserName", "编制人"+i);
-            requireMap.put("description", "说明信息"+i);
-            requireApplyDetailList.add(requireMap);
+            //做测试数据 begin
+            RequireApplyItemBean materialItemBean = new RequireApplyItemBean();
+            materialItemBean.setMaterialName("物资A"+id);
+            //materialItemBean.setMaterialClassName("物资类别"+code);
+            materialItemBean.setMaterialCode("物资编码"+id);
+            materialItemBean.setMaterialUnitName("单位"+id);
+            materialItemBean.setSpecification("规格型号"+id);
+            materialItemBean.setTexture("材质"+id);
+            //materialItemBean.setOutsideBarCode("包装物资"+code);
+            materialItemBean.setBudgetQty(1000.23);//预算数量
+            materialItemBean.setRequireQty(500.90);//需求数量
+            materialItemBean.setBudgetPrice(new BigDecimal("900.24"));//预算单价
+            materialItemBean.setReferencePrice(new BigDecimal("900.24"));//参考单价
+            materialItemBean.setStockQty(200.34);//库存数量
+            materialItemBean.setAcceptUserName("张三");
+            materialItemBean.setAcceptUserId("zhangsan");
+            requireApplyDetailList.add(materialItemBean);
         }
         Map<String, Object> returnData = new HashMap<String, Object>();
         returnData.put("requireApplyDetailList", requireApplyDetailList);

@@ -16,6 +16,7 @@ var info=function(){
 			auto : false, // 不自动上传设置
 			bindAction : '#upFile', // “上传”按钮的ID
 			accept : 'file',
+			exts: 'xlsx|xls',
 			done : function(r) {
 				data = r.list;
 				parent.jqxTreeGrid(data);

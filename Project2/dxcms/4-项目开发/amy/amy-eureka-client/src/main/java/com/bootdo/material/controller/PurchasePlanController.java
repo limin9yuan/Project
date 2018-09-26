@@ -3,6 +3,7 @@ package com.bootdo.material.controller;
 import java.util.*;
 
 import com.bootdo.common.utils.DateUtils;
+import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -20,10 +21,35 @@ import com.bootdo.common.utils.R;
 
 import com.bootdo.common.controller.BaseController;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+
+import com.dx.client.model.purchase.PurchasePlanItemBean;
+import com.dx.client.model.purchase.PurchasePlanBean;
+import com.dx.client.model.purchase.RequirePlanItemBean;
+import com.dx.client.model.purchase.RequirePlanBean;
+import org.wxcl.amy.utils.common.ResultMsg;
+import com.dx.service.datacenter.service.api.IMaterialService;
+import com.dx.service.purchase.service.api.IPurchasePlanService;
+import com.dx.service.purchase.service.api.IRequirePlanService;
+
 @Controller
 @RequestMapping("/material/purchasePlan")
 
 public class PurchasePlanController extends BaseController {
+
+    @Autowired
+    private IPurchasePlanService purchasePlanService;
+    @Autowired
+    private IMaterialService  materialService;
+    @Autowired
+    private IRequirePlanService  requirePlanService;
+
     private String prefix="material/purchasePlan"  ;
     @GetMapping()
     @RequiresPermissions("material:purchasePlan:purchasePlan")
@@ -70,49 +96,73 @@ public class PurchasePlanController extends BaseController {
         return "material/purchasePlan/nextStep";
     }
 
+    //查看begin
     @GetMapping("/check/{planNo}")
     @RequiresPermissions("material:purchasePlan:check")
     String check(@PathVariable("planNo") String planNo, Model model){
-        model.addAttribute("planNo",planNo);
-        model.addAttribute("businessDate","2018/8/27");
-        model.addAttribute("authorUser","编制人");
-        model.addAttribute("createDate","2018/8/27");
-        model.addAttribute("remark","sb");
+        //调用接口
+        ResultMsg rm = purchasePlanService.primary(planNo);
+        //做测试数据 begin
+        PurchasePlanBean purchasePlanModel = new PurchasePlanBean();//此处为接口取得数据
+        purchasePlanModel.setId(planNo);
+        purchasePlanModel.setName("2018年8月采购申请");
+        purchasePlanModel.setCode(planNo);
+        purchasePlanModel.setAuthorCorpId("8");
+        purchasePlanModel.setAuthorCorpName("研发二部");
+        //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
+        //requireApplyModel.setAuthorCorpId("编制部门Id");
+        //requireApplyModel.setCreateUserId("编制人Id");
+        //purchasePlanModel.setCreateUserName("编制人姓名");
+        purchasePlanModel.setRemark("备注");
 
+        rm = new ResultMsg();
+        rm.setData(purchasePlanModel);
+        //做测试数据 end
+        model.addAttribute("purchasePlanModel", rm.getData());//编制日期
         return "material/purchasePlan/check";
     }
 
     @RequestMapping("/check_ajax/{planNo}")
     @ResponseBody
     Map<String, Object> check_ajax(@PathVariable("planNo") String planNo) {
-        List<Map<String, Object>> checkList = new ArrayList<>();//调用接口
+        //调用接口
+        ResultMsg rsm = purchasePlanService.detail(planNo);
         //做测试数据 调用接口前使用 begin
-        for (int i = 1; i < 6; i++) {
-            Map<String, Object> purchaseMap = new HashMap<>();
-            //purchaseMap.put("requirePlanid", "物资编码" + i);
-            purchaseMap.put("materialType", "物料类别" + i);
-            purchaseMap.put("materialName", "物资A" + i);
-            purchaseMap.put("materilaCode", "物资编码" + i);
-            purchaseMap.put("specification", "规格" + i);
-            purchaseMap.put("materialUnitName", "单位" + i);
-            purchaseMap.put("materialSubArray", "包装物料" + i);
-            purchaseMap.put("requireQty","25345");
-            purchaseMap.put("purchaseQty","456");
-            purchaseMap.put("stockQty", "47");
-            purchaseMap.put("budgetQty", "8768");
-            purchaseMap.put("referencePrice", "789");
-            purchaseMap.put("budgetPrice", "8908");
-            purchaseMap.put("referenceAmount", "34");
-            //purchaseMap.put("requireDate","2018/8/27");
-            purchaseMap.put("arriveDate", "2018/8/27");
-            //purchaseMap.put("purchaserName", "张三");
-            purchaseMap.put("requireDept", "需求部门" + i);
-            purchaseMap.put("requirePlanid", "需求计划编号" + i);
-            purchaseMap.put("description", "sb");
-            checkList.add(purchaseMap);
+        List<PurchasePlanItemBean> purchasePlanDetailList = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            //做测试数据 begin
+            PurchasePlanItemBean purchasePlanDetailBean = new PurchasePlanItemBean();//（正式的）
+            if(i<=3){
+                //purchasePlanDetailBean.setMaterialType("物料类别1");//物料类别（没有）
+                purchasePlanDetailBean.setMaterialUnitName("单位1");//单位
+            }else{
+                //purchasePlanDetailBean.setMaterialType("物料类别2");//物料类别（没有）
+                purchasePlanDetailBean.setMaterialUnitName("单位2");//单位
+            }
+
+            purchasePlanDetailBean.setMaterialName("物资A" + i);//物资名称
+            purchasePlanDetailBean.setMaterilaCode("物资编码" + i);//物资编码
+            purchasePlanDetailBean.setSpecification("规格" + i);//规格
+            purchasePlanDetailBean.setMaterialSubArray("包装物料" + i);//包装物料
+            purchasePlanDetailBean.setRequireQty(Double.valueOf("100"));
+            purchasePlanDetailBean.setPurchaseQty(Double.valueOf("5"));
+            //purchasePlanDetailBean.setStockQty(Double.valueOf("47"));//库存数量（没有）
+            purchasePlanDetailBean.setPurchaseQty(Double.valueOf("5"));
+            purchasePlanDetailBean.setBudgetQty(Double.valueOf("7"));
+            purchasePlanDetailBean.setReferencePrice(new BigDecimal(100));//参考单价
+            purchasePlanDetailBean.setBudgetPrice(new BigDecimal(200));//预算价格
+            //purchasePlanDetailBean.setReferenceAmount(new BigDecimal(200));//参考金额(没有)
+            purchasePlanDetailBean.setArriveDate(new Date("2018/8/27"));
+            //purchasePlanDetailBean.setRequireDept("需求部门" + i);//需求部门(没有)
+            purchasePlanDetailBean.setRequirePlanItemId("i");//需求计划明细id
+            // purchaseMap.put("requirePlanid", i);
+            purchasePlanDetailBean.setDescription("sb");
+            purchasePlanDetailList.add(purchasePlanDetailBean);
         }
+
         Map<String, Object> returnData = new HashMap<String, Object>();
-        returnData.put("checkList", checkList);
+        returnData.put("editList", purchasePlanDetailList);
+
         return returnData;
     }
 
@@ -120,26 +170,29 @@ public class PurchasePlanController extends BaseController {
     @RequestMapping("/checkPurchasePlanGroup/{planNo}")
     @ResponseBody
     Map<String, Object> checkPurchasePlanGroup(@PathVariable("planNo") String planNo) {
-        List<Map<String, Object>> checkPurchasePlanGroup = new ArrayList<>();//调用接口
+        //调用接口
+        ResultMsg rsm = purchasePlanService.detail(planNo);
+        List<PurchasePlanItemBean> editPurchasePlanGroup = new ArrayList<>();//(正式的)
         //做测试数据 调用接口前使用 begin
         int type1=0;
         int type1cnt=0;
         int budgetAmount=0;
         for (int i = 0; i < 6; i++) {
-            Map<String, Object> purchaseMap = new HashMap<>();
-            //purchaseMap.put("requirePlanid", codeArray[i]);
+            //做测试数据 begin
+            PurchasePlanItemBean purchasePlanGroupBean = new PurchasePlanItemBean();//正式
+            ///正式
             if(i<=3) {
                 type1 = type1+ 5;
                 type1cnt = type1cnt  + 500;
                 budgetAmount = budgetAmount+1400;
             }
             if(i==3){
-                purchaseMap.put("materialType", "物料类别1" );
-                purchaseMap.put("materialUnitName", "单位1" );
-                purchaseMap.put("purchaseQty",type1);
-                purchaseMap.put("referenceAmount",type1cnt );
-                purchaseMap.put("budgetAmount", budgetAmount);
-                checkPurchasePlanGroup.add(purchaseMap);
+                //purchasePlanGroupBean.setMaterialType("物料类别1");//物料类别（没有）
+                purchasePlanGroupBean.setMaterialUnitName("单位1");//单位
+                purchasePlanGroupBean.setPurchaseQty(Double.valueOf("type1"));
+                //purchasePlanGroupBean.setReferenceAmount(new BigDecimal("type1cnt"));//参考金额(没有)
+                //purchasePlanGroupBean.setBudgetAmount(new BigDecimal("budgetAmount"));//预算金额(没有)
+                editPurchasePlanGroup.add(purchasePlanGroupBean);
                 type1 = 0;
                 type1cnt = 0;
                 budgetAmount = 0;
@@ -148,79 +201,143 @@ public class PurchasePlanController extends BaseController {
                 type1 = type1+ 5;
                 type1cnt = type1cnt  + 500;
                 budgetAmount = budgetAmount+1400;
-                purchaseMap.put("materialType", "物料类别2" );
-                purchaseMap.put("materialUnitName", "单位2");
-                purchaseMap.put("purchaseQty",type1);
-                purchaseMap.put("referenceAmount",type1cnt );
-                purchaseMap.put("budgetAmount", budgetAmount);
-                checkPurchasePlanGroup.add(purchaseMap);
+                //purchasePlanGroupBean.setMaterialType("物料类别2");//物料类别（没有）
+                purchasePlanGroupBean.setMaterialUnitName("单位2");//单位
+                purchasePlanGroupBean.setPurchaseQty(Double.valueOf("type1"));
+                //purchasePlanGroupBean.setReferenceAmount(new BigDecimal("type1cnt"));//参考金额(没有)
+                //purchasePlanGroupBean.setBudgetAmount(new BigDecimal("budgetAmount"));//预算金额(没有)
+                editPurchasePlanGroup.add(purchasePlanGroupBean);
             }
         }
 
         Map<String, Object> returnData = new HashMap<String, Object>();
-        returnData.put("checkPurchasePlanGroup", checkPurchasePlanGroup);
+        returnData.put("editPurchasePlanGroup", editPurchasePlanGroup);
         return returnData;
     }
 
+    //查看end
+    //修改begin    (三个已完)
     @GetMapping("/edit/{planNo}")
     @RequiresPermissions("material:purchasePlan:edit")
     String edit(@PathVariable("planNo") String planNo, Model model){
-        String businessDate = DateUtils.format(new Date(),DateUtils.DATE_PATTERN);
-        String name = businessDate.substring(0,4)+"年"+businessDate.substring(5,7)+"月采购申请";
-        model.addAttribute("planNo",planNo);
-        model.addAttribute("name", name);//名称
-        model.addAttribute("type","月度计划");
-        model.addAttribute("businessDate",businessDate);
-        model.addAttribute("authorUser","编制人");
-        model.addAttribute("createDate",businessDate);
-        model.addAttribute("remark","sb");
 
+        //正式的
+        ResultMsg rm = purchasePlanService.primary(planNo);
+        //测试数据 begin
+        rm = new ResultMsg();
+        PurchasePlanBean purchasePlanModel = new PurchasePlanBean();//此处为接口取得数据
+        purchasePlanModel.setId(planNo);
+        purchasePlanModel.setName("2018年8月采购申请");
+        purchasePlanModel.setCode(planNo);
+        //purchasePlanModel.setType("类型");//类型（没有）
+        purchasePlanModel.setBusinessDate(new Date("2018/11/28"));
+        //purchasePlanModel.setAuthorCorpId("8");
+        //purchasePlanModel.setAuthorCorpName("研发二部");
+        purchasePlanModel.setAuthorUserId("8");//编制人id
+        purchasePlanModel.setAuthorUserName("张三");//编制人名称
+        purchasePlanModel.setRemark("备注");
+        rm.setData(purchasePlanModel);
+        //测试数据 end
+
+        model.addAttribute("purchasePlanModel", rm.getData());//编制日期*/
         return "material/purchasePlan/edit";
     }
 
     @RequestMapping("/edit_ajax/{planNo}")
     @ResponseBody
     Map<String, Object> edit_ajax(@PathVariable("planNo") String planNo) {
-        List<Map<String, Object>> editList = new ArrayList<>();//调用接口
+
+        //调用接口
+        ResultMsg rsm = purchasePlanService.detail(planNo);
         //做测试数据 调用接口前使用 begin
+        List<PurchasePlanItemBean> purchasePlanDetailList = new ArrayList<>();
         for (int i = 0; i < 6; i++) {
-                Map<String, Object> purchaseMap = new HashMap<>();
-                if(i<=3){
-                    purchaseMap.put("materialType", "物料类别1");
-
-                    purchaseMap.put("materialUnitName", "单位1");
-                }else{
-                    purchaseMap.put("materialType", "物料类别2");
-                    purchaseMap.put("materialUnitName", "单位2");
-                }
-
-                purchaseMap.put("materialName", "物资A" + i);
-                purchaseMap.put("materilaCode", "物资编码" + i);
-                purchaseMap.put("specification", "规格" + i);
-                purchaseMap.put("materialSubArray", "包装物料" + i);
-                purchaseMap.put("requireQty","100");
-                purchaseMap.put("purchaseQty","5");
-                purchaseMap.put("stockQty", "47");
-                purchaseMap.put("reserveQty", "57657");
-                purchaseMap.put("onwayQty", "878");
-                purchaseMap.put("budgetQty", "7");
-                purchaseMap.put("referencePrice", "100");
-                purchaseMap.put("budgetPrice", "200");
-                purchaseMap.put("referenceAmount", "500");
-                //purchaseMap.put("requireDate","2018/8/27");
-                purchaseMap.put("arriveDate", "2018/8/27");
-                //purchaseMap.put("purchaserName", "张三");
-                purchaseMap.put("requireDept", "需求部门" + i);
-                purchaseMap.put("requirePlanid", i);
-                purchaseMap.put("description", "sb");
-            editList.add(purchaseMap);
+            //做测试数据 begin
+            PurchasePlanItemBean purchasePlanDetailBean = new PurchasePlanItemBean();//（正式的）
+            if(i<=3){
+                //purchasePlanDetailBean.setMaterialType("物料类别1");//物料类别（没有）
+                purchasePlanDetailBean.setMaterialUnitName("单位1");//单位
+            }else{
+                //purchasePlanDetailBean.setMaterialType("物料类别2");//物料类别（没有）
+                purchasePlanDetailBean.setMaterialUnitName("单位2");//单位
             }
+
+            purchasePlanDetailBean.setMaterialName("物资A" + i);//物资名称
+            purchasePlanDetailBean.setMaterilaCode("物资编码" + i);//物资编码
+            purchasePlanDetailBean.setSpecification("规格" + i);//规格
+            purchasePlanDetailBean.setMaterialSubArray("包装物料" + i);//包装物料
+            purchasePlanDetailBean.setRequireQty(Double.valueOf("100"));
+            purchasePlanDetailBean.setPurchaseQty(Double.valueOf("5"));
+            //purchasePlanDetailBean.setStockQty(Double.valueOf("47"));//库存数量（没有）
+            purchasePlanDetailBean.setPurchaseQty(Double.valueOf("5"));
+            purchasePlanDetailBean.setBudgetQty(Double.valueOf("7"));
+            purchasePlanDetailBean.setReferencePrice(new BigDecimal(100));//参考单价
+            purchasePlanDetailBean.setBudgetPrice(new BigDecimal(200));//预算价格
+            //purchasePlanDetailBean.setReferenceAmount(new BigDecimal(200));//参考金额(没有)
+            purchasePlanDetailBean.setArriveDate(new Date("2018/8/27"));
+            //purchasePlanDetailBean.setRequireDept("需求部门" + i);//需求部门(没有)
+            purchasePlanDetailBean.setRequirePlanItemId("i");//需求计划明细id
+           // purchaseMap.put("requirePlanid", i);
+            purchasePlanDetailBean.setDescription("sb");
+            purchasePlanDetailList.add(purchasePlanDetailBean);
+        }
+
         Map<String, Object> returnData = new HashMap<String, Object>();
-        returnData.put("editList", editList);
+        returnData.put("editList", purchasePlanDetailList);
+
         return returnData;
     }
 
+    @RequestMapping("/editPurchasePlanGroup/{planNo}")
     @ResponseBody
+    Map<String, Object> editPurchasePlanGroup(@PathVariable("planNo") String planNo) {
+
+        //调用接口
+        ResultMsg rsm = purchasePlanService.detail(planNo);
+        List<PurchasePlanItemBean> editPurchasePlanGroup = new ArrayList<>();//(正式的)
+        //做测试数据 调用接口前使用 begin
+        int type1=0;
+        int type1cnt=0;
+        int budgetAmount=0;
+        for (int i = 0; i < 6; i++) {
+            //做测试数据 begin
+            PurchasePlanItemBean purchasePlanGroupBean = new PurchasePlanItemBean();//正式
+            ///正式
+            if(i<=3) {
+                type1 = type1+ 5;
+                type1cnt = type1cnt  + 500;
+                budgetAmount = budgetAmount+1400;
+            }
+            if(i==3){
+                //purchasePlanGroupBean.setMaterialType("物料类别1");//物料类别（没有）
+                purchasePlanGroupBean.setMaterialUnitName("单位1");//单位
+                purchasePlanGroupBean.setPurchaseQty(Double.valueOf("type1"));
+                //purchasePlanGroupBean.setReferenceAmount(new BigDecimal("type1cnt"));//参考金额(没有)
+                //purchasePlanGroupBean.setBudgetAmount(new BigDecimal("budgetAmount"));//预算金额(没有)
+                editPurchasePlanGroup.add(purchasePlanGroupBean);
+                type1 = 0;
+                type1cnt = 0;
+                budgetAmount = 0;
+            }
+            if(i>3) {
+                type1 = type1+ 5;
+                type1cnt = type1cnt  + 500;
+                budgetAmount = budgetAmount+1400;
+                //purchasePlanGroupBean.setMaterialType("物料类别2");//物料类别（没有）
+                purchasePlanGroupBean.setMaterialUnitName("单位2");//单位
+                purchasePlanGroupBean.setPurchaseQty(Double.valueOf("type1"));
+                //purchasePlanGroupBean.setReferenceAmount(new BigDecimal("type1cnt"));//参考金额(没有)
+                //purchasePlanGroupBean.setBudgetAmount(new BigDecimal("budgetAmount"));//预算金额(没有)
+                editPurchasePlanGroup.add(purchasePlanGroupBean);
+            }
+        }
+
+        Map<String, Object> returnData = new HashMap<String, Object>();
+        returnData.put("editPurchasePlanGroup", editPurchasePlanGroup);
+        return returnData;
+    }
+    //修改end
+    /*@ResponseBody
     @GetMapping("/getMaterialDetailByCode/{code}")
     @RequiresPermissions("material:purchasePlan:add")
     Map<String, Object> getMaterialDetailByCode(@PathVariable("code") String code){
@@ -258,13 +375,19 @@ public class PurchasePlanController extends BaseController {
 
         return returnData;
 
-    }
+    }*/
 
+    //点击下一步后的第二页明细列表begin
     @ResponseBody
     @GetMapping("/purchasePlanGroup")
     @RequiresPermissions("material:purchasePlan:add")
     Map<String, Object> purchasePlanGroup(@RequestParam("code") String code){
-        List<Map<String, Object>> purchasePlanGroup = new ArrayList<>();//调用接口
+        //调用接口
+        List ml = new ArrayList();
+        ml.add(code);
+        ResultMsg rsm = purchasePlanService.createItems(ml);
+
+        /*List<Map<String, Object>> purchasePlanGroup = new ArrayList<>();//调用接口
         String codeArray[] = code.split(",");
         //做测试数据 调用接口前使用 begin
 
@@ -272,20 +395,21 @@ public class PurchasePlanController extends BaseController {
         int type1cnt=0;
         int budgetAmount=0;
         for (int i = 0; i < codeArray.length; i++) {
-            Map<String, Object> purchaseMap = new HashMap<>();
-            //purchaseMap.put("requirePlanid", codeArray[i]);
+            //做测试数据 begin
+            RequirePlanItemBean purchasePlanGroupBean = new RequirePlanItemBean();//正式
+            ///正式
             if(i<=3) {
                 type1 = type1+ 5;
                 type1cnt = type1cnt  + 500;
                 budgetAmount = budgetAmount+1400;
             }
             if(i==3){
-                purchaseMap.put("materialType", "物料类别1" );
-                purchaseMap.put("materialUnitName", "单位1" );
-                purchaseMap.put("purchaseQty",type1);
-                purchaseMap.put("referenceAmount",type1cnt );
-                purchaseMap.put("budgetAmount", budgetAmount);
-                purchasePlanGroup.add(purchaseMap);
+                //purchasePlanGroupBean.setMaterialType("物料类别1");//物料类别（没有）
+                purchasePlanGroupBean.setMaterialUnitName("单位1");//单位
+                purchasePlanGroupBean.setPurchaseQty(Double.valueOf("type1"));
+                //purchasePlanGroupBean.setReferenceAmount(new BigDecimal("type1cnt"));//参考金额(没有)
+                //purchasePlanGroupBean.setBudgetAmount(new BigDecimal("budgetAmount"));//预算金额(没有)
+                purchasePlanGroup.add(purchasePlanGroupBean);
                 type1 = 0;
                 type1cnt = 0;
                 budgetAmount = 0;
@@ -294,70 +418,23 @@ public class PurchasePlanController extends BaseController {
                 type1 = type1+ 5;
                 type1cnt = type1cnt  + 500;
                 budgetAmount = budgetAmount+1400;
+                //purchasePlanGroupBean.setMaterialType("物料类别2");//物料类别（没有）
+                purchasePlanGroupBean.setMaterialUnitName("单位2");//单位
+                purchasePlanGroupBean.setPurchaseQty(Double.valueOf("type1"));
+                //purchasePlanGroupBean.setReferenceAmount(new BigDecimal("type1cnt"));//参考金额(没有)
+                //purchasePlanGroupBean.setBudgetAmount(new BigDecimal("budgetAmount"));//预算金额(没有)
+                purchasePlanGroup.add(purchasePlanGroupBean);
             }
-            if(i==codeArray.length-1){
-                purchaseMap.put("materialType", "物料类别2" );
-                purchaseMap.put("materialUnitName", "单位2");
-                purchaseMap.put("purchaseQty",type1);
-                purchaseMap.put("referenceAmount",type1cnt );
-                purchaseMap.put("budgetAmount", budgetAmount);
-                purchasePlanGroup.add(purchaseMap);
-            }
-        }
 
+        }*/
         Map<String, Object> returnData = new HashMap<String, Object>();
-        returnData.put("purchasePlanGroup", purchasePlanGroup);
-
+        //做测试数据 end
+        returnData.put("purchasePlanGroup", rsm.getData());
         return returnData;
 
     }
 
-    @RequestMapping("/editPurchasePlanGroup/{planNo}")
-    @ResponseBody
-    Map<String, Object> editPurchasePlanGroup(@PathVariable("planNo") String planNo) {
-        List<Map<String, Object>> editPurchasePlanGroup = new ArrayList<>();//调用接口
-        //做测试数据 调用接口前使用 begin
-        int type1=0;
-        int type1cnt=0;
-        int budgetAmount=0;
-        for (int i = 0; i < 6; i++) {
-            Map<String, Object> purchaseMap = new HashMap<>();
-            //purchaseMap.put("requirePlanid", codeArray[i]);
-            if(i<=3) {
-                type1 = type1+ 5;
-                type1cnt = type1cnt  + 500;
-                budgetAmount = budgetAmount+1400;
-            }
-            if(i==3){
-                purchaseMap.put("materialType", "物料类别1" );
-                purchaseMap.put("materialUnitName", "单位1" );
-                purchaseMap.put("purchaseQty",type1);
-                purchaseMap.put("referenceAmount",type1cnt );
-                purchaseMap.put("budgetAmount", budgetAmount);
-                editPurchasePlanGroup.add(purchaseMap);
-                type1 = 0;
-                type1cnt = 0;
-                budgetAmount = 0;
-            }
-            if(i>3) {
-                type1 = type1+ 5;
-                type1cnt = type1cnt  + 500;
-                budgetAmount = budgetAmount+1400;
-                purchaseMap.put("materialType", "物料类别2" );
-                purchaseMap.put("materialUnitName", "单位2");
-                purchaseMap.put("purchaseQty",type1);
-                purchaseMap.put("referenceAmount",type1cnt );
-                purchaseMap.put("budgetAmount", budgetAmount);
-                editPurchasePlanGroup.add(purchaseMap);
-            }
-        }
-
-        Map<String, Object> returnData = new HashMap<String, Object>();
-        returnData.put("editPurchasePlanGroup", editPurchasePlanGroup);
-        return returnData;
-    }
-
-    @ResponseBody
+    /*@ResponseBody
     @GetMapping("/getPurchasePlanDetail")
     @RequiresPermissions("material:purchasePlan:add")
     Map<String, Object> getPurchasePlanDetail(@RequestParam("code") String code){
@@ -404,8 +481,64 @@ public class PurchasePlanController extends BaseController {
         return returnData;
 
     }
+    */
 
+
+    @GetMapping("/getPurchasePlanDetail")
+    @RequiresPermissions("material:purchasePlan:add")
     @ResponseBody
+    Map<String, Object> getPurchasePlanDetail(@RequestParam("code") String code){
+        //调用接口
+        List ml = new ArrayList();
+        ml.add(code);
+        ResultMsg rsm = requirePlanService.createItems(ml);
+
+        //做测试数据 begin
+       /* List<Map<String, Object>> purchasePlanDetailList = new ArrayList();
+        String codeArray[] = code.split(",");
+        for (int i = 0; i < codeArray.length; i++) {
+            //做测试数据 调用接口前使用 begin
+            RequirePlanItemBean purchasePlanDetailBean = new RequirePlanItemBean();
+            if(i<=3){
+                //purchasePlanDetailBean.setMaterialType("物料类别1");//物料类别（没有）
+                purchasePlanDetailBean.setMaterialUnitName("单位1");//单位
+            }else{
+                //purchasePlanDetailBean.setMaterialType("物料类别2");//物料类别（没有）
+                purchasePlanDetailBean.setMaterialUnitName("单位2");//单位
+            }
+
+            purchasePlanDetailBean.setMaterialName("物资A" + i);//物资名称
+            purchasePlanDetailBean.setMaterilaCode("物资编码" + i);//物资编码
+            purchasePlanDetailBean.setSpecification("规格" + i);//规格
+            purchasePlanDetailBean.setMaterialSubArray("包装物料" + i);//包装物料
+            purchasePlanDetailBean.setRequireQty(Double.valueOf("100"));
+            purchasePlanDetailBean.setPurchaseQty(Double.valueOf("5"));
+            //purchasePlanDetailBean.setStockQty(Double.valueOf("47"));//库存数量（没有）
+            purchasePlanDetailBean.setPurchaseQty(Double.valueOf("5"));
+            purchasePlanDetailBean.setBudgetQty(Double.valueOf("7"));
+            purchasePlanDetailBean.setReferencePrice(new BigDecimal(100));//参考单价
+            purchasePlanDetailBean.setBudgetPrice(new BigDecimal(200));//预算价格
+            //purchasePlanDetailBean.setReferenceAmount(new BigDecimal(200));//参考金额(没有)
+            purchasePlanDetailBean.setArriveDate(new Date("2018/8/27"));
+            //purchasePlanDetailBean.setRequireDept("需求部门" + i);//需求部门(没有)
+            //purchasePlanDetailBean.setRequirePlanItemId("codeArray[i]");//需求计划明细id
+            // purchaseMap.put("requirePlanid", i);
+            purchasePlanDetailBean.setDescription("sb");
+            purchasePlanDetailList.add(purchasePlanDetailBean);
+        }*/
+        Map<String, Object> returnData = new HashMap<String, Object>();
+        //rsm = new ResultMsg();
+        //rsm.setData(purchasePlanDetailList);
+        //做测试数据 end
+        returnData.put("getPurchasePlanDetailList", rsm.getData());
+        return returnData;
+
+    }
+    //点击下一步后的第二页明细列表end
+
+
+
+    /* @ResponseBody
     @GetMapping("/purchasePlanDetailList")
     @RequiresPermissions("material:purchasePlan:purchasePlan")
     public PageUtils purchasePlanDetailList(@RequestParam Map<String, Object> params){
@@ -432,8 +565,45 @@ public class PurchasePlanController extends BaseController {
         PageUtils pageUtils = new PageUtils(purchasePlanDetailList, total);
         return pageUtils;
     }
+*/
 
+    //采购计划编制明细列表（第一页）（已完）
+    @GetMapping("/purchasePlanDetailList")
     @ResponseBody
+    PageInfo purchasePlanDetailList(@RequestParam Map<String, Object> params) {
+
+        // 查询列表数据
+        ResultMsg rsm = requirePlanService.search(params.get("pageNumber").toString(),
+                params.get("pageSize").toString(),"",
+                params);
+        //做测试数据 begin
+        List<Map<String, Object>> purchasePlanDetailList = new ArrayList();
+        for(int i=1;i<11;i++){
+            //做测试数据 调用接口前使用 begin
+            Map<String, Object> purchasePlanMap = new HashMap<>();
+            purchasePlanMap.put("requirePlanid","需求计划编号"+i);
+            purchasePlanMap.put("materialName","物资A"+i);
+            purchasePlanMap.put("materilaCode","物资编码"+i);
+            purchasePlanMap.put("specification","型号"+i);
+            purchasePlanMap.put("materialUnitName","单位"+i);
+            purchasePlanMap.put("referencePrice","10"+i);
+            purchasePlanMap.put("requireQty","1000");
+            purchasePlanMap.put("requireDept","需求部门"+i);
+            purchasePlanMap.put("arriveDate","2018/8/27");
+            purchasePlanMap.put("createDate","2018/8/20");
+            purchasePlanMap.put("description","sb");
+            purchasePlanDetailList.add(purchasePlanMap);
+        }
+        int total = 20;
+        PageInfo pageInfo = new PageInfo(purchasePlanDetailList,
+                Integer.parseInt(params.get("pageNumber").toString()));
+        pageInfo.setTotal(total);
+        //做测试数据 end
+        //PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
+        return pageInfo;
+    }
+
+    /*@ResponseBody
     @GetMapping("/list")
     @RequiresPermissions("material:purchasePlan:purchasePlan")
     public PageUtils list(@RequestParam Map<String, Object> params){
@@ -457,7 +627,42 @@ public class PurchasePlanController extends BaseController {
         int total = 20;//调用接口
         PageUtils pageUtils = new PageUtils(purchasePlanDetailList, total);
         return pageUtils;
+    }*/
+
+    //采购管理列表
+    @GetMapping("/list")  //（已完）
+    @ResponseBody
+    PageInfo list(@RequestParam Map<String, Object> params) {
+        // 查询列表数据
+        ResultMsg rsm = purchasePlanService.search(params.get("pageNumber").toString(),
+                params.get("pageSize").toString(),"",
+                params);
+        //做测试数据 begin
+        List<Map<String, Object>> purchasePlanList = new ArrayList();
+        for(int i=1;i<11;i++){
+            Map<String, Object> purchaseMap = new HashMap<>();
+            purchaseMap.put("id",i);
+            purchaseMap.put("statusName","状态"+i);
+            purchaseMap.put("planNo","编号"+i);
+            purchaseMap.put("name","名称"+i);
+            purchaseMap.put("authorDeptName","编制部门"+i);
+            //purchaseMap.put("purchaseDept","采购部门"+i);
+            purchaseMap.put("budgetMoney","1000");
+            purchaseMap.put("totalMoney","2000");
+            purchaseMap.put("authorUserName","编制人"+i);
+            purchaseMap.put("createDate","2018-08-"+String.valueOf(10+i));
+            purchasePlanList.add(purchaseMap);
+        }
+        int total = 20;
+        PageInfo pageInfo = new PageInfo(purchasePlanList,
+                Integer.parseInt(params.get("pageNumber").toString()));
+        pageInfo.setTotal(total);
+        //做测试数据 end
+        //PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
+
+        return pageInfo;
     }
+
 
     /**
      * 保存
@@ -465,7 +670,7 @@ public class PurchasePlanController extends BaseController {
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("material:purchasePlan:add")
-    public R save(@RequestParam Map<String, Object> params){
+    public R save(@RequestParam Map<String, Object> params) {
         System.out.println(params);
         //int contactIds = service.save(customerContact);
 
@@ -476,12 +681,37 @@ public class PurchasePlanController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/update")
-    @RequiresPermissions("material:purchasePlan:add")
+    @RequiresPermissions("material:purchasePlan:edit")
     public R update(@RequestParam Map<String, Object> params){
-        System.out.println(params);
-        //int contactIds = service.save(customerContact);
 
-        return R.ok();
+        PurchasePlanBean purchasePlanModel = new PurchasePlanBean();
+        purchasePlanModel.setName((String)params.get("name"));
+        purchasePlanModel.setCode((String)params.get("code"));
+        purchasePlanModel.setAuthorCorpId((String)params.get("authorCorpId"));
+        purchasePlanModel.setRemark((String)params.get("remark"));
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date createDate = sdf.parse((String)params.get("createDate"));
+            purchasePlanModel.setCreateDate(createDate);
+            Date businessDate = sdf.parse((String)params.get("businessDate"));
+            purchasePlanModel.setBusinessDate(businessDate);
+        }catch (Exception e){
+            return R.error();
+        }
+        List itemList = new ArrayList<PurchasePlanItemBean>();
+
+        JSONArray array = JSONArray.fromObject(params.get("applyEntryJson"));
+        for(int i=0;i<array.size();i++){
+            System.out.println(array.get(i));
+            PurchasePlanItemBean purchasePlanItemBean = (PurchasePlanItemBean) JSONObject.toBean((JSONObject)array.get(i), PurchasePlanItemBean.class);
+            itemList.add(purchasePlanItemBean);
+        }
+        purchasePlanModel.setPurchasePlanItemBeans(itemList);
+        ResultMsg rms = purchasePlanService.save(purchasePlanModel);
+        if ("1".equals(rms.getCode())) {
+            return R.ok();
+        }
+        return R.error();
     }
 
     /**
@@ -491,10 +721,12 @@ public class PurchasePlanController extends BaseController {
     @ResponseBody
     @RequiresPermissions("material:purchasePlan:remove")
     public R remove( String id){
-        System.out.println(id);
-        //int contactIds = service.save(customerContact);
-
-        return R.ok();
+        //调用接口
+        ResultMsg rms = purchasePlanService.remove(id);
+        if ("1".equals(rms.getCode())) {
+            return R.ok();
+        }
+        return R.error(rms.getCode(), rms.getMsg());
     }
 
     /**
@@ -503,11 +735,12 @@ public class PurchasePlanController extends BaseController {
     @PostMapping( "/submitApproval")
     @ResponseBody
     @RequiresPermissions("material:purchasePlan:submitApproval")
-    public R submitApproval( String planNo){
-        System.out.println(planNo);
+    public R submitApproval(@RequestParam Map<String, Object> params){
+        System.out.println(params);
         //int contactIds = service.save(customerContact);
-
-        return R.ok();
+        R r = new R();
+        r.put("id",1);
+        return r.ok();
     }
     /**
      * 撤回审批
@@ -515,23 +748,12 @@ public class PurchasePlanController extends BaseController {
     @PostMapping( "/withdrawApproval")
     @ResponseBody
     @RequiresPermissions("material:purchasePlan:withdrawApproval")
-    public R withdrawApproval( String planNo){
-        System.out.println(planNo);
+    public R withdrawApproval(@RequestParam Map<String, Object> params){
+        System.out.println(params);
         //int contactIds = service.save(customerContact);
 
         return R.ok();
     }
 
-    /**
-     * 关闭
-     */
-    @PostMapping( "/closeWin")
-    @ResponseBody
-    @RequiresPermissions("material:purchasePlan:closeWin")
-    public R closeWin( String planNo){
-        System.out.println(planNo);
-        //int contactIds = service.save(customerContact);
 
-        return R.ok();
-    }
 }

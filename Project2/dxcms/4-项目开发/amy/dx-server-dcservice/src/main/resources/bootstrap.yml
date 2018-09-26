@@ -5,11 +5,11 @@ eureka:
     fetch-registry: true
     register-with-eureka: true
   instance:
-    hostname: service1.wangxin.com
+    hostname: dcservice.wangxin.com
 
 spring:
   application:
-    name: service1.wangxin.com
+    name: dcservice.wangxin.com
   cloud:
     config:
       #uri: http://192.168.1.222:14000

@@ -1,5 +1,5 @@
 server:
-  port: 81001
+  port: 3520
 
 management:
   endpoints:
@@ -27,10 +27,9 @@ spring:
   datasource:
     name: main
 #    url: jdbc:mysql://localhost:3306/amy?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
-    url: jdbc:mysql://localhost:3306/amy?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/mytest?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&useSSL=false
     username: root
-    password: wxcl
-#    password: 123456
+    password: Cxd@790429
     driver-class-name: com.mysql.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     initialSize: 70

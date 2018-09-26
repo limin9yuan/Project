@@ -4,7 +4,7 @@ var $ellipsis = null;//行选择物资图标对象
 $().ready(function() {
 	//初始化页面
 	initPage();
-	//初始化页面
+	//初始化控件
 	initControl();
 	//初始化日期控件
     initDatetimepicker()
@@ -44,8 +44,8 @@ function initControl() {
                              '预算单价' ,'参考单价' , '预算金额' ,'参考金额' ,
                              '要求到货时间' , '受理人' , '说明信息'],//jqGrid的列显示名字
 				colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-				             {name : 'name',index : 'name',width : 100},//物资名称
-				             {name : 'code',index : 'code',width : 90},//物资编码
+				             {name : 'materialName',index : 'materialName',width : 100},//物资名称
+				             {name : 'materialCode',index : 'materialCode',width : 90},//物资编码
 				             {name : 'specification',index : 'specification',width : 100},//规格型号
 				             {name : 'materialUnitId',index : 'materialUnitId',width : 60,align : "right"},//单位
 				             {name : 'materialSubArray',index : 'materialSubArray',width : 80,align : "right"},//包装物资
@@ -154,10 +154,10 @@ function initDatetimepicker() {
 //空数据行
 function getEmptyRow(){
     var rowdata = {
-         name : '<div class="product"><input name="name" readonly type="text" class="editable left" isvalid="no" checkexpession="NotNull"/><span class="ui-icon-ellipsis"></span></div>',
-         code : '<input name="code" type="text" class="editable left disabled" />',//物资编码
+         materialName : '<div class="product"><input name="materialName" readonly type="text" class="editable left" isvalid="no" checkexpession="NotNull"/><span class="ui-icon-ellipsis"></span></div>',
+         materialCode : '<input name="materialCode" type="text" class="editable left disabled" />',//物资编码
          specification: '<input name="specification" type="text" class="editable left disabled" />',//规格型号
-         materialUnitId: '<input name="materialUnitName" type="text" class="editable left disabled" /><input name="materialUnitId" type="hidden"/>',//单位
+         materialUnitName: '<input name="materialUnitName" type="text" class="editable left disabled" /><input name="materialUnitId" type="hidden"/>',//单位
          materialSubArray: '<input name="materialSubArray" type="text" class="editable left disabled" />',//包装物资
 
          stockQty: '<input name="stockQty" type="text" class="editable left disabled" />',//库存数量
@@ -181,7 +181,7 @@ function registEvent(){
     //数字input
     $grid.find('.decimal').attr('onfocus', 'IsMoney(this.id)');
     //物资名称事件
-    $('input[name="name"]').focus(function () {
+    $('input[name="materialName"]').focus(function () {
         $('.ui-icon-ellipsis').hide();
         $(this).next('.ui-icon-ellipsis').show();
        // $(this).Contextmenu();
@@ -209,6 +209,7 @@ function registEvent(){
     });
     //需求数量文本框换算
     $grid.find('.decimal').keyup(function () {
+        clearNoNum($(this));
         var $qty = $(this).parents('[role=row]').find('input[name="requireQty"]');                    //数量
         var $price = $(this).parents('[role=row]').find('input[name="referencePrice"]');                //单价
         var $referenceTotal = $(this).parents('[role=row]').find('input[name="referenceTotal"]');                //金额
@@ -221,7 +222,7 @@ function registEvent(){
 //计算汇总值
 function calculateTotal(){
     //合计
-    var budgetTotalQty = 0.00, budgetTotalAccount = 0.00,  requireTotalQty = 0.00,  referenceTotal = 0.00;
+    var budgetTotalQty = 0.00, budgetTotalAccount = 0.00,  requireTotalQty = 0.00,  referenceTotalAccount = 0.00;
     $("#requireApplyTable").find("tbody tr").each(function (i) {
          //预算数量
         var Qty = $(this).find('td:eq(7)').find('input').val();
@@ -236,18 +237,18 @@ function calculateTotal(){
         //预算金额
         var account = $(this).find('td:eq(11)').find('input').val();
         if (account != "" && Qty != undefined) {
-            requireTotalQty += Number(account);
+            budgetTotalAccount += Number(account);
         }
         //参考金额
         var account = $(this).find('td:eq(13)').find('input').val();
         if (account != "" && account != undefined) {
-            referenceTotal += Number(account);
+            referenceTotalAccount += Number(account);
         }
     });
-    $("#budgetQty").text(toDecimal(requireTotalQty));
-    $("#budgetTotal").text(toDecimal(referenceTotal));
+    $("#budgetQty").text(toDecimal(budgetTotalQty));
+    $("#budgetTotal").text(toDecimal(budgetTotalAccount));
     $("#requireQty").text(toDecimal(requireTotalQty));
-    $("#referenceTotal").text(toDecimal(referenceTotal));
+    $("#referenceTotal").text(toDecimal(referenceTotalAccount));
 }
 
 //取得物资数据，并赋值给Grid
@@ -263,10 +264,10 @@ function getMaterialDetailByCode(code,index){
    		},
    		success : function(data) {
    		    result=data.materialDetail;
-            if ( $("#requireApplyTable").find('[role=row]').find('[data-value=' + result.code + ']').length == 0) {
+            if ( $("#requireApplyTable").find('[role=row]').find('[data-value=' + result.materialCode + ']').length == 0) {
 
-                $ellipsis.parents('[role=row]').find('input[name="name"]').val(result.name);
-                $ellipsis.parents('[role=row]').find('input[name="code"]').val(result.code).attr('data-value', result.code);
+                $ellipsis.parents('[role=row]').find('input[name="materialName"]').val(result.materialName);
+                $ellipsis.parents('[role=row]').find('input[name="materialCode"]').val(result.materialCode).attr('data-value', result.materialCode);
                 $ellipsis.parents('[role=row]').find('input[name="specification"]').val(result.specification);
                 $ellipsis.parents('[role=row]').find('input[name="materialUnitId"]').val(result.materialUnitId);
                 $ellipsis.parents('[role=row]').find('input[name="materialUnitName"]').val(result.materialUnitName);
@@ -310,7 +311,7 @@ function addRow(){
      var rowdata =getEmptyRow();
      $grid.jqGrid('addRowData', newid, rowdata);
      $grid.find("tbody tr:eq("+thistr+")").find('input').attr("disabled", "disabled");
-     if(!!$grid.find("tbody tr:eq("+thistr+")").last().find('input[name="name"]').val() || ids.length==0){
+     if(!!$grid.find("tbody tr:eq("+(Number(thistr)-1)+")").last().find('input[name="materialName"]').val() || ids.length==0){
         $grid.find("tbody tr:eq("+thistr+")").find('input').removeAttr('disabled').attr("isvalid", "yes");
      }
      $grid.find("tbody tr:eq("+thistr+")").find('.disabled').attr("disabled", "disabled");
@@ -327,7 +328,25 @@ function deleteRow(){
 	//计算汇总值
 	calculateTotal();
 }
+//导入
+function importMaterial(){
+    layer.open({
+        type : 2,
+        title : 'Excel导入',
+        maxmin : true,
+        shadeClose : false, // 点击遮罩关闭层
+        area : [ '500px', '250px' ],
+        content : '/material/requireApply/importMaterial', // iframe的url
+        btn : [ '确定', '取消' ],
+        yes : function(index, layero) {
+            window["layui-layer-iframe" + index].clickButtonFile();
+            //                var res = window["layui-layer-iframe" + index].info();
+            //                alert(res);
+            //                jqxTreeGrid(data);
 
+        }
+    });
+}
 //取得可编辑表格数据
 function getGridData(){
     var applyEntryJson = [];

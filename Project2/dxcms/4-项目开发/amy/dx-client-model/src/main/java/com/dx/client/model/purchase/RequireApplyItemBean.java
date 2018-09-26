@@ -18,7 +18,7 @@ public class RequireApplyItemBean {
     //物资id
     private String materialId;
     //物资编码
-    private String materilaCode;
+    private String materialCode;
     //物资名称
     private String materialName;
     //单位名称
@@ -88,12 +88,12 @@ public class RequireApplyItemBean {
         this.materialId = materialId;
     }
 
-    public String getMaterilaCode() {
-        return materilaCode;
+    public String getMaterialCode() {
+        return materialCode;
     }
 
-    public void setMaterilaCode(String materilaCode) {
-        this.materilaCode = materilaCode;
+    public void setMaterialCode(String materialCode) {
+        this.materialCode = materialCode;
     }
 
     public String getMaterialName() {
@@ -200,7 +200,7 @@ public class RequireApplyItemBean {
         this.acceptUserName = acceptUserName;
     }
 
-    public boolean getActived() {
+    public boolean isActived() {
         return isActived;
     }
 
@@ -208,7 +208,7 @@ public class RequireApplyItemBean {
         isActived = actived;
     }
 
-    public boolean getAccepted() {
+    public boolean isAccepted() {
         return isAccepted;
     }
 

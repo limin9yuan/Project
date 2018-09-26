@@ -72,6 +72,7 @@ import com.dx.client.model.contract.ContractMaterialBean;
 import com.dx.client.model.contract.ContractSuitBean;
 import com.dx.client.model.purchase.RequireApplyItemBean;
 import com.dx.service.contract.service.api.IContractService;
+import com.dx.service.datacenter.service.api.ICompanyService;
 
 /**
  * 合同起草
@@ -92,10 +93,10 @@ public class ContractController extends BaseController {
 	private FileService sysFileService;
 	@Autowired
 	private DeptService sysDeptService;
-//	@Autowired 
-//	private ContractBean contractBean;
+	@Autowired 
+	private ICompanyService iCompanyService;//供货公司接口
 	@Autowired
-	private IContractService iContractService;
+	private IContractService iContractService;//合同接口
 
 	/**
 	 * @param model
@@ -103,18 +104,18 @@ public class ContractController extends BaseController {
 	 */
 	@RequiresPermissions("ContractCreation:ContractCreation")
 	@GetMapping()
-	String ContractCreation(Model model,Long userId,String userName,String deptName,Long deptId) {
-//		Long userId = getUser().getUserId();
-//		String userName = getUser().getUsername();
-//		String deptName = getUser().getDeptName();
-//		Long deptId = getUser().getDeptId();
+	String ContractCreation(Model model) {
+		Long userId = getUser().getUserId();
+		String userName = getUser().getUsername();
+		String deptName = getUser().getDeptName();
+		Long deptId = getUser().getDeptId();
 		model.addAttribute("authorUserName", userName);
 		model.addAttribute("authorUserId", userId);
 		model.addAttribute("authorDeptName", deptName);
 		model.addAttribute("authorDeptId", deptId);
 		return "contract/ContractCreation/add";
 	}
-
+	//查询页面
 	@GetMapping("/list")
 	@RequiresPermissions("ContractCreation:ContractCreation:list")
 	String list(Model model) {
@@ -179,6 +180,7 @@ public class ContractController extends BaseController {
 	@RequiresPermissions("ContractCreation:ContractCreation:edit")
 	String edit(@PathVariable("id") String id, Model model) {
 		// RecordDO record = recordService.get(recordId);
+		ResultMsg data=iContractService.primary(id);
 		List<Map<String, Object>> beanlist = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<>();
 		map.put("contractName", "合同名称");
@@ -219,6 +221,7 @@ public class ContractController extends BaseController {
 	@GetMapping("/see/{id}")
 	@RequiresPermissions("ContractCreation:ContractCreation:see")
 	String see(@PathVariable("id") String id, Model model) {
+		ResultMsg data=iContractService.primary(id);
 		List<Map<String, Object>> beanlist = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<>();
 		map.put("contractName", "合同名称");
@@ -263,6 +266,7 @@ public class ContractController extends BaseController {
 			return R.ok();
 		}
 		return R.error();
+//		return R.ok();
 	}
 
 //	/**
@@ -297,19 +301,6 @@ public class ContractController extends BaseController {
 		return selectTree;
 	}
 
-	// 富文本编辑
-	@PostMapping("/richText")
-	@ResponseBody
-	@RequiresPermissions("ContractCreation:ContractCreation")
-	R richText(@RequestParam("ctrls[]") String[] ctrls) {
-		System.out.println("************************");
-		for (int i = 0; i < ctrls.length; i++) {// 遍历前台页面传回的数据
-			String data = ctrls[i];
-			System.out.println(data + "************************");
-		}
-		System.out.println("************************");
-		return R.ok();
-	}
 
 	//
 	@GetMapping("/editTree")
@@ -507,13 +498,13 @@ public class ContractController extends BaseController {
 		}
 		return R.error();
 	}
-
+	//项目名称页面
 	@GetMapping("/project")
 //	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	String project() {
 		return "/contract/ContractCreation/projectList";
 	}
-
+	//项目名称弹出列表数据
 	@GetMapping("/projectList")
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	@ResponseBody
@@ -536,19 +527,20 @@ public class ContractController extends BaseController {
 //        PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
 		return pageInfo;
 	}
-
+	
+	//供货公司页面
 	@GetMapping("/contractDeliverBeans")
 //	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	String contractDeliversList() {
 		return "/contract/ContractCreation/relevantParty";
 	}
-
+	//供货公司弹出页面数据
 	@GetMapping("/contractDeliversList")
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	@ResponseBody
 	public PageInfo contractDeliversList(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
-		ResultMsg rsm = iContractService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),"", params);
+		ResultMsg rsm = iCompanyService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),"", params);
 		List<ContractDeliverBean> contractDeliverBeans = new ArrayList<ContractDeliverBean>();// 调用接口
 		for (int i = 0; i <= 10; i++) {
 			ContractDeliverBean aa = new ContractDeliverBean();
@@ -571,7 +563,7 @@ public class ContractController extends BaseController {
 	@GetMapping("/materila/{id}")
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	@ResponseBody
-	public PageUtils materila(@RequestParam Map<String, Object> params, @PathVariable("id") String contractId) {
+	public PageInfo materila(@RequestParam Map<String, Object> params, @PathVariable("id") String contractId) {
 		ResultMsg lists = iContractService.getMaterialsByContractId(contractId);// 调用接口
 
 		List<ContractMaterialBean> list = new ArrayList<ContractMaterialBean>();// 调用接口
@@ -632,11 +624,11 @@ public class ContractController extends BaseController {
 		beans.setDateTo(dates);// 有效截止日期
 		beans.setRemark("备注");// 备注
 		list.add(beans);
-//			JSONObject js = new JSONObject(map); // 将map类型转成json数据
 
 		int total = 20;// 调用接口
-		PageUtils pageUtils = new PageUtils(list, total);
-		return pageUtils;
+		PageInfo pageInfo = new PageInfo(list);
+//		pageInfo.setTotal(total);
+		return pageInfo;
 	}
 
 	@GetMapping("/importM")

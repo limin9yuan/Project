@@ -18,7 +18,6 @@ public class MaterialServiceFallbackFactory implements FallbackFactory<IMaterial
     @Override
     public IMaterialService create(Throwable cause){
         return new IMaterialService() {
-
             @Override
             public ResultMsg save(MaterialBean materialBean) {
                 return null;

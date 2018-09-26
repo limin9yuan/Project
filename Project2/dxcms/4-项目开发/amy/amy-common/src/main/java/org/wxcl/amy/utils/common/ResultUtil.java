@@ -9,13 +9,15 @@ import java.util.Map;
  * @Description:
  */
 public class ResultUtil {
-    public static final String CODE_SUCCESS="1";
-    public static final String CODE_FAIL="0";
+    public static final String CODE_TODO = "8000";
+    public static final String CODE_SUCCESS = "1";
+    public static final String CODE_FAIL = "0";
 
-    public static final String MSG_SUCCESS="操作成功";
-    public static final String MSG_FAIL="操作失败";
+    public static final String MSG_TODO = "待实现";
+    public static final String MSG_SUCCESS = "操作成功";
+    public static final String MSG_FAIL = "操作失败";
 
-    public static ResultMsg success(){
+    public static ResultMsg success() {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_SUCCESS);
         resultMsg.setMsg(MSG_SUCCESS);
@@ -23,7 +25,7 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static ResultMsg fail(){
+    public static ResultMsg fail() {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_FAIL);
         resultMsg.setMsg(MSG_FAIL);
@@ -31,7 +33,7 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static ResultMsg success(Object data){
+    public static ResultMsg success(Object data) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_SUCCESS);
         resultMsg.setMsg(MSG_SUCCESS);
@@ -40,7 +42,7 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static ResultMsg fail(Object data){
+    public static ResultMsg fail(Object data) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_FAIL);
         resultMsg.setMsg(MSG_FAIL);
@@ -49,7 +51,15 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static ResultMsg success(String detail){
+    public static ResultMsg todo(String detail){
+        ResultMsg resultMsg = new ResultMsg();
+        resultMsg.setCode(CODE_TODO);
+        resultMsg.setMsg(MSG_TODO);
+        resultMsg.setDetail(detail);
+        return resultMsg;
+    }
+
+    public static ResultMsg success(String detail) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_SUCCESS);
         resultMsg.setMsg(MSG_SUCCESS);
@@ -57,7 +67,7 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static ResultMsg fail(String detail){
+    public static ResultMsg fail(String detail) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_FAIL);
         resultMsg.setMsg(MSG_FAIL);
@@ -65,7 +75,7 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static ResultMsg success(String detail,Object data){
+    public static ResultMsg success(String detail, Object data) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_SUCCESS);
         resultMsg.setMsg(MSG_SUCCESS);
@@ -74,7 +84,7 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static ResultMsg fail(String detail,Object data){
+    public static ResultMsg fail(String detail, Object data) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_FAIL);
         resultMsg.setMsg(MSG_FAIL);
@@ -83,15 +93,15 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static ResultMsg fail(String detail,Exception exception){
+    public static ResultMsg fail(String detail, Exception exception) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_FAIL);
         resultMsg.setMsg(MSG_FAIL);
-        resultMsg.setDetail(detail+","+exception.getMessage());
+        resultMsg.setDetail(detail + "," + exception.getMessage());
         return resultMsg;
     }
 
-    public static ResultMsg fail(Exception exception){
+    public static ResultMsg fail(Exception exception) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_FAIL);
         resultMsg.setMsg(MSG_FAIL);
@@ -99,16 +109,16 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static ResultMsg fail(String detail,Object data,Exception exception){
+    public static ResultMsg fail(String detail, Object data, Exception exception) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_FAIL);
         resultMsg.setMsg(MSG_FAIL);
-        resultMsg.setDetail(detail+","+exception.getMessage());
+        resultMsg.setDetail(detail + "," + exception.getMessage());
         resultMsg.setData(data);
         return resultMsg;
     }
 
-    public static ResultMsg fail(Object data,Exception exception){
+    public static ResultMsg fail(Object data, Exception exception) {
         ResultMsg resultMsg = new ResultMsg();
         resultMsg.setCode(CODE_FAIL);
         resultMsg.setMsg(MSG_FAIL);
@@ -117,7 +127,7 @@ public class ResultUtil {
         return resultMsg;
     }
 
-    public static Object validate(Boolean result){
+    public static Object validate(Boolean result) {
         Map<String, Boolean> map = new HashMap<>();
         map.put("valid", result);
         return map;

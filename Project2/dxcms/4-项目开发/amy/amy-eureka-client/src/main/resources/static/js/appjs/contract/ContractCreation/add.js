@@ -142,6 +142,8 @@ $().ready(function() {
 				var files = this.files = obj.pushFile(); // 将每次选择的文件追加到文件队列
 				// 读取本地文件
 				obj.preview(function(index, file, result) {
+					var t=file.name+","+$("#fileNameIf").val();
+					$("#fileNameIf").val(t)
 					var tr = $([ '<tr id="upload-' + index + '">'
 						, '<td style="text-align: center;">' + file.name + '</td>'
 						, '<td style="text-align: center;">' + (file.size / 1014).toFixed(1) + 'kb</td>'
@@ -161,38 +163,53 @@ $().ready(function() {
 					tr.find('.demo-delete').on('click', function() {
 						delete files[index]; // 删除对应的文件
 						tr.remove();
-						uploadListIns.config.elem.next()[0].value = ''; // 清空 input
+						uploadInst.config.elem.next()[0].value = ''; // 清空 input
+						var a=$("#fileNameIf").val().replace(file.name+",","");//取得删除的文件的名字替换为空
+						$("#fileNameIf").val(a);
+						fileCount=Number(fileCount)-1;
 					// file
 					// 值，以免删除后出现同名文件不可选
 					});
-
+					
 					demoListView.append(tr);
 					fileCount=Number(fileCount)+1;
 				});
 			},
 			done : function(r) {
 //				console.log(r.fileNameUrl);
+				var fileInformation;
 				if (r.code == 0) {
-					var tmpFile={"url":r.url,"type":r.typeId,"date":r.createDate};
-					if (window.localStorage.getItem("fileArray")==null) {
+					alert(fileCount);
+					var tmpFile={"url":r.fileNameUrl,"typeId":r.fileType,"createDate":r.fileDate};
+//					alert(window.localStorage.getItem("fileArray"));
+					if (fileCount<=1) {
 						window.localStorage.setItem("fileArray",JSON.stringify(tmpFile));
-						window.localStorage.setItem("fileCount",1);
-					}else{
+						window.localStorage.setItem("fileCount",Number(1));
+						console.log(window.localStorage.getItem("fileArray"));
+						console.log(tmpFile);
+						fileInformation=window.localStorage.setItem("fileArray",JSON.stringify(tmpFile));
+						console.log("if");
+					}else if(fileCount>1){
+						console.log("else");
 						var tmpArray = window.localStorage.getItem("fileArray");
 						var tmpCount = window.localStorage.getItem("fileCount");
 						tmpArray = tmpArray+","+JSON.stringify(tmpFile);
 						window.localStorage.setItem("fileArray",tmpArray);
 						window.localStorage.setItem("fileCount",1+Number(tmpCount));
 //						console.log(tmpCount);
-						console.log("["+tmpArray.toString()+"]");
-						var fileInformation ="["+tmpArray.toString()+"]";
-						save(fileInformation);
+//						console.log("["+tmpArray.toString()+"]");
+						fileInformation ="["+tmpArray.toString()+"]";
+						
+						console.log(fileInformation);
+//						save(fileInformation);
 					}
+						save(fileInformation);
 //					window.localStorage.getItem("fileArray");
 					if (fileCount==Number(window.localStorage.getItem("fileCount"))) {
 						window.localStorage.removeItem("fileArray")
+						console.log("清空");
+//					alert(fileCount+"数量");
 					}
-//					console.log("["+window.localStorage.getItem("fileArray")+"]");
 					
 //					parent.layer.alert(r.msg);
 
@@ -253,7 +270,7 @@ $("#saveBtn").click(function() {
 		var myDate=new Date();
 		
 		contractElementBeans=[{"isActived":true,"createDate":myDate.toLocaleDateString(),jsonArray}];
-		console.log(JSON.stringify(contractElementBeans));
+//		console.log(JSON.stringify(contractElementBeans));
 		
 
 		//供货公司
@@ -304,12 +321,13 @@ $("#saveBtn").click(function() {
 })
 
 function save(fileInformation) {
+//	alert("123456");
 	//富文本全部text
 			var div = document.createElement('div');
 			div.innerHTML=sde.html();
 			div.innerText//即为纯文本
 	var signupForm = $('#signupForm').serializeArray();
-	console.log(signupForm);
+//	console.log(signupForm);
 	var params = {
 		"htmlText":div.innerText,
 		"contractMaterialBeans" : JSON.stringify(materialData),
@@ -319,6 +337,8 @@ function save(fileInformation) {
 		"jsonSuitBeans" : JSON.stringify(jsonSuitBeans),
 		"richTextKVJson" : JSON.stringify(contractElementBeans)
 	};
+	console.log(params);
+//	alert(params);
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -791,6 +811,9 @@ function validateRule() {
 			},
 			timeMax : {
 				compareDate : true
+			},
+			fileNameIf:{
+				required : true
 			}
 		},
 		messages : {
@@ -850,6 +873,9 @@ function validateRule() {
 			},
 			timeMax : {
 				compareDate : icon + "结束时间不能小于开始时间"
+			},
+			fileNameIf:{
+				required : icon + "文件不能为空"
 			}
 		}
 	});
