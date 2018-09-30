@@ -2,18 +2,18 @@ $(function() {
     load();
     datetimepicker();
 });
-function datetimepicker(){
-    //开始时间
-    $('#timeStart').datetimepicker({
-        format:'YYYY-MM-DD',
-        locale:moment.locale('zh-cn')
+//初始化日期控件
+function datetimepicker() {
+    $('#beginDate').datetimepicker({
+        format: 'YYYY-MM-DD ',
+        locale: moment.locale('zh-cn')
     });
-    //结束时间
-    $('#timeEnd').datetimepicker({
-        format:'YYYY-MM-DD',
-        locale:moment.locale('zh-cn')
+    $('#endDate').datetimepicker({
+        format: 'YYYY-MM-DD ',
+        locale: moment.locale('zh-cn')
     });
 }
+
 function load() {
     $('#exampleTable')
         .bootstrapTable(
@@ -41,8 +41,13 @@ function load() {
                 queryParams : function(params) {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-                        limit: params.limit,
-                        offset:params.offset
+                        //limit: params.limit,
+                        pageSize: params.limit,
+                        offset:params.offset,
+                        pageNumber:Number(params.offset) / Number(params.limit) + 1,
+                        codeOrName:$('#searchName').val(),
+                        beginDate:$('#beginDate').data('date'),
+                        endDate:$('#endDate').data('date')
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };
@@ -97,13 +102,13 @@ function load() {
                         align : 'center',
                         formatter : function(value, row, index) {
                             var e = '<a class="btn btn-primary btn-sm '+s_edit_h+'" href="#" mce_href="#" title="编辑" onclick="edit(\''
-                                + row.planNo
+                                + row.id
                                 + '\')"><i class="fa fa-edit"></i></a> ';
                             var d = '<a class="btn btn-warning btn-sm '+s_remove_h+'" href="#" title="删除"  mce_href="#" onclick="remove(\''
-                                + row.planNo
+                                + row.id
                                 + '\')"><i class="fa fa-remove"></i></a> ';
                             var f = '<a class="btn btn-success btn-sm '+s_check_h+'" href="#" title="查看"  mce_href="#" onclick="check(\''
-                                + row.planNo
+                                + row.id
                                 + '\')"><i class="fa fa-search"></i></a> ';
                             return f + e + d;
                         }
@@ -113,23 +118,26 @@ function load() {
 function reLoad() {
     $('#exampleTable').bootstrapTable('refresh');
 }
-function add() {
-    window.location.assign("/material/purchasePlan/add")
-    //window.location.replace("/material/purchasePlan/add")
-    //window.open('/material/purchasePlan/add')
-}
 
-function edit(id) {
-    layer.open({
-        type : 2,
-        title : '编辑',
-        maxmin : true,
-        shadeClose : false, // 点击遮罩关闭层
-        area : [ '100%', '100%' ],
-        content : '/material/purchasePlan/edit/' + id // iframe的url
+function add() {
+    $('.J_menuItem',window.parent.document).each(function () {
+        if ($(this).attr('href') == 'material/purchasePlan/add') {
+            parent.menuItemFromChild($(this));
+            return false;
+        }
     });
 }
-function check(id) {
+
+//修改
+function edit(id) {
+    var param={
+        href:'/material/purchasePlan/edit/' + id,
+        index:'editPurchasePlan',
+        text:'采购计划修改'
+    }
+    parent.openNewTabFromChild(param);
+}
+/*function check(id) {
     layer.open({
         type : 2,
         title : '查看',
@@ -138,6 +146,16 @@ function check(id) {
         area : [ '100%', '100%' ],
         content :'/material/purchasePlan/check/' + id // iframe的url
     });
+}*/
+
+//查看
+function check(id) {
+    var param={
+        href:'/material/purchasePlan/check/' + id,
+        index:'checkPurchasePlan',
+        text:'采购计划查看'
+    }
+    parent.openNewTabFromChild(param);
 }
 function remove(id) {
     layer.confirm('确定要删除选中的记录？', {

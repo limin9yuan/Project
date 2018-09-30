@@ -3,8 +3,14 @@ var sde; //富文本对象
 var jsonArray = []; //富文本key and value
 var jsonCompanyName = [];
 var jsonSuitBeans = [];
-var contractElementBeans=[];
+var contractElementBeans = [];
+var fileInformation = [];
+
 $().ready(function() {
+	//遮罩层
+	nextStepThis('myTab',3,'lastBtn','nextBtn');
+	setTimeout('hidenload()', 500)
+	//遮罩层END
 	$("button[name=excelinsertbtn]").click(function() {
 		layer.open({
 			type : 2,
@@ -78,9 +84,31 @@ $().ready(function() {
 					}
 				}
 			};
+
+			$("#suitCorpName").drawMultipleTree(defaults);
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/tree",
+		data : {
+			'deptIds' : $("#authorDeptId").val()
+		},
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
 			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
 
-			$("#contractSuitBeans").drawMultipleTree(defaults);
 		}
 	});
 	$.ajax({
@@ -108,12 +136,14 @@ $().ready(function() {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
 	});
+	var n=0;
 	$('#myTab a[href="#contractTemplate"]').on('shown.bs.tab', function(e) {
-		$('#lastBtn').attr("disabled", true);
+		$('#lastBtn').attr("disabled", false);
 		$('#nextBtn').attr("disabled", false);
-		richText();
-
-
+			if(n<=0){
+				richText();
+			}
+			n++;
 	});
 	$('#myTab a[href="#contractMaterialDetail"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
@@ -127,7 +157,7 @@ $().ready(function() {
 		var upload = layui.upload;
 		// 多文件列表示例
 		var demoListView = $('#demoList');
-		var fileCount=0;
+		var fileCount = 0;
 		//执行实例
 		var uploadInst = upload.render({
 			elem : '#test1', //绑定元素
@@ -142,8 +172,7 @@ $().ready(function() {
 				var files = this.files = obj.pushFile(); // 将每次选择的文件追加到文件队列
 				// 读取本地文件
 				obj.preview(function(index, file, result) {
-					var t=file.name+","+$("#fileNameIf").val();
-					$("#fileNameIf").val(t)
+					//					var ss=document.getElementById("demoList").rows.
 					var tr = $([ '<tr id="upload-' + index + '">'
 						, '<td style="text-align: center;">' + file.name + '</td>'
 						, '<td style="text-align: center;">' + (file.size / 1014).toFixed(1) + 'kb</td>'
@@ -164,54 +193,53 @@ $().ready(function() {
 						delete files[index]; // 删除对应的文件
 						tr.remove();
 						uploadInst.config.elem.next()[0].value = ''; // 清空 input
-						var a=$("#fileNameIf").val().replace(file.name+",","");//取得删除的文件的名字替换为空
-						$("#fileNameIf").val(a);
-						fileCount=Number(fileCount)-1;
+//						fileCount = Number(fileCount) - 1;
 					// file
 					// 值，以免删除后出现同名文件不可选
 					});
-					
+
 					demoListView.append(tr);
-					fileCount=Number(fileCount)+1;
+					
 				});
 			},
 			done : function(r) {
-//				console.log(r.fileNameUrl);
-				var fileInformation;
+				fileCount = Number(fileCount) + 1;
 				if (r.code == 0) {
-					alert(fileCount);
-					var tmpFile={"url":r.fileNameUrl,"typeId":r.fileType,"createDate":r.fileDate};
-//					alert(window.localStorage.getItem("fileArray"));
-					if (fileCount<=1) {
-						window.localStorage.setItem("fileArray",JSON.stringify(tmpFile));
-						window.localStorage.setItem("fileCount",Number(1));
-						console.log(window.localStorage.getItem("fileArray"));
-						console.log(tmpFile);
-						fileInformation=window.localStorage.setItem("fileArray",JSON.stringify(tmpFile));
-						console.log("if");
-					}else if(fileCount>1){
-						console.log("else");
+					var tmpFile = {
+						"url" : r.fileNameUrl,
+						"typeId" : r.fileType,
+						"createDate" : r.fileDate
+					};
+					if (window.localStorage.getItem("fileArray") == null) {
+						window.localStorage.setItem("fileArray", JSON.stringify(tmpFile));
+						window.localStorage.getItem("fileArray");
+
+						fileInformation ="["+ JSON.stringify(tmpFile)+"]";
+						window.localStorage.setItem("fileArray", JSON.stringify(tmpFile));
+					} else {
 						var tmpArray = window.localStorage.getItem("fileArray");
 						var tmpCount = window.localStorage.getItem("fileCount");
-						tmpArray = tmpArray+","+JSON.stringify(tmpFile);
-						window.localStorage.setItem("fileArray",tmpArray);
-						window.localStorage.setItem("fileCount",1+Number(tmpCount));
-//						console.log(tmpCount);
-//						console.log("["+tmpArray.toString()+"]");
-						fileInformation ="["+tmpArray.toString()+"]";
-						
-						console.log(fileInformation);
-//						save(fileInformation);
-					}
-						save(fileInformation);
-//					window.localStorage.getItem("fileArray");
-					if (fileCount==Number(window.localStorage.getItem("fileCount"))) {
-						window.localStorage.removeItem("fileArray")
-						console.log("清空");
-//					alert(fileCount+"数量");
+						tmpArray = tmpArray + "," + JSON.stringify(tmpFile);
+						window.localStorage.setItem("fileArray", tmpArray);
+
+						fileInformation = "[" + tmpArray.toString() + "]";
+
 					}
 					
-//					parent.layer.alert(r.msg);
+					var totalCount=0;
+					$("#demoList").find('.demo-reload').each(function(i) {
+						totalCount++;
+						
+					});
+					if (fileCount == totalCount) {
+						console.log("fileInformation"+fileInformation);
+						save(fileInformation);
+						window.localStorage.removeItem("fileArray")
+						console.log("清空+localStorage");
+						console.log(fileCount + "数量");
+					}
+
+					//					parent.layer.alert(r.msg);
 
 					if (r.serviceAttachment > 0) {
 					}
@@ -222,22 +250,27 @@ $().ready(function() {
 		});
 	});
 	//	*****************************上传文件END
-	//	selectTree();
 	jqxTreeGrid();
 	validateRule();
 });
 
-
 //得到合同物资数据test
 function dsds() {
-	
 }
 
+//隐藏遮罩层
+function hidenload(){
+	if(sde==null){
+		parent.layer.msg("合同模板加载失败，请手动点击合同模板！");
+		setTimeout('$("#load").hide()',500);
+	}else{
+		lastStep('myTab',3,'lastBtn','nextBtn')
+		setTimeout('$("#load").hide()',500);
+	}
+	
+}
 $("#saveBtn").click(function() {
 	if ($("#signupForm").valid()) {
-		document.getElementById("uploadFile").click();
-		
-
 		var ctrls = sde.getControlById();
 		var ele = new Array(); //value
 		var rite = new Array(); //key
@@ -261,17 +294,19 @@ $("#saveBtn").click(function() {
 				}
 			}
 		}
-		
+
 		//富文本全部text
 		var div = document.createElement('div');
-		div.innerHTML=sde.html();
-		div.innerText//即为纯文本
-		
-		var myDate=new Date();
-		
-		contractElementBeans=[{"isActived":true,"createDate":myDate.toLocaleDateString(),jsonArray}];
-//		console.log(JSON.stringify(contractElementBeans));
-		
+		div.innerHTML = sde.html();
+		div.innerText //即为纯文本
+
+		var myDate = new Date();
+
+//		contractElementBeans = [ {
+//			"isActived" : true,
+//			"createDate" : myDate.toLocaleDateString()
+//		} ];
+//		contractElementBeans["jsonArray",jsonArray]
 
 		//供货公司
 		var deliverCompanyNameArr = new Array();
@@ -296,11 +331,11 @@ $("#saveBtn").click(function() {
 
 		//适用机构
 		var contractSuitBeansArr = new Array();
-		var contractSuitBeans = $("#contractSuitBeans").val();
+		var contractSuitBeans = $("#suitCorpName").val();
 		contractSuitBeansArr = contractSuitBeans.split(",");
 
 		var suitCorpIdArr = new Array();
-		var suitCorpId = $("#contractSuitBeans").drawMultipleTree("getChecks", "val");
+		var suitCorpId = $("#suitCorpName").drawMultipleTree("getChecks", "val");
 		suitCorpIdArr = suitCorpId.split(",");
 		$("#suitCorpId").val(suitCorpId);
 		jsonSuitBeans = new Array();
@@ -314,6 +349,7 @@ $("#saveBtn").click(function() {
 				}
 			}
 		}
+		document.getElementById("uploadFile").click();
 	//		console.log("适用机构");
 	//		console.log(jsonSuitBeans);
 	//		setTimeout('save()', 500); //延迟执行save()方法5毫秒
@@ -321,24 +357,23 @@ $("#saveBtn").click(function() {
 })
 
 function save(fileInformation) {
-//	alert("123456");
 	//富文本全部text
-			var div = document.createElement('div');
-			div.innerHTML=sde.html();
-			div.innerText//即为纯文本
+	var div = document.createElement('div');
+	div.innerHTML = sde.html();
+	div.innerText //即为纯文本
+//	alert(JSON.stringify(div.innerText));
 	var signupForm = $('#signupForm').serializeArray();
-//	console.log(signupForm);
+	//	console.log(signupForm);
 	var params = {
-		"htmlText":div.innerText,
+		"htmlText" : JSON.stringify(div.innerText),
 		"contractMaterialBeans" : JSON.stringify(materialData),
 		"signupForm" : JSON.stringify(signupForm),
-		"fileInformation":fileInformation,
+		"fileInformation" :fileInformation,
 		"jsonCompanyName" : JSON.stringify(jsonCompanyName),
 		"jsonSuitBeans" : JSON.stringify(jsonSuitBeans),
-		"richTextKVJson" : JSON.stringify(contractElementBeans)
+		"richTextKVJson" : JSON.stringify(jsonArray)
 	};
 	console.log(params);
-//	alert(params);
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -351,84 +386,19 @@ function save(fileInformation) {
 		},
 		success : function(data) {
 			if (data.code == 0) {
+				$("#ids").val(data.ids);
 				parent.layer.msg("操作成功");
-
+					layer.open({
+						type : 2,
+						title : '编辑',
+						maxmin : true,
+						shadeClose : false, // 点击遮罩关闭层
+						area : [ '100%', '100%' ],
+						content : "/ContractCreation/ContractCreation/edit/" + $("#ids").val() // iframe的url
+					});
 			} else {
 				parent.layer.alert(data.msg);
 			}
-		}
-	});
-}
-//树状下拉复选框-MultipleTreeSelect
-function selectTree() {
-	$.ajax({
-		type : "GET",
-		url : "/ContractCreation/ContractCreation/editTree",
-		data : {
-			'deptIds' : $("#authorDeptId").val()
-		},
-		success : function(tree) {
-			tree.checked = false;
-			var defaults = {
-				zNodes : tree,
-				height : 233,
-				chkStyle : "radio", //设置单选树形 默认是多选
-				radioType : "all",
-				callback : {
-					onCheck : function(treeNode) {
-						//alert("my callback");
-					}
-				}
-			};
-			$("#authorDeptName").drawMultipleTree(defaults);
-
-
-		}
-	});
-	$.ajax({
-		type : "GET",
-		url : "/ContractCreation/ContractCreation/tree",
-		data : {
-			'deptIds' : $("#authorDeptId").val()
-		},
-		success : function(tree) {
-			tree.checked = false;
-			var defaults = {
-				zNodes : tree,
-				height : 233,
-				chkStyle : "radio", //设置单选树形 默认是多选
-				radioType : "all",
-				callback : {
-					onCheck : function(treeNode) {
-						//alert("my callback");
-					}
-				}
-			};
-			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
-
-			$("#contractSuitBeans").drawMultipleTree(defaults);
-			$("#performUserName").drawMultipleTree(defaults);
-
-		}
-	});
-	$.ajax({
-		type : "GET",
-		url : "/ContractCreation/ContractCreation/usertree",
-		success : function(tree) {
-			tree.checked = false;
-			var defaults = {
-				zNodes : tree,
-				height : 233,
-				chkStyle : "radio", //设置单选树形 默认是多选
-				radioType : "all",
-				callback : {
-					onCheck : function(treeNode) {
-						//alert("my callback");
-					}
-				}
-			};
-			$("#performUserName").drawMultipleTree(defaults);
-
 		}
 	});
 }
@@ -448,6 +418,8 @@ $.validator.addMethod("compareDate", function(value, element) {
 		return true;
 	}
 }, "<font  color='#E47068'><strong>结束日期必须大于开始日期</strong></font>");
+
+
 
 //打开项目页面
 function openProject() {
@@ -503,22 +475,6 @@ function triggerCheckbox(checkbox) {
 	}
 }
 
-function selecttree() {
-	$.ajax({
-		type : "GET",
-		url : "/ContractCreation/ContractCreation/tree",
-		success : function(tree) {
-			var defaults = {
-				zNodes : tree,
-				height : 233,
-				//                    chkStyle: "radio",//设置单选树形 默认是多选
-				radioType : "all"
-			};
-			$("#contractSuitBeans").drawMultipleTree(defaults); //初始化树状下拉复选框
-
-		}
-	});
-}
 
 
 function jqxTreeGrid(data) {
@@ -771,7 +727,7 @@ function validateRule() {
 				//税率
 				required : true
 			},
-			contractSuitBeans : {
+			suitCorpName : {
 				//生效机构
 				required : true
 			},
@@ -811,9 +767,6 @@ function validateRule() {
 			},
 			timeMax : {
 				compareDate : true
-			},
-			fileNameIf:{
-				required : true
 			}
 		},
 		messages : {
@@ -833,7 +786,7 @@ function validateRule() {
 				//税率
 				required : icon + "税率不能为空"
 			},
-			contractSuitBeans : {
+			suitCorpName : {
 				//生效机构
 				required : icon + "生效机构不能为空"
 			},
@@ -873,9 +826,6 @@ function validateRule() {
 			},
 			timeMax : {
 				compareDate : icon + "结束时间不能小于开始时间"
-			},
-			fileNameIf:{
-				required : icon + "文件不能为空"
 			}
 		}
 	});
@@ -1480,16 +1430,4 @@ function richText() {
 
 function nextStepThis(tabId, totalStep, lastBtn, nextBtn) {
 	nextStep(tabId, totalStep, lastBtn, nextBtn);
-//	if (address == null) {
-//		if ($('#' + tabId + ' li:eq(1)').attr("class") == 'active') {
-//			address = new addressResolve({
-//				proId : 'province',
-//				cityId : 'city',
-//				areaId : 'area'
-//			});
-//			address.init();
-//		}
-//
-//	}
 }
-//	}

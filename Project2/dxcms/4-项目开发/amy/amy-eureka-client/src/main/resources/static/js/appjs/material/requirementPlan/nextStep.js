@@ -103,7 +103,7 @@ function save() {
 				 'authorUser' : $("#authorUser").val(),
 				 'createDate' : $("#createDate").data('date'),
 				 'remark' : $("#remark").val(),
-				 'applyEntryJson' : applyEntryJson
+				 'applyEntryJson' : JSON.stringify(applyEntryJson)
 				 },// 你的formid
 		async : false,
 		error : function(request) {
@@ -241,9 +241,11 @@ function getMaterialDetailByCode(code) {
 					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="budgetQty"]').val(orderEntry[i].budgetQty);
 					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="referencePrice"]').val(orderEntry[i].referencePrice);
 					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="budgetPrice"]').val(orderEntry[i].budgetPrice);
-					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="referenceAmount"]').val(orderEntry[i].referenceAmount);
-					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="requireDate"]').val(orderEntry[i].requireDate);
-					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="arriveDate"]').val(orderEntry[i].arriveDate);
+					var referenceAmount = $("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="referencePrice"]').val()
+										* $("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="purchaseQty"]').val();
+					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="referenceAmount"]').val(referenceAmount);
+					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="requireDate"]').val(orderEntry[i].requireDate.substr(0,10));
+					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="arriveDate"]').val(orderEntry[i].arriveDate.substr(0,10));
 					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="purchaserName"]').val(orderEntry[i].purchaserName);
 					$("#requirePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="description"]').val(orderEntry[i].description);
 				}else {

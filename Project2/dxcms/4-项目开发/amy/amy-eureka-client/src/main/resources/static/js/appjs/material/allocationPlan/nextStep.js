@@ -110,7 +110,7 @@ function save() {
 				 'authorUser' : $("#authorUser").val(),
 				 'createDate' : $("#createDate").data('date'),
 				 'remark' : $("#remark").val(),
-				 'applyEntryJsonArray' : applyEntryJsonArray
+				 'applyEntryJsonArray' : JSON.stringify(applyEntryJsonArray)
 				 },// 你的formid
 		async : false,
 		error : function(request) {

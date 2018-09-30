@@ -41,8 +41,9 @@ function load() {
 						queryParams : function(params) {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-								limit: params.limit,
-								offset:params.offset
+								pageSize: params.limit,
+								offset:params.offset,
+								pageNumber:Number(params.offset) / Number(params.limit) + 1,
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
@@ -116,7 +117,7 @@ function check(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '100%', '100%' ],
-		content :'/requirementPlan/requirementPlan/check/' + id // iframe的url
+		content :'/allocationPlan/allocationPlan/check/' + id // iframe的url
 	});
 }
 function edit(id) {
@@ -126,7 +127,7 @@ function edit(id) {
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
 		area : [ '100%', '100%' ],
-		content : '/requirementPlan/requirementPlan/edit/' + id // iframe的url
+		content : '/allocationPlan/allocationPlan/edit/' + id // iframe的url
 	});
 }
 function remove(id) {

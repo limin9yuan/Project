@@ -8,6 +8,8 @@ import com.dx.client.model.purchase.RequirePlanBean;
 import com.dx.client.model.purchase.RequirePlanItemBean;
 import com.dx.service.purchase.service.api.IRequirePlanService;
 import com.github.pagehelper.PageInfo;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -19,8 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bootdo.common.utils.PageUtils;
-import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
 import org.wxcl.amy.utils.common.ResultMsg;
 
@@ -98,30 +98,38 @@ public class RequirePlanController {
 	@RequestMapping("/check_ajax/{planNo}")
 	@ResponseBody
 	Map<String, Object> check_ajax(@PathVariable("planNo") String planNo) {
-		List<Map<String, Object>> checkList = new ArrayList<>();//调用接口
+		ResultMsg rsm = requirePlanService.detail(planNo);
+		List<RequirePlanItemBean> checkList = new ArrayList<>();//调用接口
+		String stringDate = "2018-08-27";
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = dateFormat.parse(stringDate);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		//做测试数据 调用接口前使用 begin
 		for (int i = 1; i < 6; i++) {
-			Map<String, Object> requireMap = new HashMap<>();
-			requireMap.put("requirePlanid", "物资编码" + i);
-			requireMap.put("materialName", "物资A" + i);
-			requireMap.put("materilaCode", "物资编码" + i);
-			requireMap.put("specification", "规格" + i);
-			requireMap.put("materialUnitName", "单位" + i);
-			requireMap.put("materialSubArray", "包装物料" + i);
-			requireMap.put("requireQty","25345");
-			requireMap.put("purchaseQty","456");
-			requireMap.put("stockQty", "47");
-			requireMap.put("reserveQty", "57657");
-			requireMap.put("onwayQty", "878");
-			requireMap.put("budgetQty", "8768");
-			requireMap.put("referencePrice", "789");
-			requireMap.put("budgetPrice", "8908");
-			requireMap.put("referenceAmount", "34");
-			requireMap.put("requireDate","2018/8/27");
-			requireMap.put("arriveDate", "2018/8/27");
-			requireMap.put("purchaserName", "张三");
-			requireMap.put("description", "sb");
-			checkList.add(requireMap);
+			RequirePlanItemBean requirePlanItemBean = new RequirePlanItemBean();
+			requirePlanItemBean.setRequirePlanid("物资编码" + i);
+			requirePlanItemBean.setMaterialName("物资A" + i);
+			requirePlanItemBean.setMaterilaCode("物资编码" + i);
+			requirePlanItemBean.setSpecification("规格" + i);
+			requirePlanItemBean.setMaterialUnitName("单位" + i);
+			requirePlanItemBean.setMaterialSubArray("包装物料" + i);
+			requirePlanItemBean.setRequireQty((double)25345);
+			requirePlanItemBean.setPurchaseQty((double)456);
+			requirePlanItemBean.setStockQty((double)47);
+			requirePlanItemBean.setReserveQty((double)57657);
+			requirePlanItemBean.setOnwayQty((double)878);
+			requirePlanItemBean.setBudgetQty((double)8768);
+			requirePlanItemBean.setReferencePrice(BigDecimal.valueOf(789));
+			requirePlanItemBean.setBudgetPrice(BigDecimal.valueOf(8908));
+			requirePlanItemBean.setRequireDate(date);
+			requirePlanItemBean.setArriveDate(date);
+			requirePlanItemBean.setPurchaserName("张三");
+			requirePlanItemBean.setDescription("sb");
+			checkList.add(requirePlanItemBean);
 		}
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		returnData.put("checkList", checkList);
@@ -142,7 +150,7 @@ public class RequirePlanController {
 
 		ResultMsg rm = requirePlanService.primary(planNo);
 		RequirePlanBean requirePlanModel = new RequirePlanBean();
-		requirePlanModel.setId(planNo);
+		requirePlanModel.setCode(planNo);
 		requirePlanModel.setName("2018年8月采购申请");
 		requirePlanModel.setBusinessDate(date);
 		requirePlanModel.setPurchaseDeptId("1");
@@ -162,30 +170,38 @@ public class RequirePlanController {
 	@RequestMapping("/edit_ajax/{planNo}")
 	@ResponseBody
 	Map<String, Object> edit_ajax(@PathVariable("planNo") String planNo) {
-		List<Map<String, Object>> editList = new ArrayList<>();//调用接口
+		ResultMsg rsm = requirePlanService.detail(planNo);
+		List<RequirePlanItemBean> editList = new ArrayList<>();//调用接口
+		String stringDate = "2018-08-27";
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = dateFormat.parse(stringDate);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		//做测试数据 调用接口前使用 begin
 		for (int i = 1; i < 6; i++) {
-			Map<String, Object> requireMap = new HashMap<>();
-			requireMap.put("requirePlanid", "物资编码" + i);
-			requireMap.put("materialName", "物资A" + i);
-			requireMap.put("materilaCode", "物资编码" + i);
-			requireMap.put("specification", "规格" + i);
-			requireMap.put("materialUnitName", "单位" + i);
-			requireMap.put("materialSubArray", "包装物料" + i);
-			requireMap.put("requireQty","25345");
-			requireMap.put("purchaseQty","456");
-			requireMap.put("stockQty", "47");
-			requireMap.put("reserveQty", "57657");
-			requireMap.put("onwayQty", "878");
-			requireMap.put("budgetQty", "8768");
-			requireMap.put("referencePrice", "789");
-			requireMap.put("budgetPrice", "8908");
-			requireMap.put("referenceAmount", "34");
-			requireMap.put("requireDate","2018/8/27");
-			requireMap.put("arriveDate", "2018/8/27");
-			requireMap.put("purchaserName", "张三");
-			requireMap.put("description", "sb");
-			editList.add(requireMap);
+			RequirePlanItemBean requirePlanItemBean = new RequirePlanItemBean();
+			requirePlanItemBean.setRequirePlanid("物资编码" + i);
+			requirePlanItemBean.setMaterialName("物资A" + i);
+			requirePlanItemBean.setMaterilaCode("物资编码" + i);
+			requirePlanItemBean.setSpecification("规格" + i);
+			requirePlanItemBean.setMaterialUnitName("单位" + i);
+			requirePlanItemBean.setMaterialSubArray("包装物料" + i);
+			requirePlanItemBean.setRequireQty((double)25345);
+			requirePlanItemBean.setPurchaseQty((double)456);
+			requirePlanItemBean.setStockQty((double)47);
+			requirePlanItemBean.setReserveQty((double)57657);
+			requirePlanItemBean.setOnwayQty((double)878);
+			requirePlanItemBean.setBudgetQty((double)8768);
+			requirePlanItemBean.setReferencePrice(BigDecimal.valueOf(789));
+			requirePlanItemBean.setBudgetPrice(BigDecimal.valueOf(8908));
+			requirePlanItemBean.setRequireDate(date);
+			requirePlanItemBean.setArriveDate(date);
+			requirePlanItemBean.setPurchaserName("张三");
+			requirePlanItemBean.setDescription("sb");
+			editList.add(requirePlanItemBean);
 		}
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		returnData.put("editList", editList);
@@ -196,31 +212,41 @@ public class RequirePlanController {
 	@GetMapping("/getMaterialDetailByCode/{code}")
 	@RequiresPermissions("requirementPlan:add")
 	Map<String, Object> getMaterialDetailByCode(@PathVariable("code") String code){
-		List<Map<String, Object>> getRequirePlanDetailList = new ArrayList<>();//调用接口
+		List ml = new ArrayList();
+		ml.add(code);
+		ResultMsg rsm = requirePlanService.createItems(ml);
+		List<RequirePlanItemBean> getRequirePlanDetailList = new ArrayList<>();//调用接口
 		String codeArray[] = code.split(",");
+		String stringDate = "2018-08-27";
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = dateFormat.parse(stringDate);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		//做测试数据 调用接口前使用 begin
 		for (int i = 0; i < codeArray.length; i++) {
-			Map<String, Object> requireMap = new HashMap<>();
-			requireMap.put("requirePlanid", codeArray[i]);
-			requireMap.put("materialName", "物资A" + i);
-			requireMap.put("materilaCode", "物资编码" + i);
-			requireMap.put("specification", "规格" + i);
-			requireMap.put("materialUnitName", "单位" + i);
-			requireMap.put("materialSubArray", "包装物料" + i);
-			requireMap.put("requireQty","25345");
-			requireMap.put("purchaseQty","456");
-			requireMap.put("stockQty", "47");
-			requireMap.put("reserveQty", "57657");
-			requireMap.put("onwayQty", "878");
-			requireMap.put("budgetQty", "8768");
-			requireMap.put("referencePrice", "789");
-			requireMap.put("budgetPrice", "8908");
-			requireMap.put("referenceAmount", "34");
-			requireMap.put("requireDate","2018/8/27");
-			requireMap.put("arriveDate", "2018/8/27");
-			requireMap.put("purchaserName", "张三");
-			requireMap.put("description", "sb");
-			getRequirePlanDetailList.add(requireMap);
+			RequirePlanItemBean requirePlanItemBean = new RequirePlanItemBean();
+			requirePlanItemBean.setRequirePlanid(codeArray[i]);
+			requirePlanItemBean.setMaterialName("物资A" + i);
+			requirePlanItemBean.setMaterilaCode(codeArray[i]);
+			requirePlanItemBean.setSpecification("规格" + i);
+			requirePlanItemBean.setMaterialUnitName("单位" + i);
+			requirePlanItemBean.setMaterialSubArray("包装物料" + i);
+			requirePlanItemBean.setRequireQty((double)25345);
+			requirePlanItemBean.setPurchaseQty((double)456);
+			requirePlanItemBean.setStockQty((double)47);
+			requirePlanItemBean.setReserveQty((double)57657);
+			requirePlanItemBean.setOnwayQty((double)878);
+			requirePlanItemBean.setBudgetQty((double)8768);
+			requirePlanItemBean.setReferencePrice(BigDecimal.valueOf(789));
+			requirePlanItemBean.setBudgetPrice(BigDecimal.valueOf(8908));
+			requirePlanItemBean.setRequireDate(date);
+			requirePlanItemBean.setArriveDate(date);
+			requirePlanItemBean.setPurchaserName("张三");
+			requirePlanItemBean.setDescription("sb");
+			getRequirePlanDetailList.add(requirePlanItemBean);
 		}
 		Map<String, Object> returnData = new HashMap<String, Object>();
 		returnData.put("getRequirePlanDetailList", getRequirePlanDetailList);
@@ -292,8 +318,8 @@ public class RequirePlanController {
 			requireMap.put("materialUnitName","单位"+i);
 			requireMap.put("requireQty","1000");
 			requireMap.put("requireDept","需求部门"+i);
-			requireMap.put("requireDate","2018/8/27");
-			requireMap.put("createDate","2018/8/20");
+			requireMap.put("requireDate","2018-8-27");
+			requireMap.put("createDate","2018-8-20");
 			requireMap.put("remark","sb");
 			requirementPlanDetailList.add(requireMap);
 		}
@@ -322,7 +348,7 @@ public class RequirePlanController {
 			requirePlanMap.put("budgetMoney","1000");
 			requirePlanMap.put("totalMoney","2000");
 			requirePlanMap.put("authorUser","编制人"+i);
-			requirePlanMap.put("createDate","2018/8/27");
+			requirePlanMap.put("createDate","2018-8-27");
 			requirementPlanList.add(requirePlanMap);
 		}
 		int total = 20;//调用接口
@@ -339,22 +365,70 @@ public class RequirePlanController {
 	@PostMapping("/save")
 	@RequiresPermissions("requirementPlan:add")
 	public R save(@RequestParam Map<String, Object> params){
-		System.out.println(params);
-		//int contactIds = service.save(customerContact);
-
-		return R.ok();
+		RequirePlanBean requirePlanBean = new RequirePlanBean();
+		requirePlanBean.setName((String) params.get("title"));
+		requirePlanBean.setCode((String)params.get("planNo"));
+		requirePlanBean.setPurchaseDeptName((String)params.get("purchaseDept"));
+		requirePlanBean.setRequireTypeName((String)params.get("type"));
+		requirePlanBean.setAuthorUserName((String)params.get("authorUser"));
+		requirePlanBean.setRemark((String)params.get("remark"));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date invoiceDate = dateFormat.parse((String)params.get("invoiceDate"));
+			requirePlanBean.setBusinessDate(invoiceDate);
+			Date createDate = dateFormat.parse((String)params.get("createDate"));
+			requirePlanBean.setCreateDate(createDate);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		ArrayList<RequirePlanItemBean> itemList = new ArrayList<>();
+		JSONArray jsonArray = JSONArray.fromObject(params.get("applyEntryJson"));
+		for (int i = 0; i < jsonArray.size(); i++){
+			RequirePlanItemBean requirePlanItemBean = (RequirePlanItemBean) JSONObject.toBean((JSONObject)jsonArray.get(i), RequirePlanItemBean.class);
+			itemList.add(requirePlanItemBean);
+		}
+		requirePlanBean.setRequirePlanItemBeans(itemList);
+		ResultMsg rms =requirePlanService.save(requirePlanBean);
+		if ("1".equals(rms.getCode())) {
+			return R.ok();
+		}
+		return R.error();
 	}
 	/**
 	 * 修改
 	 */
 	@ResponseBody
 	@RequestMapping("/update")
-	@RequiresPermissions("requirementPlan:add")
+	@RequiresPermissions("requirementPlan:edit")
 	public R update(@RequestParam Map<String, Object> params){
-		System.out.println(params);
-		//int contactIds = service.save(customerContact);
-
-		return R.ok();
+		RequirePlanBean requirePlanBean = new RequirePlanBean();
+		requirePlanBean.setName((String) params.get("title"));
+		requirePlanBean.setCode((String)params.get("planNo"));
+		requirePlanBean.setPurchaseDeptName((String)params.get("purchaseDept"));
+		requirePlanBean.setRequireTypeName((String)params.get("type"));
+		requirePlanBean.setAuthorUserName((String)params.get("authorUser"));
+		requirePlanBean.setRemark((String)params.get("remark"));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date invoiceDate = dateFormat.parse((String)params.get("invoiceDate"));
+			requirePlanBean.setBusinessDate(invoiceDate);
+			Date createDate = dateFormat.parse((String)params.get("createDate"));
+			requirePlanBean.setCreateDate(createDate);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		ArrayList<RequirePlanItemBean> itemList = new ArrayList<>();
+		JSONArray jsonArray = JSONArray.fromObject(params.get("applyEntryJson"));
+		for (int i = 0; i < jsonArray.size(); i++){
+			RequirePlanItemBean requirePlanItemBean = (RequirePlanItemBean) JSONObject.toBean((JSONObject)jsonArray.get(i), RequirePlanItemBean.class);
+			itemList.add(requirePlanItemBean);
+		}
+		requirePlanBean.setRequirePlanItemBeans(itemList);
+		ResultMsg rms =requirePlanService.save(requirePlanBean);
+		if ("1".equals(rms.getCode())) {
+			return R.ok();
+		}
+		return R.error();
 	}
 
 	/**

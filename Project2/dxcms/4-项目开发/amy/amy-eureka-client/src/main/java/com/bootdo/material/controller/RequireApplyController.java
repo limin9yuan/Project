@@ -1,11 +1,16 @@
 package com.bootdo.material.controller;
 
 
+import com.bootdo.common.config.BootdoConfig;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.*;
 import com.github.pagehelper.PageInfo;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.NumberToTextConverter;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -15,11 +20,18 @@ import org.springframework.web.bind.annotation.*;
 import com.dx.client.model.datacenter.MaterialBean;
 import com.dx.client.model.purchase.RequireApplyItemBean;
 import com.dx.client.model.purchase.RequireApplyBean;
+import org.springframework.web.multipart.MultipartFile;
 import org.wxcl.amy.utils.common.ResultMsg;
+import org.springframework.util.CollectionUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import javax.servlet.http.HttpServletRequest;
 
 @RefreshScope
 @Controller
@@ -29,7 +41,8 @@ public class RequireApplyController extends BaseController {
     private com.dx.service.purchase.service.api.IRequireApplyService requireApplyService;
     @Autowired
     private com.dx.service.datacenter.service.api.IMaterialService  materialService;
-
+    @Autowired
+    private BootdoConfig bootdoConfig;
 
 
     private String prefix="material/requireApply"  ;
@@ -95,6 +108,7 @@ public class RequireApplyController extends BaseController {
         requireApplyModel.setCode(id);
         requireApplyModel.setAuthorCorpId("8");
         requireApplyModel.setAuthorCorpName("研发二部");
+        String businessDate = DateUtils.format(new Date(),DateUtils.DATE_PATTERN);
         //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
         //requireApplyModel.setAuthorCorpId("编制部门Id");
         //requireApplyModel.setCreateUserId("编制人Id");
@@ -390,5 +404,171 @@ public class RequireApplyController extends BaseController {
         //int contactIds = service.save(customerContact);
 
         return R.ok();
+    }
+
+    /**
+     * exls表格导入
+     */
+    @ResponseBody
+    @PostMapping("/uploadExcel")
+    @RequiresPermissions("material:requireApply:add")
+    R uploadExcel(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+        String fileName = file.getOriginalFilename();
+        fileName = FileUtil.renameToUUID(fileName);
+        File datafile = null;
+        try {
+            FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
+            datafile = new File(bootdoConfig.getUploadPath() + fileName);
+
+            Map<String, Object> errorMsgs = ImportMaterial(datafile);
+            if ("success".equals(errorMsgs.get("result"))) {
+                R r = R.ok();
+                r.put("list", errorMsgs.get("list"));
+                return r;
+            } else {
+                return R.error();
+            }
+        } catch (Exception e) {
+            return R.error();
+        }
+
+    }
+
+    public Map<String, Object> ImportMaterial(File file) {
+        Workbook wookbook = null;
+        List<String> errorMsgs = null;
+        Map<String, Object> result = null;
+        List<RequireApplyItemBean> list = new ArrayList<RequireApplyItemBean>();
+
+        int rtn = 0;
+        try {
+            result = new HashMap<String, Object>();
+            errorMsgs = new ArrayList<String>();
+
+            FileInputStream is = new FileInputStream(file); // 文件流
+            wookbook = WorkbookFactory.create(is); // 这种方式 Excel 2003/2007/2010 都是可以处理的
+
+            // 在Excel文档中，第一张工作表的缺省索引是0
+            // 其语句为：HSSFSheet sheet = wookbook.getSheetAt(0);
+            Sheet sheet = wookbook.getSheetAt(0);// wookbook.getSheet("Sheet1");
+            // 获取到Excel文件中的所有行数
+            int rows = sheet.getPhysicalNumberOfRows();
+            // Excel文件中的第一行（标题行）
+            int cellCount = 0;
+            String titleName = "";
+            // 遍历行
+            my: for (int i = 0; i < rows; i++) {
+                // 读取左上端单元格(跳过第一行标题行)
+                Row row = sheet.getRow(i);
+                RequireApplyItemBean requireApplyItemBean = new RequireApplyItemBean(); //
+
+                // 行不为空
+                if (row != null) {
+                    if (i == 0) {
+                        // 获取到Excel文件中的第一行（标题行）
+                        Row rowCount = sheet.getRow(i);
+
+                        // 获取到Excel文件中的所有的列
+                        cellCount = rowCount.getPhysicalNumberOfCells();
+                        continue;
+                    }
+                    // 获取到Excel文件中的所有的列
+                    // int cells = row.getPhysicalNumberOfCells();
+                    String cellvalue = "";
+                    String contact = "";
+                    // String agentCode = null;
+                    String companyName = null;
+                    // 遍历列
+                    for (int j = 0; j < cellCount; j++) {
+                        cellvalue = ""; // 清空之前之前取到的列的值
+                        // 获取到列的值
+                        Cell cell = row.getCell(j);
+                        // String value = "";
+                        if (cell != null) {
+                            switch (cell.getCellType()) {
+                                case XSSFCell.CELL_TYPE_FORMULA:
+                                    break;
+                                case XSSFCell.CELL_TYPE_NUMERIC: {
+                                    short format = cell.getCellStyle().getDataFormat();
+                                    if (format == 14 || format == 31 || format == 57 || format == 58) { // excel中的时间格式
+                                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                        double value = cell.getNumericCellValue();
+                                        Date date = DateUtil.getJavaDate(value);
+                                        cellvalue = sdf.format(date);
+                                    }
+                                    // 判断当前的cell是否为Date
+                                    else if (HSSFDateUtil.isCellDateFormatted(cell)) { // 先注释日期类型的转换，在实际测试中发现HSSFDateUtil.isCellDateFormatted(cell)只识别2014/02/02这种格式。
+                                        // 如果是Date类型则，取得该Cell的Date值 // 对2014-02-02格式识别不出是日期格式
+                                        Date date = cell.getDateCellValue();
+                                        DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+                                        cellvalue = formater.format(date);
+                                    } else { // 如果是纯数字
+                                        // 取得当前Cell的数值
+                                        cellvalue = NumberToTextConverter.toText(cell.getNumericCellValue());
+                                    }
+                                    break;
+                                }
+                                case XSSFCell.CELL_TYPE_STRING:
+                                    cellvalue = cell.getStringCellValue();
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (i == 0) {
+                            titleName=cellvalue==null?"":cellvalue;
+                        }else{
+                            if ("物资编码".equals(titleName.trim())) {
+                                requireApplyItemBean.setMaterialCode(cellvalue);
+                            } else if ("物资名称".equals(titleName.trim())) {
+                                requireApplyItemBean.setMaterialName(cellvalue);
+                            } else if ("需求数量".equals(titleName.trim())) {
+                                requireApplyItemBean.setRequireQty(Double.parseDouble(cellvalue));
+                            } else if ("参考单价".equals(titleName.trim())) {
+                                requireApplyItemBean.setReferencePrice(new BigDecimal(cellvalue));
+                            } else if ("要求到货日期".equals(titleName.trim())) {
+                                if (cellvalue == null || cellvalue == "") {
+                                    continue;
+                                } else {
+                                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                                    requireApplyItemBean.setRequireDate(formatter.parse(cellvalue));
+                                }
+                            } else if ("说明信息".equals(titleName.trim())) {
+                                requireApplyItemBean.setRemark(cellvalue);
+                            }
+                        }
+
+
+                    } // --->遍历列
+
+                }
+                list.add(requireApplyItemBean);
+                rtn = list.size();
+            }
+        } catch (Exception e) {
+            errorMsgs.add(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            wookbook.cloneSheet(0); // 关闭sheet页
+            try {
+                wookbook.close(); // 关闭Excel文件
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if (CollectionUtils.isEmpty(errorMsgs)) { // errorMsgs.size() == 0
+
+            if (rtn > 0) {
+                result.put("result", "success");
+                result.put("list", list);
+            } else {
+                result.put("result", "false");
+            }
+        } else {
+            result.put("result", "error");
+            result.put("msg", errorMsgs);
+        }
+
+        return result;
     }
 }

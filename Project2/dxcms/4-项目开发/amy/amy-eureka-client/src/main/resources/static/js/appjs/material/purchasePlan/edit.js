@@ -1,17 +1,43 @@
 $().ready(function() {
+    loadType();
     validateRule();
     pageInit();
+    pageInit2();
     edit_ajax();
     datetimepicker();
+    editPurchasePlanGroup();
 });
+
+function loadType(){
+    var html = "";
+    $.ajax({
+        url : '/common/dict/list/material_purchasePlan_type',
+        success : function(data) {
+            // 加载数据
+            for (var i = 0; i < data.length; i++) {
+                html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+            }
+            $(".chosen-select").append(html);
+            $(".chosen-select").chosen({
+                maxHeight : 200
+            });
+            $(".chosen-select").val($("#Ttype").val());
+            $(".chosen-select").trigger("chosen:updated");
+            // 点击事件
+            $('.chosen-select').on('change', function(e, params) {
+
+            });
+        }
+    });
+}
 function withdrawApproval() {
-    var planNo = $("#planNo").val();//单据编号
+    var id = $("#id").val();//单据编号
     $.ajax({
         cache : true,
         type : "POST",
         url : "/material/purchasePlan/withdrawApproval",
         data :  {
-            'planNo' : planNo
+            'id' : id
         },// 你的formid
         async : false,
         error : function(request) {
@@ -32,13 +58,13 @@ function withdrawApproval() {
     });
 }
 function submitApproval() {
-    var planNo = $("#planNo").val();//单据编号
+    var id = $("#id").val();//单据编号
     $.ajax({
         cache : true,
         type : "POST",
         url : "/material/purchasePlan/submitApproval",
         data :  {
-            'planNo' : planNo
+            'id' : id
         },// 你的formid
         async : false,
         error : function(request) {
@@ -58,10 +84,16 @@ function submitApproval() {
         }
     });
 }
+
+//关闭
+function closeWin() {
+    var tmpObj = $('.J_menuTab.active i',window.parent.document);
+    parent.closeTabFromChild(tmpObj);
+}
 function update() {
     var applyEntryJson = [];
     $("#purchasePlanTable").find('[role=row]').each(function (i) {
-        if ($(this).find('input[name="requirePlanid"]').val()) {
+        if ($(this).find('input[name="requirePlanItemId"]').val()) {
             applyEntryJson.push({
                 //requirePlanid : $(this).find('input[name="requirePlanid"]').val(),//序号
                 materialType : $(this).find('input[name="materialType"]').val(),//物料类别
@@ -75,8 +107,8 @@ function update() {
                 purchaseQty: $(this).find('input[name="purchaseQty"]').val(),//采购数量
 
                 stockQty: $(this).find('input[name="stockQty"]').val(),//库存数量
-                reserveQty: $(this).find('input[name="reserveQty"]').val(),//安全库存
-                onwayQty: $(this).find('input[name="onwayQty"]').val(),//在途数量
+                //reserveQty: $(this).find('input[name="reserveQty"]').val(),//安全库存
+                //onwayQty: $(this).find('input[name="onwayQty"]').val(),//在途数量
                 budgetQty: $(this).find('input[name="budgetQty"]').val(),//预算数量
                 referencePrice: $(this).find('input[name="referencePrice"]').val(),//参考单价
                 budgetPrice: $(this).find('input[name="budgetPrice"]').val(),//预算金额
@@ -86,7 +118,7 @@ function update() {
                 arriveDate: $(this).find('input[name="arriveDate"]').val(),//要求到货时间
                 //purchaserName: $(this).find('input[name="purchaserName"]').val(),//采购员
                 requireDept: $(this).find('input[name="requireDept"]').val(),//需求部门
-                requirePlanid: $(this).find('input[name="requirePlanid"]').val(),//需求计划编号
+                requirePlanItemId: $(this).find('input[name="requirePlanItemId"]').val(),//需求计划编号
                 description: $(this).find('input[name="description"]').val()//说明信息
             });
         }
@@ -128,8 +160,9 @@ function calculateTotal() {
     var sum_requireQty = 0.00;
     var sum_purchaseQty = 0.00;
     var sum_stockQty = 0.00;
-    var sum_onwayQty = 0.00;
+    //var sum_onwayQty = 0.00;
     var sum_budgetQty = 0.00;
+    var sum_referencePrice = 0.00;
     var sum_budgetPrice = 0.00;
     var sum_referenceAmount = 0.00;
     $("#purchasePlanTable").find("tbody tr").each(function (i) {
@@ -149,22 +182,28 @@ function calculateTotal() {
             sum_stockQty += Number(stockQty);
         }
         //在途数量
-        var onwayQty = $(this).find('td:eq(12)').find('input').val();
+        /*var onwayQty = $(this).find('td:eq(12)').find('input').val();
         if (onwayQty != "" && onwayQty != undefined) {
             sum_onwayQty += Number(onwayQty);
-        }
+        }*/
         //预算数量
-        var budgetQty = $(this).find('td:eq(13)').find('input').val();
+        var budgetQty = $(this).find('td:eq(11)').find('input').val();
         if (budgetQty != "" && budgetQty != undefined) {
             sum_budgetQty += Number(budgetQty);
         }
+
+        //参考单价
+        var referencePrice = $(this).find('td:eq(12)').find('input').val();
+        if (referencePrice != "" && referencePrice != undefined) {
+            sum_referencePrice += Number(referencePrice);
+        }
         //预算金额
-        var budgetPrice = $(this).find('td:eq(15)').find('input').val();
+        var budgetPrice = $(this).find('td:eq(13)').find('input').val();
         if (budgetPrice != "" && budgetPrice != undefined) {
             sum_budgetPrice += Number(budgetPrice);
         }
         //参考金额
-        var referenceAmount = $(this).find('td:eq(16)').find('input').val();
+        var referenceAmount = $(this).find('td:eq(14)').find('input').val();
         if (referenceAmount != "" && referenceAmount != undefined) {
             sum_referenceAmount += Number(referenceAmount);
         }
@@ -172,8 +211,9 @@ function calculateTotal() {
     $("#requireQty").text(toDecimal(sum_requireQty));
     $("#purchaseQty").text(toDecimal(sum_purchaseQty));
     $("#stockQty").text(toDecimal(sum_stockQty));
-    $("#onwayQty").text(toDecimal(sum_onwayQty));
+    //$("#onwayQty").text(toDecimal(sum_onwayQty));
     $("#budgetQty").text(toDecimal(sum_budgetQty));
+    $("#referencePrice").text(toDecimal(sum_referencePrice));
     $("#budgetPrice").text(toDecimal(sum_budgetPrice));
     $("#referenceAmount").text(toDecimal(sum_referenceAmount));
 }
@@ -182,7 +222,7 @@ function getMaterialDetailByCode(code) {
         url : '/material/purchasePlan/getMaterialDetailByCode/' + code,
         type : "get",
         data : {
-            'code' : $("#requirePlanid").val(),
+            'code' : $("#requirePlanItemId").val(),
         },
         success : function(data) {
 
@@ -200,7 +240,7 @@ function getMaterialDetailByCode(code) {
                 newrowid = "0"
             }
             for (var i = 0; i < orderEntry.length; i++) {
-                if ( $("#purchasePlanTable").find('[role=row]').find('[data-value=' + orderEntry[i].requirePlanid + ']').length == 0) {
+                if ( $("#purchasePlanTable").find('[role=row]').find('[data-value=' + orderEntry[i].requirePlanItemId + ']').length == 0) {
                     var rowdata = {
                         //requirePlanid : '<input name="requirePlanid" type="text" class="editable left disabled"/ readonly>',//序号
                         materialType : '<input name="materialType" type="text" class="editable left disabled"/>',//物料类别
@@ -214,8 +254,8 @@ function getMaterialDetailByCode(code) {
                         purchaseQty: '<input name="purchaseQty" type="text" class="editable left disabled decimal"/>',//采购数量
 
                         stockQty: '<input name="stockQty" type="text" class="editable left disabled decimal" readonly/>',//库存数量
-                        reserveQty: '<input name="reserveQty" type="text" class="editable left disabled" readonly/>',//安全库存
-                        onwayQty: '<input name="onwayQty" type="text" class="editable left disabled decimal" readonly/>',//在途数量
+                        //reserveQty: '<input name="reserveQty" type="text" class="editable left disabled" readonly/>',//安全库存
+                        //onwayQty: '<input name="onwayQty" type="text" class="editable left disabled decimal" readonly/>',//在途数量
                         budgetQty: '<input name="budgetQty" type="text" class="editable left disabled decimal" readonly/>',//预算数量
                         referencePrice: '<input name="referencePrice" type="text" class="editable left disabled" readonly/>',//参考单价
                         budgetPrice: '<input name="budgetPrice" type="text" class="editable left disabled decimal" readonly/>',//预算金额
@@ -225,7 +265,7 @@ function getMaterialDetailByCode(code) {
                         arriveDate: '<input name="arriveDate" type="text" class="editable left disabled" />',//要求到货时间
                         //purchaserName: '<input name="purchaserName" type="text" class="editable left disabled" readonly/>',//采购员
                         requireDept: '<input name="requireDept" type="text" class="editable left disabled" readonly/>',//需求部门
-                        requirePlanid: '<input name="requirePlanid" type="text" class="editable left disabled" readonly/>',//需求计划编号
+                        requirePlanItemId: '<input name="requirePlanItemId" type="text" class="editable left disabled" readonly/>',//需求计划编号
                         description: '<input name="description" type="text" class="editable left disabled" readonly/>'//说明信息
                     }
                     $("#purchasePlanTable").jqGrid('addRowData', newrowid, rowdata);
@@ -240,8 +280,8 @@ function getMaterialDetailByCode(code) {
                     $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="requireQty"]').val(orderEntry[i].requireQty);
                     $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="purchaseQty"]').val(orderEntry[i].purchaseQty);
                     $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="stockQty"]').val(orderEntry[i].stockQty);
-                    $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="reserveQty"]').val(orderEntry[i].reserveQty);
-                    $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="onwayQty"]').val(orderEntry[i].onwayQty);
+                    //$("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="reserveQty"]').val(orderEntry[i].reserveQty);
+                    //$("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="onwayQty"]').val(orderEntry[i].onwayQty);
                     $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="budgetQty"]').val(orderEntry[i].budgetQty);
                     $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="referencePrice"]').val(orderEntry[i].referencePrice);
                     $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="budgetPrice"]').val(orderEntry[i].budgetPrice);
@@ -250,7 +290,7 @@ function getMaterialDetailByCode(code) {
                     $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="arriveDate"]').val(orderEntry[i].arriveDate);
                     //$("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="purchaserName"]').val(orderEntry[i].purchaserName);
                     $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="requireDept"]').val(orderEntry[i].requireDept);
-                    $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="requirePlanid"]').val(orderEntry[i].requirePlanid).attr('data-value', orderEntry[i].requirePlanid);
+                    $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="requirePlanItemId"]').val(orderEntry[i].requirePlanItemId).attr('data-value', orderEntry[i].requirePlanItemId);
                     $("#purchasePlanTable").find("tbody tr:eq("+tmpRowId+")").find('input[name="description"]').val(orderEntry[i].description);
                 }else {
                     layer.msg('该物资已存在,不能重复添加');
@@ -289,20 +329,28 @@ function addRow() {
 function deleteSelectedRow(){
     //获取多选到的id集合
     var ids = $("#purchasePlanTable").jqGrid("getGridParam", "selarrrow");
-    //遍历访问这个集合
     $(ids).each(function (index, id){
-        //由id获得对应数据行
-        var row = $("#purchasePlanTable").jqGrid('getRowData', id);
-        $("#purchasePlanTable").delRowData(id);
+        $("#purchasePlanTable").find('[role=row]').each(function (i) {
+            var tmpid = $(this).context.id;
+            if(tmpid!="" && tmpid==id){
+                materialType = $(this).find('input[name="materialType"]').val();
+                materialUnitName = $(this).find('input[name="materialUnitName"]').val();
+                $("#purchasePlanTable").delRowData(id);
+                calculateGroup(materialType ,materialUnitName);
+                return;
+            }
+        });
     });
     calculateTotal();
+
+
 }
 function edit_ajax(){
     $.ajax({
-        url : '/material/purchasePlan/edit_ajax/'+$("#planNo").val(),
+        url : '/material/purchasePlan/edit_ajax',
         type : "get",
         data : {
-            'code' : $("#materilaCode").val(),
+            'id' : $("#id").val(),
         },
         success : function(data) {
 
@@ -321,8 +369,8 @@ function edit_ajax(){
                     purchaseQty: '<input name="purchaseQty" type="text" class="editable left disabled decimal"/>',//采购数量
 
                     stockQty: '<input name="stockQty" type="text" class="editable left disabled decimal" readonly/>',//库存数量
-                    reserveQty: '<input name="reserveQty" type="text" class="editable left disabled" readonly/>',//安全库存
-                    onwayQty: '<input name="onwayQty" type="text" class="editable left disabled decimal" readonly/>',//在途数量
+                    //reserveQty: '<input name="reserveQty" type="text" class="editable left disabled" readonly/>',//安全库存
+                    //onwayQty: '<input name="onwayQty" type="text" class="editable left disabled decimal" readonly/>',//在途数量
                     budgetQty: '<input name="budgetQty" type="text" class="editable left disabled decimal" readonly/>',//预算数量
                     referencePrice: '<input name="referencePrice" type="text" class="editable left disabled" readonly/>',//参考单价
                     budgetPrice: '<input name="budgetPrice" type="text" class="editable left disabled decimal" readonly/>',//预算金额
@@ -332,7 +380,7 @@ function edit_ajax(){
                     arriveDate: '<input name="arriveDate" type="text" class="editable left disabled" />',//要求到货时间
                     //purchaserName: '<input name="purchaserName" type="text" class="editable left disabled" readonly/>',//采购员
                     requireDept: '<input name="requireDept" type="text" class="editable left disabled" readonly/>',//需求部门
-                    requirePlanid: '<input name="requirePlanid" type="text" class="editable left disabled" readonly/>',//需求计划编号
+                    requirePlanItemId: '<input name="requirePlanItemId" type="text" class="editable left disabled" readonly/>',//需求计划编号
                     description: '<input name="description" type="text" class="editable left disabled" readonly/>'//说明信息
                 }
                 $("#purchasePlanTable").jqGrid('addRowData', i, rowdata);
@@ -350,8 +398,8 @@ function edit_ajax(){
                     $(this).find('input[name="requireQty"]').val(row.requireQty);
                     $(this).find('input[name="purchaseQty"]').val(row.purchaseQty);
                     $(this).find('input[name="stockQty"]').val(row.stockQty);
-                    $(this).find('input[name="reserveQty"]').val(row.reserveQty);
-                    $(this).find('input[name="onwayQty"]').val(row.onwayQty);
+                    //$(this).find('input[name="reserveQty"]').val(row.reserveQty);
+                    //$(this).find('input[name="onwayQty"]').val(row.onwayQty);
                     $(this).find('input[name="budgetQty"]').val(row.budgetQty);
                     $(this).find('input[name="referencePrice"]').val(row.referencePrice);
                     $(this).find('input[name="budgetPrice"]').val(row.budgetPrice);
@@ -360,7 +408,7 @@ function edit_ajax(){
                     $(this).find('input[name="arriveDate"]').val(row.arriveDate);
                     //$(this).find('input[name="purchaserName"]').val(row.purchaserName);
                     $(this).find('input[name="requireDept"]').val(row.requireDept);
-                    $(this).find('input[name="requirePlanid"]').val(row.requirePlanid).attr('data-value', row.requirePlanid);
+                    $(this).find('input[name="requirePlanItemId"]').val(row.requirePlanItemId).attr('data-value', row.requirePlanItemId);
                     $(this).find('input[name="description"]').val(row.description);
                     // $(this).find('input').removeAttr('disabled').attr("isvalid", "yes");
                     // $(this).next().find('input').removeAttr('disabled');
@@ -372,6 +420,22 @@ function edit_ajax(){
             $("#purchasePlanTable").find('.decimal').keyup(function () {
                 //合计
                 calculateTotal();
+            });
+
+            var $grid = $("#purchasePlanTable");
+            //数字input
+            $grid.find('.decimal').attr('onfocus', 'IsMoney(this.id)');
+            //采购数量文本框换算
+            $grid.find('.decimal').keyup(function () {
+                var $qty = $(this).parents('[role=row]').find('input[name="purchaseQty"]');                    //采购数量
+                var $price = $(this).parents('[role=row]').find('input[name="referencePrice"]');                //参考单价
+                var $referenceTotal = $(this).parents('[role=row]').find('input[name="referenceAmount"]');                //参考金额
+                //数量*单价=金额
+                $referenceTotal.val(toDecimal($qty.val() * $price.val()));
+                calculateTotal();
+                var materialType = $(this).parents('[role=row]').find('input[name="materialType"]').val();                    //物资类型
+                var materialUnitName = $(this).parents('[role=row]').find('input[name="materialUnitName"]').val();                //单位
+                calculateGroup(materialType ,materialUnitName)
             });
         }
     });
@@ -388,7 +452,7 @@ function pageInit(){
             height: '100%',
             autowidth: true,
             colNames : [ /*'序号',*/ '物资类别','物资名称', '物资编码', '规格', '单位名称','包装物料',
-                '需求数量', '采购数量', '库存数量', '安全库存', '在途数量','预算数量',
+                '需求数量', '采购数量', '库存数量',/* '安全库存', '在途数量',*/'预算数量',
                 '参考单价', '预算金额', '参考金额',/*'需求日期',*/ '要求到货时间', /*'采购员',*/ '需求部门', '需求计划编号','说明信息'],//jqGrid的列显示名字
             colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
                 //{name : 'requirePlanid',index : 'requirePlanid',width : 100,align : "right",sortable: false},
@@ -401,8 +465,8 @@ function pageInit(){
                 {name : 'requireQty',index : 'requireQty',width : 100,align : "right",sortable: false},
                 {name : 'purchaseQty',index : 'purchaseQty',width : 100,align : "right",sortable: false},
                 {name : 'stockQty',index : 'stockQty',width : 100,align : "right",sortable: false},
-                {name : 'reserveQty',index : 'reserveQty',width : 100,align : "right",sortable: false},
-                {name : 'onwayQty',index : 'onwayQty',width : 100,align : "right",sortable: false},
+                //{name : 'reserveQty',index : 'reserveQty',width : 100,align : "right",sortable: false},
+                //{name : 'onwayQty',index : 'onwayQty',width : 100,align : "right",sortable: false},
                 {name : 'budgetQty',index : 'budgetQty',width : 100,align : "right",sortable: false},
                 {name : 'referencePrice',index : 'referencePrice',width : 100,align : "right",sortable: false},
                 {name : 'budgetPrice',index : 'budgetPrice',width : 100,align : "right",sortable: false},
@@ -411,7 +475,7 @@ function pageInit(){
                 {name : 'arriveDate',index : 'arriveDate',width : 130,align : "right",sortable: false},
                 //{name : 'purchaserName',index : 'purchaserName',width : 100,align : "right",sortable: false},
                 {name : 'requireDept',index : 'requireDept',width : 100,align : "right",sortable: false},
-                {name : 'requirePlanid',index : 'requirePlanid',width : 100,align : "right",sortable: false},
+                {name : 'requirePlanItemId',index : 'requirePlanItemId',width : 100,align : "right",sortable: false},
                 {name : 'description',index : 'description',width : 100,align : "right",sortable: false}
             ],
             rowNum : 10,//一页显示多少条
@@ -436,8 +500,9 @@ function pageInit(){
                     "requireQty": "<span id='requireQty'>0.00</span>",
                     "purchaseQty": "<span id='purchaseQty'>0.00</span>",
                     "stockQty": "<span id='stockQty'>0.00</span>",
-                    "onwayQty": "<span id='onwayQty'>0.00</span>",
+                    //"onwayQty": "<span id='onwayQty'>0.00</span>",
                     "budgetQty": "<span id='budgetQty'>0.00</span>",
+                    "referencePrice": "<span id='referencePrice'>0.00</span>",
                     "budgetPrice": "<span id='budgetPrice'>0.00</span>",
                     "referenceAmount": "<span id='referenceAmount'>0.00</span>"
                 });
@@ -456,7 +521,7 @@ function pageInit(){
     $grid.jqGrid('setGroupHeaders', {
         useColSpanStyle: true,
         groupHeaders: [
-            { startColumnName: 'requireQty', numberOfColumns: 6, titleText: '<div align="center"><span>数量信息</span></div>'},
+            { startColumnName: 'requireQty', numberOfColumns: 4, titleText: '<div align="center"><span>数量信息</span></div>'},
             { startColumnName: 'referencePrice', numberOfColumns: 3, titleText: '<div align="center"><span>金额信息</span></div>'}
         ]
     });
@@ -495,17 +560,51 @@ function save() {
     });
 
 }
+//验证规则
 function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
     $("#signupForm").validate({
         rules : {
             name : {
+                maxlength : 200
+            },
+            code : {
+                required : true,
+                maxlength : 50
+            },
+            type : {
                 required : true
+            },
+            businessDate : {
+                required : true,
+                date:true
+            },
+            createDate : {
+                required : true,
+                date:true
+            },
+            remark : {
+                maxlength : 100
             }
         },
         messages : {
-            name : {
-                required : icon + "请输入姓名"
+            code : {
+                required : "请输入单据编号",
+                maxlength : icon + "单据编号必须50个字符以内"
+            },
+            type : {
+                required : "请选择类型"
+            },
+            businessDate : {
+                required : "请输入计划日期",
+                date:"请输入正确格式的日期"
+            },
+            createDate : {
+                required : "请输入编制日期",
+                date:"请输入正确格式的日期"
+            },
+            remark : {
+                maxlength : icon + "备注必须100个字符以内"
             }
         }
     })
@@ -523,4 +622,129 @@ function datetimepicker(){
         locale: moment.locale('zh-cn')
     });
 
+}
+
+
+function pageInit2(){
+    var $grid = $("#purchasePlanCollectTable");
+    //创建jqGrid组件
+    $grid.jqGrid(
+        {
+            // url : '/requirementPlan/requirementPlan/getRequirePlanDetailByCode/'+code,//组件创建完成之后请求数据的url
+            // datatype : "json",//请求数据返回的类型。可选json,xml,txt
+            unwritten: false,
+            datatype: "local",
+            height: '100%',
+            autowidth: false,
+            colNames : [ '物资类别', '单位名称', '采购数量', '采购金额', '预算金额'],//jqGrid的列显示名字
+            colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
+                //{name : 'requirePlanid',index : 'requirePlanid',width : 100,align : "right",sortable: false},
+                {name : 'materialType',index : 'materialType',width : 100,align : "right",sortable: false},
+                {name : 'materialUnitName',index : 'materialUnitName',width : 100,align : "right",sortable: false},
+                {name : 'purchaseQty',index : 'purchaseQty',width : 100,align : "right",sortable: false},
+                {name : 'referenceAmount',index : 'referenceAmount',width : 100,align : "right",sortable: false},
+                {name : 'budgetAmount',index : 'budgetAmount',width : 100,align : "right",sortable: false}
+            ],
+            rowNum : 10,//一页显示多少条
+            rowList : [ 10, 20, 30 ],//可供用户选择一页显示多少条
+            //pager : '#requireApplyPage',//表格页脚的占位符(一般是div)的id
+            // gridComplete: completeMethod,
+            pager: false,
+            sortname : 'id',//初始化的时候排序的字段
+            sortorder : "desc",//排序方式,可选desc,asc
+            mtype : "get",//向后台请求数据的ajax的类型。可选post,get
+            viewrecords : true,
+            rownumbers: true,
+            shrinkToFit: false,
+            gridview: true,
+            footerrow: true,
+            cellEdit:true
+            //multiselect: true
+        });
+    //表头合并
+    /*创建jqGrid的操作按钮容器*/
+    /*可以控制界面上增删改查的按钮是否显示*/
+    // jQuery("#requirePlanTable").jqGrid('navGrid', '#requirePlanPage', {edit : false,add : false,del : false});
+    // jQuery("#requirePlanTable").jqGrid('inlineNav', "#requirePlanPage");
+}
+
+
+function editPurchasePlanGroup(){
+    $.ajax({
+        url : '/material/purchasePlan/editPurchasePlanGroup',
+        type : "get",
+        data : {
+            'id' : $("#id").val(),
+        },
+        success : function(data) {
+
+            var orderEntry = data.editPurchasePlanGroup;
+            for (var i = 0; i < orderEntry.length; i++) {
+                var rowdata = {
+                    materialType : '<input name="materialType" type="text" class="editable left disabled" readonly/>',//物料类别
+                    materialUnitName: '<input name="materialUnitName" type="text" class="editable left disabled" readonly/>',//单位
+                    purchaseQty: '<input name="purchaseQty" type="text" class="editable left disabled decimal" readonly/>',//采购数量
+                    referenceAmount: '<input name="referenceAmount" type="text" class="editable left disabled" readonly/>',//参考单价
+                    budgetAmount: '<input name="budgetAmount" type="text" class="editable left disabled decimal" readonly/>'//预算金额
+                }
+                $("#purchasePlanCollectTable").jqGrid('addRowData', i, rowdata);
+            };
+            $("#purchasePlanCollectTable").find('[role=row]').each(function (i) {
+                var row = orderEntry[i - 1];
+                if (row != undefined) {
+                    $(this).find('input[name="materialType"]').val(row.materialType);
+                    $(this).find('input[name="materialUnitName"]').val(row.materialUnitName);
+                    $(this).find('input[name="purchaseQty"]').val(row.purchaseQty);
+                    $(this).find('input[name="referenceAmount"]').val(row.referenceAmount);
+                    $(this).find('input[name="budgetAmount"]').val(row.budgetAmount);
+                }
+            });
+            //合计
+            calculateTotal();
+
+            $("#purchasePlanCollectTable").find('.decimal').keyup(function () {
+                //合计
+                calculateTotal();
+            });
+        }
+    });
+}
+
+function calculateGroup(materialTypeLine ,materialUnitNameLine){
+
+    var purchaseQtyTotal = 0;
+    var referenceAmountTotal = 0;
+    $("#purchasePlanTable").find("tbody tr").each(function (i) {
+        var tmpid = $(this).context.id;
+        if(tmpid!="") {
+            //物资类别
+            var materialType = $(this).find('td:eq(2)').find('input').val();
+            //单位
+            var materialUnitName = $(this).find('td:eq(6)').find('input').val();
+            //采购数量
+            var purchaseQty = $(this).find('td:eq(9)').find('input').val();
+            //参考金额
+            var referenceAmount = $(this).find('td:eq(14)').find('input').val();
+            if (materialTypeLine == materialType && materialUnitNameLine == materialUnitName) {
+                purchaseQtyTotal += Number(purchaseQty);
+                referenceAmountTotal += Number(referenceAmount);
+            }
+        }
+    });
+    $("#purchasePlanCollectTable").find("tbody tr").each(function (i) {
+        var tmpid = $(this).context.id;
+        if(tmpid!="") {
+            //物资类别
+            var materialTypeT = $(this).find('td:eq(1)').find('input').val();
+            //单位
+            var materialUnitNameT = $(this).find('td:eq(2)').find('input').val();
+            if (materialTypeLine == materialTypeT && materialUnitNameLine == materialUnitNameT) {
+                var $purchaseQtyTotal = $(this).find('td:eq(3)').find('input')               //参考金额
+                $purchaseQtyTotal.val(purchaseQtyTotal);
+                var $referenceAmountTotal = $(this).find('td:eq(4)').find('input')               //参考金额
+                $referenceAmountTotal.val(referenceAmountTotal);
+                return;
+            }
+        }
+    });
 }

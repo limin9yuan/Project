@@ -5,12 +5,12 @@ $().ready(function() {
 });
 function datetimepicker(){
     //开始时间
-    $('#timeStart').datetimepicker({
+    $('#beginDate').datetimepicker({
         format: 'YYYY-MM-DD ',
         locale: moment.locale('zh-cn')
     });
     //结束时间
-    $('#timeEnd').datetimepicker({
+    $('#endDate').datetimepicker({
         format: 'YYYY-MM-DD ',
         locale: moment.locale('zh-cn')
     });
@@ -44,11 +44,11 @@ function load() {
                 toolbar : '#exampleToolbar',
                 striped : true, // 设置为true会有隔行变色效果
                 dataType : "json", // 服务器返回的数据类型
-                // pagination : true, // 设置为true会在底部显示分页条
+                pagination : true, // 设置为true会在底部显示分页条
                 // queryParamsType : "limit",
                 // //设置为limit则会发送符合RESTFull格式的参数
-                singleSelect : false, // 设置为true将禁止多选
-                // contentType : "application/x-www-form-urlencoded",
+                singleSelect : false, // 设置为true将禁止多选 // contentType : "application/x-www-form-urlencoded",
+
                 // //发送到服务器的数据编码类型
                 pageSize : 10, // 如果设置了分页，每页数据条数
                 pageNumber : 1, // 如果设置了分布，首页页码
@@ -58,8 +58,12 @@ function load() {
                 queryParams : function(params) {
                     return {
                         //说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-                        limit: 500,
-                        offset:0
+                        pageSize: params.limit,
+                        offset:params.offset,
+                        pageNumber:Number(params.offset) / Number(params.limit) + 1,
+                        codeOrName:$('#searchName').val(),
+                        beginDate:$('#beginDate').data('date'),
+                        endDate:$('#endDate').data('date')
                         // name:$('#searchName').val(),
                         // username:$('#searchName').val()
                     };
@@ -120,6 +124,10 @@ function load() {
                     }
                 ]
             });
+}
+
+function reLoad() {
+    $('#exampleTable').bootstrapTable('refresh');
 }
 function getSelectedMaterial() {
     var rows = $('#exampleTable').bootstrapTable('getSelections');

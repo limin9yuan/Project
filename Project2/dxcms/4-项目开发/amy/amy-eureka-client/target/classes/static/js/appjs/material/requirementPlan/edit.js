@@ -101,7 +101,7 @@ function update() {
 				 'authorUser' : $("#authorUser").val(),
 				 'createDate' : $("#createDate").data('date'),
 				 'remark' : $("#remark").val(),
-				 'applyEntryJson' : applyEntryJson
+				 'applyEntryJson' : JSON.stringify(applyEntryJson)
 				 },// 你的formid
 		async : false,
 		error : function(request) {
@@ -343,9 +343,11 @@ function edit_ajax(){
 	                $(this).find('input[name="budgetQty"]').val(row.budgetQty);
 	                $(this).find('input[name="referencePrice"]').val(row.referencePrice);
 					$(this).find('input[name="budgetPrice"]').val(row.budgetPrice);
-				    $(this).find('input[name="referenceAmount"]').val(row.referenceAmount);
-				    $(this).find('input[name="requireDate"]').val(row.requireDate);
-				    $(this).find('input[name="arriveDate"]').val(row.arriveDate);
+					var referenceAmount = $(this).find('input[name="referencePrice"]').val()
+										* $(this).find('input[name="purchaseQty"]').val();
+				    $(this).find('input[name="referenceAmount"]').val(referenceAmount);
+				    $(this).find('input[name="requireDate"]').val(row.requireDate.substr(0,10));
+				    $(this).find('input[name="arriveDate"]').val(row.arriveDate.substr(0,10));
 				    $(this).find('input[name="purchaserName"]').val(row.purchaserName);
 				    $(this).find('input[name="description"]').val(row.description);
 	                // $(this).find('input').removeAttr('disabled').attr("isvalid", "yes");

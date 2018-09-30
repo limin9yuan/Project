@@ -4,6 +4,24 @@
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <style type="text/css">
+/* 遮罩层css代码 */
+#load {
+	position: fixed;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	filter: alpha(opacity = 60);
+	background-color: white;
+	z-index: 1002;
+	left: 0px;
+	display: none;
+	opacity: 1;
+	-moz-opacity: 1;
+	padding-top: 100px;
+	color: #000000;
+	display: block;
+}
+
 /* 结算币别错误浮动 */
 #currencyTypeId-error {
 	position: relative;
@@ -57,12 +75,17 @@
 <link rel="stylesheet" href="/js/plugins/jqwidgets/styles/jqx.base.css"
 	type="text/css" />
 <body class="gray-bg">
+<!-- 遮罩层 -->
+	<div id="load"  align="center">
+		<img src="/img/loadingGif.gif" />
+		<p style="padding-left: 20px;font-family: inherit;color: #787878"><strong>加载中请稍后......</strong></p>
+	</div>
+<!-- 遮罩层END -->	
 	<div class="wrapper wrapper-content ">
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
-
 						<ul id="myTab" class="nav nav-tabs">
 							<li class="active"><a href="#baseInfo" data-toggle="tab"><span
 									class="mustin">*&nbsp;</span>合同基本信息</a></li>
@@ -232,12 +255,12 @@
 										<label class="col-sm-2 control-label">适用机构 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<textarea id="suitCorpName" name="suitCorpId"
+											<input id="suitCorpName" name="suitCorpId"
 												class="form-control " style="width: 378px;overflow:hidden;"
 												th:checks="${bo.suitCorpId}"
 												th:value="${bo.suitCorpName}"
 												th:textLabel="${bo.suitCorpName}" type="text"
-												readonly="readonly"></textarea>
+												readonly="readonly"/>
 										</div>
 										<label class="col-sm-2 control-label">供货公司 <span
 											class="mustin">*</span></label>
@@ -301,8 +324,7 @@
 										<div class="col-sm-6 control-label">
 											<label class="col-sm-4 radio-inline"> <input
 												type="checkbox" name="checkbox" value="1"
-												onclick="triggerCheckbox(this)" /> 录入明细 <span
-												class="mustin">*</span>
+												onclick="triggerCheckbox(this)" /> 录入明细 
 											</label>
 										</div>
 									</div>
@@ -316,15 +338,13 @@
 									</div>
 
 									<div class="form-group">
-										<label class="col-sm-2 control-label">附件 <span
-											class="mustin">*</span></label>
+										<label class="col-sm-2 control-label">附件</label>
 										<div class="col-sm-4">
 											<div class="file-manager">
 												<button type="button" class="layui-btn btn btn-danger"
 													id="test1" style="width: 100%;">
 													<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
 												</button>
-
 											</div>
 										</div>
 									</div>
@@ -516,7 +536,7 @@
 											<i class="fa fa-import" aria-hidden="true"></i>导入
 										</button>
 										<button class="btn  btn-danger"
-											onclick="window.open('/ContractCreation/ContractCreation/downloadTemplate')"
+											onclick="window.open('/common/downloadFile/downloadFile?fileName=合同订立中物资批量导入模版.xlsx')"
 											type="button">
 											<i class="glyphicon glyphicon-save-file "></i> 下载模板
 										</button>
@@ -633,21 +653,21 @@
 	 var app = new Vue({
 	        el: '#app',
 	        data: {
-	            limit: 10000,
+	            pageSize: 10000,
 	            offset: 0,
 	            total: 0,
 	            file: '',
 	            type: '',
 	            rows: '',
-	            contractCode:$("#contractCode").val(),
+	            id:$("#id").val(),
 	        },
 	        methods: {
 	            getData: function () {
 	                $.getJSON("/ContractCreation/ContractCreation/fileList", {
-	                	limit: this.limit,
+	                	pageSize: this.limit,
 	                    offset: this.offset,
 	                    type: this.type,
-	                    contractCode:this.contractCode
+	                    id:this.id
 	                }, function (r) {
 	                    app.total = r.total;
 	                    app.rows = r.rows;
@@ -742,38 +762,8 @@
                  }
              }
          });
-		 updateAttachment();
 	 }
 	
-// 		删除附件文件的同时删除企业客户信息表里面附件字段下的附件id
-	    function updateAttachment(id){
-	    	var ids=id+',';//将得到的id加上逗号组合传给mapper里面的id去修改字段下的值
-// 	    	alert(ids)
-	    	$.ajax({
-                url: "/sales/recordService/updateRecordServiceAttachment",
-                type: "post",
-                data: {
-                    'id': ids
-                },
-                success: function (r) {
-                    if (r.code == 0) {
-//                     	alert(id)
-						//将serviceAttachment里面的字段提取出来
-//                     	var serviceAtt=$("#serviceAttachment").val();
-//                     	alert(serviceAtt);
-						//将serviceAttachment字段里面查出来的id加上都好替换为'' 空
-//                     	var idss=serviceAtt.replace(id+",",'');
-//                     	alert(idss)
-						//将idss传给serviceAttachment  input
-//                     	$("#serviceAttachment").val(idss);
-                        layer.msg(r.msg);
-                        app.getData();
-                    } else {
-                        layer.msg(r.msg);
-                    }
-                }
-            });
-	    }
 //********************** END *************************************	
 	</script>
 </body>

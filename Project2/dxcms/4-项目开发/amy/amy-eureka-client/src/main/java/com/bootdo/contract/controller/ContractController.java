@@ -73,6 +73,7 @@ import com.dx.client.model.contract.ContractSuitBean;
 import com.dx.client.model.purchase.RequireApplyItemBean;
 import com.dx.service.contract.service.api.IContractService;
 import com.dx.service.datacenter.service.api.ICompanyService;
+import com.dx.service.file.service.api.IContractFileService;
 
 /**
  * 合同起草
@@ -85,6 +86,7 @@ import com.dx.service.datacenter.service.api.ICompanyService;
 @Controller
 @RequestMapping("/ContractCreation/ContractCreation")
 public class ContractController extends BaseController {
+	private static final String CELL_TYPE_NUMERIC = null;
 	@Autowired
 	UserService userService;
 	@Autowired
@@ -93,10 +95,12 @@ public class ContractController extends BaseController {
 	private FileService sysFileService;
 	@Autowired
 	private DeptService sysDeptService;
-	@Autowired 
-	private ICompanyService iCompanyService;//供货公司接口
 	@Autowired
-	private IContractService iContractService;//合同接口
+	private ICompanyService iCompanyService;// 供货公司接口
+	@Autowired
+	private IContractService iContractService;// 合同接口
+	@Autowired
+	private IContractFileService iContractFileService;
 
 	/**
 	 * @param model
@@ -115,7 +119,8 @@ public class ContractController extends BaseController {
 		model.addAttribute("authorDeptId", deptId);
 		return "contract/ContractCreation/add";
 	}
-	//查询页面
+
+	// 查询页面
 	@GetMapping("/list")
 	@RequiresPermissions("ContractCreation:ContractCreation:list")
 	String list(Model model) {
@@ -137,8 +142,9 @@ public class ContractController extends BaseController {
 	public PageInfo listData(@RequestParam Map<String, Object> params) {
 		// 测试数据
 
-		ResultMsg rsm = iContractService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),"", params);
-		
+		ResultMsg rsm = iContractService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),
+				"", params);
+
 		List<ContractBean> list = new ArrayList<ContractBean>();
 		for (int i = 1; i <= 10; i++) {
 			ContractBean contractBean = new ContractBean();
@@ -158,11 +164,11 @@ public class ContractController extends BaseController {
 			contractBean.setAuthorDeptName("编制部门--" + i);// 编制部门
 			list.add(contractBean);
 		}
-		
-		int total = 20;//调用接口
+
+		int total = 20;// 调用接口
 		PageInfo pageInfo = new PageInfo(list, Integer.parseInt(params.get("pageNumber").toString()));
 		pageInfo.setTotal(total);
-		//测试数据 end
+		// 测试数据 end
 //        PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
 		return pageInfo;
 	}
@@ -180,7 +186,7 @@ public class ContractController extends BaseController {
 	@RequiresPermissions("ContractCreation:ContractCreation:edit")
 	String edit(@PathVariable("id") String id, Model model) {
 		// RecordDO record = recordService.get(recordId);
-		ResultMsg data=iContractService.primary(id);
+		ResultMsg data = iContractService.primary(id);
 		List<Map<String, Object>> beanlist = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<>();
 		map.put("contractName", "合同名称");
@@ -208,7 +214,9 @@ public class ContractController extends BaseController {
 		map.put("authorUserName", "admin");
 		beanlist.add(map);
 
-		model.addAttribute("beanlist", beanlist);
+		data = new ResultMsg();
+		data.setData(beanlist);
+		model.addAttribute("beanlist", data.getData());
 		model.addAttribute("suitCorpId", 6);
 		model.addAttribute("authorCorpId", 6);
 		model.addAttribute("performUserId", 135);
@@ -221,7 +229,7 @@ public class ContractController extends BaseController {
 	@GetMapping("/see/{id}")
 	@RequiresPermissions("ContractCreation:ContractCreation:see")
 	String see(@PathVariable("id") String id, Model model) {
-		ResultMsg data=iContractService.primary(id);
+		ResultMsg data = iContractService.primary(id);
 		List<Map<String, Object>> beanlist = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<>();
 		map.put("contractName", "合同名称");
@@ -248,7 +256,9 @@ public class ContractController extends BaseController {
 		map.put("authorUserName", "admin");
 		beanlist.add(map);
 
-		model.addAttribute("beanlist", beanlist);
+		data = new ResultMsg();
+		data.setData(beanlist);
+		model.addAttribute("beanlist", data.getData());
 		model.addAttribute("id", id);
 		return "contract/ContractCreation/see";
 	}
@@ -285,7 +295,7 @@ public class ContractController extends BaseController {
 	@RequiresPermissions("ContractCreation:ContractCreation")
 	List<Map<String, Object>> selectTree(@RequestParam Map<String, Object> params, Model model) {
 
-		// 适用机构 下拉列表查询数据
+		// 适用机构 下拉列表测试查询数据
 		List<Map<String, Object>> selectTree = new ArrayList<>();// 调用接口
 //		for (int i = 0; i < 4; i++) {
 //			ContractSuitBean contractSuitBean = new ContractSuitBean();
@@ -300,7 +310,6 @@ public class ContractController extends BaseController {
 //		model.addAttribute("selectTree", selectTree); // 将数据传到前台
 		return selectTree;
 	}
-
 
 	//
 	@GetMapping("/editTree")
@@ -343,10 +352,10 @@ public class ContractController extends BaseController {
 	@RequiresPermissions("ContractCreation:ContractCreation:edit")
 	public R update(@RequestParam Map<String, Object> params) {
 		ContractBean contractBean = new ContractBean();
-		ContractHtmlBean contractHtmlBean=new ContractHtmlBean();
-		//附件
-		List<ContractEnclosureBean> fileBena=new ArrayList<ContractEnclosureBean>();
-		//表单
+		ContractHtmlBean contractHtmlBean = new ContractHtmlBean();
+		// 附件
+		List<ContractEnclosureBean> fileBena = new ArrayList<ContractEnclosureBean>();
+		// 表单
 		List<ContractBean> contractBeanl = new ArrayList<ContractBean>();
 		// 供货公司
 		List<ContractDeliverBean> contractDeliverBeans = new ArrayList<ContractDeliverBean>();
@@ -356,13 +365,14 @@ public class ContractController extends BaseController {
 		List<ContractElementBean> richTextList = new ArrayList<ContractElementBean>();
 		// 合同物资列表
 		List<ContractMaterialBean> contractMaterialBeansList = new ArrayList<ContractMaterialBean>();
-		//附件
+		// 附件
 		JSONArray file = JSONArray.fromObject(params.get("fileInformation"));
 		for (int i = 0; i < file.size(); i++) {
-			ContractEnclosureBean signupFormModel = (ContractEnclosureBean) JSONObject.toBean((JSONObject) file.get(i),ContractEnclosureBean.class);
+			ContractEnclosureBean signupFormModel = (ContractEnclosureBean) JSONObject.toBean((JSONObject) file.get(i),
+					ContractEnclosureBean.class);
 			fileBena.add(signupFormModel);
 		}
-		//表单
+		// 表单
 		JSONArray signupForm = JSONArray.fromObject(params.get("signupForm"));
 		for (int i = 0; i < signupForm.size(); i++) {
 			ContractBean signupFormModel = (ContractBean) JSONObject.toBean((JSONObject) signupForm.get(i),
@@ -397,19 +407,18 @@ public class ContractController extends BaseController {
 					ContractElementBean.class);
 			richTextList.add(contractModelR);
 		}
-		ContractMaterialBean contractMaterialBean=new ContractMaterialBean();
-		ContractElementBean contractElementBean=new ContractElementBean();
-		contractMaterialBean.setContractId((String)params.get("contractId"));
+		ContractMaterialBean contractMaterialBean = new ContractMaterialBean();
+		ContractElementBean contractElementBean = new ContractElementBean();
+		contractMaterialBean.setContractId((String) params.get("contractId"));
 		contractBean.setContractMaterialBeans(contractMaterialBeansList);
 		contractBean.setContractDeliverBeans(contractDeliverBeans);
 		contractBean.setContractSuitBeans(contractSuitBeans);
 		contractBean.setContractEnclosureBeans(fileBena);
-		contractElementBean.setContractId((String)params.get("contractId"));
+		contractElementBean.setContractId((String) params.get("contractId"));
 		contractHtmlBean.setContractElementBeans(richTextList);
-		contractHtmlBean.setHtmlText((StringBuffer)params.get("htmlText"));
-		
+		contractHtmlBean.setHtmlText(new StringBuffer(params.get("htmlText").toString()));
+
 		ResultMsg msg = iContractService.save(contractBean);
-		System.out.println(msg.getCode());
 		if ("1".equals(msg.getCode())) {
 			return R.ok();
 		}
@@ -428,10 +437,10 @@ public class ContractController extends BaseController {
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	public R save(@RequestParam Map<String, Object> params) {
 		ContractBean contractBean = new ContractBean();
-		ContractHtmlBean contractHtmlBean=new ContractHtmlBean();
-		//附件
-		List<ContractEnclosureBean> fileBena=new ArrayList<ContractEnclosureBean>();
-		//表单
+		ContractHtmlBean contractHtmlBean = new ContractHtmlBean();
+		// 附件
+		List<ContractEnclosureBean> fileBena = new ArrayList<ContractEnclosureBean>();
+		// 表单
 		List<ContractBean> contractBeanl = new ArrayList<ContractBean>();
 		// 供货公司
 		List<ContractDeliverBean> contractDeliverBeans = new ArrayList<ContractDeliverBean>();
@@ -441,15 +450,15 @@ public class ContractController extends BaseController {
 		List<ContractElementBean> richTextList = new ArrayList<ContractElementBean>();
 		// 合同物资列表
 		List<ContractMaterialBean> contractMaterialBeansList = new ArrayList<ContractMaterialBean>();
-		
-		
-		//附件
+
+		// 附件
 		JSONArray file = JSONArray.fromObject(params.get("fileInformation"));
 		for (int i = 0; i < file.size(); i++) {
-			ContractEnclosureBean signupFormModel = (ContractEnclosureBean) JSONObject.toBean((JSONObject) file.get(i),ContractEnclosureBean.class);
+			ContractEnclosureBean signupFormModel = (ContractEnclosureBean) JSONObject.toBean((JSONObject) file.get(i),
+					ContractEnclosureBean.class);
 			fileBena.add(signupFormModel);
 		}
-		//表单
+		// 表单
 		JSONArray signupForm = JSONArray.fromObject(params.get("signupForm"));
 		for (int i = 0; i < signupForm.size(); i++) {
 			ContractBean signupFormModel = (ContractBean) JSONObject.toBean((JSONObject) signupForm.get(i),
@@ -473,7 +482,8 @@ public class ContractController extends BaseController {
 		// 合同物资列表
 		JSONArray contractMaterialBeans = JSONArray.fromObject(params.get("contractMaterialBeans"));
 		for (int i = 0; i < contractMaterialBeans.size(); i++) {
-			ContractMaterialBean contractModel = (ContractMaterialBean) JSONObject.toBean((JSONObject) contractMaterialBeans.get(i), ContractMaterialBean.class);
+			ContractMaterialBean contractModel = (ContractMaterialBean) JSONObject
+					.toBean((JSONObject) contractMaterialBeans.get(i), ContractMaterialBean.class);
 			contractMaterialBeansList.add(contractModel);
 		}
 		// 富文本
@@ -489,28 +499,33 @@ public class ContractController extends BaseController {
 		contractBean.setContractEnclosureBeans(fileBena);
 //		contractBean.setContractHtmlBeans(contractHtmlBeans);
 		contractHtmlBean.setContractElementBeans(richTextList);
-		contractHtmlBean.setHtmlText((StringBuffer)params.get("htmlText"));
-		
+		contractHtmlBean.setHtmlText(new StringBuffer(params.get("htmlText").toString()));
 		ResultMsg msg = iContractService.save(contractBean);
+		String ids = (String) msg.getData();
 		System.out.println(msg.getCode());
 		if ("1".equals(msg.getCode())) {
-			return R.ok();
+			R r = R.ok();
+			r.put("ids", ids);
+			return r;
 		}
 		return R.error();
 	}
-	//项目名称页面
+
+	// 项目名称页面
 	@GetMapping("/project")
 //	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	String project() {
 		return "/contract/ContractCreation/projectList";
 	}
-	//项目名称弹出列表数据
+
+	// 项目名称弹出列表数据
 	@GetMapping("/projectList")
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	@ResponseBody
 	public PageInfo projectList(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
-		ResultMsg rsm = iContractService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),"", params);
+		ResultMsg rsm = iContractService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),
+				"", params);
 
 		List<Map<String, Object>> projectList = new ArrayList<>();// 调用接口
 		for (int i = 1; i <= 10; i++) {
@@ -520,28 +535,31 @@ public class ContractController extends BaseController {
 			map.put("projectName", "物资编码" + i);
 			projectList.add(map);
 		}
-		int total = 20;//调用接口
+		int total = 20;// 调用接口
 		PageInfo pageInfo = new PageInfo(projectList, Integer.parseInt(params.get("pageNumber").toString()));
 		pageInfo.setTotal(total);
-		//测试数据 end
+		// 测试数据 end
 //        PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
 		return pageInfo;
 	}
-	
-	//供货公司页面
+
+	// 供货公司页面
 	@GetMapping("/contractDeliverBeans")
 //	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	String contractDeliversList() {
 		return "/contract/ContractCreation/relevantParty";
 	}
-	//供货公司弹出页面数据
+
+	// 供货公司弹出页面数据
 	@GetMapping("/contractDeliversList")
 	@RequiresPermissions("ContractCreation:ContractCreation:add")
 	@ResponseBody
 	public PageInfo contractDeliversList(@RequestParam Map<String, Object> params) {
 		// 查询列表数据
-		ResultMsg rsm = iCompanyService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),"", params);
-		List<ContractDeliverBean> contractDeliverBeans = new ArrayList<ContractDeliverBean>();// 调用接口
+		ResultMsg rsm = iCompanyService.search(params.get("pageNumber").toString(), params.get("pageSize").toString(),
+				"", params);
+
+		List<ContractDeliverBean> contractDeliverlist = new ArrayList<ContractDeliverBean>();// 调用接口
 		for (int i = 0; i <= 10; i++) {
 			ContractDeliverBean aa = new ContractDeliverBean();
 			Date nowDate = new Date();
@@ -549,12 +567,12 @@ public class ContractController extends BaseController {
 			aa.setDeliverCompanyName("供货公司" + i);
 			aa.setId("1" + i);
 			aa.setCreateDate(nowDate);
-			contractDeliverBeans.add(aa);
+			contractDeliverlist.add(aa);
 		}
-		int total = 20;//调用接口
-		PageInfo pageInfo = new PageInfo(contractDeliverBeans, Integer.parseInt(params.get("pageNumber").toString()));
+		int total = 20;// 调用接口
+		PageInfo pageInfo = new PageInfo(contractDeliverlist, Integer.parseInt(params.get("pageNumber").toString()));
 		pageInfo.setTotal(total);
-		//测试数据 end
+		// 测试数据 end
 //        PageInfo pageInfo = (PageInfo)rsm.getData();//调用接口
 		return pageInfo;
 	}
@@ -643,6 +661,44 @@ public class ContractController extends BaseController {
 		return "/contract/ContractCreation/editImportMaterial";
 	}
 
+	// 根据ID查看附件列表
+	@ResponseBody
+	@GetMapping("/listId")
+	@RequiresPermissions("sales:companyCustomer:companyCustomer")
+	public PageInfo listId(@RequestParam("id") String contractId, @RequestParam Map<String, Object> params) {
+		// 查询列表数据
+		ResultMsg msg = iContractFileService.getEnclosures(contractId);
+
+		List<Map<String, Object>> fileList = new ArrayList<Map<String, Object>>();
+
+//		for (int i = 0; i < sysFileList.size(); i++) {
+//			FileDO a =sysFileList.get(i);
+//			String urlFile=a.getUrl();
+//			String suffix=urlFile.substring(urlFile.indexOf(".")+1);
+//			if (suffix.equals("xls")||suffix.equals("xlsx")) {
+//				a.setSuffix("1");//1代表xlsx表格
+//			}else if (suffix.equals("docx")) {
+//				a.setSuffix("2");//2代表word文档
+//			}else if(suffix.equals("avi")||suffix.equals("wma")||suffix.equals("rmvb")||suffix.equals("rm")||suffix.equals("flash")||suffix.equals("mp4")||suffix.equals("mid")||suffix.equals("3GP")){
+//				a.setSuffix("3");//3代表视频文件
+//			}else if(suffix.equals("jpg")||suffix.equals("png")||suffix.equals("gif")||suffix.equals("tif")||suffix.equals("psd")||suffix.equals("dng")||suffix.equals("cr2")||suffix.equals("nef")){
+//				a.setSuffix("4");//4代表图片
+//			}else if(suffix.equals("rar")||suffix.equals("zip")){
+//				a.setSuffix("5");//5代表压缩文件
+//			}else {
+//				a.setSuffix("6");//6除以判断的文件之外的文件
+//			}
+//			System.out.println("************************************************");
+//			System.out.println(urlFile.substring(urlFile.indexOf(".")+1));
+//			System.out.println("************************************************");
+//		}
+		int total = 20;
+		PageInfo pageInfo = new PageInfo(fileList);
+//		PageInfo pageInfo=(PageInfo)msg.getData();
+		pageInfo.setTotal(total);
+		return pageInfo;
+	}
+
 	/**
 	 * 上传文件
 	 * 
@@ -658,7 +714,7 @@ public class ContractController extends BaseController {
 //		chars.charAt((int)(Math.random() * 52))+
 		String fileName = file.getOriginalFilename();
 //		fileName = FileUtil.renameToUUID(fileName);
-		Date date=new Date();
+		Date date = new Date();
 		FileDO sysFile = new FileDO(FileType.fileType(fileName), "/files/" + fileName, date);
 		try {
 			FileUtil.uploadFile(file.getBytes(), bootdoConfig.getUploadPath(), fileName);
@@ -673,7 +729,7 @@ public class ContractController extends BaseController {
 			r.put("fileNameUrl", sysFile.getUrl());
 			r.put("fileType", FileType.fileType(fileName));
 			r.put("fileDate", date);
-			
+
 			return r;
 //			return R.ok().put("fileName", sysFile.getUrl());
 		}
@@ -694,46 +750,6 @@ public class ContractController extends BaseController {
 
 			// 以流的形式下载文件。
 			InputStream fis = new BufferedInputStream(new FileInputStream(path));
-			byte[] buffer = new byte[fis.available()];
-			fis.read(buffer);
-			fis.close();
-			// 清空response
-			response.reset();
-			// 设置response的Header
-			// 设置文件名
-			response.addHeader("Content-Disposition",
-					"attachment;filename=" + new String(filename.getBytes(), "ISO-8859-1"));
-			// 设置文件打下
-			response.addHeader("Content-Length", "" + file.length());
-			OutputStream toClient = new BufferedOutputStream(response.getOutputStream());
-			response.setContentType("application/octet-stream");
-			toClient.write(buffer);
-			toClient.flush();
-			toClient.close();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
-
-	// 模板下载
-	@ResponseBody
-	@RequestMapping("/downloadTemplate")
-	public void download(HttpServletResponse response, HttpServletRequest request) {
-		try {
-
-			// File files = new
-			// File(".\\src\\main\\resources\\downloadTemplate\\企业客户导入摸板.xls");
-			// System.out.println("getAbsolutePath:"+files.getAbsolutePath());
-			// //getAbsolutePath()会将.认为是一个以.命名的文件
-			// System.out.println("getCanonicalPath:"+files.getCanonicalPath());//getCanonicalPath()得到的是一个规范路径没有.
-			//
-
-			File file = new File("./src/main/resources/downTemplate/合同订立中物资批量导入模版.xlsx");
-			// 取得文件名。
-			String filename = file.getName();
-
-			// 以流的形式下载文件。
-			InputStream fis = new BufferedInputStream(new FileInputStream(file.getCanonicalPath()));
 			byte[] buffer = new byte[fis.available()];
 			fis.read(buffer);
 			fis.close();
@@ -787,6 +803,12 @@ public class ContractController extends BaseController {
 
 	}
 
+	/**
+	 * exls表格导入实现方法
+	 * 
+	 * @param file
+	 * @return
+	 */
 	public Map<String, Object> ImportMaterial(File file) {
 		Workbook wookbook = null;
 		List<String> errorMsgs = null;
@@ -812,14 +834,16 @@ public class ContractController extends BaseController {
 			my: for (int i = 0; i < rows; i++) {
 				// 读取左上端单元格(跳过第一行标题行)
 				Row row = sheet.getRow(i);
+				//获取标题行
+				Row rowTitleName = sheet.getRow(0);
+				
 				ContractMaterialBean contractMaterialBean = new ContractMaterialBean(); // 售前项目信息表
 
 				// 行不为空
-				if (row != null) {
+				if (row != null & rowTitleName != null) {
 					if (i == 0) {
 						// 获取到Excel文件中的第一行（标题行）
 						Row rowCount = sheet.getRow(i);
-
 						// 获取到Excel文件中的所有的列
 						cellCount = rowCount.getPhysicalNumberOfCells();
 						continue;
@@ -828,82 +852,134 @@ public class ContractController extends BaseController {
 					// int cells = row.getPhysicalNumberOfCells();
 					String cellvalue = "";
 					String contact = "";
+					//标题行名称
+					String titleName = "";
 					// String agentCode = null;
 					String companyName = null;
 					// 遍历列
 					for (int j = 0; j < cellCount; j++) {
+						titleName = "";
 						cellvalue = ""; // 清空之前之前取到的列的值
 						// 获取到列的值
 						Cell cell = row.getCell(j);
+						//获取标题到列的值
+						Cell cellTitleName = rowTitleName.getCell(j);
 						// String value = "";
-						if (cell != null) {
-							switch (cell.getCellType()) {
+						if (cell != null & cellTitleName != null) {
+							switch (cell.getCellType() & cellTitleName.getCellType()) {
 							case XSSFCell.CELL_TYPE_FORMULA:
 								break;
 							case XSSFCell.CELL_TYPE_NUMERIC: {
 								short format = cell.getCellStyle().getDataFormat();
-								if (format == 14 || format == 31 || format == 57 || format == 58) { // excel中的时间格式
+								short formatTitleName = cellTitleName.getCellStyle().getDataFormat();
+								if (format == 14 || format == 31 || format == 57 || format == 58 || formatTitleName == 14
+										|| formatTitleName == 31 || formatTitleName == 57 || formatTitleName == 58) { // excel中的时间格式
 									SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 									double value = cell.getNumericCellValue();
+									double values = cellTitleName.getNumericCellValue();
 									Date date = DateUtil.getJavaDate(value);
+									Date dateTitleName = DateUtil.getJavaDate(values);
 									cellvalue = sdf.format(date);
-								}
-								// 判断当前的cell是否为Date
-								else if (HSSFDateUtil.isCellDateFormatted(cell)) { // 先注释日期类型的转换，在实际测试中发现HSSFDateUtil.isCellDateFormatted(cell)只识别2014/02/02这种格式。
-									// 如果是Date类型则，取得该Cell的Date值 // 对2014-02-02格式识别不出是日期格式
+									titleName = sdf.format(dateTitleName);
+								} else if (HSSFDateUtil.isCellDateFormatted(cell)) { // 如果是纯数字
 									Date date = cell.getDateCellValue();
 									DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 									cellvalue = formater.format(date);
-								} else { // 如果是纯数字
+								} else {
 									// 取得当前Cell的数值
 									cellvalue = NumberToTextConverter.toText(cell.getNumericCellValue());
+									titleName = cellTitleName.getStringCellValue();
+
 								}
 								break;
 							}
 							case XSSFCell.CELL_TYPE_STRING:
+								titleName = cellTitleName.getStringCellValue();
 								cellvalue = cell.getStringCellValue();
 								break;
 							default:
 								break;
 							}
 						}
-						if (j == 0) {
+
+//						if (j == 0) {
+//							titleName=cellvalue==null?"":cellvalue;
+//						} else {
+						if ("组织机构".equals(titleName.trim())) {
 							contractMaterialBean.setSuitCorpId(cellvalue);
-						} else if (j == 1) {
+						} else if ("物资编码".equals(titleName.trim())) {
 							contractMaterialBean.setMaterilaCode(cellvalue);
-						} else if (j == 2) {
+						} else if ("物资名称".equals(titleName.trim())) {
 							contractMaterialBean.setMaterialName(cellvalue);
-						} else if (j == 3) {
+						} else if ("父物资编码".equals(titleName.trim())) {
 							contractMaterialBean.setParentId(cellvalue);
-						} else if (j == 4) {
+						} else if ("数量".equals(titleName.trim())) {
 							if (cellvalue == null || cellvalue == "") {
 								continue;
 							} else {
 								contractMaterialBean.setQty(Double.parseDouble(cellvalue));
 							}
-						} else if (j == 5) {
+						} else if ("单价".equals(titleName.trim())) {
 							if (cellvalue == null || cellvalue == "") {
 								continue;
 							} else {
 								contractMaterialBean.setPrice(new BigDecimal(cellvalue));
 							}
-						} else if (j == 6) {
+						} else if ("有效起始日期".equals(titleName.trim())) {
 							if (cellvalue == null || cellvalue == "") {
 								continue;
 							} else {
 								SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 								contractMaterialBean.setDateFrom(formatter.parse(cellvalue));
 							}
-						} else if (j == 7) {
+						} else if ("有效截止日期".equals(titleName.trim())) {
 							if (cellvalue == null || cellvalue == "") {
 								continue;
 							} else {
 								SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 								contractMaterialBean.setDateTo(formatter.parse(cellvalue));
 							}
-						} else if (j == 8) {
+						} else if ("备注".equals(titleName.trim())) {
 							contractMaterialBean.setRemark(cellvalue);
 						}
+//						}
+
+//						contractMaterialBean.setSuitCorpId(cellvalue);
+//						else if (j == 1) {
+//							contractMaterialBean.setMaterilaCode(cellvalue);
+//						} else if (j == 2) {
+//							contractMaterialBean.setMaterialName(cellvalue);
+//						} else if (j == 3) {
+//							contractMaterialBean.setParentId(cellvalue);
+//						} else if (j == 4) {
+//							if (cellvalue == null || cellvalue == "") {
+//								continue;
+//							} else {
+//								contractMaterialBean.setQty(Double.parseDouble(cellvalue));
+//							}
+//						} else if (j == 5) {
+//							if (cellvalue == null || cellvalue == "") {
+//								continue;
+//							} else {
+//								contractMaterialBean.setPrice(new BigDecimal(cellvalue));
+//							}
+//						} else if (j == 6) {
+//							if (cellvalue == null || cellvalue == "") {
+//								continue;
+//							} else {
+//								SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//								contractMaterialBean.setDateFrom(formatter.parse(cellvalue));
+//							}
+//						} else if (j == 7) {
+//							if (cellvalue == null || cellvalue == "") {
+//								continue;
+//							} else {
+//								SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//								contractMaterialBean.setDateTo(formatter.parse(cellvalue));
+//							}
+//						} else if (j == 8) {
+//							contractMaterialBean.setRemark(cellvalue);
+//						}
 
 					} // --->遍历列
 

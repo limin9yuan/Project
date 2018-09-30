@@ -5,7 +5,10 @@ var jsonCompanyName = [];
 var jsonSuitBeans = [];
 var contractElementBeans = [];
 $().ready(function() {
-
+	//遮罩层
+		nextStepThis('myTab',3,'lastBtn','nextBtn');
+		setTimeout('hidenload()', 500)
+		//遮罩层END
 	$("button[name=excelinsertbtn]").click(function() {
 		layer.open({
 			type : 2,
@@ -37,7 +40,7 @@ $().ready(function() {
 		type : "GET",
 		url : "/ContractCreation/ContractCreation/editTree",
 		data : {
-			'deptIds' : $("#suitCorpId").val()
+			'deptIds' : $("#authorDeptId").val()
 		},
 		success : function(tree) {
 			tree.checked = false;
@@ -45,6 +48,30 @@ $().ready(function() {
 				zNodes : tree,
 				height : 233,
 				chkStyle : "radio", //设置单选树形 默认是多选
+				radioType : "all",
+				callback : {
+					onCheck : function(treeNode) {
+						//alert("my callback");
+					}
+				}
+			};
+			$("#authorDeptName").drawMultipleTree(defaults);
+
+
+		}
+	});
+	$.ajax({
+		type : "GET",
+		url : "/ContractCreation/ContractCreation/tree",
+		data : {
+			'deptIds' : $("#authorDeptId").val()
+		},
+		success : function(tree) {
+			tree.checked = false;
+			var defaults = {
+				zNodes : tree,
+				height : 233,
+				//				chkStyle : "radio", //设置单选树形 默认是多选
 				radioType : "all",
 				callback : {
 					onCheck : function(treeNode) {
@@ -54,36 +81,11 @@ $().ready(function() {
 			};
 
 			$("#suitCorpName").drawMultipleTree(defaults);
-
 		}
 	});
 	$.ajax({
 		type : "GET",
-		url : "/ContractCreation/ContractCreation/editTree",
-		data : {
-			'deptIds' : $("#authorCorpId").val()
-		},
-		success : function(tree) {
-			tree.checked = false;
-			var defaults = {
-				zNodes : tree,
-				height : 233,
-				chkStyle : "radio", //设置单选树形 默认是多选
-				radioType : "all",
-				callback : {
-					onCheck : function(treeNode) {
-						//alert("my callback");
-					}
-				}
-			};
-
-			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
-
-		}
-	});
-	$.ajax({
-		type : "GET",
-		url : "/ContractCreation/ContractCreation/editTree",
+		url : "/ContractCreation/ContractCreation/tree",
 		data : {
 			'deptIds' : $("#authorDeptId").val()
 		},
@@ -100,18 +102,13 @@ $().ready(function() {
 					}
 				}
 			};
-
-			$("#authorDeptName").drawMultipleTree(defaults);
+			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
 
 		}
 	});
-
 	$.ajax({
 		type : "GET",
-		url : "/ContractCreation/ContractCreation/editUserTree",
-		data : {
-			'deptIds' : $("#performUserId").val()
-		},
+		url : "/ContractCreation/ContractCreation/userTree",
 		success : function(tree) {
 			tree.checked = false;
 			var defaults = {
@@ -125,21 +122,23 @@ $().ready(function() {
 					}
 				}
 			};
-
 			$("#performUserName").drawMultipleTree(defaults);
 
 		}
 	});
 
-
 	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
 	});
+	var n=0;
 	$('#myTab a[href="#contractTemplate"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
 		$('#nextBtn').attr("disabled", false);
-		richText();
+		if(n<=0){
+			richText();
+		}
+		n++;
 	});
 	$('#myTab a[href="#contractMaterialDetail"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
@@ -153,6 +152,7 @@ $().ready(function() {
 		var upload = layui.upload;
 		// 多文件列表示例
 		var demoListView = $('#demoList');
+		var fileCount=0;
 		//执行实例
 		var uploadInst = upload.render({
 			elem : '#test1', //绑定元素
@@ -187,40 +187,51 @@ $().ready(function() {
 						delete files[index]; // 删除对应的文件
 						tr.remove();
 						uploadInst.config.elem.next()[0].value = ''; // 清空 input
+						fileCount=Number(fileCount)-1;
 					// file
 					// 值，以免删除后出现同名文件不可选
 					});
 
 					demoListView.append(tr);
+				
 				});
 			},
 			done : function(r) {
+				fileCount = Number(fileCount) + 1;
 				if (r.code == 0) {
 					var tmpFile = {
-						"url" : r.url,
-						"type" : r.typeId,
-						"date" : r.createDate
-					};
-					if (window.localStorage.getItem("fileArray") == null) {
-						window.localStorage.setItem("fileArray", JSON.stringify(tmpFile));
-						window.localStorage.setItem("fileCount", 1);
-					} else {
-						var tmpArray = window.localStorage.getItem("fileArray");
-						var tmpCount = window.localStorage.getItem("fileCount");
-						tmpArray = tmpArray + "," + JSON.stringify(tmpFile);
-						window.localStorage.setItem("fileArray", tmpArray);
-						window.localStorage.setItem("fileCount", 1 + Number(tmpCount));
-						//						console.log(tmpCount);
-						console.log("[" + tmpArray.toString() + "]");
-						var fileInformation = "[" + tmpArray.toString() + "]";
-						update(fileInformation);
-					}
-					//					window.localStorage.getItem("fileArray");
-					if (fileCount == Number(window.localStorage.getItem("fileCount"))) {
-						window.localStorage.removeItem("fileArray")
-					}
-					//					console.log("["+window.localStorage.getItem("fileArray")+"]");
+							"url" : r.fileNameUrl,
+							"typeId" : r.fileType,
+							"createDate" : r.fileDate
+						};
+						if (window.localStorage.getItem("fileArray") == null) {
+							window.localStorage.setItem("fileArray", JSON.stringify(tmpFile));
+							window.localStorage.getItem("fileArray");
 
+							fileInformation = JSON.stringify(tmpFile);
+							window.localStorage.setItem("fileArray", JSON.stringify(tmpFile));
+						} else {
+							var tmpArray = window.localStorage.getItem("fileArray");
+							var tmpCount = window.localStorage.getItem("fileCount");
+							tmpArray = tmpArray + "," + JSON.stringify(tmpFile);
+							window.localStorage.setItem("fileArray", tmpArray);
+
+							fileInformation = "[" + tmpArray.toString() + "]";
+
+						}
+						
+						var totalCount=0;
+						$("#demoList").find('.demo-reload').each(function(i) {
+							totalCount++;
+							
+						});
+						if (fileCount == totalCount) {
+							console.log("fileInformation"+fileInformation);
+							update(fileInformation);
+							window.localStorage.removeItem("fileArray")
+							console.log("清空+localStorage");
+							console.log(fileCount + "数量");
+						}
 					parent.layer.alert(r.msg);
 
 					if (r.serviceAttachment > 0) {
@@ -236,35 +247,20 @@ $().ready(function() {
 
 	jqxTreeGrid();
 });
+
+//隐藏遮罩层
+function hidenload(){
+	if(sde==null){
+		parent.layer.msg("合同模板加载失败，请手动点击合同模板！");
+		setTimeout('$("#load").hide()',500);
+	}else{
+		lastStep('myTab',3,'lastBtn','nextBtn')
+		setTimeout('$("#load").hide()',500);
+	}
+	
+}
 //得到合同物资数据test
 function dsds() {
-	var ctrls = sde.getControlById();
-	var ele = new Array(); //value
-	var rite = new Array(); //key
-	ctrls.forEach(ctrl => {
-		//		debugger;//debug断点
-		//		这里的ctrl是控件对象，每种类型的控件的所具有的方法会有些差异，但是都有getValue和setValue
-		//		console.log(ctrl.getValue());
-		ele.push(ctrl.getValue());
-
-		var element = ctrl.getCtrlElement() //获取控制的Value节点
-		rite.push(element.id);
-	//		alert(element.id);
-	});
-	var jsonArray = [];
-	for (var i = 0; i < ele.length; i++) {
-		var json = {};
-		for (var j = 0; j < rite.length; j++) {
-			if (i == j) {
-				json.key = rite[j];
-				json.value = ele[i];
-				jsonArray.push(json);
-			}
-		}
-	}
-	console.log(jsonArray);
-	console.log(ele);
-	console.log(rite);
 
 }
 $("#saveBtn").click(function() {
@@ -333,11 +329,11 @@ $("#saveBtn").click(function() {
 
 		//适用机构
 		var contractSuitBeansArr = new Array();
-		var contractSuitBeans = $("#contractSuitBeans").val();
+		var contractSuitBeans = $("#suitCorpName").val();
 		contractSuitBeansArr = contractSuitBeans.split(",");
 
 		var suitCorpIdArr = new Array();
-		var suitCorpId = $("#contractSuitBeans").drawMultipleTree("getChecks", "val");
+		var suitCorpId = $("#suitCorpName").drawMultipleTree("getChecks", "val");
 		suitCorpIdArr = suitCorpId.split(",");
 		$("#suitCorpId").val(suitCorpId);
 		jsonSuitBeans = new Array();
@@ -362,7 +358,7 @@ function update(fileInformation) {
 	div.innerHTML = sde.html();
 	div.innerText //即为纯文本
 	var signupForm = $('#signupForm').serializeArray();
-	console.log(signupForm);
+//	console.log(signupForm);
 	var params = {
 		"htmlText" : div.innerText,
 		"contractId":$("#id").val(),
@@ -373,6 +369,8 @@ function update(fileInformation) {
 		"jsonSuitBeans" : JSON.stringify(jsonSuitBeans),
 		"richTextKVJson" : JSON.stringify(contractElementBeans)
 	};
+	console.log("update")
+	console.log(params);
 	//合同物资信息
 	$.ajax({
 		cache : true,
