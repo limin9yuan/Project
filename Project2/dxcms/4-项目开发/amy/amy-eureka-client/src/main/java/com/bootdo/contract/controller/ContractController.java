@@ -886,6 +886,7 @@ public class ContractController extends BaseController {
 									DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 									cellvalue = formater.format(date);
 								} else {
+									 // 如果是Date类型则，取得该Cell的Date值 // 对2014-02-02格式识别不出是日期格式
 									// 取得当前Cell的数值
 									cellvalue = NumberToTextConverter.toText(cell.getNumericCellValue());
 									titleName = cellTitleName.getStringCellValue();
@@ -902,9 +903,6 @@ public class ContractController extends BaseController {
 							}
 						}
 
-//						if (j == 0) {
-//							titleName=cellvalue==null?"":cellvalue;
-//						} else {
 						if ("组织机构".equals(titleName.trim())) {
 							contractMaterialBean.setSuitCorpId(cellvalue);
 						} else if ("物资编码".equals(titleName.trim())) {
@@ -926,7 +924,7 @@ public class ContractController extends BaseController {
 								contractMaterialBean.setPrice(new BigDecimal(cellvalue));
 							}
 						} else if ("有效起始日期".equals(titleName.trim())) {
-							if (cellvalue == null || cellvalue == "") {
+							if (cellvalue == null || cellvalue == "") { 
 								continue;
 							} else {
 								SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -942,7 +940,6 @@ public class ContractController extends BaseController {
 						} else if ("备注".equals(titleName.trim())) {
 							contractMaterialBean.setRemark(cellvalue);
 						}
-//						}
 
 //						contractMaterialBean.setSuitCorpId(cellvalue);
 //						else if (j == 1) {

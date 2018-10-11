@@ -22,25 +22,31 @@
 										style="width: 100%">
 									</input>
 								</div>
-								<label class="col-sm-2 control-label">类型:<span class="mustin">*</span></label>
+								<label class="col-sm-2 control-label">单据日期:<span class="mustin">*</span></label>
+								<div class="col-sm-3">
+									<div class="columns pull-left nopadding" >
+										<div class="input-group date" id="invoiceDate">
+											<input readonly id="invoice" class="form-control" type="text"
+												   name="invoiceDate" th:value="${#dates.format(requirePlanModel.businessDate,'yyyy-MM-dd')}" > <span
+												class="input-group-addon"> <span
+												class="glyphicon glyphicon-calendar"></span>
+													</span>
+										</div>
+									</div>
+								</div>
+								<!-- <label class="col-sm-2 control-label">类型:<span class="mustin">*</span></label>
 								<div class="col-sm-4">
 									<select disabled data-placeholder="请选择" name="businessId" id="businessId"
 										class="form-control chosen-select" tabindex="2"
 										style="width: 100%">
 										<option value="">全部</option>
 									</select>
-								</div>
+								</div> -->
 							</div>
 							<div class="form-group">
 								<label class="col-sm-2 control-label">采购部门:<span class="mustin">*</span></label>
 								<div class="col-sm-4">
 									<input readonly id="purchaseDept" name="purchaseDept" th:value="${requirePlanModel.purchaseDeptName}" class="form-control"
-										style="width: 100%">
-									</input>
-								</div>
-								<label class="col-sm-2 control-label">单据日期:<span class="mustin">*</span></label>
-								<div class="col-sm-4">
-									<input readonly id="invoiceDate" name="invoiceDate" th:value="${#dates.format(requirePlanModel.businessDate,'yyyy-MM-dd')}" class="form-control"
 										style="width: 100%">
 									</input>
 								</div>
@@ -70,7 +76,7 @@
 									</div>
 								</div>
 
-								<label class="col-sm-1 control-label">备注</label>
+								<label class="col-sm-1 control-label">备注<span class="mustin">*</span></label>
 								<div class="col-sm-3">
 									<input readonly id="remark" name="remark" th:value="${requirePlanModel.remark}" class="form-control" type="text">
 								</div>

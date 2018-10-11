@@ -2,8 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ca43e6d6-7e3f-4fdf-812e-92b1ebd0e12c" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-pro.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-pro.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/static/js/appjs/material/allocationPlan/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/static/js/appjs/material/allocationPlan/edit.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/static/js/appjs/material/allocationPlan/nextStep.js" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/static/js/appjs/material/allocationPlan/nextStep.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/static/js/appjs/material/requirementPlan/edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/static/js/appjs/material/requirementPlan/edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/static/js/appjs/material/requirementPlan/nextStep.js" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/static/js/appjs/material/requirementPlan/nextStep.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/allocationPlan/check.html" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/allocationPlan/check.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/allocationPlan/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/allocationPlan/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/allocationPlan/nextStep.html" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/allocationPlan/nextStep.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/requirementPlan/check.html" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/requirementPlan/check.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/requirementPlan/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/requirementPlan/edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/requirementPlan/nextStep.html" beforeDir="false" afterPath="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/templates/material/requirementPlan/nextStep.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
@@ -49,8 +59,17 @@
       <file leaf-file-name="RequirePlanController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="401" column="45" selection-start-line="401" selection-start-column="45" selection-end-line="401" selection-end-column="45" />
+            <state relative-caret-position="348">
+              <caret line="391" selection-start-line="391" selection-end-line="391" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RequireApplyController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequireApplyController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3589">
+              <caret line="171" column="9" selection-start-line="168" selection-start-column="8" selection-end-line="171" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -58,7 +77,7 @@
       <file leaf-file-name="IAllotPlanService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/service/api/IAllotPlanService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="9">
+            <state relative-caret-position="1026">
               <caret line="54" column="34" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="34" />
             </state>
           </provider>
@@ -67,25 +86,21 @@
       <file leaf-file-name="AllotPlanBean.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../dx-client-model/src/main/java/com/dx/client/model/purchase/AllotPlanBean.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-95">
+            <state relative-caret-position="209">
               <caret line="11" column="26" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AllocationPlanController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AllocationPlanController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="702" column="52" selection-start-line="702" selection-start-column="52" selection-end-line="702" selection-end-column="52" />
+            <state relative-caret-position="-4237">
+              <caret line="392" column="56" selection-start-line="392" selection-start-column="56" selection-end-line="392" selection-end-column="56" />
               <folding>
                 <element signature="method#edit#0;class#AllocationPlanController#0" />
-                <element signature="method#edit_ajax#0;class#AllocationPlanController#0" />
                 <element signature="method#check#0;class#AllocationPlanController#0" />
-                <element signature="method#edit_ajax#1;class#AllocationPlanController#0" />
                 <element signature="method#list#0;class#AllocationPlanController#0" />
-                <element signature="method#allocationPlanAddList#0;class#AllocationPlanController#0" />
-                <element signature="method#getSourcePlanDetail#0;class#AllocationPlanController#0" />
               </folding>
             </state>
           </provider>
@@ -94,7 +109,7 @@
       <file leaf-file-name="AllotPlanItemBean.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../dx-client-model/src/main/java/com/dx/client/model/purchase/AllotPlanItemBean.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="171">
               <caret line="9" column="30" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="30" />
             </state>
           </provider>
@@ -123,6 +138,8 @@
         <option value="$PROJECT_DIR$/.idea/misc.xml" />
         <option value="$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java" />
         <option value="$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java" />
+        <option value="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-dev.yml" />
+        <option value="$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-pro.yml" />
       </list>
     </option>
   </component>
@@ -139,7 +156,7 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="950" />
     <option name="width" value="980" />
     <option name="height" value="1040" />
@@ -152,6 +169,7 @@
     <panes>
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -193,6 +211,13 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="bootdo" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="amy-eureka-client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="amy-parent" type="b2602c69:ProjectViewProjectNode" />
@@ -285,7 +310,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -449,9 +473,9 @@
       <item itemvalue="Spring Boot.App (2)" />
       <item itemvalue="Spring Boot.App (3)" />
       <item itemvalue="Spring Boot.App (4)" />
-      <item itemvalue="Spring Boot.BootdoApplication" />
       <item itemvalue="Spring Boot.Application (6)" />
       <item itemvalue="Spring Boot.Application (7)" />
+      <item itemvalue="Spring Boot.BootdoApplication" />
     </list>
     <recent_temporary>
       <list>
@@ -473,50 +497,61 @@
       <workItem from="1537926077195" duration="21209000" />
       <workItem from="1538013299433" duration="16568000" />
       <workItem from="1538185452804" duration="6636000" />
-      <workItem from="1538270064969" duration="5390000" />
+      <workItem from="1538270064969" duration="11201000" />
+      <workItem from="1538961739225" duration="9930000" />
+      <workItem from="1539049983018" duration="255000" />
+      <workItem from="1539221748646" duration="5501000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65574000" />
+    <option name="totallyTimeSpent" value="87071000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.50067115" side_tool="true" weight="0.39911634" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info id="Capture Tool" order="2" />
+      <window_info id="Capture Tool" order="1" />
       <window_info id="Designer" order="2" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Structure" order="0" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info id="UI Designer" order="2" />
+      <window_info id="UI Designer" order="3" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49932885" weight="0.66863036" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.3298969" />
       <window_info anchor="bottom" id="Messages" order="7" weight="0.3298969" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
-      <window_info id="Image Layers" order="2" />
-      <window_info anchor="bottom" id="Java Enterprise" order="7" />
+      <window_info id="Image Layers" order="4" />
+      <window_info anchor="bottom" id="Java Enterprise" order="7" weight="0.3298969" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3298969" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932885" visible="true" weight="0.73195875" />
-      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.3298969" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.3298969" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26308724" />
+      <window_info content_ui="combo" id="Project" order="7" visible="true" weight="0.2751678" />
       <window_info anchor="right" id="Bean Validation" order="3" />
-      <window_info id="Web" order="2" side_tool="true" />
+      <window_info id="Web" order="5" side_tool="true" />
       <window_info anchor="right" id="BPMNPalette" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Theme Preview" order="3" />
-      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -531,6 +566,86 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8360">
+          <caret line="446" column="4" selection-start-line="433" selection-start-column="3" selection-end-line="446" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/service/api/IAllotPlanService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="54" column="34" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dx-client-model/src/main/java/com/dx/client/model/purchase/AllotPlanBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dx-client-model/src/main/java/com/dx/client/model/purchase/AllotPlanItemBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6460">
+          <caret line="392" column="56" selection-start-line="392" selection-start-column="56" selection-end-line="392" selection-end-column="56" />
+          <folding>
+            <element signature="method#edit#0;class#AllocationPlanController#0" />
+            <element signature="method#check#0;class#AllocationPlanController#0" />
+            <element signature="method#list#0;class#AllocationPlanController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8360">
+          <caret line="446" column="4" selection-start-line="433" selection-start-column="3" selection-end-line="446" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/service/api/IAllotPlanService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="54" column="34" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dx-client-model/src/main/java/com/dx/client/model/purchase/AllotPlanBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="26" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dx-client-model/src/main/java/com/dx/client/model/purchase/AllotPlanItemBean.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11400">
+          <caret line="600" column="52" selection-start-line="600" selection-start-column="52" selection-end-line="600" selection-end-column="52" />
+          <folding>
+            <element signature="method#edit#0;class#AllocationPlanController#0" />
+            <element signature="method#check#0;class#AllocationPlanController#0" />
+            <element signature="method#list#0;class#AllocationPlanController#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3743">
@@ -565,12 +680,8 @@
           <caret line="77" column="33" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="33" />
           <folding>
             <element signature="method#edit#0;class#AllocationPlanController#0" />
-            <element signature="method#edit_ajax#0;class#AllocationPlanController#0" />
             <element signature="method#check#0;class#AllocationPlanController#0" />
-            <element signature="method#edit_ajax#1;class#AllocationPlanController#0" />
             <element signature="method#list#0;class#AllocationPlanController#0" />
-            <element signature="method#allocationPlanAddList#0;class#AllocationPlanController#0" />
-            <element signature="method#getSourcePlanDetail#0;class#AllocationPlanController#0" />
           </folding>
         </state>
       </provider>
@@ -609,12 +720,8 @@
           <caret line="141" column="19" lean-forward="true" selection-start-line="141" selection-end-line="142" />
           <folding>
             <element signature="method#edit#0;class#AllocationPlanController#0" />
-            <element signature="method#edit_ajax#0;class#AllocationPlanController#0" />
             <element signature="method#check#0;class#AllocationPlanController#0" />
-            <element signature="method#edit_ajax#1;class#AllocationPlanController#0" />
             <element signature="method#list#0;class#AllocationPlanController#0" />
-            <element signature="method#allocationPlanAddList#0;class#AllocationPlanController#0" />
-            <element signature="method#getSourcePlanDetail#0;class#AllocationPlanController#0" />
           </folding>
         </state>
       </provider>
@@ -773,13 +880,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequireApplyController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="171" column="25" selection-start-line="168" selection-start-column="8" selection-end-line="171" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -789,45 +889,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../dx-client-model/src/main/java/com/dx/client/model/purchase/AllotPlanBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-95">
+        <state relative-caret-position="209">
           <caret line="11" column="26" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/service/api/IAllotPlanService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9">
-          <caret line="54" column="34" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="401" column="45" selection-start-line="401" selection-start-column="45" selection-end-line="401" selection-end-column="45" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../dx-client-model/src/main/java/com/dx/client/model/purchase/AllotPlanItemBean.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="171">
           <caret line="9" column="30" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../dx-service-purchase-api/src/main/java/com/dx/service/purchase/service/api/IAllotPlanService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="54" column="34" selection-start-line="54" selection-start-column="17" selection-end-line="54" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-pro.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/resources/application-dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/AllocationPlanController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="702" column="52" selection-start-line="702" selection-start-column="52" selection-end-line="702" selection-end-column="52" />
+        <state relative-caret-position="-4237">
+          <caret line="392" column="56" selection-start-line="392" selection-start-column="56" selection-end-line="392" selection-end-column="56" />
           <folding>
             <element signature="method#edit#0;class#AllocationPlanController#0" />
-            <element signature="method#edit_ajax#0;class#AllocationPlanController#0" />
             <element signature="method#check#0;class#AllocationPlanController#0" />
-            <element signature="method#edit_ajax#1;class#AllocationPlanController#0" />
             <element signature="method#list#0;class#AllocationPlanController#0" />
-            <element signature="method#allocationPlanAddList#0;class#AllocationPlanController#0" />
-            <element signature="method#getSourcePlanDetail#0;class#AllocationPlanController#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequirePlanController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="391" selection-start-line="391" selection-end-line="391" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../amy-eureka-client/src/main/java/com/bootdo/material/controller/RequireApplyController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3589">
+          <caret line="171" column="9" selection-start-line="168" selection-start-column="8" selection-end-line="171" selection-end-column="9" />
         </state>
       </provider>
     </entry>

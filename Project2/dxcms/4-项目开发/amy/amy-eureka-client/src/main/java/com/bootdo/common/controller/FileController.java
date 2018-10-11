@@ -157,6 +157,14 @@ public class FileController extends BaseController {
 		}
 		return R.error();
 	}
-
+	
+	//公用导入excel文件
+	@GetMapping("/importEcxel")
+	@RequiresPermissions("common:sysFile:sysFile")
+	String importM(@RequestParam("url") String url,Model model) {
+		System.out.println(url);
+		model.addAttribute("url", url);
+		return "/common/uploadExcel/uploadEcxcel";
+	}
 
 }

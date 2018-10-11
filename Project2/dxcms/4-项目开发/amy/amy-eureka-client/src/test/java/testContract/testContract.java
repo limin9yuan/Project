@@ -1,19 +1,9 @@
 package testContract;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -28,20 +18,14 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bootdo.contract.controller.ContractController;
-import com.dx.client.model.contract.ContractBean;
 import com.dx.service.contract.service.api.IContractService;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.pagehelper.PageInfo;
 
-import io.swagger.models.Model;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 @RunWith(MockitoJUnitRunner.class)
@@ -57,7 +41,7 @@ public class testContract {
 	@Mock
 	private IContractService iContractService;
 	
-	public static String route="/ContractCreation/ContractCreation";
+	private String route="/ContractCreation/ContractCreation";
 	
 	@Before
 	public void setUp() throws Exception {
@@ -69,7 +53,7 @@ public class testContract {
 	@Test
 	public void ContractCreation() throws Exception {
 //		MvcResult mvcResult = mockMvc
-//				.perform(get("/ContractCreation/ContractCreation"))
+//				.perform(get(route))
 //				.andDo(MockMvcResultHandlers.print())
 //				.andReturn();
 //		int status = mvcResult.getResponse().getStatus(); // 得到返回代码
@@ -77,7 +61,7 @@ public class testContract {
 //
 //		Assert.assertEquals(200, status); // 断言，判断返回代码是否正确
 //		Assert.assertEquals(content, "");// 断言，判断返回的值是否正确
-		System.out.println("首次加载数据ContractCreation()方法");
+//		System.out.println("首次加载数据ContractCreation()方法");
 	}
 	
 	/**
@@ -168,17 +152,6 @@ public class testContract {
 		String htmlText="\"\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t 设备定作合同 合同编号:定作方:  华润雪花啤酒（\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t）有限公司（以下简称甲方）注册地址:  法定代表人或负责人：经办人:  业务电话:  承揽方:   （以下简称乙方）\\n\\t\\t\\t\\t\\t\\t\\t\\t\\t\\t\"";
 		String jsonSuitBeans="[{\"deliverCompanyId\":\"13\",\"deliverCompanyName\":\"测试部\"}]";
 		
-		JSONObject object=new JSONObject();
-		object.accumulate("htmlText", htmlText);
-		object.accumulate("contractId", "1");
-		object.accumulate("contractMaterialBeans",contractMaterialBeans);
-		object.accumulate("signupForm", signupForm);
-		object.accumulate("fileInformation", fileInformation);
-		object.accumulate("jsonCompanyName", jsonCompanyName);
-		object.accumulate("richTextKVJson", richTextKVJson);
-		object.accumulate("jsonSuitBeans", jsonSuitBeans);
-		JSONArray array=new JSONArray();
-		array.add(object);
 		MvcResult mvcResult = this.mockMvc
 				.perform(post(route+"/update")
 				.contentType(MediaType.APPLICATION_JSON_UTF8)

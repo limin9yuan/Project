@@ -484,20 +484,59 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			planNo : {
 				required : true
+			},
+			invoiceDate : {
+				required : true,
+				date : true
+			},
+			purchaseDept : {
+				required : true
+			},
+			authorUser : {
+				required : true
+			},
+			createDate : {
+				required : true,
+				date : true
+			},
+			remark : {
+				required : true,
 			}
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
+			planNo : {
+				required : icon + "请输入单据编号"
+			},
+			invoiceDate : {
+				required : icon + "请输入单据日期",
+				date : "请输入正确格式的日期"
+			},
+			purchaseDept : {
+				required : icon + "请输入采购部门"
+			},
+			authorUser : {
+				required : icon + "请输入编制人"
+			},
+			createDate : {
+				required : icon + "请输入编制日期",
+				date : "请输入正确格式的日期"
+			},
+			remark : {
+				required : icon + "请输入备注"
+			},
 		}
 	})
 }
 function datetimepicker(){
-	//开始时间
+	//编制日期
 	$('#createDate').datetimepicker({
+		   format: 'YYYY-MM-DD ',
+		   locale: moment.locale('zh-cn')
+	});
+	//单据日期
+	$('#invoiceDate').datetimepicker({
 		   format: 'YYYY-MM-DD ',
 		   locale: moment.locale('zh-cn')
 	});

@@ -509,6 +509,69 @@ $("#commitApplyBtn").click(function (){
         commitApply();
      }
 })
+//导入
+function importMaterial() {
+	layer.open({
+		type : 2,
+		title : 'Excel导入',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '500px', '250px' ],
+		content : '/common/sysFile/importEcxel?url=' + "/material/requireApply/uploadExcel", // iframe的url
+		btn : [ '确定', '取消' ],
+		yes : function(index, layero) {
+			var info="edit";
+			window["layui-layer-iframe" + index].clickButtonFile(info);
+		}
+	});
+}
+//修改页Excel数据导入
+function addEdExcel(data) {
+	var $grid = $("#requireApplyTable");
+//	alert(data.length);
+	//添加空行
+	for (var i = 0; i < data.length; i++) {
+		var result = data[i]
+		var rowdata = setDataRow(result);
+		$grid.jqGrid('addRowData', i, rowdata);
+	}
+	;
+	$grid.find('.decimal').attr('onfocus', 'IsMoney(this.id)');
+	//$grid.find('input').attr("disabled", "disabled");
+	//$grid.find("tbody tr:eq(1)").find('input').removeAttr('disabled').attr("isvalid", "yes");
+	$grid.find('.disabled').attr("disabled", "disabled");
+	//注册事件
+	registEvent();
+
+	calculateTotal();
+}
+//数据行
+function setDataRow(result) {
+	var tmpReferenceTotal = (Number(result.referencePrice) * Number(result.requireQty)).toFixed(2);
+	var tmpBudgetTotal = (Number(result.budgetPrice) * Number(result.budgetQty)).toFixed(2);
+
+	var rowdata = {
+		materialName : '<div class="product"><input name="materialName" readonly type="text" class="editable left" isvalid="no" checkexpession="NotNull" value="' + result.materialName + '"/><span class="ui-icon-ellipsis"></span></div>',
+		materialCode : '<input name="materialCode" type="text" class="editable left disabled"  value="' + result.materialCode + '"/>', //物资编码
+		specification : '<input name="specification" type="text" class="editable left disabled" value="' + result.specification + '"/>', //规格型号
+		materialUnitName : '<input name="materialUnitName" type="text" class="editable left disabled" value="' + result.materialUnitName + '"/><input name="materialUnitId" type="hidden" value="' + result.materialUnitId + '"/>', //单位
+		materialSubArray : '<input name="materialSubArray" type="text" class="editable left disabled"  value="' + result.materialSubArray + '"/>', //包装物资
+
+		stockQty : '<input name="stockQty" type="text" class="editable left disabled" value="' + result.stockQty + '" />', //库存数量
+		budgetQty : '<input name="budgetQty" type="text" class="editable left disabled"  value="' + result.budgetQty + '"/>', //预算数量
+		requireQty : '<input name="requireQty" type="text" class="editable left decimal" checkexpession="Double"  value="' + result.requireQty + '"/>', //需求数量
+
+		budgetPrice : '<input name="budgetPrice" type="text" class="editable left disabled" value="' + result.budgetPrice + '"/>', //预算单价
+		referencePrice : '<input name="referencePrice" type="text" class="editable left disabled"  value="' + result.referencePrice + '"/>', //参考单价
+		budgetTotal : '<input name="budgetTotal" type="text" class="editable left disabled"  value="' + tmpBudgetTotal + '"/>', //预算金额
+		referenceTotal : '<input name="referenceTotal" type="text" class="editable left disabled"  value="' + tmpReferenceTotal + '"/>', //参考金额
+		requireDate : '<input name="requireDate" type="text" class="editable left" value="' + result.requireDate + '"/>', //要求到货时间
+		acceptUserId : '<input name="acceptUserName" type="text" class="editable left disabled" value="' + result.acceptUserName + '"/><input name="acceptUserId" type="hidden" value="' + result.acceptUserId + '"/>', //受理人
+		description : '<input name="description" type="text" class="editable left" value="' + result.description + '"/>' //说明信息
+	}
+	return rowdata;
+}
+
 
 //加载修改数据
 function loadRequireApplyDetail(){

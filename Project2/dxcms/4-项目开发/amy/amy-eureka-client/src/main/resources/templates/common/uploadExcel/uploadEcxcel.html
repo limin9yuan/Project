@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<link href="/css/layui.css" rel="stylesheet">
+<link rel="stylesheet" href="/js/plugins/jqwidgets/styles/jqx.base.css"
+	type="text/css" />
+<body class="gray-bg">
+	<div class="wrapper wrapper-content ">
+		<div class="row">
+			<div class="form-group">
+				<!-- <label class="col-sm-2 control-label">附件：</label> -->
+				<div class="col-sm-4">
+					<div class="file-manager">
+					<p style="color: #999;padding:0 10px">只能上传后缀是.xls和.xlsx的表格文件</p>
+						<button type="button" class="layui-btn btn btn-danger" id="fileTest1"
+							style="width: 100%;">
+							<i class="glyphicon glyphicon-cloud-upload"></i>选择文件
+						</button>
+						<input id="excelUrl" name="excelUrl" th:value="${url}"  type="hidden">
+						<input id="recordFile" name="recordFile" type="hidden">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group pull-right">
+				<label class="col-sm-3 control-label"></label>
+				<div class="col-sm-9">
+				<button type="button" id="upFile" class="btn btn-primary columns" style="display: none">上传文件</button>
+				<button type="button" id="upFileEdit" class="btn btn-primary columns" style="display: none">上传文件</button>
+<!-- 					<button type="button" class="btn btn-danger" onclick="closeWin()">取消</button> -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:include="include::footer"></div>
+	<script src="/js/layui.js"></script>
+	<script src="/js/vue.min.js"></script>
+	<script src="/js/plugins/layer/layer.min.js"></script>
+	<script type="text/javascript" src="/js/appjs/common/uploadExcel/uploadExcel.js"></script>
+	
+	
+
+	<script type="text/javascript" src="/js/jquery-1.11.2.min.js"></script>
+	<script type="text/javascript" src="/js/plugins/jqwidgets/jqxcore.js"></script>
+	<script type="text/javascript" src="/js/plugins/jqwidgets/jqxdata.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxbuttons.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxscrollbar.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxlistbox.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxdropdownlist.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxdatatable.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxtreegrid.js"></script>
+	<script type="text/javascript"
+		src="/js/plugins/jqwidgets/jqxtooltip.js"></script>
+	<script type="text/javascript" src="/js/plugins/jqwidgets/jqxinput.js"></script>
+	
+<!-- 	<script type="text/javascript" src="/js/appjs/contract/ContractCreation/add.js"></script> -->
+</body>
+</html>
+
+ 

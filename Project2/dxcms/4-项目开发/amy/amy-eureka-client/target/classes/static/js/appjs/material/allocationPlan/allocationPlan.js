@@ -135,7 +135,7 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : "/requirementPlan/requirementPlan/remove",
+			url : "/allocationPlan/allocationPlan/remove",
 			type : "post",
 			data : {
 				'id' : id

@@ -3,8 +3,6 @@ package com.bootdo.material.controller;
 import com.bootdo.common.utils.R;
 import com.dx.client.model.purchase.AllotPlanBean;
 import com.dx.client.model.purchase.AllotPlanItemBean;
-import com.dx.client.model.purchase.RequirePlanBean;
-import com.dx.client.model.purchase.RequirePlanItemBean;
 import com.dx.service.purchase.service.api.IAllotPlanService;
 import com.github.pagehelper.PageInfo;
 import net.sf.json.JSONArray;
@@ -161,7 +159,7 @@ public class AllocationPlanController {
                     allocationMap.put("materilaCode", dataList.get(i).getMaterilaCode());
                     allocationMap.put("specification", dataList.get(i).getSpecification());
                     allocationMap.put("materialUnitName",dataList.get(i).getMaterialUnitName());
-                    allocationMap.put("purchaseQty","采购数量");
+                    allocationMap.put("purchaseQty","1000");
                     allocationMap.put("unitPrice",dataList.get(i).getUnitPrice());
                     allocationMap.put("allotQty",dataList.get(i).getAllotQty());
                     allocationMap.put("allotRatio",dataList.get(i).getAllotRatio());
@@ -174,7 +172,7 @@ public class AllocationPlanController {
                     allocationMap.put("materilaCode", dataList.get(i).getMaterilaCode());
                     allocationMap.put("specification", dataList.get(i).getSpecification());
                     allocationMap.put("materialUnitName",dataList.get(i).getMaterialUnitName());
-                    allocationMap.put("purchaseQty","采购数量");
+                    allocationMap.put("purchaseQty","500");
                     allocationMap.put("unitPrice",dataList.get(i).getUnitPrice());
                     allocationMap.put("allotQty",dataList.get(i).getAllotQty());
                     allocationMap.put("allotRatio",dataList.get(i).getAllotRatio());
@@ -188,7 +186,7 @@ public class AllocationPlanController {
                 allocationMap.put("materilaCode", dataList.get(i).getMaterilaCode());
                 allocationMap.put("specification", dataList.get(i).getSpecification());
                 allocationMap.put("materialUnitName",dataList.get(i).getMaterialUnitName());
-                allocationMap.put("purchaseQty","采购数量");
+                allocationMap.put("purchaseQty","600");
                 allocationMap.put("unitPrice",dataList.get(i).getUnitPrice());
                 allocationMap.put("allotQty",dataList.get(i).getAllotQty());
                 allocationMap.put("allotRatio",dataList.get(i).getAllotRatio());
@@ -379,7 +377,7 @@ public class AllocationPlanController {
                     allocationMap.put("materilaCode", dataList.get(i).getMaterilaCode());
                     allocationMap.put("specification", dataList.get(i).getSpecification());
                     allocationMap.put("materialUnitName",dataList.get(i).getMaterialUnitName());
-                    allocationMap.put("purchaseQty","采购数量");
+                    allocationMap.put("purchaseQty","1000");
                     allocationMap.put("unitPrice",dataList.get(i).getUnitPrice());
                     allocationMap.put("allotQty",dataList.get(i).getAllotQty());
                     allocationMap.put("allotRatio",dataList.get(i).getAllotRatio());
@@ -392,7 +390,7 @@ public class AllocationPlanController {
                     allocationMap.put("materilaCode", dataList.get(i).getMaterilaCode());
                     allocationMap.put("specification", dataList.get(i).getSpecification());
                     allocationMap.put("materialUnitName",dataList.get(i).getMaterialUnitName());
-                    allocationMap.put("purchaseQty","采购数量");
+                    allocationMap.put("purchaseQty","500");
                     allocationMap.put("unitPrice",dataList.get(i).getUnitPrice());
                     allocationMap.put("allotQty",dataList.get(i).getAllotQty());
                     allocationMap.put("allotRatio",dataList.get(i).getAllotRatio());
@@ -406,7 +404,7 @@ public class AllocationPlanController {
                 allocationMap.put("materilaCode", dataList.get(i).getMaterilaCode());
                 allocationMap.put("specification", dataList.get(i).getSpecification());
                 allocationMap.put("materialUnitName",dataList.get(i).getMaterialUnitName());
-                allocationMap.put("purchaseQty","采购数量");
+                allocationMap.put("purchaseQty","600");
                 allocationMap.put("unitPrice",dataList.get(i).getUnitPrice());
                 allocationMap.put("allotQty",dataList.get(i).getAllotQty());
                 allocationMap.put("allotRatio",dataList.get(i).getAllotRatio());
@@ -573,7 +571,7 @@ public class AllocationPlanController {
                     allocationMap.put("materilaCode", "物料编码" + i);
                     allocationMap.put("specification", "物料特性" + i);
                     allocationMap.put("materialUnitName","单位");
-                    allocationMap.put("purchaseQty","采购数量");
+                    allocationMap.put("purchaseQty","1000");
                     allocationMap.put("unitPrice","4000");
                     allocationMap.put("allotQty","200");
                     allocationMap.put("allotRatio","50");
@@ -586,7 +584,7 @@ public class AllocationPlanController {
                     allocationMap.put("materilaCode", "物料编码" + i);
                     allocationMap.put("specification", "物料特性" + i);
                     allocationMap.put("materialUnitName","单位");
-                    allocationMap.put("purchaseQty","采购数量");
+                    allocationMap.put("purchaseQty","500");
                     allocationMap.put("unitPrice","60");
                     allocationMap.put("allotQty","99");
                     allocationMap.put("allotRatio","15");
@@ -600,7 +598,7 @@ public class AllocationPlanController {
                 allocationMap.put("materilaCode", "物料编码" + i);
                 allocationMap.put("specification", "物料特性" + i);
                 allocationMap.put("materialUnitName","单位");
-                allocationMap.put("purchaseQty","采购数量");
+                allocationMap.put("purchaseQty","600");
                 allocationMap.put("unitPrice","124");
                 allocationMap.put("allotQty","78");
                 allocationMap.put("allotRatio","6");
@@ -739,6 +737,21 @@ public class AllocationPlanController {
             return R.ok();
         }
         return R.error();
+    }
+
+    /**
+     * 删除
+     */
+    @PostMapping( "/remove")
+    @ResponseBody
+    @RequiresPermissions("requirementPlan:remove")
+    public R remove( String id){
+        //调用接口
+        ResultMsg rms = allotPlanService.remove(id);
+        if ("1".equals(rms.getCode())) {
+            return R.ok();
+        }
+        return R.error(rms.getCode(), rms.getMsg());
     }
 
     /**

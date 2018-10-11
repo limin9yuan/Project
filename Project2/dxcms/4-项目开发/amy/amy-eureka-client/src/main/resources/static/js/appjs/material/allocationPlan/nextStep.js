@@ -5,6 +5,34 @@ $().ready(function() {
 	datetimepicker();
 	getAllocationPlanDetail();
 });
+function singleCalculateRatio(obj) {
+	clearNoNum(obj);
+	var allotQty = obj.parents('[role=row]').find('input[name="allotQty"]');
+	var purchaseQty = obj.parents('[role=row]').find('input[name="purchaseQty"]');
+	var tempRatio = Number(allotQty.val())/Number(purchaseQty.val());
+	obj.parents('[role=row]').find('input[name="allotRatio"]').val(tempRatio.toFixed(4));
+}
+function singleCalculateQty(obj) {
+	clearNoNum(obj);
+	var allotRatio = obj.parents('[role=row]').find('input[name="allotRatio"]');
+	var purchaseQty = obj.parents('[role=row]').find('input[name="purchaseQty"]');
+	var tempQty = Number(allotRatio.val())*Number(purchaseQty.val());
+	obj.parents('[role=row]').find('input[name="allotQty"]').val(tempQty);
+}
+function calculateRatio(i,j,obj){
+	clearNoNum(obj);
+	var allotQty = obj.parents('[role=row]').find('input[name="allotQty'+i+'"]');
+	var purchaseQty = obj.parents('[role=row]').find('input[name="purchaseQty"]');
+	var tempRatio = Number(allotQty.val())/Number(purchaseQty.val());
+	obj.parents('[role=row]').find('input[name="allotRatio'+i+'"]').val(tempRatio.toFixed(4));
+}
+function calculateQty(i,j,obj) {
+	clearNoNum(obj);
+	var allotRatio = obj.parents('[role=row]').find('input[name="allotRatio'+i+'"]');
+	var purchaseQty = obj.parents('[role=row]').find('input[name="purchaseQty"]');
+	var tempQty = Number(allotRatio.val())*Number(purchaseQty.val());
+	obj.parents('[role=row]').find('input[name="allotQty'+i+'"]').val(tempQty);
+}
 function withdrawApproval() {
 	var planNo = $("#planNo").val();//单据编号
 	$.ajax({
@@ -213,8 +241,8 @@ function loadData(orderEntry, i,supplierArrays) {
 				materialUnitName: '<input value="'+typeEntity[j].materialUnitName+'" name="materialUnitName" type="text" class="editable left disabled" readonly/>',//单位
 				purchaseQty: '<input value="'+typeEntity[j].purchaseQty+'" name="purchaseQty" type="text" class="editable left disabled decimal" readonly/>',//采购数量
 				unitPrice: '<input value="'+typeEntity[j].unitPrice+'" name="unitPrice" type="text" class="editable left disabled" readonly/>',//合同单价
-				allotQty: '<input value="'+typeEntity[j].allotQty+'" name="allotQty" type="text" class="editable left disabled"/>',//分配数量
-				allotRatio: '<input value="'+typeEntity[j].allotRatio+'" name="allotRatio" type="text" class="editable left disabled"/>',//分配比例
+				allotQty: '<input onkeyup=\'singleCalculateRatio($(this))\' value="'+typeEntity[j].allotQty+'" name="allotQty" type="text" class="editable left disabled"/>',//分配数量
+				allotRatio: '<input onkeyup=\'singleCalculateQty($(this))\' value="'+typeEntity[j].allotRatio+'" name="allotRatio" type="text" class="editable left disabled"/>',//分配比例
 				companyName: '<input value="'+typeEntity[j].companyName+'" name="companyName" type="text" class="editable left disabled decimal" readonly/><input value="'+typeEntity[j].companyId+'" name="companyId" type="hidden" class="editable left disabled decimal" readonly/>',//供应商
 			}
 			$("#"+tableName).jqGrid('addRowData', j, rowdata);
@@ -245,8 +273,8 @@ function loadData(orderEntry, i,supplierArrays) {
 						tempAllotRatio = "";
 					}
 					jsonGroupStr = jsonGroupStr+'"unitPrice'+i+'" :  "<input value=\''+tempUnitPrice+'\' name=\'unitPrice'+i+'\' type=\'text\' class=\'editable left disabled\' readonly/>",'//合同单价
-					+'"allotQty'+i+'" :  "<input value=\''+tempAllotQty+'\' name=\'allotQty'+i+'\' type=\'text\' class=\'editable left disabled\'/>",'//分配数量
-					+'"allotRatio'+i+'" :  "<input value=\''+tempAllotRatio+'\' name=\'allotRatio'+i+'\' type=\'text\' class=\'editable left disabled\'/>"';//分配比例
+					+'"allotQty'+i+'" :  "<input onkeyup=\'calculateRatio('+i+','+j+',$(this))\' value=\''+tempAllotQty+'\' name=\'allotQty'+i+'\' type=\'text\' class=\'editable left disabled\'/>",'//分配数量
+					+'"allotRatio'+i+'" :  "<input onkeyup=\'calculateQty('+i+','+j+',$(this))\' value=\''+tempAllotRatio+'\' name=\'allotRatio'+i+'\' type=\'text\' class=\'editable left disabled\'/>"';//分配比例
 					if (i != supplierArrays.length - 1) {
 						jsonGroupStr = jsonGroupStr+',';
 					}
@@ -413,14 +441,34 @@ function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
 	$("#signupForm").validate({
 		rules : {
-			name : {
+			planNo : {
 				required : true
+			},
+			authorUser : {
+				required : true
+			},
+			createDate : {
+				required : true,
+				date : true
+			},
+			remark : {
+				required : true,
 			}
 		},
 		messages : {
-			name : {
-				required : icon + "请输入姓名"
-			}
+			planNo : {
+				required : icon + "请输入单据编号"
+			},
+			authorUser : {
+				required : icon + "请输入编制人"
+			},
+			createDate : {
+				required : icon + "请输入编制日期",
+				date : "请输入正确格式的日期"
+			},
+			remark : {
+				required : icon + "请输入备注"
+			},
 		}
 	})
 }

@@ -405,7 +405,7 @@ public class RequireApplyController extends BaseController {
 
         return R.ok();
     }
-
+    
     /**
      * exls表格导入
      */
@@ -455,11 +455,14 @@ public class RequireApplyController extends BaseController {
             int rows = sheet.getPhysicalNumberOfRows();
             // Excel文件中的第一行（标题行）
             int cellCount = 0;
-            String titleName = "";
+           
             // 遍历行
             my: for (int i = 0; i < rows; i++) {
                 // 读取左上端单元格(跳过第一行标题行)
                 Row row = sheet.getRow(i);
+                
+              //获取标题行
+				Row rowTitleName = sheet.getRow(0);
                 RequireApplyItemBean requireApplyItemBean = new RequireApplyItemBean(); //
 
                 // 行不为空
@@ -476,48 +479,63 @@ public class RequireApplyController extends BaseController {
                     // int cells = row.getPhysicalNumberOfCells();
                     String cellvalue = "";
                     String contact = "";
+                    String titleName = "";
                     // String agentCode = null;
                     String companyName = null;
                     // 遍历列
                     for (int j = 0; j < cellCount; j++) {
                         cellvalue = ""; // 清空之前之前取到的列的值
+                        titleName = "";
                         // 获取到列的值
                         Cell cell = row.getCell(j);
+                      //获取标题到列的值
+						Cell cellTitleName = rowTitleName.getCell(j);
                         // String value = "";
                         if (cell != null) {
-                            switch (cell.getCellType()) {
+                            switch (cell.getCellType()& cellTitleName.getCellType()) {
                                 case XSSFCell.CELL_TYPE_FORMULA:
                                     break;
                                 case XSSFCell.CELL_TYPE_NUMERIC: {
                                     short format = cell.getCellStyle().getDataFormat();
+//                                    
                                     if (format == 14 || format == 31 || format == 57 || format == 58) { // excel中的时间格式
                                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                                         double value = cell.getNumericCellValue();
                                         Date date = DateUtil.getJavaDate(value);
                                         cellvalue = sdf.format(date);
                                     }
+                                    short formatTitleName = cellTitleName.getCellStyle().getDataFormat();
+                                    if (formatTitleName == 14 || formatTitleName == 31 || formatTitleName == 57 || formatTitleName == 58) {
+                                    	 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                                         double values = cellTitleName.getNumericCellValue();
+                                         Date dateTitleName = DateUtil.getJavaDate(values);
+                                         titleName = sdf.format(dateTitleName);
+									}
                                     // 判断当前的cell是否为Date
                                     else if (HSSFDateUtil.isCellDateFormatted(cell)) { // 先注释日期类型的转换，在实际测试中发现HSSFDateUtil.isCellDateFormatted(cell)只识别2014/02/02这种格式。
                                         // 如果是Date类型则，取得该Cell的Date值 // 对2014-02-02格式识别不出是日期格式
                                         Date date = cell.getDateCellValue();
                                         DateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
                                         cellvalue = formater.format(date);
+                                        titleName =cellTitleName.getStringCellValue();
                                     } else { // 如果是纯数字
                                         // 取得当前Cell的数值
+                                    	titleName = cellTitleName.getStringCellValue();
                                         cellvalue = NumberToTextConverter.toText(cell.getNumericCellValue());
                                     }
                                     break;
                                 }
                                 case XSSFCell.CELL_TYPE_STRING:
+                                	titleName = cellTitleName.getStringCellValue();
                                     cellvalue = cell.getStringCellValue();
                                     break;
                                 default:
                                     break;
                             }
                         }
-                        if (i == 0) {
-                            titleName=cellvalue==null?"":cellvalue;
-                        }else{
+//                        if (i == 0) {
+//                            titleName=cellvalue==null?"":cellvalue;
+//                        }else{
                             if ("物资编码".equals(titleName.trim())) {
                                 requireApplyItemBean.setMaterialCode(cellvalue);
                             } else if ("物资名称".equals(titleName.trim())) {
@@ -536,7 +554,7 @@ public class RequireApplyController extends BaseController {
                             } else if ("说明信息".equals(titleName.trim())) {
                                 requireApplyItemBean.setRemark(cellvalue);
                             }
-                        }
+//                        }
 
 
                     } // --->遍历列

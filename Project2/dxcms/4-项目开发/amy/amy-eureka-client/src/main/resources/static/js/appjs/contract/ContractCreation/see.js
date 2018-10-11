@@ -1057,7 +1057,7 @@ function richText() {
 		header_page_height : 50, //头部高度，底部
 		footer_page_height : 30, //页脚的高度
 		total_page_height : 1000, //A4纸张总页高默认该值【不允许修改】
-		mode : 'DESIGN', //默认为设计模式设计模式（DESIGN）、编辑模式（EDITOR）、严格模式STRICT、只读模式（READONLY）
+		mode : 'READONLY', //默认为设计模式设计模式（DESIGN）、编辑模式（EDITOR）、严格模式STRICT、只读模式（READONLY）
 		page_header_footer : {
 			header (index) {}, //返回header的Element对象
 			footer (index) {}, //返回footer的Element对象
@@ -1552,13 +1552,15 @@ function richText() {
 					name : 'sdectrlcbx',
 					title : '复选框'
 				} ]
-			}, {
-				name : 'sde-toolbar-controls-sdemode',
-				title : '模式设置',
-				items : [ {
-					name : 'sdemode',
-					title : '模式设置'
-				} ]
+			}
+//			, {
+//				name : 'sde-toolbar-controls-sdemode',
+//				title : '模式设置',
+//				items : [ {
+//					name : 'sdemode',
+//					title : '模式设置'
+//				} 
+				]
 			} ]
 		} ]
 	};
