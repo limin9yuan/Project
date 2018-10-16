@@ -18,15 +18,8 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-1 control-label">单据编号<span class="mustin">*</span></label>
-                            <div class="col-sm-3"><input id="planNo" name="" th:value="${planNo}" class="form-control" type="text"></div>
+                            <div class="col-sm-3"><input id="code" name="code" th:value="${code}" class="form-control" type="text"></div>
 
-                            <label class="col-sm-1 control-label">类型:<span class="mustin">*</span></label>
-                            <div class="col-sm-3">
-                                <select data-placeholder="--选择类别--" name="type" id="type"
-                                        class="form-control chosen-select" tabindex="2" required>
-                                    <option value="">--选择类别--</option>
-                                </select>
-                            </div>
 
                             <label class="col-sm-1 control-label">计划日期<span class="mustin">*</span></label>
                             <div class="col-sm-3">
@@ -98,8 +91,7 @@
                         </div>
                         <div class="text-right form-group">
                             <div class="columns pull-right col-md-4">
-                                <button shiro:hasPermission="material:purchasePlan:add" type="button" class="btn  btn-success"
-                                        onclick="save()">
+                                <button type="button" id="saveBtn" class="btn  btn-success">
                                     <i class="fa" aria-hidden="true"></i>保存
                                 </button>
                                 <button  type="button" class="btn  btn-success"
@@ -110,7 +102,7 @@
                                         onclick="withdrawApproval()">
                                     <i class="fa" aria-hidden="true"></i>撤回审批
                                 </button>
-                                <button type="button" class="btn btn-success" onclick="closeTabWin()">
+                                <button type="button" class="btn btn-success" onclick="closeWin()">
                                     <i class="fa" aria-hidden="true"></i>关闭
                                 </button>
                             </div>

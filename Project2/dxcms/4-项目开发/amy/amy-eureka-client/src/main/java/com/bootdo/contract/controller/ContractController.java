@@ -372,13 +372,6 @@ public class ContractController extends BaseController {
 					ContractEnclosureBean.class);
 			fileBena.add(signupFormModel);
 		}
-		// 表单
-		JSONArray signupForm = JSONArray.fromObject(params.get("signupForm"));
-		for (int i = 0; i < signupForm.size(); i++) {
-			ContractBean signupFormModel = (ContractBean) JSONObject.toBean((JSONObject) signupForm.get(i),
-					ContractBean.class);
-			contractBeanl.add(signupFormModel);
-		}
 		// 供货公司
 		JSONArray DeliverBeans = JSONArray.fromObject(params.get("jsonCompanyName"));
 		for (int i = 0; i < DeliverBeans.size(); i++) {
@@ -407,6 +400,7 @@ public class ContractController extends BaseController {
 					ContractElementBean.class);
 			richTextList.add(contractModelR);
 		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		ContractMaterialBean contractMaterialBean = new ContractMaterialBean();
 		ContractElementBean contractElementBean = new ContractElementBean();
 		contractMaterialBean.setContractId((String) params.get("contractId"));
@@ -414,6 +408,35 @@ public class ContractController extends BaseController {
 		contractBean.setContractDeliverBeans(contractDeliverBeans);
 		contractBean.setContractSuitBeans(contractSuitBeans);
 		contractBean.setContractEnclosureBeans(fileBena);
+		contractBean.setAuthorDeptId(params.get("authorDeptId").toString());
+		contractBean.setPerformUserId(params.get("performUserId").toString());
+		contractBean.setAuthorUserId(params.get("authorUserId").toString());
+		contractBean.setProjectId(params.get("projectId").toString());
+		contractBean.setContractName(params.get("contractName").toString());
+		contractBean.setContractCode(params.get("contractCode").toString());
+		contractBean.setProjectName(params.get("projectName").toString());
+		contractBean.setBidSchemeName(params.get("bidSchemeName").toString());
+		contractBean.setCurrencyTypeName(params.get("currencyTypeName").toString());
+		contractBean.setTaxRate((Double)params.get("taxRate"));
+		contractBean.setPerformanceBond(new BigDecimal(params.get("performanceBond").toString()));
+		contractBean.setWarrantyBond(new BigDecimal(params.get("warrantyBond").toString()));
+		 try {
+			 Date dateFrom = sdf.parse(params.get("dateFrom").toString());
+	         Date timeDateFrom = new java.sql.Date(dateFrom.getTime());
+			contractBean.setDateFrom(timeDateFrom);
+			 Date dateTo = sdf.parse(params.get("dateTo").toString());
+	         Date timeDateTo = new java.sql.Date(dateTo.getTime());
+	         contractBean.setDateTo(timeDateTo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		contractBean.setTotalMoney(new BigDecimal(params.get("totalMoney").toString()));
+		contractBean.setAuthorDeptName(params.get("authorDeptName").toString());
+		contractBean.setPerformUserName(params.get("performUserName").toString());
+		contractBean.setAuthorUserName(params.get("authorUserName").toString());
+		contractBean.setRemark(params.get("remark").toString());
+		contractBean.setAuthorCorpId(params.get("authorCorpId").toString());
 		contractElementBean.setContractId((String) params.get("contractId"));
 		contractHtmlBean.setContractElementBeans(richTextList);
 		contractHtmlBean.setHtmlText(new StringBuffer(params.get("htmlText").toString()));
@@ -458,13 +481,6 @@ public class ContractController extends BaseController {
 					ContractEnclosureBean.class);
 			fileBena.add(signupFormModel);
 		}
-		// 表单
-		JSONArray signupForm = JSONArray.fromObject(params.get("signupForm"));
-		for (int i = 0; i < signupForm.size(); i++) {
-			ContractBean signupFormModel = (ContractBean) JSONObject.toBean((JSONObject) signupForm.get(i),
-					ContractBean.class);
-			contractBeanl.add(signupFormModel);
-		}
 		// 供货公司
 		JSONArray DeliverBeans = JSONArray.fromObject(params.get("jsonCompanyName"));
 		for (int i = 0; i < DeliverBeans.size(); i++) {
@@ -493,10 +509,41 @@ public class ContractController extends BaseController {
 					ContractElementBean.class);
 			richTextList.add(contractModelR);
 		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		contractBean.setContractMaterialBeans(contractMaterialBeansList);
 		contractBean.setContractDeliverBeans(contractDeliverBeans);
 		contractBean.setContractSuitBeans(contractSuitBeans);
 		contractBean.setContractEnclosureBeans(fileBena);
+		contractBean.setAuthorDeptId(params.get("authorDeptId").toString());
+		contractBean.setPerformUserId(params.get("performUserId").toString());
+		contractBean.setAuthorUserId(params.get("authorUserId").toString());
+		contractBean.setProjectId(params.get("projectId").toString());
+		contractBean.setContractName(params.get("contractName").toString());
+		contractBean.setContractCode(params.get("contractCode").toString());
+		contractBean.setProjectName(params.get("projectName").toString());
+		contractBean.setBidSchemeName(params.get("bidSchemeName").toString());
+		contractBean.setCurrencyTypeName(params.get("currencyTypeName").toString());
+		contractBean.setTaxRate((Double)params.get("taxRate"));
+		contractBean.setPerformanceBond(new BigDecimal(params.get("performanceBond").toString()));
+		contractBean.setWarrantyBond(new BigDecimal(params.get("warrantyBond").toString()));
+		 try {
+			 Date dateFrom = sdf.parse(params.get("dateFrom").toString());
+	         Date timeDateFrom = new java.sql.Date(dateFrom.getTime());
+			contractBean.setDateFrom(timeDateFrom);
+			 Date dateTo = sdf.parse(params.get("dateTo").toString());
+	         Date timeDateTo = new java.sql.Date(dateTo.getTime());
+	         contractBean.setDateTo(timeDateTo);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		contractBean.setTotalMoney(new BigDecimal(params.get("totalMoney").toString()));
+		contractBean.setAuthorDeptName(params.get("authorDeptName").toString());
+		contractBean.setPerformUserName(params.get("performUserName").toString());
+		contractBean.setAuthorUserName(params.get("authorUserName").toString());
+		contractBean.setRemark(params.get("remark").toString());
+//		contractBean.setAuthorCorpId(params.get("authorCorpId").toString());
+		
 //		contractBean.setContractHtmlBeans(contractHtmlBeans);
 		contractHtmlBean.setContractElementBeans(richTextList);
 		contractHtmlBean.setHtmlText(new StringBuffer(params.get("htmlText").toString()));

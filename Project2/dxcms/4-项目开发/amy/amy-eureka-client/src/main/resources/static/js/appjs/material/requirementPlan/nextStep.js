@@ -6,6 +6,57 @@ $().ready(function() {
 	// initPage();
 	// datetimepicker();
 });
+//导入
+function importMaterial() {
+	layer.open({
+		type : 2,
+		title : 'Excel导入',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '500px', '250px' ],
+		content : '/requirementPlan/requirementPlan/import', // iframe的url
+		btn : [ '确定', '取消' ],
+		yes : function(index, layero) {
+			var info="add";
+			window["layui-layer-iframe" + index].clickButtonFile(info);
+		}
+	});
+}
+//导入Excel数据
+function addExcel(data) {
+	var dataThis = data;
+	var $grid = $("#requirePlanTable");
+	for (var i = 0; i < data.length; i++) {
+
+		$grid.find('[role=row]').each(function (i) {
+			var result = dataThis[i-1];
+			if (result != undefined ) {
+				$(this).find('input[name="requirePlanid"]').val(result.requirePlanid).attr('data-value', row.requirePlanid);
+				$(this).find('input[name="materialName"]').val(result.materialName);
+				$(this).find('input[name="materilaCode"]').val(result.materilaCode);
+				$(this).find('input[name="specification"]').val(result.specification);
+				$(this).find('input[name="materialUnitName"]').val(result.materialUnitName);
+				$(this).find('input[name="materialSubArray"]').val(result.materialSubArray);
+				$(this).find('input[name="requireQty"]').val(result.requireQty);
+				$(this).find('input[name="purchaseQty"]').val(result.purchaseQty);
+				$(this).find('input[name="stockQty"]').val(result.stockQty);
+				$(this).find('input[name="reserveQty"]').val(result.reserveQty);
+				$(this).find('input[name="onwayQty"]').val(result.onwayQty);
+				$(this).find('input[name="budgetQty"]').val(result.budgetQty);
+				$(this).find('input[name="referencePrice"]').val(result.referencePrice);
+				$(this).find('input[name="budgetPrice"]').val(result.budgetPrice);
+				var referenceAmount = $(this).find('input[name="referencePrice"]').val()
+									* $(this).find('input[name="purchaseQty"]').val();
+				$(this).find('input[name="referenceAmount"]').val(referenceAmount);
+				$(this).find('input[name="requireDate"]').val(result.requireDate.substr(0,10));
+				$(this).find('input[name="arriveDate"]').val(result.arriveDate.substr(0,10));
+				$(this).find('input[name="purchaserName"]').val(result.purchaserName);
+				$(this).find('input[name="description"]').val(result.description);
+			}
+		});
+	}
+	calculateTotal();
+}
 function withdrawApproval() {
 	var planNo = $("#planNo").val();//单据编号
 	$.ajax({
@@ -471,7 +522,6 @@ function validateRule() {
 			},
 			invoiceDate : {
 				required : true,
-				date : true
 			},
 			purchaseDept : {
 				required : true
@@ -481,7 +531,6 @@ function validateRule() {
 			},
 			createDate : {
 				required : true,
-				date : true
 			},
 			remark : {
 				required : true,
@@ -493,7 +542,6 @@ function validateRule() {
 			},
 			invoiceDate : {
 				required : icon + "请输入单据日期",
-				date : "请输入正确格式的日期"
 			},
 			purchaseDept : {
 				required : icon + "请输入采购部门"
@@ -503,7 +551,6 @@ function validateRule() {
 			},
 			createDate : {
 				required : icon + "请输入编制日期",
-				date : "请输入正确格式的日期"
 			},
 			remark : {
 				required : icon + "请输入备注"

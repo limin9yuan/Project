@@ -270,7 +270,7 @@
 											<input id="deliverCompanyName" name="deliverCompanyName"
 												class="form-control" type="text"
 												th:value="${bo.deliverCompanyName}"
-												onclick="openContractDelivers()" readonly="readonly"
+												 readonly="readonly"
 												placeholder="==请选择==">
 										</div>
 									</div>
@@ -279,21 +279,24 @@
 										<label class="col-sm-2 control-label">签订机构 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input id="authorCorpName" name="authorCorpId"
-												th:value="${bo.authorCorpName}"
-												th:textLabel="${bo.authorCorpName}"
-												th:checks="${bo.authorCorpId}" class="form-control "
-												style="width: 378px;overflow:hidden;" textLabel="jasontext"
-												type="text" readonly="readonly" />
+										<input id="authorCorpName" name="authorCorpId" type="text" th:value="${bo.authorCorpName}" class="form-control " readonly="readonly">
+<!-- 											<input id="authorCorpName" name="authorCorpId" -->
+<!-- 												th:value="${bo.authorCorpName}" -->
+<!-- 												th:textLabel="${bo.authorCorpName}" -->
+<!-- 												th:checks="${bo.authorCorpId}" class="form-control " -->
+<!-- 												style="width: 378px;overflow:hidden;" textLabel="jasontext" -->
+<!-- 												type="text" readonly="readonly" /> -->
 										</div>
 										<label class="col-sm-2 control-label">签订部门 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input id="authorDeptName" name="authorDeptId"
-												class="form-control " type="text"
-												th:value="${bo.authorDeptName}" readonly="readonly"
-												th:checks="${bo.authorDeptId}"
-												th:textLabel="${bo.authorDeptName}" />
+										<input  id="authorDeptName" name="authorDeptId" class="form-control " type="text" th:value="${bo.authorDeptName}" readonly="readonly">
+ 												
+<!-- 											<input id="authorDeptName" name="authorDeptId" -->
+<!-- 												class="form-control " type="text" -->
+<!-- 												th:value="${bo.authorDeptName}" readonly="readonly" -->
+<!-- 												th:checks="${bo.authorDeptId}" -->
+<!-- 												th:textLabel="${bo.authorDeptName}" /> -->
 										</div>
 									</div>
 
@@ -302,12 +305,14 @@
 											class="mustin">*</span>
 										</label>
 										<div class="col-sm-3">
-											<input id="performUserName" name="performUserId"
-												class="form-control " style="width: 378px;overflow:hidden;"
-												th:value="${bo.performUserName}"
-												th:textLabel="${bo.performUserName}"
-												th:checks="${bo.performUserId}" type="text"
-												readonly="readonly" />
+										<input id="performUserName" name="performUserId" th:value="${bo.performUserName}"
+												class="form-control " type="text" readonly="readonly">
+<!-- 											<input id="performUserName" name="performUserId" -->
+<!-- 												class="form-control " style="width: 378px;overflow:hidden;" -->
+<!-- 												th:value="${bo.performUserName}" -->
+<!-- 												th:textLabel="${bo.performUserName}" -->
+<!-- 												th:checks="${bo.performUserId}" type="text" -->
+<!-- 												readonly="readonly" /> -->
 											<!-- 											<input id="performUserName" name="performUserName" -->
 											<!-- 												class="form-control" type="text"> -->
 										</div>
@@ -530,7 +535,7 @@
 	</div>
 	<div th:include="include :: footer"></div>
 	<script type="text/javascript"
-		src="/js/appjs/contract/ContractCreation/edit.js"></script>
+		src="/js/appjs/contract/ContractCreation/see.js"></script>
 	<script type="text/javascript"
 		src="/js/appjs/contract/ContractCreation/ImportMaterial.js"></script>
 	<script src="/js/layui.js"></script>

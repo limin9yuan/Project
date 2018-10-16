@@ -126,10 +126,17 @@ function closeTabWin() {
     var tmpObj = $('.J_menuTab.active i',window.parent.document);
     parent.closeTabFromChild(tmpObj);
 }
-function save() {
-    var applyEntryJson = [];
-    $("#purchasePlanTable").find('[role=row]').each(function (i) {
-        if ($(this).find('input[name="requirePlanid"]').val()) {
+//保存按钮事件
+$("#saveBtn").click(function (){
+  if($("#signupForm").valid()){
+	  save();
+   }
+})
+//取得可编辑表格数据
+function getGridData() {
+	var applyEntryJson = [];
+	$("#purchasePlanTable").find('[role=row]').each(function (i) {
+        if ($(this).find('input[name="materialName"]').val()) {
             applyEntryJson.push({
                 //requirePlanid : $(this).find('input[name="requirePlanid"]').val(),//序号
                 materialType : $(this).find('input[name="materialType"]').val(),//物料类别
@@ -159,20 +166,24 @@ function save() {
             });
         }
     });
+	return applyEntryJson;
+}
+function save() {
+    applyEntryJson = getGridData();
+    var params= {
+            'name' : $("#name").val(),
+            'code' : $("#code").val(),
+            'businessDate' : $("#businessDate").data('date'),
+            'authorUserName' : $("#authorUserName").val(),
+            'createDate' : $("#createDate").data('date'),
+            'remark' : $("#remark").val(),
+            'applyEntryJson' : JSON.stringify(applyEntryJson)
+        };
     $.ajax({
         cache : true,
         type : "POST",
         url : "/material/purchasePlan/save",
-        data :  {
-            'title' : $("#title").val(),
-            'planNo' : $("#planNo").val(),
-            'type' : $("#type").val(),
-            'businessDate' : $("#businessDate").val(),
-            'authorUser' : $("#authorUser").val(),
-            'createDate' : $("#createDate").data('date'),
-            'remark' : $("#remark").val(),
-            'applyEntryJson' : applyEntryJson
-        },// 你的formid
+        data : params,// 你的formid
         async : false,
         error : function(request) {
             parent.layer.alert("Connection error");
@@ -277,8 +288,8 @@ function getMaterialDetailByCode(code) {
             }
             for (var i = 0; i < orderEntry.length; i++) {
                 if ( $("#purchasePlanTable").find('[role=row]').find('[data-value=' + orderEntry[i].requirePlanid + ']').length == 0) {
-                    var rowdata = {
-
+                	var rowdata = {
+                    		
                         materialType : '<input name="materialType" type="text" class="editable left disabled"/>',//物料类别
                         materialName : '<input name="materialName" type="text" class="editable left disabled"/>',//物料名称
                         materilaCode: '<input name="materilaCode" type="text" class="editable left disabled"/ readonly>',//物料编码
@@ -525,12 +536,12 @@ function pageInit(){
             datatype: "local",
             height: '100%',
             autowidth: true,
-            colNames : [ /*'序号', */'物资类别','物资名称', '物资编码', '规格', '单位名称','包装物料',
+            colNames : [ /*'序号', '物资类别',*/'物资名称', '物资编码', '规格', '单位名称','包装物料',
                 '需求数量', '采购数量', '库存数量', /*'安全库存', '在途数量',*/'预算数量',
                 '参考单价', '预算金额', '参考金额',/*'需求日期', */'要求到货时间', /*'采购员',*/'需求部门','需求计划编号','说明信息'],//jqGrid的列显示名字
             colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
                 //{name : 'requirePlanid',index : 'requirePlanid',width : 100,align : "right",sortable: false},
-                {name : 'materialType',index : 'materialType',width : 100,align : "right",sortable: false},
+//                {name : 'materialType',index : 'materialType',width : 100,align : "right",sortable: false},
                 {name : 'materialName',index : 'materialName',width : 100,align : "right",sortable: false},
                 {name : 'materilaCode',index : 'materilaCode',width : 100,align : "right",sortable: false},
                 {name : 'specification',index : 'specification',width : 100,align : "right",sortable: false},
@@ -604,11 +615,6 @@ function pageInit(){
     // jQuery("#requirePlanTable").jqGrid('navGrid', '#requirePlanPage', {edit : false,add : false,del : false});
     // jQuery("#requirePlanTable").jqGrid('inlineNav', "#requirePlanPage");
 }
-$.validator.setDefaults({
-    submitHandler : function() {
-        save();
-    }
-});
 
 //验证规则
 function validateRule() {
@@ -622,39 +628,38 @@ function validateRule() {
                 required : true,
                 maxlength : 50
             },
-            type : {
-                required : true
-            },
             businessDate : {
                 required : true,
-                date:true
             },
             createDate : {
                 required : true,
-                date:true
             },
             remark : {
                 maxlength : 100
+            },
+            authorUserName :{
+            	required:true
             }
         },
         messages : {
+        	name : {
+                maxlength : icon + "备注必须200个字符以内"
+            },
             code : {
                 required : "请输入单据编号",
                 maxlength : icon + "单据编号必须50个字符以内"
             },
-            type : {
-                required : "请选择类型"
-            },
             businessDate : {
                 required : "请输入计划日期",
-                date:"请输入正确格式的日期"
             },
             createDate : {
                 required : "请输入编制日期",
-                date:"请输入正确格式的日期"
             },
             remark : {
                 maxlength : icon + "备注必须100个字符以内"
+            },
+            authorUserName :{
+            	required:"请输入编制人"
             }
         }
     })
@@ -670,10 +675,10 @@ function pageInit2(){
             datatype: "local",
             height: '100%',
             autowidth: false,
-            colNames : [ '物资类别', '单位名称', '采购数量', '采购金额', '预算金额'],//jqGrid的列显示名字
+            colNames : [ '单位名称', '采购数量', '采购金额', '预算金额'],//jqGrid的列显示名字
             colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
                 //{name : 'requirePlanid',index : 'requirePlanid',width : 100,align : "right",sortable: false},
-                {name : 'materialType',index : 'materialType',width : 100,align : "right",sortable: false},
+//                {name : 'materialType',index : 'materialType',width : 100,align : "right",sortable: false},
                 {name : 'materialUnitName',index : 'materialUnitName',width : 100,align : "right",sortable: false},
                 {name : 'purchaseQty',index : 'purchaseQty',width : 100,align : "right",sortable: false},
                 {name : 'referenceAmount',index : 'referenceAmount',width : 100,align : "right",sortable: false},

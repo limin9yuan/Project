@@ -90,6 +90,12 @@ function closeWin() {
     var tmpObj = $('.J_menuTab.active i',window.parent.document);
     parent.closeTabFromChild(tmpObj);
 }
+//保存按钮事件
+$("#saveBtn").click(function (){
+if($("#signupForm").valid()){
+	update();
+ }
+})
 function update() {
     var applyEntryJson = [];
     $("#purchasePlanTable").find('[role=row]').each(function (i) {
@@ -123,20 +129,20 @@ function update() {
             });
         }
     });
+    var params={
+            'name' : $("#name").val(),
+            'code' : $("#code").val(),
+            'businessDate' : $("#businessDate").data('date'),
+            'authorUserName' : $("#authorUserName").val(),
+            'createDate' : $("#createDate").data('date'),
+            'remark' : $("#remark").val(),
+            'applyEntryJson' : JSON.stringify(applyEntryJson)
+        };
     $.ajax({
         cache : true,
         type : "POST",
         url : "/material/purchasePlan/update",
-        data :  {
-            'title' : $("#title").val(),
-            'planNo' : $("#planNo").val(),
-            'type' : $("#type").val(),
-            'businessDate' : $("#businessDate").val(),
-            'authorUser' : $("#authorUser").val(),
-            'createDate' : $("#createDate").data('date'),
-            'remark' : $("#remark").val(),
-            'applyEntryJson' : applyEntryJson
-        },// 你的formid
+        data :  params,// 你的formid
         async : false,
         error : function(request) {
             parent.layer.alert("Connection error");
@@ -530,36 +536,6 @@ function pageInit(){
     // jQuery("#requirePlanTable").jqGrid('navGrid', '#requirePlanPage', {edit : false,add : false,del : false});
     // jQuery("#requirePlanTable").jqGrid('inlineNav', "#requirePlanPage");
 }
-$.validator.setDefaults({
-    submitHandler : function() {
-        save();
-    }
-});
-function save() {
-    $.ajax({
-        cache : true,
-        type : "POST",
-        url : "/system/purchasePlan/save",
-        data : $('#signupForm').serialize(),// 你的formid
-        async : false,
-        error : function(request) {
-            parent.layer.alert("Connection error");
-        },
-        success : function(data) {
-            if (data.code == 0) {
-                parent.layer.msg("操作成功");
-                parent.reLoad();
-                var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-                parent.layer.close(index);
-
-            } else {
-                parent.layer.alert(data.msg)
-            }
-
-        }
-    });
-
-}
 //验证规则
 function validateRule() {
     var icon = "<i class='fa fa-times-circle'></i> ";
@@ -572,19 +548,17 @@ function validateRule() {
                 required : true,
                 maxlength : 50
             },
-            type : {
-                required : true
-            },
             businessDate : {
                 required : true,
-                date:true
             },
             createDate : {
                 required : true,
-                date:true
             },
             remark : {
                 maxlength : 100
+            },
+            authorUserName :{
+            	required:true
             }
         },
         messages : {
@@ -592,19 +566,17 @@ function validateRule() {
                 required : "请输入单据编号",
                 maxlength : icon + "单据编号必须50个字符以内"
             },
-            type : {
-                required : "请选择类型"
-            },
             businessDate : {
                 required : "请输入计划日期",
-                date:"请输入正确格式的日期"
             },
             createDate : {
                 required : "请输入编制日期",
-                date:"请输入正确格式的日期"
             },
             remark : {
                 maxlength : icon + "备注必须100个字符以内"
+            },
+            authorUserName :{
+            	required:"请输入编制人"
             }
         }
     })

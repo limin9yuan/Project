@@ -42,8 +42,8 @@ function initControl() {
                              '预算单价' ,'参考单价' , '预算金额' ,'参考金额' ,
                              '要求到货时间' , '受理人' , '说明信息'],//jqGrid的列显示名字
 				colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-				             {name : 'name',index : 'name',width : 100},//物资名称
-				             {name : 'code',index : 'code',width : 90},//物资编码
+							 {name : 'materialName',index : 'materialName',width : 100},//物资名称
+				             {name : 'materilaCode',index : 'materilaCode',width : 90},//物资编码
 				             {name : 'specification',index : 'specification',width : 100},//规格型号
 				             {name : 'materialUnitId',index : 'materialUnitId',width : 60,align : "right"},//单位
 				             {name : 'materialSubArray',index : 'materialSubArray',width : 80,align : "right"},//包装物资
@@ -115,8 +115,8 @@ function initControl() {
 //空数据行
 function getEmptyRow(){
     var rowdata = {
-         name : '<div class="product"><input name="name" readonly type="text" class="editable left" isvalid="no" checkexpession="NotNull"/><span class="ui-icon-ellipsis"></span></div>',
-         code : '<input name="code" type="text" class="editable left disabled" />',//物资编码
+		 materialName : '<div class="product"><input name="materialName" readonly type="text" class="editable left" isvalid="no" checkexpession="NotNull"/><span class="ui-icon-ellipsis"></span></div>',
+		 materilaCode : '<input name="materilaCode" type="text" class="editable left disabled" />',//物资编码
          specification: '<input name="specification" type="text" class="editable left disabled" />',//规格型号
          materialUnitId: '<input name="materialUnitName" type="text" class="editable left disabled" /><input name="materialUnitId" type="hidden"/>',//单位
          materialSubArray: '<input name="materialSubArray" type="text" class="editable left disabled" />',//包装物资
@@ -218,8 +218,8 @@ function loadRequireApplyDetail(){
 			$("#requireApplyTable").find('[role=row]').each(function (i) {
 	            var result = orderEntry[i - 1];
 	            if (result != undefined) {
-	                $(this).find('input[name="name"]').val(result.name);
-                    $(this).find('input[name="code"]').val(result.code).attr('data-value', result.code);
+	                $(this).find('input[name="materialName"]').val(result.materialName);
+                    $(this).find('input[name="materilaCode"]').val(result.materilaCode).attr('data-value', result.materilaCode);
                     $(this).find('input[name="specification"]').val(result.specification);
                     $(this).find('input[name="materialUnitId"]').val(result.materialUnitId);
                     $(this).find('input[name="materialUnitName"]').val(result.materialUnitId);

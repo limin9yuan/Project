@@ -61,8 +61,8 @@
 										onclick="deleteSelectedRow()">
 										<i class="fa" aria-hidden="true"></i>删除
 									</button>
-									<button type="button" class="btn btn-grid-add"
-										onclick="">
+									<button shiro:hasPermission="requirementPlan:import" type="button" class="btn btn-grid-add"
+										onclick="importMaterial()">
 										<i class="fa" aria-hidden="true"></i>批量导入
 									</button>
 								</div>

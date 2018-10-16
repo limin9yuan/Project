@@ -59,9 +59,9 @@ function load() {
 							return {
 								//说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 								limit: 500,
-								offset:0
-					           // name:$('#searchName').val(),
-					           // username:$('#searchName').val()
+								offset:0,
+								start:$('#start').val(),
+					            end:$('#end').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果
@@ -112,6 +112,10 @@ function load() {
 								}
 							 ]
 					});
+}
+//查询
+function reLoad() {
+	$('#exampleTable').bootstrapTable('refresh');
 }
 function getSelectedMaterial() {
     var rows = $('#exampleTable').bootstrapTable('getSelections');

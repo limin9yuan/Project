@@ -123,27 +123,18 @@
 										<div
 											class="input-group input-inline-sm col-sm-4 col-md-offset-4">
 
-											<input id="ids" name="ids" type="hidden" class="form-control"
-												value="-1"> <input id="authorDeptId"
-												name="authorDeptId" th:value="${authorDeptId}"
-												class="form-control" type="hidden"> <input
-												id="performUserId" name="performUserId" class="form-control"
-												type="hidden">
+											<input id="ids" name="ids" type="hidden" class="form-control" value="-1"> 
+											<input id="authorDeptId" name="authorDeptId" th:value="${authorDeptId}" class="form-control" type="hidden"> 
+											<input id="performUserId" name="performUserId" class="form-control" type="hidden">
 											<!--执行人id -->
-											<input id="authorUserId" name="authorUserId"
-												class="form-control" th:value="${authorUserId}"
-												type="hidden">
+											<input id="authorUserId" name="authorUserId" class="form-control" th:value="${authorUserId}" type="hidden">
 											<!-- 起草人id -->
-											<input id="projectId" name="projectId" class="form-control"
-												type="hidden"> <input id="deliverCompanyId"
-												name="deliverCompanyId" class="form-control" type="hidden">
+											<input id="projectId" name="projectId" class="form-control" type="hidden"> 
 											<!-- 供货公司id -->
+											<input id="deliverCompanyId" name="deliverCompanyId" class="form-control" type="hidden">
 											<!-- 项目id -->
-											<input type="hidden" id="suitCorpId" name="suitCorpId"
-												class="contracform-control">
-											<!-- 											<input type="text" id="contractSuitsId" name="contractSuitsId" th:value="${contractSuitsId}"  class="contracform-control"> -->
-											<!-- 											<input type="text" id="authorCorpId" name="authorCorpId" th:value="${authorCorpId}"  class="contracform-control"> -->
-											<!-- 											<input type="text" id="performUserId" name="performUserId" th:value="${performUserId}"  class="contracform-control"> -->
+											<input type="hidden" id="suitCorpId" name="suitCorpId" class="contracform-control">
+											<input type="hidden" id="authorCorpId" name="authorCorpId" th:value="${authorCorpId}"  class="contracform-control">
 
 										</div>
 									</div>
@@ -287,7 +278,7 @@
 										<label class="col-sm-2 control-label">签订部门 <span
 											class="mustin">*</span></label>
 										<div class="col-sm-3">
-											<input id="authorDeptName" name="authorDeptId"
+											<input id="authorDeptName" name="authorDeptName"
 												class="form-control " type="text"
 												th:value="${authorDeptName}" readonly="readonly"
 												th:checks="${authorDeptId}" th:textLabel="${authorDeptName}" />
@@ -329,7 +320,7 @@
 									<div class="form-group">
 										<label class="col-sm-2 control-label">摘要</label>
 										<div class="col-sm-8">
-											<textarea id="abstract" name="abstract" class="form-control"
+											<textarea id="remark" name="remark" class="form-control"
 												rows="3"></textarea>
 										</div>
 									</div>

@@ -5,7 +5,9 @@ var jsonCompanyName = [];
 var jsonSuitBeans = [];
 var contractElementBeans = [];
 $().ready(function() {
-
+	//遮罩层
+		nextStepThis('myTab',3,'lastBtn','nextBtn');
+		setTimeout('hidenload()', 500)
 	$("button[name=excelinsertbtn]").click(function() {
 		layer.open({
 			type : 2,
@@ -33,96 +35,7 @@ $().ready(function() {
 		locale : moment.locale('zh-cn')
 	});
 
-	$.ajax({
-		type : "GET",
-		url : "/ContractCreation/ContractCreation/editTree",
-		data : {
-			'deptIds' : $("#authorDeptId").val()
-		},
-		success : function(tree) {
-			tree.checked = false;
-			var defaults = {
-				zNodes : tree,
-				height : 233,
-				chkStyle : "radio", //设置单选树形 默认是多选
-				radioType : "all",
-				callback : {
-					onCheck : function(treeNode) {
-						//alert("my callback");
-					}
-				}
-			};
-			$("#authorDeptName").drawMultipleTree(defaults);
-
-
-		}
-	});
-	$.ajax({
-		type : "GET",
-		url : "/ContractCreation/ContractCreation/tree",
-		data : {
-			'deptIds' : $("#authorDeptId").val()
-		},
-		success : function(tree) {
-			tree.checked = false;
-			var defaults = {
-				zNodes : tree,
-				height : 233,
-				//				chkStyle : "radio", //设置单选树形 默认是多选
-				radioType : "all",
-				callback : {
-					onCheck : function(treeNode) {
-						//alert("my callback");
-					}
-				}
-			};
-
-			$("#suitCorpName").drawMultipleTree(defaults);
-		}
-	});
-	$.ajax({
-		type : "GET",
-		url : "/ContractCreation/ContractCreation/tree",
-		data : {
-			'deptIds' : $("#authorDeptId").val()
-		},
-		success : function(tree) {
-			tree.checked = false;
-			var defaults = {
-				zNodes : tree,
-				height : 233,
-				chkStyle : "radio", //设置单选树形 默认是多选
-				radioType : "all",
-				callback : {
-					onCheck : function(treeNode) {
-						//alert("my callback");
-					}
-				}
-			};
-			$("#authorCorpName").drawMultipleTree(defaults); //初始化树状下拉复选框 
-
-		}
-	});
-	$.ajax({
-		type : "GET",
-		url : "/ContractCreation/ContractCreation/userTree",
-		success : function(tree) {
-			tree.checked = false;
-			var defaults = {
-				zNodes : tree,
-				height : 233,
-				chkStyle : "radio", //设置单选树形 默认是多选
-				radioType : "all",
-				callback : {
-					onCheck : function(treeNode) {
-						//alert("my callback");
-					}
-				}
-			};
-			$("#performUserName").drawMultipleTree(defaults);
-
-		}
-	});
+	
 
 	$('#myTab a[href="#baseInfo"]').on('shown.bs.tab', function(e) {
 		$('#lastBtn').attr("disabled", true);
@@ -1562,7 +1475,6 @@ function richText() {
 //				} 
 				]
 			} ]
-		} ]
 	};
 
 	sde = new SDE(options);

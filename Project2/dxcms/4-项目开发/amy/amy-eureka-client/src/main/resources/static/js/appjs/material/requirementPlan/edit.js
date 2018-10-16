@@ -489,7 +489,6 @@ function validateRule() {
 			},
 			invoiceDate : {
 				required : true,
-				date : true
 			},
 			purchaseDept : {
 				required : true
@@ -499,7 +498,6 @@ function validateRule() {
 			},
 			createDate : {
 				required : true,
-				date : true
 			},
 			remark : {
 				required : true,
@@ -511,7 +509,6 @@ function validateRule() {
 			},
 			invoiceDate : {
 				required : icon + "请输入单据日期",
-				date : "请输入正确格式的日期"
 			},
 			purchaseDept : {
 				required : icon + "请输入采购部门"
@@ -521,7 +518,6 @@ function validateRule() {
 			},
 			createDate : {
 				required : icon + "请输入编制日期",
-				date : "请输入正确格式的日期"
 			},
 			remark : {
 				required : icon + "请输入备注"

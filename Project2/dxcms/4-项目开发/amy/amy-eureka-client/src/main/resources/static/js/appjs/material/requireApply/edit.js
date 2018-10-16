@@ -189,7 +189,53 @@ function getEmptyRow(){
     }
     return rowdata;
 }
-
+//日期Datepicker中文显示方法
+jQuery(function($){
+  $.datepicker.regional['zh-CN'] = {
+      clearText: '清除',
+      clearStatus: '清除已选日期',
+      closeText: '关闭',
+      closeStatus: '不改变当前选择',
+      prevText: '< 上月',
+      prevStatus: '显示上月',
+      prevBigText: '<<',
+      prevBigStatus: '显示上一年',
+      nextText: '下月>',
+      nextStatus: '显示下月',
+      nextBigText: '>>',
+      nextBigStatus: '显示下一年',
+      currentText: '今天',
+      currentStatus: '显示本月',
+      monthNames: ['一月','二月','三月','四月','五月','六月', '七月','八月','九月','十月','十一月','十二月'],
+      monthNamesShort: ['一月','二月','三月','四月','五月','六月', '七月','八月','九月','十月','十一月','十二月'],
+      monthStatus: '选择月份',
+      yearStatus: '选择年份',
+      weekHeader: '周',
+      weekStatus: '年内周次',
+      dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+      dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+      dayNamesMin: ['日','一','二','三','四','五','六'],
+      dayStatus: '设置 DD 为一周起始',
+      dateStatus: '选择 m月 d日, DD',
+      dateFormat: 'yy-mm-dd',
+      firstDay: 1,
+      initStatus: '请选择日期',
+      isRTL: false};
+  $.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+});
+$(function() {
+  $("#datepicker").datepicker({
+      showOtherMonths: true,
+      selectOtherMonths: true,
+      showButtonPanel: true,
+      showOn: "both",
+      buttonImageOnly: true,
+      buttonImage: "calendar.gif",
+      buttonText: "",
+      changeMonth: true,
+      changeYear: true
+  });
+});
 //注册单元格事件
 function registEvent(){
     var $grid = $("#requireApplyTable");
@@ -200,6 +246,19 @@ function registEvent(){
         $('.ui-icon-ellipsis').hide();
         $(this).next('.ui-icon-ellipsis').show();
        // $(this).Contextmenu();
+      //要求到货时间
+        $('input[name="requireDate"]').datepicker
+        ({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            showButtonPanel: true,
+            showOn: "both",
+            buttonImageOnly: true,
+            buttonImage: "calendar.gif",
+            buttonText: "",
+            changeMonth: true,
+            changeYear: true
+        });
     });
     //选择物资事件
     $('.ui-icon-ellipsis').click(function () {
@@ -374,23 +433,24 @@ function getGridData(){
 }
 
 //保存
-function save() {
+function update() {
     $('#saveBtn').attr("disabled","disabled");
     applyEntryJson = getGridData();
+    var params={
+            'name' : $("#name").val(),
+            'code' : $("#code").val(),
+            'authorCorpId' : $("#authorCorpId").val(),
+            'businessDate' : $("#businessDate").data('date'),
+            'createUserId' : $("#createUserId").val(),
+            'createDate' : $("#createDate").data('date'),
+            'remark' : $("#remark").val(),
+            'applyEntryJson' : JSON.stringify(applyEntryJson)
+            };
     $.ajax({
         cache : true,
         type : "POST",
-        url : "/material/requireApply/save",
-        data :  {
-                 'name' : $("#name").val(),
-                 'code' : $("#code").val(),
-                 'authorCorpId' : $("#authorCorpId").val(),
-                 'businessDate' : $("#businessDate").data('date'),
-                 'createUserId' : $("#createUserId").val(),
-                 'createDate' : $("#createDate").data('date'),
-                 'remark' : $("#remark").val(),
-                 'applyEntryJson' : applyEntryJson
-                 },
+        url : "/material/requireApply/update",
+        data :  params,
         async : false,
         error : function(request) {
             parent.layer.alert("Connection error");
@@ -463,7 +523,7 @@ function closeTabWin() {
 //验证规则
 function validateRule() {
 	var icon = "<i class='fa fa-times-circle'></i> ";
-	$("#requireApplyForm").validate({
+	$("#signupForm").validate({
 		rules : {
 			name : {
 				maxlength : 200
@@ -492,20 +552,20 @@ function validateRule() {
 			remark : {
             	maxlength : icon + "备注必须100个字符以内"
             }
-		}
+		},
 	})
 }
 
 //保存按钮事件
 $("#saveBtn").click(function (){
-    if($("#requireApplyForm").valid()){
-        save();
+    if($("#signupForm").valid()){
+    	update();
      }
 })
 
 //提交审批按钮事件
 $("#commitApplyBtn").click(function (){
-    if($("#requireApplyForm").valid()){
+    if($("#signupForm").valid()){
         commitApply();
      }
 })
@@ -595,6 +655,19 @@ function loadRequireApplyDetail(){
             //$grid.find("tbody tr:eq(1)").find('input').removeAttr('disabled').attr("isvalid", "yes");
             $grid.find('.disabled').attr("disabled", "disabled");
             //注册事件
+          //要求到货时间
+            $('input[name="requireDate"]').datepicker
+            ({
+                showOtherMonths: true,
+                selectOtherMonths: true,
+                showButtonPanel: true,
+                showOn: "both",
+                buttonImageOnly: true,
+                buttonImage: "calendar.gif",
+                buttonText: "",
+                changeMonth: true,
+                changeYear: true
+            });
             registEvent();
 			
             calculateTotal();

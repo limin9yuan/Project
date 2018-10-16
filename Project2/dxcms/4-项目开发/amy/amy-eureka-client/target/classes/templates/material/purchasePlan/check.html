@@ -18,23 +18,14 @@
 						</div>
 						<div class="form-group">
 							<label class="col-sm-1 control-label">单据编号<span class="mustin">*</span></label>
-							<div class="col-sm-3"><input id="planNo" name="planNo" th:value="${planNo}" class="form-control" type="text"></div>
-
-							<label class="col-sm-1 control-label">类型:<span class="mustin">*</span></label>
-							<div class="col-sm-3">
-								<select disabled data-placeholder="请选择" name="type" id="businessId"
-										class="form-control chosen-select" tabindex="2"
-										style="width: 100%">
-									<option value="">全部</option>
-								</select>
-							</div>
+							<div class="col-sm-3"><input id="code" name="code" th:value="${purchasePlanModel.code}" class="form-control" type="text"></div>
 
 							<label class="col-sm-1 control-label">计划日期<span class="mustin">*</span></label>
 							<div class="col-sm-3">
 								<div class="columns pull-left nopadding"  >
 									<div class="input-group date" id="businessDate">
 										<input id="business" class="form-control" type="text"
-											   name="businessDate" th:value="${businessDate}" > <span
+											   name="businessDate" th:value="${purchasePlanModel.businessDate}" > <span
 											class="input-group-addon"> <span
 											class="glyphicon glyphicon-calendar"></span>
 											</span>
@@ -62,7 +53,7 @@
 						<div class="form-group">
 							<label class="col-sm-1 control-label">编制人<span class="mustin">*</span></label>
 							<div class="col-sm-3">
-								<input readonly id="authorUserName" name="authorUserName" th:value="${authorUserName}" class="form-control" type="text">
+								<input readonly id="authorUserName" name="authorUserName" th:value="${purchasePlanModel.authorUserName}" class="form-control" type="text">
 							</div>
 
 							<label class="col-sm-1 control-label">编制日期<span class="mustin">*</span></label>
@@ -70,7 +61,7 @@
 								<div class="columns pull-left nopadding" >
 									<div class="input-group date" id="createDate">
 										<input readonly id="create" class="form-control" type="text"
-											   name="createDate" th:value="${createDate}" > <span
+											   name="createDate" th:value="${purchasePlanModel.createDate}" > <span
 											class="input-group-addon"> <span
 											class="glyphicon glyphicon-calendar"></span>
 													</span>

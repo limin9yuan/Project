@@ -369,9 +369,28 @@ function save(fileInformation) {
 		"contractMaterialBeans" : JSON.stringify(materialData),
 		"signupForm" : JSON.stringify(signupForm),
 		"fileInformation" :fileInformation,
-		"jsonCompanyName" : JSON.stringify(jsonCompanyName),
-		"jsonSuitBeans" : JSON.stringify(jsonSuitBeans),
-		"richTextKVJson" : JSON.stringify(jsonArray)
+		"jsonCompanyName" : JSON.stringify(jsonCompanyName),//供货公司
+		"jsonSuitBeans" : JSON.stringify(jsonSuitBeans),//适用机构
+		"authorDeptId" : $("#authorDeptId").val(),
+		"performUserId" : $("#performUserId").val(),
+		"authorUserId" : $("#authorUserId").val(),
+		"projectId" : $("#projectId").val(),
+		"contractName" : $("#contractName").val(),
+		"contractCode" : $("#contractCode").val(),
+		"projectName" : $("#projectName").val(),
+		"bidSchemeName" : $("#bidSchemeName").val(),
+		"currencyTypeName" : $("#currencyTypeName").val(),
+		"taxRate" : $("#taxRate").val(),
+		"performanceBond" : $("#performanceBond").val(),
+		"warrantyBond" : $("#warrantyBond").val(),
+		"dateFrom" : $("#dateFrom").val(),
+		"dateTo" : $("#dateTo").val(),
+		"totalMoney" : $("#totalMoney").val(),
+		"authorDeptName" : $("#authorDeptName").val(),
+		"performUserName" : $("#performUserName").val(),
+		"authorUserName" : $("#authorUserName").val(),
+		"remark" : $("#remark").val(),
+//		"authorCorpId":$("#authorCorpId").val(),
 	};
 	console.log(params);
 	$.ajax({

@@ -29,6 +29,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
@@ -98,52 +99,73 @@ public class RequireApplyController extends BaseController {
      */
     @GetMapping("/edit/{id}")
     @RequiresPermissions("material:requireApply:edit")
-    String edit(@PathVariable("id") String id, Model model) {
-        //调用接口
-        ResultMsg rm = requireApplyService.primary(id);
-        //做测试数据 begin
-        RequireApplyBean requireApplyModel = new RequireApplyBean();
-        requireApplyModel.setId(id);
-        requireApplyModel.setName("2018年8月采购申请");
-        requireApplyModel.setCode(id);
-        requireApplyModel.setAuthorCorpId("8");
-        requireApplyModel.setAuthorCorpName("研发二部");
-        String businessDate = DateUtils.format(new Date(),DateUtils.DATE_PATTERN);
-        //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
-        //requireApplyModel.setAuthorCorpId("编制部门Id");
-        //requireApplyModel.setCreateUserId("编制人Id");
-        requireApplyModel.setCreateUserName("编制人姓名");
-        requireApplyModel.setRemark("备注");
-        rm = new ResultMsg();
-        rm.setData(requireApplyModel);
-        //做测试数据 end
-        model.addAttribute("requireApplyModel", rm.getData());//编制日期
+    String edit(@PathVariable("id") String id, Model model){
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String time="2018-10-11";
+		//调用接口
+	        ResultMsg rm = requireApplyService.primary(id);
+	        //做测试数据 begin
+	        RequireApplyBean requireApplyModel = new RequireApplyBean();
+	        requireApplyModel.setId(id);
+	        requireApplyModel.setName("2018年8月采购申请");
+	        requireApplyModel.setCode(id);
+	        requireApplyModel.setAuthorCorpId("8");
+	        requireApplyModel.setAuthorCorpName("研发二部");
+	        String businessDate = DateUtils.format(new Date(),DateUtils.DATE_PATTERN);
+	        try {
+	        	Date utilDate = sdf.parse(time); 
+	    		Date date = new java.sql.Date(utilDate.getTime()); 
+	            requireApplyModel.setCreateDate(date);
+	        }catch (Exception e){
+	            e.printStackTrace();
+	        }
+	        //requireApplyModel.setAuthorCorpId("编制部门Id");
+	        //requireApplyModel.setCreateUserId("编制人Id");
+	        requireApplyModel.setCreateUserName("编制人姓名");
+	        requireApplyModel.setRemark("备注");
+	        rm = new ResultMsg();
+	        rm.setData(requireApplyModel);
+	        //做测试数据 end
+	        model.addAttribute("requireApplyModel", rm.getData());//编制日期
+    	
         return prefix + "/edit";
     }
     /**
      * 查看页
+     * 
      */
-    @GetMapping("/view/{id}")
+	@GetMapping("/view/{id}")
     @RequiresPermissions("material:requireApply:requireApply")
     String view(@PathVariable("id") String id, Model model) {
-        //调用接口
-        ResultMsg rm = requireApplyService.primary(id);
-        //做测试数据 begin
-        RequireApplyBean requireApplyModel = new RequireApplyBean();
-        requireApplyModel.setId(id);
-        requireApplyModel.setName("2018年8月采购申请");
-        requireApplyModel.setCode(id);
-        requireApplyModel.setAuthorCorpId("8");
-        requireApplyModel.setAuthorCorpName("研发二部");
-        //requireApplyModel.setBusinessDate(new Date("YYYY-MM-DD"));
-        //requireApplyModel.setAuthorCorpId("编制部门Id");
-        //requireApplyModel.setCreateUserId("编制人Id");
-        requireApplyModel.setCreateUserName("编制人姓名");
-        requireApplyModel.setRemark("备注");
-        rm = new ResultMsg();
-        rm.setData(requireApplyModel);
-        //做测试数据 end
-        model.addAttribute("requireApplyModel", rm.getData());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String time="2018-10-11";
+		
+		//调用接口
+	        ResultMsg rm = requireApplyService.primary(id);
+	        //做测试数据 begin
+	        RequireApplyBean requireApplyModel = new RequireApplyBean();
+	        requireApplyModel.setId(id);
+	        requireApplyModel.setName("2018年8月采购申请");
+	        requireApplyModel.setCode(id);
+	        requireApplyModel.setAuthorCorpId("8");
+	        requireApplyModel.setAuthorCorpName("研发二部");
+	        try {
+	        	Date utilDate = sdf.parse(time); 
+	    		Date date = new java.sql.Date(utilDate.getTime()); 
+	            requireApplyModel.setCreateDate(date);
+	            requireApplyModel.setBusinessDate(date);
+	        }catch (Exception e){
+	            e.printStackTrace();
+	        }
+	        //requireApplyModel.setAuthorCorpId("编制部门Id");
+	        //requireApplyModel.setCreateUserId("编制人Id");
+	        requireApplyModel.setCreateUserName("编制人姓名");
+	        requireApplyModel.setRemark("备注");
+	        rm = new ResultMsg();
+	        rm.setData(requireApplyModel);
+	        //做测试数据 end
+	        model.addAttribute("requireApplyModel", rm.getData());
+        
         return prefix + "/view";
     }
 
@@ -163,9 +185,11 @@ public class RequireApplyController extends BaseController {
         requireApplyModel.setRemark((String)params.get("remark"));
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date createDate = sdf.parse((String)params.get("createDate"));
+            Date createTime = sdf.parse((String)params.get("createDate"));
+            Date createDate = new java.sql.Date(createTime.getTime());
             requireApplyModel.setCreateDate(createDate);
-            Date businessDate = sdf.parse((String)params.get("businessDate"));
+            Date businessTime = sdf.parse((String)params.get("businessDate"));
+            Date businessDate = new java.sql.Date(businessTime.getTime());
             requireApplyModel.setBusinessDate(businessDate);
         }catch (Exception e){
             return R.error();
@@ -178,6 +202,47 @@ public class RequireApplyController extends BaseController {
             RequireApplyItemBean requireApplyItemBean = (RequireApplyItemBean) JSONObject.toBean((JSONObject)array.get(i), RequireApplyItemBean.class);
             itemList.add(requireApplyItemBean);
         }
+        requireApplyModel.setRequireApplyItemBeans(itemList);
+        ResultMsg rms = requireApplyService.save(requireApplyModel);
+        if ("1".equals(rms.getCode())) {
+            return R.ok();
+        }
+        return R.error();
+    }
+    /**
+     * 保存
+     */
+    @ResponseBody
+    @PostMapping("/save")
+    @RequiresPermissions("material:requireApply:add")
+    public R save(@RequestParam Map<String, Object> params) {
+    	 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    	 RequireApplyBean requireApplyModel = new RequireApplyBean();
+    	 requireApplyModel.setName(params.get("name").toString());
+    	 requireApplyModel.setCode(params.get("code").toString());
+    	 requireApplyModel.setAuthorCorpId(params.get("authorCorpId").toString());
+    	 try {
+    		 Date time=sdf.parse(params.get("businessDate").toString());
+    		 Date businessDate=new java.sql.Date(time.getTime());
+    		 requireApplyModel.setBusinessDate(businessDate);
+    		 Date createTime=sdf.parse(params.get("createDate").toString());
+    		 Date createDate=new java.sql.Date(createTime.getTime());
+    		 requireApplyModel.setCreateDate(createDate);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    	 requireApplyModel.setCreateUserId(params.get("createUserId").toString());
+    	 List itemList = new ArrayList<RequireApplyItemBean>();
+    	 JSONArray array = JSONArray.fromObject(params.get("applyEntryJson"));
+         for(int i=0;i<array.size();i++){
+             System.out.println(array.get(i));
+             RequireApplyItemBean requireApplyItemBean = (RequireApplyItemBean) JSONObject.toBean((JSONObject)array.get(i), RequireApplyItemBean.class);
+             itemList.add(requireApplyItemBean);
+         }
+        System.out.println(params);
+        //int contactIds = service.save(customerContact);
+
         requireApplyModel.setRequireApplyItemBeans(itemList);
         ResultMsg rms = requireApplyService.save(requireApplyModel);
         if ("1".equals(rms.getCode())) {
@@ -365,18 +430,6 @@ public class RequireApplyController extends BaseController {
 
         return returnData;
 
-    }
-    /**
-     * 保存
-     */
-    @ResponseBody
-    @PostMapping("/save")
-    @RequiresPermissions("material:requireApply:add")
-    public R save(@RequestParam Map<String, Object> params) {
-        System.out.println(params);
-        //int contactIds = service.save(customerContact);
-
-        return R.ok();
     }
 
     /**

@@ -44,6 +44,8 @@ function load() {
 								pageSize: params.limit,
 								offset:params.offset,
 								pageNumber:Number(params.offset) / Number(params.limit) + 1,
+								start:$('#start').val(),
+					            end:$('#end').val()
 					           // name:$('#searchName').val(),
 					           // username:$('#searchName').val()
 							};
