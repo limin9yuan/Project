@@ -1,0 +1,1585 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="w01050301_2"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="595"
+		 pageHeight="842"
+		 columnWidth="535"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="AllSectionsNoDetail"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<style 
+		name="标题"
+		isDefault="false"
+		hAlign="Center"
+		vAlign="Middle"
+		fontName="仿宋_GB2312"
+		fontSize="14"
+		isBold="true"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="表头"
+		isDefault="false"
+		hAlign="Center"
+		vAlign="Middle"
+		topBorder="1Point"
+		topBorderColor="#000000"
+		leftBorder="Thin"
+		leftBorderColor="#000000"
+		bottomBorder="Thin"
+		bottomBorderColor="#333333"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		isBold="true"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="统计时间"
+		isDefault="false"
+		vAlign="Middle"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="左边表头"
+		isDefault="false"
+		hAlign="Center"
+		vAlign="Middle"
+		topBorder="1Point"
+		topBorderColor="#000000"
+		leftBorder="1Point"
+		leftBorderColor="#000000"
+		bottomBorder="Thin"
+		bottomBorderColor="#000000"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		isBold="true"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="右边表头"
+		isDefault="false"
+		hAlign="Center"
+		vAlign="Middle"
+		topBorder="1Point"
+		topBorderColor="#000000"
+		leftBorder="Thin"
+		leftBorderColor="#000000"
+		bottomBorder="Thin"
+		bottomBorderColor="#000000"
+		rightBorder="1Point"
+		rightBorderColor="#000000"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="左边数据"
+		isDefault="false"
+		vAlign="Middle"
+		leftBorder="1Point"
+		leftBorderColor="#000000"
+		bottomBorder="Thin"
+		bottomBorderColor="#000000"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="右边数据"
+		isDefault="false"
+		vAlign="Middle"
+		leftBorder="Thin"
+		leftBorderColor="#000000"
+		bottomBorder="Thin"
+		bottomBorderColor="#000000"
+		rightBorder="1Point"
+		rightBorderColor="#000000"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="总计"
+		isDefault="false"
+		vAlign="Middle"
+		topBorder="Thin"
+		topBorderColor="#000000"
+		leftBorder="Thin"
+		leftBorderColor="#000000"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="左边总计"
+		isDefault="false"
+		hAlign="Center"
+		vAlign="Middle"
+		topBorder="Thin"
+		topBorderColor="#000000"
+		leftBorder="1Point"
+		leftBorderColor="#000000"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		isBold="true"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="右边总计"
+		isDefault="false"
+		vAlign="Middle"
+		topBorder="Thin"
+		topBorderColor="#000000"
+		leftBorder="Thin"
+		leftBorderColor="#000000"
+		rightBorder="1Point"
+		rightBorderColor="#000000"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+	<style 
+		name="制表人"
+		isDefault="false"
+		hAlign="Center"
+		vAlign="Middle"
+		topBorder="Thin"
+		topBorderColor="#000000"
+		leftBorder="1Point"
+		leftBorderColor="#000000"
+		bottomBorder="Thin"
+		bottomBorderColor="#000000"
+		fontName="仿宋_GB2312"
+		fontSize="11"
+		isBold="true"
+		pdfFontName="STSong-Light"
+		pdfEncoding="UniGB-UCS2-H"
+		isPdfEmbedded="true"
+	/>
+
+	<parameter name="sDate" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[new SimpleDateFormat ("yyyy-MM-dd").format(new java.util.Date())]]></defaultValueExpression>
+	</parameter>
+	<parameter name="company_name" isForPrompting="false" class="java.lang.String">
+		<parameterDescription><![CDATA['']]></parameterDescription>
+	</parameter>
+	<parameter name="user_name" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="p_range" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="standard_id" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="is_null" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="charge_month" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="queryDate" isForPrompting="false" class="java.lang.String"/>
+	<queryString><![CDATA[select sum(B1_area) B1_area,sum(B2_area) B2_area,sum(B3_area) B3_area,sum(B4_area) B4_area,sum(intoweb_area) intoweb_area,
+sum(B1_money) B1_money,sum(B2_money) B2_money,sum(B3_money) B3_money,sum(B4_money) B4_money,
+sum(intoweb_money) intoweb_money,
+stat_id,stat_name,source_id,source_name,
+sum(web_count) web_count,
+sum(TOTAL_WEB_COUNT) TOTAL_WEB_COUNT
+from (
+select 
+sum(case when standard_id='B1' then intoweb_area else 0 end) B1_area,
+sum(case when standard_id='B2' then intoweb_area else 0 end) B2_area,
+sum(case when standard_id='B3' then intoweb_area else 0 end) B3_area,
+sum(case when standard_id='B4' then intoweb_area else 0 end) B4_area,
+sum(intoweb_area) intoweb_area,
+sum(case when standard_id='B1' then intoweb_money else 0 end) B1_money,
+sum(case when standard_id='B2' then intoweb_money else 0 end) B2_money,
+sum(case when standard_id='B3' then intoweb_money else 0 end) B3_money,
+sum(case when standard_id='B4' then intoweb_money else 0 end) B4_money,
+sum(intoweb_money) intoweb_money,
+stat_id,stat_name,b.source_id,b.source_name,
+case when $P!{charge_month}='-1' then count(distinct web_code) else 0 end  web_count,
+count(distinct web_code) TOTAL_WEB_COUNT
+from 
+		(select 
+		a.i_id, 
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		f.real_account INTOWEB_MONEY,
+		a.remark,d.stat_id,d.stat_name,d.source_id,f.community_code,f.building_code,f.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,fc_station d,fc_house e,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+                and a.web_type='用户'
+                and a.web_code=e.house_code(+)
+                and e.stat_id=d.stat_id(+)
+	and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+                union all
+                select 
+		a.i_id, 
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		f.real_account INTOWEB_MONEY,
+		a.remark,d.stat_id,d.stat_name,d.source_id,f.community_code,f.building_code,f.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,fc_station d,fc_community e,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+                and a.web_type='小区'
+                and a.web_code=e.community_code(+)
+                and e.stat_id=d.stat_id(+)
+	and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+                union all
+                select 
+		a.i_id, 
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		f.real_account INTOWEB_MONEY,
+		a.remark,d.stat_id,d.stat_name,d.source_id,f.community_code,f.building_code,f.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,fc_station d,fc_building e,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+                and a.web_type='大楼'
+                and a.web_code=e.building_code(+)
+                and e.stat_id=d.stat_id(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+	and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+		) a ,fc_source b
+where a.source_id=b.source_id 
+and ('$P!{is_null}'='1' or (COMMUNITY_CODE in ($P!{p_range}) or BUILDING_CODE in ($P!{p_range})   
+ or HOUSE_CODE in ($P!{p_range})
+                ))
+		and (('$P!{standard_id}'='-1' and standard_id is null ) 
+		or '$P!{standard_id}'='1'
+		or standard_id='$P!{standard_id}')
+and ($P!{charge_month}='-1' or INTOWEB_YEAR in($P!{charge_month}))
+$P!{queryDate}
+group by stat_id,stat_name,b.source_id,b.source_name
+union all
+select 
+0 B1_area,
+0 B2_area,
+0 B3_area,
+0 B4_area,
+0 intoweb_area,
+0 B1_money,
+0 B2_money,
+0 B3_money,
+0 B4_money,
+0 intoweb_money,
+stat_id,stat_name,b.source_id,b.source_name,
+-count(distinct web_code) web_count,0
+from 
+		(select 
+		a.i_id, 
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		f.real_account INTOWEB_MONEY,
+		a.remark,d.stat_id,d.stat_name,d.source_id,f.community_code,f.building_code,f.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,fc_station d,fc_house e,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+                and a.web_type='用户'
+                and a.web_code=e.house_code(+)
+                and e.stat_id=d.stat_id(+)
+	and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+                union all
+                select 
+		a.i_id, 
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		f.real_account INTOWEB_MONEY,
+		a.remark,d.stat_id,d.stat_name,d.source_id,f.community_code,f.building_code,f.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,fc_station d,fc_community e,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+                and a.web_type='小区'
+                and a.web_code=e.community_code(+)
+                and e.stat_id=d.stat_id(+)
+	and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+                union all
+                select 
+		a.i_id, 
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		f.real_account INTOWEB_MONEY,
+		a.remark,d.stat_id,d.stat_name,d.source_id,f.community_code,f.building_code,f.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,fc_station d,fc_building e,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+                and a.web_type='大楼'
+                and a.web_code=e.building_code(+)
+                and e.stat_id=d.stat_id(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+	and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+		) a ,fc_source b
+where a.source_id=b.source_id 
+and ('$P!{is_null}'='1' or (COMMUNITY_CODE in ($P!{p_range}) or BUILDING_CODE in ($P!{p_range})   
+ or HOUSE_CODE in ($P!{p_range})
+                ))
+		and (('$P!{standard_id}'='-1' and standard_id is null ) 
+		or '$P!{standard_id}'='1'
+		or standard_id='$P!{standard_id}')
+and ($P!{charge_month}!='-1' and INTOWEB_YEAR <$P!{charge_month})
+$P!{queryDate}
+group by stat_id,stat_name,b.source_id,b.source_name
+union all
+select 
+0 B1_area,
+0 B2_area,
+0 B3_area,
+0 B4_area,
+0 intoweb_area,
+0 B1_money,
+0 B2_money,
+0 B3_money,
+0 B4_money,
+0 intoweb_money,
+stat_id,stat_name,b.source_id,b.source_name,
+count(distinct web_code) web_count,0
+from 
+		(select 
+		a.i_id, 
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		f.real_account INTOWEB_MONEY,
+		a.remark,d.stat_id,d.stat_name,d.source_id,f.community_code,f.building_code,f.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,fc_station d,fc_house e,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+                and a.web_type='用户'
+                and a.web_code=e.house_code(+)
+                and e.stat_id=d.stat_id(+)
+	and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+                union all
+                select 
+		a.i_id, 
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		f.real_account INTOWEB_MONEY,
+		a.remark,d.stat_id,d.stat_name,d.source_id,f.community_code,f.building_code,f.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,fc_station d,fc_community e,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+                and a.web_type='小区'
+                and a.web_code=e.community_code(+)
+                and e.stat_id=d.stat_id(+)
+	and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+                union all
+                select 
+		a.i_id, 
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		f.real_account INTOWEB_MONEY,
+		a.remark,d.stat_id,d.stat_name,d.source_id,f.community_code,f.building_code,f.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,fc_station d,fc_building e,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+                and a.web_type='大楼'
+                and a.web_code=e.building_code(+)
+                and e.stat_id=d.stat_id(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+	and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+		) a ,fc_source b
+where a.source_id=b.source_id 
+and ('$P!{is_null}'='1' or (COMMUNITY_CODE in ($P!{p_range}) or BUILDING_CODE in ($P!{p_range})   
+ or HOUSE_CODE in ($P!{p_range})
+                ))
+		and (('$P!{standard_id}'='-1' and standard_id is null ) 
+		or '$P!{standard_id}'='1'
+		or standard_id='$P!{standard_id}')
+and ($P!{charge_month}!='-1' and INTOWEB_YEAR <=$P!{charge_month})
+$P!{queryDate}
+group by stat_id,stat_name,b.source_id,b.source_name
+)group by stat_id,stat_name,source_id,source_name
+order by stat_id]]></queryString>
+
+	<field name="B1_AREA" class="java.math.BigDecimal"/>
+	<field name="B2_AREA" class="java.math.BigDecimal"/>
+	<field name="B3_AREA" class="java.math.BigDecimal"/>
+	<field name="B4_AREA" class="java.math.BigDecimal"/>
+	<field name="INTOWEB_AREA" class="java.math.BigDecimal"/>
+	<field name="B1_MONEY" class="java.math.BigDecimal"/>
+	<field name="B2_MONEY" class="java.math.BigDecimal"/>
+	<field name="B3_MONEY" class="java.math.BigDecimal"/>
+	<field name="B4_MONEY" class="java.math.BigDecimal"/>
+	<field name="INTOWEB_MONEY" class="java.math.BigDecimal"/>
+	<field name="STAT_ID" class="java.lang.String"/>
+	<field name="STAT_NAME" class="java.lang.String"/>
+	<field name="SOURCE_ID" class="java.lang.String"/>
+	<field name="SOURCE_NAME" class="java.lang.String"/>
+	<field name="WEB_COUNT" class="java.lang.Integer"/>
+	<field name="TOTAL_WEB_COUNT" class="java.lang.Integer"/>
+
+	<variable name="SUMHOUC" class="java.lang.Integer" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{WEB_COUNT}]]></variableExpression>
+	</variable>
+	<variable name="sumB1_area" class="java.math.BigDecimal" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{B1_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumB2_area" class="java.math.BigDecimal" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{B2_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumB3_area" class="java.math.BigDecimal" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{B3_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumTB1" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{B1_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumTB2" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{B2_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumTB3" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{B3_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumB1" class="java.math.BigDecimal" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{B1_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="sumB2" class="java.math.BigDecimal" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{B2_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="sumB3" class="java.math.BigDecimal" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{B3_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="sumTMB1" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{B1_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="sumTMB2" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{B2_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="sumTMB3" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{B3_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="sumTB" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{INTOWEB_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumTMB" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{INTOWEB_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="sumB_area" class="java.math.BigDecimal" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{INTOWEB_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumStat" class="java.lang.Integer" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{GRPStat_COUNT}]]></variableExpression>
+	</variable>
+	<variable name="sumB" class="java.math.BigDecimal" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{INTOWEB_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="sumB4_area" class="java.math.BigDecimal" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{B4_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumTB4" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{B4_AREA}]]></variableExpression>
+	</variable>
+	<variable name="sumB4" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{B4_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="sumTMB4" class="java.math.BigDecimal" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{B4_MONEY}]]></variableExpression>
+	</variable>
+	<variable name="v_total_web_count" class="java.lang.Integer" resetType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL_WEB_COUNT}]]></variableExpression>
+	</variable>
+	<variable name="g_total_web_count" class="java.lang.Integer" resetType="Group" resetGroup="GRPStat" calculation="Sum">
+		<variableExpression><![CDATA[$F{TOTAL_WEB_COUNT}]]></variableExpression>
+	</variable>
+
+		<group  name="GRPStat" >
+			<groupExpression><![CDATA[$F{SOURCE_ID}]]></groupExpression>
+			<groupHeader>
+			<band height="30"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="535"
+						height="30"
+						key="textField-13"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" leftPadding="2" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["热源名称："+$F{SOURCE_NAME}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="30"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						style="左边总计"
+						x="0"
+						y="0"
+						width="20"
+						height="30"
+						key="staticText-40"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[合计]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="20"
+						y="0"
+						width="33"
+						height="30"
+						key="textField-21"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{GRPStat_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="480"
+						y="0"
+						width="55"
+						height="30"
+						key="textField-32"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="314"
+						y="0"
+						width="40"
+						height="30"
+						key="textField-51"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="354"
+						y="0"
+						width="43"
+						height="30"
+						key="textField-53"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="440"
+						y="0"
+						width="40"
+						height="30"
+						key="textField-56"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB4}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="78"
+						y="0"
+						width="27"
+						height="30"
+						key="textField-60"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{SUMHOUC}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="260"
+						y="0"
+						width="54"
+						height="30"
+						key="textField-62"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB_area}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="105"
+						y="0"
+						width="37"
+						height="30"
+						key="textField-63"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB1_area}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="142"
+						y="0"
+						width="42"
+						height="30"
+						key="textField-64"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB2_area}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="220"
+						y="0"
+						width="40"
+						height="30"
+						key="textField-65"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB4_area}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="184"
+						y="0"
+						width="36"
+						height="30"
+						key="textField-72"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB3_area}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="397"
+						y="0"
+						width="43"
+						height="30"
+						key="textField-75"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumB3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="53"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-79"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{g_total_web_count}]]></textFieldExpression>
+				</textField>
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="100"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						style="标题"
+						x="0"
+						y="0"
+						width="535"
+						height="30"
+						key="staticText-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[用户入网统计表(按换热站统计)]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="30"
+						width="314"
+						height="30"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="2" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["统计时间："+$P{sDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						style="左边表头"
+						x="0"
+						y="60"
+						width="20"
+						height="40"
+						key="staticText-31"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[序号]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="左边表头"
+						x="20"
+						y="60"
+						width="33"
+						height="40"
+						key="staticText-32"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[换热站名称]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="314"
+						y="30"
+						width="221"
+						height="30"
+						key="textField-25"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["单位：平方米"]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="314"
+						y="60"
+						width="221"
+						height="20"
+						key="staticText-49"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[入网费金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="314"
+						y="80"
+						width="40"
+						height="20"
+						key="staticText-50"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[小区]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="354"
+						y="80"
+						width="43"
+						height="20"
+						key="staticText-51"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[商业]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="440"
+						y="80"
+						width="40"
+						height="20"
+						key="staticText-52"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[庭院]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="480"
+						y="80"
+						width="55"
+						height="20"
+						key="staticText-53"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[合计]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="105"
+						y="60"
+						width="209"
+						height="20"
+						key="staticText-54"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[入网面积]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="105"
+						y="80"
+						width="37"
+						height="20"
+						key="staticText-55"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[小区]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="142"
+						y="80"
+						width="42"
+						height="20"
+						key="staticText-56"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[商业]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="220"
+						y="80"
+						width="40"
+						height="20"
+						key="staticText-57"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[庭院]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="260"
+						y="80"
+						width="54"
+						height="20"
+						key="staticText-58"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[合计]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="184"
+						y="80"
+						width="36"
+						height="20"
+						key="staticText-59"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[单位]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="表头"
+						x="397"
+						y="80"
+						width="43"
+						height="20"
+						key="staticText-60"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[单位]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="左边表头"
+						x="53"
+						y="60"
+						width="25"
+						height="40"
+						key="staticText-61"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						style="左边表头"
+						x="78"
+						y="60"
+						width="27"
+						height="40"
+						key="staticText-62"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="11" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[新增户数]]></text>
+				</staticText>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="30"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="##0" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="20"
+						height="30"
+						key="textField-40"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="20"
+						y="0"
+						width="33"
+						height="30"
+						key="textField-41"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{STAT_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="78"
+						y="0"
+						width="27"
+						height="30"
+						key="textField-42"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{WEB_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="480"
+						y="0"
+						width="55"
+						height="30"
+						key="textField-50"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{INTOWEB_MONEY}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="314"
+						y="0"
+						width="40"
+						height="30"
+						key="textField-52"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{B1_MONEY}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="354"
+						y="0"
+						width="43"
+						height="30"
+						key="textField-54"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{B2_MONEY}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="440"
+						y="0"
+						width="40"
+						height="30"
+						key="textField-55"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{B4_MONEY}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="260"
+						y="0"
+						width="54"
+						height="30"
+						key="textField-66"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{INTOWEB_AREA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="105"
+						y="0"
+						width="37"
+						height="30"
+						key="textField-67"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{B1_AREA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="142"
+						y="0"
+						width="42"
+						height="30"
+						key="textField-68"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{B2_AREA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="220"
+						y="0"
+						width="40"
+						height="30"
+						key="textField-69"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{B4_AREA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="184"
+						y="0"
+						width="36"
+						height="30"
+						key="textField-71"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{B3_AREA}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="397"
+						y="0"
+						width="43"
+						height="30"
+						key="textField-74"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$F{B3_MONEY}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="53"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-77"
+						stretchType="RelativeToTallestObject"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="false" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$F{TOTAL_WEB_COUNT}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="55"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Report" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="314"
+						y="30"
+						width="221"
+						height="25"
+						key="textField-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[" 共 "+$V{PAGE_NUMBER}.toString()+" 页"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="30"
+						width="314"
+						height="25"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["第 "+$V{PAGE_NUMBER}.toString()+" 页"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						style="表头"
+						x="314"
+						y="0"
+						width="221"
+						height="30"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="None" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["制表人："+$P{user_name}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="314"
+						height="30"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" leftPadding="2" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["制表单位："+$P{company_name}]]></textFieldExpression>
+				</textField>
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="30"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						style="左边总计"
+						x="0"
+						y="0"
+						width="20"
+						height="30"
+						key="staticText-16"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#333333"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<text><![CDATA[总计]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="105"
+						y="0"
+						width="37"
+						height="30"
+						key="textField-4"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTB1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="142"
+						y="0"
+						width="42"
+						height="30"
+						key="textField-8"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTB2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="220"
+						y="0"
+						width="40"
+						height="30"
+						key="textField-9"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTB4}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="260"
+						y="0"
+						width="54"
+						height="30"
+						key="textField-33"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTB}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="480"
+						y="0"
+						width="55"
+						height="30"
+						key="textField-34"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTMB}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="314"
+						y="0"
+						width="40"
+						height="30"
+						key="textField-57"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTMB1}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="354"
+						y="0"
+						width="43"
+						height="30"
+						key="textField-58"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTMB2}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="440"
+						y="0"
+						width="40"
+						height="30"
+						key="textField-59"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTMB4}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="20"
+						y="0"
+						width="33"
+						height="30"
+						key="textField-61"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{sumStat}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="78"
+						y="0"
+						width="27"
+						height="30"
+						key="textField-70"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{SUMHOUC}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="184"
+						y="0"
+						width="36"
+						height="30"
+						key="textField-73"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTB3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="397"
+						y="0"
+						width="43"
+						height="30"
+						key="textField-76"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{sumTMB3}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="53"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-78"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" rightPadding="2" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="STSong-Light" size="10" isBold="true" isPdfEmbedded ="true" pdfEncoding ="UniGB-UCS2-H"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{v_total_web_count}]]></textFieldExpression>
+				</textField>
+			</band>
+		</summary>
+</jasperReport>

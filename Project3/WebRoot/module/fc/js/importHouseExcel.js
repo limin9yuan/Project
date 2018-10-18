@@ -1,0 +1,368 @@
+/**
+ * Excel导入
+ * 
+ * @author XiongChun
+ * @since 2010-08-20
+ */
+Ext.onReady(function() {
+			var cm = new Ext.grid.ColumnModel([new Ext.grid.RowNumberer(),{
+						header : 'excel行号',
+						dataIndex : 'excel_row',
+						width : 60
+					},{
+						header : '错误提示',
+						dataIndex : 'error',
+						width : 80
+					},  {
+						header : '小区编号',
+						dataIndex : 'community_code',
+						width : 60
+					}, {
+						header : '小区名称',
+						dataIndex : 'community_name',
+						width : 80
+					}, {
+						header : '大楼编号',
+						dataIndex : 'building_code',
+						width : 60
+					}, {
+						header : '大楼名称',
+						dataIndex : 'building_name',
+						width : 100
+					}, {
+						header : '单元号',
+						dataIndex : 'cell_code',
+						width : 60
+					}, {
+						header : '楼层',
+						dataIndex : 'floor',
+						width : 60
+					}, {
+						header : '门牌',
+						dataIndex : 'door_code',
+						width : 60
+					}, {
+						header : '地址',
+						dataIndex : 'address',
+						width : 60
+					}, {
+						header : '入住时间',
+						dataIndex : 'enter_date',
+						width : 60
+					}, {
+						header : '住户名称',
+						dataIndex : 'owner_name',
+						width : 80
+					}, {
+						header : '固定电话',
+						dataIndex : 'telephone',
+						width : 80
+					}, {
+						header : '移动电话',
+						dataIndex : 'mobilephone',
+						width : 80
+					}, {
+						header : '单位名称',
+						dataIndex : 'work_unit'
+					}, {
+						header : '使用类型(1)',
+						dataIndex : 'use_type'
+					}, {
+						header : '建筑面积(1)',
+						dataIndex : 'build_area'
+					},{
+						header : '使用面积(1)',
+						dataIndex : 'use_area'
+					},{
+						header : '收费面积(1)',
+						dataIndex : 'charge_area'
+					},{
+						header : '使用类型(2)',
+						dataIndex : 'use_type2'
+					},{
+						header : '收费面积(2)',
+						dataIndex : 'charge_area2'
+					},{
+						header : '超高面积(1)',
+						dataIndex : 'super_area'
+					},{
+						header : '超高面积(2)',
+						dataIndex : 'super_area2'
+					},{
+						header : '锁闭阀卡号',
+						dataIndex : 'card_id'
+					},{
+						header : '原始编号',
+						dataIndex : 'cluster_code'
+					},{
+						header : '智能阀号',
+						dataIndex : 'valvecode'
+					},{
+						header : '阳台面积',
+						dataIndex : 'balcony'
+					},{
+						id : '_blank',
+						header : '',
+						dataIndex : '_blank'
+					}]);
+
+			/**
+			 * 数据存储
+			 */
+			
+			var store = new Ext.data.Store({
+						proxy : new Ext.data.HttpProxy({
+									url : 'importHouse.ered?reqCode=queryErrorImport'
+								}),
+						reader : new Ext.data.JsonReader({
+									totalProperty : 'TOTALCOUNT',
+									root : 'ROOT'
+								}, [{
+											name : 'excel_row'
+										},{
+											name : 'error'
+										},{
+											name : 'community_code'
+										}, {
+											name : 'community_name'
+										}, {
+											name : 'building_code'
+										}, {
+											name : 'building_name'
+										}, {
+											name : 'cell_code'
+										}, {
+											name : 'floor'
+										}, {
+											name : 'door_code'
+										}, {
+											name : 'enter_date'
+										}, {
+											name : 'owner_name'
+										}, {
+											name : 'telephone'
+										}, {
+											name : 'mobilephone'
+										}, {
+											name : 'work_unit'
+										},{
+											name : 'card_id'
+										},{
+											name : 'cluster_code'
+										},{
+											name : 'valvecode'
+										},{
+											name : 'use_type'
+										}, {
+											name : 'build_area'
+										}, {
+											name : 'use_area'
+										}, {
+											name : 'charge_area'
+										}, {
+											name : 'super_area'
+										}, {
+											name : 'use_type2'
+										}, {
+											name : 'charge_area2'
+										}, {
+											name : 'super_area2'
+										}, {
+											name : 'address'
+										},{
+											name : 'balcony'
+										}])
+					});
+
+			var pagesize_combo = new Ext.form.ComboBox({
+						name : 'pagesize',
+						hiddenName : 'pagesize',
+						typeAhead : true,
+						triggerAction : 'all',
+						lazyRender : true,
+						mode : 'local',
+						store : new Ext.data.ArrayStore({
+									fields : ['value', 'text'],
+									data : [[10, '10条/页'], [20, '20条/页'], [50, '50条/页'], [100, '100条/页'], [250, '250条/页'], [500, '500条/页']]
+								}),
+						valueField : 'value',
+						displayField : 'text',
+						value : '20',
+						editable : false,
+						width : 85
+					});
+			var number = parseInt(pagesize_combo.getValue());
+			pagesize_combo.on("select", function(comboBox) {
+						bbar.pageSize = parseInt(comboBox.getValue());
+						number = parseInt(comboBox.getValue());
+						store.reload({
+									params : {
+										start : 0,
+										limit : bbar.pageSize
+									}
+								});
+					});
+			
+			var bbar = new Ext.PagingToolbar({
+						pageSize : number,
+						store : store,
+						displayInfo : true,
+						displayMsg : '显示{0}条到{1}条,共{2}条',
+						plugins : new Ext.ux.ProgressBarPager(), // 分页进度条						emptyMsg : "没有符合条件的记录",
+						items : ['-', '&nbsp;&nbsp;', pagesize_combo]
+					});
+			
+			var grid = new Ext.grid.GridPanel({
+						title : '',
+						renderTo : 'catalogGridDiv',
+						height : 500,
+						// width:600,
+						autoScroll : true,
+						region : 'center',
+						
+						store : store,
+						loadMask : {
+							msg : '正在加载表格数据,请稍等...'
+						},
+						stripeRows : true,
+						frame : true,
+						autoExpandColumn : '_blank',
+						cm : cm,
+						tbar : [{
+									text : '选择导入文件',
+									id:'01030201',
+									iconCls : 'page_excelIcon',
+									hidden:parent.checkBtn('01030201'),
+									handler : function() {
+										w.show();
+									}
+								},{
+									text : '导入模板下载',
+									id:'01030202',
+									iconCls : 'downloadIcon',
+									hidden:parent.checkBtn('01030202'),
+									handler : function() {
+										window.open("../module/fc/import.xls");
+									
+									
+									}
+										}],
+						bbar : bbar
+					});
+			store.load({
+						params : {
+							start : 0,
+							limit : bbar.pageSize
+						}
+					});
+			bbar.on("change", function() {
+						grid.getSelectionModel().selectFirstRow();
+					});
+			
+		
+			var formpanel = new Ext.form.FormPanel({
+						id : 'formpanel',
+						name : 'formpanel',
+						defaultType : 'textfield',
+						labelAlign : 'right',
+						labelWidth : 99,
+						frame : true,
+						fileUpload : true,
+						items : [{
+									fieldLabel : '请选择导入文件',
+									name : 'theFile',
+									id : 'theFile',
+									inputType : 'file',
+									allowBlank : true,
+									anchor : '99%'
+								}]
+					});
+
+			var w = new Ext.Window({
+						layout : 'fit',
+						width : 380,
+						height : 100,
+						resizable : false,
+						draggable : true,
+						closeAction : 'hide',
+						title : '导入Excel',
+						modal : false,
+						collapsible : true,
+						titleCollapse : true,
+						maximizable : false,
+						buttonAlign : 'right',
+						border : false,
+						animCollapse : true,
+						animateTarget : Ext.getBody(),
+						constrain : true,
+						items : [formpanel],
+						buttons : [{
+									text : '导入',
+									iconCls : 'acceptIcon',
+									handler : function() {
+										var theFile = Ext.getCmp('theFile').getValue();
+										if (Ext.isEmpty(theFile)) {
+											Ext.Msg.alert('提示', '请先选择您要导入的xls文件...');
+											return;
+										}
+										if (theFile.substring(theFile.length - 4, theFile.length) != ".xls") {
+											Ext.Msg.alert('提示', '您选择的文件格式不对,只能导入.xls文件!');
+											return;
+										}
+										formpanel.form.submit({
+													url : 'importHouse.ered?reqCode=importHouseExcel',
+													waitTitle : '提示',
+													method : 'POST',
+													waitMsg : '正在处理数据,请稍候...',
+													success : function(form, action) {
+														store.load({
+																	params : {
+																		start : 0,
+																		limit : bbar.pageSize
+																	}
+																});
+														w.hide();
+														// Ext.MessageBox.alert('提示',
+														// action.result.msg);
+
+													},
+													failure : function(form, action) {
+														var msg = action.result.msg;
+														Ext.MessageBox.alert('提示', '参数数据保存失败:<br>' + msg);
+													}
+												});
+
+									}
+								}, {
+									text : '关闭',
+									id : 'btnReset',
+									iconCls : 'deleteIcon',
+									handler : function() {
+										w.hide();
+									}
+								}]
+					});
+			
+			
+			/**
+			 * 布局
+			 */
+			
+			var viewport = new Ext.Viewport({
+						layout : 'border',
+						items : [grid]
+					});
+
+			/**
+			 * 查询医院收费目录
+			 */
+			function queryCatalogItem() {
+				store.load({
+							params : {
+								start : 0,
+								limit : bbar.pageSize
+							}
+						});
+			}
+
+		});

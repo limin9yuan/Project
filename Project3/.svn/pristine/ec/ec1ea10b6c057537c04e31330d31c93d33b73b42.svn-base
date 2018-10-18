@@ -1,0 +1,33 @@
+delete from fc_import;
+delete from fc_area;
+delete from fc_house;
+delete from fc_owner;
+delete from fc_building;
+delete from fc_community;
+delete from sf_charge;
+delete from sf_detail;
+delete from sf_invoice;
+delete from sf_invoiceuse;
+delete from sf_minus;
+delete from fc_station;
+delete from fc_source;
+delete from fc_import;
+
+
+
+variable n number;
+begin
+  dbms_job.submit(:n, 'calcLateFee;', to_date('2018-02-06 01:00:00', 'yyyy-mm-dd hh24:mi:ss'),'sysdate+1');
+  commit;
+end;
+
+begin
+ dbms_job.run(23);
+end;
+
+begin
+ dbms_job.remove(26);
+end;
+
+
+

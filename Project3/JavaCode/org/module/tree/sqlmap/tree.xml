@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="dto"
+		type="org.eredlab.g4.ccl.datastructure.impl.BaseDto" />
+
+	<!-- 查询第一级树节点(小区)-->
+	<select id="queryCommunity" parameterClass="map"
+		resultClass="dto">
+		SELECT community_code as id, community_code||' '||community_name||' ('||building_count||')' as text,nvl(building_count,0) as child_Count
+		FROM
+		fc_community order by community_code
+	</select>
+
+	<!-- 查询第二级树节点(大楼) -->
+	<select id="queryBuilding" parameterClass="map" resultClass="dto">
+		SELECT building_code as id, building_code||' '||building_name||' ('||house_count||')' as text,nvl(house_count,0) as child_Count
+		FROM fc_building a WHERE
+		a.community_code = '$parentId$'  order by building_code
+	</select>
+	
+	<!-- 查询第三级树节点(房间) -->
+	<select id="queryHouse" parameterClass="map" resultClass="dto">
+		SELECT a.house_code as id, a.CELL_CODE||'-'||a.FLOOR||'-'||a.DOOR_CODE||' '||b.OWNER_NAME as text,0 as child_Count
+		FROM fc_house a,fc_owner b WHERE
+		a.house_code=b.house_code(+) and b.is_owner(+)='1' and a.building_code = '$parentId$'
+		order by a.house_code
+	</select>
+</sqlMap>

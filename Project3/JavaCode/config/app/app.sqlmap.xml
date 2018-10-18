@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<!-- 业务系统的SQL映射文件装载 -->
+<sqlMapConfig>
+  <sqlMap resource="org/module/tree/sqlmap/tree.xml"/>
+  <sqlMap resource="org/module/fc/sqlmap/fc.xml"/>
+  <sqlMap resource="org/module/sys/sqlmap/sys.xml"/>
+  <sqlMap resource="org/module/sf/sqlmap/sf.xml"/>
+  <sqlMap resource="org/module/iw/sqlmap/iw.xml"/>
+  <sqlMap resource="org/module/rpt/sqlmap/rpt.xml"/>
+</sqlMapConfig>

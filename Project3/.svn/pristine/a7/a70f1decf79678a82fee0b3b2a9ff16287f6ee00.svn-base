@@ -1,0 +1,147 @@
+create or replace PACKAGE PKG_CHARGE AS
+
+  /* TODO enter package declarations (types, exceptions, methods etc) here */
+--生成应收
+  procedure createPlan( 
+    p_item_code in varchar2,--收费项目
+    p_charge_month in varchar2,--生成计划的收费期  格式：2008,2009或200801,200802，以","分隔
+    p_range in varchar2,--生成计划条件
+    p_returnNumber in varchar2,--是否返回生成房间数 1是，0否
+    p_operator in varchar2,--操作人
+    o_creatPlanNumber out number,--生成应收记录数
+    appCode out nocopy varchar2,--是否成功 1成功0出错
+    errorMsg out nocopy varchar2--错误信息
+    ) ;
+      
+  procedure minusMoney(
+    p_id in varchar2,--应收id
+    p_minus_type in varchar2,--减免方式、折扣、金额
+    p_minus_money in varchar2,--减免金额
+    p_minus_rate in varchar2,--折扣率
+    p_minus_kind in varchar2,--减免类型、按天、面积等减免
+    p_minus_days in varchar2,--减免天数
+    p_minus_area in varchar2,--减免面积
+    p_minus_reason in varchar2,--减免原因
+    p_remark in varchar2,--备注
+    p_operator in varchar2,--操作人
+    p_cid in varchar2,--操作人
+    appCode out nocopy varchar2,--是否成功 1成功0出错
+    errorMsg out nocopy varchar2--错误信息
+    ) ;
+     --删除减免
+   procedure deleteMinus(
+    m_id in varchar2,--应收id
+    p_charge_month in varchar2,--查询条件
+    p_range in varchar2,--查询条件
+    p_operator in varchar2,--操作人
+    p_cid in varchar2,
+    appCode out nocopy varchar2,--是否成功 1成功0出错
+    errorMsg out nocopy varchar2--错误信息
+    ); 
+  /*收费*/
+    procedure charge_A(
+    b_id in number,--bill id
+    p_id in varchar2,--应收id
+    p_house_code in varchar2,--用户编号
+    p_address in varchar2,--地址
+    p_work_unit in varchar2,--工作单位    
+    p_telphone in varchar2,--联系电话    
+    p_invoice_number in varchar2,--发票代码
+    p_invoice_code in varchar2,--发票号
+    p_price in number,--单价
+    p_charge_area in number,--面积    
+    p_pay_mode in varchar2,--交款方式
+    p_payman in varchar2,--交款人
+    p_paydate in varchar2,--交款时间
+    p_real_charge in number,--收费金额
+    p_delzero in number,--抹零金额
+    p_billman in varchar2,--、收款人
+    p_billdate in varchar2,--收款时间    
+    p_begin_prepay in number,--预收款初值
+    p_end_prepay in number,--预收款现值
+    p_use_prepay in number,--使用预收款
+    p_add_prepay in number,--存入预收款
+    p_latefee_enddate in varchar2,--滞纳金截止时间
+    p_latefee_realaccount in number,--滞纳金应收金额
+    p_latefee_charge in number,--滞纳金收费金额
+    p_minus_reason in varchar2,--滞纳金减免类型
+    p_remark in varchar2,--滞纳金减免备注
+    p_operator in varchar2,--操作人
+    p_cid in varchar2,--
+    appCode out nocopy varchar2,--是否成功 1成功0出错
+    errorMsg out nocopy varchar2--错误信息
+    )  ;
+    /*冲账*/
+    procedure rollback(
+    p_b_id in varchar2,--收费单id    
+    p_invalid_invoice in varchar2,--是否作废发票,1作废，0不作废
+    p_rollback_reason in varchar2,--冲账原因
+    p_remark in varchar2,--备注
+    p_operator in varchar2,--操作人
+    p_cid in varchar2,
+    appCode out nocopy varchar2,--是否成功 1成功0出错
+    errorMsg out nocopy varchar2--错误信息
+    );  
+    /*票据入库*/
+     procedure insertInvoice(
+    p_invoice_number in varchar2,--票据代码    
+    p_invoice_code in varchar2,--票据编号
+    p_invoice_account in varchar2,--数量
+    p_item_code in varchar2,--收费项目    
+    p_lead_man in varchar2,--领用人
+    p_invoice_bigtype in varchar2,--发票大类
+    p_invoice_type in varchar2,--发票类型
+    p_book_code in varchar2,--册号
+    p_operator in varchar2,--操作人
+    p_cid in varchar2,
+    appCode out nocopy varchar2,--是否成功 1成功0出错
+    errorMsg out nocopy varchar2--错误信息
+    );
+    /*
+  取得滞纳金
+  */
+  function getOVF_NUM(
+    p_house_code in varchar2,--房间编号 
+    p_item_code in varchar2,--收费项目
+    p_charge_month in varchar2,--收费月份
+    p_meter_id in varchar2--表号  
+    )  
+  return number ;
+  function charge(
+    p_bank_number in varchar2, --银行交易流水号
+    p_bank_company_id in varchar2,--银行id
+    p_house_code in varchar2,--用户编号
+    p_charge_month in varchar2,--收费年度
+    p_owner_name in varchar2,--用户名称 
+    p_work_unit in varchar2,--工作单位 
+    p_charge_detail in varchar2,--收费明细  
+    p_invoice_number in varchar2,--发票代码
+    p_invoice_code in varchar2,--发票号
+    p_pay_mode in varchar2,--交款方式
+    p_payman in varchar2,--交款人
+    p_paydate in varchar2,--交款时间
+    p_real_charge in number,--收费金额
+    p_latefee_charge in number,--收滞纳金金额(收费单收滞纳金金额)
+    p_delzero in number,--抹零金额
+    p_latefee_enddate in varchar2,--滞纳金截止时间
+    p_billman in varchar2,--、收款人
+    p_billdate in varchar2,--收款时间
+    p_operator in varchar2,--操作人
+    p_cid in varchar2
+    )  return number ;
+    --冲账 银行
+   function rollback_bank(
+    p_b_id in varchar2,--收费单id    
+    p_invalid_invoice in varchar2,--是否作废发票,1作废，0不作废
+    p_rollback_reason in varchar2,--冲账原因
+    p_remark in varchar2,--备注
+    p_operator in varchar2,--操作人
+    p_cid in varchar2
+    ) return number ;
+     --计算滞纳金
+   function calculateLateFee  (
+    p_item_code in varchar2,--收费项目
+    p_charge_month in varchar2,--生成计划的收费期  
+    p_range in varchar2--生成计划条件
+    )  return number ;
+END PKG_CHARGE;

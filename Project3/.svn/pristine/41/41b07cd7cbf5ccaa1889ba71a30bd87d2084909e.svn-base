@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="../../../" name="eRedG4" default="all">
+	<!-- ANT任务 -->
+	<target name="all">
+		<antcall target="clean" />
+		<antcall target="init" />
+		<antcall target="ear" />
+	</target>
+	<target name="init">
+		<echo message="---------- ${projectRemark} ----------" />
+
+		<!-- java源文件路径 -->
+		<property name="src.dir" value="${basedir}/01.JavaCode" />
+		<!-- jar包路径 -->
+		<property name="lib.dir" value="${basedir}/04.lib" />
+		<!-- webapp路径 -->
+		<property name="webapp.dir" value="${basedir}/03.WebRoot" />
+		<property name="packages" value="com.eredlab.*" />
+
+		<!-- 打包war文件路径 -->
+		<property name="war.dir" value="${basedir}/06.AntBuild/war" />
+	</target>
+
+	<!-- 准备源文件-->
+	<target name="prepare-src" depends="init">
+		<!-- create directories -->
+		<echo message="准备资源..." />
+		<mkdir dir="${war.dir}" />
+	</target>
+
+	<!-- 编译源文件-->
+	<target name="build" depends="prepare-src">
+		<echo message="编译..." />
+	</target>
+
+	<!-- 打war包 -->
+	<target name="eRedG4.war" depends="build">
+		<echo message="正在打包..." />
+		<war warfile="${war.dir}/eRedG4.war" webxml="${webapp.dir}/WEB-INF/web.xml">
+			<!-- 指定lib路径 -->
+			<lib dir="${lib.dir}" />
+			<!-- 指定classes路径,由于我的WebRoot中已经包含了classes,故注释！否则将引入重复的class资源
+   <classes dir = "${webapp.dir}/WEB-INF/classes"/>
+   -->
+			<fileset dir="${webapp.dir}" />
+		</war>
+	</target>
+
+	<!-- 清除临时文件 -->
+	<target name="clean" depends="init">
+		<delete dir="${war.dir}" />
+	</target>
+</project>

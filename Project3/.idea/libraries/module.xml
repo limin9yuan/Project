@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="module">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/WebRoot/module/module.zip!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/module/jasperreports-3.1.0-applet.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/module/jasperreports-fonts-3.7.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/module/applets.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

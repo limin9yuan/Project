@@ -1,0 +1,47 @@
+
+  CREATE OR REPLACE FORCE VIEW "EXTGR"."V_HOUSE" ("HOUSE_CODE", "CID", "BUILDING_CODE", "BUILDING_NAME", "COMMUNITY_CODE", "COMMUNITY_NAME", "CELL_CODE", "FLOOR", "DOOR_CODE", "CARD_ID", "CLUSTER_CODE", "INTOWEB_DATE", "ADDRESS", "APART_STATUS", "HOUSE_MANAGER", "USER_KIND", "HEAT_STATUS", "STAT_ID", "REMARK", "OPERATOR", "OPERATE_DATE", "STAT_NAME", "OWNER_NAME", "HOUSE_MANAGER_NAME", "WORK_UNIT", "ENTER_DATE", "CONTACT_MAN", "MOBILE", "TELEPHONE", "MOBILEPHONE", "INTOWEB_AREA", "AREA_COUNT", "INTOWEB_YEAR", "VALVECODE", "USERCARDVAL","BALCONY") AS 
+  select 
+a.HOUSE_CODE,
+a.CID,
+b.BUILDING_CODE,
+b.building_name,
+c.COMMUNITY_CODE,
+c.community_name,
+a.CELL_CODE,
+a.FLOOR,
+a.DOOR_CODE,
+a.CARD_ID,
+a.CLUSTER_CODE,
+a.INTOWEB_DATE,
+a.ADDRESS,
+a.APART_STATUS,
+a.HOUSE_MANAGER,
+a.USER_KIND,
+a.HEAT_STATUS,
+
+a.STAT_ID,
+a.REMARK,
+a.OPERATOR,
+a.OPERATE_DATE,
+d.STAT_NAME,
+e.OWNER_NAME,
+f.USERNAME HOUSE_MANAGER_NAME,
+e.WORK_UNIT,
+e.ENTER_DATE,
+e.CONTACT_MAN,
+e.MOBILE,
+e.TELEPHONE,
+e.MOBILEPHONE,
+a.intoweb_area,
+a.area_count,
+a.INTOWEB_YEAR,
+a.VALVECODE,
+a.USERCARDVAL,
+a.BALCONY
+from fc_house a,fc_building b,fc_community c,fc_station d,fc_owner e,EAUSER f
+where a.building_code=b.building_code
+and b.community_code=c.community_code
+and a.stat_id=d.stat_id(+)
+and a.house_code=e.house_code(+)
+and e.IS_OWNER(+)='1'
+and a.HOUSE_MANAGER=f.USERID(+);

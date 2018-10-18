@@ -1,0 +1,1587 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="dto"
+		type="org.eredlab.g4.ccl.datastructure.impl.BaseDto" />
+
+	<!-- 应收列表 -->
+	<select id="queryChargePlan" parameterClass="map" resultClass="dto">
+		select * from 
+		(select 
+				b.userName,
+				c.item_name,CHARGE_MONTH             ,
+				HOUSE_CODE               ,
+				a.ITEM_CODE                ,
+				METER_ID                 ,
+				a.CID                      ,
+				COMMUNITY_CODE           ,
+				BUILDING_CODE            ,
+				OWNER_NAME               ,
+				TOTAL_ACCOUNT            ,
+				MINUS_MONEY              ,
+				SUBTRACT_MONEY           ,
+				REAL_ACCOUNT             ,
+				NOW_CASH                 ,
+				USE_TYPE                 ,
+				STANDARD_CODE            ,
+				PRICE                    ,
+				BUILD_AREA               ,
+				FLOOR_AREA               ,
+				CHARGE_AREA              ,
+				PLAN_BEGIN_DATE          ,
+				PLAN_END_DATE            ,
+				DAYS                     ,
+				LATEFEE_STARTDATE        ,
+				LATEFEE_ENDDATE          ,
+				LATEFEE_TOTALACCOUNT     ,
+				LATEFEE_MINUS            ,
+				LATEFEE_REALACCOUNT      ,
+				LATEFEE_NOWCASH          ,
+				LATEFEE_REALACCOUNT-LATEFEE_NOWCASH LATEFEE_QF,
+				LAS_READING              ,
+				THIS_READING             ,
+				POINT_NUMBER             ,
+				WASTE                    ,
+				STOPHEATING              ,
+				STOPTOTALACCOUNT         ,
+				BACK_MONEY               ,
+				IS_INPUT ,
+				a.p_id
+		from SF_CHARGE a,EAUSER b,sf_item c where a.house_manager=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month"> 
+				charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="chargeStatus"> 
+				real_account #chargeStatus# now_cash
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="item_code"> 
+				item_code =#item_code# 
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="owner_name"> 
+				owner_name =#owner_name# 
+			</isNotEmpty>
+		</dynamic>
+		 order by house_code asc
+	</select>
+	<select id="queryChargePlanForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) 
+		from SF_CHARGE 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month"> 
+				charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="chargeStatus"> 
+				real_account #chargeStatus# now_cash
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="item_code"> 
+				item_code =#item_code# 
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="owner_name"> 
+				owner_name =#owner_name# 
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<!-- 查询生成应收汇总信息 -->
+	<select id="sumChargePlan" parameterClass="map" resultClass="dto">
+		
+		  select   '共' || COUNT(house_code) || '' AS house_count,
+				sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
+				sum(MINUS_MONEY)  MINUS_MONEY            ,
+				sum(SUBTRACT_MONEY)   SUBTRACT_MONEY        ,
+				sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,
+				sum(NOW_CASH)  NOW_CASH               ,
+				sum(BUILD_AREA)  BUILD_AREA             ,
+				sum(FLOOR_AREA)  FLOOR_AREA             ,
+				sum(CHARGE_AREA) CHARGE_AREA             ,
+				
+				sum(LATEFEE_TOTALACCOUNT) LATEFEE_TOTALACCOUNT     ,
+				sum(LATEFEE_MINUS )    LATEFEE_MINUS       ,
+				sum(LATEFEE_REALACCOUNT)     LATEFEE_REALACCOUNT ,
+				sum(LATEFEE_NOWCASH)    LATEFEE_NOWCASH,
+				sum(LATEFEE_REALACCOUNT-LATEFEE_NOWCASH)    LATEFEE_QF  				     
+		from SF_CHARGE 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month"> 
+									charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="chargeStatus"> 
+				real_account #chargeStatus# now_cash
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="item_code"> 
+				item_code =#item_code# 
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!-- 生成应收-->
+	<!-- 定义出入参对象映射 -->
+	<parameterMap id="sf.creatPlandto" class="java.util.Map">
+		<parameter property="p_item_code" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="p_charge_month" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="p_range" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="p_returnNumber" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="p_operator" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="o_creatPlanNumber" jdbcType="INTEGER" javaType="java.lang.Integer" mode="OUT" /> <!-- 出参 -->
+		<parameter property="appCode" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 执行代码 -->
+		<parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 出错信息 -->
+	</parameterMap>
+	<!-- 演示调用存储过程:如果你将存储过程是通过oracle的package的方式来组织,则使用packagename.prcname的方式来调用 -->
+	<procedure id="createPlan" parameterMap="sf.creatPlandto">{call pkg_charge.createPlan(?,?,?,?,?,?,?,?)}</procedure>
+	<!--删除应收-->
+	<delete id="deletePlan" parameterClass="map">
+       DELETE FROM sf_charge
+       <dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month"> 
+				charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="item_code"> 
+				item_code=#item_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>			
+			<isNotEmpty prepend="AND" property="p_id">
+				p_id in ($p_id$)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" > 
+				 now_cash = 0
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="chargeStatus"> 
+				real_account #chargeStatus# now_cash
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	<!-- 减免列表 -->
+	<select id="queryMinus" parameterClass="map" resultClass="dto">
+		select * from 
+		(select 
+				b.userName,
+				c.item_name,a.CHARGE_MONTH             ,
+				a.HOUSE_CODE               ,
+				a.ITEM_CODE                ,
+				a.METER_ID                 ,
+				a.CID                      ,
+				a.COMMUNITY_CODE           ,
+				a.BUILDING_CODE            ,
+				a.OWNER_NAME               ,
+				a.TOTAL_ACCOUNT            ,
+				a.MINUS_MONEY              ,
+				a.SUBTRACT_MONEY           ,
+				a.REAL_ACCOUNT             ,
+				a.NOW_CASH                 ,
+				a.LATEFEE_STARTDATE        ,
+				a.LATEFEE_ENDDATE          ,
+				a.LATEFEE_TOTALACCOUNT     ,
+				a.LATEFEE_MINUS            ,
+				a.LATEFEE_REALACCOUNT      ,
+				a.LATEFEE_NOWCASH          ,
+				nvl(a.LATEFEE_REALACCOUNT,0)-nvl(a.LATEFEE_NOWCASH,0)  LATEFEE_QF,
+				a.USE_TYPE                 ,
+				a.STANDARD_CODE            ,
+				a.PRICE                    ,
+				a.BUILD_AREA               ,
+				a.FLOOR_AREA               ,
+				a.CHARGE_AREA              ,
+				a.p_id,
+				d.minus_money this_minus_money,
+				d.minus_reason,
+				d.operate_date,
+				e.userName operator,
+				d.remark,
+				d.m_id
+		from SF_CHARGE a,EAUSER b,sf_item c,sf_minus d,EAUSER e where a.house_manager=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.house_code=d.house_code(+) 
+    	and a.meter_id=d.meter_id(+) 
+    	and a.item_code=d.item_code(+) 
+    	and a.charge_month=d.charge_month(+) 
+    	and d.operator=e.USERID(+)
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month"> 
+									charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="have_minus"> 
+				((#have_minus#='1' and this_minus_money>0) or(#have_minus#='0'))
+			</isNotEmpty>
+		</dynamic>
+		 order by house_code asc
+	</select>
+	<select id="queryMinusForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from 
+		(select 
+				a.house_code,a.community_code,a.building_code,a.charge_month
+		from SF_CHARGE a,EAUSER b,sf_item c,sf_minus d where a.house_manager=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.house_code=d.house_code(+) 
+    	and a.meter_id=d.meter_id(+) 
+    	and a.item_code=d.item_code(+) 
+    	and a.charge_month=d.charge_month(+) 
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month"> 
+									charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="chargeStatus"> 
+				real_account #chargeStatus# now_cash
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<!-- 查询生成应收汇总信息 -->
+	<select id="sumMinus" parameterClass="map" resultClass="dto">
+		
+		  select   '共' || COUNT(house_code) || '' AS house_count,
+				sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
+				sum(MINUS_MONEY)  MINUS_MONEY            ,
+				sum(SUBTRACT_MONEY)   SUBTRACT_MONEY        ,
+				sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,
+				sum(NOW_CASH)  NOW_CASH               ,
+				sum(BUILD_AREA)  BUILD_AREA             ,
+				sum(FLOOR_AREA)  FLOOR_AREA             ,
+				sum(CHARGE_AREA) CHARGE_AREA             ,
+				sum(this_minus_money) this_minus_money,
+				
+				sum(LATEFEE_TOTALACCOUNT) LATEFEE_TOTALACCOUNT     ,
+				sum(LATEFEE_MINUS )    LATEFEE_MINUS       ,
+				sum(LATEFEE_REALACCOUNT)     LATEFEE_REALACCOUNT ,
+				sum(LATEFEE_NOWCASH)    LATEFEE_NOWCASH,
+				sum(LATEFEE_REALACCOUNT-LATEFEE_NOWCASH)    LATEFEE_QF 
+		from (select a.community_code,a.building_code,a.house_code,
+		a.charge_month,a.TOTAL_ACCOUNT,
+		a.MINUS_MONEY,a.SUBTRACT_MONEY,a.REAL_ACCOUNT,a.NOW_CASH,
+		a.BUILD_AREA,a.FLOOR_AREA,a.CHARGE_AREA,b.minus_money this_minus_money,
+    a.LATEFEE_TOTALACCOUNT,a.LATEFEE_MINUS,a.LATEFEE_REALACCOUNT,a.LATEFEE_NOWCASH
+		from SF_CHARGE a, SF_MINUS b where 
+		a.house_code=b.house_code(+) 
+    	and a.meter_id=b.meter_id(+) 
+    	and a.item_code=b.item_code(+) 
+    	and a.charge_month=b.charge_month(+))  
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month"> 
+									charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="chargeStatus"> 
+				real_account #chargeStatus# now_cash
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!-- 减免-定义出入参对象映射 -->
+	<parameterMap id="sf.minusdto" class="java.util.Map">
+		<parameter property="p_id" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="minus_type" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="this_minus_money" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" /> <!-- 入参 -->
+		<parameter property="this_minus_rate" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" /> <!-- 入参 -->		
+		<parameter property="minus_kind" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="minus_days" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" /> <!-- 入参 -->
+		<parameter property="minus_area" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" /> <!-- 入参 -->
+		<parameter property="minus_reason" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="remark" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="operator" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="p_cid" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="appCode" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 执行代码 -->
+		<parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 出错信息 -->
+	</parameterMap>
+	<!-- 减免 -->
+	<procedure id="minusMoney" parameterMap="sf.minusdto">{call pkg_charge.minusMoney(?,?,?,?,?,?,?,?,?,?,?,?,?)}</procedure>
+	<!-- 删除减免-定义出入参对象映射 -->
+	<parameterMap id="sf.deleteminusdto" class="java.util.Map">
+		<parameter property="m_id" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="charge_month" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="p_range" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="operator" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="p_cid" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		<parameter property="appCode" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 执行代码 -->
+		<parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 出错信息 -->
+	</parameterMap>
+	<!-- 减免 -->
+	<procedure id="deleteMinus" parameterMap="sf.deleteminusdto">{call pkg_charge.deleteMinus(?,?,?,?,?,?,?)}</procedure>
+	<!-- 收费页面欠费列表 -->
+	<select id="queryArrearsList" parameterClass="map" resultClass="dto">
+		select * from 
+		(select 
+				b.userName,
+				c.item_name,a.CHARGE_MONTH             ,
+				HOUSE_CODE               ,
+				a.ITEM_CODE                ,
+				METER_ID                 ,				
+				case when d.charge_month is not null then 
+				((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))
+				else 
+				(NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))
+				end
+				 not_money,
+				NVL(a.LATEFEE_REALACCOUNT,0)-NVL(a.LATEFEE_NOWCASH,0) not_money_latefee,
+				a.CID                      ,
+				COMMUNITY_CODE           ,
+				BUILDING_CODE            ,
+				OWNER_NAME               ,
+				TOTAL_ACCOUNT            ,
+				MINUS_MONEY              ,
+				SUBTRACT_MONEY           ,
+				REAL_ACCOUNT             ,
+				NOW_CASH                 ,
+				USE_TYPE                 ,
+				STANDARD_CODE            ,
+				PRICE                    ,
+				BUILD_AREA               ,
+				FLOOR_AREA               ,
+				CHARGE_AREA              ,
+				PLAN_BEGIN_DATE          ,
+				PLAN_END_DATE            ,
+				DAYS                     ,
+				LATEFEE_STARTDATE        ,
+				LATEFEE_ENDDATE          ,
+				LATEFEE_TOTALACCOUNT     ,
+				LATEFEE_MINUS            ,
+				LATEFEE_REALACCOUNT      ,
+				LATEFEE_NOWCASH          ,
+				LAS_READING              ,
+				THIS_READING             ,
+				POINT_NUMBER             ,
+				WASTE                    ,
+				STOPHEATING              ,
+				STOPTOTALACCOUNT         ,
+				BACK_MONEY               ,
+				IS_INPUT ,
+				a.p_id
+				
+		from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d
+		where a.house_manager=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.charge_month=d.charge_month(+) 
+        and d.start_date(+)&lt;= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)&gt;=to_char(sysdate,'yyyy-MM-dd')
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="house_code"> 				
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" > 
+				(not_money>0 or not_money_latefee>0)
+			</isNotEmpty>
+		</dynamic>
+		 order by charge_month asc
+	</select>
+	<select id="queryArrearsListForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from 
+		(select 
+				HOUSE_CODE               ,
+				a.ITEM_CODE                ,
+				METER_ID                 ,				
+				case when d.charge_month is not null then 
+				((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))
+				else 
+				(NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))
+				end
+				 not_money,
+				NVL(a.LATEFEE_REALACCOUNT,0)-NVL(a.LATEFEE_NOWCASH,0) not_money_latefee
+				
+		from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d
+		where a.house_manager=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.charge_month=d.charge_month(+) 
+        and d.start_date(+)&lt;= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)&gt;=to_char(sysdate,'yyyy-MM-dd')
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="house_code"> 				
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" > 
+				(not_money>0 or not_money_latefee>0)
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<!-- 查询收费页面欠费 -->
+	<select id="sumArrearsList" parameterClass="map" resultClass="dto">
+		
+		  select   '共' || COUNT(house_code) || '' AS house_count,
+				sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
+				sum(MINUS_MONEY)  MINUS_MONEY            ,
+				sum(SUBTRACT_MONEY)   SUBTRACT_MONEY        ,
+				sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,
+				sum(
+				case when d.charge_month is not null then 
+				((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))
+				else 
+				(NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))
+				end
+				)  not_money          ,
+				sum(NVL(LATEFEE_REALACCOUNT,0)-NVL(LATEFEE_NOWCASH,0))  not_money_latefee          ,
+				sum(NOW_CASH)  NOW_CASH               ,
+				sum(BUILD_AREA)  BUILD_AREA             ,
+				sum(FLOOR_AREA)  FLOOR_AREA             ,
+				sum(CHARGE_AREA) CHARGE_AREA  ,
+				sum(LATEFEE_TOTALACCOUNT) LATEFEE_TOTALACCOUNT    ,
+				sum(LATEFEE_MINUS) LATEFEE_MINUS           ,
+				sum(LATEFEE_REALACCOUNT) LATEFEE_REALACCOUNT     ,
+				sum(LATEFEE_NOWCASH )   LATEFEE_NOWCASH                    
+		from SF_CHARGE a,sf_discount d 
+		where a.charge_month=d.charge_month(+) 
+        and d.start_date(+)&lt;= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)&gt;=to_char(sysdate,'yyyy-MM-dd')
+        <isNotEmpty prepend="AND" property="house_code"> 				
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" > 
+				(real_account > (now_cash+delzero) or nvl(LATEFEE_REALACCOUNT,0)>nvl(LATEFEE_NOWCASH,0))
+			</isNotEmpty>
+		
+		
+	</select>
+	<select id="chargeHouseInfo" parameterClass="map"
+		resultClass="dto">		
+		SELECT house_code,card_id ,cluster_code,contact_man,
+		house_manager ,owner_name,
+		address,telephone,
+		stat_id ,work_unit,apart_status,
+		user_kind,heat_status 
+		FROM
+		v_house where 1=1
+		<isNotEmpty prepend="AND" property="house_code"> 
+			house_code=#house_code#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND"  property="valve_code"> 
+			valvecode=#valve_code#
+		</isNotEmpty>
+	 </select>
+	 <select id="getInvoiceCode" parameterClass="map"
+		resultClass="dto">
+	select invoice_code,invoice_number from (
+		select case
+        when length(to_number(INVOICE_CODE)+1)=1 then '0000000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=2 then '000000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=3 then '00000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=4 then '0000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=5 then '000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=6 then '00'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=7 then '0'||(to_number(INVOICE_CODE)+1) else to_char(to_number(INVOICE_CODE)+1) end
+        invoice_code,
+        invoice_number from EAUSER where
+				userid=#operator# ) u
+		where exists(
+		select invoice_code from SF_INVOICE
+		where ITEM_CODE=#item_code#
+		and invoice_code = u.invoice_code
+		and INVOICE_NUMBER=u.INVOICE_NUMBER
+		and STATUS='0' )
+	 </select>
+	<!-- 收费-定义出入参对象映射 -->
+	<parameterMap id="sf.chargedto" class="java.util.Map">
+		<parameter property="b_id" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="p_id" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="house_code" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 		
+		
+		<parameter property="address" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="work_unit" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="telphone" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		
+		<parameter property="invoice_number" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="invoice_code" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		
+		<parameter property="price" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" /> 
+		<parameter property="charge_area" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" /> 
+		
+		<parameter property="pay_mode" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		<parameter property="payman" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		<parameter property="paydate" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		 
+		<parameter property="real_charge" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" />
+		<parameter property="delzero" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" />
+		
+		<parameter property="billman" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		<parameter property="billdate" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		
+		<parameter property="begin_prepay" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" />
+		<parameter property="end_prepay" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" />
+		<parameter property="use_prepay" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" />
+		<parameter property="add_prepay" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" />
+		
+		<parameter property="latefee_enddate" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		<parameter property="latefee_realaccount" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" />
+		<parameter property="latefee_charge" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" />
+		<parameter property="minus_reason" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		<parameter property="remark" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		<parameter property="operator" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		
+		<parameter property="p_cid" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<!-- <parameter property="p_b_id" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> 执行代码 -->
+		<parameter property="appCode" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 执行代码 -->
+		<parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 出错信息 -->
+	</parameterMap>
+	<!-- 收费 -->
+	<procedure id="charge" parameterMap="sf.chargedto">{call pkg_charge.Charge_A(	?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,  ?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}</procedure>
+	<!-- 收费明细列表 -->
+	<select id="queryChargeDetail" parameterClass="map" resultClass="dto">
+		select * from 
+		(select 
+				b.userName rollback_operator_name,
+				a.rollback_operate_date,
+				d.userName operator_name,
+				a.operate_date,
+				c.item_name,CHARGE_MONTH ,
+				a.HOUSE_CODE               ,
+				a.ITEM_CODE              ,
+				a.METER_ID                 ,
+				a.CID                    ,
+				a.COMMUNITY_CODE           ,
+				a.BUILDING_CODE            ,
+				a.OWNER_NAME               ,
+				a.TOTAL_ACCOUNT            ,
+				a.REAL_ACCOUNT             ,
+				a.REAL_CHARGE              ,
+				a.CHARGE_TYPE              ,
+				a.PAY_UNIT,
+				a.PAY_MAN,
+				a.CHARGE_PRICE,
+				a.CHARGE_AREA,
+				a.ADDRESS,
+				a.PAY_MODE,
+				a.DELZERO,
+				e.userName BILL_MAN,
+				a.BILL_DATE,
+				a.b_id,
+				a.rollback_flag rollback_flag_ora,
+				case when a.rollback_flag='1' then '已冲账' else '' end rollback_flag,
+				a.rollback_reason,a.rollback_remark,
+				a.operator,a.rollback_operator
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e where 
+		a.rollback_operator=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.operator=d.USERID(+)
+		and a.bill_man=e.USERID(+)
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="house_code"> 				
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="b_id"> 
+				b_id=#b_id#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="operator"> 
+				a.operator=#operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 
+				operate_date&gt;=#begin_date#||' 00:00:00'				
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 
+				operate_date&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_begin_date"> 
+				rollback_operate_date&gt;=#rollback_begin_date#||' 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_end_date"> 
+				rollback_operate_date&lt;=#rollback_end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_operator"> 
+				a.rollback_operator=#rollback_operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="have_rollback"> 
+				a.rollback_flag_ora='1'
+			</isNotEmpty>
+		</dynamic>
+		 order by operate_date desc ,house_code asc
+	</select>
+	<select id="queryChargeDetailForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from 
+		(select 
+				b.userName rollback_operator_name,
+				a.rollback_operate_date,
+				d.userName operator_name,
+				a.operate_date,
+				c.item_name,CHARGE_MONTH ,
+				a.HOUSE_CODE               ,
+				a.ITEM_CODE              ,
+				a.METER_ID                 ,
+				a.CID                    ,
+				a.COMMUNITY_CODE           ,
+				a.BUILDING_CODE            ,
+				a.OWNER_NAME               ,
+				a.TOTAL_ACCOUNT            ,
+				a.REAL_ACCOUNT             ,
+				a.REAL_CHARGE              ,
+				a.CHARGE_TYPE              ,
+				a.PAY_UNIT,
+				a.PAY_MAN,
+				a.CHARGE_PRICE,
+				a.CHARGE_AREA,
+				a.ADDRESS,
+				a.PAY_MODE,
+				a.DELZERO,
+				e.userName BILL_MAN,
+				a.BILL_DATE,
+				a.b_id,
+				a.rollback_flag rollback_flag_ora,
+				case when a.rollback_flag='1' then '已冲账' else '' end rollback_flag,
+				a.rollback_reason,a.rollback_remark,
+				a.operator,a.rollback_operator
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e where 
+		a.rollback_operator=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.operator=d.USERID(+)
+		and a.bill_man=e.USERID(+)
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="house_code"> 				
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="b_id"> 
+				b_id=#b_id#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="operator"> 
+				a.operator=#operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 
+				operate_date&gt;=#begin_date#||' 00:00:00'				
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 
+				operate_date&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_begin_date"> 
+				rollback_operate_date&gt;=#rollback_begin_date#||' 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_end_date"> 
+				rollback_operate_date&lt;=#rollback_end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_operator"> 
+				a.rollback_operator=#rollback_operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="have_rollback"> 
+				a.rollback_flag_ora='1'
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!-- 查询收费明细 -->
+	<select id="sumChargeDetail" parameterClass="map" resultClass="dto">
+		
+		  select   '共' || COUNT(house_code) || '' AS house_count,
+				sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
+				
+				sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,
+				sum(REAL_CHARGE)  NOW_CASH              
+		from SF_DETAIL 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="house_code"> 				
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="b_id"> 
+				b_id=#b_id#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="operator"> 
+				operator=#operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 
+				operate_date&gt;=#begin_date#||' 00:00:00'				
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 
+				operate_date&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_begin_date"> 
+				rollback_operate_date&gt;=#rollback_begin_date#||' 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_end_date"> 
+				rollback_operate_date&lt;=#rollback_end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_operator"> 
+				rollback_operator=#rollback_operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="have_rollback"> 
+				rollback_flag='1'
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!-- 冲账-定义出入参对象映射 -->
+	<parameterMap id="sf.rolbackdto" class="java.util.Map">
+		<parameter property="b_id" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="invalid_invoice" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="rollback_reason" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="rollback_remark" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="operator" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		
+		<parameter property="p_cid" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="appCode" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 执行代码 -->
+		<parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 出错信息 -->
+	</parameterMap>
+	<!-- 冲账 -->
+	<procedure id="rollback" parameterMap="sf.rolbackdto">{call pkg_charge.rollback(?,?,?,?,?,?,?,?)}</procedure>
+	<!-- 发票列表 -->
+	<select id="queryInvoice" parameterClass="map" resultClass="dto">
+		select * from 
+		(select 
+			d.item_name,a.ITEM_CODE,
+			a.INVOICE_CODE,
+			a.INVOICE_NUMBER,
+			a.CID,
+			INVOICE_MONEY,
+			BOOK_CODE,
+			c.username LEAD_MAN,
+			LEAD_DATE,
+			e.username RETURN_MAN,
+			RETURN_DATE,
+			a.REMARK,
+			b.username OPERATOR,
+			a.OPERATE_DATE,
+			INVOICE_TYPE,
+			INVOICE_BIGTYPE,
+			case when STATUS='0' then '未用' 
+			when STATUS='1' then '已用' 
+			when STATUS='2' then '作废'
+			when STATUS='3' then '丢失' end STATUS_SHOW,STATUS,a.i_id,
+			f.username invalid_MAN,
+			invalid_date
+			 from sf_invoice a,eauser b,eauser c,sf_item d,eauser e,eauser f
+			where a.OPERATOR=b.userid(+)
+			and a.LEAD_MAN=c.userid(+)
+			and a.item_code=d.item_code(+)
+			and a.RETURN_MAN=e.userid(+)
+			and a.invalid_MAN=f.userid(+)
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="invoice_number"> 
+				invoice_number=#invoice_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_code"> 
+				to_number(invoice_code)&gt;=#begin_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_code"> 
+				to_number(invoice_code)&lt;=#end_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="lead_man"> 				
+				lead_man=#lead_man#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="invoice_status"> 				
+				status=#invoice_status#
+			</isNotEmpty>
+		</dynamic>
+		 order by item_code,invoice_number,invoice_code asc
+	</select>
+	<select id="queryInvoiceForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) 
+		from sf_invoice 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="invoice_number"> 
+				invoice_number=#invoice_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_code"> 
+				to_number(invoice_code)&gt;=#begin_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_code"> 
+				to_number(invoice_code)&lt;=#end_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="lead_man"> 				
+				lead_man=#lead_man#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="invoice_status"> 				
+				status=#invoice_status#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!--  发票明细 -->
+	<select id="sumInvoice" parameterClass="map" resultClass="dto">
+		
+		  select   '共' || COUNT(invoice_code) || '' AS invoicecount,
+				sum(INVOICE_MONEY)  INVOICE_MONEY              
+		from SF_INVOICE 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="invoice_number"> 
+				invoice_number=#invoice_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_code"> 
+				to_number(invoice_code)&gt;=#begin_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_code"> 
+				to_number(invoice_code)&lt;=#end_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="lead_man"> 				
+				lead_man=#lead_man#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="invoice_status"> 				
+				status=#invoice_status#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!-- 查询收费项目编号/名称-->
+	<select id="getItems" parameterClass="map"
+		resultClass="dto">
+		SELECT item_code value,item_name text
+		FROM
+		sf_item
+	</select>	
+	<!-- 查询发票领用人(收费员)编号/名称-->
+	<select id="getCashier" parameterClass="map"
+		resultClass="dto">
+		SELECT userid value,username text
+		FROM eauser		
+	</select>
+	<!-- 票据入库-定义出入参对象映射 -->
+	<parameterMap id="sf.insertInvoicedto" class="java.util.Map">
+		<parameter property="invoice_number" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="invoice_code" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="invoice_account" jdbcType="DOUBLE" javaType="java.math.BigDecimal" mode="IN" />		
+		<parameter property="item_code" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		<parameter property="lead_man" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		<parameter property="invoice_bigtype" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />
+		<parameter property="invoice_type" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" />	
+		
+		<parameter property="book_code" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="operator" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> <!-- 入参 -->
+		
+		<parameter property="p_cid" jdbcType="VARCHAR" javaType="java.lang.String" mode="IN" /> 
+		<parameter property="appCode" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 执行代码 -->
+		<parameter property="errorMsg" jdbcType="VARCHAR" javaType="java.lang.String" mode="OUT" /> <!-- 出错信息 -->
+	</parameterMap>
+	<!-- 票据入库 -->
+	<procedure id="insertInvoice" parameterMap="sf.insertInvoicedto">{call pkg_charge.insertInvoice(?,?,?,?,?,?,?,?,?,?,?,?)}</procedure>
+	<!-- 删除票据 -->
+	<delete id="deleteInvoice" parameterClass="map">
+       DELETE FROM sf_invoice
+       <dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="invoice_number"> 
+				invoice_number=#invoice_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_code"> 
+				to_number(invoice_code)&gt;=#begin_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_code"> 
+				to_number(invoice_code)&lt;=#end_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="lead_man"> 				
+				lead_man=#lead_man#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="invoice_status"> 				
+				status=#invoice_status#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="i_id">
+				i_id in ($i_id$)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" > 
+				status!='1'
+			</isNotEmpty>
+		</dynamic>
+	</delete>
+	<!-- 作废票据 -->
+	<update id="invalidInvoice" parameterClass="dto">
+		UPDATE sf_invoice SET  status='2',invalid_man=#operator#,invalid_date=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		where i_id in ($i_id$)
+	</update>
+	<!-- 返还票据 -->
+	<update id="returnInvoice" parameterClass="dto">
+		UPDATE sf_invoice SET  return_man=#operator#,return_date=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="invoice_number"> 
+				invoice_number=#invoice_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_code"> 
+				to_number(invoice_code)&gt;=#begin_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_code"> 
+				to_number(invoice_code)&lt;=#end_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="lead_man"> 				
+				lead_man=#lead_man#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="invoice_status"> 				
+				status=#invoice_status#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="i_id">
+				i_id in ($i_id$)
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	<!-- 领用票据 -->
+	<update id="leadInvoice" parameterClass="dto">
+		UPDATE sf_invoice set lead_man=#operator#,lead_date=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="invoice_number"> 
+				invoice_number=#invoice_number#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_code"> 
+				to_number(invoice_code)&gt;=#begin_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_code"> 
+				to_number(invoice_code)&lt;=#end_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" > 				
+				lead_man is null
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="invoice_status"> 				
+				status=#invoice_status#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="i_id">
+				i_id in ($i_id$)
+			</isNotEmpty>
+		</dynamic>
+	</update>
+	
+	
+	<!-- 收费标准表管理 -->
+	<select id="getStandardListForPage" parameterClass="map" resultClass="dto">
+		SELECT   ITEM_CODE, STANDARD_ID, STANDARD_NAME, STANDYEAR,
+		   PRICE,  PERIOD_START_DATE, PERIOD_END_DATE,
+		   ACCOUNTDOT,LATEFEEDOT,LATEFEE_EDATE,LATEFEERATE,b.userName OPERATOR, OPERATE_DATE,CID,STANDARD_ID||STANDYEAR as STANDARD_KEY
+		    FROM sf_standard a,eauser b
+		   WHERE a.OPERATOR = b.userid(+) and  STANDARD_NAME LIKE '%$queryParam$%'
+		      <!--OR fieldname LIKE '%$queryParam$%'
+		      OR codedesc LIKE '%$queryParam$%'-->
+		ORDER BY STANDYEAR desc ,standard_id ASC <!--, cid desc-->
+	</select>
+	<select id="getStandardListForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*)
+		  FROM sf_standard WHERE STANDARD_NAME like '%$queryParam$%'		                
+		order by STANDYEAR desc ,standard_id ASC
+	</select>
+
+	<!-- 查询标准编号是否存在-->
+	<select id="checkStandardByIndex" parameterClass="map"
+		resultClass="dto">
+		SELECT ITEM_CODE, STANDARD_ID, STANDARD_NAME, STANDYEAR, 
+		PRICE, PERIOD_START_DATE, PERIOD_END_DATE, 
+		ACCOUNTDOT,LATEFEEDOT,LATEFEE_EDATE,LATEFEERATE,OPERATOR,OPERATE_DATE,CID
+		FROM sf_standard where standard_id=	#standard_id# and cid= #cid# and standyear= #standyear#	
+	</select>
+    <!-- 查询标准编号是否存在  根据唯一索引进行唯一性校验
+	<select id="checkStandardByIndex" parameterClass="map" resultClass="dto">
+		SELECT standard_id,ITEM_CODE, STANDARD_ID, STANDARD_NAME, STANDYEAR, 
+		PRICE, PERIOD_START_DATE, PERIOD_END_DATE, 
+		ACCOUNTDOT, OPERATOR,OPERATE_DATE,CID
+		FROM sf_standard where standard_id=	#standard_id# and cid= #cid# and standyear= #standyear#
+	</select>-->
+	<!-- 插入一条收费标准记录 -->
+	<insert id="insertStandard" parameterClass="dto">
+		INSERT INTO sf_standard (
+		   ITEM_CODE, STANDARD_ID, STANDARD_NAME, STANDYEAR,
+		   PRICE,  PERIOD_START_DATE, PERIOD_END_DATE,
+		   ACCOUNTDOT,LATEFEEDOT,LATEFEE_EDATE,LATEFEERATE,OPERATOR, OPERATE_DATE,CID) 
+		VALUES ('A', #standard_id#, #standard_name#,#standyear#,
+		    #price#, #period_start_date#,#period_end_date#,
+		    #accountdot#, #latefeedot#,#latefee_edate#,#latefeerate#, #operator#,to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#cid#)
+	</insert>
+	<!-- 根据主键查询收费标准表 -->
+		
+	<select id="getStandardIdByKey" parameterClass="map" resultClass="dto">
+		SELECT ITEM_CODE, STANDARD_ID, STANDARD_NAME, STANDYEAR, 
+		PRICE, PERIOD_START_DATE, PERIOD_END_DATE, 
+		ACCOUNTDOT,LATEFEEDOT,LATEFEE_EDATE,LATEFEERATE,OPERATOR,OPERATE_DATE,CID
+		  FROM sf_standard 
+		 WHERE standard_id = #standard_id#
+	</select>
+	
+		<!-- 删除收费标准 -->
+	<delete id="deleteStandard" parameterClass="map" >
+		DELETE 
+		  FROM sf_standard 
+		 WHERE standard_id||standyear = #standard_key#
+	</delete>
+	
+	<!-- 根据主键更新收费标准表 -->
+	<update id="updateStandard" parameterClass="dto">
+         UPDATE sf_standard set
+          OPERATOR = #operator#,
+          OPERATE_DATE = to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		<dynamic prepend=""> 
+			<isNotNull prepend="," property="standard_id">
+	         STANDARD_ID = #standard_id#
+			</isNotNull>
+			<isNotNull prepend="," property="standard_name">
+	         STANDARD_NAME = #standard_name#
+			</isNotNull>
+			<isNotNull prepend="," property="standyear">
+	         STANDYEAR = #standyear#
+			</isNotNull>
+			<isNotNull prepend="," property="price">
+	         PRICE = #price#
+			</isNotNull>
+			<isNotNull prepend="," property="period_start_date">
+	         PERIOD_START_DATE = #period_start_date#
+			</isNotNull>
+			<isNotNull prepend="," property="period_end_date">
+	         PERIOD_END_DATE = #period_end_date#
+			</isNotNull>
+			<isNotNull prepend="," property="accountdot">
+	         ACCOUNTDOT = #accountdot#
+			</isNotNull>
+			<isNotNull prepend="," property="latefeedot">
+	         LATEFEEDOT = #latefeedot#
+			</isNotNull>
+			<isNotNull prepend="," property="latefee_edate">
+	         LATEFEE_EDATE = #latefee_edate#
+			</isNotNull>
+			<isNotNull prepend="," property="latefeerate">
+	         LATEFEERATE = #latefeerate#
+			</isNotNull>								
+		</dynamic> 
+	        WHERE standard_id = #standard_id# and cid= #cid# and standyear= #standyear#	    
+	</update>
+	<select id="getStandardCountFromHouse" parameterClass="map" resultClass="dto">
+		SELECT count(house_code) cnt
+		  FROM sf_charge 
+		 WHERE standard_code||charge_month=#standard_key#
+	</select>
+	
+	
+	<!-- 优惠设置表管理 -->
+	<select id="getDiscountListForPage" parameterClass="map" resultClass="dto">
+		SELECT   ITEM_CODE, CHARGE_MONTH, START_DATE, END_DATE,
+		  PERCENT,MINUSDOT,a.REMARK,b.userName OPERATOR, OPERATE_DATE,CID,START_DATE||CHARGE_MONTH as DISCOUNT_KEY
+		   FROM sf_discount a,eauser b
+		   WHERE a.OPERATOR = b.userid(+) and CHARGE_MONTH LIKE '%$queryParam$%'
+		      <!--OR fieldname LIKE '%$queryParam$%'
+		      OR codedesc LIKE '%$queryParam$%'-->
+		ORDER BY START_DATE DESC <!--, cid desc-->
+	</select>
+	<select id="getDiscountListForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*)
+		  FROM sf_discount WHERE CHARGE_MONTH like '%$queryParam$%'		                
+		order by START_DATE desc
+	</select>
+
+	<!-- 查询优惠年度是否存在-->
+	<select id="checkDiscountByIndex" parameterClass="map"
+		resultClass="dto">
+		SELECT ITEM_CODE, CHARGE_MONTH, START_DATE, END_DATE, 
+		PERCENT,MINUSDOT,REMARK, OPERATOR, OPERATE_DATE,CID
+		FROM sf_discount 
+		where charge_month= #charge_month# and cid= #cid# and start_date= #start_date#	
+	</select>
+    <!-- 查询标准编号是否存在  根据唯一索引进行唯一性校验
+	<select id="checkStandardByIndex" parameterClass="map" resultClass="dto">
+		SELECT standard_id,ITEM_CODE, STANDARD_ID, STANDARD_NAME, STANDYEAR, 
+		PRICE, PERIOD_START_DATE, PERIOD_END_DATE, 
+		ACCOUNTDOT, OPERATOR,OPERATE_DATE,CID
+		FROM sf_standard where standard_id=	#standard_id# and cid= #cid# and standyear= #standyear#
+	</select>-->
+	<!-- 插入一条优惠记录 -->
+	<insert id="insertDiscount" parameterClass="dto">
+		INSERT INTO sf_discount (
+		   ITEM_CODE, CHARGE_MONTH, START_DATE, END_DATE, 
+		   PERCENT,MINUSDOT, REMARK, OPERATOR, OPERATE_DATE,CID) 
+		VALUES ('A', #charge_month#, #start_date#,#end_date#,
+		    #percent#,#minusdot#, #remark#, #operator#,to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#cid#)
+	</insert>
+	<!-- 根据主键查询优惠设置表 -->
+		
+	<select id="getDiscountIdByKey" parameterClass="map" resultClass="dto">
+		SELECT ITEM_CODE, CHARGE_MONTH, START_DATE, END_DATE, 
+		  PERCENT,MINUSDOT, REMARK, OPERATOR, OPERATE_DATE,CID
+		  FROM sf_discount 
+		 WHERE start_date = #start_date#
+	</select>
+	
+		<!-- 删除优惠 -->
+	<delete id="deleteDiscount" parameterClass="map" >
+		DELETE 
+		  FROM sf_discount 
+		 WHERE start_date||charge_month = #discount_key#
+	</delete>
+	
+	<!-- 根据主键更新优惠设置表 -->
+	<update id="updateDiscount" parameterClass="dto">
+         UPDATE sf_discount 
+		<dynamic prepend="SET"> 
+			<isNotNull prepend="," property="charge_month">
+	         CHARGE_MONTH = #charge_month#
+			</isNotNull>
+			<isNotNull prepend="," property="start_date">
+	         START_DATE = #start_date#
+			</isNotNull>
+			<isNotNull prepend="," property="end_date">
+	         END_DATE = #end_date#
+			</isNotNull>
+			<isNotNull prepend="," property="percent">
+	         PERCENT = #percent#
+			</isNotNull>
+			<isNotNull prepend="," property="minusdot">
+	         MINUSDOT = #minusdot#
+			</isNotNull>
+			<isNotNull prepend="," property="remark">
+	         REMARK = #remark#
+			</isNotNull>
+			<isNotNull prepend="," property="operator">
+	         OPERATOR = #operator#
+			</isNotNull>
+			<isNotNull prepend="," property="operate_date">
+	         OPERATE_DATE = to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+			</isNotNull>
+			<isNotNull prepend="," property="CID">
+	         CID = #CID#
+			</isNotNull>								
+		</dynamic> 
+	        WHERE start_date||charge_month= #discount_key# and cid= #cid#   
+	</update>
+	<select id="getDiscountCountFromHouse" parameterClass="map" resultClass="dto">
+		SELECT count(house_code) cnt
+		  FROM sf_charge 
+		 WHERE plan_begin_date = #start_date# and charge_month=#charge_month#
+	</select>
+	<!-- 房间查询-->
+	<select id="queryHouseForPage" parameterClass="map" resultClass="dto">
+		SELECT   a.house_code,b.owner_name,a.card_id,a.cluster_code,b.work_unit,c.charge_area, d.standard_name, 
+		   d.PRICE,a.address
+		    FROM fc_house a,fc_owner b,fc_area c ,sf_standard d
+		   WHERE a.house_code = b.house_code(+) and b.is_owner(+)=1
+		   and a.house_code=c.house_code
+		   and c.standard_id=d.standard_id
+		   and d.standyear=(select current_year from sf_item where item_code='A')
+		<dynamic prepend="">
+			<isNotEmpty prepend="AND" property="owner_name_q"> 
+				b.owner_name like '%$owner_name_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="card_id_q"> 
+				a.card_id like '%$card_id_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="cluster_code_q"> 
+				a.cluster_code like '%$cluster_code_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="address_q"> 
+				a.address like '%$address_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="work_unit_q"> 
+				b.work_unit like '%$work_unit_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="house_code_q"> 				
+				a.house_code like '$house_code_q$%'
+			</isNotEmpty>
+		</dynamic>   
+	</select>
+	<select id="queryHouseForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT  count(*)
+		    FROM fc_house a,fc_owner b,fc_area c ,sf_standard d
+		   WHERE a.house_code = b.house_code(+) and b.is_owner(+)=1
+		   and a.house_code=c.house_code
+		   and c.standard_id=d.standard_id
+		   and d.standyear=(select current_year from sf_item where item_code='A')
+		<dynamic prepend="">
+			<isNotEmpty prepend="AND" property="owner_name_q"> 
+				b.owner_name like '%$owner_name_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="card_id_q"> 
+				a.card_id like '%$card_id_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="cluster_code_q"> 
+				a.cluster_code like '%$cluster_code_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="address_q"> 
+				a.address like '%$address_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="work_unit_q"> 
+				b.work_unit like '%$work_unit_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="house_code_q"> 				
+				a.house_code like '$house_code_q$%'
+			</isNotEmpty>
+		</dynamic>   
+	</select>
+	
+	<!-- 根据主键更新当前年度收费项目表sf_item -->
+	<update id="updateCurrentYear" parameterClass="dto">
+         UPDATE sf_item 
+		<dynamic prepend="SET"> 
+			<isNotNull prepend="," property="current_year">
+	         CURRENT_YEAR = #current_year#
+			</isNotNull>
+			<isNotNull prepend="," property="operator">
+	         OPERATOR = #operator#
+			</isNotNull>
+			<isNotNull prepend="," property="operate_date">
+	         OPERATE_DATE = to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+			</isNotNull>														
+		</dynamic> 
+	        WHERE item_code='A'
+	</update>
+	<select id="getCurrentYear" parameterClass="map" resultClass="dto">
+		SELECT current_year
+		FROM sf_item where item_code='A'
+	</select>
+	<insert id="copyStandard" parameterClass="dto">
+		insert into sf_standard (ITEM_CODE, STANDARD_ID, STANDARD_NAME, STANDYEAR,
+		   PRICE,  PERIOD_START_DATE, PERIOD_END_DATE,
+		   ACCOUNTDOT,LATEFEEDOT,LATEFEE_EDATE,LATEFEERATE, OPERATOR, OPERATE_DATE,CID)
+		SELECT 'A',STANDARD_ID, STANDARD_NAME, #current_year#,
+		   PRICE,  (to_number(substr(PERIOD_START_DATE,1,4))+1)||substr(PERIOD_START_DATE,5),
+		   (to_number(substr(PERIOD_END_DATE,1,4))+1)||substr(PERIOD_END_DATE,5),
+		   ACCOUNTDOT,LATEFEEDOT,LATEFEE_EDATE,LATEFEERATE, #operator#, to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),CID
+		FROM sf_standard where item_code='A' and STANDYEAR=to_number(#current_year#)-1
+	</insert>
+	
+	
+	<!-- 银行对账收费明细列表 -->
+	<select id="queryChargeDetailBank" parameterClass="map" resultClass="dto">
+		select * from 
+		(select 
+				b.userName rollback_operator_name,
+				a.rollback_operate_date,
+				d.userName operator_name,
+				a.operate_date,
+				c.item_name,CHARGE_MONTH ,
+				a.HOUSE_CODE               ,
+				a.ITEM_CODE              ,
+				a.METER_ID                 ,
+				a.CID                    ,
+				a.COMMUNITY_CODE           ,
+				a.BUILDING_CODE            ,
+				a.OWNER_NAME               ,
+				a.TOTAL_ACCOUNT            ,
+				a.REAL_ACCOUNT             ,
+				a.REAL_CHARGE              ,
+				a.CHARGE_TYPE              ,
+				a.PAY_UNIT,
+				a.PAY_MAN,
+				a.CHARGE_PRICE,
+				a.CHARGE_AREA,
+				a.ADDRESS,
+				a.PAY_MODE,
+				a.DELZERO,
+				e.userName BILL_MAN,
+				a.BILL_DATE,
+				a.b_id,
+				case when a.rollback_flag='1' then '已冲账' else '' end rollback_flag,
+				case when a.bankflag='1' then '已平账'
+				when a.bankflag='0' then '未平账' end bankflag_SHOW,a.bankflag,
+				a.rollback_reason,a.rollback_remark
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e where 
+		a.item_code=c.item_code(+)
+		and a.bill_man=e.USERID(+)
+		and a.rollback_operator=b.USERID(+)
+		and a.operator=d.USERID(+)
+		and a.banknumber is not null
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="house_code"> 				
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="b_id"> 
+				b_id=#b_id#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 
+				operate_date&gt;=#begin_date#||' 00:00:00'				
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 
+				operate_date&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="have_bank"> 
+				(a.bankflag=#have_bank# and #have_bank#='0') or (a.bankflag!='0' and #have_bank#='1')
+			</isNotEmpty>
+		</dynamic>
+		 order by operate_date desc ,house_code asc
+	</select>
+	<select id="queryChargeDetailBankForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from 
+		(select 
+				b.userName rollback_operator_name,
+				a.rollback_operate_date,
+				d.userName operator_name,
+				a.operate_date,
+				c.item_name,CHARGE_MONTH ,
+				a.HOUSE_CODE               ,
+				a.ITEM_CODE              ,
+				a.METER_ID                 ,
+				a.CID                    ,
+				a.COMMUNITY_CODE           ,
+				a.BUILDING_CODE            ,
+				a.OWNER_NAME               ,
+				a.TOTAL_ACCOUNT            ,
+				a.REAL_ACCOUNT             ,
+				a.REAL_CHARGE              ,
+				a.CHARGE_TYPE              ,
+				a.PAY_UNIT,
+				a.PAY_MAN,
+				a.CHARGE_PRICE,
+				a.CHARGE_AREA,
+				a.ADDRESS,
+				a.PAY_MODE,
+				a.DELZERO,
+				e.userName BILL_MAN,
+				a.BILL_DATE,
+				a.b_id,
+				case when a.rollback_flag='1' then '已冲账' else '' end rollback_flag,
+				case when a.bankflag!='0' then '已平账'
+				when a.bankflag='0' then '未平账' end bankflag_SHOW,a.bankflag,
+				a.rollback_reason,a.rollback_remark
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e where 
+		a.item_code=c.item_code(+)
+		and a.bill_man=e.USERID(+)
+		and a.rollback_operator=b.USERID(+)
+		and a.operator=d.USERID(+)
+		and a.banknumber is not null
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="house_code"> 				
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="b_id"> 
+				b_id=#b_id#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 
+				operate_date&gt;=#begin_date#||' 00:00:00'				
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 
+				operate_date&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="have_bank"> 
+				(a.bankflag=#have_bank# and #have_bank#='0') or (a.bankflag!='0' and #have_bank#='1')
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!-- 查询收费明细 -->
+	<select id="sumChargeDetailBank" parameterClass="map" resultClass="dto">
+		
+		
+		  select   '共' || COUNT(house_code) || '' AS house_count,
+				sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
+				
+				sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,
+				sum(REAL_CHARGE)  NOW_CASH              
+		from SF_DETAIL where banknumber is not null
+		<dynamic prepend="">			
+			<isNotEmpty prepend="AND" property="house_code"> 				
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="b_id"> 
+				b_id=#b_id#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 
+				operate_date&gt;=##||' 00:00:00'				
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 
+				operate_date&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="have_bank"> 
+				(bankflag=#have_bank# and #have_bank#='0') or (bankflag!='0' and #have_bank#='1')
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!--查询删除应收记录数-->
+	<select id="countDeletePlan" parameterClass="map" resultClass="java.lang.Integer">
+       select count(*) cnt FROM sf_charge
+       <dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month"> 
+				charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="item_code"> 
+				item_code=#item_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>			
+			<isNotEmpty prepend="AND" property="p_id">
+				p_id in ($p_id$)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" > 
+				 now_cash = 0
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="chargeStatus"> 
+				real_account #chargeStatus# now_cash
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<!-- 查询欠费房间号是否存在-->
+	<select id="isQfExist" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) count
+		FROM
+		sf_charge  where house_code=#house_code#
+	</select>
+	<!-- 导入欠费数据 -->
+	<insert id="insertQf" parameterClass="dto">
+		insert into sf_charge(
+	    CHARGE_MONTH             , 
+	    HOUSE_CODE               , 		
+	    ITEM_CODE                , 		
+	    METER_ID                 , 			
+	    CID                      , 			
+	    COMMUNITY_CODE           , 		
+	    BUILDING_CODE            , 		
+	    OWNER_NAME               , 		
+	    TOTAL_ACCOUNT            ,		
+	    REAL_ACCOUNT             , 		
+	    USE_TYPE                 , 		
+	    STANDARD_CODE            , 		
+	    PRICE                    , 		
+	    BUILD_AREA               , 		
+	    FLOOR_AREA               , 		
+	    CHARGE_AREA              , 		
+	    PLAN_BEGIN_DATE          , 		
+	    PLAN_END_DATE            ,
+	    STAT_ID,
+	    HOUSE_MANAGER,
+	    IS_INPUT,
+		OPERATOR,
+		OPERATE_DATE)
+select #charge_month#,
+    a.house_code,'A',    
+    a.area_id,a.cid,a.community_code,a.building_code,b.owner_name,
+    #qf_account#,
+    #qf_account#,
+    use_type,
+    a.standard_id,c.price,a.build_area,a.super_area,a.charge_area,
+    c.period_start_date,c.period_end_date,h.STAT_ID,h.HOUSE_MANAGER,'1',
+    #operator#,
+	to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+    from fc_HOUSE h,fc_area a,fc_owner b,sf_standard c
+    where h.house_code=a.house_code and a.house_code=b.house_code(+) and b.is_owner(+)='1'
+    and a.standard_id=c.standard_id 
+    and c.standyear=#charge_month#
+    and a.house_code =#house_code#
+    and a.area_id='0'
+    and not exists (select 1 from sf_charge where charge_month=#charge_month#
+    and item_code='A' and house_code =#house_code#
+    and a.house_code=house_code 
+    and a.area_id=meter_id and a.item_code=item_code)
+    
+		
+	</insert>
+	
+	<!-- 导入错误房间数据 -->
+	<insert id="importErrorQf" parameterClass="dto">
+		insert into SF_IMPORTQF(
+		EXCEL_ROW,
+		HOUSE_CODE,
+		REAL_ACCOUNT1,
+		REAL_ACCOUNT2,
+		REAL_ACCOUNT3,
+		REAL_ACCOUNT4,
+		
+		REAL_ACCOUNT5,
+		REAL_ACCOUNT6,
+		REAL_ACCOUNT7,
+		REAL_ACCOUNT8,
+		REAL_ACCOUNT9,
+		REAL_ACCOUNT10,
+		ERROR
+		)values(
+		#excel_row#,
+		#house_code#,
+		#real_account1#,
+		#real_account2#,
+		#real_account3#,
+		#real_account4#,
+		
+		#real_account5#,
+		#real_account6#,
+		#real_account7#,
+		#real_account8#,
+		#real_account9#,
+		#real_account10#,
+		#error#)
+	</insert>
+	<!-- 欠费数据导入错误数据 -->
+	<select id="queryErrorQfImport" parameterClass="map" resultClass="dto">
+		select * from sf_importqf
+		 order by excel_row asc
+	</select>
+	<select id="queryErrorQfImportForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from sf_importqf		
+	</select>
+	<!-- 查询某房间是否有面积1-->
+	<select id="haveQfData" parameterClass="map"
+		resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM
+		sf_charge  where house_code=#house_code#
+		and charge_month=#charge_month#
+		and meter_id='0'
+		and item_code='A'
+	</select>
+	
+	<!--收费、冲账、退款更新写卡标识、写卡人、写卡时间-->
+	<update id="updateSfChargeWriteCardFlag" parameterClass="dto">
+		update sf_charge a set a.WRITECARDFLAG=#WRITECARDFLAG#,a.WRITECARDOPERATOR=#operator#,a.WRITECARDOPERATEDATE=TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI:SS')
+		where a.house_code = #houseCode# and a.charge_month = #mon# 
+		and exists (
+		select house_code from fc_house b
+		where b.house_code = #houseCode# and b.valvecode = #valvecode# 
+		and a.house_code=b.house_code)
+	</update>
+	<!--查询冲账记录的相关数据-->
+	<select id="selectChargeMonth" parameterClass="map" resultClass="dto">
+        select distinct a.charge_month chargemonth,a.house_code housecode,b.VALVECODE valvecode,a.ROLLBACK_OPERATE_DATE rollbackdate         
+        from sf_detail a,fc_house b       
+        where a.b_id= #b_id# and a.house_code=b.house_code
+	</select>
+	<!--查询冲账记录的相关数据-->
+	<select id="selectMinBillDate" parameterClass="map" resultClass="dto">
+		select bill_date as minbilldate from sf_detail where b_id= #b_id#
+	</select>
+	<!--收费页面点收费按钮时候，修改开启度-->
+	<update id='updateVal' parameterClass="dto">
+		update fc_house set userCardVal = #userCardVal#,OPERATE_DATE=TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),operator=#operator#  where house_code = #code#  and valvecode is not null 
+	</update>
+	<!--查询收费记录的相关数据-->
+	<select id="getUserCardVal" parameterClass="map" resultClass="dto">
+		select userCardVal as val from fc_house where house_code = #houseCode#
+	</select>
+	
+	<!--查询阀门号-->
+	<select id="getvalveCode" parameterClass="map" resultClass="dto">
+		select nvl(valvecode,'') as valveCode from fc_house where house_code = #houseCode#
+	</select>
+
+</sqlMap>
+

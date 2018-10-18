@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="dto"
+		type="org.eredlab.g4.ccl.datastructure.impl.BaseDto" />
+
+<!-- 并网用户列表 -->
+	<select id="queryIntoWeb" parameterClass="map" resultClass="dto">
+		select * from 
+		(select 
+		a.i_id, 
+		a.HOUSE_CODE, 
+		a.BUILDING_CODE, 
+		a.COMMUNITY_CODE,
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    c.STANDARD_ID||'_'||c.price  STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		a.INTOWEB_MONEY,
+		a.remark,a.area_id
+		from IW_INTOWEB a,EAUSER b,sf_standard c 
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="intoweb_year"> 
+				intoweb_year in (#intoweb_year_query#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+		</dynamic>
+		 order by web_code,area_id asc
+	</select>
+	<select id="queryIntoWebForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from 
+		(select
+		a.i_id, 
+		a.HOUSE_CODE, 
+		a.BUILDING_CODE, 
+		a.COMMUNITY_CODE, 
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		INTOWEB_MONEY
+		from IW_INTOWEB a,EAUSER b,sf_standard c 
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="intoweb_year"> 
+				intoweb_year in (#intoweb_year_query#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<!-- 并网用户汇总信息 -->
+	<select id="sumIntoWeb" parameterClass="map" resultClass="dto">
+		
+		  select   '共' || COUNT(HOUSE_CODE) || '' AS house_count,
+				sum(INTOWEB_AREA)   INTOWEB_AREA        ,
+				sum(INTOWEB_MONEY)   INTOWEB_MONEY
+		from (select 
+		a.HOUSE_CODE, 
+		a.BUILDING_CODE, 
+		a.COMMUNITY_CODE, 
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		INTOWEB_MONEY
+		from IW_INTOWEB a,EAUSER b,sf_standard c 
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+))  
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="intoweb_year"> 
+				intoweb_year in (#intoweb_year_query#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<select id="queryIntoWebHouseInfo" parameterClass="map"
+		resultClass="dto">	
+		SELECT c.charge_area intoweb_area,intoweb_date,intoweb_year,a.house_code,b.owner_name web_name,
+		
+		area_id
+		from fc_house a,fc_owner b,fc_area c
+		where a.house_code=b.house_code(+) 
+		and a.house_code=c.house_code
+		and b.is_owner(+)='1' and a.house_code=#web_code#
+		and rownum=1
+	</select>
+	<select id="queryIntoWebCommunityInfo" parameterClass="map"
+		resultClass="dto">	
+		SELECT sum(a.intoweb_area) intoweb_area,community_name web_name
+		from fc_house a,fc_community b
+		where a.community_code=b.community_code(+) 
+		 and a.community_code=#web_code#
+		 group by b.community_name
+	</select>
+	<select id="queryIntoWebBuildingInfo" parameterClass="map"
+		resultClass="dto">	
+		SELECT sum(a.intoweb_area) intoweb_area,building_name web_name
+		from fc_house a,fc_building b
+		where a.building_code=b.building_code(+) 
+		 and a.building_code=#web_code#
+		 group by b.building_name
+	</select>
+	<!-- 入网 -->
+	<insert id="intoWeb" parameterClass="dto">
+		INSERT INTO
+		iw_intoWeb (
+		I_ID,COMMUNITY_CODE,BUILDING_CODE,HOUSE_CODE,WEB_NAME,WEB_TYPE,	INTOWEB_DATE,
+		INTOWEB_AREA,INTOWEB_MONEY,INTOWEB_YEAR,STANDARD_ID,web_code,area_id,REMARK,
+		CID,OPERATOR,OPERATE_DATE)
+		select #i_id#,community_code,building_code,#house_code#, #web_name#, #web_type#, #intoweb_date#, 
+		 #intoweb_area#,#intoweb_money#,#intoweb_year#,#standard_id#,#web_code#,
+		 #area_id#,
+		 #remark#,
+		 #cid#,#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		from fc_house where house_code=#house_code#
+	</insert>
+	<!-- 入网修改 -->
+	<insert id="updateIntoWeb" parameterClass="dto">
+		UPDATE
+		iw_intoWeb set		
+		WEB_NAME=#web_name#,
+		INTOWEB_DATE= #intoweb_date#,
+		INTOWEB_AREA=#intoweb_area#,
+		INTOWEB_MONEY=#intoweb_money#,
+		INTOWEB_YEAR=#intoweb_year#,
+		STANDARD_ID=#standard_id#,
+		REMARK=#remark#,
+		OPERATOR=#operator#,
+		OPERATE_DATE=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		where I_ID=#i_id#
+		
+	</insert>
+	<insert id="intoWeb_bu" parameterClass="dto">
+		INSERT INTO
+		iw_intoWeb (
+		I_ID,COMMUNITY_CODE,BUILDING_CODE,HOUSE_CODE,WEB_NAME,WEB_TYPE,	INTOWEB_DATE,
+		INTOWEB_AREA,INTOWEB_MONEY,INTOWEB_YEAR,STANDARD_ID,web_code,area_id,REMARK,
+		CID,OPERATOR,OPERATE_DATE)
+		select #i_id#,community_code,#web_code#,#web_code#, #web_name#, #web_type#, #intoweb_date#, 
+		 #intoweb_area#,#intoweb_money#,#intoweb_year#,#standard_id#,#web_code#,
+		 (case when    (select to_number(max(area_id))+1 from iw_intoweb where web_code=#web_code# ) is null 
+                  then 0 else (select to_number(max(area_id))+1 from iw_intoweb where web_code=#web_code# ) end),
+		 #remark#,
+		 #cid#,#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		from fc_building where building_code=#web_code#
+	</insert>
+	<insert id="intoWeb_com" parameterClass="dto">
+		INSERT INTO
+		iw_intoWeb (
+		I_ID,COMMUNITY_CODE,BUILDING_CODE,HOUSE_CODE,WEB_NAME,WEB_TYPE,	INTOWEB_DATE,
+		INTOWEB_AREA,INTOWEB_MONEY,INTOWEB_YEAR,STANDARD_ID,web_code,area_id,REMARK,
+		CID,OPERATOR,OPERATE_DATE) values
+		(#i_id#,#web_code#,#web_code#,#web_code#, #web_name#, #web_type#, #intoweb_date#, 
+		 #intoweb_area#,#intoweb_money#,#intoweb_year#,#standard_id#,#web_code#,
+		 (case when    (select to_number(max(area_id))+1 from iw_intoweb where web_code=#web_code# ) is null 
+                  then 0 else (select to_number(max(area_id))+1 from iw_intoweb where web_code=#web_code# ) end),
+		 #remark#,
+		 #cid#,#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	<!-- 入网_修改房间 -->
+	<update id="intoWeb_updatehouse" parameterClass="dto">
+		UPDATE FC_HOUSE a SET (intoweb_date,intoweb_area,intoweb_year)=
+		(select min(intoweb_date),sum(intoweb_area),min(intoweb_year) 
+		from iw_intoWeb 
+		where a.house_code=house_code )
+		WHERE house_code = #web_code#
+		and exists (select 1
+		from iw_intoWeb 
+		where a.house_code=house_code )
+	</update>
+	<!-- 入网_修改房间(小区大楼) -->
+	<update id="intoWeb_updatehouse_byCB" parameterClass="dto">
+		UPDATE FC_HOUSE SET 
+		intoweb_date=#intoweb_date#,
+		intoweb_year=#intoweb_year#,
+		intoweb_std_id=#standard_id#
+		WHERE (community_code = #web_code# or building_code = #web_code# )
+	</update>
+	<!-- 入网 -->
+	<delete id="deleteWeb" parameterClass="map">
+       DELETE FROM iw_intoWeb WHERE i_id in ($p_range$)
+	</delete>
+	<!-- 查询某房间是否欠费-->
+	<select id="haveWebcharge" parameterClass="map"
+		resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM
+		sf_charge a where 
+		exists (select 1 from iw_intoweb f
+	    where ((a.house_code=f.house_code and web_type='用户')  or 
+            (a.building_code=f.building_code and web_type='大楼')
+	    or (a.community_code=f.community_code and web_type='小区')) and f.i_id in ($p_range$))
+		and now_cash>0
+		and item_code='B'
+	</select>	
+	<!--取得某编号的小区数-->
+	<select id="getIntoWebCodeCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM iw_intoweb WHERE WEB_CODE = #web_code# 
+	</select>
+</sqlMap>

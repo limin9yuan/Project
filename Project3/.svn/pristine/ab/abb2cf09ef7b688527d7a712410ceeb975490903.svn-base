@@ -1,0 +1,65 @@
+package org.module.fc.service.impl;
+
+import org.eredlab.g4.bmf.base.BaseServiceImpl;
+import org.eredlab.g4.ccl.datastructure.Dto;
+import org.eredlab.g4.ccl.datastructure.impl.BaseDto;
+import org.module.fc.service.CommunityService;
+
+public class CommunityImpl extends BaseServiceImpl implements CommunityService{
+
+	
+	/**
+	 * 添加小区
+	 * @param pDto
+	 * @return
+	 */
+	public Dto insertCommunity(Dto pDto) {
+		Dto outDto = new BaseDto();
+		Integer countInteger = (Integer) g4Dao.queryForObject("getCommunityCodeCount", pDto);
+		if (countInteger.intValue() > 0) {
+			outDto.put("failure", new Boolean(true));
+			outDto.put("msg", (String)"编号为"+pDto.get("community_code") +"的小区已存在，不能添加。");
+			return outDto;
+		}
+		g4Dao.insert("insertCommunity", pDto);
+		outDto.put("success", new Boolean(true));
+		outDto.put("msg", "小区添加成功!");
+		return outDto;
+	}
+	/**
+	 * 修改小区
+	 * @param pDto
+	 * @return
+	 */	
+	public Dto updateCommunity(Dto pDto) {
+		Dto outDto = new BaseDto();		
+		if("1".equals(pDto.get("updateStat"))){
+			g4Dao.update("updateHouseStation", pDto);
+			g4Dao.update("updateBuildingStation", pDto);
+		}		
+		g4Dao.update("updateCommunity", pDto);
+		outDto.put("success", new Boolean(true));
+		outDto.put("msg", "小区修改成功!");
+		return outDto;
+	}
+	/**
+	 * 删除小区
+	 * @param pDto
+	 * @return
+	 */	
+	public Dto deleteCommunity(Dto pDto) {
+		Dto outDto = new BaseDto();
+		Integer countInteger = (Integer) g4Dao.queryForObject("getBuildingCount", pDto);
+		if (countInteger.intValue() > 0) {
+			outDto.put("success", new Boolean(false));
+			outDto.put("msg", (String)pDto.get("community_code")+(String)pDto.get("community_name")+" 小区下有大楼，不能删除！请先删除该小区下的大楼。");
+			return outDto;
+		}
+		g4Dao.delete("deleteCommunity", pDto);
+		outDto.put("success", new Boolean(true));
+		outDto.put("msg", "小区删除成功!");
+		return outDto;
+	}
+
+
+}

@@ -1,0 +1,391 @@
+insert into extgr.fc_community(community_code,
+"COMMUNITY_NAME", 
+	"HOUSE_MANAGER", 
+	"DEVELOPER", 
+	"FINISH_DATE", 
+	"INTOWEB_DATE", 
+	"GET_TYPE", 
+	"ADDRESS", 
+	"IS_DESTORY" , 
+	"STAT_ID" , 
+	"REMARK" , 
+	"CID" , 
+	"BUILDING_COUNT" , 
+	"HOUSE_COUNT" , 
+	"EMPTY_COUNT" , 
+	"ENTER_COUNT" , 
+	"BUILD_AREA" , 
+	"USE_AREA" , 
+	"FLOOR_AREA" , 
+	"CHARGE_AREA" , 
+	"OPERATOR" , 
+	"OPERATE_DATE" )
+select distinct (case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2),
+"COMMUNITY_NAME", 
+	"HOUSE_MANAGER", 
+	"DEVELOPER", 
+	"FINISH_DATE", 
+	"INTOWEB_DATE", 
+	"GET_TYPE", 
+	"ADDRESS", 
+	"IS_DESTORY" , 
+	"STAT_ID" , 
+	"REMARK" , 
+	"CID" , 
+	"BUILDING_COUNT" , 
+	"HOUSE_COUNT" , 
+	"EMPTY_COUNT" , 
+	"ENTER_COUNT" , 
+	"BUILD_AREA" , 
+	"USE_AREA" , 
+	"FLOOR_AREA" , 
+	"CHARGE_AREA" , 
+	"OPERATOR" , 
+	"OPERATE_DATE" 
+from extgrfx.fc_community where 
+(community_code >='0201' and community_code <='0217')
+or (community_code >='0301' and community_code <='0316')
+or (community_code >='0401' and community_code <='0423')
+or (community_code >='0101' and community_code <='0127')
+or (community_code >='0501' and community_code <='0521')
+or (community_code >='0601' and community_code <='0605')
+or (community_code >='0701' and community_code <='0711')
+or (community_code >='1001' and community_code <='1016')
+or (community_code >='1401' and community_code <='1405')
+or (community_code >='1301' and community_code <='1305')
+or (community_code >='1501' and community_code <='1502');
+
+
+
+insert into extgr.fc_building("BUILDING_CODE", 
+	"BUILDING_NAME", 
+	"COMMUNITY_CODE", 
+	"CID", 
+	"HOUSE_MANAGER", 
+	"DEVELOPER" , 
+	"FINISH_DATE" , 
+	"INTOWEB_DATE" , 
+	"IS_DESTORY" , 
+	"STAT_ID", 
+	"FLOOR_HEIGHT" , 
+	"FLOOR_COUNT" , 
+	"UNIT_COUNT" , 
+	"REMARK" , 
+	"OPERATOR", 
+	"OPERATE_DATE" , 
+	"HOUSE_COUNT", 
+	"ENTER_COUNT" , 
+	"EMPTY_COUNT" , 
+	"BUILD_AREA" , 
+	"USE_AREA" , 
+	"FLOOR_AREA" , 
+	"CHARGE_AREA")
+select (
+case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2)||
+substr(BUILDING_CODE,5) BUILDING_CODE,
+"BUILDING_NAME", 
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2) community_code,
+	"CID", 
+	"HOUSE_MANAGER", 
+	"DEVELOPER" , 
+	"FINISH_DATE" , 
+	"INTOWEB_DATE" , 
+	"IS_DESTORY" , 
+	"STAT_ID", 
+	"FLOOR_HEIGHT" , 
+	"FLOOR_COUNT" , 
+	"UNIT_COUNT" , 
+	"REMARK" , 
+	"OPERATOR", 
+	"OPERATE_DATE" , 
+	"HOUSE_COUNT", 
+	"ENTER_COUNT" , 
+	"EMPTY_COUNT" , 
+	"BUILD_AREA" , 
+	"USE_AREA" , 
+	"FLOOR_AREA" , 
+	"CHARGE_AREA"
+from extgrfx.fc_building
+where (community_code >='0201' and community_code <='0217')
+or (community_code >='0301' and community_code <='0316')
+or (community_code >='0401' and community_code <='0423')
+or (community_code >='0101' and community_code <='0127')
+or (community_code >='0501' and community_code <='0521')
+or (community_code >='0601' and community_code <='0605')
+or (community_code >='0701' and community_code <='0711')
+or (community_code >='1001' and community_code <='1016')
+or (community_code >='1401' and community_code <='1405')
+or (community_code >='1301' and community_code <='1305')
+or (community_code >='1501' and community_code <='1502');
+
+
+
+insert into extgr.fc_house
+("HOUSE_CODE" , 
+	"BUILDING_CODE", 
+	"COMMUNITY_CODE" , 
+	"CID", 
+	"CELL_CODE" , 
+	"FLOOR" , 
+	"DOOR_CODE" , 
+	"CARD_ID" , 
+	"CLUSTER_CODE" , 
+	"ADDRESS" , 
+	"STREET" , 
+	"BUILD_AREA" , 
+	"CHARGE_AREA" , 
+	"FLOOR_AREA" , 
+	"HOUSE_TYPE" , 
+	"DIRECT_TYPE", 
+	"HEAT_STATUS" , 
+	"APART_STATUS" , 
+	"HEAT_TYPE" , 
+	"USER_KIND" , 
+	"HOUSE_UNION", 
+	"HOUSE_MANAGER" ,
+	"STAT_ID" , 
+	"IS_DESTORY" , 
+	"IS_BLACK" , 
+	"REMARK" , 
+	"OPERATOR" , 
+	"OPERATE_DATE" , 
+	"MOD_REASON", 
+	"INTOWEB_DATE", 
+	"INTOWEB_AREA", 
+	"AREA_COUNT", 
+	"INTOWEB_YEAR", 
+	"IS_DEST" 
+)
+  
+select
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2)||
+substr(HOUSE_CODE,5) HOUSE_CODE,
+
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2)||
+substr(BUILDING_CODE,5) BUILDING_CODE,
+
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2) community_code,
+	 
+	
+	 
+	"CID", 
+	"CELL_CODE" , 
+	"FLOOR" , 
+	"DOOR_CODE" , 
+	"CARD_ID" , 
+	"CLUSTER_CODE" , 
+	"ADDRESS" , 
+	"STREET" , 
+	"BUILD_AREA" , 
+	"CHARGE_AREA" , 
+	"FLOOR_AREA" , 
+	"HOUSE_TYPE" , 
+	"DIRECT_TYPE", 
+	"HEAT_STATUS" , 
+	"APART_STATUS" , 
+	"HEAT_TYPE" , 
+	"USER_KIND" , 
+	"HOUSE_UNION", 
+	"HOUSE_MANAGER" ,
+	"STAT_ID" , 
+	"IS_DESTORY" , 
+	"IS_BLACK" , 
+	"REMARK" , 
+	"OPERATOR" , 
+	"OPERATE_DATE" , 
+	"MOD_REASON", 
+	"INTOWEB_DATE", 
+	"INTOWEB_AREA", 
+	"AREA_COUNT", 
+	"INTOWEB_YEAR", 
+	"IS_DEST" 
+	
+from extgrfx.fc_house
+where (community_code >='0201' and community_code <='0217')
+or (community_code >='0301' and community_code <='0316')
+or (community_code >='0401' and community_code <='0423')
+or (community_code >='0101' and community_code <='0127')
+or (community_code >='0501' and community_code <='0521')
+or (community_code >='0601' and community_code <='0605')
+or (community_code >='0701' and community_code <='0711')
+or (community_code >='1001' and community_code <='1016')
+or (community_code >='1401' and community_code <='1405')
+or (community_code >='1301' and community_code <='1305')
+or (community_code >='1501' and community_code <='1502');
+
+
+
+
+
+
+
+
+
+
+
+
+insert into extgr.fc_owner
+("HOUSE_CODE" , 
+	"ENTER_DATE" , 
+	"CID" , 
+	"BUILDING_CODE" , 
+	"COMMUNITY_CODE" , 
+	"OWNER_NAME", 
+	"PAY_MAN" , 
+	"SEX" , 
+	"WORK_UNIT" , 
+	"PAPER_TYPE" , 
+	"PAPER_CODE" , 
+	"CONTACT_MAN" , 
+	"TELEPHONE" , 
+	"MOBILE" , 
+	"BANK" , 
+	"BANK_NUMBER" , 
+	"IS_OWNER", 
+	"REMARK" , 
+	"OPERATOR" , 
+	"OPERATE_DATE" , 
+	"MOBILEPHONE"
+)
+  
+select
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2)||
+substr(HOUSE_CODE,5) HOUSE_CODE,
+"ENTER_DATE" , 
+	"CID" ,
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2)||
+substr(BUILDING_CODE,5) BUILDING_CODE,
+
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2) community_code,
+
+	 
+	
+	"OWNER_NAME", 
+	"PAY_MAN" , 
+	"SEX" , 
+	"WORK_UNIT" , 
+	"PAPER_TYPE" , 
+	"PAPER_CODE" , 
+	"CONTACT_MAN" , 
+	"TELEPHONE" , 
+	"MOBILE" , 
+	"BANK" , 
+	"BANK_NUMBER" , 
+	"IS_OWNER", 
+	"REMARK" , 
+	"OPERATOR" , 
+	"OPERATE_DATE" , 
+	"MOBILEPHONE"
+	
+from extgrfx.fc_owner
+where (community_code >='0201' and community_code <='0217')
+or (community_code >='0301' and community_code <='0316')
+or (community_code >='0401' and community_code <='0423')
+or (community_code >='0101' and community_code <='0127')
+or (community_code >='0501' and community_code <='0521')
+or (community_code >='0601' and community_code <='0605')
+or (community_code >='0701' and community_code <='0711')
+or (community_code >='1001' and community_code <='1016')
+or (community_code >='1401' and community_code <='1405')
+or (community_code >='1301' and community_code <='1305')
+or (community_code >='1501' and community_code <='1502');
+
+
+
+
+
+
+
+insert into extgr.fc_area
+("HOUSE_CODE", 
+	"AREA_ID" , 
+	"CID" , 
+	"BUILDING_CODE" , 
+	"COMMUNITY_CODE" , 
+	"AREA_NAME", 
+	"USE_TYPE" , 
+	"BUILD_AREA" , 
+	"USE_AREA" , 
+	"FLOOR_HEIGHT" , 
+	"SUPER_AREA" , 
+	"CHARGE_AREA" , 
+	"ITEM_CODE" , 
+	"STANDARD_ID" , 
+	"OPERATOR" , 
+	"OPERATE_DATE"
+)
+  
+select
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2)||
+substr(HOUSE_CODE,5) HOUSE_CODE,
+"AREA_ID" , 
+	"CID" , 
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2)||
+substr(BUILDING_CODE,5) BUILDING_CODE,
+
+(case when substr(community_code,1,1)='0' then 'B'
+when substr(community_code,1,1)='1' then 'C'
+when substr(community_code,1,1)='2' then 'D' else '' end )||substr(community_code,2) community_code,
+
+	 
+	
+
+	"AREA_NAME", 
+	"USE_TYPE" , 
+	"BUILD_AREA" , 
+	"USE_AREA" , 
+	"FLOOR_HEIGHT" , 
+	"SUPER_AREA" , 
+	"CHARGE_AREA" , 
+	"ITEM_CODE" , 
+	"STANDARD_ID" , 
+	"OPERATOR" , 
+	"OPERATE_DATE"
+	
+from extgrfx.fc_area
+where (community_code >='0201' and community_code <='0217')
+or (community_code >='0301' and community_code <='0316')
+or (community_code >='0401' and community_code <='0423')
+or (community_code >='0101' and community_code <='0127')
+or (community_code >='0501' and community_code <='0521')
+or (community_code >='0601' and community_code <='0605')
+or (community_code >='0701' and community_code <='0711')
+or (community_code >='1001' and community_code <='1016')
+or (community_code >='1401' and community_code <='1405')
+or (community_code >='1301' and community_code <='1305')
+or (community_code >='1501' and community_code <='1502');
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1006 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<!-- 演示与教程手工映射SQL语句 -->
+<sqlMap>
+	<typeAlias alias="dto" type="org.eredlab.g4.ccl.datastructure.impl.BaseDto" />
+	<typeAlias alias="catalogVO" type="org.eredlab.g4.demo.vo.CatalogVO" />
+
+	<!-- 用户情况汇总表 -->
+	<select id="list01050101" parameterClass="map"
+		resultClass="dto">
+		select * from (
+		select a.community_code,a.community_name,a.building_code,a.building_name,
+		a.house_code,a.owner_name,a.address,a.enter_date,a.telephone,a.mobilephone,
+		b.use_area,b.build_area,b.super_area,b.charge_area,a.work_unit,
+		b.standard_id
+		from v_house a,fc_area b
+		where a.house_code=b.house_code) a where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_standard"> 				
+				standard_id is null
+		</isNotEmpty>
+		order by house_code asc
+	</select>
+	<select id="list01050101ForPageCount" parameterClass="map"
+		resultClass="java.lang.Integer">
+		select count(*) from (
+		select a.community_code,a.building_code,
+		a.house_code,b.standard_id
+		from v_house a,fc_area b
+		where a.house_code=b.house_code) a  where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_standard"> 				
+				standard_id is null
+		</isNotEmpty>
+	</select>
+	<select id="sum01050101" parameterClass="map"
+		resultClass="dto">
+		select count(house_code) house_code,
+		sum(use_area) use_area,
+		sum(build_area) build_area,
+		sum(super_area) super_area,
+		sum(charge_area) charge_area
+		 from (
+		select a.community_code,a.community_name,a.building_code,a.building_name,
+		a.house_code,a.owner_name,a.address,a.enter_date,a.telephone,a.mobilephone,
+		b.use_area,b.build_area,b.super_area,b.charge_area,a.work_unit,
+		b.standard_id
+		from v_house a,fc_area b
+		where a.house_code=b.house_code) a  where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_standard"> 				
+				standard_id is null
+		</isNotEmpty>
+	</select>
+	<!-- 欠费明细表 -->
+	<select id="list01050201" parameterClass="map"
+		resultClass="dto">
+		select * from (		
+		select  c.owner_name,
+        b.house_code,
+        a.address,
+        c.work_unit,
+        c.telephone,
+        b.charge_Area,
+        nvl(b.charge_Area,0)-nvl(b.now_charge_Area,0)-nvl(b.minus_Area,0) as qf_area,
+        b.real_account,
+        nvl(b.real_Account,0)-nvl(b.now_cash,0)-nvl(b.delzero,0) qf_account, 
+		b.charge_month,b.price,
+		b.community_code,b.building_code,b.item_code,e.item_name
+		from fc_house a,sf_charge b,fc_owner c,fc_community d ,sf_item e
+		where a.house_code(+)=b.house_code
+		and b.house_code=c.house_code(+)
+		and c.is_Owner(+)='1'
+		and b.item_code=e.item_code
+		and ((a.community_code=d.community_code and b.item_code='A')
+		 or (b.item_code='B' and (
+		(length(b.house_code)=17  and a.community_code=d.community_code ) 
+		or (length(b.house_code)=4 and b.house_code=d.community_code)
+		or (length(b.house_code)=8 and b.building_code=d.community_code)
+		)))
+		 ) a where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_qf"> 				
+				qf_account>0
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+		order by house_code asc
+	</select>
+	<select id="list01050201ForPageCount" parameterClass="map"
+		resultClass="java.lang.Integer">
+		select count(*) from (
+		select  c.owner_name,
+        b.house_code,
+        a.address,
+        c.work_unit,
+        c.telephone,
+        b.charge_Area,
+        nvl(b.charge_Area,0)-nvl(b.now_charge_Area,0)-nvl(b.minus_Area,0) as qf_area,
+        b.real_account,
+        nvl(b.real_Account,0)-nvl(b.now_cash,0)-nvl(b.delzero,0) qf_account, 
+		b.charge_month,b.price,
+		b.community_code,b.building_code, b.item_Code
+		from fc_house a,sf_charge b,fc_owner c,fc_community d 
+		where a.house_code(+)=b.house_code
+		and b.house_code=c.house_code(+)
+		and c.is_Owner(+)='1'
+		and ((a.community_code=d.community_code and b.item_code='A')
+		 or (b.item_code='B' and (
+		(length(b.house_code)=17  and a.community_code=d.community_code ) 
+		or (length(b.house_code)=4 and b.house_code=d.community_code)
+		or (length(b.house_code)=8 and b.building_code=d.community_code)
+		)))
+		
+		 ) a  where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_qf"> 				
+				qf_account>0
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+	</select>
+	<select id="sum01050201" parameterClass="map"
+		resultClass="dto">
+		select count(house_code) house_code,
+		sum(qf_area) qf_area,
+		sum(qf_account) qf_account,
+		sum(real_account) real_account,
+		sum(charge_Area) charge_Area
+		 from (
+		select  c.owner_name,
+        b.house_code,
+        a.address,
+        c.work_unit,
+        c.telephone,
+        b.charge_Area,
+        nvl(b.charge_Area,0)-nvl(b.now_charge_Area,0)-nvl(b.minus_Area,0) as qf_area,
+        b.real_account,
+        nvl(b.real_Account,0)-nvl(b.now_cash,0)-nvl(b.delzero,0) qf_account, 
+		b.charge_month,b.price,
+		b.community_code,b.building_code,b.item_Code
+		from fc_house a,sf_charge b,fc_owner c,fc_community d 
+		where a.house_code(+)=b.house_code
+		and b.house_code=c.house_code(+)
+		and c.is_Owner(+)='1'
+		and ((a.community_code=d.community_code and b.item_code='A')
+		 or (b.item_code='B' and (
+		(length(b.house_code)=17  and a.community_code=d.community_code ) 
+		or (length(b.house_code)=4 and b.house_code=d.community_code)
+		or (length(b.house_code)=8 and b.building_code=d.community_code)
+		)))
+		
+		 ) a  where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_qf"> 				
+				qf_account>0
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+	</select>
+	<!-- 收费明细表 -->
+	<select id="list01050202" parameterClass="map"
+		resultClass="dto">
+		select * from (		
+		  select
+		  b.bill_date ,   
+		  e.community_name,
+		  b.community_code,
+		  b.building_code, 
+		  b.house_code,   
+		  b.owner_name,   
+		  b.charge_price, 
+		  b.charge_area, 
+		  b.USE_PREPAY,  
+		  b.PAY_MODE,  
+		  f.invoice_code,  
+		  f.invoice_number,
+		  c.userName operatorName,
+		  b.operator, 
+		  b.operate_date, 
+		  b.item_code, 
+		  b.charge_type, 
+		  case when b.charge_month='0' then '' else b.charge_month end as charge_month,  
+		  b.real_charge ,
+		  case when g.status='2' then 1 else 0 end cancelCount,d.item_name
+		from 
+		  SF_DETAIL b,EAUSER c,SF_ITEM d,FC_COMMUNITY e,SF_INVOICEUSE f,sf_invoice g
+		where 
+		  b.community_code=e.community_code
+		  and b.operator=c.userid
+		  and b.item_code=d.item_code
+		  and b.b_id=f.b_id(+)
+		  and b.rollback_flag='0'
+		  and f.invoice_code=g.invoice_code(+)
+		  and f.invoice_number=g.invoice_number(+)
+		  and f.item_code=g.item_code(+)
+		  and f.invoice_type=g.invoice_type(+)
+		 ) a where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="begin_date"> 				
+				operate_date&gt;='$begin_date$ 00:00:00'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="end_date"> 				
+				operate_date&lt;='$end_date$ 23:59:59'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="operator"> 				
+				operator in ($operator$)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+		order by house_code asc
+	</select>
+	<select id="list01050202ForPageCount" parameterClass="map"
+		resultClass="java.lang.Integer">
+		select count(*) from (
+		select
+		  b.bill_date ,   
+		  e.community_name,
+		  b.community_code,
+		  b.building_code, 
+		  b.house_code,   
+		  b.owner_name,   
+		  b.charge_price, 
+		  b.charge_area, 
+		  b.USE_PREPAY,  
+		  b.PAY_MODE,  
+		  f.invoice_code,  
+		  f.invoice_number,
+		  c.userName operatorName,
+		  b.operator,  
+		  b.operate_date, 
+		  b.item_code, 
+		  b.charge_type, 
+		  case when b.charge_month='0' then '' else b.charge_month end as charge_month,  
+		  b.real_charge ,
+		  case when g.status='2' then 1 else 0 end cancelCount
+		from 
+		  SF_DETAIL b,EAUSER c,SF_ITEM d,FC_COMMUNITY e,SF_INVOICEUSE f,sf_invoice g
+		where 
+		  b.community_code=e.community_code
+		  and b.operator=c.userid
+		  and b.item_code=d.item_code
+		  and b.b_id=f.b_id(+)
+		  and b.rollback_flag='0'
+		  and f.invoice_code=g.invoice_code(+)
+		  and f.invoice_number=g.invoice_number(+)
+		  and f.item_code=g.item_code(+)
+		  and f.invoice_type=g.invoice_type(+)
+		 ) a  where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="begin_date"> 				
+				operate_date&gt;='$begin_date$ 00:00:00'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="end_date"> 				
+				operate_date&lt;='$end_date$ 23:59:59'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="operator"> 				
+				operator in ($operator$)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+	</select>
+	<select id="sum01050202" parameterClass="map"
+		resultClass="dto">
+		select count(house_code) house_code,
+		sum(charge_area) charge_area,
+		sum(real_charge) real_charge,
+		sum(cancelCount) cancelCount
+		 from (
+		select
+		  b.bill_date ,   
+		  e.community_name,
+		  b.community_code,
+		  b.building_code, 
+		  b.house_code,   
+		  b.owner_name,   
+		  b.charge_price, 
+		  b.charge_area, 
+		  b.USE_PREPAY,  
+		  b.PAY_MODE,  
+		  f.invoice_code,  
+		  f.invoice_number,
+		  c.userName operatorName,
+		  b.operator,  
+		  b.operate_date, 
+		  b.item_code, 
+		  b.charge_type, 
+		  case when b.charge_month='0' then '' else b.charge_month end as charge_month,  
+		  b.real_charge ,
+		  case when g.status='2' then 1 else 0 end cancelCount
+		from 
+		  SF_DETAIL b,EAUSER c,SF_ITEM d,FC_COMMUNITY e,SF_INVOICEUSE f,sf_invoice g
+		where 
+		  b.community_code=e.community_code
+		  and b.operator=c.userid
+		  and b.item_code=d.item_code
+		  and b.b_id=f.b_id(+)
+		  and b.rollback_flag='0'
+		  and f.invoice_code=g.invoice_code(+)
+		  and f.invoice_number=g.invoice_number(+)
+		  and f.item_code=g.item_code(+)
+		  and f.invoice_type=g.invoice_type(+)
+		 ) a  where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="begin_date"> 				
+				operate_date&gt;='$begin_date$ 00:00:00'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="end_date"> 				
+				operate_date&lt;='$end_date$ 23:59:59'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="operator"> 				
+				operator in ($operator$)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+	</select>
+	<select id="sum01050202_rpt" parameterClass="map"
+		resultClass="dto">
+		select pay_mode,count(house_code) house_count,
+		sum(real_charge) real_charge,sum(nvl(LATEFEE_REALCHARGE,0)) latefee_realcharge
+		 from (
+		select
+		  b.bill_date ,   
+		  e.community_name,
+		  b.community_code,
+		  b.building_code,
+		  b.house_code,   
+		  b.owner_name,   
+		  b.charge_price, 
+		  b.charge_area, 
+		  b.USE_PREPAY,  
+		  b.PAY_MODE,  
+		  f.invoice_code,  
+		  f.invoice_number,
+		  c.userName operatorName,
+		  b.operator,  
+		  b.operate_date, 
+		  b.item_code, 
+		  b.charge_type, 
+		  case when b.charge_month='0' then '' else b.charge_month end as charge_month,  
+		  b.real_charge ,
+		  case when g.status='2' then 1 else 0 end cancelCount,b.LATEFEE_REALCHARGE
+		from 
+		  SF_DETAIL b,EAUSER c,SF_ITEM d,FC_COMMUNITY e,SF_INVOICEUSE f,sf_invoice g
+		where 
+		  b.community_code=e.community_code
+		  and b.operator=c.userid
+		  and b.item_code=d.item_code
+		  and b.b_id=f.b_id(+)
+		  and b.rollback_flag='0'
+		  and f.invoice_code=g.invoice_code(+)
+		  and f.invoice_number=g.invoice_number(+)
+		  and f.item_code=g.item_code(+)
+		  and f.invoice_type=g.invoice_type(+)
+		 ) a  where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="begin_date"> 				
+				operate_date&gt;='$begin_date$ 00:00:00'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="end_date"> 				
+				operate_date&lt;='$end_date$ 23:59:59'
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="operator"> 				
+				operator in ($operator$)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+		group by pay_mode
+	</select>
+	
+	<!-- 入网情况汇总表 -->
+	<select id="list01050301" parameterClass="map"
+		resultClass="dto">
+		select * from(select 
+		a.i_id, 
+		a.HOUSE_CODE, 
+		a.BUILDING_CODE, 
+		a.COMMUNITY_CODE,
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		a.INTOWEB_MONEY,
+		a.remark
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,sf_charge f 
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+		and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+		)  a where 1=1
+		<isNotEmpty prepend="AND" property="charge_month"> 
+			intoweb_year in (#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="p_range"> 				
+			(HOUSE_CODE in ($p_range$) or BUILDING_CODE in ($p_range$)
+			or COMMUNITY_CODE in ($p_range$) )
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="begin_date"> 				
+			intoweb_date&gt;=#begin_date#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="end_date"> 				
+			intoweb_date&lt;=#end_date#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_standard"> 				
+				standard_id is null
+		</isNotEmpty>
+		order by web_code asc
+	</select>
+	<select id="list01050301ForPageCount" parameterClass="map"
+		resultClass="java.lang.Integer">
+		select count(*) from (select 
+		a.i_id, 
+		a.HOUSE_CODE, 
+		a.BUILDING_CODE, 
+		a.COMMUNITY_CODE,
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		a.INTOWEB_MONEY,
+		a.remark
+		from IW_INTOWEB a,EAUSER b,sf_standard c,sf_charge f 
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+		and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+		) a  where 1=1
+		<isNotEmpty prepend="AND" property="charge_month"> 
+			intoweb_year in (#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="p_range"> 				
+			(HOUSE_CODE in ($p_range$) or BUILDING_CODE in ($p_range$)
+			or COMMUNITY_CODE in ($p_range$) ) 
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="begin_date"> 				
+			intoweb_date&gt;=#begin_date#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="end_date"> 				
+			intoweb_date&lt;=#end_date#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_standard"> 				
+				standard_id is null
+		</isNotEmpty>
+	</select>
+	<select id="sum01050301" parameterClass="map"
+		resultClass="dto">
+		select count(web_code) house_code,
+		sum(INTOWEB_AREA) INTOWEB_AREA,
+		sum(INTOWEB_MONEY) INTOWEB_MONEY
+		 from (select 
+		a.i_id, 
+		a.HOUSE_CODE, 
+		a.BUILDING_CODE, 
+		a.COMMUNITY_CODE,
+		a.web_code,
+	    a.WEB_NAME,
+	    a.WEB_TYPE,
+		a.CID, 
+		c.PRICE,
+		a.INTOWEB_DATE, 
+		a.INTOWEB_AREA, 
+	    a.STANDARD_ID, 
+	    a.OPERATOR, 
+		a.OPERATE_DATE,
+		b.userName,
+		c.standard_name,
+		a.INTOWEB_YEAR,
+		a.INTOWEB_MONEY,
+		a.remark
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,sf_charge f
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+		and a.web_code=f.house_code(+)
+        and f.item_code(+)='B'
+        and a.area_id=f.meter_id(+)
+        and a.intoweb_year=f.charge_month(+)
+		) a  where 1=1
+		<isNotEmpty prepend="AND" property="charge_month"> 
+			intoweb_year in (#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="p_range"> 				
+			(HOUSE_CODE in ($p_range$) or BUILDING_CODE in ($p_range$)
+			or COMMUNITY_CODE in ($p_range$) )
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="begin_date"> 				
+			intoweb_date&gt;=#begin_date#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="end_date"> 				
+			intoweb_date&lt;=#end_date#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_standard"> 				
+				standard_id is null
+		</isNotEmpty>
+	</select>
+		<!-- 收费情况表 -->
+	<select id="list01050401" parameterClass="map"
+		resultClass="dto">
+	select	community_name,
+  owner_name,
+  house_code,
+  charge_price, 
+charge_area, 
+  charge_month,
+  real_account,
+  minus_money,
+  now_cash,
+  real_charge ,item_name ,standard_name,
+  qf,
+qql
+from (
+select  
+  e.community_name,s.community_code,s.building_code,f.standard_id,s.item_code,
+  s.owner_name,
+  s.house_code,
+  s.price charge_price, 
+s.charge_area, 
+  case when b.charge_month='0' then '' else s.charge_month end as charge_month,
+  s.total_account real_account,
+  s.minus_money,
+  nvl(c.now_charge,0) now_cash,
+  nvl(b.real_charge,0) real_charge ,d.item_name ,f.standard_name,
+  s.real_account-nvl(c.now_charge,0) qf,
+(case when s.real_account=0 then 0 else round(b.real_charge/s.real_account,4) end)*100 qql
+from 
+  (select sum(real_charge) real_charge ,house_code,charge_month,item_code,meter_id from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = #item_code# or   #item_code# is null)
+
+  and (#charge_month#  is null or charge_month in(#charge_month#)) 
+  group by house_code,charge_month,item_code,meter_id) b,
+  (select sum(real_charge) now_charge ,house_code,charge_month,item_code,meter_id from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = #item_code# or  #item_code# is null)
+
+  and (#charge_month#  is null or charge_month in(#charge_month#)) 
+  and operate_date &gt;= #begin_date#||' 00:00:00'
+  and operate_date &lt;= #end_date#||' 23:59:59' group by house_code,charge_month,item_code,meter_id) c,
+  
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,
+  (select distinct standard_id,standard_name from sf_standard) f
+where 
+  s.house_code=b.house_code(+)  and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.house_code=c.house_code(+) and s.charge_month=c.charge_month(+) 
+  and s.item_code=c.item_code(+)  and s.meter_id=c.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.standard_code=f.standard_id(+)
+  and s.item_code=d.item_code
+
+and (s.item_Code = #item_code# or  #item_code#  is null)
+and (s.standard_code = #standard_id# or  #standard_id#  is null)
+) a where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_qf"> 				
+				qf>0
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+		order by house_code asc
+	</select>
+	<select id="list01050401ForPageCount" parameterClass="map"
+		resultClass="java.lang.Integer">
+		select count(*) from (
+		select  c.owner_name,
+        a.house_code,
+        a.address,
+        c.work_unit,
+        c.telephone,
+        b.charge_Area,
+        nvl(b.charge_Area,0)-nvl(b.now_charge_Area,0)-nvl(b.minus_Area,0) as qf_area,
+        b.real_account,
+        nvl(b.real_Account,0)-nvl(b.now_cash,0)-nvl(b.delzero,0) qf_account, 
+		b.charge_month,b.price,
+		a.community_code,b.building_code, b.item_Code
+		from fc_house a,sf_charge b,fc_owner c
+		where a.house_code=b.house_code
+		and a.house_code=c.house_code
+		and c.is_Owner='1'
+		
+		 ) a  where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_qf"> 				
+				qf_account>0
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+	</select>
+	<select id="sum01050401" parameterClass="map"
+		resultClass="dto">
+		select count(house_code) house_code,
+		sum(qf_area) qf_area,
+		sum(qf_account) qf_account,
+		sum(real_account) real_account,
+		sum(charge_Area) charge_Area
+		 from (
+		select  c.owner_name,
+        a.house_code,
+        a.address,
+        c.work_unit,
+        c.telephone,
+        b.charge_Area,
+        nvl(b.charge_Area,0)-nvl(b.now_charge_Area,0)-nvl(b.minus_Area,0) as qf_area,
+        b.real_account,
+        nvl(b.real_Account,0)-nvl(b.now_cash,0)-nvl(b.delzero,0) qf_account, 
+		b.charge_month,b.price,
+		a.community_code,b.building_code,b.item_Code
+		from fc_house a,sf_charge b,fc_owner c
+		where a.house_code=b.house_code
+		and a.house_code=c.house_code
+		and c.is_Owner='1'
+		
+		 ) a  where 1=1
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				standard_id=#standard_id#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				charge_month in(#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="have_qf"> 				
+				qf_account>0
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="item_code"> 				
+				item_code=#item_code#
+		</isNotEmpty>
+	</select>
+	<select id="countIntowebUsers" parameterClass="map"
+		resultClass="dto">
+		select count(distinct WEB_CODE) count from (
+		select  
+	    a.WEB_CODE,
+	    a.STANDARD_ID, 
+		a.INTOWEB_YEAR,
+		d.community_code,d.building_code,d.house_code
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,sf_charge d
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+		and a.web_code=d.house_code(+)
+        and d.item_code(+)='B'
+        and a.area_id=d.meter_id(+)
+        and a.intoweb_year=d.charge_month(+)
+		) a 
+		where 1=1 
+		<isNotEmpty prepend="AND" property="p_range"> 				
+				(#is_null#='1' or (community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$)))
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="standard_id"> 				
+				(('#standard_id#'='-1' and standard_id is null ) or '#standard_id#'='1'
+				or standard_id='#standard_id#')
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="charge_month"> 				
+				(#charge_month#='-1' or INTOWEB_YEAR in(#charge_month#))
+		</isNotEmpty>
+		<isNotEmpty prepend="" property="queryDate"> 				
+				#queryDate#
+		</isNotEmpty>
+	
+	</select>
+	<select id="countIntowebUsers_year" parameterClass="map"
+		resultClass="dto">
+		select sum(web_count) count from (
+		select 
+	   	-count(distinct web_code) web_count
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,sf_charge d
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+		and a.web_code=d.house_code(+)
+        and d.item_code(+)='B'
+        and a.area_id=d.meter_id(+)
+        and a.intoweb_year=d.charge_month(+)
+        and a.INTOWEB_YEAR &lt;#charge_month#
+        and (#is_null#='1' or (d.community_code in (#p_range#) or
+				d.building_code in (#p_range#) or
+				d.house_code in (#p_range#)))
+		and (('#standard_id#'='-1' and a.standard_id is null ) or '#standard_id#'='1'
+				or a.standard_id='#standard_id#')
+		and (intoweb_date&gt;=#begin_date# or '-1'=#begin_date#)
+		and (intoweb_date&lt;=#end_date# or '-1'=#end_date#)
+        union all
+        select 
+	    count(distinct web_code) web_count
+		from IW_INTOWEB a,EAUSER b,sf_standard c ,sf_charge d
+		where a.OPERATOR=b.USERID(+)
+		and a.STANDARD_ID=c.STANDARD_ID(+)
+		and a.web_code=d.house_code(+)
+        and d.item_code(+)='B'
+        and a.area_id=d.meter_id(+)
+        and a.intoweb_year=d.charge_month(+)
+        and a.INTOWEB_YEAR &lt;=#charge_month#
+        and (#is_null#='1' or (d.community_code in (#p_range#) or
+				d.building_code in (#p_range#) or
+				d.house_code in (#p_range#)))
+		and (('#standard_id#'='-1' and a.standard_id is null ) or '#standard_id#'='1'
+				or a.standard_id='#standard_id#')
+		and (intoweb_date&gt;=#begin_date# or '-1'=#begin_date#)
+		and (intoweb_date&lt;=#end_date# or '-1'=#end_date#)
+		) a 
+	
+	</select>
+	
+	<!-- 减免明细表 -->
+	<select id="list01050204" parameterClass="map"
+		resultClass="dto">
+		select * from 
+		(select 
+				b.userName,
+				c.item_name,a.CHARGE_MONTH             ,
+				a.HOUSE_CODE               ,
+				a.ITEM_CODE                ,
+				a.METER_ID                 ,
+				a.CID                      ,
+				a.COMMUNITY_CODE           ,
+				a.BUILDING_CODE            ,
+				a.OWNER_NAME               ,
+				a.TOTAL_ACCOUNT            ,
+				a.MINUS_MONEY              ,
+				a.SUBTRACT_MONEY           ,
+				a.REAL_ACCOUNT             ,
+				a.NOW_CASH                 ,
+				a.USE_TYPE                 ,
+				a.STANDARD_CODE            ,
+				a.PRICE                    ,
+				a.BUILD_AREA               ,
+				a.FLOOR_AREA               ,
+				a.CHARGE_AREA              ,
+				a.p_id,
+				d.minus_money this_minus_money,
+				d.minus_reason,
+				d.operate_date,
+				f.username operator_name,d.operator,
+				d.remark,
+				d.m_id
+		from SF_CHARGE a,EAUSER b,sf_item c,sf_minus d,EAUSER f where a.house_manager=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.house_code=d.house_code(+) 
+    	and a.meter_id=d.meter_id(+) 
+    	and a.item_code=d.item_code(+) 
+    	and a.charge_month=d.charge_month(+) 
+    	and d.operator=f.USERID(+)
+		) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 				
+					operate_date&gt;='$begin_date$ 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 				
+					operate_date&lt;='$end_date$ 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="charge_month"> 				
+					charge_month in(#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="operator"> 				
+					operator in ($operator$)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="item_code"> 				
+					item_code=#item_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="minus_reason"> 				
+					minus_reason=#minus_reason#
+			</isNotEmpty>
+		</dynamic>
+		order by house_code asc
+	</select>
+	<select id="list01050204ForPageCount" parameterClass="map"
+		resultClass="java.lang.Integer">
+		select count(*) from 
+		(select 
+				a.house_code,a.community_code,a.building_code,a.charge_month,d.operate_date,d.item_code,d.operator,
+				d.minus_reason
+		from SF_CHARGE a,EAUSER b,sf_item c,sf_minus d where a.house_manager=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.house_code=d.house_code(+) 
+    	and a.meter_id=d.meter_id(+) 
+    	and a.item_code=d.item_code(+) 
+    	and a.charge_month=d.charge_month(+) 
+    	
+		) a
+         
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 				
+					operate_date&gt;='$begin_date$ 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 				
+					operate_date&lt;='$end_date$ 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="charge_month"> 				
+					charge_month in(#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="operator"> 				
+					operator in ($operator$)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="item_code"> 				
+					item_code=#item_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="minus_reason"> 				
+					minus_reason=#minus_reason#
+			</isNotEmpty>
+		</dynamic>
+		
+	</select>
+	<select id="sum01050204" parameterClass="map"
+		resultClass="dto">
+		select   '共' || COUNT(house_code) || '' AS house_count,
+				sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
+				sum(MINUS_MONEY)  MINUS_MONEY            ,
+				sum(SUBTRACT_MONEY)   SUBTRACT_MONEY        ,
+				sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,
+				sum(NOW_CASH)  NOW_CASH               ,
+				sum(BUILD_AREA)  BUILD_AREA             ,
+				sum(FLOOR_AREA)  FLOOR_AREA             ,
+				sum(CHARGE_AREA) CHARGE_AREA             ,
+				sum(this_minus_money) this_minus_money
+		from (select a.community_code,a.building_code,a.house_code,
+		a.charge_month,a.TOTAL_ACCOUNT,
+		a.MINUS_MONEY,a.SUBTRACT_MONEY,a.REAL_ACCOUNT,a.NOW_CASH,
+		a.BUILD_AREA,a.FLOOR_AREA,a.CHARGE_AREA,b.minus_money this_minus_money,b.operate_date,b.item_code,
+		b.operator,b.minus_reason
+		from SF_CHARGE a, SF_MINUS b where 
+		a.house_code=b.house_code(+) 
+    	and a.meter_id=b.meter_id(+) 
+    	and a.item_code=b.item_code(+) 
+    	and a.charge_month=b.charge_month(+))  
+
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="p_range"> 				
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 				
+					operate_date&gt;='$begin_date$ 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 				
+					operate_date&lt;='$end_date$ 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="charge_month"> 				
+					charge_month in(#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="operator"> 				
+					operator in ($operator$)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="item_code"> 				
+					item_code=#item_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="minus_reason"> 				
+					minus_reason=#minus_reason#
+			</isNotEmpty>
+		</dynamic>
+		
+	</select>
+</sqlMap>

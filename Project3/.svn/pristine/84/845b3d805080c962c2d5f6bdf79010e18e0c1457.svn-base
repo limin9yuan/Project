@@ -1,0 +1,70 @@
+create or replace procedure calcLateFee as
+        strSql varchar2(2000);
+      v_date varchar2(19);
+      v_result number(10);
+begin 
+
+      v_date:=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS');
+      strSql := 'insert into SF_LATEFEE (HOUSE_CODE,ITEM_CODE,CHARGE_MONTH,METER_ID,TOTAL_ACCOUNT,REAL_ACCOUNT,NOW_CASH,delzero,QF,START_DATE,END_DATE,LATEFEE_TOTALACCOUNT,STANDARD_CODE)
+                select HOUSE_CODE,ITEM_CODE,CHARGE_MONTH,METER_ID,TOTAL_ACCOUNT,REAL_ACCOUNT,NOW_CASH,delzero,nvl(REAL_ACCOUNT,0)-nvl(now_cash,0)-nvl(delzero,0),
+                (SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE),
+                to_CHAR(sysdate,''YYYY-MM-DD''),
+                round((case when (nvl(REAL_ACCOUNT,0)-nvl(now_cash,0)-nvl(delzero,0))
+                *(SELECT LATEFEERATE FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE)
+                *
+                (case when to_CHAR(sysdate,''YYYY-MM-DD'')>(SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE) then 
+                (to_date(to_CHAR(sysdate,''YYYY-MM-DD''),''YYYY-MM-DD'')-to_date((SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE),''YYYY-MM-DD'')+1)
+                else 0 end)
+                >a.TOTAL_ACCOUNT then a.TOTAL_ACCOUNT else
+                (nvl(REAL_ACCOUNT,0)-nvl(now_cash,0)-nvl(delzero,0))
+                *(SELECT LATEFEERATE FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE)
+                *
+                (case when to_CHAR(sysdate,''YYYY-MM-DD'')>(SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE) then 
+                (to_date(to_CHAR(sysdate,''YYYY-MM-DD''),''YYYY-MM-DD'')-to_date((SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE),''YYYY-MM-DD'')+1)
+                else 0 end)                 
+                end),0) V,a.STANDARD_CODE
+                FROM SF_CHARGE a where not exists (select 1 from SF_LATEFEE where  HOUSE_CODE=a.HOUSE_CODE 
+                and ITEM_CODE=a.ITEM_CODE 
+                and CHARGE_MONTH=a.CHARGE_MONTH 
+                and METER_ID=a.METER_ID
+                and QF=(nvl(a.REAL_ACCOUNT,0)-nvl(a.now_cash,0)-nvl(a.delzero,0))
+                ) and (nvl(REAL_ACCOUNT,0)-nvl(now_cash,0)-nvl(delzero,0))>0';
+      execute immediate strSql;
+      strSql := 'update SF_LATEFEE a set (TOTAL_ACCOUNT,REAL_ACCOUNT,NOW_CASH,delzero,QF,START_DATE,END_DATE,LATEFEE_TOTALACCOUNT)=
+                (select TOTAL_ACCOUNT,REAL_ACCOUNT,NOW_CASH,delzero,nvl(REAL_ACCOUNT,0)-nvl(now_cash,0)-nvl(delzero,0),
+                (SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE),
+                to_CHAR(sysdate,''YYYY-MM-DD''),
+                round(case when (REAL_ACCOUNT-now_cash-delzero)
+                *(SELECT LATEFEERATE FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE)
+                *
+                (case when to_CHAR(sysdate,''YYYY-MM-DD'')>(SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE) then 
+                (to_date(to_CHAR(sysdate,''YYYY-MM-DD''),''YYYY-MM-DD'')-to_date((SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE),''YYYY-MM-DD'')+1)
+                else 0 end)                
+                >a.TOTAL_ACCOUNT then a.TOTAL_ACCOUNT else
+                (REAL_ACCOUNT-now_cash-delzero)
+                *(SELECT LATEFEERATE FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE)
+                *
+                (case when to_CHAR(sysdate,''YYYY-MM-DD'')>(SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE) then 
+                (to_date(to_CHAR(sysdate,''YYYY-MM-DD''),''YYYY-MM-DD'')-to_date((SELECT latefee_edate FROM sf_STANDARD WHERE ITEM_CODE=a.ITEM_CODE AND STANDYEAR = a.CHARGE_MONTH and STANDARD_ID=a.STANDARD_CODE),''YYYY-MM-DD'')+1)
+                else 0 end)
+                end,0) V
+                FROM SF_CHARGE b where HOUSE_CODE=a.HOUSE_CODE and ITEM_CODE=a.ITEM_CODE and 
+                CHARGE_MONTH=a.CHARGE_MONTH and METER_ID=a.METER_ID 
+                and QF=nvl(a.REAL_ACCOUNT,0)-nvl(a.now_cash,0)-nvl(a.delzero,0) 
+                and (nvl(REAL_ACCOUNT,0)-nvl(now_cash,0)-nvl(delzero,0))>0)
+                where exists (select 1 from SF_CHARGE where  HOUSE_CODE=a.HOUSE_CODE and ITEM_CODE=a.ITEM_CODE 
+                and CHARGE_MONTH=a.CHARGE_MONTH 
+                and METER_ID=a.METER_ID 
+                and QF=nvl(a.REAL_ACCOUNT,0)-nvl(a.now_cash,0)-nvl(a.delzero,0)
+                and  (nvl(REAL_ACCOUNT,0)-nvl(now_cash,0)-nvl(delzero,0))>0)';
+     execute immediate strSql;
+     strSql := 'update SF_CHARGE a set (LATEFEE_TOTALACCOUNT,LATEFEE_REALACCOUNT,LATEFEE_STARTDATE,LATEFEE_ENDDATE)=
+                (select sum(LATEFEE_TOTALACCOUNT),sum(nvl(LATEFEE_TOTALACCOUNT,0)-nvl(a.LATEFEE_MINUS,0)),min(START_DATE),max(END_DATE)
+                FROM SF_LATEFEE where HOUSE_CODE=a.HOUSE_CODE and ITEM_CODE=a.ITEM_CODE and 
+                CHARGE_MONTH=a.CHARGE_MONTH and METER_ID=a.METER_ID group by HOUSE_CODE,ITEM_CODE,CHARGE_MONTH,METER_ID)
+                where exists (select 1 from SF_LATEFEE where  HOUSE_CODE=a.HOUSE_CODE and ITEM_CODE=a.ITEM_CODE and 
+                CHARGE_MONTH=a.CHARGE_MONTH and METER_ID=a.METER_ID ) and  (nvl(REAL_ACCOUNT,0)-nvl(now_cash,0)-nvl(delzero,0))>0';
+    execute immediate strSql;
+    strSql := 'insert into task_log (tm) values(to_char(sysdate,''YYYY-MM-DD HH24:MI:SS''))';
+    execute immediate strSql; 
+end calcLateFee;

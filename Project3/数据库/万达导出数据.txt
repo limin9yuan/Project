@@ -1,0 +1,20 @@
+SELECT a.stat_id, d.stat_name,e.communitycode, e.communityname,e.sartype, a.housecode,k.buildingname||f.cellcode||'单元'||f.floor||f.doorplatecode||'房间' as dz,
+ a.owner, a.chargecombuildarea, a.chargearea, a.chargemonth,
+       a.realaccount, a.nowcash, (a.realaccount - a.nowcash)as unpaid, a.minusmoney,replace(c.standardname,'标准',''),
+            f.operatedate,g.operatedate
+FROM sf_charge a
+left join fc_charge b on a.housecode = b.housecode
+left join sf_standard c on b.standardcode = c.standardcode
+left join of_station d on a.stat_id = d.stat_id
+left join fc_community e on a.communitycode = e.communitycode
+left join fc_house f on a.housecode = f.housecode
+left join fc_building k on k.buildingcode=f.buildingcode
+
+left join (select latefeenow,totalaccount,housecode,clocknumber,chargemonth,itemcode,max(operatedate) as operatedate
+from sf_detail 
+
+GROUP BY latefeenow, totalaccount, housecode, clocknumber, chargemonth, itemcode) g
+
+on a.housecode = g.housecode and a.clocknumber=g.clocknumber and a.itemcode=g.itemcode and a.chargemonth=g.chargemonth
+where  chargemonth='2017' and b.chargearea>0
+order by a.stat_id,f.communitycode,f.buildingcode,f.housecode

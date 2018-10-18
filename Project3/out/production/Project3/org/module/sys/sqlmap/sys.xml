@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="dto"
+		type="org.eredlab.g4.ccl.datastructure.impl.BaseDto" />
+
+	<!-- 查询收费标准-->
+	<select id="getStandard" parameterClass="map"
+		resultClass="dto">
+		SELECT STANDARD_ID value,STANDARD_NAME text
+		FROM SF_STANDARD 
+		where item_code=#item_code# and standyear=(select current_year from sf_item where item_code=#item_code# )
+		order by STANDARD_ID
+	</select>
+	<!-- 查询面积编号-->
+	<select id="getAreaList" parameterClass="map"
+		resultClass="dto">
+		SELECT distinct AREA_ID value,'面积'||(AREA_ID+1) text
+		FROM  FC_AREA
+		where
+		(house_code=#house_code# and #web_type#='用户' or 
+                community_code=#house_code# and  #web_type#='小区' or 
+                building_code=#house_code# and  #web_type#='大楼' ) 
+		order by AREA_ID
+	</select>
+	<!-- 查询收费标准+单价-->
+	<select id="getStandardAndPrice" parameterClass="map"
+		resultClass="dto">
+		SELECT STANDARD_ID||'_'||price value,STANDARD_NAME text
+		FROM SF_STANDARD 
+		where item_code=#item_code#
+		order by STANDARD_ID
+	</select>
+	<!-- 查询收费员-->	
+	<select id="getOperator" parameterClass="map"
+		resultClass="dto">
+		SELECT userid as id, username as text
+		FROM
+		eauser order by userid
+	</select>
+	<!-- 取得当前日期-->
+	<select id="getCurrentDate" parameterClass="map"
+		resultClass="dto">
+	SELECT TO_CHAR(SYSDATE,'YYYY-MM-DD') currentDate FROM DUAL
+	</select>
+	
+</sqlMap>
