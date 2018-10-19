@@ -44,8 +44,8 @@ function load() {
 								pageSize: params.limit,
 								offset:params.offset,
 								pageNumber:Number(params.offset) / Number(params.limit) + 1,
-					           // name:$('#searchName').val(),
-					           // username:$('#searchName').val()
+					            start:$('#start').val(),
+					            end:$('#end').val()
 							};
 						},
 						// //请求服务器数据时，你可以通过重写参数的方式添加一些额外的参数，例如 toolbar 中的参数 如果

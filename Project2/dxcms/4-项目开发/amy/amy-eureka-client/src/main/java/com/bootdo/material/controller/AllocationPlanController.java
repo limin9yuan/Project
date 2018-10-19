@@ -7,6 +7,7 @@ import com.dx.service.purchase.service.api.IAllotPlanService;
 import com.github.pagehelper.PageInfo;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.apache.poi.hssf.usermodel.*;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.wxcl.amy.utils.common.ResultMsg;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.ServletOutputStream;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -720,7 +724,8 @@ public class AllocationPlanController {
         allotPlanBean.setRemark((String)params.get("remark"));
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         try {
-            Date createDate = dateFormat.parse((String)params.get("createDate"));
+            Date createTime = dateFormat.parse((String)params.get("createDate"));
+            Date createDate=new java.sql.Date(createTime.getTime()); 
             allotPlanBean.setCreateDate(createDate);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -778,6 +783,142 @@ public class AllocationPlanController {
 
         return R.ok();
     }
+
+    /**
+     * 导出
+     */
+    @RequestMapping(value = "/export")
+//    @RequiresPermissions("allocationPlan:add")
+    public @ResponseBody void export(@RequestParam Map<String, Object> params,HttpServletResponse response,
+                                     HttpServletRequest request){
+        ArrayList<AllotPlanItemBean> itemList = new ArrayList<>();
+        JSONArray jsonArray = JSONArray.fromObject(params.get("applyEntryJsonArray"));
+        for (int i = 0; i < jsonArray.size(); i++){
+            AllotPlanItemBean allotPlanItemBean = (AllotPlanItemBean) JSONObject.toBean((JSONObject)jsonArray.get(i), AllotPlanItemBean.class);
+            itemList.add(allotPlanItemBean);
+        }
+        if (itemList.size() > 0) {
+            System.out.println("---------------------list.size------------------->" + itemList.size());
+            response.setContentType("application/binary;charset=UTF-8");
+            try {
+                ServletOutputStream out = response.getOutputStream();
+                String fileName = new String((new SimpleDateFormat("yyyyMMddHHmmss")).format(new Date()).getBytes(),
+                        "UTF-8");
+                response.setHeader("Content-disposition", "attachment; filename=" + fileName + ".xls");
+                String[] titles = { "物资类别名称", "物资编码", "物资名称", "单位名称", "规格",
+                        "供应商id", "分配比例", "分配数量", "合同单价"};
+                exportExcel(titles, out, itemList);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+    /**
+     * 导出Excel写入文件方法
+     */
+    private static void exportExcel(String[] titles, ServletOutputStream out, ArrayList<AllotPlanItemBean> list) {
+        try {
+            // 第一步，创建一个workbook，对应一个Excel文件
+            HSSFWorkbook workbook = new HSSFWorkbook();
+            // 第二步，在webbook中添加一个sheet,对应Excel文件中的sheet
+            HSSFSheet hssfSheet = workbook.createSheet("sheet1");
+            // 第三步，在sheet中添加表头第0行,注意老版本poi对Excel的行数列数有限制short
+            HSSFRow hssfRow = hssfSheet.createRow(0);
+            // 第四步，创建单元格，并设置值表头 设置表头居中
+            HSSFCellStyle hssfCellStyle = workbook.createCellStyle();
+            // 居中样式
+            hssfCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+            HSSFCell hssfCell = null;
+            for (int i = 0; i < titles.length; i++) {
+                hssfCell = hssfRow.createCell(i);// 列索引从0开始
+                hssfCell.setCellValue(titles[i]);// 列名1
+                hssfCell.setCellStyle(hssfCellStyle);// 列居中显示
+            }
+            // 第五步，写入实体数据
+            if (list != null && !list.isEmpty()) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                for (int i = 0; i < list.size(); i++) {
+                    hssfRow = hssfSheet.createRow(i + 1);
+                    AllotPlanItemBean report = list.get(i);
+                    /** 第六步，创建单元格，并设置值 **/
+                    // 序号
+                    hssfRow.createCell(0).setCellValue(i + 1);
+                    // 物资类别名称
+                    String materialClassName = "";
+                    if (report.getMaterialClassName() != null) {
+                        materialClassName = report.getMaterialClassName();
+                    }
+                    hssfRow.createCell(0).setCellValue(materialClassName);
+                    // 物资编码
+                    String materilaCode = "";
+                    if (report.getMaterilaCode() != null) {
+                        materilaCode = report.getMaterilaCode();
+                    }
+                    hssfRow.createCell(1).setCellValue(materilaCode);
+                    // 物资名称
+                    String materialName = "";
+                    if (report.getMaterialName() != null) {
+                        materialName = report.getMaterialName();
+                    }
+                    hssfRow.createCell(2).setCellValue(materialName);
+                    // 单位名称
+                    String materialUnitName = "";
+                    if (report.getMaterialUnitName() != null) {
+                        materialUnitName = report.getMaterialUnitName();
+                    }
+                    hssfRow.createCell(3).setCellValue(materialUnitName);
+                    // 规格
+                    String specification = "";
+                    if (report.getSpecification() != null) {
+                        specification = report.getSpecification();
+                    }
+                    hssfRow.createCell(4).setCellValue(specification);
+                    // 供应商id
+                    String companyId = "";
+                    if (report.getCompanyId() != null) {
+                        companyId = report.getCompanyId();
+                    }
+                    hssfRow.createCell(5).setCellValue(companyId);
+                    // 分配比例
+                    double allotRatio = 0;
+                    if (report.getAllotRatio() != null) {
+                        allotRatio = report.getAllotRatio();
+                    }
+                    hssfRow.createCell(6).setCellValue(allotRatio);
+                    // 分配数量
+                    double allotQty = 0;
+                    if (report.getAllotQty() != null) {
+                        allotQty = report.getAllotQty();
+                    }
+                    hssfRow.createCell(7).setCellValue(allotQty);
+                    // 合同单价
+                    BigDecimal unitPrice = null;
+                    if (report.getUnitPrice() != null) {
+                        unitPrice = report.getUnitPrice();
+                    }
+                    hssfRow.createCell(8).setCellValue(String.valueOf(unitPrice));
+                }
+            }
+            // 第七步，将文件输出到客户端浏览器
+            try {
+                workbook.write(out);
+                out.flush();
+                out.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                throw new Exception("企业信息导出失败！");
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
 
     private static void clearList(List<Map<String, Object>> list)
     {

@@ -197,6 +197,7 @@ function check(id) {
 	});
 }
 function edit(id) {
+	console.log(id);
 	layer.open({
 		type : 2,
 		title : '编辑',

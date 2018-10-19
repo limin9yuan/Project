@@ -36,7 +36,25 @@
 								</div>
 							</div>
 						</div>
-
+						<div class="text-left form-group" style="margin-bottom:0px;" >
+							<div class="columns pull-left col-md-4">
+								<button class="btn btn-grid-add" onclick="addRow()"
+										type="button">
+									<i class="fa" aria-hidden="true"></i>添加
+								</button>
+								<button type="button" class="btn btn-grid-add" onclick="deleteRow()">
+									<i class="fa" aria-hidden="true"></i>删除
+								</button>
+								<button type="button" class="btn btn-grid-add" onclick="importMaterial()">
+									<i class="fa" aria-hidden="true"></i>批量导入
+								</button>
+								<button class="btn btn-grid-add"
+										onclick="window.open('/common/downloadFile/downloadFile?fileName=采购申请导入模板.xlsx')"
+										type="button">
+									<i class="glyphicon glyphicon-save-file "></i> 下载模板
+								</button>
+							</div>
+						</div>
 						<div class="bills">
 							<div class="gridPanel">
 								<table id="requireApplyTable"></table>
@@ -76,6 +94,12 @@
 	</div>
 </div>
 <div th:include="include::footer"></div>
+<script type="text/javascript" src="/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!--<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.min.js"></script>-->
+<script type="text/javascript" src="/js/plugins/jqgrid/i18n/grid.locale-cn.js"></script>
+<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.min.js"></script>
+<!--<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>-->
+<!--<script type="text/javascript" src="/js/plugins/jqgrid/learun.js"></script>-->
 <link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
 <link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
 
@@ -88,7 +112,7 @@
 <script type="text/javascript" src="/js/plugins/zTree/jquery.ztree.all.min.js"></script>
 <script type="text/javascript" src="/js/plugins/MultipleTreeSelect.js"></script>
 
-<script type="text/javascript" src="/js/appjs/material/requireApply/edit.js"></script>
+<script type="text/javascript" src="/js/appjs/material/purchaseOrder/edit.js"></script>
 
 </body>
 </html>

@@ -8,6 +8,9 @@
 			<div class="col-sm-12">
 				<div class="ibox float-e-margins">
 					<div class="ibox-content">
+						<form id="exportForm" method="get" th:action="@{/allocationPlan/allocationPlan/export}">
+							<input id="applyEntryJsonArray" name="applyEntryJsonArray" type="hidden">
+						</form>
 						<form class="form-horizontal m-t" id="signupForm">
 							<input id="purchasePlanId" name="purchasePlanId" th:value="${purchasePlanId}" class="form-control" type="hidden">
 							<input id="tabNames" name="tabNames" th:value="${tabNames}" class="form-control" type="hidden">
@@ -39,7 +42,7 @@
 										<i class="fa" aria-hidden="true"></i>删除
 									</button>
 									<button type="button" class="btn btn-grid-add"
-										onclick="">
+										onclick="exportExcel()">
 										<i class="fa" aria-hidden="true"></i>导出
 									</button>
 									<button type="button" class="btn btn-grid-add"
@@ -77,8 +80,7 @@
 							</div>
 							<div class="text-right form-group">
 								<div class="columns pull-right col-md-4">
-									<button shiro:hasPermission="allocationPlan:add" type="button" class="btn  btn-success"
-										onclick="save()">
+									<button type="button" class="btn  btn-success" id="saveBtn">
 										<i class="fa" aria-hidden="true"></i>保存
 									</button>
 									<button shiro:hasPermission="allocationPlan:submitApproval" type="button" class="btn  btn-success"

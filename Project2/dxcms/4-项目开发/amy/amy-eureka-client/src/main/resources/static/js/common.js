@@ -244,3 +244,52 @@ function clearNoNum(obj){
         obj.val(parseFloat(obj.val()));
     }
 }
+function loadD(dicName,selId,Id,Id1,initValue){
+	var html = "";
+	$.ajax({
+		url : '/common/dict/list/'+dicName,
+		success : function(data) {
+			//$("#"+selId).html("");
+			$("#"+selId).chosen({
+				maxHeight : 200
+			});
+			$("#"+selId).empty();
+			$("#"+selId).chosen("destroy");
+			//加载数据
+
+			if(initValue==undefined){
+				html += '<option value="">请选择</option>';
+			}
+			for (var i = 0; i < data.length; i++) {
+				html += '<option value="' + data[i].value + '">' + data[i].name + '</option>'
+			}
+
+			html += '<option value="' +$("#"+selId).attr('data')+ '" selected>' + $("#"+selId).attr('data')+ '</option>';
+			
+			
+			$("#"+selId).append(html);
+			$("#"+selId).chosen({
+				maxHeight : 200
+			});
+			//点击事件
+			$("#"+selId).on('change', function(e, params) {
+				console.log(params.selected);
+				var opt = {
+					query : {
+						type : params.selected,
+					}
+				}
+				
+				
+				var options=$("#"+selId+" option:selected"); 
+
+				if(options.text()==$("#"+selId).attr('data')){
+					$("#"+Id).html("");
+				}else{
+					$("#"+Id).html($("#"+selId).attr('data'));
+				}
+				//$('#exampleTable').bootstrapTable('refresh', opt);
+			});
+		}
+	});
+}

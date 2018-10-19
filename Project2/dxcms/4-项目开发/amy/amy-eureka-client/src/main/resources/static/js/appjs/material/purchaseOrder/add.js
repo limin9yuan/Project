@@ -181,10 +181,24 @@ function registEvent(){
     //数字input
     $grid.find('.decimal').attr('onfocus', 'IsMoney(this.id)');
     //物资名称事件
-    $('input[name="name"]').focus(function () {
+    $('input[name="materialName"]').focus(function () {
         $('.ui-icon-ellipsis').hide();
         $(this).next('.ui-icon-ellipsis').show();
+      //要求到货时间
+        $('input[name="requireDate"]').datepicker
+        ({
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            showButtonPanel: true,
+            showOn: "both",
+            buttonImageOnly: true,
+            buttonImage: "calendar.gif",
+            buttonText: "",
+            changeMonth: true,
+            changeYear: true
+        });
        // $(this).Contextmenu();
+        
     });
     //选择物资事件
     $('.ui-icon-ellipsis').click(function () {
@@ -310,7 +324,7 @@ function addRow(){
      var rowdata =getEmptyRow();
      $grid.jqGrid('addRowData', newid, rowdata);
      $grid.find("tbody tr:eq("+thistr+")").find('input').attr("disabled", "disabled");
-     if(!!$grid.find("tbody tr:eq("+thistr+")").last().find('input[name="name"]').val() || ids.length==0){
+     if(!!$grid.find("tbody tr:eq("+thistr+")").last().find('input[name="materialName"]').val() || ids.length==0){
         $grid.find("tbody tr:eq("+thistr+")").find('input').removeAttr('disabled').attr("isvalid", "yes");
      }
      $grid.find("tbody tr:eq("+thistr+")").find('.disabled').attr("disabled", "disabled");
@@ -390,7 +404,22 @@ function save() {
         }
     });
 }
-
+//导入
+function importMaterial() {
+	layer.open({
+		type : 2,
+		title : 'Excel导入',
+		maxmin : true,
+		shadeClose : false, // 点击遮罩关闭层
+		area : [ '500px', '250px' ],
+		content : '/common/sysFile/importEcxel?url=' + "/material/requireApply/uploadExcel", // iframe的url
+		btn : [ '确定', '取消' ],
+		yes : function(index, layero) {
+			var info="add";
+			window["layui-layer-iframe" + index].clickButtonFile(info);
+		}
+	});
+}
 //提交审批
 function commitApply() {
     //提交审批按钮设为不可用
@@ -480,3 +509,37 @@ function validateRule() {
         }
 	})
 }
+//日期Datepicker中文显示方法
+jQuery(function($){
+$.datepicker.regional['zh-CN'] = {
+  clearText: '清除',
+  clearStatus: '清除已选日期',
+  closeText: '关闭',
+  closeStatus: '不改变当前选择',
+  prevText: '< 上月',
+  prevStatus: '显示上月',
+  prevBigText: '<<',
+  prevBigStatus: '显示上一年',
+  nextText: '下月>',
+  nextStatus: '显示下月',
+  nextBigText: '>>',
+  nextBigStatus: '显示下一年',
+  currentText: '今天',
+  currentStatus: '显示本月',
+  monthNames: ['一月','二月','三月','四月','五月','六月', '七月','八月','九月','十月','十一月','十二月'],
+  monthNamesShort: ['一月','二月','三月','四月','五月','六月', '七月','八月','九月','十月','十一月','十二月'],
+  monthStatus: '选择月份',
+  yearStatus: '选择年份',
+  weekHeader: '周',
+  weekStatus: '年内周次',
+  dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+  dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+  dayNamesMin: ['日','一','二','三','四','五','六'],
+  dayStatus: '设置 DD 为一周起始',
+  dateStatus: '选择 m月 d日, DD',
+  dateFormat: 'yy-mm-dd',
+  firstDay: 1,
+  initStatus: '请选择日期',
+  isRTL: false};
+$.datepicker.setDefaults($.datepicker.regional['zh-CN']);
+});

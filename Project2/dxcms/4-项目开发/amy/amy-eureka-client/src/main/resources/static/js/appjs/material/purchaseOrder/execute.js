@@ -114,7 +114,7 @@ function load() {
 								+ row.id
 								+ '\')"><i class="fa fa-remove"></i></a> ';
 							var end = "</div>";
-							return bg + v + e + d + end;
+							return bg + v + end;
 						}
 					} ]
 			});
@@ -137,25 +137,15 @@ function reLoad() {
 	$('#purchaseOrder').bootstrapTable('refresh');
 }
 
-//添加
-function add() {
-	$('.J_menuItem', window.parent.document).each(function() {
-		if ($(this).attr('href') == '/material/purchaseOrder/add') {
-			parent.menuItemFromChild($(this));
-			return false;
-		}
-	});
-}
-
 //修改
-function edit(id) {
-	var param = {
-		href : '/material/purchaseOrder/edit/' + id,
-		index : 'editPurchaseOrder',
-		text : '采购申请修改'
-	}
-	parent.openNewTabFromChild(param);
-}
+//function edit(id) {
+//	var param = {
+//		href : '/material/purchaseOrder/edit/' + id,
+//		index : 'editPurchaseOrder',
+//		text : '采购申请修改'
+//	}
+//	parent.openNewTabFromChild(param);
+//}
 
 //查看
 function view(id) {
@@ -168,72 +158,27 @@ function view(id) {
 }
 
 //删除
-function remove(id) {
-	layer.confirm('确定要删除选中的记录？', {
-		btn : [ '确定', '取消' ]
-	}, function() {
-		$.ajax({
-			url : "/material/purchaseOrder/remove",
-			type : "post",
-			data : {
-				'id' : id
-			},
-			success : function(r) {
-				if (r.code == 0) {
-					layer.msg(r.msg);
-					reLoad();
-				} else {
-					layer.msg(r.msg);
-				}
-			}
-		});
-	})
-}
-
-function approve() {
-	$.ajax({
-		cache : true,
-		type : "POST",
-		url : "/material/purchaseOrder/approve",
-		//		data : param,
-		async : false,
-		error : function(request) {
-			parent.layer.alert("Connection error");
-		},
-		success : function(data) {
-			if (data.code == 0) {
-				//提交审批按钮设为可用
-				//				$('#commitApplyBtn').removeAttr('disabled');
-				parent.layer.msg("提交审批成功");
-			} else {
-				parent.layer.alert(data.msg)
-			}
-
-		}
-	});
-}
-function cancelApprove() {
-	$.ajax({
-		cache : true,
-		type : "POST",
-		url : "/material/purchaseOrder/cancelApprove",
-		//		data : param,
-		async : false,
-		error : function(request) {
-			parent.layer.alert("Connection error");
-		},
-		success : function(data) {
-			if (data.code == 0) {
-				//提交审批按钮设为可用
-				//				$('#commitApplyBtn').removeAttr('disabled');
-				parent.layer.msg("提交审批成功");
-			} else {
-				parent.layer.alert(data.msg)
-			}
-
-		}
-	});
-}
+//function remove(id) {
+//	layer.confirm('确定要删除选中的记录？', {
+//		btn : [ '确定', '取消' ]
+//	}, function() {
+//		$.ajax({
+//			url : "/material/purchaseOrder/remove",
+//			type : "post",
+//			data : {
+//				'id' : id
+//			},
+//			success : function(r) {
+//				if (r.code == 0) {
+//					layer.msg(r.msg);
+//					reLoad();
+//				} else {
+//					layer.msg(r.msg);
+//				}
+//			}
+//		});
+//	})
+//}
 function getSelectedMaterial() {
 	var rows = $('#purchaseOrder').bootstrapTable('getSelections');
 
@@ -249,48 +194,20 @@ function getSelectedMaterial() {
 	return ids;
 
 }
-////批量新增
-function multiAdd() {
-	layer.open({
-		type : 2,
-		title : '编辑',
-		maxmin : true,
-		shadeClose : false, // 点击遮罩关闭层
-		area : [ '100%', '100%' ],
-		content : "/material/purchaseOrder/multiAdd" // iframe的url
-	});
-}
-//变更
-function change() {
+//终止订单
+function terminateTheOrder() {
 	var id = getSelectedMaterial();
+	var params = {
+		'id' : id
+	};
 	if (id.length == 0) {
-		layer.msg("请勾选变更的数据");
+		layer.msg("请选择一条数据");
 		return;
 	} else {
-		var param = {
-			href : '/material/purchaseOrder/changeBut/' + id,
-			index : 'changePurchaseOrder',
-			text : '采购订单变更'
-		}
-		parent.openNewTabFromChild(param);
-
-	}
-
-}
-//批量下达
-function multiGodown() {
-	var id = getSelectedMaterial();
-	if (id.length == 0) {
-		layer.msg("请勾选变更的数据");
-		return;
-	} else {
-		var params={
-				'id' : id
-			};
 		$.ajax({
 			cache : true,
-			type : "POST",
-			url : "/material/purchaseOrder/multiGoDown",
+			type : "post",
+			url : "/material/purchaseOrder/terminateTheOrder",
 			data : params,
 			async : false,
 			error : function(request) {
@@ -298,9 +215,7 @@ function multiGodown() {
 			},
 			success : function(data) {
 				if (data.code == 0) {
-					//提交审批按钮设为可用
-					//				$('#commitApplyBtn').removeAttr('disabled');
-					parent.layer.msg("批量下达成功");
+					parent.layer.msg("操作成功");
 				} else {
 					parent.layer.alert(data.msg)
 				}
@@ -308,4 +223,110 @@ function multiGodown() {
 			}
 		});
 	}
+
+}
+//关闭订单
+function closeTheOrder() {
+	var id = getSelectedMaterial();
+	var params = {
+		'id' : id
+	};
+	if (id.length == 0) {
+		layer.msg("请选择一条数据");
+		return;
+	} else {
+		$.ajax({
+			cache : true,
+			type : "post",
+			url : "/material/purchaseOrder/closeTheOrder",
+			data :params,
+			async : false,
+			error : function(request) {
+				parent.layer.alert("Connection error");
+			},
+			success : function(data) {
+				if (data.code == 0) {
+					parent.layer.msg("操作成功");
+				} else {
+					parent.layer.alert(data.msg)
+				}
+
+			}
+		});
+	}
+}
+//打印
+function print(){
+	var id = getSelectedMaterial();
+	var params = {
+				 'id' : id
+				};
+	if (id.length == 0) {
+		layer.msg("请选择一条数据");
+		return;
+	} else {
+		$.ajax({
+			cache : true,
+			type : "post",
+			url : "/material/purchaseOrder/print",
+			data :params,
+			async : false,
+			error : function(request) {
+				parent.layer.alert("Connection error");
+			},
+			success : function(data) {
+				if (data.code == 0) {
+					parent.layer.msg("操作成功");
+				} else {
+					parent.layer.alert(data.msg)
+				}
+
+			}
+		});
+	}
+}
+//执行
+function execute(){
+	var id = getSelectedMaterial();
+	var params = {
+		'id' : id
+	};
+	if (id.length == 0) {
+		layer.msg("请选择一条数据");
+		return;
+	} else {
+		$.ajax({
+			cache : true,
+			type : "post",
+			url : "/material/purchaseOrder/execute",
+			data :params,
+			async : false,
+			error : function(request) {
+				parent.layer.alert("Connection error");
+			},
+			success : function(data) {
+				if (data.code == 0) {
+					parent.layer.msg("操作成功");
+				} else {
+					parent.layer.alert(data.msg)
+				}
+
+			}
+		});
+	}
+}
+function getSelectedMaterial() {
+	var rows = $('#purchaseOrder').bootstrapTable('getSelections');
+
+	if (rows.length == 0) {
+		layer.msg("请选择一条数据");
+		return;
+	}
+	var ids = new Array();
+	// 遍历所有选择的行数据，取每条数据对应的ID
+	$.each(rows, function(i, row) {
+		ids[i] = row['id'];
+	});
+	return ids;
+
 }

@@ -81,7 +81,12 @@ function selectData() {
 //	alert(name);
 	parent.$("#deliverCompanyName").val(name);
 	parent.$("#deliverCompanyId").val(id);
-
+	//采购订单变更页
+	if($("#name").val()=="companyName"){
+		parent.$("#companyName").val(name);
+	}else if($("#name").val()=="DeliverCompanyName"){
+		parent.$("#DeliverCompanyName").val(name);
+	}
 	closeWin();
 
 }

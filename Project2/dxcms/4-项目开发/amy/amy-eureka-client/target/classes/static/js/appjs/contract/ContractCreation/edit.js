@@ -412,6 +412,52 @@ function update(fileInformation) {
 	});
 
 }
+//提交审批
+function approve(){
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/ContractCreation/ContractCreation/approve",
+		data : {'id':$("#id").val()},
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				//提交审批按钮设为可用
+//				$('#commitApplyBtn').removeAttr('disabled');
+				parent.layer.msg("提交审批成功");
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+}
+//撤回审批
+function cancelApprove(){
+	$.ajax({
+		cache : true,
+		type : "POST",
+		url : "/ContractCreation/ContractCreation/cancelApprove",
+		data : {'id':$("#id").val()},
+		async : false,
+		error : function(request) {
+			parent.layer.alert("Connection error");
+		},
+		success : function(data) {
+			if (data.code == 0) {
+				//提交审批按钮设为可用
+//				$('#commitApplyBtn').removeAttr('disabled');
+				parent.layer.msg("撤回审批成功");
+			} else {
+				parent.layer.alert(data.msg)
+			}
+
+		}
+	});
+}
 //日期判断
 $.validator.addMethod("compareDate", function(value, element) {
 	var assigntime = $("#dateFrom").val();

@@ -600,6 +600,19 @@ function addEdExcel(data) {
 	//$grid.find('input').attr("disabled", "disabled");
 	//$grid.find("tbody tr:eq(1)").find('input').removeAttr('disabled').attr("isvalid", "yes");
 	$grid.find('.disabled').attr("disabled", "disabled");
+	//要求到货时间
+    $('input[name="requireDate"]').datepicker
+    ({
+        showOtherMonths: true,
+        selectOtherMonths: true,
+        showButtonPanel: true,
+        showOn: "both",
+        buttonImageOnly: true,
+        buttonImage: "calendar.gif",
+        buttonText: "",
+        changeMonth: true,
+        changeYear: true
+    });
 	//注册事件
 	registEvent();
 

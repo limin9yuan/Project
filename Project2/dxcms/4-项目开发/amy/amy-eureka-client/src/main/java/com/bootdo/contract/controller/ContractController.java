@@ -149,6 +149,7 @@ public class ContractController extends BaseController {
 		for (int i = 1; i <= 10; i++) {
 			ContractBean contractBean = new ContractBean();
 			Date date = new Date();
+			contractBean.setId("0"+i);
 			contractBean.setStatusName("待审批");// 审批状态
 			contractBean.setContractCode(Integer.toString(i));// 合同/协议编号
 			contractBean.setProjectId("0" + i);// 项目编号
@@ -275,8 +276,7 @@ public class ContractController extends BaseController {
 		if ("1".equals(remove.getCode())) {
 			return R.ok();
 		}
-		return R.error();
-//		return R.ok();
+        return R.error(remove.getCode(), remove.getMsg());
 	}
 
 //	/**
@@ -552,6 +552,7 @@ public class ContractController extends BaseController {
 		System.out.println(msg.getCode());
 		if ("1".equals(msg.getCode())) {
 			R r = R.ok();
+			//返回保存后的id
 			r.put("ids", ids);
 			return r;
 		}
@@ -593,9 +594,17 @@ public class ContractController extends BaseController {
 	// 供货公司页面
 	@GetMapping("/contractDeliverBeans")
 //	@RequiresPermissions("ContractCreation:ContractCreation:add")
-	String contractDeliversList() {
+	String contractDeliversList(Model model) {
 		return "/contract/ContractCreation/relevantParty";
 	}
+	
+	// 采购订单供货公司页面
+		@GetMapping("/purchaseOrderDeliversList/{name}")
+//		@RequiresPermissions("ContractCreation:ContractCreation:add")
+		String purchaseOrderDeliversList(Model model,@PathVariable("name") String name) {
+			model.addAttribute("name", name);
+			return "/contract/ContractCreation/relevantParty";
+		}
 
 	// 供货公司弹出页面数据
 	@GetMapping("/contractDeliversList")
@@ -707,7 +716,33 @@ public class ContractController extends BaseController {
 	String importE() {
 		return "/contract/ContractCreation/editImportMaterial";
 	}
+    /**
+     * 提交审批
+     */
+    @ResponseBody
+    @PostMapping("/approve")
+    @RequiresPermissions("ContractCreation:ContractCreation:approve")
+    public R approve(@RequestParam Map<String, Object> params,@RequestParam("id")String id) {
+        System.out.println(params);
+        //int contactIds = service.save(customerContact);
+        R r = new R();
+        r.put("id",1);
+        return r;
+    }
 
+    /**
+     * 取消审批
+     */
+    @ResponseBody
+    @PostMapping("/cancelApprove")
+    @RequiresPermissions("ContractCreation:ContractCreation:cancelApprove")
+    public R cancelApply(@RequestParam Map<String, Object> params,@RequestParam("id")String id) {
+        System.out.println(params);
+        //int contactIds = service.save(customerContact);
+        R r = new R();
+        r.put("id",1);
+        return r;
+    }
 	// 根据ID查看附件列表
 	@ResponseBody
 	@GetMapping("/listId")

@@ -1,4 +1,4 @@
-var $ellipsis = null;//行选择物资图标对象
+﻿var $ellipsis = null;//行选择物资图标对象
 
 //页面加载完成之后执行
 $().ready(function() {
@@ -43,21 +43,20 @@ function initControl() {
                 colNames : ['序号','物资名称', '物资编码', '规格型号', '单位','原单价','新单价8',
 					'原数量','新数量','原到货日期',' 新到货日期','备注'],//jqGrid的列显示名字
 				colModel : [ //jqGrid每一列的配置信息。包括名字，索引，宽度,对齐方式.....
-					{name : 'num',index : 'num'},//序号
-					{name : 'materialName',index : 'materialName'},//物资名称
-		            {name : 'materilaCode',index : 'materilaCode'},//物资编码
-		            {name : 'specification',index : 'specification'},//规格型号
-		            {name : 'materialUnitName',index : 'materialUnitName',align : "right"},//单位
-					{name : 'price',index : 'price'},//原单价
-					{name : 'newprice',index : 'newprice',editable:true},//新单价
-					{name : 'qty',index : 'qty'},//原数量
-					{name : 'newqty',index : 'newqty',editable:true},//新数量
-					{name : 'arriveDate',index : 'arriveDate'},//原到货日期
-					{name : 'newarriveDate',index : 'newarriveDate',editable:true},//新到货日期
-					{name : 'remark',index : 'remark'},//备注
+					{name : 'num',index : 'num',width : 80},//序号
+					{name : 'materialName',index : 'materialName',width : 100},//物资名称
+		            {name : 'materilaCode',index : 'materilaCode',width : 90},//物资编码
+		            {name : 'specification',index : 'specification',width : 100},//规格型号
+		            {name : 'materialUnitName',index : 'materialUnitName',width : 60,align : "right"},//单位
+					{name : 'price',index : 'price',width : 80},//原单价
+					{name : 'newprice',index : 'newprice',width : 80,editable:true},//新单价
+					{name : 'qty',index : 'qty',width : 80},//原数量
+					{name : 'newqty',index : 'newqty',width : 80,editable:true},//新数量
+					{name : 'arriveDate',index : 'arriveDate',width : 100},//原到货日期
+					{name : 'newarriveDate',index : 'newarriveDate',width : 100,editable:true},//新到货日期
+					{name : 'remark',index : 'remark',width : 80},//备注
 				],
 				//pager : '#requireApplyPage',//表格页脚的占位符(一般是div)的id
-				 width:"100%",
 				sortname : 'id',//初始化的时候排序的字段
 				sortorder : "desc",//排序方式,可选desc,asc
 				mtype : "get",//向后台请求数据的ajax的类型。可选post,get
@@ -132,24 +131,23 @@ function getGridData(){
 function save() {
     $('#saveBtn').attr("disabled","disabled");
     applyEntryJson = getGridData();
-    var params={
-        	'code' : $("#materialCode").val(),//采购订单编号
-        	'companyName' : $("#companyName").val(),//供应商
-        	'DeliverCompanyName' : $("#DeliverCompanyName").val(),//发货单位
-        	'PurchasePlanCode' : $("#PurchasePlanCode").val(),//采购计划编号
-        	'ContractCode' : $("#ContractCode").val(),//意向协议(询比价报告单）编号
-			'taxRate' : $("#taxRate").val(),//税率
-        	'ArriveAddress' : $("#ArriveAddress").val(),//交货地点
-        	'PaymentType' : $("#PaymentType").val(),//付款方式及期限
-        	'QualityStandard' : $("#QualityStandard").val(),//质量标准
-
-            'applyEntryJson' : JSON.stringify(applyEntryJson)
-             };
     $.ajax({
         cache : true,
         type : "POST",
-        url : "/material/purchaseOrder/save",
-        data :  params,
+        url : "/material/requireApply/save",
+        data :  {
+            	'code' : $("#code").val(),//采购订单编号
+            	'contractDelivers' : $("#contractDelivers").val(),//供应商
+            	'DeliverCompanyName' : $("#DeliverCompanyName").val(),//发货单位
+            	'PurchasePlanCode' : $("#PurchasePlanCode").val(),//采购计划编号
+            	'ContractCode' : $("#ContractCode").val(),//意向协议(询比价报告单）编号
+				'taxRate' : $("#taxRate").val(),//税率
+            	'ArriveAddress' : $("#ArriveAddress").val(),//交货地点
+            	'PaymentType' : $("#PaymentType").val(),//付款方式及期限
+            	'QualityStandard' : $("#QualityStandard").val(),//质量标准
+
+                'applyEntryJson' : applyEntryJson
+                 },
         async : false,
         error : function(request) {
             parent.layer.alert("Connection error");
@@ -254,30 +252,23 @@ function validateRule() {
         }
 	})
 }
-//打开供货页面
-function openContractDelivers() {
+function openContractDelivers(newObj,oldObj) {
 	layer.open({
 		type : 2,
 		title : "选择供货信息",
 		area : [ '60%', '90%' ],
-		content : "/ContractCreation/ContractCreation/purchaseOrderDeliversList/"+"companyName"
-	})
-}
-//打开供货页面
-function openDeliverCompanyName() {
-	layer.open({
-		type : 2,
-		title : "选择供货信息",
-		area : [ '60%', '90%' ],
-		content : "/ContractCreation/ContractCreation/purchaseOrderDeliversList/"+"DeliverCompanyName"
-	})
+		content : "/ContractCreation/ContractCreation/contractDelivers"
+			
+	})			
+
+
 }
 function loadRequireApplyDetail(){
     $.ajax({
 		url : '/material/purchaseOrder/getPurchaseOrderDetailList',
 		type : "get",
 		data : {
-			'id' : $("#ids").val(),
+			'id' : $("#id").val(),
 		},
 		success :function(data) {
 			var orderEntry = data.getPurchaseOrderDetailList;
@@ -317,5 +308,13 @@ function loadRequireApplyDetail(){
 		}
 	});
 }
+
+function changeValue(newObj,oldObj){
+	if($("#"+newObj).val()!=$("#"+newObj).attr("data")){
+		$("#"+oldObj).html($("#"+newObj).attr("data"));
+	}else{
+		$("#"+oldObj).html("");
+	}
+} 
 
 

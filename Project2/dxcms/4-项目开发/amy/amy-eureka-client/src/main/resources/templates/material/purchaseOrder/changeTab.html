@@ -5,20 +5,18 @@
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
 		<div class="ibox-content">
-		<input id="ids" name="ids" type="hidden" class="form-control" th:value="${ids}">
 			<form class="form-horizontal m-t" id="purchaseOrderForm" style="margin-top:20px;">
 				<div class="row">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">采购订单编号</label>
 						<div class="col-sm-2">	
-							<input id="code" name="code" autocomplete="off" th:data="${purchaseOrder.code}"
-								th:value="${purchaseOrder.code}" class="form-control" type="text" >	</div>
+							<input id="code" name="code" autocomplete="off"  
+								 class="form-control" type="text" >	</div>
 						<label class="col-sm-2 control-label" id="oldCode" style="text-align: left;"></label>
 						
 						<label class="col-sm-2 control-label">供应商 </label>
 						<div class="col-sm-2">	
-							<input id="companyName" name="companyName" autocomplete="off" th:data="${purchaseOrder.companyName}" 
-							 th:value="${purchaseOrder.companyName}" readonly="readonly"
+							<input id="companyName" name="companyName" autocomplete="off"  readonly="readonly"
 								onclick="openContractDelivers()"
 								class="form-control" type="text" placeholder="==请选择==">	</div>
 						<label class="col-sm-2 control-label" id="oldcontractDelivers" style="text-align: left;"></label>
@@ -37,17 +35,16 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label" >发货单位</label>
 						<div class="col-sm-2">	
-							<input id="DeliverCompanyName" name="DeliverCompanyName" autocomplete="off" th:data="${purchaseOrder.DeliverCompanyName}" 
+							<input id="DeliverCompanyName" name="DeliverCompanyName" autocomplete="off" 
 							onclick="openDeliverCompanyName()" readonly="readonly" placeholder="==请选择=="
-								th:value="${purchaseOrder.DeliverCompanyName}" class="form-control" type="text" >	
+								 class="form-control" type="text" >	
 						</div>
 						<label class="col-sm-2 control-label" id="oldDeliverCompanyName" style="text-align: left;"></label> 
 						
 						<label class="col-sm-2 control-label">采购计划编号</label>
 						<div class="col-sm-2">	
-							<input id="PurchasePlanCode" name="PurchasePlanCode" autocomplete="off" th:data="${purchaseOrder.PurchasePlanCode}" 
-							
-								th:value="${purchaseOrder.PurchasePlanCode}" class="form-control" type="text" >	
+							<input id="PurchasePlanCode" name="PurchasePlanCode" autocomplete="off" 
+								 class="form-control" type="text" >	
 						</div>
 						<label class="col-sm-2 control-label" id="oldPurchasePlanCode" style="text-align: left;"></label> 
 					</div>
@@ -56,13 +53,13 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">意向协议(询比价报告单）编号</label>
 						<div class="col-sm-2">	
-							<input id="ContractCode" name="ContractCode" autocomplete="off" th:data="${purchaseOrder.ContractCode}" 
-								th:value="${purchaseOrder.ContractCode}" class="form-control" type="text" >	
+							<input id="ContractCode" name="ContractCode" autocomplete="off" 
+								 class="form-control" type="text" >	
 						</div>
 						<label class="col-sm-2 control-label" id="oldContractCode" style="text-align: left;"></label>
 						<label class="col-sm-2 control-label">税率</label>
 						<div class="col-sm-2" >					
-							<select data-placeholder="请选择" name="taxRate" id="taxRate" th:data="${purchaseOrder.TaxRate}" 
+							<select data-placeholder="请选择" name="taxRate" id="taxRate" 
 								class="form-control chosen-select " tabindex="2">
 								<option  value=""  >请选择</option>
 							</select>
@@ -74,15 +71,15 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">付款方式及期限</label>
 						<div class="col-sm-2">	
-							<input id="PaymentType" name="PaymentType" autocomplete="off" th:data="${purchaseOrder.PaymentType}" 
-								th:value="${purchaseOrder.PaymentType}" class="form-control" type="text" >	</div>
+							<input id="PaymentType" name="PaymentType" autocomplete="off" 
+								 class="form-control" type="text" >	</div>
 						<label class="col-sm-2 control-label" id="oldPaymentType" style="text-align: left;"></label>
 						
 						
 						<label class="col-sm-2 control-label">交货地点</label>
 						<div class="col-sm-2">	
-							<input id="ArriveAddress" name="ArriveAddress" autocomplete="off" th:data="${purchaseOrder.ArriveAddress}" 
-								th:value="${purchaseOrder.ArriveAddress}" class="form-control" type="text" >	</div>
+							<input id="ArriveAddress" name="ArriveAddress" autocomplete="off" 
+								 class="form-control" type="text" >	</div>
 						<label class="col-sm-2 control-label" id="oldArriveAddress" style="text-align: left;"></label>
 					</div>
 				</div>
@@ -90,8 +87,8 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">质量标准</label>
 						<div class="col-sm-2">	
-							<input id="QualityStandard" name="QualityStandard" autocomplete="off" th:data="${purchaseOrder.QualityStandard}" 
-								th:value="${purchaseOrder.QualityStandard}" class="form-control" type="text" >	</div>
+							<input id="QualityStandard" name="QualityStandard" autocomplete="off" 
+								 class="form-control" type="text" >	</div>
 						<label class="col-sm-2 control-label" id="oldQualityStandard" style="text-align: left;"></label>
 					</div>		
 				</div>
@@ -101,10 +98,10 @@
 					<div class="form-group">
 						<div class="ibox float-e-margins">					
 							<div class="columns pull-left col-md-4">
-								
 								<button type="button" class="btn btn-grid-add" onclick="deleteRow()">
 									<i class="fa" aria-hidden="true"></i>删除
 								</button>
+								<button type="button" class="btn btn-success" onclick="selId()">查询</button>
 							</div>
 						</div>
 					</div>
@@ -139,6 +136,6 @@
 	<link rel="stylesheet" href="/css/plugins/jqgrid/ui.jqgrid.css" />
 	<link rel="stylesheet" href="/css/plugins/jqgrid/redmond/jquery-ui-1.8.16.custom.css" />
 	<script type="text/javascript" src="/js/plugins/jqgrid/jquery.jqGrid.src.js"></script>
-	<script type="text/javascript" src="/js/appjs/material/purchaseOrder/change.js"></script>
+	<script type="text/javascript" src="/js/appjs/material/purchaseOrder/changeTab.js"></script>
 </body>
 </html>

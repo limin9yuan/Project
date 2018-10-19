@@ -5,19 +5,27 @@ package com.bootdo.material.controller;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.*;
 import com.dx.client.model.purchase.PurchaseOrderBean;
-import com.dx.service.purchase.service.api.IPurchaseOrderService;
-import com.github.pagehelper.PageInfo;
+//import com.dx.service.purchase.service.api.IPurchaseOrderService;
+//import com.github.pagehelper.PageInfo;
 import com.dx.client.model.purchase.PurchaseOrderItemBean;
-import com.github.pagehelper.PageInfo;
+//import com.github.pagehelper.PageInfo;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.wxcl.amy.utils.common.ResultMsg;
+
 import com.dx.client.model.datacenter.MaterialBean;
 import com.dx.client.model.purchase.RequireApplyItemBean;
+import com.dx.service.purchase.service.api.IPurchaseOrderService;
+import com.github.pagehelper.PageInfo;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import com.dx.client.model.purchase.RequireApplyBean;
-import org.wxcl.amy.utils.common.ResultMsg;
+//import org.wxcl.amy.utils.common.ResultMsg;
 //import org.wxcl.amy.utils.common.ResultMsg;
 
 import java.math.BigDecimal;
@@ -44,15 +52,10 @@ public class PurchaseOrderController extends BaseController {
     @GetMapping("/list")
     @ResponseBody
     PageInfo list(@RequestParam Map<String, Object> params) {
-       /* iPurchaseOrderService.save( new PurchaseOrderBean(),
-                new ArrayList< PurchaseOrderItemBean >(),
-        true);*/
-        /*ResultMsg rsm = iPurchaseOrderService.search(params.get("pageNumber").toString(),
+        ResultMsg rsm = iPurchaseOrderService.search(params.get("pageNumber").toString(),
                                         params.get("pageSize").toString(),"",
-                                        params);*/
-
-
-        List<Map<String, Object>> requireApplyList = new ArrayList();//调用接口
+                                        params);
+        List<Map<String, Object>> requireApplyList = new ArrayList<Map<String,Object>>();//调用接口
         for(int i=1;i<11;i++){
             //做测试数据 调用接口前使用 begin
             Map<String, Object> materialMap = new HashMap<>();
@@ -66,16 +69,20 @@ public class PurchaseOrderController extends BaseController {
             materialMap.put("totalMoney","1000"+i);
             materialMap.put("authorUserName","编制人"+i);
             materialMap.put("createDate","2018-08-"+String.valueOf(10+i));
+            materialMap.put("code", i);
+            materialMap.put("companyName", "供应商"+i);
+            materialMap.put("taxRate", "税率");
+            materialMap.put("performCorpName", "执行部门"+i);
+            materialMap.put("executerName", "admin"+i);
+            materialMap.put("statusName", "待审批");
             requireApplyList.add(materialMap);
         }
-        //做测试数据 end
+       
         int total = 20;//调用接口
-        PageInfo pageInfo = new PageInfo(requireApplyList,
-                Integer.parseInt(params.get("pageNumber").toString()));
-        pageInfo.setTotal(total);
-        /*if("0".equals(rsm.getCode())){
-            return null;
-        }*/
+        PageInfo pageInfo = new PageInfo(requireApplyList, total);
+        //做测试数据 end
+        //PageInfo pageInfo = (PageInfo)rsm.getData();
+        
         return pageInfo;
     }
 
@@ -157,59 +164,70 @@ public class PurchaseOrderController extends BaseController {
         return prefix + "/edit";
     }
 
-    /**
-     * 修改
-     */
-    @ResponseBody
-    @RequestMapping("/update")
-    @RequiresPermissions("material:requireApply:edit")
-    public R update(RequireApplyBean requireApplyModel) {
-        int re=1;
-        //int re = requireApplyService.update(requireApplyModel) > 0
-        if (re > 0) {
-            return R.ok();
-        }
-        return R.error();
-    }
 
+    
+    @GetMapping("/batchAdd")
+    @RequiresPermissions("material:purchaseOrder:add")
+    String batchAdd() {
+    	return "/material/purchaseOrder/batchAdd";
+    }
     /**
-     * 采购订单变更页
+     * 变更
      */
-    @GetMapping("/change")
+    @GetMapping("/changeBut/{id}")
     @RequiresPermissions("material:purchaseOrder:change")
-    String change(Model model) {
+    String change(Model model,@PathVariable("id") String id) {
+    	
+    	ResultMsg rm=iPurchaseOrderService.primary(id);
         PurchaseOrderBean purchaseOrderBean = new PurchaseOrderBean();//此处为接口取得数据
-        /*purchaseOrderBean.setId(id);//主键
+        purchaseOrderBean.setId("11");//主键
         purchaseOrderBean.setStatusId("状态");
-        purchaseOrderBean.setCode(id);//采购订单 编号
+        purchaseOrderBean.setCode("采购订单编号");//采购订单 编号
         purchaseOrderBean.setName("2018年8月采购订单");
-        purchaseOrderBean.setCompanyName("供应商名称");//供应商名称
+        purchaseOrderBean.setCompanyName("供货公司0");//供应商名称
         purchaseOrderBean.setRelatedCode("关联单据编号");//关联单据编号
         purchaseOrderBean.setTaxRate(0.5);//税率
         purchaseOrderBean.setPaymentType("付款方式及期限");//付款方式及期限
         purchaseOrderBean.setArriveAddress("交货地点");//交货地点
         // purchaseOrderBean.setArriveAddress("质量标准");//质量标准
         //货源分配计划单编号
+        purchaseOrderBean.setQualityStandard("质量标准");//质量标准
+        purchaseOrderBean.setPurchasePlanCode("采购计划编号");//采购计划编号
+        purchaseOrderBean.setContractCode("意向协议(询比价报告单）编号");//意向协议(询比价报告单）编号
+        purchaseOrderBean.setDeliverCompanyName("发货单位");//发货单位
+
         purchaseOrderBean.setTotalMoney(new BigDecimal("3000.89"));//订单总金额
         purchaseOrderBean.setAuthorCorpId("编制部门Id");
         purchaseOrderBean.setAuthorCorpName("编制部门名称");
         purchaseOrderBean.setCreateUserId("编制人Id");
         purchaseOrderBean.setCreateUserName("编制人姓名");
         purchaseOrderBean.setRemark("备注");//备注*/
-
+        rm = new ResultMsg();
+        rm.setData(purchaseOrderBean);
         List<MaterialBean> materialList = new ArrayList();//调用接口
-        for(int i=1;i<11;i++){
+//        for(int i=1;i<11;i++){
             //做测试数据 调用接口前使用 begin
             MaterialBean materialBean = new MaterialBean();
-            materialBean.setId(String.valueOf(i));
-            materialBean.setName("物资名称"+i);
-            materialBean.setCode("物资编码"+i);
+            materialBean.setId("1");
+            materialBean.setName("物资名称");
+            materialBean.setCode("物资编码");
             materialList.add(materialBean);
-        }
-
-        model.addAttribute("purchaseOrder", purchaseOrderBean);//编制日期
+//        }
+            
+        model.addAttribute("ids", id);
+        model.addAttribute("purchaseOrder", rm.getData());//编制日期
         model.addAttribute("materialList", materialList);//编制日期
+
+
         return prefix + "/change";
+    }
+    /**
+     * 采购订单变更页tab
+     */
+    @GetMapping("/change")
+    @RequiresPermissions("material:purchaseOrder:change")
+    String change(Model model) {
+        return prefix + "/changeTab";
     }
     /**
      * 删除
@@ -217,16 +235,12 @@ public class PurchaseOrderController extends BaseController {
     @PostMapping("/remove")
     @ResponseBody
     @RequiresPermissions("material:purchaseOrder:remove")
-    public R remove(Long id) {
-        /*if(requireApplyService.checkCanRemove(id)) {
-            if (requireApplyService.remove(id) > 0) {
-                return R.ok();
-            }
-        }else {
-            return R.error(1, "该申请已经被审批,不允许删除");
+    public R remove(@RequestParam("id")String id) {
+    	ResultMsg rms=iPurchaseOrderService.remove(id);
+    	if ("1".equals(rms.getCode())) {
+            return R.ok();
         }
-        return R.error();*/
-        return R.ok();
+        return R.error(rms.getCode(), rms.getMsg());
     }
 
     /**
@@ -235,51 +249,54 @@ public class PurchaseOrderController extends BaseController {
     @PostMapping("/multiGoDown")
     @ResponseBody
     @RequiresPermissions("material:purchaseOrder:multiGoDown")
-    public R multiGoDown(Long id) {
-        /*if(requireApplyService.checkCanRemove(id)) {
-            if (requireApplyService.remove(id) > 0) {
-                return R.ok();
-            }
-        }else {
-            return R.error(1, "该申请已经被审批,不允许删除");
-        }
-        return R.error();*/
-        return R.ok();
+    public R multiGoDown(@RequestParam Map<String, Object> params) {
+    	 System.out.println(params);
+         R r = new R();
+         r.put("id",1);
+         return r;
     }
 
     /**
      * 执行
      */
-    @PostMapping("/execute")
-    @ResponseBody
+    @GetMapping("/execute")
     @RequiresPermissions("material:purchaseOrder:execute")
-    public R execute(Long id) {
-        /*if(requireApplyService.checkCanRemove(id)) {
-            if (requireApplyService.remove(id) > 0) {
-                return R.ok();
-            }
-        }else {
-            return R.error(1, "该申请已经被审批,不允许删除");
-        }
-        return R.error();*/
+    R execute(@RequestParam Map<String, Object> params) {
+    	System.out.println(params);
         return R.ok();
     }
 
+    /**
+     * 关闭订单
+     * @return
+     */
+    @PostMapping("/closeTheOrder")
+    @ResponseBody
+    @RequiresPermissions("material:purchaseOrder:closeTheOrder")
+    R closeTheOrder(@RequestParam Map<String, Object> params) {
+    	System.out.println(params);
+    	return R.ok();
+    }
+    
+    /**
+     * 终止订单
+     * @return
+     */
+    @PostMapping("/terminateTheOrder")
+    @ResponseBody
+    @RequiresPermissions("material:purchaseOrder:terminateTheOrder")
+    R terminateTheOrder(@RequestParam Map<String, Object> params) {
+    	System.out.println(params);
+    	return R.ok();
+    }
     /**
      * 打印
      */
     @PostMapping("/print")
     @ResponseBody
     @RequiresPermissions("material:purchaseOrder:print")
-    public R print(Long id) {
-        /*if(requireApplyService.checkCanRemove(id)) {
-            if (requireApplyService.remove(id) > 0) {
-                return R.ok();
-            }
-        }else {
-            return R.error(1, "该申请已经被审批,不允许删除");
-        }
-        return R.error();*/
+    public R print(@RequestParam Map<String, Object> params) {
+    	 System.out.println(params);
         return R.ok();
     }
 
@@ -290,8 +307,8 @@ public class PurchaseOrderController extends BaseController {
     @PostMapping("/approve")
     @RequiresPermissions("material:purchaseOrder:approve")
     public R approve(@RequestParam Map<String, Object> params) {
+//    	ResultMsg rsm=iPurchaseOrderService.submit();
         System.out.println(params);
-        //int contactIds = service.save(customerContact);
         R r = new R();
         r.put("id",1);
         return r.ok();
@@ -305,9 +322,9 @@ public class PurchaseOrderController extends BaseController {
     @RequiresPermissions("material:purchaseOrder:cancelApprove")
     public R cancelApply(@RequestParam Map<String, Object> params) {
         System.out.println(params);
-        //int contactIds = service.save(customerContact);
-
-        return R.ok();
+        R r = new R();
+        r.put("id",1);
+        return r.ok();
     }
 
 
@@ -336,55 +353,6 @@ public class PurchaseOrderController extends BaseController {
 
 
 
-    /**
-     * 取得选择物资列表
-     */
-    @GetMapping("/getMaterialList")
-    @RequiresPermissions("material:requireApply:add")
-    @ResponseBody
-    PageUtils getMaterialList(@RequestParam Map<String, Object> params){
-        // 查询列表数据
-        //Query query = new Query(params);
-        List<Map<String, Object>> materialList = new ArrayList();//调用接口
-        for(int i=1;i<11;i++){
-            //做测试数据 调用接口前使用 begin
-            Map<String, Object> materialMap = new HashMap<>();
-            materialMap.put("name","物资A"+i);
-            materialMap.put("materialClassName","物资类别"+i);
-            materialMap.put("code",i);
-            materialMap.put("brand","规格型号"+i);
-            materialMap.put("texture","材质"+i);
-            materialMap.put("materialUnitId","单位"+i);
-            materialList.add(materialMap);
-        }
-        //做测试数据 end
-        int total = 20;//调用接口
-        PageUtils pageUtil = new PageUtils(materialList, total);
-        return pageUtil;
-    }
-
-
-
-    /**
-     * 采购申请明细
-     */
-    @GetMapping("/requireMaterialDetailList")
-    @ResponseBody
-    PageUtils requireMaterialDetailList(@RequestParam Map<String, Object> params) {
-        // 查询列表数据
-        Query query = new Query(params);
-        List<RequireApplyItemBean> requireMaterialDetailList = new ArrayList();//调用接口
-        //做测试数据 调用接口前使用 begin
-        /*RequireApplyDetailModel requireApplyDetailModel = new  RequireApplyDetailModel();
-        MaterialModel ma = new MaterialModel();
-        ma.setName("测试物资");
-        requireApplyDetailModel.setMaterial(ma);
-        requireMaterialDetailList.add(requireApplyDetailModel);*/
-        //做测试数据 end
-        int total = 1;//调用接口
-        PageUtils pageUtil = new PageUtils(requireMaterialDetailList, total);
-        return pageUtil;
-    }
 
     /**
      * 取得一条采购物资记录
@@ -447,20 +415,144 @@ public class PurchaseOrderController extends BaseController {
         returnData.put("requireApplyDetailList", requireApplyDetailList);
 
         return returnData;
-
     }
+    
     /**
      * 保存
      */
+    
+    
     @ResponseBody
     @PostMapping("/save")
     @RequiresPermissions("material:requireApply:add")
     public R save(@RequestParam Map<String, Object> params) {
-        System.out.println(params);
-        //int contactIds = service.save(customerContact);
+    	PurchaseOrderBean purchaseOrderBean=new PurchaseOrderBean();
+    	purchaseOrderBean.setCode((String)params.get("code"));
+    	purchaseOrderBean.setCompanyName((String)params.get("companyName"));
+    	purchaseOrderBean.setDeliverCompanyName((String)params.get("DeliverCompanyName"));
+    	purchaseOrderBean.setPurchasePlanCode((String)params.get("PurchasePlanCode"));
+    	purchaseOrderBean.setContractCode((String)params.get("ContractCode"));
+    	purchaseOrderBean.setTaxRate(Double.parseDouble(params.get("taxRate").toString()));
+    	purchaseOrderBean.setArriveAddress((String)params.get("ArriveAddress"));
+    	purchaseOrderBean.setPaymentType((String)params.get("PaymentType"));
+    	purchaseOrderBean.setQualityStandard((String)params.get("QualityStandard"));
+    	
+    	
+    	List<PurchaseOrderItemBean> itmeList=new ArrayList<PurchaseOrderItemBean>();
+    	 JSONArray array = JSONArray.fromObject(params.get("applyEntryJson"));
+         for(int i=0;i<array.size();i++){
+             System.out.println(array.get(i));
+             PurchaseOrderItemBean purchaseOrderItemBean = (PurchaseOrderItemBean) JSONObject.toBean((JSONObject)array.get(i), PurchaseOrderItemBean.class);
+             itmeList.add(purchaseOrderItemBean);
+         }
+         purchaseOrderBean.setPurchaseOrderItemBeans(itmeList);
+         
+         ResultMsg rms = iPurchaseOrderService.changeOrder(purchaseOrderBean);
+         if ("1".equals(rms.getCode())) {
+             return R.ok();
+         }
+        return R.error();
+    }
+    /**
+     * 修改
+     */
+    @ResponseBody
+    @RequestMapping("/update")
+    @RequiresPermissions("material:requireApply:edit")
+    public R update(@RequestParam Map<String, Object> params) {
+    	PurchaseOrderBean purchaseOrderBean=new PurchaseOrderBean();
+    	purchaseOrderBean.setCode((String)params.get("code"));
+    	purchaseOrderBean.setCompanyName((String)params.get("companyName"));
+    	purchaseOrderBean.setDeliverCompanyName((String)params.get("DeliverCompanyName"));
+    	purchaseOrderBean.setPurchasePlanCode((String)params.get("PurchasePlanCode"));
+    	purchaseOrderBean.setContractCode((String)params.get("ContractCode"));
+    	purchaseOrderBean.setTaxRate(Double.parseDouble(params.get("taxRate").toString()));
+    	purchaseOrderBean.setArriveAddress((String)params.get("ArriveAddress"));
+    	purchaseOrderBean.setPaymentType((String)params.get("PaymentType"));
+    	purchaseOrderBean.setQualityStandard((String)params.get("QualityStandard"));
+    	
+    	
+    	List<PurchaseOrderItemBean> itmeList=new ArrayList<PurchaseOrderItemBean>();
+    	 JSONArray array = JSONArray.fromObject(params.get("applyEntryJson"));
+         for(int i=0;i<array.size();i++){
+             System.out.println(array.get(i));
+             PurchaseOrderItemBean purchaseOrderItemBean = (PurchaseOrderItemBean) JSONObject.toBean((JSONObject)array.get(i), PurchaseOrderItemBean.class);
+             itmeList.add(purchaseOrderItemBean);
+         }
+         purchaseOrderBean.setPurchaseOrderItemBeans(itmeList);
+         
+         ResultMsg rms = iPurchaseOrderService.changeOrder(purchaseOrderBean);
+         if ("1".equals(rms.getCode())) {
+             return R.ok();
+         }
+        return R.error();
+    }
+    @GetMapping("/getPurchaseOrderDetailList")
+    @RequiresPermissions("material:purchaseOrder:change")
+    @ResponseBody
+    Map<String, Object>  getPurchaseOrderDetailList(@RequestParam Map<String, Object> params,@RequestParam("id") String id){
+    	 ResultMsg rsm = iPurchaseOrderService.detail(id);
+    	List<Map<String, Object>> purchaseOrderDetailList = new ArrayList<>();//调用接口
+        //做测试数据 调用接口前使用 begin
+        for (int i = 0; i < 15; i++) {
+            Map<String, Object> requireMap = new HashMap<>();
+            requireMap.put("num","序号"+i);
+            requireMap.put("materialName", "物资名称" + i);
+            requireMap.put("materilaCode", "物资编码" + i);
+            requireMap.put("specification", "型号规格" + i);
+            requireMap.put("materialUnitName", "单位" + i);
+            requireMap.put("price", 100 + i);
+            requireMap.put("newprice", 101 + i);
+            requireMap.put("qty",1000+i);
+            requireMap.put("newqty",1001+i);
+            requireMap.put("arriveDate", "2018-9-21");
+            requireMap.put("newarriveDate", "2018-9-22");
+            requireMap.put("remark", "备注"+i);
+            purchaseOrderDetailList.add(requireMap);
 
-        return R.ok();
+        }
+        Map<String, Object> returnData = new HashMap<String, Object>();
+        returnData.put("getPurchaseOrderDetailList", purchaseOrderDetailList);
+
+        return returnData;
     }
 
-
+    /**
+     * 采购变更根据订单编号取得采购申请物资明细列表
+     */
+    @GetMapping("/getRequireApplyDetailByCodeId")
+    @RequiresPermissions("material:requireApply:edit")
+    @ResponseBody
+    R getRequireApplyDetailByCodeId(@RequestParam("id") String id){
+    	ResultMsg rm=iPurchaseOrderService.detail(id);
+    	//测试数据
+    	List<Map<String, Object>> purchaseOrderDetailList = new ArrayList<>();//调用接口
+        //做测试数据 调用接口前使用 begin
+        for (int i = 0; i < 15; i++) {
+        	 Map<String, Object> requireMap = new HashMap<>();
+             requireMap.put("num","序号"+i);
+             requireMap.put("materialName", "物资名称" + i);
+             requireMap.put("materilaCode", "物资编码" + i);
+             requireMap.put("specification", "型号规格" + i);
+             requireMap.put("materialUnitName", "单位" + i);
+             requireMap.put("price", 100 + i);
+             requireMap.put("newprice", 101 + i);
+             requireMap.put("qty",1000+i);
+             requireMap.put("newqty",1001+i);
+             requireMap.put("arriveDate", "2018-9-21");
+             requireMap.put("newarriveDate", "2018-9-22");
+             requireMap.put("remark", "备注"+i);
+             purchaseOrderDetailList.add(requireMap);
+        }
+      //测试END
+//        if ("1".equals(rm.getCode())) {
+        if ("123456".equals(id)) {
+			R r=R.ok();
+			r.put("purchaseOrderDetailList", purchaseOrderDetailList);
+			return r;
+		}
+        
+        return R.error();
+    }
+    
 }

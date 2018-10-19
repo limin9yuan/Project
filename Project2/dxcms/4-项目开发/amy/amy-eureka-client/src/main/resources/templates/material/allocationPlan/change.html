@@ -1,26 +1,25 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
 	<div class="wrapper wrapper-content ">
 		<div class="ibox-content">
-		<input id="ids" name="ids" type="hidden" class="form-control" th:value="${ids}">
 			<form class="form-horizontal m-t" id="purchaseOrderForm" style="margin-top:20px;">
 				<div class="row">
 					<div class="form-group">
 						<label class="col-sm-2 control-label">采购订单编号</label>
 						<div class="col-sm-2">	
-							<input id="code" name="code" autocomplete="off" th:data="${purchaseOrder.code}"
+							<input id="code" name="code" autocomplete="off" th:data="${purchaseOrder.code}" 
+							onKeyUp="changeValue('code','oldCode')"
 								th:value="${purchaseOrder.code}" class="form-control" type="text" >	</div>
 						<label class="col-sm-2 control-label" id="oldCode" style="text-align: left;"></label>
 						
 						<label class="col-sm-2 control-label">供应商 </label>
 						<div class="col-sm-2">	
-							<input id="companyName" name="companyName" autocomplete="off" th:data="${purchaseOrder.companyName}" 
-							 th:value="${purchaseOrder.companyName}" readonly="readonly"
-								onclick="openContractDelivers()"
-								class="form-control" type="text" placeholder="==请选择==">	</div>
+							<input id="contractDelivers" name="contractDelivers" autocomplete="off" th:data="${purchaseOrder.contractDelivers}" 
+							 th:value="${purchaseOrder.contractDelivers}"
+								onclick="openContractDelivers('contractDelivers','oldcontractDelivers')"class="form-control" type="text" placeholder="==请选择==">	</div>
 						<label class="col-sm-2 control-label" id="oldcontractDelivers" style="text-align: left;"></label>
  
 						<!--
@@ -38,7 +37,7 @@
 						<label class="col-sm-2 control-label" >发货单位</label>
 						<div class="col-sm-2">	
 							<input id="DeliverCompanyName" name="DeliverCompanyName" autocomplete="off" th:data="${purchaseOrder.DeliverCompanyName}" 
-							onclick="openDeliverCompanyName()" readonly="readonly" placeholder="==请选择=="
+							onKeyUp="changeValue('DeliverCompanyName','oldDeliverCompanyName')"
 								th:value="${purchaseOrder.DeliverCompanyName}" class="form-control" type="text" >	
 						</div>
 						<label class="col-sm-2 control-label" id="oldDeliverCompanyName" style="text-align: left;"></label> 
@@ -46,7 +45,7 @@
 						<label class="col-sm-2 control-label">采购计划编号</label>
 						<div class="col-sm-2">	
 							<input id="PurchasePlanCode" name="PurchasePlanCode" autocomplete="off" th:data="${purchaseOrder.PurchasePlanCode}" 
-							
+							onKeyUp="changeValue('PurchasePlanCode','oldPurchasePlanCode')"
 								th:value="${purchaseOrder.PurchasePlanCode}" class="form-control" type="text" >	
 						</div>
 						<label class="col-sm-2 control-label" id="oldPurchasePlanCode" style="text-align: left;"></label> 
@@ -57,6 +56,7 @@
 						<label class="col-sm-2 control-label">意向协议(询比价报告单）编号</label>
 						<div class="col-sm-2">	
 							<input id="ContractCode" name="ContractCode" autocomplete="off" th:data="${purchaseOrder.ContractCode}" 
+							onKeyUp="changeValue('ContractCode','oldContractCode')"
 								th:value="${purchaseOrder.ContractCode}" class="form-control" type="text" >	
 						</div>
 						<label class="col-sm-2 control-label" id="oldContractCode" style="text-align: left;"></label>
@@ -75,6 +75,7 @@
 						<label class="col-sm-2 control-label">付款方式及期限</label>
 						<div class="col-sm-2">	
 							<input id="PaymentType" name="PaymentType" autocomplete="off" th:data="${purchaseOrder.PaymentType}" 
+							onKeyUp="changeValue('PaymentType','oldPaymentType')"
 								th:value="${purchaseOrder.PaymentType}" class="form-control" type="text" >	</div>
 						<label class="col-sm-2 control-label" id="oldPaymentType" style="text-align: left;"></label>
 						
@@ -82,6 +83,7 @@
 						<label class="col-sm-2 control-label">交货地点</label>
 						<div class="col-sm-2">	
 							<input id="ArriveAddress" name="ArriveAddress" autocomplete="off" th:data="${purchaseOrder.ArriveAddress}" 
+							onKeyUp="changeValue('ArriveAddress','oldArriveAddress')"
 								th:value="${purchaseOrder.ArriveAddress}" class="form-control" type="text" >	</div>
 						<label class="col-sm-2 control-label" id="oldArriveAddress" style="text-align: left;"></label>
 					</div>
@@ -91,6 +93,7 @@
 						<label class="col-sm-2 control-label">质量标准</label>
 						<div class="col-sm-2">	
 							<input id="QualityStandard" name="QualityStandard" autocomplete="off" th:data="${purchaseOrder.QualityStandard}" 
+							onKeyUp="changeValue('QualityStandard','oldQualityStandard')"
 								th:value="${purchaseOrder.QualityStandard}" class="form-control" type="text" >	</div>
 						<label class="col-sm-2 control-label" id="oldQualityStandard" style="text-align: left;"></label>
 					</div>		

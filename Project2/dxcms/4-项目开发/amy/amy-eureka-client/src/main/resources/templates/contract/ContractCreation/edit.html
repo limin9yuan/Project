@@ -99,9 +99,9 @@
 							<div class="col-sm-12 col-sm-offset-4">
 								<button type="submit" class="btn btn-success" id="saveBtn">保存</button>
 								&nbsp;
-								<button type="button" class="btn btn-success">提交审批</button>
+								<button  shiro:hasPermission="ContractCreation:ContractCreation:approve" type="button" class="btn btn-success" onclick="approve()">提交审批</button>
 								&nbsp;
-								<button type="button" class="btn btn-success">撤回审批</button>
+								<button shiro:hasPermission="ContractCreation:ContractCreation:cancelApprove" type="button" class="btn btn-success" onclick="cancelApprove()">撤回审批</button>
 								&nbsp;
 								<button type="button" class="btn btn-success"
 									onclick="closeWin()">关闭</button>

@@ -159,6 +159,48 @@ function update() {
 	});
 
 }
+function exportExcel() {
+	var tableName="";
+	var applyEntryJsonArray = [];
+	for(var k=0;k<typeCount;k++){
+		tableName = "t" + k+"table";
+		$("#"+tableName).find('[role=row]').each(function (f) {
+	        if ($(this).find('input[name="authorDeptName"]').val()) {
+				var recordJson = {
+					authorDeptName : $(this).find('input[name="authorDeptName"]').val(),//需求机构
+					materialClassName : $(this).find('input[name="materialClassName"]').val(),//物料类型
+					materialName: $(this).find('input[name="materialName"]').val(),//物料名称
+					materilaCode: $(this).find('input[name="materilaCode"]').val(),//物料编码
+					specification: $(this).find('input[name="specification"]').val(),//物料特性
+					materialUnitName: $(this).find('input[name="materialUnitName"]').val(),//单位
+					purchaseQty: $(this).find('input[name="purchaseQty"]').val(),//采购数量
+			   };
+			   if (k != typeCount-1) {
+				   var companyArray = supplier[k];
+				   for (var j = 0; j < companyArray.length; j++) {
+					   if ($(this).find('input[name="unitPrice'+j+'"]').val() != ""
+				   			&& $(this).find('input[name="allotQty'+j+'"]').val() != ""
+							&& $(this).find('input[name="allotRatio'+j+'"]').val()!= "") {
+							recordJson["companyId"] = companyArray[j].companyId;  
+	 					    recordJson["unitPrice"] = $(this).find('input[name="unitPrice'+j+'"]').val();
+	 					    recordJson["allotQty"] = $(this).find('input[name="allotQty'+j+'"]').val();
+	 					    recordJson["allotRatio"] = $(this).find('input[name="allotRatio'+j+'"]').val();
+					   }
+
+					}
+			   }else {
+				   recordJson["companyId"] = $(this).find('input[name="companyId"]').val();
+				   recordJson["unitPrice"] = $(this).find('input[name="unitPrice"]').val();
+				   recordJson["allotQty"] = $(this).find('input[name="allotQty"]').val();
+				   recordJson["allotRatio"] = $(this).find('input[name="allotRatio"]').val();
+			   }
+	            applyEntryJsonArray.push(recordJson);
+	        }
+	    });
+	}
+	$("#applyEntryJsonArray").val(JSON.stringify(applyEntryJsonArray));
+	$("#exportForm").submit();
+}
 function deleteSelectedRow(){
 	var activeTableName="";
 	for(i=0;i<typeCount;i++){

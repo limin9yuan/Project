@@ -9,29 +9,17 @@
 				<div class="ibox-body">
 					<div class="fixed-table-toolbar">
 						<div class="columns pull-left">
-							<button shiro:hasPermission="material:purchaseOrder:add" type="button" class="btn btn-success" onclick="add()">
-								<i class="fa" aria-hidden="true"></i>新增
+							<button  type="button" class="btn btn-success" onclick="terminateTheOrder()">
+								<i class="fa" aria-hidden="true"></i>终止订单
 							</button>
-							<button shiro:hasPermission="material:purchaseOrder:multiAdd" type="button" class="btn btn-success" onclick="multiAdd()">
-								<i class="fa" aria-hidden="true"></i>批量新增
+							<button type="button" class="btn btn-success" onclick="closeTheOrder()">
+								<i class="fa" aria-hidden="true"></i>关闭订单
 							</button>
-<!-- 							<button shiro:hasPermission="material:purchaseOrder:change" type="button" class="btn btn-success" onclick="change()"> -->
-<!-- 								<i class="fa" aria-hidden="true"></i>变更 -->
-<!-- 							</button> -->
-							<button shiro:hasPermission="material:purchaseOrder:multiGodown" type="button" class="btn btn-success" onclick="multiGodown()">
-								<i class="fa" aria-hidden="true"></i>批量下达
+							<button shiro:hasPermission="material:purchaseOrder:print" type="button" class="btn btn-success" onclick="print()">
+								<i class="fa" aria-hidden="true"></i>打印
 							</button>
-<!-- 							<button shiro:hasPermission="material:purchaseOrder:execute" type="button" class="btn btn-success" onclick="execute()"> -->
-<!-- 								<i class="fa" aria-hidden="true"></i>执行 -->
-<!-- 							</button> -->
-<!-- 							<button shiro:hasPermission="material:purchaseOrder:print" type="button" class="btn btn-success" onclick="print()"> -->
-<!-- 								<i class="fa" aria-hidden="true"></i>打印 -->
-<!-- 							</button> -->
-							<button shiro:hasPermission="material:purchaseOrder:approve" type="button" class="btn btn-success" onclick="approve()">
-								<i class="fa" aria-hidden="true"></i>提交审批
-							</button>
-							<button shiro:hasPermission="material:purchaseOrder:cancelApprove" type="button" class="btn btn-success" onclick="cancelApprove()">
-								<i class="fa" aria-hidden="true"></i>撤回审批
+							<button shiro:hasPermission="material:purchaseOrder:execute" type="button" class="btn btn-success" onclick="execute()">
+								<i class="fa" aria-hidden="true"></i>执行
 							</button>
 						</div>
 						<div class="columns pull-right">
@@ -88,7 +76,7 @@
 		</div>
 	</div>
 	<div th:include="include :: footer"></div>
-	<script type="text/javascript" src="/js/appjs/material/purchaseOrder/purchaseOrder.js"></script>
+	<script type="text/javascript" src="/js/appjs/material/purchaseOrder/execute.js"></script>
 </body>
 </html>
 
