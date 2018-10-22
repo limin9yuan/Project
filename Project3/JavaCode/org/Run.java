@@ -10,8 +10,6 @@ import org.eredlab.g4.rif.server.G4Server;
 public class Run {
 	public static void main(String[] args) {
 		G4Server server = new G4Server(
-				
-//				E:\\2016Project\\gr\\extgr\\source\\WebRoot
 				"C:\\Documents\\Project\\Project\\Project3\\WebRoot",
 				"/gr",
 				882

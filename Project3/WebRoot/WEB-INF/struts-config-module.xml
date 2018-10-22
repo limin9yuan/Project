@@ -10,13 +10,13 @@
 	<!-- Action映射 -->
 	<action-mappings type="org.apache.struts.action.ActionMapping">
 
-		
+
 		<!-- 房产复选树 -->
 		<action name="commonActionForm" path="/fcTree" scope="request"
 			validate="false" parameter="reqCode" type="org.module.tree.web.TreeAction">
-			
+
 		</action>
-		
+
 		<!-- 入网管理 -->
 	    <action name="commonActionForm" path="/iw" scope="request"
 			validate="false" parameter="reqCode" type="org.module.iw.web.IntoWebAction">
@@ -31,23 +31,23 @@
 		<action name="commonActionForm" path="/sr" scope="request" validate="false" parameter="reqCode"
 			 type="org.module.fc.web.SourceAction">
 			<forward name="sourceView" path="/fc/source.jsp" />
-		</action> 
+		</action>
 		<!-- 换热站管理 -->
 		<action name="commonActionForm" path="/st" scope="request" validate="false" parameter="reqCode"
 			 type="org.module.fc.web.StationAction">
-		</action> 
+		</action>
 		<!-- 小区 添加/修改/删除 取得换热站、管理员字典 -->
 	    <action name="commonActionForm" path="/fc" scope="request"
 			validate="false" parameter="reqCode" type="org.module.fc.web.CommunityAction">
 			<forward name="communityView" path="/fc/community.jsp" />
 		</action>
-		
+
 		<!-- 大楼 添加/修改/删除 -->
 	    <action name="commonActionForm" path="/bl" scope="request"
 			validate="false" parameter="reqCode" type="org.module.fc.web.BuildingAction">
 			<forward name="buildingView" path="/fc/building.jsp" />
 		</action>
-		
+
 		<!-- 房间 添加/修改/删除 -->
 	    <action name="commonActionForm" path="/hou" scope="request"
 			validate="false" parameter="reqCode" type="org.module.fc.web.HouseAction">
@@ -84,6 +84,11 @@
 			validate="false" parameter="reqCode" type="org.module.sf.web.ChargeAction">
 			<forward name="chargeView" path="/sf/charge.jsp" />
 		</action>
+		<!-- 收费-批量缴费 -->
+	    <action name="commonActionForm" path="/multiChg" scope="request"
+			validate="false" parameter="reqCode" type="org.module.sf.web.ChargeAction">
+			<forward name="multiChargeView" path="/sf/multiCharge.jsp" />
+		</action>
 		<!-- 收费-减免 -->
 	    <action name="commonActionForm" path="/mns" scope="request"
 			validate="false" parameter="reqCode" type="org.module.sf.web.MinusAction">
@@ -107,11 +112,11 @@
 		<!-- 收费-退款 -->
 	    <action name="commonActionForm" path="/bkm" scope="request"
 			validate="false" parameter="reqCode" type="org.module.sf.web.BackMoneyAction">
-			
+
 		</action>
 		<!-- 取得系统维护相关字典参数数据 -->
 	    <action name="commonActionForm" path="/sys" scope="request"
-			validate="false" parameter="reqCode" type="org.module.sys.web.SysAction">			
+			validate="false" parameter="reqCode" type="org.module.sys.web.SysAction">
 		</action>
 		<!-- 收费-收费标准 -->
 	    <action name="commonActionForm" path="/std" scope="request"
@@ -131,7 +136,7 @@
 		<!-- 报表 -->
 	    <action name="commonActionForm" path="/rpt" scope="request"
 			validate="false" parameter="reqCode" type="org.module.rpt.web.ReportAction">
-			<forward name="f01050101" path="/rpt/f01050101.jsp" />			
+			<forward name="f01050101" path="/rpt/f01050101.jsp" />
 			<forward name="c01050201" path="/rpt/c01050201.jsp" />
 			<forward name="c01050202" path="/rpt/c01050202.jsp" />
 			<forward name="c01050204" path="/rpt/c01050204.jsp" />

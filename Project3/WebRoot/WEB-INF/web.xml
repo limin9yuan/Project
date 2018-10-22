@@ -161,28 +161,15 @@
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.ered</url-pattern>
 	</servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>action</servlet-name>
-        <url-pattern>*.do</url-pattern>
-    </servlet-mapping>
-
-    <!-- 配置Log4j -->
+	
+	<!-- 配置Log4j -->
 	<servlet>     
 		<servlet-name>log4jInit</servlet-name>   
 		<servlet-class>org.eredlab.g4.rif.util.Log4jInitServlet</servlet-class>         
 		<load-on-startup>0</load-on-startup>   
-	</servlet>
-    <servlet>
-        <servlet-name>action</servlet-name>
-        <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
-        <init-param>
-            <param-name>config</param-name>
-            <param-value>/WEB-INF/struts-config.xml</param-value>
-        </init-param>
-        <load-on-startup>2</load-on-startup>
-    </servlet>
-
-    <!-- 设置Session时长:以分钟为单位;如果是零或负数,那么会话就永远不会超时。 -->
+	</servlet> 
+	
+	<!-- 设置Session时长:以分钟为单位;如果是零或负数,那么会话就永远不会超时。 -->
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
