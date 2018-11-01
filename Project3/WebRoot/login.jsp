@@ -10,7 +10,7 @@
 	</div>
 	<div id="aboutDiv" class="x-hidden"
 		style='color: black; padding-left: 10px; padding-top: 10px; font-size: 12px'>
-        <a href="jre-6u2-windows-i586-p.exe" >打印控件下载</a>
+        <a href="jre-8u181-windows-i586.exe" >打印控件下载</a>
 	</div>
 	<div id="infoDiv" class="x-hidden"
 		style='color: black; padding-left: 10px; padding-top: 10px; font-size: 12px'>

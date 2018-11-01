@@ -21,6 +21,115 @@ import org.module.sf.service.ChargeService;
 
 public class ChargeAction extends BaseAction{
 	private ChargeService chargeService = (ChargeService) super.getService("ChargeService");
+
+	/**
+	 * 查询批量应收数据
+	 *
+	 * @param
+	 * @return
+	 */
+	public ActionForward queryMultiChargePlan(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+															HttpServletResponse response) throws Exception {
+
+		CommonActionForm aForm = (CommonActionForm) form;
+		Dto dto = aForm.getParamAsDto(request);
+		List list = new ArrayList();
+		list = g4Reader.queryForPage("queryMultiChargePlan", dto);
+		Integer countInteger = (Integer) g4Reader.queryForObject("queryMultiChargePlanForPageCount", dto);
+		super.setSessionAttribute(request, "GRIDACTION_QUERYBALANCEINFO_DTO", dto);
+		String jsonString = encodeList2PageJson(list, countInteger, GlobalConstants.FORMAT_Date);
+		super.write(jsonString, response);
+		return mapping.findForward(null);
+	}
+
+	/**
+	 * 汇总批量应收数据
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward sumMultiChargePlan(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+														 HttpServletResponse response) throws Exception {
+		Dto dto = (BaseDto)super.getSessionAttribute(request, "GRIDACTION_QUERYBALANCEINFO_DTO");
+		Dto sumDto = new BaseDto();
+		sumDto = (BaseDto)g4Reader.queryForObject("sumMultiChargePlan", dto);
+		sumDto.put("success", new Boolean(true));
+		String jsonString = JsonHelper.encodeObject2Json(sumDto);
+		super.write(jsonString, response);
+		return mapping.findForward(null);
+	}
+
+	/**
+	 * 批量收费
+	 *
+	 * @param mapping
+	 * @param form
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	public ActionForward multiCharge(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+												HttpServletResponse response) throws Exception {
+
+		CommonActionForm cForm = (CommonActionForm) form;
+		Dto inDto = cForm.getParamAsDto(request);
+		inDto.put("start", 0);
+		inDto.put("end", 100000);
+//		inDto.put("p_item_code")
+		List list = new ArrayList();
+		list = g4Reader.queryForPage("queryMultiChargePlan", inDto);
+		Dto outDto = new BaseDto();
+		String uID = getSessionContainer(request).getUserInfo().getUserid();
+		String cID = super.getSessionContainer(request).getUserInfo().getCustomId();
+		for (int i = 0; i < list.size(); i++) {
+			BaseDto baseDto = (BaseDto) list.get(i);
+			BaseDto chargeDto = new BaseDto();
+			chargeDto.put("operator", uID);
+			chargeDto.put("cid", cID);
+			chargeDto.put("b_id", IDHelper.getB_ID());
+			chargeDto.put("p_id", baseDto.getAsString("p_id"));
+			chargeDto.put("house_code", baseDto.getAsString("house_code"));
+			chargeDto.put("address", baseDto.getAsString("address"));
+			chargeDto.put("work_unit", baseDto.getAsString("work_unit"));
+			chargeDto.put("telphone", baseDto.getAsString("telphone"));
+			chargeDto.put("invoice_number", baseDto.getAsString("invoice_number"));
+			chargeDto.put("invoice_code", baseDto.getAsString("invoice_code"));
+
+			chargeDto.put("price", baseDto.getAsBigDecimal("price"));
+			chargeDto.put("charge_area", baseDto.getAsBigDecimal("charge_area"));
+			chargeDto.put("pay_mode", baseDto.getAsString("pay_mode"));
+			chargeDto.put("payman", baseDto.getAsString("payman"));
+			chargeDto.put("paydate", baseDto.getAsString("paydate"));
+			chargeDto.put("real_charge", baseDto.getAsBigDecimal("not_money"));
+			chargeDto.put("delzero", baseDto.getAsBigDecimal("delzero"));
+
+			chargeDto.put("billman", baseDto.getAsString("billman"));
+			chargeDto.put("billdate", baseDto.getAsString("billdate"));
+			chargeDto.put("begin_prepay", baseDto.getAsBigDecimal("begin_prepay"));
+			chargeDto.put("end_prepay", baseDto.getAsBigDecimal("end_prepay"));
+			chargeDto.put("use_prepay", baseDto.getAsBigDecimal("use_prepay"));
+			chargeDto.put("add_prepay", baseDto.getAsBigDecimal("add_prepay"));
+
+			chargeDto.put("latefee_enddate", baseDto.getAsString("latefee_enddate"));
+			chargeDto.put("latefee_realaccount", baseDto.getAsBigDecimal("latefee_realaccount"));
+			chargeDto.put("latefee_charge", baseDto.getAsBigDecimal("not_money_latefee"));
+			chargeDto.put("minus_reason", baseDto.getAsString("minus_reason"));
+			chargeDto.put("remark", baseDto.getAsString("remark"));
+			outDto = chargeService.charge(chargeDto);
+
+
+		}
+		outDto.put("success", new Boolean(true));
+		outDto.put("msg", "收费成功！");
+		write(JsonHelper.encodeObject2Json(outDto), response);
+		return mapping.findForward(null);
+	}
+
 	/**
 	 * 表格演示六页面初始化
 	 * 
@@ -42,6 +151,7 @@ public class ChargeAction extends BaseAction{
 		//super.removeSessionAttribute(request, "GRIDACTION_QUERYBALANCEINFO_DTO");
 		return mapping.findForward("multiChargeView");
 	}
+
 	/**
 	 * 查询应收数据
 	 * 

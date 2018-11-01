@@ -532,7 +532,7 @@ dateContent
 					<textElement textAlignment="Center" verticalAlignment="Middle">
 						<font fontName="宋体" pdfFontName="STSong-Light" size="14" isBold="true" pdfEncoding ="UniGB-UCS2-H"/>
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["安源热力供热收费专用收据"]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["上党城投供热收费专用收据"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

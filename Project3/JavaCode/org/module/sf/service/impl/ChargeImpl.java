@@ -54,7 +54,7 @@ public class ChargeImpl  extends BaseServiceImpl implements ChargeService{
 		outDto.put("msg", "批量修改开启度成功!");
 		System.out.println(prcDto);
 		g4Dao.callPrc("charge", prcDto);
-		return prcDto;
+		return outDto;
 	}
 	
 	

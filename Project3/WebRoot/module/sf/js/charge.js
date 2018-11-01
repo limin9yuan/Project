@@ -1486,7 +1486,7 @@ Ext.onReady(function() {
 				+"&item_code="+record.get('item_code')
 				+"&item_name="+record.get('item_name')
 				+"&standard_code="+record.get('standard_code');
-				alert(str);
+				//alert(str);
 				printInvoice(str);
 				
 		}

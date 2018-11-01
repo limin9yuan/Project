@@ -95,7 +95,186 @@
 			</isNotEmpty>
 		</dynamic>
 	</select>
-	
+
+	<!-- 批量缴费列表 -->
+	<select id="queryMultiChargePlan" parameterClass="map" resultClass="dto">
+		select * from
+		(select
+		b.userName,
+		c.item_name,a.CHARGE_MONTH             ,
+		HOUSE_CODE               ,
+		a.ITEM_CODE                ,
+		METER_ID                 ,
+		case when d.charge_month is not null then
+		((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))
+		else
+		(NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))
+		end
+		not_money,
+		NVL(a.LATEFEE_REALACCOUNT,0)-NVL(a.LATEFEE_NOWCASH,0) not_money_latefee,
+		a.CID                      ,
+		COMMUNITY_CODE           ,
+		BUILDING_CODE            ,
+		OWNER_NAME               ,
+		TOTAL_ACCOUNT            ,
+		MINUS_MONEY              ,
+		SUBTRACT_MONEY           ,
+		REAL_ACCOUNT             ,
+		NOW_CASH                 ,
+		USE_TYPE                 ,
+		STANDARD_CODE            ,
+		PRICE                    ,
+		BUILD_AREA               ,
+		FLOOR_AREA               ,
+		CHARGE_AREA              ,
+		PLAN_BEGIN_DATE          ,
+		PLAN_END_DATE            ,
+		DAYS                     ,
+		LATEFEE_STARTDATE        ,
+		LATEFEE_ENDDATE          ,
+		LATEFEE_TOTALACCOUNT     ,
+		LATEFEE_MINUS            ,
+		LATEFEE_REALACCOUNT      ,
+		LATEFEE_NOWCASH          ,
+		LAS_READING              ,
+		THIS_READING             ,
+		POINT_NUMBER             ,
+		WASTE                    ,
+		STOPHEATING              ,
+		STOPTOTALACCOUNT         ,
+		BACK_MONEY               ,
+		IS_INPUT ,
+		a.p_id
+
+		from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d
+		where a.house_manager=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.charge_month=d.charge_month(+)
+		and d.start_date(+)&lt;= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)&gt;=to_char(sysdate,'yyyy-MM-dd')
+		) a
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month">
+				charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="query_item_code">
+				a.ITEM_CODE in (#query_item_code#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range">
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" >
+				(not_money>0 or not_money_latefee>0)
+			</isNotEmpty>
+		</dynamic>
+		order by charge_month asc
+	</select>
+	<select id="queryMultiChargePlanForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from
+		(select
+		b.userName,
+		c.item_name,a.CHARGE_MONTH             ,
+		HOUSE_CODE               ,
+		a.ITEM_CODE                ,
+		METER_ID                 ,
+		case when d.charge_month is not null then
+		((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))
+		else
+		(NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))
+		end
+		not_money,
+		NVL(a.LATEFEE_REALACCOUNT,0)-NVL(a.LATEFEE_NOWCASH,0) not_money_latefee,
+		a.CID                      ,
+		COMMUNITY_CODE           ,
+		BUILDING_CODE            ,
+		OWNER_NAME               ,
+		TOTAL_ACCOUNT            ,
+		MINUS_MONEY              ,
+		SUBTRACT_MONEY           ,
+		REAL_ACCOUNT             ,
+		NOW_CASH                 ,
+		USE_TYPE                 ,
+		STANDARD_CODE            ,
+		PRICE                    ,
+		BUILD_AREA               ,
+		FLOOR_AREA               ,
+		CHARGE_AREA              ,
+		PLAN_BEGIN_DATE          ,
+		PLAN_END_DATE            ,
+		DAYS                     ,
+		LATEFEE_STARTDATE        ,
+		LATEFEE_ENDDATE          ,
+		LATEFEE_TOTALACCOUNT     ,
+		LATEFEE_MINUS            ,
+		LATEFEE_REALACCOUNT      ,
+		LATEFEE_NOWCASH          ,
+		LAS_READING              ,
+		THIS_READING             ,
+		POINT_NUMBER             ,
+		WASTE                    ,
+		STOPHEATING              ,
+		STOPTOTALACCOUNT         ,
+		BACK_MONEY               ,
+		IS_INPUT ,
+		a.p_id
+
+		from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d
+		where a.house_manager=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.charge_month=d.charge_month(+)
+		and d.start_date(+)&lt;= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)&gt;=to_char(sysdate,'yyyy-MM-dd')
+		) a
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="charge_month">
+				charge_month in (#charge_month#)
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range">
+				(community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" >
+				(not_money>0 or not_money_latefee>0)
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!-- 查询收费页面欠费 -->
+	<select id="sumMultiChargePlan" parameterClass="map" resultClass="dto">
+		select   '共' || COUNT(house_code) || '' AS house_count,
+		sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
+		sum(MINUS_MONEY)  MINUS_MONEY            ,
+		sum(SUBTRACT_MONEY)   SUBTRACT_MONEY        ,
+		sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,
+		sum(
+		case when d.charge_month is not null then
+		((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))
+		else
+		(NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))
+		end
+		)  not_money          ,
+		sum(NVL(LATEFEE_REALACCOUNT,0)-NVL(LATEFEE_NOWCASH,0))  not_money_latefee          ,
+		sum(NOW_CASH)  NOW_CASH               ,
+		sum(BUILD_AREA)  BUILD_AREA             ,
+		sum(FLOOR_AREA)  FLOOR_AREA             ,
+		sum(CHARGE_AREA) CHARGE_AREA  ,
+		sum(LATEFEE_TOTALACCOUNT) LATEFEE_TOTALACCOUNT    ,
+		sum(LATEFEE_MINUS) LATEFEE_MINUS           ,
+		sum(LATEFEE_REALACCOUNT) LATEFEE_REALACCOUNT     ,
+		sum(LATEFEE_NOWCASH )   LATEFEE_NOWCASH
+		from SF_CHARGE a,sf_discount d
+		where a.charge_month=d.charge_month(+)
+		and d.start_date(+)&lt;= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)&gt;=to_char(sysdate,'yyyy-MM-dd')
+		<isNotEmpty prepend="AND" property="charge_month">
+			a.charge_month in (#charge_month#)
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="p_range">
+			(a.community_code in ($p_range$) or
+			a.building_code in ($p_range$) or
+			a.house_code in ($p_range$))
+		</isNotEmpty>
+
+	</select>
 	<!-- 查询生成应收汇总信息 -->
 	<select id="sumChargePlan" parameterClass="map" resultClass="dto">
 		

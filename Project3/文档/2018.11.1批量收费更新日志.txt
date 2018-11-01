@@ -1,0 +1,10 @@
+2018年11月1日
+
+更新chargeAction.java,
+    sf.xml,
+添加multiCharge.js,
+    multiCharge.jsp.
+在收费管理菜单中，添加批量收费选项。进入批量收费选项以后，在左侧勾选多个大楼信息，点击查询，可查询出所有欠费记录，点击右下侧收费按钮，可以收取全部欠费住户。
+
+insert into EAROLEAUTHORIZE (ROLEID, MENUID,AUTHORIZELEVEL, AUTHORIZEID)
+values (10000060, 010407,1, 10001353)
