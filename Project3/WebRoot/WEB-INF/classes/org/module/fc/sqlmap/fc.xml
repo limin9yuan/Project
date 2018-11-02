@@ -506,8 +506,8 @@
 		cid,
 		operator,
 		operate_date)values(
-		substr(#house_code#,1,4),
-		substr(#house_code#,1,8),
+		#community_code#,
+		#building_code#,
 		#house_code#,
 		#item_code#,
 		#area_id#,
@@ -704,11 +704,29 @@
 	<!-- 房产数据导入错误数据 -->
 	<select id="queryErrorImport" parameterClass="map" resultClass="dto">
 		select * from fc_import
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="community_code">
+				community_code=#community_code#
+			</isNotEmpty>
+		</dynamic>
 		 order by excel_row asc
 	</select>
 	<select id="queryErrorImportForPageCount" parameterClass="map" resultClass="java.lang.Integer">
-		select count(*) from fc_import		
+		select count(*) from fc_import
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="community_code">
+				community_code=#community_code#
+			</isNotEmpty>
+		</dynamic>
 	</select>
+	<!--删除导入数据-->
+	<delete id="deleteImportData" parameterClass="map">
+       DELETE FROM fc_import WHERE p_id in ($p_id$)
+	</delete>
+	<!--删除导入数据-->
+	<!--<delete id="deleteImportDataCount" parameterClass="map">-->
+       <!--SELECT count(*) FROM fc_import WHERE community_code=#p_id#-->
+	<!--</delete>-->
 	<!-- 查询某房间是否有面积1-->
 	<select id="haveArea1" parameterClass="map"
 		resultClass="java.lang.Integer">

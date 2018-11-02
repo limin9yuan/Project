@@ -2,17 +2,16 @@
 
 将chargeAction.class 覆盖到 WebRoot-->WEB-INF-->classes-->org-->module-->sf-->web 中,
 将sf.xml 覆盖到 WebRoot-->WEB-INF-->classes-->org-->module-->sf-->sqlmap 中,
-将struts-config-module.xml 覆盖到 WebRoot-->WEB-INF 中,
 将multiCharge.js 添加到WebRoot-->module-->sf-->js中,
 将multiCharge.jsp 添加到WebRoot-->module-->sf中.
 
 添加菜单：
 insert into EAMENU (MENUID,MENUNAME,PARENTID,EXPANDED,REQUEST,LEAF,SORTNO,MENUTYPE)
-values('010407','批量缴费','0104','0','module/multiChg.ered?reqCode=multiChargeInit','1','0','0')
+values(010407,批量缴费,0104,0,module/multiChg.ered?reqCode=multiChargeInit,1,0,0)
 
 添加权限:
 insert into EAROLEAUTHORIZE (ROLEID, MENUID,AUTHORIZELEVEL, AUTHORIZEID)
-values ('10000060', '010407','1', '10001353')
+values (10000060, 010407,1, 10001353)
 
 使用方法：
 在收费管理菜单中，添加批量收费选项。进入批量收费选项以后，在左侧勾选多个大楼信息，点击查询，可查询出所有欠费记录，点击右下侧收费按钮，可以收取全部欠费住户。

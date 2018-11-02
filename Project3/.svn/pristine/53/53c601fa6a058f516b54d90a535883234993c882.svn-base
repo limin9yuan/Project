@@ -1,0 +1,17 @@
+delete from fc_import where community_code='9999';
+delete from fc_area where community_code='9999';
+delete from fc_house where community_code='9999';
+delete from fc_owner where community_code='9999';
+delete from fc_building where community_code='9999';
+delete from fc_community where community_code='9999';
+delete from sf_charge where community_code='9999';
+--将已收和减免更新成0，实应收更新为已收
+update sf_charge set now_cash=0,minus_money=0,real_account=total_account
+--删除减免
+delete from sf_detail ;
+--更新已用和作废发票为未用
+update sf_invoice set status=0;
+--删除发票使用记录
+delete from sf_invoiceuse
+--删除减免
+delete from sf_minus;

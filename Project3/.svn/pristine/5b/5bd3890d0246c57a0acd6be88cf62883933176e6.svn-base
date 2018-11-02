@@ -1,0 +1,17 @@
+--(1)建立表空间
+create tablespace sjzrl
+logging
+datafile 'D:\oracle11g\oradata\orcl\kfqrl.dbf' 
+size 1000m 
+autoextend on 
+next 32m
+extent management local;
+--(2)建立用户
+create user sjzrl identified by sjzrl default tablespace sjzrl temporary tablespace temp;
+grant connect,resource,dba, create any view to sjzrl;
+--(3)创建虚拟目录
+create directory hx_dmp as 'E:\2017Project\gr\database';
+grant read,write on directory hx_dmp to sjzrl;
+--(4)在命令行中执行
+impdp sjzrl/sjzrl directory=hx_dmp dumpfile=SJZRL20170301.DMP remap_schema=sjzrl:sjzrl remap_tablespace=sjzrl:sjzrl
+按这个一步一步做

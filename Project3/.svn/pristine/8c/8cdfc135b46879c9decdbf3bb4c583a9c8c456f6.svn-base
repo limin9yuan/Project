@@ -1,0 +1,9 @@
+2018/11/2
+
+将importHouseExcel.js 覆盖到 WebRoot-->module-->fc-->js 中
+将fc.xml 覆盖到 WEB-INF-->classes-->org-->module-->fc-->sqlmap 中
+将ImportHouseAction.class 覆盖到 WEB-INF-->classes-->org-->module-->fc-->web 中
+将CreatPLanService.class 覆盖到 WEB-INF-->classes-->org-->module-->sf-->service 中
+将CreatPLanImpl.class 覆盖到 WEB-INF-->classes-->org-->module-->sf-->service-->impl 中
+
+数据库，表fc_import添加p_id字段
