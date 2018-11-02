@@ -664,7 +664,9 @@
 		CARD_ID,
 		CLUSTER_CODE,
 		VALVECODE,
-		ERROR
+		ERROR,
+		OPERATOR,
+		OPERATEDATE
 		)values(
 		#excel_row#,
 		#community_code#,
@@ -699,7 +701,10 @@
 		#card_id#,
 		#cluster_code#,
 		#valvecode#,
-		#error#)
+		#error#,
+		#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		)
 	</insert>
 	<!-- 房产数据导入错误数据 -->
 	<select id="queryErrorImport" parameterClass="map" resultClass="dto">
@@ -709,7 +714,7 @@
 				community_code=#community_code#
 			</isNotEmpty>
 		</dynamic>
-		 order by excel_row asc
+		 order by operatedate desc 
 	</select>
 	<select id="queryErrorImportForPageCount" parameterClass="map" resultClass="java.lang.Integer">
 		select count(*) from fc_import
