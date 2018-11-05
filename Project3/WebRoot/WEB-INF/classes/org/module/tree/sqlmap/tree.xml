@@ -6,11 +6,36 @@
 		type="org.eredlab.g4.ccl.datastructure.impl.BaseDto" />
 
 	<!-- 查询第一级树节点(小区)-->
+	<select id="queryStations" parameterClass="map"
+			resultClass="dto">
+		SELECT STAT_ID as id, STAT_ID||' '||STAT_NAME||' ('||COMMUNITY_COUNT||')' as text,nvl(COMMUNITY_COUNT,0) as child_Count
+		FROM
+		FC_STATION order by STAT_ID
+	</select>
+
+	<!-- 查询第一级树节点(小区)-->
 	<select id="queryCommunity" parameterClass="map"
 		resultClass="dto">
 		SELECT community_code as id, community_code||' '||community_name||' ('||building_count||')' as text,nvl(building_count,0) as child_Count
 		FROM
-		fc_community order by community_code
+		fc_community
+		order by community_code
+	</select>
+
+	<!-- 查询第一级树节点(小区)-->
+	<select id="queryCommunityByStation" parameterClass="map"
+			resultClass="dto">
+		SELECT a.community_code as id, a.community_code||' '||a.community_name||' ('||a.building_count||')' as text,nvl(a.building_count,0) as child_Count
+		FROM
+		fc_community a
+		LEFT join FC_HOUSE b on a.COMMUNITY_CODE = b.COMMUNITY_CODE
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="parentId">
+				b.STAT_ID = #parentId#
+			</isNotEmpty>
+
+		</dynamic>
+		order by a.community_code
 	</select>
 
 	<!-- 查询第二级树节点(大楼) -->

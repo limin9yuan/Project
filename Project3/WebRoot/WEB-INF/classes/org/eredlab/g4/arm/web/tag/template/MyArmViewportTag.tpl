@@ -20,6 +20,7 @@ var configButton;
 var currentNodePath="";
 var currentLevel=0;
 var currentNode=null;
+var treeLevel = '${treeLevel}';
 Ext.onReady(function(){
 			//j_buttons=Ext.decode(tmpbtns.substring(0,tmpbtns.length-1));
 			j_buttons=","+tmpbtns;
@@ -51,7 +52,7 @@ Ext.onReady(function(){
 			tb.add(configButton);
 			tb.add(closeButton);
             var root = new Ext.tree.AsyncTreeNode({
-				id : '00',
+				id : treeLevel==3?'00':'-1',
 				text : '',
 				checked : false,
 				expanded : true
@@ -86,45 +87,102 @@ Ext.onReady(function(){
 				currentLevel = node.getDepth();
 				// Ext.MessageBox.alert('提示', 'ID:' + node.getDepth()  + " text:"
 				// + node.text);
-				 if(currentLevel==1){
-				 	communityCode=node.attributes.id;
-				 	communityName=node.attributes.text;
-				 		if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")){
-						 	addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 小区信息','server_connect.png',node.attributes.id);
-						 }else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
-						 	Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(communityCode,'小区','loadIntoWebCommunityInfo');					 
-						 }else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
-						 
-						 	Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(communityCode);					 
-						 }
-				 
-				 }else if(currentLevel==2){
-				 	buildingCode=node.attributes.id;
-				 	buildingName=node.attributes.text;
-				 		 if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")){
-						 	addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 大楼信息','server_connect.png',node.attributes.id);
-					 
-						 }else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
-						 	Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(buildingCode,'大楼','loadIntoWebBuildingInfo');					 
-						 }else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
-						 
-						 	Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(buildingCode);					 
-						 }
-				 }else if(currentLevel==3){
-				 	houseCode=node.attributes.id;
-						 if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")&&(mainTabs.getActiveTab().id!="tab_id_"+"010308")){
-						 	addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 房间信息','server_connect.png',node.attributes.id);
-					 
-						 }else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
-						 
-						 	Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(houseCode);					 
-						 }else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
-						 	Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(houseCode,'用户','loadIntoWebHouseInfo');					 
-						 }else if(mainTabs.getActiveTab().id=="tab_id_"+"010308"){
-						 	Ext.getDom("frame_"+"tab_id_"+"010308").contentWindow.loadHouseInfo(houseCode);					 
-						 }
-						 
-				 }
+	             if(treeLevel == 4){
+					if(currentLevel==1){
+						statId=node.attributes.id;
+						statName=node.attributes.text;
+							/*if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")){
+								addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 小区信息','server_connect.png',node.attributes.id);
+							}
+							else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
+								Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(communityCode,'小区','loadIntoWebCommunityInfo');
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
+
+								Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(communityCode);
+							}*/
+
+					}else if(currentLevel==2){
+						communityCode=node.attributes.id;
+						communityName=node.attributes.text;
+							if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")){
+								addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 小区信息','server_connect.png',node.attributes.id);
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
+								Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(communityCode,'小区','loadIntoWebCommunityInfo');
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
+
+								Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(communityCode);
+							}
+
+					}else if(currentLevel==3){
+						buildingCode=node.attributes.id;
+						buildingName=node.attributes.text;
+							if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")){
+								addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 大楼信息','server_connect.png',node.attributes.id);
+
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
+								Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(buildingCode,'大楼','loadIntoWebBuildingInfo');
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
+
+								Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(buildingCode);
+							}
+					}else if(currentLevel==4){
+						houseCode=node.attributes.id;
+							if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")&&(mainTabs.getActiveTab().id!="tab_id_"+"010308")){
+								addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 房间信息','server_connect.png',node.attributes.id);
+
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
+
+								Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(houseCode);
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
+								Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(houseCode,'用户','loadIntoWebHouseInfo');
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010308"){
+								Ext.getDom("frame_"+"tab_id_"+"010308").contentWindow.loadHouseInfo(houseCode);
+							}
+
+					}
+                 }
+                 else if (treeLevel == 3){
+					if(currentLevel==1){
+						communityCode=node.attributes.id;
+						communityName=node.attributes.text;
+							if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")){
+								addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 小区信息','server_connect.png',node.attributes.id);
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
+								Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(communityCode,'小区','loadIntoWebCommunityInfo');
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
+
+								Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(communityCode);
+							}
+
+					}else if(currentLevel==2){
+						buildingCode=node.attributes.id;
+						buildingName=node.attributes.text;
+						if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")){
+							addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 大楼信息','server_connect.png',node.attributes.id);
+
+						}else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
+							Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(buildingCode,'大楼','loadIntoWebBuildingInfo');
+						}else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
+
+						Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(buildingCode);
+						}
+					}else if(currentLevel==3){
+						houseCode=node.attributes.id;
+							if((mainTabs.getActiveTab().id!="tab_id_"+"010402")&&(mainTabs.getActiveTab().id!="tab_id_"+"010305")&&(mainTabs.getActiveTab().id!="tab_id_"+"010308")){
+								addTab('module/fc.ered?reqCode=communityInit','基础信息','010303','供热收费管理信息系统 -> 基础信息 -> 房间信息','server_connect.png',node.attributes.id);
+
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010402"){
+
+								Ext.getDom("frame_"+"tab_id_"+"010402").contentWindow.loadInfoList(houseCode);
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010305"){
+								Ext.getDom("frame_"+"tab_id_"+"010305").contentWindow.loadIntoweb(houseCode,'用户','loadIntoWebHouseInfo');
+							}else if(mainTabs.getActiveTab().id=="tab_id_"+"010308"){
+								Ext.getDom("frame_"+"tab_id_"+"010308").contentWindow.loadHouseInfo(houseCode);
+							}
+
+					}
+                 }
+
 			});
 			fcTreePanel.on("load",function(node){
 				         if(currentNodePath==""){   
@@ -284,22 +342,46 @@ function addTab(url,name,menuid,pathCh,icon,param1){
         mainTabs.setActiveTab(n);
   }else{
 		mainTabs.setActiveTab(n);
-	 	if(currentLevel==1){
-	 		if(id=="tab_id_"+"010303"){
-	 			Ext.getDom("frame_"+id).contentWindow.loadCommunityInfo(param1);
-	 		}	 		
-	 	}else if(currentLevel==2){
-	 		if(id=="tab_id_"+"010303"){
-	 			Ext.getDom("frame_"+id).contentWindow.loadBuildingInfo(param1);
-	 		}
-	 	}else if(currentLevel==3){
-	 		if(id=="tab_id_"+"010303"){
-	 			Ext.getDom("frame_"+id).contentWindow.loadHouseInfo(param1);
-	 		}
-	 		if(id=="tab_id_"+"010402"){
-				Ext.getDom("frame_"+id).contentWindow.queryArrearsList(houseCode);				 
+		if(treeLevel == 4){
+			if(currentLevel==1){
+
 			}
-	 	}
+			if(currentLevel==2){
+				if(id=="tab_id_"+"010303"){
+					Ext.getDom("frame_"+id).contentWindow.loadCommunityInfo(param1);
+				}
+			}else if(currentLevel==3){
+				if(id=="tab_id_"+"010303"){
+					Ext.getDom("frame_"+id).contentWindow.loadBuildingInfo(param1);
+				}
+			}else if(currentLevel==4){
+				if(id=="tab_id_"+"010303"){
+					Ext.getDom("frame_"+id).contentWindow.loadHouseInfo(param1);
+				}
+				if(id=="tab_id_"+"010402"){
+					Ext.getDom("frame_"+id).contentWindow.queryArrearsList(houseCode);
+				}
+			}
+		}
+		else if (treeLevel == 3){
+			if(currentLevel==1){
+				if(id=="tab_id_"+"010303"){
+					Ext.getDom("frame_"+id).contentWindow.loadCommunityInfo(param1);
+				}
+			}else if(currentLevel==2){
+				if(id=="tab_id_"+"010303"){
+					Ext.getDom("frame_"+id).contentWindow.loadBuildingInfo(param1);
+				}
+			}else if(currentLevel==3){
+				if(id=="tab_id_"+"010303"){
+					Ext.getDom("frame_"+id).contentWindow.loadHouseInfo(param1);
+				}
+				if(id=="tab_id_"+"010402"){
+					Ext.getDom("frame_"+id).contentWindow.queryArrearsList(houseCode);
+				}
+			}
+		}
+
   }
  
  }
