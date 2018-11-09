@@ -1,0 +1,12 @@
+package org.module.tg.service.impl;
+
+import org.eredlab.g4.bmf.base.BaseServiceImpl;
+import org.module.tg.service.StopService;
+
+/**
+ * Created by Mingyuan Li on 2018/11/5.
+ * Package name: org.module.tg.service.impl.
+ * Project name: extgr.
+ */
+public class StopImpl  extends BaseServiceImpl implements StopService {
+}

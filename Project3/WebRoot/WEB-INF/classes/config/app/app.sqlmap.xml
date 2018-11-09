@@ -8,4 +8,5 @@
   <sqlMap resource="org/module/sf/sqlmap/sf.xml"/>
   <sqlMap resource="org/module/iw/sqlmap/iw.xml"/>
   <sqlMap resource="org/module/rpt/sqlmap/rpt.xml"/>
+  <sqlMap resource="org/module/tg/sqlmap/tg.xml"/>
 </sqlMapConfig>

@@ -1,0 +1,11 @@
+package org.module.tg.service;
+
+import org.eredlab.g4.bmf.base.BaseService;
+
+/**
+ * Created by Mingyuan Li on 2018/11/5.
+ * Package name: org.module.tg.service.
+ * Project name: extgr.
+ */
+public interface StopService extends BaseService {
+}

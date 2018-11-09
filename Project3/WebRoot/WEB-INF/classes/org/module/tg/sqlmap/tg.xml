@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+    <typeAlias alias="dto"
+               type="org.eredlab.g4.ccl.datastructure.impl.BaseDto" />
+
+    <!-- 停供列表 -->
+    <select id="queryStop" parameterClass="map" resultClass="dto">
+        select * from
+        (select
+        b.userName,
+        c.item_name,
+        a.CHARGE_MONTH             ,
+        a.HOUSE_CODE               ,
+        a.ITEM_CODE                ,
+        a.METER_ID                 ,
+        a.CID                      ,
+        COMMUNITY_CODE           ,
+        BUILDING_CODE            ,
+        OWNER_NAME               ,
+        TOTAL_ACCOUNT            ,
+        MINUS_MONEY              ,
+        SUBTRACT_MONEY           ,
+        REAL_ACCOUNT             ,
+        NOW_CASH                 ,
+        USE_TYPE                 ,
+        STANDARD_CODE            ,
+        PRICE                    ,
+        BUILD_AREA               ,
+        FLOOR_AREA               ,
+        CHARGE_AREA              ,
+        PLAN_BEGIN_DATE          ,
+        PLAN_END_DATE            ,
+        DAYS                     ,
+        LATEFEE_STARTDATE        ,
+        LATEFEE_ENDDATE          ,
+        LATEFEE_TOTALACCOUNT     ,
+        LATEFEE_MINUS            ,
+        LATEFEE_REALACCOUNT      ,
+        LATEFEE_NOWCASH          ,
+        LATEFEE_REALACCOUNT-LATEFEE_NOWCASH LATEFEE_QF,
+        LAS_READING              ,
+        THIS_READING             ,
+        POINT_NUMBER             ,
+        WASTE                    ,
+        STOPHEATING              ,
+        STOPTOTALACCOUNT         ,
+        BACK_MONEY               ,
+        IS_INPUT ,
+        a.p_id,
+        d.STOP_TYPE,
+        d.STOP_AREA,
+        d.STOP_DAYS,
+        d.STOP_STATUS,
+        d.IS_STOP,
+        d.REMARK,
+        d.OPERATOR,
+        d.OPERATE_DATE
+        from SF_CHARGE a,EAUSER b,sf_item c,fc_stop d where a.house_manager=b.USERID(+)
+        and a.item_code=c.item_code(+) and a.house_code = d.house_code(+) and a.charge_month = d.charge_month(+)
+        and a.meter_id = d.meter_id(+)
+        ) a
+        <dynamic prepend="WHERE">
+            <isNotEmpty prepend="AND" property="charge_month">
+                charge_month in (#charge_month#)
+            </isNotEmpty>
+            <isNotEmpty prepend="AND" property="p_range">
+                (community_code in ($p_range$) or
+                building_code in ($p_range$) or
+                house_code in ($p_range$))
+            </isNotEmpty>
+            <isNotEmpty prepend="AND" property="chargeStatus">
+                real_account #chargeStatus# now_cash
+            </isNotEmpty>
+            <isNotEmpty prepend="AND" property="item_code">
+                item_code =#item_code#
+            </isNotEmpty>
+            <isNotEmpty prepend="AND" property="owner_name">
+                owner_name =#owner_name#
+            </isNotEmpty>
+        </dynamic>
+        order by house_code asc
+    </select>
+    <select id="queryStopForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+        select count(*)
+        from SF_CHARGE
+        <dynamic prepend="WHERE">
+            <isNotEmpty prepend="AND" property="charge_month">
+                charge_month in (#charge_month#)
+            </isNotEmpty>
+            <isNotEmpty prepend="AND" property="p_range">
+                (community_code in ($p_range$) or
+                building_code in ($p_range$) or
+                house_code in ($p_range$))
+            </isNotEmpty>
+            <isNotEmpty prepend="AND" property="chargeStatus">
+                real_account #chargeStatus# now_cash
+            </isNotEmpty>
+            <isNotEmpty prepend="AND" property="item_code">
+                item_code =#item_code#
+            </isNotEmpty>
+            <isNotEmpty prepend="AND" property="owner_name">
+                owner_name =#owner_name#
+            </isNotEmpty>
+        </dynamic>
+    </select>
+
+    <insert id="saveStop"  parameterClass="dto">
+        INSERT INTO
+		fc_stop (
+		HOUSE_CODE,
+		CHARGE_MONTH,
+		METER_ID,
+		STOP_TYPE,
+		STOP_AREA,
+		STOP_DAYS,
+		STOP_STATUS,
+		IS_STOP,
+		REMARK,
+		OPERATOR,
+		OPERATE_DATE)
+		VALUES (
+		#house_code#,
+		#charge_month#,
+		#meter_id#,
+		#stop_type#,
+		#stop_area#,
+		#stop_days#,
+		#stop_status#,
+		#is_stop#,
+		#remark#,
+		#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+
+	</insert>
+
+    <!-- 应收列表 -->
+    <select id="dataCheck" parameterClass="map" resultClass="dto">
+        SELECT *
+        FROM fc_stop
+
+    </select>
+    <select id="queryStopInfo" parameterClass="map" resultClass="dto">
+        SELECT *
+        FROM fc_stop
+        where house_code= #house_code#
+		and charge_month=#charge_month# and meter_id=#meter_id#
+    </select>
+
+    <update id="updateStop" parameterClass="dto">
+        UPDATE fc_stop
+        set
+        OPERATOR = #operator#,
+        OPERATE_DATE = to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+        <isNotNull prepend="," property="stop_type">
+            STOP_TYPE = #stop_type#
+        </isNotNull>
+        ,
+        STOP_AREA = #stop_area#
+
+        ,
+        STOP_DAYS = #stop_days#
+
+        <isNotNull prepend="," property="stop_status">
+            STOP_STATUS = #stop_status#
+        </isNotNull>
+        <isNotNull prepend="," property="remark">
+            REMARK = #remark#
+        </isNotNull>
+
+        where house_code= #house_code#
+        and charge_month=#charge_month# and meter_id=#meter_id#
+    </update>
+
+    <update id="startHeat" parameterClass="dto">
+        UPDATE fc_stop
+        set
+        IS_Stop = #is_stop#
+        where house_code= #house_code#
+        and charge_month=#charge_month# and meter_id=#meter_id#
+    </update>
+
+    <delete id="deleteStop" parameterClass="map">
+       DELETE FROM fc_stop where house_code= #house_code#
+        and charge_month=#charge_month# and meter_id=#meter_id#
+	</delete>
+
+
+
+</sqlMap>
+

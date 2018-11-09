@@ -9,110 +9,118 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
-<bean id="SourceService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.fc.service.impl.SourceImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="StationService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.fc.service.impl.StationImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<!-- 小区 -->
-<bean id="CommunityService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.fc.service.impl.CommunityImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="BuildingService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.fc.service.impl.BuildingImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="HouseService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.fc.service.impl.HouseImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="ChargeService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.sf.service.impl.ChargeImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="CreatPLanService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.sf.service.impl.CreatPLanImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="MinusService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.sf.service.impl.MinusImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="RollbackService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.sf.service.impl.RollbackImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="InvoiceService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.sf.service.impl.InvoiceImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="IntoWebService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.iw.service.impl.IntoWebImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="StandardService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.sf.service.impl.StandardImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="DiscountService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.sf.service.impl.DiscountImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="BankService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.sf.service.impl.BankImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
-<bean id="UserCardService" parent="baseTransactionProxyG4">
-	<property name="target">
-		<bean class="org.module.fc.service.impl.UserCardImpl">
-			<property name="g4Dao" ref="g4Dao" />
-		</bean>
-	</property>
-</bean>
+	<!-- 停供管理 -->
+	<bean id="StopService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.tg.service.impl.StopImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="SourceService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.fc.service.impl.SourceImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="StationService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.fc.service.impl.StationImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<!-- 小区 -->
+	<bean id="CommunityService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.fc.service.impl.CommunityImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="BuildingService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.fc.service.impl.BuildingImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="HouseService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.fc.service.impl.HouseImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="ChargeService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.sf.service.impl.ChargeImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="CreatPLanService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.sf.service.impl.CreatPLanImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="MinusService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.sf.service.impl.MinusImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="RollbackService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.sf.service.impl.RollbackImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="InvoiceService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.sf.service.impl.InvoiceImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="IntoWebService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.iw.service.impl.IntoWebImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="StandardService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.sf.service.impl.StandardImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="DiscountService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.sf.service.impl.DiscountImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="BankService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.sf.service.impl.BankImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="UserCardService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.fc.service.impl.UserCardImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
 </beans>
