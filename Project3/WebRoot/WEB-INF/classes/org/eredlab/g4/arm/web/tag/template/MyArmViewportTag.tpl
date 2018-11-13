@@ -75,8 +75,8 @@ Ext.onReady(function(){
 				height : 380,
 				rootVisible:false,
 				autoScroll : true, // 内容溢出时产生滚动条
-				animate : false
-					// 是否动画显示
+				animate : false// 是否动画显示
+
 			});			
              // 选中根节点
 			fcTreePanel.getRootNode().select();
@@ -208,6 +208,7 @@ Ext.onReady(function(){
 				         }   
 				  
 			});
+
 			//左菜单
 			var westPanel = new Ext.Panel({region:'west',
                 width: 220,
@@ -224,7 +225,8 @@ Ext.onReady(function(){
                   animate:true,
 				  activeOnTop : ${activeOnTop}
 				},
-				/*tbar:[ {
+				tbar:[
+					/*{
 	                iconCls: 'expand-allIcon',
 	                id:'searchTbar',
 					tooltip: '查询项',
@@ -242,38 +244,52 @@ Ext.onReady(function(){
 								text : '单位名称',
 								iconCls : 'userIcon',
 								handler : function() {
-									
+
 								}
 							},{
 								text : '原始编号',
 								iconCls : 'userIcon',
 								handler : function() {
-									
+
 								}
 							} ]
 						}
-	            },' ',
-				new Ext.form.TextField({
-					width: 150,
-					emptyText:'输入房间编号/用户姓名',
-	                enableKeyEvents: true,
+	            },' ',*/
+				new Ext.form.Checkbox({
+					id : 'multiSelect',
+					name : 'multiSelect',
+					boxLabel : '复选',
 					listeners:{
-						render: function(f){
-	                    	
-						},
-	                    scope: this
+						'check':function(obj, ischecked){
+							if(Ext.getCmp('multiSelect').getValue()==true){
+								var rootNode = Ext.getCmp('p1').getRootNode();
+								rootNode.eachChild(function (child) {
+									child.getUI().checkbox.checked = true;
+									});
+							}
+							if(Ext.getCmp('multiSelect').getValue()==false){
+								var rootNode = Ext.getCmp('p1').getRootNode();
+								rootNode.eachChild(function (child) {
+									child.getUI().checkbox.checked = false;
+								});
+							}
+						}
 					}
-				}), ' ', ' ',
+
+				}),
+				/*' ', ' ',
 				{
 	                iconCls: 'magnifier',
 					tooltip: '查询',
-	                handler: function(){ 
-						westPanel.layout.setActiveItem('p1'); 
+	                handler: function(){
+						westPanel.layout.setActiveItem('p1');
 					},
 	                scope: this
-	            }],*/
+	            }*/
+				],
 	            items : [fcTreePanel]
              });
+
              var viewport = new Ext.Viewport({
                  layout:'border',
                  items:[
