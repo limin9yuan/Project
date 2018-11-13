@@ -208,6 +208,11 @@
 		UPDATE fc_building SET stat_id=#stat_id#
 		where  COMMUNITY_CODE = #community_code#
 	</update>
+	<!-- 修改小区下应收数据的换热站 -->
+	<update id="updateChargeStation" parameterClass="dto">
+		UPDATE sf_charge SET stat_id=#stat_id#
+		where  COMMUNITY_CODE = #community_code#
+	</update>
 	<!--删除小区-->
 	<delete id="deleteCommunity" parameterClass="map">
        DELETE FROM fc_community WHERE COMMUNITY_CODE = #community_code#

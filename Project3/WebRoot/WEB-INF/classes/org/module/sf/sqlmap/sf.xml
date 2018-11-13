@@ -38,7 +38,7 @@
 				LATEFEE_MINUS            ,
 				LATEFEE_REALACCOUNT      ,
 				LATEFEE_NOWCASH          ,
-				LATEFEE_REALACCOUNT-LATEFEE_NOWCASH LATEFEE_QF,
+				nvl(LATEFEE_REALACCOUNT,0)-nvl(LATEFEE_NOWCASH,0) LATEFEE_QF,
 				LAS_READING              ,
 				THIS_READING             ,
 				POINT_NUMBER             ,
@@ -47,7 +47,8 @@
 				STOPTOTALACCOUNT         ,
 				BACK_MONEY               ,
 				IS_INPUT ,
-				a.p_id
+				a.p_id,
+				a.STAT_ID
 		from SF_CHARGE a,EAUSER b,sf_item c where a.house_manager=b.USERID(+)
 		and a.item_code=c.item_code(+)
 		) a 
@@ -56,7 +57,8 @@
 				charge_month in (#charge_month#)
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -80,7 +82,8 @@
 				charge_month in (#charge_month#)
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -144,7 +147,8 @@
 		STOPTOTALACCOUNT         ,
 		BACK_MONEY               ,
 		IS_INPUT ,
-		a.p_id
+		a.p_id,
+		a.stat_id
 
 		from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d
 		where a.house_manager=b.USERID(+)
@@ -160,7 +164,8 @@
 				a.ITEM_CODE in (#query_item_code#)
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range">
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -217,7 +222,8 @@
 		STOPTOTALACCOUNT         ,
 		BACK_MONEY               ,
 		IS_INPUT ,
-		a.p_id
+		a.p_id,
+		a.stat_id
 
 		from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d
 		where a.house_manager=b.USERID(+)
@@ -230,7 +236,8 @@
 				charge_month in (#charge_month#)
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range">
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -269,7 +276,8 @@
 			a.charge_month in (#charge_month#)
 		</isNotEmpty>
 		<isNotEmpty prepend="AND" property="p_range">
-			(a.community_code in ($p_range$) or
+			(a.stat_id in ($p_range$) or
+			a.community_code in ($p_range$) or
 			a.building_code in ($p_range$) or
 			a.house_code in ($p_range$))
 		</isNotEmpty>
@@ -299,7 +307,8 @@
 									charge_month in (#charge_month#)
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -336,7 +345,8 @@
 				item_code=#item_code#
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>			
@@ -388,7 +398,8 @@
 				d.operate_date,
 				e.userName operator,
 				d.remark,
-				d.m_id
+				d.m_id,
+				a.stat_id
 		from SF_CHARGE a,EAUSER b,sf_item c,sf_minus d,EAUSER e where a.house_manager=b.USERID(+)
 		and a.item_code=c.item_code(+)
 		and a.house_code=d.house_code(+) 
@@ -402,7 +413,8 @@
 									charge_month in (#charge_month#)
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -415,7 +427,7 @@
 	<select id="queryMinusForPageCount" parameterClass="map" resultClass="java.lang.Integer">
 		select count(*) from 
 		(select 
-				a.house_code,a.community_code,a.building_code,a.charge_month
+				a.house_code,a.community_code,a.building_code,a.charge_month,a.stat_id
 		from SF_CHARGE a,EAUSER b,sf_item c,sf_minus d where a.house_manager=b.USERID(+)
 		and a.item_code=c.item_code(+)
 		and a.house_code=d.house_code(+) 
@@ -428,7 +440,8 @@
 									charge_month in (#charge_month#)
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -461,7 +474,7 @@
 		a.charge_month,a.TOTAL_ACCOUNT,
 		a.MINUS_MONEY,a.SUBTRACT_MONEY,a.REAL_ACCOUNT,a.NOW_CASH,
 		a.BUILD_AREA,a.FLOOR_AREA,a.CHARGE_AREA,b.minus_money this_minus_money,
-    a.LATEFEE_TOTALACCOUNT,a.LATEFEE_MINUS,a.LATEFEE_REALACCOUNT,a.LATEFEE_NOWCASH
+    a.LATEFEE_TOTALACCOUNT,a.LATEFEE_MINUS,a.LATEFEE_REALACCOUNT,a.LATEFEE_NOWCASH,a.stat_id
 		from SF_CHARGE a, SF_MINUS b where 
 		a.house_code=b.house_code(+) 
     	and a.meter_id=b.meter_id(+) 
@@ -472,7 +485,8 @@
 									charge_month in (#charge_month#)
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -733,7 +747,8 @@
 				a.rollback_operate_date,
 				d.userName operator_name,
 				a.operate_date,
-				c.item_name,CHARGE_MONTH ,
+				c.item_name,
+				a.CHARGE_MONTH ,
 				a.HOUSE_CODE               ,
 				a.ITEM_CODE              ,
 				a.METER_ID                 ,
@@ -758,12 +773,14 @@
 				a.rollback_flag rollback_flag_ora,
 				case when a.rollback_flag='1' then '已冲账' else '' end rollback_flag,
 				a.rollback_reason,a.rollback_remark,
-				a.operator,a.rollback_operator
-		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e where 
+				a.operator,a.rollback_operator,
+				f.stat_id
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e, sf_charge f where
 		a.rollback_operator=b.USERID(+)
 		and a.item_code=c.item_code(+)
 		and a.operator=d.USERID(+)
 		and a.bill_man=e.USERID(+)
+		and a.house_code = f.house_code(+)
 		) a 
 		<dynamic prepend="WHERE">
 			<isNotEmpty prepend="AND" property="house_code"> 				
@@ -782,7 +799,8 @@
 				operate_date&lt;=#end_date#||' 23:59:59'
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -808,7 +826,7 @@
 				a.rollback_operate_date,
 				d.userName operator_name,
 				a.operate_date,
-				c.item_name,CHARGE_MONTH ,
+				c.item_name,a.CHARGE_MONTH ,
 				a.HOUSE_CODE               ,
 				a.ITEM_CODE              ,
 				a.METER_ID                 ,
@@ -833,12 +851,14 @@
 				a.rollback_flag rollback_flag_ora,
 				case when a.rollback_flag='1' then '已冲账' else '' end rollback_flag,
 				a.rollback_reason,a.rollback_remark,
-				a.operator,a.rollback_operator
-		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e where 
+				a.operator,a.rollback_operator,
+				f.stat_id
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e,sf_charge f where
 		a.rollback_operator=b.USERID(+)
 		and a.item_code=c.item_code(+)
 		and a.operator=d.USERID(+)
 		and a.bill_man=e.USERID(+)
+		and a.house_code = f.house_code(+)
 		) a 
 		<dynamic prepend="WHERE">
 			<isNotEmpty prepend="AND" property="house_code"> 				
@@ -857,7 +877,8 @@
 				operate_date&lt;=#end_date#||' 23:59:59'
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -877,14 +898,14 @@
 	</select>
 	<!-- 查询收费明细 -->
 	<select id="sumChargeDetail" parameterClass="map" resultClass="dto">
-		
-		  select   '共' || COUNT(house_code) || '' AS house_count,
-				sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
-				
-				sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,
-				sum(REAL_CHARGE)  NOW_CASH              
-		from SF_DETAIL 
-		<dynamic prepend="WHERE">
+
+		select   '共' || COUNT(a.house_code) || '' AS house_count,
+		sum(a.TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
+		sum(a.REAL_ACCOUNT)  REAL_ACCOUNT          ,
+		sum(a.REAL_CHARGE)  NOW_CASH
+		from SF_DETAIL a, sf_charge f
+		where a.house_code = f.house_code
+		<dynamic prepend="">
 			<isNotEmpty prepend="AND" property="house_code"> 				
 				house_code=#house_code#
 			</isNotEmpty>
@@ -907,9 +928,10 @@
 				rollback_operate_date&lt;=#rollback_end_date#||' 23:59:59'
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
-				building_code in ($p_range$) or
-				house_code in ($p_range$))
+				(f.stat_id in ($p_range$) or
+				a.community_code in ($p_range$) or
+				a.building_code in ($p_range$) or
+				a.house_code in ($p_range$))
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="rollback_operator"> 
 				rollback_operator=#rollback_operator#
@@ -1441,7 +1463,7 @@
 				a.rollback_operate_date,
 				d.userName operator_name,
 				a.operate_date,
-				c.item_name,CHARGE_MONTH ,
+				c.item_name,a.CHARGE_MONTH ,
 				a.HOUSE_CODE               ,
 				a.ITEM_CODE              ,
 				a.METER_ID                 ,
@@ -1466,13 +1488,15 @@
 				case when a.rollback_flag='1' then '已冲账' else '' end rollback_flag,
 				case when a.bankflag='1' then '已平账'
 				when a.bankflag='0' then '未平账' end bankflag_SHOW,a.bankflag,
-				a.rollback_reason,a.rollback_remark
-		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e where 
+				a.rollback_reason,a.rollback_remark,
+				f.stat_id
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e, sf_charge f where
 		a.item_code=c.item_code(+)
 		and a.bill_man=e.USERID(+)
 		and a.rollback_operator=b.USERID(+)
 		and a.operator=d.USERID(+)
 		and a.banknumber is not null
+		and a.house_code = f.house_code(+)
 		) a 
 		<dynamic prepend="WHERE">
 			<isNotEmpty prepend="AND" property="house_code"> 				
@@ -1488,7 +1512,8 @@
 				operate_date&lt;=#end_date#||' 23:59:59'
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -1505,7 +1530,7 @@
 				a.rollback_operate_date,
 				d.userName operator_name,
 				a.operate_date,
-				c.item_name,CHARGE_MONTH ,
+				c.item_name,a.CHARGE_MONTH ,
 				a.HOUSE_CODE               ,
 				a.ITEM_CODE              ,
 				a.METER_ID                 ,
@@ -1530,13 +1555,14 @@
 				case when a.rollback_flag='1' then '已冲账' else '' end rollback_flag,
 				case when a.bankflag!='0' then '已平账'
 				when a.bankflag='0' then '未平账' end bankflag_SHOW,a.bankflag,
-				a.rollback_reason,a.rollback_remark
-		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e where 
+				a.rollback_reason,a.rollback_remark,f.stat_id
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e,sf_charge f where
 		a.item_code=c.item_code(+)
 		and a.bill_man=e.USERID(+)
 		and a.rollback_operator=b.USERID(+)
 		and a.operator=d.USERID(+)
 		and a.banknumber is not null
+		and a.house_code = f.house_code(+)
 		) a 
 		<dynamic prepend="WHERE">
 			<isNotEmpty prepend="AND" property="house_code"> 				
@@ -1552,7 +1578,8 @@
 				operate_date&lt;=#end_date#||' 23:59:59'
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>
@@ -1563,14 +1590,17 @@
 	</select>
 	<!-- 查询收费明细 -->
 	<select id="sumChargeDetailBank" parameterClass="map" resultClass="dto">
-		
-		
-		  select   '共' || COUNT(house_code) || '' AS house_count,
-				sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
-				
-				sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,
-				sum(REAL_CHARGE)  NOW_CASH              
-		from SF_DETAIL where banknumber is not null
+
+
+		select   '共' || COUNT(a.house_code) || '' AS house_count,
+		sum(a.TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,
+		sum(a.REAL_ACCOUNT)  REAL_ACCOUNT          ,
+		sum(REAL_CHARGE)  NOW_CASH
+		from SF_DETAIL a, sf_charge f
+		where banknumber is not null
+		and a.house_code = f.house_code(+)
+		and a.COMMUNITY_CODE = f.COMMUNITY_CODE(+)
+		and a.METER_ID = f.METER_ID(+)
 		<dynamic prepend="">			
 			<isNotEmpty prepend="AND" property="house_code"> 				
 				house_code=#house_code#
@@ -1585,9 +1615,10 @@
 				operate_date&lt;=#end_date#||' 23:59:59'
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
-				building_code in ($p_range$) or
-				house_code in ($p_range$))
+				(f.stat_id in ($p_range$) or
+				a.community_code in ($p_range$) or
+				a.building_code in ($p_range$) or
+				a.house_code in ($p_range$))
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="have_bank"> 
 				(bankflag=#have_bank# and #have_bank#='0') or (bankflag!='0' and #have_bank#='1')
@@ -1605,7 +1636,8 @@
 				item_code=#item_code#
 			</isNotEmpty>
 			<isNotEmpty prepend="AND" property="p_range"> 				
-				(community_code in ($p_range$) or
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
 				building_code in ($p_range$) or
 				house_code in ($p_range$))
 			</isNotEmpty>			

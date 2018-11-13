@@ -25,7 +25,7 @@
 	<!-- 查询第一级树节点(小区)-->
 	<select id="queryCommunityByStation" parameterClass="map"
 			resultClass="dto">
-		SELECT a.community_code as id, a.community_code||' '||a.community_name||' ('||a.building_count||')' as text,nvl(a.building_count,0) as child_Count
+		SELECT distinct a.community_code as id, a.community_code||' '||a.community_name||' ('||a.building_count||')' as text,nvl(a.building_count,0) as child_Count
 		FROM
 		fc_community a
 		LEFT join FC_HOUSE b on a.COMMUNITY_CODE = b.COMMUNITY_CODE
