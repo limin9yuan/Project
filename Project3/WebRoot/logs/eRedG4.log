@@ -1583,3 +1583,785 @@
 2018-11-19 10:55:24,136 DEBUG [java.sql.PreparedStatement] - <{pstm-100834} Executing Statement:    DELETE      FROM eahttpsession   WHERE                sessionid = ?                >
 2018-11-19 10:55:24,136 DEBUG [java.sql.PreparedStatement] - <{pstm-100834} Parameters: [11qiacq0btssg]>
 2018-11-19 10:55:24,136 DEBUG [java.sql.PreparedStatement] - <{pstm-100834} Types: [java.lang.String]>
+2018-11-19 11:20:07,957 DEBUG [java.sql.Connection] - <{conn-100835} Connection>
+2018-11-19 11:20:07,958 DEBUG [java.sql.Connection] - <{conn-100835} Preparing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:20:07,958 DEBUG [java.sql.PreparedStatement] - <{pstm-100836} Executing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:20:07,958 DEBUG [java.sql.PreparedStatement] - <{pstm-100836} Parameters: [100043]>
+2018-11-19 11:20:07,958 DEBUG [java.sql.PreparedStatement] - <{pstm-100836} Types: [java.lang.String]>
+2018-11-19 11:20:07,974 DEBUG [java.sql.ResultSet] - <{rset-100837} ResultSet>
+2018-11-19 11:20:07,974 DEBUG [java.sql.ResultSet] - <{rset-100837} Header: [theme]>
+2018-11-19 11:20:07,974 DEBUG [java.sql.ResultSet] - <{rset-100837} Result: [default]>
+2018-11-19 11:20:08,226 DEBUG [java.sql.Connection] - <{conn-100838} Connection>
+2018-11-19 11:20:08,226 DEBUG [java.sql.Connection] - <{conn-100838} Preparing Statement: SELECT * FROM (SELECT page.*, ROWNUM AS rn FROM (   SELECT   paramid, paramkey, paramvalue, remark       FROM eaparam a      WHERE 1 = 1                     ORDER BY paramid DESC  ) page) WHERE rn BETWEEN 1 AND 50>
+2018-11-19 11:20:08,226 DEBUG [java.sql.PreparedStatement] - <{pstm-100839} Executing Statement: SELECT * FROM (SELECT page.*, ROWNUM AS rn FROM (   SELECT   paramid, paramkey, paramvalue, remark       FROM eaparam a      WHERE 1 = 1                     ORDER BY paramid DESC  ) page) WHERE rn BETWEEN 1 AND 50>
+2018-11-19 11:20:08,227 DEBUG [java.sql.PreparedStatement] - <{pstm-100839} Parameters: []>
+2018-11-19 11:20:08,227 DEBUG [java.sql.PreparedStatement] - <{pstm-100839} Types: []>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} ResultSet>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} Header: [paramid, paramkey, paramvalue, remark, rn]>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000033, PRINT_DRIVER, 0, 0:Applet 1:Lodop, 1]>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000032, LOCK_DEVICE, 0, 0:无锁闭阀 1:有锁闭阀, 2]>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000031, TREE_LEVEL, 3, 4:换热站--小区--大楼--房间 3:小区--大楼--房间, 3]>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000028, WEST_CARDMENU_ACTIVEONTOP, 1, 左侧卡片树菜单当前活动卡片是否置顶1:置顶;0:不置顶, 4]>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000026, MULTI_SESSION, 1, 是否运行同一个帐户建立同时多个会话连接。1:允许;0:不允许, 5]>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000025, PAGE_LOAD_MSG, 系统正在载入页面,请稍等..., 页面加载等待提示信息, 6]>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000024, INDEX_BANNER, /resource/image/logo-139.png, 首页Banner图片,必须为透明的PNG图片,建议尺寸:600 X 58, 7]>
+2018-11-19 11:20:08,331 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000023, WELCOME_PAGE_TITLE, 我的工作台, 缺省欢迎页面的标题, 8]>
+2018-11-19 11:20:08,332 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000022, MENU_FIRST, 供热系统, 中心面板导航菜单的第一个节点名, 9]>
+2018-11-19 11:20:08,335 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000021, BOTTOM_COPYRIGHT, Copyright&copy 2011 Credit&reg 中国.山西 联系电话13503513659, 右下角的版权信息, 10]>
+2018-11-19 11:20:08,335 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000020, WEST_NAVIGATE_TITLE, 基础信息, 左边菜单导航栏标题, 11]>
+2018-11-19 11:20:08,335 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000019, LOGIN_WINDOW_BANNER, /resource/image/login_banner.png, 登录窗口的Banner图片。尺寸规格:450 X 70, 12]>
+2018-11-19 11:20:08,335 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000018, LOGIN_WINDOW_TITLE, 立信供热收费管理信息系统, 登录窗口标题, 13]>
+2018-11-19 11:20:08,335 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000017, SYS_TITLE, 立信供热收费管理信息系统, 系统标题, 14]>
+2018-11-19 11:20:08,335 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000010, DEFAULT_DEVELOP_ACCOUNT, developer, 系统默认开发专用帐户, 15]>
+2018-11-19 11:20:08,335 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000009, DEFAULT_ADMIN_ACCOUNT, super, 默认超级管理员帐户, 16]>
+2018-11-19 11:20:08,335 DEBUG [java.sql.ResultSet] - <{rset-100840} Result: [10000008, SYS_DEFAULT_THEME, default, 系统默认主题皮肤, 17]>
+2018-11-19 11:20:08,335 DEBUG [java.sql.Connection] - <{conn-100841} Connection>
+2018-11-19 11:20:08,337 DEBUG [java.sql.Connection] - <{conn-100841} Preparing Statement:    SELECT count(*) as count     FROM eaparam a WHERE 1 = 1                    >
+2018-11-19 11:20:08,337 DEBUG [java.sql.PreparedStatement] - <{pstm-100842} Executing Statement:    SELECT count(*) as count     FROM eaparam a WHERE 1 = 1                    >
+2018-11-19 11:20:08,337 DEBUG [java.sql.PreparedStatement] - <{pstm-100842} Parameters: []>
+2018-11-19 11:20:08,337 DEBUG [java.sql.PreparedStatement] - <{pstm-100842} Types: []>
+2018-11-19 11:20:08,353 DEBUG [java.sql.ResultSet] - <{rset-100843} ResultSet>
+2018-11-19 11:20:08,353 DEBUG [java.sql.ResultSet] - <{rset-100843} Header: [count]>
+2018-11-19 11:20:08,353 DEBUG [java.sql.ResultSet] - <{rset-100843} Result: [17]>
+2018-11-19 11:20:29,554 DEBUG [java.sql.Connection] - <{conn-100844} Connection>
+2018-11-19 11:20:29,555 DEBUG [java.sql.Connection] - <{conn-100844} Preparing Statement:           UPDATE eaparam   SET                paramkey = ?        ,           paramvalue = ?        ,           remark = ?                        WHERE paramid = ?      >
+2018-11-19 11:20:29,555 DEBUG [java.sql.PreparedStatement] - <{pstm-100845} Executing Statement:           UPDATE eaparam   SET                paramkey = ?        ,           paramvalue = ?        ,           remark = ?                        WHERE paramid = ?      >
+2018-11-19 11:20:29,555 DEBUG [java.sql.PreparedStatement] - <{pstm-100845} Parameters: [PRINT_DRIVER, 1, 0:Applet 1:Lodop, 10000033]>
+2018-11-19 11:20:29,555 DEBUG [java.sql.PreparedStatement] - <{pstm-100845} Types: [java.lang.String, java.lang.String, java.lang.String, java.lang.String]>
+2018-11-19 11:20:29,740 DEBUG [java.sql.Connection] - <{conn-100846} Connection>
+2018-11-19 11:20:29,740 DEBUG [java.sql.Connection] - <{conn-100846} Preparing Statement: SELECT * FROM (SELECT page.*, ROWNUM AS rn FROM (   SELECT   paramid, paramkey, paramvalue, remark       FROM eaparam a      WHERE 1 = 1                     ORDER BY paramid DESC  ) page) WHERE rn BETWEEN 1 AND 50>
+2018-11-19 11:20:29,740 DEBUG [java.sql.PreparedStatement] - <{pstm-100847} Executing Statement: SELECT * FROM (SELECT page.*, ROWNUM AS rn FROM (   SELECT   paramid, paramkey, paramvalue, remark       FROM eaparam a      WHERE 1 = 1                     ORDER BY paramid DESC  ) page) WHERE rn BETWEEN 1 AND 50>
+2018-11-19 11:20:29,740 DEBUG [java.sql.PreparedStatement] - <{pstm-100847} Parameters: []>
+2018-11-19 11:20:29,740 DEBUG [java.sql.PreparedStatement] - <{pstm-100847} Types: []>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} ResultSet>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Header: [paramid, paramkey, paramvalue, remark, rn]>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000033, PRINT_DRIVER, 1, 0:Applet 1:Lodop, 1]>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000032, LOCK_DEVICE, 0, 0:无锁闭阀 1:有锁闭阀, 2]>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000031, TREE_LEVEL, 3, 4:换热站--小区--大楼--房间 3:小区--大楼--房间, 3]>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000028, WEST_CARDMENU_ACTIVEONTOP, 1, 左侧卡片树菜单当前活动卡片是否置顶1:置顶;0:不置顶, 4]>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000026, MULTI_SESSION, 1, 是否运行同一个帐户建立同时多个会话连接。1:允许;0:不允许, 5]>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000025, PAGE_LOAD_MSG, 系统正在载入页面,请稍等..., 页面加载等待提示信息, 6]>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000024, INDEX_BANNER, /resource/image/logo-139.png, 首页Banner图片,必须为透明的PNG图片,建议尺寸:600 X 58, 7]>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000023, WELCOME_PAGE_TITLE, 我的工作台, 缺省欢迎页面的标题, 8]>
+2018-11-19 11:20:29,747 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000022, MENU_FIRST, 供热系统, 中心面板导航菜单的第一个节点名, 9]>
+2018-11-19 11:20:29,750 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000021, BOTTOM_COPYRIGHT, Copyright&copy 2011 Credit&reg 中国.山西 联系电话13503513659, 右下角的版权信息, 10]>
+2018-11-19 11:20:29,750 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000020, WEST_NAVIGATE_TITLE, 基础信息, 左边菜单导航栏标题, 11]>
+2018-11-19 11:20:29,750 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000019, LOGIN_WINDOW_BANNER, /resource/image/login_banner.png, 登录窗口的Banner图片。尺寸规格:450 X 70, 12]>
+2018-11-19 11:20:29,750 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000018, LOGIN_WINDOW_TITLE, 立信供热收费管理信息系统, 登录窗口标题, 13]>
+2018-11-19 11:20:29,750 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000017, SYS_TITLE, 立信供热收费管理信息系统, 系统标题, 14]>
+2018-11-19 11:20:29,750 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000010, DEFAULT_DEVELOP_ACCOUNT, developer, 系统默认开发专用帐户, 15]>
+2018-11-19 11:20:29,750 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000009, DEFAULT_ADMIN_ACCOUNT, super, 默认超级管理员帐户, 16]>
+2018-11-19 11:20:29,750 DEBUG [java.sql.ResultSet] - <{rset-100848} Result: [10000008, SYS_DEFAULT_THEME, default, 系统默认主题皮肤, 17]>
+2018-11-19 11:20:29,750 DEBUG [java.sql.Connection] - <{conn-100849} Connection>
+2018-11-19 11:20:29,751 DEBUG [java.sql.Connection] - <{conn-100849} Preparing Statement:    SELECT count(*) as count     FROM eaparam a WHERE 1 = 1                    >
+2018-11-19 11:20:29,751 DEBUG [java.sql.PreparedStatement] - <{pstm-100850} Executing Statement:    SELECT count(*) as count     FROM eaparam a WHERE 1 = 1                    >
+2018-11-19 11:20:29,751 DEBUG [java.sql.PreparedStatement] - <{pstm-100850} Parameters: []>
+2018-11-19 11:20:29,751 DEBUG [java.sql.PreparedStatement] - <{pstm-100850} Types: []>
+2018-11-19 11:20:29,757 DEBUG [java.sql.ResultSet] - <{rset-100851} ResultSet>
+2018-11-19 11:20:29,757 DEBUG [java.sql.ResultSet] - <{rset-100851} Header: [count]>
+2018-11-19 11:20:29,757 DEBUG [java.sql.ResultSet] - <{rset-100851} Result: [17]>
+2018-11-19 11:20:31,101 DEBUG [java.sql.Connection] - <{conn-100852} Connection>
+2018-11-19 11:20:31,101 DEBUG [java.sql.Connection] - <{conn-100852} Preparing Statement:    SELECT paramid, paramkey, paramvalue     FROM eaparam  >
+2018-11-19 11:20:31,101 DEBUG [java.sql.PreparedStatement] - <{pstm-100853} Executing Statement:    SELECT paramid, paramkey, paramvalue     FROM eaparam  >
+2018-11-19 11:20:31,101 DEBUG [java.sql.PreparedStatement] - <{pstm-100853} Parameters: []>
+2018-11-19 11:20:31,101 DEBUG [java.sql.PreparedStatement] - <{pstm-100853} Types: []>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} ResultSet>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Header: [paramid, paramkey, paramvalue]>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000008, SYS_DEFAULT_THEME, default]>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000009, DEFAULT_ADMIN_ACCOUNT, super]>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000010, DEFAULT_DEVELOP_ACCOUNT, developer]>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000017, SYS_TITLE, 立信供热收费管理信息系统]>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000018, LOGIN_WINDOW_TITLE, 立信供热收费管理信息系统]>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000019, LOGIN_WINDOW_BANNER, /resource/image/login_banner.png]>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000020, WEST_NAVIGATE_TITLE, 基础信息]>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000021, BOTTOM_COPYRIGHT, Copyright&copy 2011 Credit&reg 中国.山西 联系电话13503513659]>
+2018-11-19 11:20:31,107 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000022, MENU_FIRST, 供热系统]>
+2018-11-19 11:20:31,109 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000023, WELCOME_PAGE_TITLE, 我的工作台]>
+2018-11-19 11:20:31,109 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000024, INDEX_BANNER, /resource/image/logo-139.png]>
+2018-11-19 11:20:31,109 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000026, MULTI_SESSION, 1]>
+2018-11-19 11:20:31,109 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000025, PAGE_LOAD_MSG, 系统正在载入页面,请稍等...]>
+2018-11-19 11:20:31,109 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000028, WEST_CARDMENU_ACTIVEONTOP, 1]>
+2018-11-19 11:20:31,109 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000031, TREE_LEVEL, 3]>
+2018-11-19 11:20:31,109 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000032, LOCK_DEVICE, 0]>
+2018-11-19 11:20:31,109 DEBUG [java.sql.ResultSet] - <{rset-100854} Result: [10000033, PRINT_DRIVER, 1]>
+2018-11-19 11:23:35,339 DEBUG [java.sql.Connection] - <{conn-100008} Connection>
+2018-11-19 11:23:35,344 DEBUG [java.sql.Connection] - <{conn-100008} Preparing Statement:    SELECT a.userid, a.username, a.ACCOUNT, a.PASSWORD, a.sex, a.deptid, b.theme,          (SELECT customid             FROM eadept            WHERE deptid = a.deptid) AS customid,            (SELECT customName             FROM xt_custom            WHERE customid = (SELECT customid             FROM eadept            WHERE deptid = a.deptid)) AS customName                 FROM eauser a, eausersubinfo b     WHERE a.userid = b.userid and a.locked = ?       AND      a.account = ?                 >
+2018-11-19 11:23:35,344 DEBUG [java.sql.PreparedStatement] - <{pstm-100009} Executing Statement:    SELECT a.userid, a.username, a.ACCOUNT, a.PASSWORD, a.sex, a.deptid, b.theme,          (SELECT customid             FROM eadept            WHERE deptid = a.deptid) AS customid,            (SELECT customName             FROM xt_custom            WHERE customid = (SELECT customid             FROM eadept            WHERE deptid = a.deptid)) AS customName                 FROM eauser a, eausersubinfo b     WHERE a.userid = b.userid and a.locked = ?       AND      a.account = ?                 >
+2018-11-19 11:23:35,344 DEBUG [java.sql.PreparedStatement] - <{pstm-100009} Parameters: [0, admin]>
+2018-11-19 11:23:35,344 DEBUG [java.sql.PreparedStatement] - <{pstm-100009} Types: [java.lang.String, java.lang.String]>
+2018-11-19 11:23:35,362 DEBUG [java.sql.ResultSet] - <{rset-100010} ResultSet>
+2018-11-19 11:23:35,363 DEBUG [java.sql.ResultSet] - <{rset-100010} Header: [userid, username, account, password, sex, deptid, theme, customid, customname]>
+2018-11-19 11:23:35,363 DEBUG [java.sql.ResultSet] - <{rset-100010} Result: [100043, 管理员, admin, RaFutWeh0ww=, 0, 001, default, 01, 康馨供热]>
+2018-11-19 11:23:35,365 DEBUG [java.sql.Connection] - <{conn-100011} Connection>
+2018-11-19 11:23:35,365 DEBUG [java.sql.Connection] - <{conn-100011} Preparing Statement:     SELECT        sessionid as sessionID, userid, username, account, createtime as sessionCreatedTime, explorer, loginip as loginIP        FROM eahttpsession where sessionid = ?  >
+2018-11-19 11:23:35,365 DEBUG [java.sql.PreparedStatement] - <{pstm-100012} Executing Statement:     SELECT        sessionid as sessionID, userid, username, account, createtime as sessionCreatedTime, explorer, loginip as loginIP        FROM eahttpsession where sessionid = ?  >
+2018-11-19 11:23:35,365 DEBUG [java.sql.PreparedStatement] - <{pstm-100012} Parameters: [1volyzcbtvu03]>
+2018-11-19 11:23:35,365 DEBUG [java.sql.PreparedStatement] - <{pstm-100012} Types: [java.lang.String]>
+2018-11-19 11:23:35,376 DEBUG [java.sql.ResultSet] - <{rset-100013} ResultSet>
+2018-11-19 11:23:35,379 DEBUG [java.sql.Connection] - <{conn-100014} Connection>
+2018-11-19 11:23:35,379 DEBUG [java.sql.Connection] - <{conn-100014} Preparing Statement:    INSERT INTO eahttpsession (      sessionid, username, account,       createtime, loginip,userid,explorer)    VALUES (?, ?, ?,       ?, ?, ?,?)  >
+2018-11-19 11:23:35,382 DEBUG [java.sql.PreparedStatement] - <{pstm-100015} Executing Statement:    INSERT INTO eahttpsession (      sessionid, username, account,       createtime, loginip,userid,explorer)    VALUES (?, ?, ?,       ?, ?, ?,?)  >
+2018-11-19 11:23:35,382 DEBUG [java.sql.PreparedStatement] - <{pstm-100015} Parameters: [1volyzcbtvu03, 管理员, admin, 2018-11-19 11:23:35, 127.0.0.1, 100043, CHROME/70.0.]>
+2018-11-19 11:23:35,382 DEBUG [java.sql.PreparedStatement] - <{pstm-100015} Types: [java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String]>
+2018-11-19 11:23:35,791 DEBUG [java.sql.Connection] - <{conn-100016} Connection>
+2018-11-19 11:23:35,791 DEBUG [java.sql.Connection] - <{conn-100016} Preparing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:23:35,791 DEBUG [java.sql.PreparedStatement] - <{pstm-100017} Executing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:23:35,791 DEBUG [java.sql.PreparedStatement] - <{pstm-100017} Parameters: [100043]>
+2018-11-19 11:23:35,792 DEBUG [java.sql.PreparedStatement] - <{pstm-100017} Types: [java.lang.String]>
+2018-11-19 11:23:35,796 DEBUG [java.sql.ResultSet] - <{rset-100018} ResultSet>
+2018-11-19 11:23:35,797 DEBUG [java.sql.ResultSet] - <{rset-100018} Header: [theme]>
+2018-11-19 11:23:35,797 DEBUG [java.sql.ResultSet] - <{rset-100018} Result: [default]>
+2018-11-19 11:23:35,925 DEBUG [java.sql.Connection] - <{conn-100019} Connection>
+2018-11-19 11:23:35,926 DEBUG [java.sql.Connection] - <{conn-100019} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls, a.authorizelevel, b.sortno              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid               AND LENGTH(a.menuid) = 4               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:35,926 DEBUG [java.sql.PreparedStatement] - <{pstm-100020} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls, a.authorizelevel, b.sortno              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid               AND LENGTH(a.menuid) = 4               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:35,926 DEBUG [java.sql.PreparedStatement] - <{pstm-100020} Parameters: [100043]>
+2018-11-19 11:23:35,926 DEBUG [java.sql.PreparedStatement] - <{pstm-100020} Types: [java.lang.String]>
+2018-11-19 11:23:35,939 DEBUG [java.sql.ResultSet] - <{rset-100021} ResultSet>
+2018-11-19 11:23:35,940 DEBUG [java.sql.ResultSet] - <{rset-100021} Header: [menuid, menuname, iconcls]>
+2018-11-19 11:23:35,940 DEBUG [java.sql.ResultSet] - <{rset-100021} Result: [0103, 基础信息, null]>
+2018-11-19 11:23:35,940 DEBUG [java.sql.ResultSet] - <{rset-100021} Result: [0104, 收费管理, null]>
+2018-11-19 11:23:35,940 DEBUG [java.sql.ResultSet] - <{rset-100021} Result: [0106, 停供管理, null]>
+2018-11-19 11:23:35,940 DEBUG [java.sql.ResultSet] - <{rset-100021} Result: [0105, 统计分析, null]>
+2018-11-19 11:23:35,940 DEBUG [java.sql.ResultSet] - <{rset-100021} Result: [0101, 系统管理, null]>
+2018-11-19 11:23:35,940 DEBUG [java.sql.Connection] - <{conn-100022} Connection>
+2018-11-19 11:23:35,940 DEBUG [java.sql.Connection] - <{conn-100022} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls, a.authorizelevel, b.sortno              FROM eausermenumap a, eamenu b                   WHERE a.menuid = b.menuid and a.userid=? and a.authorizelevel = '1' AND LENGTH(a.menuid) = 4                ORDER BY b.sortno asc             >
+2018-11-19 11:23:35,940 DEBUG [java.sql.PreparedStatement] - <{pstm-100023} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls, a.authorizelevel, b.sortno              FROM eausermenumap a, eamenu b                   WHERE a.menuid = b.menuid and a.userid=? and a.authorizelevel = '1' AND LENGTH(a.menuid) = 4                ORDER BY b.sortno asc             >
+2018-11-19 11:23:35,940 DEBUG [java.sql.PreparedStatement] - <{pstm-100023} Parameters: [100043]>
+2018-11-19 11:23:35,940 DEBUG [java.sql.PreparedStatement] - <{pstm-100023} Types: [java.lang.String]>
+2018-11-19 11:23:35,948 DEBUG [java.sql.ResultSet] - <{rset-100024} ResultSet>
+2018-11-19 11:23:35,949 DEBUG [java.sql.Connection] - <{conn-100025} Connection>
+2018-11-19 11:23:35,949 DEBUG [java.sql.Connection] - <{conn-100025} Preparing Statement:    SELECT deptid, deptname from eadept a     WHERE a.deptid = ?  >
+2018-11-19 11:23:35,949 DEBUG [java.sql.PreparedStatement] - <{pstm-100026} Executing Statement:    SELECT deptid, deptname from eadept a     WHERE a.deptid = ?  >
+2018-11-19 11:23:35,949 DEBUG [java.sql.PreparedStatement] - <{pstm-100026} Parameters: [001]>
+2018-11-19 11:23:35,949 DEBUG [java.sql.PreparedStatement] - <{pstm-100026} Types: [java.lang.String]>
+2018-11-19 11:23:35,957 DEBUG [java.sql.ResultSet] - <{rset-100027} ResultSet>
+2018-11-19 11:23:35,957 DEBUG [java.sql.ResultSet] - <{rset-100027} Header: [deptid, deptname]>
+2018-11-19 11:23:35,957 DEBUG [java.sql.ResultSet] - <{rset-100027} Result: [001, 长治县富鑫供热有限公司]>
+2018-11-19 11:23:35,957 DEBUG [java.sql.Connection] - <{conn-100028} Connection>
+2018-11-19 11:23:35,957 DEBUG [java.sql.Connection] - <{conn-100028} Preparing Statement:    SELECT deptid, deptname from eadept a     WHERE a.deptid = ?  >
+2018-11-19 11:23:35,957 DEBUG [java.sql.PreparedStatement] - <{pstm-100029} Executing Statement:    SELECT deptid, deptname from eadept a     WHERE a.deptid = ?  >
+2018-11-19 11:23:35,957 DEBUG [java.sql.PreparedStatement] - <{pstm-100029} Parameters: [001]>
+2018-11-19 11:23:35,957 DEBUG [java.sql.PreparedStatement] - <{pstm-100029} Types: [java.lang.String]>
+2018-11-19 11:23:35,967 DEBUG [java.sql.ResultSet] - <{rset-100030} ResultSet>
+2018-11-19 11:23:35,967 DEBUG [java.sql.ResultSet] - <{rset-100030} Header: [deptid, deptname]>
+2018-11-19 11:23:35,967 DEBUG [java.sql.ResultSet] - <{rset-100030} Result: [001, 长治县富鑫供热有限公司]>
+2018-11-19 11:23:35,967 DEBUG [java.sql.Connection] - <{conn-100031} Connection>
+2018-11-19 11:23:35,967 DEBUG [java.sql.Connection] - <{conn-100031} Preparing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:23:35,968 DEBUG [java.sql.PreparedStatement] - <{pstm-100032} Executing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:23:35,968 DEBUG [java.sql.PreparedStatement] - <{pstm-100032} Parameters: [100043]>
+2018-11-19 11:23:35,968 DEBUG [java.sql.PreparedStatement] - <{pstm-100032} Types: [java.lang.String]>
+2018-11-19 11:23:35,977 DEBUG [java.sql.ResultSet] - <{rset-100033} ResultSet>
+2018-11-19 11:23:35,977 DEBUG [java.sql.ResultSet] - <{rset-100033} Header: [theme]>
+2018-11-19 11:23:35,977 DEBUG [java.sql.ResultSet] - <{rset-100033} Result: [default]>
+2018-11-19 11:23:35,996 DEBUG [java.sql.Connection] - <{conn-100034} Connection>
+2018-11-19 11:23:35,997 DEBUG [java.sql.Connection] - <{conn-100034} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0103%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:35,997 DEBUG [java.sql.PreparedStatement] - <{pstm-100035} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0103%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:35,998 DEBUG [java.sql.PreparedStatement] - <{pstm-100035} Parameters: [100043]>
+2018-11-19 11:23:35,998 DEBUG [java.sql.PreparedStatement] - <{pstm-100035} Types: [java.lang.String]>
+2018-11-19 11:23:36,009 DEBUG [java.sql.ResultSet] - <{rset-100036} ResultSet>
+2018-11-19 11:23:36,010 DEBUG [java.sql.ResultSet] - <{rset-100036} Header: [menuid, menuname, iconcls, parentid, request, leaf, isroot, expanded, icon]>
+2018-11-19 11:23:36,010 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [010305, 入网管理, null, 0103, module/iw.ered?reqCode=intoWebInit, 0, false, false, tab_blank.png]>
+2018-11-19 11:23:36,010 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030404, 新建换热站, null, 010304, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,010 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030405, 修改换热站, null, 010304, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,011 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [010301, 热源管理, null, 0103, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,011 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030401, 新建热源, null, 010304, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,011 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030406, 删除换热站, null, 010304, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,011 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030403, 删除热源, null, 010304, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,011 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030311, 修改面积2, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,011 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030313, 删除面积1, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,017 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030501, 新增入网, null, 010305, null, 1, false, true, tab_blank.png]>
+2018-11-19 11:23:36,019 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030202, 导入模板下载, null, 010302, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,020 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030201, 选择导入文件, null, 010302, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,020 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [010304, 热源站所管理, null, 0103, module/sr.ered?reqCode=sourceInit, 0, false, false, tab_blank.png]>
+2018-11-19 11:23:36,020 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [0103, 基础信息, null, 01, null, 0, true, false, tab_blank.png]>
+2018-11-19 11:23:36,020 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030312, 删除面积2, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,020 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030301, 新建小区, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,020 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030310, 添加面积2, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,024 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030502, 修改入网, null, 010305, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,024 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030402, 修改热源, null, 010304, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,028 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [010303, 基础信息维护, null, 0103, module/fc.ered?reqCode=communityInit, 0, false, false, tab_blank.png]>
+2018-11-19 11:23:36,029 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030302, 修改小区, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,029 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030503, 删除入网, null, 010305, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,029 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030303, 删除小区, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,030 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [010302, 基础数据导入, null, 0103, module/importHouse.ered?reqCode=importInit, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,030 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030304, 新建大楼, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,030 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030305, 修改大楼, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,030 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030306, 删除大楼, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,030 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030307, 新建用户, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,030 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030308, 修改用户, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,036 DEBUG [java.sql.ResultSet] - <{rset-100036} Result: [01030309, 删除用户, null, 010303, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,036 DEBUG [java.sql.Connection] - <{conn-100037} Connection>
+2018-11-19 11:23:36,037 DEBUG [java.sql.Connection] - <{conn-100037} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,037 DEBUG [java.sql.PreparedStatement] - <{pstm-100038} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,037 DEBUG [java.sql.PreparedStatement] - <{pstm-100038} Parameters: [100043]>
+2018-11-19 11:23:36,037 DEBUG [java.sql.PreparedStatement] - <{pstm-100038} Types: [java.lang.String]>
+2018-11-19 11:23:36,045 DEBUG [java.sql.ResultSet] - <{rset-100039} ResultSet>
+2018-11-19 11:23:36,046 DEBUG [java.sql.Connection] - <{conn-100040} Connection>
+2018-11-19 11:23:36,046 DEBUG [java.sql.Connection] - <{conn-100040} Preparing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,046 DEBUG [java.sql.PreparedStatement] - <{pstm-100041} Executing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,046 DEBUG [java.sql.PreparedStatement] - <{pstm-100041} Parameters: [01]>
+2018-11-19 11:23:36,046 DEBUG [java.sql.PreparedStatement] - <{pstm-100041} Types: [java.lang.String]>
+2018-11-19 11:23:36,052 DEBUG [java.sql.ResultSet] - <{rset-100042} ResultSet>
+2018-11-19 11:23:36,053 DEBUG [java.sql.ResultSet] - <{rset-100042} Header: [menuname]>
+2018-11-19 11:23:36,053 DEBUG [java.sql.ResultSet] - <{rset-100042} Result: [供热收费管理信息系统]>
+2018-11-19 11:23:36,083 DEBUG [java.sql.Connection] - <{conn-100043} Connection>
+2018-11-19 11:23:36,083 DEBUG [java.sql.Connection] - <{conn-100043} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0104%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,083 DEBUG [java.sql.PreparedStatement] - <{pstm-100044} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0104%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,083 DEBUG [java.sql.PreparedStatement] - <{pstm-100044} Parameters: [100043]>
+2018-11-19 11:23:36,083 DEBUG [java.sql.PreparedStatement] - <{pstm-100044} Types: [java.lang.String]>
+2018-11-19 11:23:36,094 DEBUG [java.sql.ResultSet] - <{rset-100045} ResultSet>
+2018-11-19 11:23:36,095 DEBUG [java.sql.ResultSet] - <{rset-100045} Header: [menuid, menuname, iconcls, parentid, request, leaf, isroot, expanded, icon]>
+2018-11-19 11:23:36,095 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [010402, 收费管理, null, 0104, module/chg.ered?reqCode=chargeInit, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,095 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [010407, 批量缴费, null, 0104, module/multiChg.ered?reqCode=multiChargeInit, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,095 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040505, 领用票据, null, 010405, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,096 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040503, 作废票据, null, 010405, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,096 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040501, 票据入库, null, 010405, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,096 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040401, 冲账, null, 010404, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,096 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040101, 生成应收, null, 010401, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,096 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [010401, 生成应收, null, 0104, module/crp.ered?reqCode=creatPlanInit, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,096 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040302, 删除减免, null, 010403, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,099 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040301, 减免应收, null, 010403, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040502, 删除票据, null, 010405, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040201, 收费, null, 010402, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040102, 删除应收, null, 010401, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [01040504, 返还票据, null, 010405, null, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [010403, 减免管理, null, 0104, module/mns.ered?reqCode=minusInit, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [0104, 收费管理, null, 01, null, 0, true, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [010404, 冲账管理, null, 0104, module/rlb.ered?reqCode=rollbackInit, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [010405, 票据管理, null, 0104, module/inv.ered?reqCode=invoiceInit, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.ResultSet] - <{rset-100045} Result: [010406, 银行对账, null, 0104, module/bnk.ered?reqCode=bankInit, 0, false, false, tab_blank.png]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.Connection] - <{conn-100046} Connection>
+2018-11-19 11:23:36,100 DEBUG [java.sql.Connection] - <{conn-100046} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,100 DEBUG [java.sql.PreparedStatement] - <{pstm-100047} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,100 DEBUG [java.sql.PreparedStatement] - <{pstm-100047} Parameters: [100043]>
+2018-11-19 11:23:36,100 DEBUG [java.sql.PreparedStatement] - <{pstm-100047} Types: [java.lang.String]>
+2018-11-19 11:23:36,108 DEBUG [java.sql.ResultSet] - <{rset-100048} ResultSet>
+2018-11-19 11:23:36,110 DEBUG [java.sql.Connection] - <{conn-100049} Connection>
+2018-11-19 11:23:36,110 DEBUG [java.sql.Connection] - <{conn-100049} Preparing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,110 DEBUG [java.sql.PreparedStatement] - <{pstm-100050} Executing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,111 DEBUG [java.sql.PreparedStatement] - <{pstm-100050} Parameters: [01]>
+2018-11-19 11:23:36,111 DEBUG [java.sql.PreparedStatement] - <{pstm-100050} Types: [java.lang.String]>
+2018-11-19 11:23:36,115 DEBUG [java.sql.ResultSet] - <{rset-100051} ResultSet>
+2018-11-19 11:23:36,116 DEBUG [java.sql.ResultSet] - <{rset-100051} Header: [menuname]>
+2018-11-19 11:23:36,116 DEBUG [java.sql.ResultSet] - <{rset-100051} Result: [供热收费管理信息系统]>
+2018-11-19 11:23:36,130 DEBUG [java.sql.Connection] - <{conn-100052} Connection>
+2018-11-19 11:23:36,130 DEBUG [java.sql.Connection] - <{conn-100052} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0106%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,130 DEBUG [java.sql.PreparedStatement] - <{pstm-100053} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0106%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,130 DEBUG [java.sql.PreparedStatement] - <{pstm-100053} Parameters: [100043]>
+2018-11-19 11:23:36,130 DEBUG [java.sql.PreparedStatement] - <{pstm-100053} Types: [java.lang.String]>
+2018-11-19 11:23:36,144 DEBUG [java.sql.ResultSet] - <{rset-100054} ResultSet>
+2018-11-19 11:23:36,145 DEBUG [java.sql.ResultSet] - <{rset-100054} Header: [menuid, menuname, iconcls, parentid, request, leaf, isroot, expanded, icon]>
+2018-11-19 11:23:36,145 DEBUG [java.sql.ResultSet] - <{rset-100054} Result: [010601, 停供管理, null, 0106, module/stp.ered?reqCode=stopInit, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,145 DEBUG [java.sql.ResultSet] - <{rset-100054} Result: [0106, 停供管理, null, 01, null, 0, true, false, tab_blank.png]>
+2018-11-19 11:23:36,145 DEBUG [java.sql.Connection] - <{conn-100055} Connection>
+2018-11-19 11:23:36,145 DEBUG [java.sql.Connection] - <{conn-100055} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,145 DEBUG [java.sql.PreparedStatement] - <{pstm-100056} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,145 DEBUG [java.sql.PreparedStatement] - <{pstm-100056} Parameters: [100043]>
+2018-11-19 11:23:36,145 DEBUG [java.sql.PreparedStatement] - <{pstm-100056} Types: [java.lang.String]>
+2018-11-19 11:23:36,151 DEBUG [java.sql.ResultSet] - <{rset-100057} ResultSet>
+2018-11-19 11:23:36,151 DEBUG [java.sql.Connection] - <{conn-100058} Connection>
+2018-11-19 11:23:36,152 DEBUG [java.sql.Connection] - <{conn-100058} Preparing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,152 DEBUG [java.sql.PreparedStatement] - <{pstm-100059} Executing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,152 DEBUG [java.sql.PreparedStatement] - <{pstm-100059} Parameters: [01]>
+2018-11-19 11:23:36,152 DEBUG [java.sql.PreparedStatement] - <{pstm-100059} Types: [java.lang.String]>
+2018-11-19 11:23:36,159 DEBUG [java.sql.ResultSet] - <{rset-100060} ResultSet>
+2018-11-19 11:23:36,159 DEBUG [java.sql.ResultSet] - <{rset-100060} Header: [menuname]>
+2018-11-19 11:23:36,159 DEBUG [java.sql.ResultSet] - <{rset-100060} Result: [供热收费管理信息系统]>
+2018-11-19 11:23:36,177 DEBUG [java.sql.Connection] - <{conn-100061} Connection>
+2018-11-19 11:23:36,177 DEBUG [java.sql.Connection] - <{conn-100061} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0105%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,177 DEBUG [java.sql.PreparedStatement] - <{pstm-100062} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0105%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,177 DEBUG [java.sql.PreparedStatement] - <{pstm-100062} Parameters: [100043]>
+2018-11-19 11:23:36,177 DEBUG [java.sql.PreparedStatement] - <{pstm-100062} Types: [java.lang.String]>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} ResultSet>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} Header: [menuid, menuname, iconcls, parentid, request, leaf, isroot, expanded, icon]>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} Result: [010501, 基础报表, null, 0105, null, 0, false, true, tab_blank.png]>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} Result: [010502, 收费报表, null, 0105, null, 0, false, true, tab_blank.png]>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} Result: [01050202, 欠费明细表, null, 010502, module/rpt.ered?reqCode=reportInit&rpt_id=c01050201, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} Result: [01050101, 用户情况汇总表, null, 010501, module/rpt.ered?reqCode=reportInit&rpt_id=f01050101, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} Result: [01050102, 入网情况汇总表, null, 010501, module/rpt.ered?reqCode=reportInit&rpt_id=w01050301, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} Result: [01050203, 收费明细表, null, 010502, module/rpt.ered?reqCode=reportInit&rpt_id=c01050202, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} Result: [01050201, 收费情况表, null, 010502, module/rpt.ered?reqCode=reportInit&rpt_id=c01050401, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,183 DEBUG [java.sql.ResultSet] - <{rset-100063} Result: [0105, 统计分析, null, 01, null, 0, true, false, tab_blank.png]>
+2018-11-19 11:23:36,188 DEBUG [java.sql.ResultSet] - <{rset-100063} Result: [01050204, 减免明细表, null, 010502, module/rpt.ered?reqCode=reportInit&rpt_id=c01050204, 1, false, false, tab_blank.png]>
+2018-11-19 11:23:36,189 DEBUG [java.sql.Connection] - <{conn-100064} Connection>
+2018-11-19 11:23:36,189 DEBUG [java.sql.Connection] - <{conn-100064} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,189 DEBUG [java.sql.PreparedStatement] - <{pstm-100065} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,189 DEBUG [java.sql.PreparedStatement] - <{pstm-100065} Parameters: [100043]>
+2018-11-19 11:23:36,189 DEBUG [java.sql.PreparedStatement] - <{pstm-100065} Types: [java.lang.String]>
+2018-11-19 11:23:36,204 DEBUG [java.sql.ResultSet] - <{rset-100066} ResultSet>
+2018-11-19 11:23:36,204 DEBUG [java.sql.Connection] - <{conn-100067} Connection>
+2018-11-19 11:23:36,204 DEBUG [java.sql.Connection] - <{conn-100067} Preparing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,205 DEBUG [java.sql.PreparedStatement] - <{pstm-100068} Executing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,205 DEBUG [java.sql.PreparedStatement] - <{pstm-100068} Parameters: [01]>
+2018-11-19 11:23:36,205 DEBUG [java.sql.PreparedStatement] - <{pstm-100068} Types: [java.lang.String]>
+2018-11-19 11:23:36,211 DEBUG [java.sql.ResultSet] - <{rset-100069} ResultSet>
+2018-11-19 11:23:36,211 DEBUG [java.sql.ResultSet] - <{rset-100069} Header: [menuname]>
+2018-11-19 11:23:36,211 DEBUG [java.sql.ResultSet] - <{rset-100069} Result: [供热收费管理信息系统]>
+2018-11-19 11:23:36,224 DEBUG [java.sql.Connection] - <{conn-100070} Connection>
+2018-11-19 11:23:36,225 DEBUG [java.sql.Connection] - <{conn-100070} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0101%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,225 DEBUG [java.sql.PreparedStatement] - <{pstm-100071} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM earoleauthorize a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.menuid like '0101%'               AND a.roleid IN (SELECT roleid                                    FROM eauserauthorize                                   WHERE userid = ?)          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,225 DEBUG [java.sql.PreparedStatement] - <{pstm-100071} Parameters: [100043]>
+2018-11-19 11:23:36,225 DEBUG [java.sql.PreparedStatement] - <{pstm-100071} Types: [java.lang.String]>
+2018-11-19 11:23:36,236 DEBUG [java.sql.ResultSet] - <{rset-100072} ResultSet>
+2018-11-19 11:23:36,236 DEBUG [java.sql.ResultSet] - <{rset-100072} Header: [menuid, menuname, iconcls, parentid, request, leaf, isroot, expanded, icon]>
+2018-11-19 11:23:36,236 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010304, 收费标准, server_connectIcon, 010103, module/std.ered?reqCode=standardInit, 1, false, false, server_connect.png]>
+2018-11-19 11:23:36,236 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [010102, 权限管理, null, 0101, null, 0, false, true, tab_blank.png]>
+2018-11-19 11:23:36,237 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010403, Requst请求跟踪, server_connectIcon, 010104, eventTrack.ered?reqCode=init, 1, false, false, server_connect.png]>
+2018-11-19 11:23:36,237 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010201, 组织机构管理, chart_organisationIcon, 010102, organization.ered?reqCode=departmentInit, 1, false, false, chart_organisation.png]>
+2018-11-19 11:23:36,237 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010301, 字典维护, application_view_listIcon, 010103, resource.ered?reqCode=codeTableInit, 1, false, false, application_view_list.png]>
+2018-11-19 11:23:36,237 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010401, Session会话监控, user_commentIcon, 010104, sessionMonitor.ered?reqCode=init, 1, false, false, user_comment.png]>
+2018-11-19 11:23:36,237 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010204, 角色管理与授权, award_star_silver_3Icon, 010102, role.ered?reqCode=roleInit, 1, false, false, award_star_silver_3.png]>
+2018-11-19 11:23:36,237 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010303, 全局参数表维护, configIcon, 010103, param.ered?reqCode=init, 1, false, false, config.png]>
+2018-11-19 11:23:36,237 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [010103, 基础数据维护, null, 0101, null, 0, false, true, tab_blank.png]>
+2018-11-19 11:23:36,242 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [010104, 运行监控, null, 0101, null, 0, false, true, tab_blank.png]>
+2018-11-19 11:23:36,242 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010202, 人员管理与授权, group_linkIcon, 010102, user.ered?reqCode=userInit, 1, false, false, group_link.png]>
+2018-11-19 11:23:36,243 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010405, JDBC执行监控, database_refreshIcon, 010104, jdbcMonitor.ered?reqCode=jdbcInit, 1, false, false, database_refresh.png]>
+2018-11-19 11:23:36,243 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010406, Service监控, pluginIcon, 010104, beanMonitor.ered?reqCode=init, 1, false, false, plugin.png]>
+2018-11-19 11:23:36,243 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [01010205, 菜单资源管理, layout_contentIcon, 010102, resource.ered?reqCode=menuResourceInit, 1, false, false, layout_content.png]>
+2018-11-19 11:23:36,243 DEBUG [java.sql.ResultSet] - <{rset-100072} Result: [0101, 系统管理, null, 01, null, 0, true, false, tab_blank.png]>
+2018-11-19 11:23:36,243 DEBUG [java.sql.Connection] - <{conn-100073} Connection>
+2018-11-19 11:23:36,243 DEBUG [java.sql.Connection] - <{conn-100073} Preparing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,243 DEBUG [java.sql.PreparedStatement] - <{pstm-100074} Executing Statement:    SELECT DISTINCT a.menuid, b.menuname, b.iconcls,b.parentid,b.request,b.sortno, b.leaf,decode(length(b.menuid),4,'true','false') as isRoot,                    decode(b.expanded,'1','true','0','false',null) as expanded,a.authorizelevel, decode(b.icon,null,'tab_blank.png',b.icon) as icon              FROM eausermenumap a, eamenu b             WHERE a.authorizelevel = '1'               AND a.menuid = b.menuid and a.userid = ?          ORDER BY b.sortno asc  >
+2018-11-19 11:23:36,243 DEBUG [java.sql.PreparedStatement] - <{pstm-100074} Parameters: [100043]>
+2018-11-19 11:23:36,243 DEBUG [java.sql.PreparedStatement] - <{pstm-100074} Types: [java.lang.String]>
+2018-11-19 11:23:36,251 DEBUG [java.sql.ResultSet] - <{rset-100075} ResultSet>
+2018-11-19 11:23:36,251 DEBUG [java.sql.Connection] - <{conn-100076} Connection>
+2018-11-19 11:23:36,251 DEBUG [java.sql.Connection] - <{conn-100076} Preparing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,251 DEBUG [java.sql.PreparedStatement] - <{pstm-100077} Executing Statement:    SELECT menuname FROM eamenu WHERE menuid = ?  >
+2018-11-19 11:23:36,251 DEBUG [java.sql.PreparedStatement] - <{pstm-100077} Parameters: [01]>
+2018-11-19 11:23:36,251 DEBUG [java.sql.PreparedStatement] - <{pstm-100077} Types: [java.lang.String]>
+2018-11-19 11:23:36,259 DEBUG [java.sql.ResultSet] - <{rset-100078} ResultSet>
+2018-11-19 11:23:36,259 DEBUG [java.sql.ResultSet] - <{rset-100078} Header: [menuname]>
+2018-11-19 11:23:36,259 DEBUG [java.sql.ResultSet] - <{rset-100078} Result: [供热收费管理信息系统]>
+2018-11-19 11:23:36,547 DEBUG [java.sql.Connection] - <{conn-100079} Connection>
+2018-11-19 11:23:36,548 DEBUG [java.sql.Connection] - <{conn-100079} Preparing Statement:    SELECT community_code as id, community_code||' '||community_name||' ('||building_count||')' as text,nvl(building_count,0) as child_Count   FROM   fc_community   order by community_code  >
+2018-11-19 11:23:36,548 DEBUG [java.sql.PreparedStatement] - <{pstm-100080} Executing Statement:    SELECT community_code as id, community_code||' '||community_name||' ('||building_count||')' as text,nvl(building_count,0) as child_Count   FROM   fc_community   order by community_code  >
+2018-11-19 11:23:36,548 DEBUG [java.sql.PreparedStatement] - <{pstm-100080} Parameters: []>
+2018-11-19 11:23:36,548 DEBUG [java.sql.PreparedStatement] - <{pstm-100080} Types: []>
+2018-11-19 11:23:36,554 DEBUG [java.sql.ResultSet] - <{rset-100081} ResultSet>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Header: [id, text, child_count]>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0101, 0101 063经贸局家属楼 (3), 3]>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0102, 0102 法院家属楼 (2), 2]>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0103, 0103 长治县电视台 (1), 1]>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0104, 0104 广播北二巷（一至三排） (1), 1]>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0105, 0105 广播南二巷（公安家属西五排） (1), 1]>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0106, 0106 广播北四巷第一组（南6户） (1), 1]>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0107, 0107 广播北四巷第一组（北19户） (1), 1]>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0108, 0108 广播北四巷第二组（16户） (1), 1]>
+2018-11-19 11:23:36,555 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0109, 0109 工业巷北一排-北八排 (1), 1]>
+2018-11-19 11:23:36,557 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0110, 0110 法院家属院17户 (1), 1]>
+2018-11-19 11:23:36,557 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0111, 0111 公安西家属区60户 (1), 1]>
+2018-11-19 11:23:36,558 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0112, 0112 建筑工程公司 (2), 2]>
+2018-11-19 11:23:36,558 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0113, 0113 工会家属楼 (1), 1]>
+2018-11-19 11:23:36,558 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0114, 0114 工会二层独院5户 (1), 1]>
+2018-11-19 11:23:36,558 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0115, 0115 政府平房南一排 (2), 2]>
+2018-11-19 11:23:36,558 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0116, 0116 政府平房南二排6户 (1), 1]>
+2018-11-19 11:23:36,558 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0117, 0117 政府平房南三排5户 (1), 1]>
+2018-11-19 11:23:36,558 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0118, 0118 政府平房南四排4户 (1), 1]>
+2018-11-19 11:23:36,558 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0119, 0119 政府平房南五排5户（北二排） (1), 1]>
+2018-11-19 11:23:36,560 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0120, 0120 政府平房南六排5户（北一排） (1), 1]>
+2018-11-19 11:23:36,560 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0121, 0121 政府平房后六户 (1), 1]>
+2018-11-19 11:23:36,560 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0122, 0122 政府第三家属楼32户 (1), 1]>
+2018-11-19 11:23:36,561 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0123, 0123 政府黄楼家属区 (1), 1]>
+2018-11-19 11:23:36,561 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0124, 0124 五交化家属楼 (2), 2]>
+2018-11-19 11:23:36,561 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0125, 0125 通达供销公司综合楼 (1), 1]>
+2018-11-19 11:23:36,561 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0126, 0126 供销联社家属楼 (3), 3]>
+2018-11-19 11:23:36,561 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0127, 0127 二轻局底商 (1), 1]>
+2018-11-19 11:23:36,561 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0201, 0201 粮食局家属院 (3), 3]>
+2018-11-19 11:23:36,561 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0202, 0202 粮苑小区 (5), 5]>
+2018-11-19 11:23:36,563 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0203, 0203 粮食局东北角2户 (1), 1]>
+2018-11-19 11:23:36,563 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0204, 0204 县一中家属楼 (5), 5]>
+2018-11-19 11:23:36,564 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0205, 0205 城建东散户 (3), 3]>
+2018-11-19 11:23:36,564 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0206, 0206 自来水公司2#井 (1), 1]>
+2018-11-19 11:23:36,564 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0207, 0207 122迎宾路宾馆家属8户 (2), 2]>
+2018-11-19 11:23:36,564 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0208, 0208 123淘清河水泥厂家属楼 (3), 3]>
+2018-11-19 11:23:36,564 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0209, 0209 城建搬迁楼 (2), 2]>
+2018-11-19 11:23:36,564 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0210, 0210 商业局家属院 (4), 4]>
+2018-11-19 11:23:36,564 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0211, 0211 县委旧家属楼 (1), 1]>
+2018-11-19 11:23:36,564 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0212, 0212 县委家属 (4), 4]>
+2018-11-19 11:23:36,566 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0213, 0213 体育巷（县委3#楼北）4户 (1), 1]>
+2018-11-19 11:23:36,567 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0214, 0214 体育巷检察院家属院27户 (5), 5]>
+2018-11-19 11:23:36,567 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0215, 0215 旧体委家属院2排 (2), 2]>
+2018-11-19 11:23:36,567 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0216, 0216 旧检察院南巷4户 (1), 1]>
+2018-11-19 11:23:36,567 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0217, 0217 饮食服务公司小区 (4), 4]>
+2018-11-19 11:23:36,567 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0301, 0301 实验小学家属院 (1), 1]>
+2018-11-19 11:23:36,567 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0302, 0302 147少年宫 (2), 2]>
+2018-11-19 11:23:36,567 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0303, 0303 148县农机局家属院 (1), 1]>
+2018-11-19 11:23:36,567 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0304, 0304 149县农机公司家属楼 (2), 2]>
+2018-11-19 11:23:36,567 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0305, 0305 151抗旱服务队 (2), 2]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0306, 0306 152长治县联通公司 (2), 2]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0307, 0307 155城建东南散户 (1), 1]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0308, 0308 156实小东韩店村散户 (1), 1]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0309, 0309 160红专剧团家属楼 (3), 3]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0310, 0310 钻井队 (7), 7]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0311, 0311 162食品公司家属楼 (2), 2]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0312, 0312 163药材小区 (2), 2]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0313, 0313 164影苑小区 (2), 2]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0314, 0314 165电影公司家属院 (2), 2]>
+2018-11-19 11:23:36,571 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0315, 0315 168食品公司北五户 (1), 1]>
+2018-11-19 11:23:36,574 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0316, 0316 172食品公司西楼底商  (1), 1]>
+2018-11-19 11:23:36,574 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0401, 0401 176县五中家属楼 (1), 1]>
+2018-11-19 11:23:36,574 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0402, 0402 177外贸住宅小区东三排 (1), 1]>
+2018-11-19 11:23:36,574 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0403, 0403 178外贸小区 (4), 4]>
+2018-11-19 11:23:36,574 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0404, 0404 179糖业公司 (2), 2]>
+2018-11-19 11:23:36,574 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0405, 0405 180果品公司家属楼 (3), 3]>
+2018-11-19 11:23:36,574 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0406, 0406 181德信电器综合楼 (2), 2]>
+2018-11-19 11:23:36,574 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0407, 0407 182长治县新华书店 (2), 2]>
+2018-11-19 11:23:36,575 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0408, 0408 183中小企业1#楼 (2), 2]>
+2018-11-19 11:23:36,575 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0409, 0409 184中小企业2#楼 (1), 1]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0410, 0410 185中小企业3#楼 (1), 1]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0411, 0411 186长治县煤炭集运公司 (3), 3]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0412, 0412 187建行家属院 (2), 2]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0413, 0413 189金典花园 (2), 2]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0414, 0414 190城建商品房南一排 (2), 2]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0415, 0415 191城建商品房南二排 (2), 2]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0416, 0416 192民政局家属楼 (2), 2]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0417, 0417 193交电家属院二排 (1), 1]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0418, 0418 194银桥市场门市 (1), 1]>
+2018-11-19 11:23:36,577 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0419, 0419 195二轻局家属院 (1), 1]>
+2018-11-19 11:23:36,579 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0420, 0420 196韩店镇家属院 (2), 2]>
+2018-11-19 11:23:36,579 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0421, 0421 197兴盛伟业商贸公司 (2), 2]>
+2018-11-19 11:23:36,579 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0422, 0422 198农业局家属楼 (3), 3]>
+2018-11-19 11:23:36,579 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0423, 0423 199兴盛商贸城外围18户门市 (1), 1]>
+2018-11-19 11:23:36,579 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0501, 0501 206国税家属院 (6), 6]>
+2018-11-19 11:23:36,579 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0502, 0502 207水利局住宅 (1), 1]>
+2018-11-19 11:23:36,579 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0503, 0503 208林业局住宅 (1), 1]>
+2018-11-19 11:23:36,579 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0504, 0504 209工会家属（俱乐部东侧）6户 (2), 2]>
+2018-11-19 11:23:36,579 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0505, 0505 210百货公司 (1), 1]>
+2018-11-19 11:23:36,580 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0506, 0506 211百货家属楼 (1), 1]>
+2018-11-19 11:23:36,582 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0507, 0507 212百货大楼顶层13户 (1), 1]>
+2018-11-19 11:23:36,582 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0508, 0508 213长治县供电公司北家属院 (1), 1]>
+2018-11-19 11:23:36,582 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0509, 0509 长治县供电公司南家属院 (3), 3]>
+2018-11-19 11:23:36,582 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0510, 0510 214工商银行家属楼 (4), 4]>
+2018-11-19 11:23:36,582 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0511, 0511 215县医院家属楼 (5), 5]>
+2018-11-19 11:23:36,582 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0512, 0512 217旧工商局家属楼（西区） (2), 2]>
+2018-11-19 11:23:36,582 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0513, 0513 218 烟草公司底商 (1), 1]>
+2018-11-19 11:23:36,582 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0514, 0514 219烟草公司旧家属院 (2), 2]>
+2018-11-19 11:23:36,583 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0515, 0515 220烟草公司营销部 (1), 1]>
+2018-11-19 11:23:36,583 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0516, 0516 221农业银行 (6), 6]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0517, 0517 225永盛嘉苑 (2), 2]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0518, 0518 225永盛嘉苑东商铺 (1), 1]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0519, 0519 225永盛嘉苑西商铺 (1), 1]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0520, 0520 226长治县供销联社家属独院 (4), 4]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0521, 0521 227百货洁雅日化门市 (1), 1]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0601, 0601 231光明小学家属楼 (2), 2]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0602, 0602 232地税局家属区 (4), 4]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0603, 0603 长征小区 (10), 10]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0604, 0604 243军转楼 (2), 2]>
+2018-11-19 11:23:36,588 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0605, 0605 244福鑫小区  (2), 2]>
+2018-11-19 11:23:36,591 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0701, 0701 人大家属楼 (3), 3]>
+2018-11-19 11:23:36,591 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0702, 0702 256人保财险家属楼 (2), 2]>
+2018-11-19 11:23:36,591 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0703, 0703 259农村信用社（丰华支行） (2), 2]>
+2018-11-19 11:23:36,591 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0704, 0704 262森特起重机械公司 (4), 4]>
+2018-11-19 11:23:36,591 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0705, 0705 263审计局北旧住宅 (1), 1]>
+2018-11-19 11:23:36,592 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0706, 0706 264锅炉辅机厂住宅楼 (3), 3]>
+2018-11-19 11:23:36,592 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0707, 0707 265农行家属院   (1), 1]>
+2018-11-19 11:23:36,592 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0708, 0708 279劳动局家属院 (1), 1]>
+2018-11-19 11:23:36,592 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0709, 0709 281畜牧局家属楼   (2), 2]>
+2018-11-19 11:23:36,592 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0710, 0710 283报社家属院 (8), 8]>
+2018-11-19 11:23:36,594 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0711, 0711 284局家属院（东区） (1), 1]>
+2018-11-19 11:23:36,595 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0801, 0801 287王庄小区 (4), 4]>
+2018-11-19 11:23:36,595 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0802, 0802 288振兴家园 (3), 3]>
+2018-11-19 11:23:36,595 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0803, 0803 289迎宾家园 (1), 1]>
+2018-11-19 11:23:36,595 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0804, 0804 290长陵公路家属楼 (1), 1]>
+2018-11-19 11:23:36,595 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0805, 0805 295宏业超市 (2), 2]>
+2018-11-19 11:23:36,595 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0806, 0806 296容海苑小区 (2), 2]>
+2018-11-19 11:23:36,595 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0807, 0807 297振东公寓 (1), 1]>
+2018-11-19 11:23:36,595 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0808, 0808 376西火镇家属楼 (2), 2]>
+2018-11-19 11:23:36,595 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0809, 0809 377教育小区 (4), 4]>
+2018-11-19 11:23:36,597 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0810, 0810 292城东小区 (18), 18]>
+2018-11-19 11:23:36,597 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0901, 0901 301长乐苑 (4), 4]>
+2018-11-19 11:23:36,597 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0902, 0902 303经坊黄河滩小区（北区） (2), 2]>
+2018-11-19 11:23:36,598 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0903, 0903 304经坊黄河滩小区（南区） (2), 2]>
+2018-11-19 11:23:36,598 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0904, 0904 305飞华小区 (4), 4]>
+2018-11-19 11:23:36,598 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0905, 0905 306黎景苑小区 (2), 2]>
+2018-11-19 11:23:36,598 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0906, 0906 307经坊黄河滩小区（南区）西片 (2), 2]>
+2018-11-19 11:23:36,598 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [0907, 0907 308 阳光花园 (2), 2]>
+2018-11-19 11:23:36,598 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1001, 1001 311进修校家属区 (3), 3]>
+2018-11-19 11:23:36,598 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1002, 1002 312党校家属2F独院 (1), 1]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1003, 1003 313党校东巷小区 (2), 2]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1004, 1004 314黎都西街南巷（进修巷东） (1), 1]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1005, 1005 315黎都西街北一巷9户 (1), 1]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1006, 1006 316黎都西街北二巷16户 (1), 1]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1007, 1007 317黎都西街北三巷 (1), 1]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1008, 1008 318黎都西街北四巷 (1), 1]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1009, 1009 319黎都西街北五巷 (1), 1]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1010, 1010 322明乐苑 (3), 3]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1011, 1011 325红旗剧团家属楼 (1), 1]>
+2018-11-19 11:23:36,601 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1012, 1012 326粮食局面粉厂家属院  (2), 2]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1013, 1013 328土产公司家属楼 (2), 2]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1014, 1014 329生产资料集资楼 (2), 2]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1015, 1015 330回收公司综合楼 (2), 2]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1016, 1016 333安顺华庭 (2), 2]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1101, 1101 342鸿景家园 (2), 2]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1102, 1102 344征费小区 (1), 1]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1103, 1103 345金源小区 (2), 2]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1104, 1104 347经坊住宅 (2), 2]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1201, 1201 361田昊小区 (5), 5]>
+2018-11-19 11:23:36,605 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1202, 1202 363黎都花园 (4), 4]>
+2018-11-19 11:23:36,608 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1203, 1203 364馨苗小区 (4), 4]>
+2018-11-19 11:23:36,608 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1204, 1204 365华泰水泥厂家属楼 (2), 2]>
+2018-11-19 11:23:36,608 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1301, 1301 371世纪苑北区 (15), 15]>
+2018-11-19 11:23:36,608 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1302, 1302 372世纪苑南区 (20), 20]>
+2018-11-19 11:23:36,608 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1303, 1303 373交通局家属楼 (3), 3]>
+2018-11-19 11:23:36,609 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1304, 1304 374银河湾 (2), 2]>
+2018-11-19 11:23:36,609 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1305, 1305 375国土园 (4), 4]>
+2018-11-19 11:23:36,609 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1401, 1401 380金盘园小区 (2), 2]>
+2018-11-19 11:23:36,609 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1402, 1402 383金德小区 (3), 3]>
+2018-11-19 11:23:36,609 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1403, 1403 385政协家属楼 (2), 2]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1404, 1404 386黎都家园 (2), 2]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1405, 1405 387煦汇苑 (3), 3]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1501, 1501 390中元体育小区 (9), 9]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1502, 1502 391苗圃家属院 (1), 1]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1701, 1701 400警苑小区 (3), 3]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1801, 1801 裕民小区北区 (4), 4]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [1901, 1901 399和谐小区 (6), 6]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [2002, 2002 南董村正街路北 (1), 1]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [2003, 2003 南董村正街路南 (1), 1]>
+2018-11-19 11:23:36,612 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [2005, 2005 伍龙小区 (3), 3]>
+2018-11-19 11:23:36,616 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [2101, 2101 西庄和谐小区 (4), 4]>
+2018-11-19 11:23:36,616 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [2102, 2102 西申家庄散户 (8), 8]>
+2018-11-19 11:23:36,616 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3001, 3001 黄河滩小区 (0), 0]>
+2018-11-19 11:23:36,616 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3002, 3002 永安保险住宅楼 (1), 1]>
+2018-11-19 11:23:36,616 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3004, 3004 司马金泽小区 (15), 15]>
+2018-11-19 11:23:36,616 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3005, 3005 祥和家园 (2), 2]>
+2018-11-19 11:23:36,616 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3006, 3006 新交通小区 (3), 3]>
+2018-11-19 11:23:36,616 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3007, 3007 单位 (24), 24]>
+2018-11-19 11:23:36,616 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3008, 3008 裕民A区 (3), 3]>
+2018-11-19 11:23:36,617 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3009, 3009 裕民B区 (4), 4]>
+2018-11-19 11:23:36,623 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3011, 3011 长治技师学院海棠校区 (1), 1]>
+2018-11-19 11:23:36,623 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3012, 3012 久安新天地 (5), 5]>
+2018-11-19 11:23:36,623 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3013, 3013 安城小镇新增 (5), 5]>
+2018-11-19 11:23:36,623 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [3014, 3014 金泽苑 (14), 14]>
+2018-11-19 11:23:36,623 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5000, 5000 月新苑 (1), 1]>
+2018-11-19 11:23:36,623 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5001, 5001 西庄新区 (14), 14]>
+2018-11-19 11:23:36,623 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5002, 5002 长治县四中 (1), 1]>
+2018-11-19 11:23:36,623 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5003, 5003 西庄和谐小区 (4), 4]>
+2018-11-19 11:23:36,624 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5004, 5004 苏店宜景新城 (2), 2]>
+2018-11-19 11:23:36,624 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5005, 5005 潞卓兰庭 (3), 3]>
+2018-11-19 11:23:36,627 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5006, 5006 东贾科技楼 (1), 1]>
+2018-11-19 11:23:36,627 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5010, 5010 和谐小区 (1), 1]>
+2018-11-19 11:23:36,627 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5011, 5011 温馨苑小区 (2), 2]>
+2018-11-19 11:23:36,627 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5012, 5012 怡馨苑小区 (2), 2]>
+2018-11-19 11:23:36,627 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5013, 5013 乐馨苑小区 (1), 1]>
+2018-11-19 11:23:36,627 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5014, 5014 舒馨苑小区 (2), 2]>
+2018-11-19 11:23:36,627 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5015, 5015 世纪苑小区 (2), 2]>
+2018-11-19 11:23:36,627 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5016, 5016 世纪苑门市 (1), 1]>
+2018-11-19 11:23:36,627 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5017, 5017 十字口北路东 (1), 1]>
+2018-11-19 11:23:36,628 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5018, 5018 和谐门市 (1), 1]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5019, 5019 怡馨苑门市 (1), 1]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5020, 5020 其他门市 (1), 1]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5021, 5021 乐馨苑门市 (1), 1]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5022, 5022 新世纪 (1), 1]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5023, 5023 信用社 (1), 1]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5024, 5024 鑫福小区 (2), 2]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5025, 5025 富苏苑小区 (4), 4]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5026, 5026 阳光小区 (2), 2]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5027, 5027 林洲小区 (2), 2]>
+2018-11-19 11:23:36,633 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5028, 5028 汽车站小区 (2), 2]>
+2018-11-19 11:23:36,636 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5029, 5029 汽车站北小区 (2), 2]>
+2018-11-19 11:23:36,636 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5030, 5030 北小区 (6), 6]>
+2018-11-19 11:23:36,636 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5031, 5031 海棠小区 (4), 4]>
+2018-11-19 11:23:36,636 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5032, 5032 兰花小区 (5), 5]>
+2018-11-19 11:23:36,636 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5033, 5033 润苏家园 (4), 4]>
+2018-11-19 11:23:36,636 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [5034, 5034 惠民小区 (2), 2]>
+2018-11-19 11:23:36,636 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [9999, 9999 测试小区 (1), 1]>
+2018-11-19 11:23:36,637 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [a001, a001 测试2 (0), 0]>
+2018-11-19 11:23:36,637 DEBUG [java.sql.ResultSet] - <{rset-100081} Result: [aaaa, aaaa aaaa (1), 1]>
+2018-11-19 11:23:36,713 DEBUG [java.sql.Connection] - <{conn-100082} Connection>
+2018-11-19 11:23:36,714 DEBUG [java.sql.Connection] - <{conn-100082} Preparing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:23:36,714 DEBUG [java.sql.PreparedStatement] - <{pstm-100083} Executing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:23:36,714 DEBUG [java.sql.PreparedStatement] - <{pstm-100083} Parameters: [100043]>
+2018-11-19 11:23:36,714 DEBUG [java.sql.PreparedStatement] - <{pstm-100083} Types: [java.lang.String]>
+2018-11-19 11:23:36,720 DEBUG [java.sql.ResultSet] - <{rset-100084} ResultSet>
+2018-11-19 11:23:36,720 DEBUG [java.sql.ResultSet] - <{rset-100084} Header: [theme]>
+2018-11-19 11:23:36,720 DEBUG [java.sql.ResultSet] - <{rset-100084} Result: [default]>
+2018-11-19 11:23:39,211 DEBUG [java.sql.Connection] - <{conn-100085} Connection>
+2018-11-19 11:23:39,212 DEBUG [java.sql.Connection] - <{conn-100085} Preparing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:23:39,212 DEBUG [java.sql.PreparedStatement] - <{pstm-100086} Executing Statement:    SELECT theme FROM eausersubinfo     WHERE userid = ?  >
+2018-11-19 11:23:39,212 DEBUG [java.sql.PreparedStatement] - <{pstm-100086} Parameters: [100043]>
+2018-11-19 11:23:39,212 DEBUG [java.sql.PreparedStatement] - <{pstm-100086} Types: [java.lang.String]>
+2018-11-19 11:23:39,217 DEBUG [java.sql.ResultSet] - <{rset-100087} ResultSet>
+2018-11-19 11:23:39,217 DEBUG [java.sql.ResultSet] - <{rset-100087} Header: [theme]>
+2018-11-19 11:23:39,217 DEBUG [java.sql.ResultSet] - <{rset-100087} Result: [default]>
+2018-11-19 11:23:40,933 DEBUG [java.sql.Connection] - <{conn-100088} Connection>
+2018-11-19 11:23:40,933 DEBUG [java.sql.Connection] - <{conn-100088} Preparing Statement:    SELECT building_code as id, building_code||' '||building_name||' ('||house_count||')' as text,nvl(house_count,0) as child_Count   FROM fc_building a WHERE   a.community_code = '0102'  order by building_code  >
+2018-11-19 11:23:40,934 DEBUG [java.sql.PreparedStatement] - <{pstm-100089} Executing Statement:    SELECT building_code as id, building_code||' '||building_name||' ('||house_count||')' as text,nvl(house_count,0) as child_Count   FROM fc_building a WHERE   a.community_code = '0102'  order by building_code  >
+2018-11-19 11:23:40,934 DEBUG [java.sql.PreparedStatement] - <{pstm-100089} Parameters: []>
+2018-11-19 11:23:40,934 DEBUG [java.sql.PreparedStatement] - <{pstm-100089} Types: []>
+2018-11-19 11:23:40,939 DEBUG [java.sql.ResultSet] - <{rset-100090} ResultSet>
+2018-11-19 11:23:40,939 DEBUG [java.sql.ResultSet] - <{rset-100090} Header: [id, text, child_count]>
+2018-11-19 11:23:40,940 DEBUG [java.sql.ResultSet] - <{rset-100090} Result: [0102-001, 0102-001 家属楼 (12), 12]>
+2018-11-19 11:23:40,940 DEBUG [java.sql.ResultSet] - <{rset-100090} Result: [0102-999, 0102-999 商业 (2), 2]>
+2018-11-19 11:23:41,764 DEBUG [java.sql.Connection] - <{conn-100091} Connection>
+2018-11-19 11:23:41,764 DEBUG [java.sql.Connection] - <{conn-100091} Preparing Statement:    SELECT a.house_code as id, a.CELL_CODE||'-'||a.FLOOR||'-'||a.DOOR_CODE||' '||b.OWNER_NAME as text,0 as child_Count   FROM fc_house a,fc_owner b WHERE   a.house_code=b.house_code(+) and b.is_owner(+)='1' and a.building_code = '0102-001'   order by a.house_code  >
+2018-11-19 11:23:41,764 DEBUG [java.sql.PreparedStatement] - <{pstm-100092} Executing Statement:    SELECT a.house_code as id, a.CELL_CODE||'-'||a.FLOOR||'-'||a.DOOR_CODE||' '||b.OWNER_NAME as text,0 as child_Count   FROM fc_house a,fc_owner b WHERE   a.house_code=b.house_code(+) and b.is_owner(+)='1' and a.building_code = '0102-001'   order by a.house_code  >
+2018-11-19 11:23:41,764 DEBUG [java.sql.PreparedStatement] - <{pstm-100092} Parameters: []>
+2018-11-19 11:23:41,764 DEBUG [java.sql.PreparedStatement] - <{pstm-100092} Types: []>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} ResultSet>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Header: [id, text, child_count]>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-01-01-01, 01-01-01 张海洲, 0]>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-01-01-02, 01-01-02 平芳, 0]>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-01-01-03, 01-01-03 韩学书, 0]>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-01-01-04, 01-01-04 王成仁, 0]>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-02-01-01, 02-01-01 王世英, 0]>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-02-01-02, 02-01-02 陈卫兵, 0]>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-02-01-03, 02-01-03 王旭琴, 0]>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-02-01-04, 02-01-04 王静, 0]>
+2018-11-19 11:23:41,769 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-03-01-01, 03-01-01 侯旭珍, 0]>
+2018-11-19 11:23:41,775 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-03-01-02, 03-01-02 李中英, 0]>
+2018-11-19 11:23:41,775 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-03-01-03, 03-01-03 和俊峰, 0]>
+2018-11-19 11:23:41,775 DEBUG [java.sql.ResultSet] - <{rset-100093} Result: [0102-001-03-01-04, 03-01-04 李鸣, 0]>
+2018-11-19 11:23:42,539 DEBUG [java.sql.Connection] - <{conn-100094} Connection>
+2018-11-19 11:23:42,539 DEBUG [java.sql.Connection] - <{conn-100094} Preparing Statement: SELECT * FROM (SELECT page.*, ROWNUM AS rn FROM (   select * from    (select      b.userName,     c.item_name,a.CHARGE_MONTH             ,     HOUSE_CODE               ,     a.ITEM_CODE                ,     METER_ID                 ,         case when d.charge_month is not null then      ((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))     else      (NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))     end      not_money,     NVL(a.LATEFEE_REALACCOUNT,0)-NVL(a.LATEFEE_NOWCASH,0) not_money_latefee,     a.CID                      ,     COMMUNITY_CODE           ,     BUILDING_CODE            ,     OWNER_NAME               ,     TOTAL_ACCOUNT            ,     MINUS_MONEY              ,     SUBTRACT_MONEY           ,     REAL_ACCOUNT             ,     NOW_CASH                 ,     USE_TYPE                 ,     STANDARD_CODE            ,     PRICE                    ,     BUILD_AREA               ,     FLOOR_AREA               ,     CHARGE_AREA              ,     PLAN_BEGIN_DATE          ,     PLAN_END_DATE            ,     DAYS                     ,     LATEFEE_STARTDATE        ,     LATEFEE_ENDDATE          ,     LATEFEE_TOTALACCOUNT     ,     LATEFEE_MINUS            ,     LATEFEE_REALACCOUNT      ,     LATEFEE_NOWCASH          ,     LAS_READING              ,     THIS_READING             ,     POINT_NUMBER             ,     WASTE                    ,     STOPHEATING              ,     STOPTOTALACCOUNT         ,     BACK_MONEY               ,     IS_INPUT ,     a.p_id        from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d   where a.house_manager=b.USERID(+)   and a.item_code=c.item_code(+)   and a.charge_month=d.charge_month(+)          and d.start_date(+)<= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)>=to_char(sysdate,'yyyy-MM-dd')   ) a    WHERE              house_code=?        AND      (not_money>0 or not_money_latefee>0)           order by charge_month asc  ) page) WHERE rn BETWEEN 1 AND 20>
+2018-11-19 11:23:42,542 DEBUG [java.sql.PreparedStatement] - <{pstm-100095} Executing Statement: SELECT * FROM (SELECT page.*, ROWNUM AS rn FROM (   select * from    (select      b.userName,     c.item_name,a.CHARGE_MONTH             ,     HOUSE_CODE               ,     a.ITEM_CODE                ,     METER_ID                 ,         case when d.charge_month is not null then      ((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))     else      (NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))     end      not_money,     NVL(a.LATEFEE_REALACCOUNT,0)-NVL(a.LATEFEE_NOWCASH,0) not_money_latefee,     a.CID                      ,     COMMUNITY_CODE           ,     BUILDING_CODE            ,     OWNER_NAME               ,     TOTAL_ACCOUNT            ,     MINUS_MONEY              ,     SUBTRACT_MONEY           ,     REAL_ACCOUNT             ,     NOW_CASH                 ,     USE_TYPE                 ,     STANDARD_CODE            ,     PRICE                    ,     BUILD_AREA               ,     FLOOR_AREA               ,     CHARGE_AREA              ,     PLAN_BEGIN_DATE          ,     PLAN_END_DATE            ,     DAYS                     ,     LATEFEE_STARTDATE        ,     LATEFEE_ENDDATE          ,     LATEFEE_TOTALACCOUNT     ,     LATEFEE_MINUS            ,     LATEFEE_REALACCOUNT      ,     LATEFEE_NOWCASH          ,     LAS_READING              ,     THIS_READING             ,     POINT_NUMBER             ,     WASTE                    ,     STOPHEATING              ,     STOPTOTALACCOUNT         ,     BACK_MONEY               ,     IS_INPUT ,     a.p_id        from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d   where a.house_manager=b.USERID(+)   and a.item_code=c.item_code(+)   and a.charge_month=d.charge_month(+)          and d.start_date(+)<= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)>=to_char(sysdate,'yyyy-MM-dd')   ) a    WHERE              house_code=?        AND      (not_money>0 or not_money_latefee>0)           order by charge_month asc  ) page) WHERE rn BETWEEN 1 AND 20>
+2018-11-19 11:23:42,542 DEBUG [java.sql.PreparedStatement] - <{pstm-100095} Parameters: [0102-001-01-01-01]>
+2018-11-19 11:23:42,542 DEBUG [java.sql.PreparedStatement] - <{pstm-100095} Types: [java.lang.String]>
+2018-11-19 11:23:42,550 DEBUG [java.sql.ResultSet] - <{rset-100096} ResultSet>
+2018-11-19 11:23:42,551 DEBUG [java.sql.ResultSet] - <{rset-100096} Header: [username, item_name, charge_month, house_code, item_code, meter_id, not_money, not_money_latefee, cid, community_code, building_code, owner_name, total_account, minus_money, subtract_money, real_account, now_cash, use_type, standard_code, price, build_area, floor_area, charge_area, plan_begin_date, plan_end_date, days, latefee_startdate, latefee_enddate, latefee_totalaccount, latefee_minus, latefee_realaccount, latefee_nowcash, las_reading, this_reading, point_number, waste, stopheating, stoptotalaccount, back_money, is_input, p_id, rn]>
+2018-11-19 11:23:42,551 DEBUG [java.sql.ResultSet] - <{rset-100096} Result: [null, 供热费, 2018, 0102-001-01-01-01, A, 0, 1546.7, 0, 01, 0102, 0102-001, 张海洲, 1591.7, 45, 0, 1546.7, 0, null, A1, 12.75, null, null, 123.49, 2018-11-01, 2019-03-31, 0, null, null, null, null, null, null, 0, 0, 0, 0, 0, 0, 0, 0, 86177, 1]>
+2018-11-19 11:23:42,551 DEBUG [java.sql.Connection] - <{conn-100097} Connection>
+2018-11-19 11:23:42,551 DEBUG [java.sql.Connection] - <{conn-100097} Preparing Statement:    select count(*) from    (select      HOUSE_CODE               ,     a.ITEM_CODE                ,     METER_ID                 ,         case when d.charge_month is not null then      ((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))     else      (NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))     end      not_money,     NVL(a.LATEFEE_REALACCOUNT,0)-NVL(a.LATEFEE_NOWCASH,0) not_money_latefee        from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d   where a.house_manager=b.USERID(+)   and a.item_code=c.item_code(+)   and a.charge_month=d.charge_month(+)          and d.start_date(+)<= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)>=to_char(sysdate,'yyyy-MM-dd')   ) a    WHERE              house_code=?        AND      (not_money>0 or not_money_latefee>0)         >
+2018-11-19 11:23:42,552 DEBUG [java.sql.PreparedStatement] - <{pstm-100098} Executing Statement:    select count(*) from    (select      HOUSE_CODE               ,     a.ITEM_CODE                ,     METER_ID                 ,         case when d.charge_month is not null then      ((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))     else      (NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))     end      not_money,     NVL(a.LATEFEE_REALACCOUNT,0)-NVL(a.LATEFEE_NOWCASH,0) not_money_latefee        from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d   where a.house_manager=b.USERID(+)   and a.item_code=c.item_code(+)   and a.charge_month=d.charge_month(+)          and d.start_date(+)<= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)>=to_char(sysdate,'yyyy-MM-dd')   ) a    WHERE              house_code=?        AND      (not_money>0 or not_money_latefee>0)         >
+2018-11-19 11:23:42,552 DEBUG [java.sql.PreparedStatement] - <{pstm-100098} Parameters: [0102-001-01-01-01]>
+2018-11-19 11:23:42,552 DEBUG [java.sql.PreparedStatement] - <{pstm-100098} Types: [java.lang.String]>
+2018-11-19 11:23:42,564 DEBUG [java.sql.ResultSet] - <{rset-100099} ResultSet>
+2018-11-19 11:23:42,564 DEBUG [java.sql.ResultSet] - <{rset-100099} Header: [count(*)]>
+2018-11-19 11:23:42,564 DEBUG [java.sql.ResultSet] - <{rset-100099} Result: [1]>
+2018-11-19 11:23:42,604 DEBUG [java.sql.Connection] - <{conn-100100} Connection>
+2018-11-19 11:23:42,604 DEBUG [java.sql.Connection] - <{conn-100100} Preparing Statement:   select invoice_code,invoice_number from (   select case         when length(to_number(INVOICE_CODE)+1)=1 then '0000000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=2 then '000000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=3 then '00000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=4 then '0000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=5 then '000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=6 then '00'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=7 then '0'||(to_number(INVOICE_CODE)+1) else to_char(to_number(INVOICE_CODE)+1) end         invoice_code,         invoice_number from EAUSER where     userid=? ) u   where exists(   select invoice_code from SF_INVOICE   where ITEM_CODE=?   and invoice_code = u.invoice_code   and INVOICE_NUMBER=u.INVOICE_NUMBER   and STATUS='0' )   >
+2018-11-19 11:23:42,605 DEBUG [java.sql.PreparedStatement] - <{pstm-100101} Executing Statement:   select invoice_code,invoice_number from (   select case         when length(to_number(INVOICE_CODE)+1)=1 then '0000000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=2 then '000000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=3 then '00000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=4 then '0000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=5 then '000'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=6 then '00'||(to_number(INVOICE_CODE)+1)         when length(to_number(INVOICE_CODE)+1)=7 then '0'||(to_number(INVOICE_CODE)+1) else to_char(to_number(INVOICE_CODE)+1) end         invoice_code,         invoice_number from EAUSER where     userid=? ) u   where exists(   select invoice_code from SF_INVOICE   where ITEM_CODE=?   and invoice_code = u.invoice_code   and INVOICE_NUMBER=u.INVOICE_NUMBER   and STATUS='0' )   >
+2018-11-19 11:23:42,605 DEBUG [java.sql.PreparedStatement] - <{pstm-100101} Parameters: [100043, A]>
+2018-11-19 11:23:42,605 DEBUG [java.sql.PreparedStatement] - <{pstm-100101} Types: [java.lang.String, java.lang.String]>
+2018-11-19 11:23:42,608 DEBUG [java.sql.Connection] - <{conn-100102} Connection>
+2018-11-19 11:23:42,609 DEBUG [java.sql.ResultSet] - <{rset-100103} ResultSet>
+2018-11-19 11:23:42,612 DEBUG [java.sql.Connection] - <{conn-100102} Preparing Statement:         select   '共' || COUNT(house_code) || '' AS house_count,     sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,     sum(MINUS_MONEY)  MINUS_MONEY            ,     sum(SUBTRACT_MONEY)   SUBTRACT_MONEY        ,     sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,     sum(     case when d.charge_month is not null then      ((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))     else      (NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))     end     )  not_money          ,     sum(NVL(LATEFEE_REALACCOUNT,0)-NVL(LATEFEE_NOWCASH,0))  not_money_latefee          ,     sum(NOW_CASH)  NOW_CASH               ,     sum(BUILD_AREA)  BUILD_AREA             ,     sum(FLOOR_AREA)  FLOOR_AREA             ,     sum(CHARGE_AREA) CHARGE_AREA  ,     sum(LATEFEE_TOTALACCOUNT) LATEFEE_TOTALACCOUNT    ,     sum(LATEFEE_MINUS) LATEFEE_MINUS           ,     sum(LATEFEE_REALACCOUNT) LATEFEE_REALACCOUNT     ,     sum(LATEFEE_NOWCASH )   LATEFEE_NOWCASH                       from SF_CHARGE a,sf_discount d    where a.charge_month=d.charge_month(+)          and d.start_date(+)<= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)>=to_char(sysdate,'yyyy-MM-dd')         AND          house_code=?        AND      (real_account > (now_cash+delzero) or nvl(LATEFEE_REALACCOUNT,0)>nvl(LATEFEE_NOWCASH,0))            >
+2018-11-19 11:23:42,612 DEBUG [java.sql.ResultSet] - <{rset-100103} Header: [invoice_code, invoice_number]>
+2018-11-19 11:23:42,612 DEBUG [java.sql.ResultSet] - <{rset-100103} Result: [00000003, 001]>
+2018-11-19 11:23:42,613 DEBUG [java.sql.PreparedStatement] - <{pstm-100104} Executing Statement:         select   '共' || COUNT(house_code) || '' AS house_count,     sum(TOTAL_ACCOUNT)    TOTAL_ACCOUNT        ,     sum(MINUS_MONEY)  MINUS_MONEY            ,     sum(SUBTRACT_MONEY)   SUBTRACT_MONEY        ,     sum(REAL_ACCOUNT)  REAL_ACCOUNT          ,     sum(     case when d.charge_month is not null then      ((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))     else      (NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))     end     )  not_money          ,     sum(NVL(LATEFEE_REALACCOUNT,0)-NVL(LATEFEE_NOWCASH,0))  not_money_latefee          ,     sum(NOW_CASH)  NOW_CASH               ,     sum(BUILD_AREA)  BUILD_AREA             ,     sum(FLOOR_AREA)  FLOOR_AREA             ,     sum(CHARGE_AREA) CHARGE_AREA  ,     sum(LATEFEE_TOTALACCOUNT) LATEFEE_TOTALACCOUNT    ,     sum(LATEFEE_MINUS) LATEFEE_MINUS           ,     sum(LATEFEE_REALACCOUNT) LATEFEE_REALACCOUNT     ,     sum(LATEFEE_NOWCASH )   LATEFEE_NOWCASH                       from SF_CHARGE a,sf_discount d    where a.charge_month=d.charge_month(+)          and d.start_date(+)<= to_char(sysdate,'yyyy-MM-dd') and d.end_date(+)>=to_char(sysdate,'yyyy-MM-dd')         AND          house_code=?        AND      (real_account > (now_cash+delzero) or nvl(LATEFEE_REALACCOUNT,0)>nvl(LATEFEE_NOWCASH,0))            >
+2018-11-19 11:23:42,613 DEBUG [java.sql.PreparedStatement] - <{pstm-100104} Parameters: [0102-001-01-01-01]>
+2018-11-19 11:23:42,613 DEBUG [java.sql.PreparedStatement] - <{pstm-100104} Types: [java.lang.String]>
+2018-11-19 11:23:42,619 DEBUG [java.sql.ResultSet] - <{rset-100105} ResultSet>
+2018-11-19 11:23:42,620 DEBUG [java.sql.ResultSet] - <{rset-100105} Header: [house_count, total_account, minus_money, subtract_money, real_account, not_money, not_money_latefee, now_cash, build_area, floor_area, charge_area, latefee_totalaccount, latefee_minus, latefee_realaccount, latefee_nowcash]>
+2018-11-19 11:23:42,620 DEBUG [java.sql.ResultSet] - <{rset-100105} Result: [共1, 1591.7, 45, 0, 1546.7, 1546.7, 0, 0, null, null, 123.49, null, null, null, null]>
+2018-11-19 11:23:42,633 DEBUG [java.sql.Connection] - <{conn-100106} Connection>
+2018-11-19 11:23:42,633 DEBUG [java.sql.Connection] - <{conn-100106} Preparing Statement:      SELECT house_code,card_id ,cluster_code,contact_man,   house_manager ,owner_name,   address,telephone,   stat_id ,work_unit,apart_status,   user_kind,heat_status    FROM   v_house where 1=1   AND     house_code=?         >
+2018-11-19 11:23:42,634 DEBUG [java.sql.PreparedStatement] - <{pstm-100107} Executing Statement:      SELECT house_code,card_id ,cluster_code,contact_man,   house_manager ,owner_name,   address,telephone,   stat_id ,work_unit,apart_status,   user_kind,heat_status    FROM   v_house where 1=1   AND     house_code=?         >
+2018-11-19 11:23:42,634 DEBUG [java.sql.PreparedStatement] - <{pstm-100107} Parameters: [0102-001-01-01-01]>
+2018-11-19 11:23:42,634 DEBUG [java.sql.PreparedStatement] - <{pstm-100107} Types: [java.lang.String]>
+2018-11-19 11:23:42,639 DEBUG [java.sql.ResultSet] - <{rset-100108} ResultSet>
+2018-11-19 11:23:42,639 DEBUG [java.sql.ResultSet] - <{rset-100108} Header: [house_code, card_id, cluster_code, contact_man, house_manager, owner_name, address, telephone, stat_id, work_unit, apart_status, user_kind, heat_status]>
+2018-11-19 11:23:42,643 DEBUG [java.sql.ResultSet] - <{rset-100108} Result: [0102-001-01-01-01, null, null, null, null, 张海洲, 沙河口区, null, null, null, null, null, null]>
+2018-11-19 13:35:03,265 DEBUG [java.sql.Connection] - <{conn-100109} Connection>
+2018-11-19 13:35:03,265 DEBUG [java.sql.Connection] - <{conn-100109} Preparing Statement:    DELETE      FROM eahttpsession   WHERE                sessionid = ?                >
+2018-11-19 13:35:03,265 DEBUG [java.sql.PreparedStatement] - <{pstm-100110} Executing Statement:    DELETE      FROM eahttpsession   WHERE                sessionid = ?                >
+2018-11-19 13:35:03,265 DEBUG [java.sql.PreparedStatement] - <{pstm-100110} Parameters: [tcqd3gdw39b8]>
+2018-11-19 13:35:03,265 DEBUG [java.sql.PreparedStatement] - <{pstm-100110} Types: [java.lang.String]>
+2018-11-19 13:35:03,328 ERROR [org.springframework.transaction.interceptor.TransactionInterceptor] - <Application exception overridden by rollback exception>
+org.springframework.jdbc.UncategorizedSQLException: SqlMapClient operation; uncategorized SQLException for SQL []; SQL state [null]; error code [17002];   
+--- The error occurred while applying a parameter map.  
+--- Check the deleteHttpSession-InlineParameterMap.  
+--- 请检查您的SQL语句 (update failed).  
+--- Cause: java.sql.SQLException: Io 异常: Connection reset; nested exception is com.ibatis.common.jdbc.exception.NestedSQLException:   
+--- The error occurred while applying a parameter map.  
+--- Check the deleteHttpSession-InlineParameterMap.  
+--- 请检查您的SQL语句 (update failed).  
+--- Cause: java.sql.SQLException: Io 异常: Connection reset
+	at org.springframework.jdbc.support.SQLStateSQLExceptionTranslator.translate(SQLStateSQLExceptionTranslator.java:124)
+	at org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator.translate(SQLErrorCodeSQLExceptionTranslator.java:322)
+	at org.springframework.orm.ibatis.SqlMapClientTemplate.execute(SqlMapClientTemplate.java:212)
+	at org.springframework.orm.ibatis.SqlMapClientTemplate.delete(SqlMapClientTemplate.java:436)
+	at org.eredlab.g4.bmf.base.IDaoImpl.delete(IDaoImpl.java:139)
+	at org.eredlab.g4.arm.service.impl.MonitorServiceImpl.deleteHttpSession(MonitorServiceImpl.java:32)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at org.eredlab.g4.bmf.aop.SpringBeanAspect.doServiceAround(SpringBeanAspect.java:46)
+	at sun.reflect.GeneratedMethodAccessor28.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:54)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at com.sun.proxy.$Proxy45.deleteHttpSession(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:106)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at com.sun.proxy.$Proxy46.deleteHttpSession(Unknown Source)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:182)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:149)
+	at org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint.proceed(MethodInvocationProceedingJoinPoint.java:77)
+	at org.eredlab.g4.bmf.aop.SpringBeanAspect.doServiceAround(SpringBeanAspect.java:46)
+	at sun.reflect.GeneratedMethodAccessor28.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethodWithGivenArgs(AbstractAspectJAdvice.java:627)
+	at org.springframework.aop.aspectj.AbstractAspectJAdvice.invokeAdviceMethod(AbstractAspectJAdvice.java:616)
+	at org.springframework.aop.aspectj.AspectJAroundAdvice.invoke(AspectJAroundAdvice.java:64)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.aspectj.AspectJAfterThrowingAdvice.invoke(AspectJAfterThrowingAdvice.java:54)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.interceptor.ExposeInvocationInterceptor.invoke(ExposeInvocationInterceptor.java:89)
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:171)
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)
+	at com.sun.proxy.$Proxy46.deleteHttpSession(Unknown Source)
+	at org.eredlab.g4.rif.util.SessionListener.sessionDestroyed(SessionListener.java:56)
+	at org.mortbay.jetty.servlet.AbstractSessionManager.removeSession(AbstractSessionManager.java:387)
+	at org.mortbay.jetty.servlet.AbstractSessionManager$Session.invalidate(AbstractSessionManager.java:901)
+	at org.mortbay.jetty.servlet.AbstractSessionManager.scavenge(AbstractSessionManager.java:468)
+	at org.mortbay.jetty.servlet.AbstractSessionManager.access$600(AbstractSessionManager.java:62)
+	at org.mortbay.jetty.servlet.AbstractSessionManager$SessionScavenger.run(AbstractSessionManager.java:1084)
+	at org.mortbay.thread.BoundedThreadPool$PoolThread.run(BoundedThreadPool.java:475)
+Caused by: com.ibatis.common.jdbc.exception.NestedSQLException:   
+--- The error occurred while applying a parameter map.  
+--- Check the deleteHttpSession-InlineParameterMap.  
+--- 请检查您的SQL语句 (update failed).  
+--- Cause: java.sql.SQLException: Io 异常: Connection reset
+	at com.ibatis.sqlmap.engine.mapping.statement.GeneralStatement.executeUpdate(GeneralStatement.java:91)
+	at com.ibatis.sqlmap.engine.impl.SqlMapExecutorDelegate.update(SqlMapExecutorDelegate.java:505)
+	at com.ibatis.sqlmap.engine.impl.SqlMapExecutorDelegate.delete(SqlMapExecutorDelegate.java:528)
+	at com.ibatis.sqlmap.engine.impl.SqlMapSessionImpl.delete(SqlMapSessionImpl.java:98)
+	at org.springframework.orm.ibatis.SqlMapClientTemplate$11.doInSqlMapClient(SqlMapClientTemplate.java:438)
+	at org.springframework.orm.ibatis.SqlMapClientTemplate.execute(SqlMapClientTemplate.java:209)
+	... 65 more
+Caused by: java.sql.SQLException: Io 异常: Connection reset
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:111)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:145)
+	at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:254)
+	at oracle.jdbc.driver.T4CPreparedStatement.executeForRows(T4CPreparedStatement.java:976)
+	at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1167)
+	at oracle.jdbc.driver.OraclePreparedStatement.executeInternal(OraclePreparedStatement.java:3315)
+	at oracle.jdbc.driver.OraclePreparedStatement.execute(OraclePreparedStatement.java:3421)
+	at org.apache.commons.dbcp.DelegatingPreparedStatement.execute(DelegatingPreparedStatement.java:168)
+	at sun.reflect.GeneratedMethodAccessor42.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at com.ibatis.common.jdbc.logging.PreparedStatementLogProxy.invoke(PreparedStatementLogProxy.java:62)
+	at com.sun.proxy.$Proxy70.execute(Unknown Source)
+	at com.ibatis.sqlmap.engine.execution.SqlExecutor.executeUpdate(SqlExecutor.java:113)
+	at com.ibatis.sqlmap.engine.mapping.statement.GeneralStatement.sqlExecuteUpdate(GeneralStatement.java:200)
+	at com.ibatis.sqlmap.engine.mapping.statement.GeneralStatement.executeUpdate(GeneralStatement.java:78)
+	... 70 more

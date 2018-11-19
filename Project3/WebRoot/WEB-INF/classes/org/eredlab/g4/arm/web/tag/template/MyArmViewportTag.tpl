@@ -24,6 +24,7 @@ var treeLevel = '${treeLevel}';
 var lockDevice ='${lockDevice}';
 var currentUser = '${username}';
 var companyName = '${deptname}';
+var printDriver = '${printDriver}';
 Ext.onReady(function(){
 			//j_buttons=Ext.decode(tmpbtns.substring(0,tmpbtns.length-1));
 			j_buttons=","+tmpbtns;
