@@ -1533,8 +1533,8 @@ Ext.onReady(function() {
 
                         var obj = Ext.util.JSON.decode(str);
                         // alert(obj.capitalNumber);
-                        lodopPrint(obj);
-                        // testPrint()
+                        // lodopPrint(obj);
+                        testPrint()
                     }
                 },
                 failure : function(response) {

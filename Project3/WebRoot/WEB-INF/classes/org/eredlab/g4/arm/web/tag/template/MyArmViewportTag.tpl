@@ -21,6 +21,9 @@ var currentNodePath="";
 var currentLevel=0;
 var currentNode=null;
 var treeLevel = '${treeLevel}';
+var lockDevice ='${lockDevice}';
+var currentUser = '${username}';
+var companyName = '${deptname}';
 Ext.onReady(function(){
 			//j_buttons=Ext.decode(tmpbtns.substring(0,tmpbtns.length-1));
 			j_buttons=","+tmpbtns;

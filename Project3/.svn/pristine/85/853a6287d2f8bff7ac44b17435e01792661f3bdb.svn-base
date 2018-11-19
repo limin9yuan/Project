@@ -177,6 +177,8 @@ function lodopPrint(params){
 	LODOP.SET_PRINT_STYLEA(0,"FontSize",10);
 	// LODOP.ADD_PRINT_LINE("130mm","201mm", "140mm", "201mm", 0, 1);// 第九层右竖线
 	// LODOP.ADD_PRINT_LINE("140mm","1mm", "140mm", "201mm", 0, 1);// 第九层下横线
+
+	LODOP.ADD_PRINT_TABLE(0,0,100,20,params);//然后多个ADD语句及SET语句
 	LODOP.PRINT();
 	// LODOP.PREVIEW();
 
