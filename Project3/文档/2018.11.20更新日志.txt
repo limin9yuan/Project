@@ -1,0 +1,9 @@
+将print.gif 添加到 WebRoot-->resource-->image-->report 中
+
+将htmlView.jsp 覆盖到 WebRoot-->module-->rpt 中
+
+将applets.jar 添加到 WebRoot-->module-->rpt 中
+
+将jasperreports-3.1.0-applet.jar 添加到 WebRoot-->module-->rpt 中
+
+将jasperreports-fonts-3.7.0.jar 添加到 WebRoot-->module-->rpt 中
