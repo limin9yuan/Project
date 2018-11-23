@@ -1,0 +1,20 @@
+将sf.xml 覆盖到 JavaCode-->org-->module-->sf-->sqlmap 中
+
+将RollbackAction.java 覆盖到 JavaCode-->org-->module-->sf-->web 中
+
+将charge.js 覆盖到 WebRoot-->module-->sf-->js 中
+
+将print.js 覆盖到 WebRoot-->module-->sf-->js 中
+
+将reprintReceipt.js 添加到 WebRoot-->module-->sf-->js 中
+
+将stop.js 覆盖到 WebRoot-->module-->tg-->js 中
+
+将struts-config-module.xml 覆盖到 WebRoot-->WEB-INF 中
+
+
+insert into EAMENU (MENUID,MENUNAME,PARENTID,EXPANDED,REQUEST,LEAF,SORTNO,MENUTYPE)
+values('010408','补打收据','0104','0','module/rpt.ered?reqCode=reprintReceiptInit','1','4','0')
+
+insert into EAROLEAUTHORIZE (ROLEID, MENUID,AUTHORIZELEVEL, AUTHORIZEID)
+values ('10000060', '010408','1', '10001356')

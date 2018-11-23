@@ -956,4 +956,205 @@
 		update fc_house set card_id = #card_id#,valvecode = #valvecode#,OPERATE_DATE=TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),operator=#operator# where house_code=#housecode#
 	</update>
 	
+	<!-- 首页收费列表 -->
+	<select id="queryChargeList" parameterClass="map" resultClass="dto">
+		select 
+userid,
+username house_manager_name,
+  charge_area, 
+  real_account,
+  minus_money,
+  now_cash,
+  delzero,
+  nvl(real_charge,0) real_charge ,
+  qf,
+round(((case when nvl(real_charge,0) =0 then 0 else (real_charge+delzero)/real_account end)*100),2) qql
+from (
+select  
+t.userid,t.username,
+
+  sum(s.charge_area) charge_area, 
+  sum(s.total_account) real_account,
+  sum(s.minus_money) minus_money,
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(nvl(b.delzero,0)) delzero,
+  sum(b.real_charge) real_charge ,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf,
+(case when sum(s.real_account)=0 then 0 else sum(b.real_charge+nvl(b.delzero,0))/sum(s.real_account) end)*100 qql
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+ 
+
+and (s.item_Code = 'A' or  'A'='-1')
+
+group by t.userid,t.username)
+order by userid,username
+		
+	</select>
+	
+	<select id="queryChargeListPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from 
+		(select 
+userid,username house_manager_name,
+  
+  charge_area, 
+  real_account,
+  minus_money,
+  now_cash,
+  delzero,
+  nvl(real_charge,0) real_charge ,
+  qf,
+(case when nvl(real_charge,0) =0 then 0 else (real_charge+delzero)/real_account end)*100 qql 
+from (
+select  
+t.userid,t.username,
+
+  sum(s.charge_area) charge_area, 
+  sum(s.total_account) real_account,
+  sum(s.minus_money) minus_money,
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(nvl(b.delzero,0)) delzero,
+  sum(b.real_charge) real_charge ,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf,
+(case when sum(s.real_account)=0 then 0 else sum(b.real_charge+nvl(b.delzero,0))/sum(s.real_account) end)*100 qql
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+ 
+
+and (s.item_Code = 'A' or  'A'='-1')
+
+group by t.userid,t.username)
+order by userid,username) a 
+		
+	</select>
+	<!-- 首页收费合计 -->
+	<select id="sumChargeList" parameterClass="map" resultClass="dto">
+		select   '共' || COUNT(userid) || '' AS user_count,
+				sum(charge_area)    charge_area        ,
+				sum(real_account)  real_account            ,
+				sum(minus_money)   minus_money        ,
+				sum(now_cash)  now_cash          ,
+				sum(delzero)  delzero               ,
+				sum(real_charge)  real_charge             ,
+				sum(qf)  qf             ,
+				round((case when sum(real_account)=0 then 0 else sum(real_charge+nvl(delzero,0))/sum(real_account) end)*100,2) qql             
+				 				     
+		from  (
+select  
+t.userid,t.username,
+
+  sum(s.charge_area) charge_area, 
+  sum(s.total_account) real_account,
+  sum(s.minus_money) minus_money,
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(nvl(b.delzero,0)) delzero,
+  sum(b.real_charge) real_charge ,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf,
+(case when sum(s.real_account)=0 then 0 else sum(b.real_charge+nvl(b.delzero,0))/sum(s.real_account) end)*100 qql
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+ and s.charge_month=(select current_year from sf_item where item_code='A')
+
+and (s.item_Code = 'A' or  'A'='-1')
+
+group by t.userid,t.username)
+
+	</select>
+	
+	<!-- 首页缴费情况饼图 -->
+	<select id="sumChargePie" parameterClass="map" resultClass="dto">
+	select  
+
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf
+
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+  and s.charge_month=(select current_year from sf_item where item_code='A')
+	</select>
+	<!-- 首页管理员收费情况饼图 -->
+	<select id="userChargePie" parameterClass="map" resultClass="dto">
+		select 
+username name,
+
+now_cash value
+
+from (
+select  
+t.userid,t.username,
+
+  sum(s.charge_area) charge_area, 
+  sum(s.total_account) real_account,
+  sum(s.minus_money) minus_money,
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(nvl(b.delzero,0)) delzero,
+  sum(b.real_charge) real_charge ,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf,
+(case when sum(s.real_account)=0 then 0 else sum(b.real_charge+nvl(b.delzero,0))/sum(s.real_account) end)*100 qql
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+ 
+
+and (s.item_Code = 'A' or  'A'='-1')
+and s.charge_month=(select current_year from sf_item where item_code='A')
+group by t.userid,t.username)
+order by userid,username
+		
+	</select>
+	
 </sqlMap>

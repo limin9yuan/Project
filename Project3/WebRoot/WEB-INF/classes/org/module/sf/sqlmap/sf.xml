@@ -528,12 +528,12 @@
 	<!-- 收费页面欠费列表 -->
 	<select id="queryArrearsList" parameterClass="map" resultClass="dto">
 		select * from 
-		(select 
+		(select
 				b.userName,
 				c.item_name,a.CHARGE_MONTH             ,
 				HOUSE_CODE               ,
 				a.ITEM_CODE                ,
-				METER_ID                 ,				
+				METER_ID                 ,
 				case when d.charge_month is not null then 
 				((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0))-(round((NVL(a.REAL_ACCOUNT,0)-NVL(a.NOW_CASH,0)-NVL(a.delzero,0)) * nvl(d.percent,0)/100,minusdot)))
 				else 
@@ -574,7 +574,7 @@
 				BACK_MONEY               ,
 				IS_INPUT ,
 				a.p_id
-				
+
 		from SF_CHARGE a,EAUSER b,sf_item c,sf_discount d
 		where a.house_manager=b.USERID(+)
 		and a.item_code=c.item_code(+)
@@ -1793,6 +1793,173 @@ select #charge_month#,
 	<select id="getvalveCode" parameterClass="map" resultClass="dto">
 		select nvl(valvecode,'') as valveCode from fc_house where house_code = #houseCode#
 	</select>
+<select id="getInvoiceCodeTest" parameterClass="map"
+		resultClass="dto">
+	select invoice_code,invoice_number from (
+		select case
+        when length(to_number(INVOICE_CODE)+1)=1 then '0000000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=2 then '000000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=3 then '00000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=4 then '0000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=5 then '000'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=6 then '00'||(to_number(INVOICE_CODE)+1)
+        when length(to_number(INVOICE_CODE)+1)=7 then '0'||(to_number(INVOICE_CODE)+1) else to_char(to_number(INVOICE_CODE)+1) end
+        invoice_code,
+        invoice_number from EAUSER ) u
+		where exists(
+		select invoice_code from SF_INVOICE
+		where  invoice_code = u.invoice_code
+		and INVOICE_NUMBER=u.INVOICE_NUMBER
+		and STATUS='0' )
+	 </select>
 
+	<!-- 收费明细列表 -->
+	<select id="queryReprintReceipt" parameterClass="map" resultClass="dto">
+		select * from
+		(select
+		a.operate_date,
+		c.item_name,
+		a.CHARGE_MONTH ,
+		a.HOUSE_CODE,
+		a.COMMUNITY_CODE,
+		a.BUILDING_CODE,
+		a.OWNER_NAME,
+		a.TOTAL_ACCOUNT,
+		a.REAL_ACCOUNT,
+		a.REAL_CHARGE,
+		a.CHARGE_TYPE,
+		a.CHARGE_PRICE,
+		a.CHARGE_AREA,
+		a.ADDRESS,
+		a.PAY_MODE,
+		a.DELZERO,
+		e.userName BILL_MAN,
+		a.BILL_DATE,
+		a.b_id,
+		a.operator,
+		f.stat_id,
+		g.INVOICE_NUMBER,
+		g.INVOICE_CODE,
+		a.latefee_realCharge,
+		f.PLAN_BEGIN_DATE,
+		f.PLAN_END_DATE
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e, sf_charge f, SF_INVOICEUSE g
+		where a.rollback_operator=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.operator=d.USERID(+)
+		and a.bill_man=e.USERID(+)
+		and a.house_code = f.house_code(+)
+		and a.B_ID = g.B_ID(+)
+		) a
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="house_code">
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="b_id">
+				b_id=#b_id#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="operator">
+				a.operator=#operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date">
+				operate_date&gt;=#begin_date#||' 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date">
+				operate_date&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range">
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_begin_date">
+				rollback_operate_date&gt;=#rollback_begin_date#||' 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_end_date">
+				rollback_operate_date&lt;=#rollback_end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_operator">
+				a.rollback_operator=#rollback_operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="have_rollback">
+				a.rollback_flag_ora='1'
+			</isNotEmpty>
+		</dynamic>
+		order by operate_date desc ,house_code asc
+	</select>
+	<select id="queryReprintReceiptForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from
+		(select
+		a.operate_date,
+		c.item_name,
+		a.CHARGE_MONTH ,
+		a.HOUSE_CODE,
+		a.COMMUNITY_CODE,
+		a.BUILDING_CODE,
+		a.OWNER_NAME,
+		a.TOTAL_ACCOUNT,
+		a.REAL_ACCOUNT,
+		a.REAL_CHARGE,
+		a.CHARGE_TYPE,
+		a.CHARGE_PRICE,
+		a.CHARGE_AREA,
+		a.ADDRESS,
+		a.PAY_MODE,
+		a.DELZERO,
+		e.userName BILL_MAN,
+		a.BILL_DATE,
+		a.b_id,
+		a.operator,
+		f.stat_id,
+		g.INVOICE_NUMBER,
+		g.INVOICE_CODE,
+		a.latefee_realCharge,
+		f.PLAN_BEGIN_DATE,
+		f.PLAN_END_DATE
+		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e, sf_charge f, SF_INVOICEUSE g
+		where a.rollback_operator=b.USERID(+)
+		and a.item_code=c.item_code(+)
+		and a.operator=d.USERID(+)
+		and a.bill_man=e.USERID(+)
+		and a.house_code = f.house_code(+)
+		and a.B_ID = g.B_ID(+)
+		) a
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="house_code">
+				house_code=#house_code#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="b_id">
+				b_id=#b_id#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="operator">
+				a.operator=#operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date">
+				operate_date&gt;=#begin_date#||' 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date">
+				operate_date&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="p_range">
+				(stat_id in ($p_range$) or
+				community_code in ($p_range$) or
+				building_code in ($p_range$) or
+				house_code in ($p_range$))
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_begin_date">
+				rollback_operate_date&gt;=#rollback_begin_date#||' 00:00:00'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_end_date">
+				rollback_operate_date&lt;=#rollback_end_date#||' 23:59:59'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="rollback_operator">
+				a.rollback_operator=#rollback_operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="have_rollback">
+				a.rollback_flag_ora='1'
+			</isNotEmpty>
+		</dynamic>
+	</select>
 </sqlMap>
 

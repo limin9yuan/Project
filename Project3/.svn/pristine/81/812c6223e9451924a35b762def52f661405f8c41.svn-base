@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap>
+	<typeAlias alias="dto"
+		type="org.eredlab.g4.ccl.datastructure.impl.BaseDto" />
+
+	<!-- 热源树初始数据 -->
+	<select id="querySourceTree" parameterClass="map" resultClass="dto">
+		select parentid,id,text,stat_id,leaf,order_id from (
+		SELECT  source_id as parentid, source_id||'_'||stat_id as id,stat_name as text,stat_id, 
+ '0' leaf,ORDER_ID
+				FROM 
+		fc_station
+		union all
+		SELECT  	'01'  as parentid	 ,  source_id as id, source_name as text, '' stat_id,(case when stat_count=0 then '1' else '0' end)  leaf ,ORDER_ID		
+		FROM fc_source		
+		 ) a
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="menuid"> 
+				id = #id#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="parentid"> 
+				parentid = #parentid#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="menuname"> 
+				text like '%'||#menuname#||'%'
+			</isNotEmpty>
+		</dynamic>
+		order by ORDER_ID asc
+	</select>
+	<!-- 热源站所管理-换热站列表 -->
+	<select id="queryStation" parameterClass="map" resultClass="dto">
+		select source_id,source_name,stat_id,stat_name,order_id,remark from 
+		(SELECT b.source_id,b.source_name,a.stat_id,a.stat_name,a.order_id,a.remark
+		  FROM fc_station a,fc_source b where a.source_id=b.source_id
+		  and #source_id#!='01' union all
+		  SELECT source_id,source_name,'','',order_id,remark
+		  FROM fc_source  )
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="stat_id"> 
+									stat_id like '$stat_id$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="source_id"> 
+									(source_id = #source_id# or #source_id#='01' or source_id||'_'||stat_id = #source_id#  )
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="stat_name"> 
+									stat_name like '%$stat_name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="queryParam"> 
+				                    (stat_name like '%$queryParam$%' or source_name like '%$queryParam$%')
+			</isNotEmpty>
+		</dynamic>
+		 order by ORDER_ID asc
+	</select>
+	<select id="queryStationForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from 
+		(SELECT b.source_id,b.source_name,a.stat_id,a.stat_name,a.order_id
+		  FROM fc_station a,fc_source b where a.source_id=b.source_id
+		  and #source_id#!='01'
+		  union all
+		  SELECT source_id,source_name,'','',order_id
+		  FROM fc_source  where #source_id#='01')
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="stat_id"> 
+									stat_id like '$stat_id$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="source_id"> 
+									(source_id = #source_id# or #source_id#='01'  or source_id||'_'||stat_id = #source_id# )
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="stat_name"> 
+									stat_name like '%$stat_name$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="queryParam"> 
+				                    (stat_name like '%$queryParam$%' or source_name like '%$queryParam$%')
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!-- 添加热源 -->
+	<insert id="insertSource" parameterClass="dto">
+		INSERT INTO fc_source (source_id,source_name,order_id,remark,cid) 
+		VALUES (#source_id#, #source_name#, #order_id#,
+		    #remark#,#cid#)
+	</insert>
+	<!-- 修改热源 -->
+	<update id="updateSource" parameterClass="dto">
+		UPDATE fc_source set 
+		source_name=#source_name#,
+		order_id=#order_id#,
+		remark=#remark#
+		WHERE source_id=#source_id#
+	</update>
+	<!--删除热源-->
+	<delete id="deleteSource" parameterClass="map">
+       DELETE FROM fc_source WHERE source_id in ($source_id$)
+	</delete>
+	<!-- 添加换热站-->
+	<insert id="insertStation" parameterClass="dto">
+		INSERT INTO fc_station (source_id,stat_id,stat_name,order_id,remark,cid) 
+		VALUES (#source_id#,#stat_id#, #stat_name#, #order_id#,
+		    #remark#,#cid#)
+	</insert>
+	<!-- 修改换热站 -->
+	<update id="updateStation" parameterClass="dto">
+		UPDATE fc_station set 
+		source_id=#source_id#,
+		stat_name=#stat_name#,
+		order_id=#order_id#,
+		remark=#remark#
+		WHERE stat_id=#stat_id#
+	</update>
+	<!--删除换热站-->
+	<delete id="deleteStation" parameterClass="map">
+       DELETE FROM fc_station WHERE stat_id in ($stat_id$)
+	</delete>
+	<!-- 更新热源下换热站数 -->
+	<update id="updateStationCount" parameterClass="dto">
+		UPDATE fc_source set 
+		stat_count=(select count(*) from fc_source where source_id=#source_id#)
+		WHERE source_id=#source_id#
+	</update>
+	<!--取得换热站是否被使用-->
+	<select id="getUseStatCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_house WHERE stat_id = #stat_id# and IS_DESTORY='0'
+	</select>
+	<!--取得换热站下房间数-->
+	<select id="getHaveStatCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_station WHERE source_id = #source_id# 
+	</select>
+	<!--验证热源号码是否已存在-->
+	<select id="isExistSourceCode" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_source WHERE source_id = #source_id# 
+	</select>
+	<!--验证换热站号码是否已存在-->
+	<select id="isExistStatCode" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_station WHERE stat_id = #stat_id# 
+	</select>
+	<!--验证热源下换热站数-->
+	<select id="getSourceStatCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_station WHERE source_id = #source_id# 
+	</select>
+	<!-- 查询小区信息-->
+	<select id="queryCommunityInfo" parameterClass="map"
+		resultClass="dto">
+		SELECT a.community_code,a.community_name,a.remark,
+		a.address,a.house_manager com_house_manager,
+		a.stat_id com_stat_id,
+		b.stat_name com_stat_name,USERNAME com_manager_name
+		FROM
+		fc_community a,fc_station b,EAUSER c  where 
+		a.stat_id=b.stat_id(+) and a.house_manager=c.USERID(+)
+		and a.community_code= #community_code# 
+	</select>
+	<!-- 查询热源编号/名称-->
+	<select id="getSourceDic" parameterClass="map"
+		resultClass="dto">
+		SELECT source_id value,source_name text
+		FROM
+		fc_source
+	</select>
+	<!-- 查询换热站编号/名称-->
+	<select id="getStationDic" parameterClass="map"
+		resultClass="dto">
+		SELECT stat_id value,stat_name text
+		FROM
+		fc_station
+	</select>
+	<!-- 查询房产管理员编号/名称-->
+	<select id="getManagerDic" parameterClass="map"
+		resultClass="dto">
+		SELECT userid value,username text
+		FROM eauser		
+	</select>
+	<!-- 添加小区 -->
+	<insert id="insertCommunity" parameterClass="dto">
+		INSERT INTO
+		fc_community (
+		COMMUNITY_CODE, COMMUNITY_NAME, HOUSE_MANAGER,
+		ADDRESS,STAT_ID,REMARK,CID,OPERATOR,OPERATE_DATE)
+		VALUES (#community_code#, #community_name#, #house_manager#,
+		#address#,#stat_id#, #remark#, #cid#,#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	<!-- 修改小区 -->
+	<update id="updateCommunity" parameterClass="dto">
+		UPDATE fc_community SET 
+		COMMUNITY_NAME=#community_name#, 
+		HOUSE_MANAGER=#house_manager#,
+		ADDRESS=#address#,
+		STAT_ID=#stat_id#,
+		REMARK=#remark#,
+		OPERATOR=#userid#,
+		OPERATE_DATE=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		WHERE COMMUNITY_CODE = #community_code#
+	</update>
+	<!-- 修改小区下房间的换热站 -->
+	<update id="updateHouseStation" parameterClass="dto">
+		UPDATE fc_house SET stat_id=#stat_id#
+		where  COMMUNITY_CODE = #community_code#
+	</update>
+	<!-- 修改小区下大楼的换热站 -->
+	<update id="updateBuildingStation" parameterClass="dto">
+		UPDATE fc_building SET stat_id=#stat_id#
+		where  COMMUNITY_CODE = #community_code#
+	</update>
+	<!--删除小区-->
+	<delete id="deleteCommunity" parameterClass="map">
+       DELETE FROM fc_community WHERE COMMUNITY_CODE = #community_code#
+	</delete>
+	<!--取得某大楼下房间数-->
+	<select id="getHouseCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_house WHERE BUILDING_CODE = #building_code# and IS_DESTORY='0'
+	</select>
+	<!--取得某大楼下有应收的房间数-->
+	<select id="getChaHouseCount" parameterClass="map" resultClass="java.lang.Integer">		  
+		SELECT count(*) as count
+		FROM
+		sf_charge  where BUILDING_CODE = #building_code#
+	</select>
+	<!--删除大楼时，批量删除没有应收的房间-->
+	<delete id="batchDeleteChaHouse" parameterClass="map" >
+       DELETE FROM fc_house a  WHERE HOUSE_CODE in (select house_code from fc_house where BUILDING_CODE = #building_code#) 
+       and not exists (select 1 from sf_charge  WHERE house_code=a.house_code and  HOUSE_CODE in (select house_code from fc_house where BUILDING_CODE = #building_code#))
+	</delete>
+	<!--删除大楼时，批量删除没有应收的房间里的用户-->
+	<delete id="batchDeleteChaOwner" parameterClass="map" >
+       DELETE FROM fc_owner a  WHERE HOUSE_CODE in (select house_code from fc_owner where BUILDING_CODE = #building_code#) 
+       and not exists (select 1 from sf_charge  WHERE house_code=a.house_code and  HOUSE_CODE in (select house_code from fc_owner where BUILDING_CODE = #building_code#))
+	</delete>
+	<!--删除大楼时，批量删除没有应收的房间里的面积-->
+	<delete id="batchDeleteChaArea" parameterClass="map" >
+       DELETE FROM fc_area a  WHERE HOUSE_CODE in (select house_code from fc_area where BUILDING_CODE = #building_code#) 
+       and not exists (select 1 from sf_charge  WHERE house_code=a.house_code and  HOUSE_CODE in (select house_code from fc_area where BUILDING_CODE = #building_code#))
+	</delete>
+	<!--取得某小区下大楼数-->
+	<select id="getBuildingCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_building WHERE COMMUNITY_CODE = #community_code# and IS_DESTORY='0'
+	</select>
+	<!--取得某编号的小区数-->
+	<select id="getCommunityCodeCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_community WHERE COMMUNITY_CODE = #community_code# and IS_DESTORY='0'
+	</select>
+	<!--取得某编号的大楼数-->
+	<select id="getBuildingCodeCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_building WHERE COMMUNITY_CODE = #community_code# and IS_DESTORY='0'
+	</select>
+	<!--取得某编号的大楼数量，用以判断是否存在-->
+	<select id="queryBuildingNum" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM fc_building WHERE building_code = #building_code#
+	</select>
+	<!-- 查询大楼信息-->
+	<select id="queryBuildingInfo" parameterClass="map"
+		resultClass="dto">
+		SELECT building_code,building_name,a.stat_id bu_stat_id,b.stat_name bu_stat_name,
+		a.house_manager bu_house_manager,c.USERNAME bu_manager_name
+		FROM
+		fc_building a,fc_station b,EAUSER c  where building_code= #building_code# 
+		and a.stat_id=b.stat_id(+) and a.house_manager=c.USERID(+)
+	</select>
+	<!-- 添加大楼 -->
+	<insert id="insertBuilding" parameterClass="dto">
+		INSERT INTO
+		fc_building (
+		COMMUNITY_CODE,BUILDING_CODE,BUILDING_NAME,HOUSE_MANAGER,	STAT_ID,
+		CID,OPERATOR,OPERATE_DATE)
+		VALUES (#community_code#,#building_code#, #building_name#, #house_manager#, 
+		 #stat_id#,#cid#,#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	<!-- 修改大楼 -->
+	<update id="updateBuilding" parameterClass="dto">
+		UPDATE fc_building SET 
+		BUILDING_NAME=#building_name#, 
+		HOUSE_MANAGER=#house_manager#,
+		STAT_ID=#stat_id#,
+		OPERATOR=#operator#,
+		OPERATE_DATE=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		WHERE BUILDING_CODE = #building_code#
+	</update>
+	<!-- 修改小区大楼数 -->
+	<update id="updateBuildingCount" parameterClass="dto">
+		UPDATE fc_community SET 
+		building_count=(select count(*) from fc_building where COMMUNITY_CODE = #community_code#)
+		WHERE COMMUNITY_CODE = #community_code#
+	</update>
+	<!--删除大楼-->
+	<delete id="deleteBuilding" parameterClass="map">
+       DELETE FROM fc_building WHERE BUILDING_CODE = #building_code#
+	</delete>
+		<!-- 查询房间信息-->
+	<select id="queryHouseInfo" parameterClass="map"
+		resultClass="dto">		
+		SELECT a.cell_code h_cell_code,a.floor h_floor,a.door_code h_door_code,
+		a.house_code h_house_code,card_id h_card_id,cluster_code h_cluster_code,contact_man h_contact_man,
+		house_manager_name h_house_manager_name,
+		house_manager h_house_manager,owner_name h_owner_name,
+		address h_address,intoweb_date h_intoweb_date,telephone h_telephone,stat_name h_stat_name,
+		stat_id h_stat_id,enter_date h_enter_date,work_unit h_work_unit,apart_status h_apart_status,
+		user_kind h_user_kind,heat_status h_heat_status,
+
+		intoweb_area h_intoweb_area,
+		mobilephone h_mobilephone,
+		area_count h_area_count,
+		intoweb_year h_intoweb_year,
+                
+    	b.item_code h_item_code,
+		b.area_id h_area_id,
+		b.use_type h_use_type,
+		b.standard_id h_standard_id,
+		(select standard_name from sf_standard where standard_id=b.standard_id  and standyear=(select current_year from sf_item where item_code='A')) h_standard_name,
+		b.build_area h_build_area,
+		b.floor_height h_floor_height,
+		b.super_area h_super_area,
+		b.charge_area h_charge_area,
+		
+		a.balcony h_balcony,
+                
+    	c.item_code h_item_code1,
+		c.area_id h_area_id1,
+		c.use_type h_use_type1,
+		c.standard_id h_standard_id1,
+		(select standard_name from sf_standard where standard_id=c.standard_id  and standyear=(select current_year from sf_item where item_code='A')) h_standard_name1,
+		c.build_area h_build_area1,
+		c.floor_height h_floor_height1,
+		c.super_area h_super_area1,
+		c.charge_area h_charge_area1,
+                
+    	d.item_code h_item_code2,
+		d.area_id h_area_id2,
+		d.use_type h_use_type2,
+		d.standard_id h_standard_id2,
+		(select standard_name from sf_standard where standard_id=d.standard_id  and standyear=(select current_year from sf_item where item_code='A')) h_standard_name2,
+		d.build_area h_build_area2,
+		d.floor_height h_floor_height2,
+		d.super_area h_super_area2,
+		d.charge_area h_charge_area2,
+		
+		e.item_code h_item_code3,
+		e.area_id h_area_id3,
+		e.use_type h_use_type3,
+		e.standard_id h_standard_id3,
+		(select standard_name from sf_standard where standard_id=e.standard_id  and standyear=(select current_year from sf_item where item_code='A')) h_standard_name3,
+		e.build_area h_build_area3,
+		e.floor_height h_floor_height3,
+		e.super_area h_super_area3,
+		e.charge_area h_charge_area3,
+		
+		f.item_code h_item_code4,
+		f.area_id h_area_id4,
+		f.use_type h_use_type4,
+		f.standard_id h_standard_id4,
+		(select standard_name from sf_standard where standard_id=f.standard_id  and standyear=(select current_year from sf_item where item_code='A')) h_standard_name4,
+		f.build_area h_build_area4,
+		f.floor_height h_floor_height4,
+		f.super_area h_super_area4,
+		f.charge_area h_charge_area4,
+		
+		a.VALVECODE h_valvecode,
+		a.usercardval h_usercardval,
+		a.REMARK h_remark
+		FROM
+		v_house a,
+                (select * from fc_area where house_code=#house_code# and area_id=0) b,
+                (select * from fc_area where house_code=#house_code# and area_id=1) c,
+                (select * from fc_area where house_code=#house_code# and area_id=2) d,
+                (select * from fc_area where house_code=#house_code# and area_id=3) e,
+                (select * from fc_area where house_code=#house_code# and area_id=4) f
+                where 
+                a.house_code=#house_code# and 
+                a.house_code=b.house_code(+) and 
+                a.house_code=c.house_code(+) and
+                a.house_code=d.house_code(+) and
+                a.house_code=e.house_code(+) and
+                a.house_code=f.house_code(+)     
+	</select>
+	<!-- 查询房间号是否存在-->
+	<select id="isHouseExist" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) count
+		FROM
+		fc_house  where house_code=#building_code#||'-'||#cell_code#||'-'||#floor#||'-'||#door_code#
+	</select>
+	<!-- 添加房间 -->
+	<insert id="insertHouse" parameterClass="dto">
+		insert into fc_house(
+		community_code,
+		building_code,
+		house_code,
+		cell_code,
+		floor,
+		door_code,
+		card_id,
+		cluster_code,
+		house_manager,
+		address,
+		intoweb_date,
+		intoweb_area,
+		stat_id,
+		apart_status,
+		user_kind ,
+		heat_status,cid,operator,operate_date,valvecode,remark,balcony)values(
+		#community_code#,
+		#building_code#,
+		#building_code#||'-'||#cell_code#||'-'||#floor#||'-'||#door_code#,
+		#cell_code#,
+		#floor#,
+		#door_code#,
+		#card_id#,
+		#cluster_code#,
+		#house_manager#,
+		#address#,
+		#intoweb_date#,
+		#intoweb_area#,
+		#stat_id#,
+		#apart_status#,
+		#user_kind#,
+		#heat_status#,
+		#cid#,#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),
+		#valvecode#,
+		#remark#,
+		#balcony#)
+	</insert>
+	<!-- 添加用户 -->
+	<insert id="insertOwner" parameterClass="dto">
+		insert into fc_owner(
+		community_code,
+		building_code,
+		house_code,
+		contact_man,
+		owner_name,
+		telephone,
+		mobilephone,
+		enter_date,
+		work_unit,
+		cid,
+		operator,
+		operate_date)values(
+		#community_code#,
+		#building_code#,
+		#building_code#||'-'||#cell_code#||'-'||#floor#||'-'||#door_code#,
+		#contact_man#,
+		#owner_name#,
+		#telephone#,
+		#mobilephone#,
+		#enter_date#,
+		#work_unit#,
+		#cid#,#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		)
+	</insert>
+	<!-- 添加面积(导入) -->
+	<insert id="insertArea" parameterClass="dto">
+		insert into fc_area(
+		community_code,
+		building_code,
+		house_code,
+		item_code,
+		area_id,
+		use_type,
+		standard_id,
+		build_area,
+		floor_height,
+		super_area,
+		charge_area,
+		cid,
+		operator,
+		operate_date)values(
+		#community_code#,
+		#building_code#,
+		#building_code#||'-'||#cell_code#||'-'||#floor#||'-'||#door_code#,
+		#item_code#,
+		#area_id#,
+		#use_type#,
+		(select standard_id from sf_standard where (standard_name=#standard_id# or standard_id=#standard_id#)  and standyear=(select current_year from sf_item where item_code='A')),
+		#build_area#,
+		#floor_height#,
+		#super_area#,
+		#charge_area#,
+		#cid#,#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	<!-- 添加面积(页面) -->
+	<insert id="insertAreas" parameterClass="dto">
+		insert into fc_area(
+		community_code,
+		building_code,
+		house_code,
+		item_code,
+		area_id,
+		use_type,
+		standard_id,
+		build_area,
+		floor_height,
+		super_area,
+		charge_area,
+		cid,
+		operator,
+		operate_date)values(
+		#community_code#,
+		#building_code#,
+		#house_code#,
+		#item_code#,
+		#area_id#,
+		#use_type#,
+		#standard_id#,
+		#build_area#,
+		#floor_height#,
+		#super_area#,
+		#charge_area#,
+		#cid#,#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'))
+	</insert>
+	<!-- 修改大楼房间数 -->
+	<update id="updateBuHouseCount" parameterClass="dto">
+		UPDATE fc_building SET 
+		house_count=(select count(*) from fc_house where BUILDING_CODE = #building_code# and IS_DESTORY='0')
+		WHERE BUILDING_CODE = #building_code#		
+	</update>
+	<!-- 修改小区房间数 -->
+	<update id="updateCmHouseCount" parameterClass="dto">
+		UPDATE fc_community SET 
+		house_count=(select count(*) from fc_house where COMMUNITY_CODE = #community_code# and IS_DESTORY='0')
+		WHERE COMMUNITY_CODE = #community_code#		
+	</update>
+	<!-- 修改房间 -->
+	<update id="updateHouse" parameterClass="dto">
+		update fc_house set		 	
+		card_id=#card_id#,
+		cluster_code=#cluster_code#,
+		house_manager=#house_manager#,
+		address=#address#,
+		intoweb_date=#intoweb_date#,
+		intoweb_area=#intoweb_area#,
+		stat_id=#stat_id#,
+		apart_status=#apart_status#,
+		user_kind=#user_kind#,
+		heat_status=#heat_status#,
+		operator=#operator#,
+		operate_date=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),
+		valvecode=#valvecode#,
+		remark=#remark#,
+		balcony=#balcony#
+		where house_code=#house_code#
+	</update>
+	<!-- 修改用户 -->
+	<update id="updateOwner" parameterClass="dto">
+		update fc_owner set
+		contact_man=#contact_man#,
+		owner_name=#owner_name#,
+		telephone=#telephone#,
+		mobilephone=#mobilephone#,
+		enter_date=#enter_date#,
+		work_unit=#work_unit#,
+		operator=#operator#,
+		operate_date=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		where house_code=#house_code#
+	</update>
+	<!-- 修改面积 -->
+	<insert id="updateArea" parameterClass="dto">
+		update fc_area set
+		use_type=#use_type#,
+		standard_id=#standard_id#,
+		build_area=#build_area#,
+		floor_height=#floor_height#,
+		super_area=#super_area#,
+		charge_area=#charge_area#,
+		operator=#operator#,
+		operate_date=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		where house_code=#house_code# and area_id=#area_id#
+	</insert>
+	<!--删除房间-->
+	<delete id="deleteHouse" parameterClass="map" >
+       DELETE FROM fc_house WHERE HOUSE_CODE = #house_code#
+	</delete>
+	<!--批量删除房间-->
+	<delete id="batchDeleteHouse" parameterClass="map" >
+       DELETE FROM fc_house a  WHERE HOUSE_CODE in ($house_code$) and not exists (select 1 from sf_charge  WHERE house_code=a.house_code and  HOUSE_CODE in ($house_code$))
+	</delete>
+	<!--删除用户信息-->
+	<delete id="deleteOwner" parameterClass="map" >
+       DELETE FROM fc_owner WHERE HOUSE_CODE = #house_code#
+	</delete>
+	<!--批量删除用户信息-->
+	<delete id="batchDeleteOwner" parameterClass="map" >
+       DELETE FROM fc_owner a WHERE HOUSE_CODE in ($house_code$) and not exists (select 1 from sf_charge  WHERE house_code=a.house_code and  HOUSE_CODE in ($house_code$))
+	</delete>
+	<!--删除面积-->
+	<delete id="deleteArea" parameterClass="map" >
+       DELETE FROM fc_area WHERE HOUSE_CODE = #house_code# and area_id=#area_id#
+	</delete>
+	<!--批量删除面积-->
+	<delete id="batchDeleteArea" parameterClass="map" >
+       DELETE FROM fc_area a WHERE HOUSE_CODE in ($house_code$) and not exists (select 1 from sf_charge  WHERE house_code=a.house_code and  HOUSE_CODE in ($house_code$))
+	</delete>
+	<!--查询不能被批量删除的房间个数-->
+	<select id="haveNotcharge2" parameterClass="map" resultClass="java.lang.Integer">
+       SELECT count(*) as count
+		FROM
+		sf_charge WHERE HOUSE_CODE in ($house_code$)
+	</select>
+	<!--查询能被批量删除的房间个数-->
+	<select id="batchDeleteHouseCount" parameterClass="map" resultClass="java.lang.Integer">
+       SELECT count(*) as count FROM fc_house a  WHERE HOUSE_CODE in ($house_code$) and not exists (select 1 from sf_charge  WHERE house_code=a.house_code and  HOUSE_CODE in ($house_code$))
+	</select>
+	<!-- 查询某房间是否有应收-->
+	<select id="haveNotcharge" parameterClass="map"
+		resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM
+		sf_charge  where house_code=#house_code#
+	</select>	
+	<!-- 查询某房间是否有应收-->
+	<select id="areaHaveNotcharge" parameterClass="map"
+		resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM
+		sf_charge  where house_code=#house_code# and meter_id=#area_id#
+	</select>
+	
+	<!-- 导入错误房间数据 -->
+	<insert id="importErrorHouse" parameterClass="dto">
+		insert into FC_IMPORT(
+		EXCEL_ROW,
+		
+		COMMUNITY_CODE,
+		COMMUNITY_NAME,
+		BUILDING_CODE,
+		BUILDING_NAME,
+		
+		CELL_CODE,
+		FLOOR,
+		DOOR_CODE,
+		ADDRESS,
+		ENTER_DATE,
+		OWNER_NAME,
+		
+		TELEPHONE,
+		MOBILEPHONE,		
+		WORK_UNIT,
+		
+		USE_TYPE,
+		STANDARD_ID,
+		BUILD_AREA,
+		USE_AREA,
+		CHARGE_AREA,
+		
+		USE_TYPE2,
+		STANDARD_ID2,
+		BUILD_AREA2,
+		USE_AREA2,
+		CHARGE_AREA2,
+		SUPER_AREA,
+		SUPER_AREA2,
+		CARD_ID,
+		CLUSTER_CODE,
+		VALVECODE,
+		ERROR,
+		OPERATOR,
+		OPERATEDATE
+		)values(
+		#excel_row#,
+		#community_code#,
+		#community_name#,
+		#building_code#,
+		#building_name#,
+		
+		#cell_code#,
+		#floor#,
+		#door_code#,
+		#address#,
+		#enter_date#,
+		#owner_name#,
+		
+		#telephone#,
+		#mobilephone#,
+		#work_unit#,
+		
+		#use_type#,
+		#standard_id#,
+		#build_area#,
+		#use_area#,
+		#charge_area#,
+		
+		#use_type2#,
+		#standard_id2#,
+		#build_area2#,
+		#use_area2#,
+		#charge_area2#,
+		#super_area#,
+		#super_area2#,
+		#card_id#,
+		#cluster_code#,
+		#valvecode#,
+		#error#,
+		#operator#,
+		to_char(sysdate,'YYYY-MM-DD HH24:MI:SS')
+		)
+	</insert>
+	<!-- 房产数据导入错误数据 -->
+	<select id="queryErrorImport" parameterClass="map" resultClass="dto">
+		select * from fc_import
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="community_code">
+				community_code=#community_code#
+			</isNotEmpty>
+		</dynamic>
+		 order by operatedate desc 
+	</select>
+	<select id="queryErrorImportForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from fc_import
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="community_code">
+				community_code=#community_code#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!--删除导入数据-->
+	<delete id="deleteImportData" parameterClass="map">
+       DELETE FROM fc_import WHERE p_id in ($p_id$)
+	</delete>
+	<!--删除导入数据-->
+	<!--<delete id="deleteImportDataCount" parameterClass="map">-->
+       <!--SELECT count(*) FROM fc_import WHERE community_code=#p_id#-->
+	<!--</delete>-->
+	<!-- 查询某房间是否有面积1-->
+	<select id="haveArea1" parameterClass="map"
+		resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM
+		fc_area  where house_code=#house_code#
+		and area_id='0'
+	</select>
+	<!-- 导入阀门号,更新房间 -->
+	<update id="updateHouseFamen" parameterClass="dto">
+		update fc_house set		 	
+		card_id=#card_id#,
+		operator=#operator#,
+		operate_date=to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),
+		valvecode=#valvecode#
+		where house_code=#house_code#
+	</update>
+	<!-- 导入错误阀门号数据 -->
+	<insert id="importErrorFamen" parameterClass="dto">
+		insert into fc_importFamen(
+		EXCEL_ROW,
+		HOUSE_CODE,
+		CARD_ID,
+		VALVECODE,
+		ERROR
+		)values(
+		#excel_row#,
+		#house_code#,
+		#card_id#,
+		#valvecode#,
+		#error#)
+	</insert>
+	<!-- 阀门号导入错误数据 -->
+	<select id="queryErrorFamenImport" parameterClass="map" resultClass="dto">
+		select * from fc_importFamen
+		 order by excel_row asc
+	</select>
+	<select id="queryErrorFamenImportForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from fc_importFamen		
+	</select>
+	<!-- 查询某房间是否有阀门号-->
+	<select id="haveFamenData" parameterClass="map"
+		resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM
+		fc_house  where house_code=#house_code#
+		and valvecode=#valvecode#
+	</select>
+
+	<!--添加用户卡日志-->
+	<insert id="insertUserCardLog" parameterClass="dto">
+		INSERT INTO XT_USERCARDLOG (OPERATOR, OPERATEDATE, OPERATENAME, OPERATECONTENT)
+		VALUES (#operator#,to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'),#operateName#,#operateContent#)
+	</insert>
+	
+    <!-- 查询用户卡管理列表 -->
+	<select id="queryUserCard" parameterClass="map" resultClass="dto">
+     select * from  		
+	   (select  		        
+	     a.operator,b.userName username, a.operatedate, 		        
+	     a.operateName,
+	     a.operateContent 				
+	     from XT_USERCARDLOG a,EAUSER b where  		
+	     a.operator=b.USERID(+) 		
+	    ) a 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="operator"> 
+				a.operator=#operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 
+				operatedate&gt;=#begin_date#||' 00:00:00'				
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 
+				operatedate&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+		</dynamic>
+		 order by operateDate desc
+	</select>
+	<select id="queryUserCardForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from 
+		(select  		        
+	     a.operator,b.userName userName, a.operatedate, 		        
+	     a.operateName,
+	     a.operateContent 				
+	     from XT_USERCARDLOG a,EAUSER b where  		
+	     a.operator=b.USERID(+) 		
+	    ) a  
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="operator"> 
+				a.operator=#operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 
+				operatedate&gt;=#begin_date#||' 00:00:00'				
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 
+				operatedate&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!--  用户卡管理明细 -->
+	<select id="sumUserCard" parameterClass="map" resultClass="dto">
+		
+		  select   '共' || COUNT(operateName) || '' AS userCardecount         
+		from XT_USERCARDLOG 
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="operator"> 
+				operator=#operator#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="begin_date"> 
+				operatedate&gt;=#begin_date#||' 00:00:00'				
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="end_date"> 
+				operatedate&lt;=#end_date#||' 23:59:59'
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	<!--取得当前时间十九位yyyy-mm-dd hh:mm:ss格式的日期-->
+	<select id="getDate19" parameterClass="map" resultClass="dto">
+	     SELECT TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI:SS') dt FROM DUAL
+	</select>
+	<!-- 查询房间信息 数量-->
+	<select id="userCodeQueryCount" parameterClass="map"
+		resultClass="java.lang.Integer">		
+		SELECT count(a.house_code) cnt from 
+		v_house a,
+                (select * from fc_area where area_id=0) b
+                where 
+                
+                a.house_code=b.house_code(+) 
+			<isNotEmpty prepend="AND" property="manageIdQuery"> 
+				a.house_code like '%'||#manageIdQuery#||'%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="ownerNameQuery"> 
+				owner_name like '%'||#ownerNameQuery#||'%'			
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="valveCode"> 
+				valveCode like '%'||#valveCode#||'%'	
+			</isNotEmpty>
+	</select>
+	<!-- 查询房间信息-->
+	<select id="userCodeQuery" parameterClass="map"
+		resultClass="dto">		
+		SELECT 
+		a.house_code ,a.card_id ,a.owner_name,a.community_name,a.building_code||' '||a.building_name as building_code,a.mobilephone, a.cluster_code,
+    	b.build_area ,
+		b.charge_area, 
+		a.valveCode,
+		a.REMARK
+		FROM
+		v_house a,
+                (select * from fc_area where area_id=0) b
+                where 
+                
+                a.house_code=b.house_code(+) 
+			<isNotEmpty prepend="AND" property="manageIdQuery"> 
+				a.house_code like '%'||#manageIdQuery#||'%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="ownerNameQuery"> 
+				owner_name like '%'||#ownerNameQuery#||'%'			
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="valveCode"> 
+				valveCode like '%'||#valveCode#||'%'	
+			</isNotEmpty>
+	</select>
+	<!-- 查询多条房间信息-->
+
+	<select id="userCodeQuery2" parameterClass="map" resultClass="dto">
+		SELECT 
+		a.house_code ,a.card_id ,a.owner_name,a.community_name,a.building_code||' '||a.building_name as building_code,a.mobilephone, a.cluster_code,
+    	b.build_area ,
+		b.charge_area, 
+		a.valveCode,
+		a.REMARK
+		FROM
+		v_house a,
+                (select * from fc_area where area_id=0) b
+                where 
+                
+                a.house_code=b.house_code(+) 
+		<dynamic prepend="">
+			<isNotEmpty prepend="AND" property="owner_name_q"> 
+				b.owner_name like '%$owner_name_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="card_id_q"> 
+				a.valveCode like '%$valveCode$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="house_code_q"> 				
+				a.house_code like '$house_code_q$%'
+			</isNotEmpty>
+		</dynamic>   
+	</select>
+	<select id="userCodeQuery2ForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(a.house_code) cnt from 
+		v_house a,
+                (select * from fc_area where area_id=0) b
+                where 
+                
+                a.house_code=b.house_code(+) 
+		<dynamic prepend="">
+			<isNotEmpty prepend="AND" property="owner_name_q"> 
+				b.owner_name like '%$owner_name_q$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="card_id_q"> 
+				a.valveCode like '%$valveCode$%'
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="house_code_q"> 				
+				a.house_code like '$house_code_q$%'
+			</isNotEmpty>
+		</dynamic>   
+	</select>
+	
+	<update id='bantchUpdateVal' parameterClass="dto">
+		update fc_house set userCardVal = #userCardVal#,OPERATE_DATE=TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),operator=#operator#  where (house_code in ($code$) or community_code in ($code$) or building_code in ($code$)) and valvecode is not null 
+	</update>
+	
+	<update id="updateCardId" parameterClass="dto">
+		update fc_house set card_id = #card_id#,valvecode = #valvecode#,OPERATE_DATE=TO_CHAR(SYSDATE,'YYYY-MM-DD HH24:MI:SS'),operator=#operator# where house_code=#housecode#
+	</update>
+	
+	<!-- 首页收费列表 -->
+	<select id="queryChargeList" parameterClass="map" resultClass="dto">
+		select 
+userid,
+username house_manager_name,
+  charge_area, 
+  real_account,
+  minus_money,
+  now_cash,
+  delzero,
+  nvl(real_charge,0) real_charge ,
+  qf,
+round(((case when nvl(real_charge,0) =0 then 0 else (real_charge+delzero)/real_account end)*100),2) qql
+from (
+select  
+t.userid,t.username,
+
+  sum(s.charge_area) charge_area, 
+  sum(s.total_account) real_account,
+  sum(s.minus_money) minus_money,
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(nvl(b.delzero,0)) delzero,
+  sum(b.real_charge) real_charge ,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf,
+(case when sum(s.real_account)=0 then 0 else sum(b.real_charge+nvl(b.delzero,0))/sum(s.real_account) end)*100 qql
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+ 
+
+and (s.item_Code = 'A' or  'A'='-1')
+
+group by t.userid,t.username)
+order by userid,username
+		
+	</select>
+	
+	<select id="queryChargeListPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select count(*) from 
+		(select 
+userid,username house_manager_name,
+  
+  charge_area, 
+  real_account,
+  minus_money,
+  now_cash,
+  delzero,
+  nvl(real_charge,0) real_charge ,
+  qf,
+(case when nvl(real_charge,0) =0 then 0 else (real_charge+delzero)/real_account end)*100 qql 
+from (
+select  
+t.userid,t.username,
+
+  sum(s.charge_area) charge_area, 
+  sum(s.total_account) real_account,
+  sum(s.minus_money) minus_money,
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(nvl(b.delzero,0)) delzero,
+  sum(b.real_charge) real_charge ,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf,
+(case when sum(s.real_account)=0 then 0 else sum(b.real_charge+nvl(b.delzero,0))/sum(s.real_account) end)*100 qql
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+ 
+
+and (s.item_Code = 'A' or  'A'='-1')
+
+group by t.userid,t.username)
+order by userid,username) a 
+		
+	</select>
+	<!-- 首页收费合计 -->
+	<select id="sumChargeList" parameterClass="map" resultClass="dto">
+		select   '共' || COUNT(userid) || '' AS user_count,
+				sum(charge_area)    charge_area        ,
+				sum(real_account)  real_account            ,
+				sum(minus_money)   minus_money        ,
+				sum(now_cash)  now_cash          ,
+				sum(delzero)  delzero               ,
+				sum(real_charge)  real_charge             ,
+				sum(qf)  qf             ,
+				round((case when sum(real_account)=0 then 0 else sum(real_charge+nvl(delzero,0))/sum(real_account) end)*100,2) qql             
+				 				     
+		from  (
+select  
+t.userid,t.username,
+
+  sum(s.charge_area) charge_area, 
+  sum(s.total_account) real_account,
+  sum(s.minus_money) minus_money,
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(nvl(b.delzero,0)) delzero,
+  sum(b.real_charge) real_charge ,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf,
+(case when sum(s.real_account)=0 then 0 else sum(b.real_charge+nvl(b.delzero,0))/sum(s.real_account) end)*100 qql
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+ and s.charge_month=(select current_year from sf_item where item_code='A')
+
+and (s.item_Code = 'A' or  'A'='-1')
+
+group by t.userid,t.username)
+
+	</select>
+	
+	<!-- 首页缴费情况饼图 -->
+	<select id="sumChargePie" parameterClass="map" resultClass="dto">
+	select  
+
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf
+
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+  and s.charge_month=(select current_year from sf_item where item_code='A')
+	</select>
+	<!-- 首页管理员收费情况饼图 -->
+	<select id="userChargePie" parameterClass="map" resultClass="dto">
+		select 
+username name,
+
+now_cash value
+
+from (
+select  
+t.userid,t.username,
+
+  sum(s.charge_area) charge_area, 
+  sum(s.total_account) real_account,
+  sum(s.minus_money) minus_money,
+  sum(nvl(s.now_cash,0)) now_cash,
+  sum(nvl(b.delzero,0)) delzero,
+  sum(b.real_charge) real_charge ,
+  sum(s.real_account-nvl(s.now_cash,0)-nvl(b.delzero,0)) qf,
+(case when sum(s.real_account)=0 then 0 else sum(b.real_charge+nvl(b.delzero,0))/sum(s.real_account) end)*100 qql
+from 
+  (select sum(real_charge) real_charge ,sum(delzero) delzero ,house_code,charge_month,item_code,meter_id,operator from SF_DETAIL 
+  where rollback_flag='0' 
+  and (item_Code = 'A' or  'A'='-1')
+ 
+  group by house_code,charge_month,item_code,meter_id,operator) b,
+  SF_ITEM d,FC_COMMUNITY e,sf_charge s,eauser t
+where 
+  s.house_code=b.house_code(+) and s.charge_month=b.charge_month(+) 
+  and s.item_code=b.item_code(+)  and s.meter_id=b.meter_id(+) 
+  and s.community_code=e.community_code
+  and s.item_code=d.item_code
+  and b.operator=t.userid(+)
+ 
+
+and (s.item_Code = 'A' or  'A'='-1')
+and s.charge_month=(select current_year from sf_item where item_code='A')
+group by t.userid,t.username)
+order by userid,username
+		
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,20 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"%>
+<%@ include file="/common/include/taglib.jsp"%>
+<eRedG4:html title="冲账" uxEnabled="true" >
+<eRedG4:ext.codeStore fields="ROLLBACK_REASON" showCode="false"/>
+<eRedG4:ext.myux uxType="gridsummary"/>
+<eRedG4:import src="/module/sf/js/reprintReceipt.js" />
+<eRedG4:import src="/module/sf/js/print.js" />
+<eRedG4:import src="/module/sf/js/LodopFuncs.js" />
+<eRedG4:ext.codeRender fields="QYBZ"/>
+<eRedG4:div key="gridDiv" ></eRedG4:div>
+<eRedG4:div key="rollbackDiv" ></eRedG4:div>
+<eRedG4:body>
+<iframe id="iprint"></iframe>
+<object  id="LODOP_OB" classid="clsid:2105C259-1E0C-4534-8141-A753534CB4CA" width=0 height=0>
+       <embed id="LODOP_EM" type="application/x-print-lodop" width=0 height=0></embed>
+</object>
+<!--需要运行{读写卡控件 FOR SQL SERVER.exe}文件-->
+	<OBJECT ID="SDWriteCARD"  codeBase="SDWriteCARD.ocx#version=1,0,0,1" CLASSID="clsid:CF09D769-5E36-49AB-B469-03733DBA0821" width=0 height=0></OBJECT>
+</eRedG4:body>
+</eRedG4:html>
