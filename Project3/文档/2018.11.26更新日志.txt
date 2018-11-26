@@ -1,0 +1,5 @@
+将sf.xml 覆盖到 JavaCode-->org-->module-->sf-->sqlmap 中
+
+将charge.js 覆盖到 WebRoot-->module-->sf-->js 中
+
+将reprintReceipt.js 覆盖到 WebRoot-->module-->sf-->js 中

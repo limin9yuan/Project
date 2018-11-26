@@ -1842,7 +1842,9 @@ select #charge_month#,
 		g.INVOICE_CODE,
 		a.latefee_realCharge,
 		f.PLAN_BEGIN_DATE,
-		f.PLAN_END_DATE
+		f.PLAN_END_DATE,
+		f.ITEM_CODE,
+		f.STANDARD_CODE
 		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e, sf_charge f, SF_INVOICEUSE g
 		where a.rollback_operator=b.USERID(+)
 		and a.item_code=c.item_code(+)
@@ -1916,7 +1918,9 @@ select #charge_month#,
 		g.INVOICE_CODE,
 		a.latefee_realCharge,
 		f.PLAN_BEGIN_DATE,
-		f.PLAN_END_DATE
+		f.PLAN_END_DATE,
+		f.ITEM_CODE,
+		f.STANDARD_CODE
 		from SF_DETAIL a,EAUSER b,sf_item c,EAUSER d,EAUSER e, sf_charge f, SF_INVOICEUSE g
 		where a.rollback_operator=b.USERID(+)
 		and a.item_code=c.item_code(+)
