@@ -17,8 +17,10 @@
 	<select id="queryCommunity" parameterClass="map"
 		resultClass="dto">
 		SELECT community_code as id, community_code||' '||community_name||' ('||building_count||')' as text,nvl(building_count,0) as child_Count
-		FROM
-		fc_community
+		FROM 		fc_community a
+		where exists(select 1 from FC_PERMISSION b
+					where a.COMMUNITY_CODE = b.COMMUNITY_CODE
+					and b.MANAGER_ID = #userID#)
 		order by community_code
 	</select>
 

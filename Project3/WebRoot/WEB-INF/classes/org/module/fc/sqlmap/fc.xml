@@ -5,6 +5,62 @@
 	<typeAlias alias="dto"
 		type="org.eredlab.g4.ccl.datastructure.impl.BaseDto" />
 
+	<delete id="deletePermission" parameterClass="map">
+       DELETE FROM fc_permission where MANAGER_ID = #manager_id#
+	</delete>
+
+	<!-- 基础数据维护-小区权限维护 -->
+	<select id="getCommunityCode" parameterClass="map" resultClass="dto">
+		select COMMUNITY_CODE
+		from fc_permission
+		where manager_id = #userid#
+	</select>
+
+	<!-- 基础数据维护-小区权限维护 -->
+	<insert id="savePermission"  parameterClass="dto">
+        INSERT INTO
+		fc_permission (
+		ID,
+		COMMUNITY_CODE,
+		MANAGER_ID)
+		VALUES (
+		#ID#,
+		#community_code#,
+		#manager_id#)
+	</insert>
+
+	<!-- 基础数据维护-小区权限维护 -->
+	<select id="queryCommunityList" parameterClass="map" resultClass="dto">
+		select
+		COMMUNITY_CODE,
+		COMMUNITY_NAME
+		from FC_COMMUNITY
+		ORDER by community_code
+	</select>
+
+	<!-- 基础数据维护-小区权限维护 -->
+	<select id="queryCommunityListForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		select
+		count(*)
+		from FC_COMMUNITY
+	</select>
+
+	<!-- 用户管理与授权-用户列表 -->
+	<select id="queryUsersForPermission" parameterClass="map" resultClass="dto">
+		SELECT userid, username, deptid, ACCOUNT, usertype,
+		(SELECT deptname
+		FROM eadept
+		WHERE deptid = a.deptid) AS deptname, sex, LOCKED, remark
+		FROM eauser a
+	</select>
+
+	<!-- 用户管理与授权-用户列表 -->
+	<select id="queryUsersForPermissionForPageCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT count(*) as count
+		FROM eauser a
+	</select>
+
+
 	<!-- 热源树初始数据 -->
 	<select id="querySourceTree" parameterClass="map" resultClass="dto">
 		select parentid,id,text,stat_id,leaf,order_id from (

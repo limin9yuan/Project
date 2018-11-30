@@ -28,11 +28,6 @@
 			validate="false" parameter="reqCode" type="org.module.tg.web.StopAction">
 			<forward name="stopView" path="/tg/stop.jsp" />
 		</action>
-		<!-- 系统管理-基础数据维护-小区权限维护 -->
-	    <action name="commonActionForm" path="/coper" scope="request"
-			validate="false" parameter="reqCode" type="org.module.fc.web.PermissionAction">
-			<forward name="permissionView" path="/fc/permission.jsp" />
-		</action>
 		<!-- 入网管理 -->
 	    <action name="commonActionForm" path="/iw" scope="request"
 			validate="false" parameter="reqCode" type="org.module.iw.web.IntoWebAction">

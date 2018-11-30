@@ -9,6 +9,14 @@
 	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
 
+	<!-- 小区权限管理 -->
+	<bean id="PermissionService" parent="baseTransactionProxyG4">
+		<property name="target">
+			<bean class="org.module.fc.service.impl.PermissionImpl">
+				<property name="g4Dao" ref="g4Dao" />
+			</bean>
+		</property>
+	</bean>
 	<!-- 停供管理 -->
 	<bean id="StopService" parent="baseTransactionProxyG4">
 		<property name="target">

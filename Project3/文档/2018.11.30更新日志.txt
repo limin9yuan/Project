@@ -1,0 +1,30 @@
+将app.service.xml 覆盖到 JavaCode-->config-->app 中
+
+将IDHelper.java 覆盖到 JavaCode-->org-->module-->sys-->util-->idgenerator 中
+
+将tree.xml 覆盖到 JavaCode-->org-->module-->tree-->sqlmap 中
+
+将TreeAction.java 覆盖到 JavaCode-->org-->module-->tree-->web 中
+
+将fc.xml 覆盖到 JavaCode-->org-->module-->fc-->sqlmap 中
+
+将PermissionAction.java 添加到 JavaCode-->org-->module-->fc-->web 中
+
+将PermissionService.java 添加到 JavaCode-->org-->module-->fc-->service 中
+
+将PermissionImpl.java 添加到 JavaCode-->org-->module-->fc-->service-->impl 中
+
+将struts-config-module.xml 覆盖到 WebRoot-->WEB-INF 中
+
+将permission.js 添加到 WebRoot-->module-->fc-->js 中
+
+将permission.jsp 添加到 WebRoot-->module-->fc 中
+
+insert into EAMENU (MENUID,MENUNAME,PARENTID,EXPANDED,REQUEST,LEAF,SORTNO,MENUTYPE,ICONCLS,ICON)
+values('01010306','小区权限维护','010103','0','module/rpt.ered?reqCode=reprintReceiptInit','1','3','0',configIcon,config.png)
+
+insert into EAROLEAUTHORIZE (ROLEID, MENUID,AUTHORIZELEVEL, AUTHORIZEID)
+values ('10000060', '01010306','1', '10001362')
+
+insert into EASEQUENCE (SEQUENCEID, FIELDNAME,MAXID, REMARK,PATTERN,IDTYPE)
+values ('1014', 'Permission_ID','100000', '小区授权编号', '000000', '1')

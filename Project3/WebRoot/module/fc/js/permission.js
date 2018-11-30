@@ -1,0 +1,547 @@
+/**
+ * 用户管理与授权
+ *
+ * @author XiongChun
+ * @since 2010-04-20
+ */
+var grid = null;
+var communityGrid = null;
+var communityCodeArray = null;
+var communityStore = null;
+var userGrantWindow = null;
+Ext.onReady(function() {
+    var root = new Ext.tree.AsyncTreeNode({
+    	text : root_deptname,
+    	expanded : true,
+    	id : root_deptid
+    });
+
+	var sm = new Ext.grid.CheckboxSelectionModel();
+	var cm = new Ext.grid.ColumnModel([new Ext.grid.RowNumberer(),sm,
+    	{
+    		header : '授权',
+    		dataIndex : 'userid',
+    		renderer : function(value, cellmeta, record) {
+    			return '<a href="javascript:void(0);"><img src="../resource/image/ext/edit1.png"/></a>';
+    		},
+    		width : 35
+    	}, {
+    		header : '姓名',
+    		dataIndex : 'username',
+    		width : 80
+    	}, {
+    		header : '登录帐户',
+    		dataIndex : 'account',
+    		width : 130
+    	}, {
+    		id : 'deptname',
+    		header : '所属部门',
+    		dataIndex : 'deptname',
+    		width : 130
+    	}, {
+    		header : '性别',
+    		dataIndex : 'sex',
+    		width : 60,
+    		renderer : function(value) {
+    			if (value == '1')
+    				return '男';
+    			else if (value == '2')
+    				return '女';
+    			else if (value == '0')
+    				return '未知';
+    			else
+    				return value;
+    		}
+    	}, {
+    		header : '人员状态',
+    		dataIndex : 'locked',
+    		width : 60,
+    		renderer : function(value) {
+    			if (value == '1')
+    				return '锁定';
+    			else if (value == '0')
+    				return '正常';
+    			else
+    				return value;
+    		}
+    	}, {
+    		id : 'usertype',
+    		header : '人员类型',
+    		dataIndex : 'usertype',
+    		width : 60,
+    		renderer : function(value) {
+    			if (value == '1')
+    				return '经办员';
+    			else if (value == '2')
+    				return '管理员';
+    			else if (value == '3')
+    				return '系统人员';
+    			else if (value == '4')
+    				return '项目主页注册用户';
+    			else
+    				return value;
+    		}
+    	}, {
+    		header : '人员编号',
+    		dataIndex : 'userid',
+    		hidden : false,
+    		hidden : false,
+    		width : 80,
+    		sortable : true
+    	}, {
+    		id : 'remark',
+    		header : '备注',
+    		dataIndex : 'remark'
+    	}, {
+    		id : 'deptid',
+    		header : '所属部门编号',
+    		dataIndex : 'deptid',
+    		hidden : true
+    	}]);
+
+		/**
+		 * 数据存储
+		 */
+		var store = new Ext.data.Store({
+			proxy : new Ext.data.HttpProxy({
+				url : 'coper.ered?reqCode=queryUsersForPermission'
+			}),
+			reader : new Ext.data.JsonReader({
+				totalProperty : 'TOTALCOUNT',
+				root : 'ROOT'
+			}, [ {
+				name : 'userid'
+			}, {
+				name : 'username'
+			}, {
+				name : 'sex'
+			}, {
+				name : 'account'
+			}, {
+				name : 'locked'
+			}, {
+				name : 'deptid'
+			}, {
+				name : 'deptname'
+			}, {
+				name : 'remark'
+			}, {
+				name : 'usertype'
+			} ])
+		});
+
+		// 翻页排序时带上查询条件
+		store.on('beforeload', function() {
+			this.baseParams = {
+				queryParam : Ext.getCmp('queryParam').getValue()
+			};
+		});
+		var pagesize_combo = new Ext.form.ComboBox({
+			name : 'pagesize',
+			hiddenName : 'pagesize',
+			typeAhead : true,
+			triggerAction : 'all',
+			lazyRender : true,
+			mode : 'local',
+			store : new Ext.data.ArrayStore({
+				fields : [ 'value', 'text' ],
+				data : [ [ 10, '10条/页' ], [ 20, '20条/页' ], [ 50, '50条/页' ],
+						[ 100, '100条/页' ], [ 250, '250条/页' ],
+						[ 500, '500条/页' ] ]
+			}),
+			valueField : 'value',
+			displayField : 'text',
+			value : '50',
+			editable : false,
+			width : 85
+		});
+		var number = parseInt(pagesize_combo.getValue());
+		pagesize_combo.on("select", function(comboBox) {
+			bbar.pageSize = parseInt(comboBox.getValue());
+			number = parseInt(comboBox.getValue());
+			store.reload({
+				params : {
+					start : 0,
+					limit : bbar.pageSize
+				}
+			});
+		});
+
+		var bbar = new Ext.PagingToolbar({
+			pageSize : number,
+			store : store,
+			displayInfo : true,
+			displayMsg : '显示{0}条到{1}条,共{2}条',
+			emptyMsg : "没有符合条件的记录",
+			items : [ '-', '&nbsp;&nbsp;', pagesize_combo ]
+		});
+		grid = new Ext.grid.GridPanel({
+			title : '<span style="font-weight:normal">人员信息表</span>',
+			iconCls : 'groupIcon',
+			renderTo : 'userGridDiv',
+			height : 500,
+			// width:600,
+			autoScroll : true,
+			region : 'center',
+			store : store,
+			loadMask : {
+				msg : '正在加载表格数据,请稍等...'
+			},
+			stripeRows : true,
+			frame : true,
+			autoExpandColumn : 'remark',
+			cm : cm,
+			sm : sm,
+			tbar : [
+            new Ext.form.TextField({
+				id : 'queryParam',
+				name : 'queryParam',
+				emptyText : '请输入人员名称',
+				enableKeyEvents : true,
+				listeners : {
+					specialkey : function(field, e) {
+						if (e.getKey() == Ext.EventObject.ENTER) {
+							queryUserItem();
+						}
+					}
+				},
+				width : 130
+			}), {
+				text : '查询',
+				iconCls : 'previewIcon',
+				handler : function() {
+					queryUserItem();
+				}
+			}, '-', {
+				text : '刷新',
+				iconCls : 'arrow_refreshIcon',
+				handler : function() {
+					store.reload();
+				}
+			} ],
+			bbar : bbar
+		});
+		store.load({
+			params : {
+				start : 0,
+				limit : bbar.pageSize,
+				firstload : 'true'
+			}
+		});
+		grid.on('sortchange', function() {
+			// grid.getSelectionModel().selectFirstRow();
+		});
+		grid.on("cellclick",
+    		function(grid, rowIndex, columnIndex, e) {
+    			var store = grid.getStore();
+    			var record = store.getAt(rowIndex);
+    			var fieldName = grid.getColumnModel().getDataIndex(
+    					columnIndex);
+    			if (fieldName == 'userid' && columnIndex == 2) {
+    				var userid = record.get('userid');
+    				var deptid = record.get('deptid');
+    				var usertype = record.get('usertype');
+    				if (login_account == parent.DEFAULT_DEVELOP_ACCOUNT
+    						|| login_account == parent.DEFAULT_ADMIN_ACCOUNT) {
+    					if (usertype == '1') {
+    						Ext.MessageBox
+    								.alert(
+    										'提示',
+    										'超级管理员和开发人员不能对业务经办员授权<br>'
+    												+ '业务经办员只能被其所属部门或上级部门的管理员授予权限');
+    						return;
+    					}
+    				}
+    				userGrantInit(userid, deptid, usertype);
+    			}
+    		}
+        );
+
+		bbar.on("change", function() {
+			// grid.getSelectionModel().selectFirstRow();
+		});
+
+		var addRoot = new Ext.tree.AsyncTreeNode({
+			text : root_deptname,
+			expanded : true,
+			id : root_deptid
+		});
+
+		var sexStore = new Ext.data.SimpleStore({
+			fields : [ 'value', 'text' ],
+			data : [ [ '1', '1 男' ], [ '2', '2 女' ], [ '0', '0 未知' ] ]
+		});
+		var sexCombo = new Ext.form.ComboBox({
+			name : 'sex',
+			hiddenName : 'sex',
+			store : sexStore,
+			mode : 'local',
+			triggerAction : 'all',
+			valueField : 'value',
+			displayField : 'text',
+			value : '0',
+			fieldLabel : '性别',
+			emptyText : '请选择...',
+			allowBlank : false,
+			forceSelection : true,
+			editable : false,
+			typeAhead : true,
+			anchor : "99%"
+		});
+
+		var usertypeStore = new Ext.data.SimpleStore({
+			fields : [ 'value', 'text' ],
+			data : [ [ '1', '1 经办员' ], [ '2', '2 管理员' ] ]
+		});
+		var usertypeCombo = new Ext.form.ComboBox({
+			name : 'usertype',
+			hiddenName : 'usertype',
+			store : usertypeStore,
+			mode : 'local',
+			triggerAction : 'all',
+			valueField : 'value',
+			displayField : 'text',
+			value : '1',
+			fieldLabel : '人员类型',
+			emptyText : '请选择...',
+			allowBlank : false,
+			forceSelection : true,
+			editable : false,
+			typeAhead : true,
+			readOnly : true,
+			anchor : "99%"
+		});
+
+		var lockedStore = new Ext.data.SimpleStore({
+			fields : [ 'value', 'text' ],
+			data : [ [ '0', '0 正常' ], [ '1', '1 锁定' ] ]
+		});
+		var lockedCombo = new Ext.form.ComboBox({
+			name : 'locked',
+			hiddenName : 'locked',
+			store : lockedStore,
+			mode : 'local',
+			triggerAction : 'all',
+			valueField : 'value',
+			displayField : 'text',
+			value : '0',
+			fieldLabel : '人员状态',
+			emptyText : '请选择...',
+			allowBlank : false,
+			forceSelection : true,
+			editable : false,
+			typeAhead : true,
+			anchor : "99%"
+		});
+
+		/**
+		 * 布局
+		 */
+		var viewport = new Ext.Viewport({
+			layout : 'border',
+			items : [
+            {
+				region : 'center',
+				layout : 'fit',
+				items : [ grid ]
+			} ]
+		});
+
+		/**
+		 * 根据条件查询人员
+		 */
+		function queryUserItem() {
+			store.load({
+				params : {
+					start : 0,
+					limit : bbar.pageSize,
+					queryParam : Ext.getCmp('queryParam').getValue()
+				}
+			});
+		}
+
+		/**
+		 * 人员授权窗口初始化
+		 */
+		function userGrantInit(userid, deptid, usertype) {
+            getCommunityCode();
+            var communitySm = new Ext.grid.CheckboxSelectionModel(
+                {
+					handleMouseDown : Ext.emptyFn,
+					singleSelect : false
+				}
+            );
+            /**
+    		 * 数据存储
+    		 */
+    		communityStore = new Ext.data.Store({
+    			proxy : new Ext.data.HttpProxy({
+    				url : 'coper.ered?reqCode=queryCommunityList'
+    			}),
+    			reader : new Ext.data.JsonReader({
+    				totalProperty : 'TOTALCOUNT',
+    				root : 'ROOT'
+    			}, [ {
+    				name : 'community_code'
+    			}, {
+    				name : 'community_name'
+    			}])
+    		});
+            communityStore.addListener('load',function(){
+                var records=[];//存放选中记录
+                for(var i=0;i<communityCodeArray.length;i++){
+                    for(var j=0;j<communityStore.getCount();j++){
+                        // alert("j="+j + "=" +communityCodeArray[j] );
+                        var record = communityStore.getAt(j);
+                        if(record.get("community_code") == communityCodeArray[i]){//根据后台数据判断那些记录默认选中
+                           communityGrid.getSelectionModel().selectRow(j,true);
+                        }
+                    }
+                }
+            });
+
+            var communityCm = new Ext.grid.ColumnModel([
+                new Ext.grid.RowNumberer({
+                    width : 35
+                }),communitySm,
+            	{
+            		header : '小区编号',
+            		dataIndex : 'community_code',
+            		width : 80
+            	}, {
+            		header : '小区名称',
+            		dataIndex : 'community_name',
+            		width : 200
+            	}]);
+
+            communityGrid = new Ext.grid.GridPanel({
+    			title : '<span style="font-weight:normal">大楼信息表</span>',
+    			iconCls : 'groupIcon',
+    			// renderTo : 'userGridDiv',
+    			height : 500,
+    			// width:600,
+    			autoScroll : true,
+    			region : 'center',
+    			store : communityStore,
+    			loadMask : {
+    				msg : '正在加载表格数据,请稍等...'
+    			},
+    			stripeRows : true,
+    			frame : true,
+    			// autoExpandColumn : 'remark',
+    			cm : communityCm,
+    			sm : new Ext.grid.CheckboxSelectionModel(),
+    			// tbar : [ ],
+    			// bbar : communityBbar
+    		});
+
+            // communityStore.addListener('load',function(){
+            //     var records=[];//存放选中记录
+            //     for(var i=0;i<communityStore.getCount();i++){
+            //         var record = communityStore.getAt(i);
+            //
+            //         for(var j=0;j<communityCodeArray.length;j++){
+            //             if(record.get("community_code") == communityCodeArray[j]){//根据后台数据判断那些记录默认选中
+            //                // records.push(record);
+            //                communityGrid.getSelectionModel().select(i,true,false);
+            //             }
+            //         }
+            //     }
+            //     // alert(records);
+            //     // communitySm.selectRecords(records);//执行选中记录
+            // });
+			userGrantWindow = new Ext.Window({
+				layout : 'fit',
+				width : 500,
+				height : 500,
+				resizable : true,
+				draggable : true,
+				closeAction : 'close',
+				title : '人员授权',
+				iconCls : 'group_linkIcon',
+				modal : true,
+				pageY : 15,
+				pageX : document.body.clientWidth / 2 - 1000 / 2,
+				collapsible : true,
+				maximizable : false,
+				// animateTarget: document.body,
+				// //如果使用autoLoad,建议不要使用动画效果
+				buttonAlign : 'right',
+				constrain : true,
+				items : [communityGrid ],
+				buttons : [ {
+					text : '保存',
+					iconCls : 'acceptIcon',
+					handler : function() {
+                        saveCommunityPermission();
+					}
+				},{
+					text : '关闭',
+					iconCls : 'deleteIcon',
+					handler : function() {
+						userGrantWindow.close();
+					}
+				} ]
+			});
+			userGrantWindow.show();
+		}
+
+});
+function saveCommunityPermission(){
+    var userRecord = grid.getSelectionModel().getSelected();
+    var communityRecord = communityGrid.getSelectionModel().getSelections();
+    var ids = "";
+    for(var i = 0; i < communityRecord.length; i++){
+        ids += communityRecord[i].get("community_code");
+        if(i<communityRecord.length-1){
+            ids = ids + ",";
+        }
+    }
+    var params={
+        'userRecord':userRecord.get('userid'),
+        'communityRecord':ids
+    };
+    Ext.Ajax.request({
+        url : 'coper.ered?reqCode=savePermission',
+        success : function(response) {
+            var resultArray = Ext.util.JSON.decode(response.responseText);
+            if(resultArray.success==true){
+                Ext.Msg.alert('提示', resultArray.msg);
+                userGrantWindow.close();
+            }
+        },
+        failure : function(response) {
+            Ext.MessageBox.alert('提示', '数据保存失败');
+
+        },
+        params : params
+    });
+}
+
+function getCommunityCode(){
+    var userRecord = grid.getSelectionModel().getSelected();
+    var params={
+        'userid':userRecord.get('userid')
+    };
+    Ext.Ajax.request({
+        url : 'coper.ered?reqCode=getCommunityCode',
+        success : function(response) {
+            var resultArray = Ext.util.JSON.decode(response.responseText);
+            if(resultArray.success==true){
+                communityCodeArray = resultArray.community_code.split(",");
+                communityStore.load({
+        			params : {
+        				start : 0,
+        				// limit : communityBbar.pageSize,
+        				firstload : 'true'
+        			}
+        		});
+            }
+        },
+        failure : function(response) {
+            Ext.MessageBox.alert('提示', '数据保存失败');
+
+        },
+        params : params
+    });
+}
