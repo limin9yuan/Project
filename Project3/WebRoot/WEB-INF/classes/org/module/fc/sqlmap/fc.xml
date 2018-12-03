@@ -52,12 +52,22 @@
 		FROM eadept
 		WHERE deptid = a.deptid) AS deptname, sex, LOCKED, remark
 		FROM eauser a
+		<dynamic prepend="WHERE">
+			<isNotEmpty property="queryParam">
+				a.username like '%$queryParam$%'
+			</isNotEmpty>
+		</dynamic>
 	</select>
 
 	<!-- 用户管理与授权-用户列表 -->
 	<select id="queryUsersForPermissionForPageCount" parameterClass="map" resultClass="java.lang.Integer">
 		SELECT count(*) as count
 		FROM eauser a
+		<dynamic prepend="WHERE">
+			<isNotEmpty property="queryParam">
+				a.username like '%$queryParam$%'
+			</isNotEmpty>
+		</dynamic>
 	</select>
 
 
@@ -1211,6 +1221,45 @@ and s.charge_month=(select current_year from sf_item where item_code='A')
 group by t.userid,t.username)
 order by userid,username
 		
+	</select>
+	<!-- 首页柱状图 -->
+	<select id="userbuildBar" parameterClass="map" resultClass="dto">
+	select sum(t1) as s1,sum(t2) as s2,sum(t3) as s3,sum(t4) as s4,sum(t5) as s5,sum(t6) as s6,sum(t7) as s7,
+       sum(t8) as s8,sum(t9) as s9,sum(t10) as s10,sum(t11) as s11,sum(t12) as s12,
+       sum(case when t1!='0' then 1 else 0 end ) as b1,
+       sum(case when t2!='0' then 1 else 0 end ) as b2,
+       sum(case when t3!='0' then 1 else 0 end ) as b3,
+       sum(case when t4!='0' then 1 else 0 end ) as b4,
+       sum(case when t5!='0' then 1 else 0 end ) as b5,
+       sum(case when t6!='0' then 1 else 0 end ) as b6,
+       sum(case when t7!='0' then 1 else 0 end ) as b7,
+       sum(case when t8!='0' then 1 else 0 end ) as b8,
+       sum(case when t9!='0' then 1 else 0 end ) as b9,
+       sum(case when t10!='0' then 1 else 0 end ) as b10,
+       sum(case when t11!='0' then 1 else 0 end ) as b11,
+       sum(case when t12!='0' then 1 else 0 end ) as b12
+from
+(select a.house_code, a.operate_date,a.t1,a.t2,a.t3,a.t4,a.t5,a.t6,a.t7,a.t8,a.t9,a.t10,a.t11,a.t12
+from
+(select b.HOUSE_CODE, b.operate_date,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 00:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 08:00:00'  then b.real_charge else 0 end as t1,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 08:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 09:00:00'  then b.real_charge else 0 end as t2,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 09:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 10:00:00'  then b.real_charge else 0 end as t3,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 10:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 11:00:00'  then b.real_charge else 0 end as t4,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 11:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 12:00:00'  then b.real_charge else 0 end as t5,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 12:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 13:00:00'  then b.real_charge else 0 end as t6,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 13:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 14:00:00'  then b.real_charge else 0 end as t7,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 14:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 15:00:00'  then b.real_charge else 0 end as t8,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 15:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 16:00:00'  then b.real_charge else 0 end as t9,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 16:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 17:00:00'  then b.real_charge else 0 end as t10,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 17:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 18:00:00'  then b.real_charge else 0 end as t11,
+    case when b.operate_date >= to_char(sysdate,'yyyy-MM-dd')||' 18:00:00'  and b.operate_date &lt;  to_char(sysdate,'yyyy-MM-dd')||' 23:59:59'  then b.real_charge else 0 end as t12
+    
+from
+(select operate_date, house_code, real_charge from SF_DETAIL
+ where rollback_flag='0' and operator=#userid# and  substr(operate_date,1,10) = to_char(sysdate,'yyyy-MM-dd')
+  )b  )a
+  )
 	</select>
 	
 </sqlMap>
